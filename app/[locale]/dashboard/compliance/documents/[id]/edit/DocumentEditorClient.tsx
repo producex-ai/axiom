@@ -1,15 +1,17 @@
 "use client";
 
-import { ArrowLeft, Edit, Eye, Globe, Loader2, Save } from "lucide-react";
+import { ArrowLeft, Edit, Eye, Globe, Loader2, AlertCircle } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { DocumentEditor } from "@/components/editor";
+import { AuditDialog } from "@/components/editor/AuditDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { convertHtmlToMarkdown, convertMarkdownToHtml } from "@/lib/document-converters";
 import { complianceKeys } from "@/lib/compliance/queries";
+import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface DocumentEditorClientProps {
   documentId: string;
@@ -23,14 +25,17 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const backTo = searchParams.get("backTo");
   const [mode, setMode] = useState<"view" | "edit">(initialMode);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [savingType, setSavingType] = useState<"draft" | "publish" | null>(null);
+  const [publishing, setPublishing] = useState(false);
   const [content, setContent] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
   const [userHasEdited, setUserHasEdited] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [documentMetadata, setDocumentMetadata] = useState<any>(null);
+  const [auditIssuesOpen, setAuditIssuesOpen] = useState(false);
+  const [auditIssues, setAuditIssues] = useState<any[]>([]);
+  const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
+  const [lastPublishedVersion, setLastPublishedVersion] = useState<number>(0);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -88,10 +93,9 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
     }
   };
 
-  const handleSave = async (publish = false) => {
+  const handlePublish = async (skipValidation: boolean = false) => {
     try {
-      setSaving(true);
-      setSavingType(publish ? "publish" : "draft");
+      setPublishing(true);
       setError(null);
 
       let markdown = convertHtmlToMarkdown(content);
@@ -109,50 +113,87 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
         markdown = markdown.trim();
       }
 
-      const response = await fetch(`/api/compliance/documents/${documentId}/content`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: markdown,
-          publish,
-        }),
-      });
+      // Show loading toast while executing publish flow
+      const loadingToastId = toast.loading(skipValidation ? "Publishing document..." : "Saving and validating document...");
 
-      if (!response.ok) {
-        throw new Error("Failed to save document");
+      try {
+        // Execute the complete publish flow:
+        // 1. Persist changes (always)
+        // 2. Validate audit readiness (unless skipValidation is true)
+        // 3. Conditionally finalize publish
+        const result = await executePublishFlow(
+          documentId,
+          markdown,
+          documentMetadata?.title || "Document",
+          { skipValidation }
+        );
+
+        // Dismiss loading toast
+        toast.dismiss(loadingToastId);
+
+        // Update local state after successful persistence
+        setOriginalContent(markdown);
+        setHasChanges(false);
+        setUserHasEdited(false);
+        setLastPublishedVersion(result.version || 0);
+
+        if (result.success) {
+          // ✅ Publish succeeded - transition to published state
+          setMode("view");
+          setDocumentMetadata((prev: any) => ({
+            ...prev,
+            status: result.status,
+            version: result.version,
+          }));
+
+          // Invalidate cache
+          await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+
+          // Show success confirmation
+          toast.success(result.message, {
+            description: `Document v${result.version} published`,
+          });
+
+          // Navigate back to module details after brief delay
+          setTimeout(() => {
+            if (backTo) {
+              router.push(backTo);
+            } else {
+              router.back();
+            }
+          }, 1000);
+        } else {
+          // ⚠️ Publish blocked - show audit issues
+          // Document is saved, but state remains draft
+          setDocumentMetadata((prev: any) => ({
+            ...prev,
+            version: result.version,
+          }));
+
+          // Show audit issues dialog with full analysis
+          setAuditIssues(result.fullAnalysis?.risks || []);
+          setAuditAnalysis(result.fullAnalysis || null);
+          setAuditIssuesOpen(true);
+
+          // Show warning toast
+          toast.error(result.message, {
+            description: `Document v${result.version} saved but blocked from publishing`,
+          });
+        }
+      } catch (publishError) {
+        toast.dismiss(loadingToastId);
+        throw publishError;
       }
 
-      // Invalidate cache to refresh UI
+      // Invalidate cache in background
       await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
-
-      setOriginalContent(markdown);
-      setHasChanges(false);
-      setUserHasEdited(false);
-
-      if (publish) {
-        setMode("view");
-        setDocumentMetadata((prev: any) => ({ ...prev, status: "published" }));
-        toast.success("Document published successfully");
-        
-        // Navigate back to module details page after publish
-        setTimeout(() => {
-          if (backTo) {
-            router.push(backTo);
-          } else {
-            router.back();
-          }
-        }, 500);
-      } else {
-        toast.success("Draft saved successfully");
-      }
     } catch (err) {
-      console.error("Error saving document:", err);
-      const message = err instanceof Error ? err.message : "Failed to save document";
+      console.error("Error in publish flow:", err);
+      const message = err instanceof Error ? err.message : "Failed to publish document";
       setError(message);
       toast.error(message);
     } finally {
-      setSaving(false);
-      setSavingType(null);
+      setPublishing(false);
     }
   };
 
@@ -224,7 +265,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                 variant="ghost"
                 size="sm"
                 onClick={handleBack}
-                disabled={saving}
+                disabled={publishing}
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
@@ -267,7 +308,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                 variant="outline"
                 size="sm"
                 onClick={toggleMode}
-                disabled={loading || saving}
+                disabled={loading || publishing}
               >
                 {mode === "view" ? (
                   <>
@@ -284,50 +325,60 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
 
               {mode === "edit" && (
                 <>
+                  {auditIssues.length > 0 && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setAuditIssuesOpen(true)}
+                    >
+                      <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
+                      Review Issues ({auditIssues.length})
+                    </Button>
+                  )}
+                  {auditAnalysis && auditAnalysis.auditReadinessScore >= 90 && auditIssues.length === 0 && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setAuditIssuesOpen(true)}
+                    >
+                      <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
+                      Review Results
+                    </Button>
+                  )}
                   <Button
-                    variant="outline"
                     size="sm"
-                    onClick={() => handleSave(false)}
-                    disabled={!hasChanges || saving || loading}
+                    onClick={() => handlePublish()}
+                    disabled={!hasChanges || publishing || loading}
                   >
-                    {saving && savingType === "draft" ? (
+                    {publishing ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Saving...
+                        Publishing...
                       </>
                     ) : (
                       <>
-                        <Save className="mr-2 h-4 w-4" />
-                        {documentMetadata?.status === "published" ? "Save" : "Save Draft"}
+                        <Globe className="mr-2 h-4 w-4" />
+                        Publish
                       </>
                     )}
                   </Button>
-
-                  {documentMetadata?.status !== "published" && (
-                    <Button
-                      size="sm"
-                      onClick={() => handleSave(true)}
-                      disabled={!hasChanges || saving || loading}
-                    >
-                      {saving && savingType === "publish" ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Publishing...
-                        </>
-                      ) : (
-                        <>
-                          <Globe className="mr-2 h-4 w-4" />
-                          Publish
-                        </>
-                      )}
-                    </Button>
-                  )}
                 </>
               )}
             </div>
           </div>
         </div>
       </header>
+
+      {/* Audit Issues Dialog - Shown when publish is blocked by audit issues */}
+      <AuditDialog
+        open={auditIssuesOpen}
+        onClose={() => setAuditIssuesOpen(false)}
+        issues={auditIssues}
+        onFixClick={() => setAuditIssuesOpen(false)}
+        onPublishClick={() => handlePublish(true)}
+        version={lastPublishedVersion}
+        fullAnalysis={auditAnalysis}
+      />
 
       {/* Editor */}
       <main className="flex-1 overflow-hidden">

@@ -18,7 +18,7 @@ import {
   convertMarkdownToDocx,
 } from "@/lib/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
-import { getDocumentById } from "@/lib/primus/db-helper";
+import { createDocumentRevision, getDocumentById } from "@/lib/primus/db-helper";
 
 const s3 = new S3Client({ region: process.env.AWS_REGION! });
 
@@ -89,6 +89,9 @@ export async function GET(
         title: document.title,
         status: document.status,
         version: document.current_version,
+        moduleId: document.module_id,
+        subModuleId: document.sub_module_id,
+        subSubModuleId: document.sub_sub_module_id,
         createdBy: document.created_by,
         updatedBy: document.updated_by,
         createdAt: document.created_at,
@@ -108,9 +111,10 @@ export async function GET(
 }
 
 /**
- * PUT - Save edited Markdown content
- * Converts to DOCX and uploads to S3
- * Updates document metadata in database
+ * PUT - Publish document
+ * Converts edited Markdown content to DOCX and uploads to S3
+ * Updates document status to published in database
+ * All saves go directly to published state
  */
 export async function PUT(
   request: NextRequest,
@@ -127,11 +131,19 @@ export async function PUT(
     const { id } = await params;
 
     // Parse request body
-    const { content, publish } = await request.json();
+    const { content, status = "published" } = await request.json();
 
     if (!content || typeof content !== "string") {
       return NextResponse.json(
         { error: "Missing or invalid 'content' field" },
+        { status: 400 },
+      );
+    }
+
+    // Validate status
+    if (!["draft", "published"].includes(status)) {
+      return NextResponse.json(
+        { error: "Invalid status. Must be 'draft' or 'published'" },
         { status: 400 },
       );
     }
@@ -146,7 +158,7 @@ export async function PUT(
       );
     }
 
-    console.log(`[API] Saving document ${id}, publish: ${publish}`);
+    console.log(`[API] ${status === "published" ? "Publishing" : "Saving draft for"} document ${id}`);
 
     // Convert Markdown to DOCX
     const docxBuffer = await convertMarkdownToDocx(content, document.title);
@@ -172,8 +184,8 @@ export async function PUT(
 
     console.log(`[API] ✅ Uploaded to S3: ${newS3Key}`);
 
-    // Update document in database
-    const newStatus = publish ? "published" : document.status;
+    // Update document in database with provided status
+    const newStatus = status;
 
     await query(
       `UPDATE document 
@@ -187,14 +199,31 @@ export async function PUT(
     );
 
     console.log(
-      `[API] ✅ Document updated in database (version ${newVersion}, status: ${newStatus})`,
+      `[API] ✅ Document ${newStatus} (version ${newVersion})`,
+    );
+
+    // Determine action based on status
+    const action = status === "published" ? "published" : "edited";
+
+    // Create revision record
+    await createDocumentRevision(
+      id,
+      orgId,
+      newVersion,
+      action,
+      newS3Key,
+      newStatus,
+      userId,
+      status === "published" ? "Document published" : "Draft saved",
+    );
+
+    console.log(
+      `[API] ✅ Revision record created for document ${id} (action: published)`,
     );
 
     return NextResponse.json({
       success: true,
-      message: publish
-        ? "Document published successfully"
-        : "Document saved successfully",
+      message: status === "published" ? "Document published successfully" : "Draft saved successfully",
       version: newVersion,
       status: newStatus,
       contentKey: newS3Key,

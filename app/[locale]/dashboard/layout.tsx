@@ -1,6 +1,7 @@
 import { AppHeader } from "@/components/AppHeader";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import DashboardContent from "./dashboard-content";
 
 export default function DashboardLayout({
   children,
@@ -14,7 +15,7 @@ export default function DashboardLayout({
         <div className="flex flex-1 flex-col">
           <AppHeader />
           <main className="flex-1 overflow-auto bg-muted/30">
-            <div className="container mx-auto max-w-7xl p-6">{children}</div>
+            <DashboardContent>{children}</DashboardContent>
           </main>
         </div>
       </div>

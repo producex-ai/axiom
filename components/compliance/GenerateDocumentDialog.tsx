@@ -197,7 +197,7 @@ export default function GenerateDocumentDialog({
     );
 
     return (
-      <div className="space-y-6 py-6">
+      <div className="space-y-4 py-4">
         {/* Progress indicator */}
         <ProgressBar answered={answeredCount} total={questions.length} />
 
@@ -238,7 +238,7 @@ export default function GenerateDocumentDialog({
 
   return (
     <Dialog open={open} onOpenChange={(open) => !open && handleClose()}>
-      <DialogContent className="flex h-[85vh] max-w-4xl flex-col p-0">
+      <DialogContent className="!max-w-4xl flex h-[85vh] flex-col p-0">
         <div className="flex-shrink-0 border-b px-6 pt-6 pb-4">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">

@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  ChevronDown,
   ClipboardList,
+  FileText,
   LayoutDashboard,
   ScrollText,
   Settings,
@@ -24,25 +26,25 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { useComplianceOverview } from "@/lib/compliance/queries";
 
-const navigationItems = [
+const mainMenuItems = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
     href: "/dashboard",
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
-  },
-  {
-    title: "Primus Compliance",
-    icon: ShieldCheck,
-    href: "/dashboard/compliance",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-    badgeKey: "compliance",
   },
   {
     title: "Tasks",
@@ -58,6 +60,24 @@ const navigationItems = [
     href: "/dashboard/logs",
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
+  },
+];
+
+const complianceItems = [
+  {
+    title: "Primus GFS",
+    icon: ShieldCheck,
+    href: "/dashboard/compliance",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    badgeKey: "compliance",
+  },
+  {
+    title: "Company Documents",
+    icon: FileText,
+    href: "/dashboard/documents",
+    color: "text-blue-600",
+    bgColor: "bg-blue-600/10",
   },
 ];
 
@@ -97,37 +117,77 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => {
-                const badgeValue =
-                  item.badgeKey === "compliance" ? moduleCount : item.badge;
-
-                return (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === item.href}
-                      className="group"
-                    >
-                      <Link href={item.href}>
-                        <div
-                          className={`${item.bgColor} ${item.color} rounded-md p-1.5 transition-transform group-hover:scale-110`}
+              {mainMenuItems.map((item) => (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.href}
+                    className="group"
+                  >
+                    <Link href={item.href}>
+                      <div
+                        className={`${item.bgColor} ${item.color} rounded-md p-1.5 transition-transform group-hover:scale-110`}
+                      >
+                        <item.icon className="size-4" />
+                      </div>
+                      <span>{item.title}</span>
+                      {item.badge && (
+                        <Badge
+                          variant="secondary"
+                          className="ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs"
                         >
-                          <item.icon className="size-4" />
-                        </div>
-                        <span>{item.title}</span>
-                        {badgeValue && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs"
-                          >
-                            {badgeValue}
-                          </Badge>
-                        )}
-                      </Link>
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+
+              {/* Compliance Group */}
+              <Collapsible defaultOpen asChild>
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton className="group">
+                      <div className="bg-primary/10 text-primary rounded-md p-1.5 transition-transform group-hover:scale-110">
+                        <ShieldCheck className="size-4" />
+                      </div>
+                      <span>Compliance</span>
+                      <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                     </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {complianceItems.map((item) => {
+                        const badgeValue =
+                          item.badgeKey === "compliance" ? moduleCount : null;
+                        const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+
+                        return (
+                          <SidebarMenuSubItem key={item.href}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={isActive}
+                            >
+                              <Link href={item.href}>
+                                <span>{item.title}</span>
+                                {badgeValue && (
+                                  <Badge
+                                    variant="secondary"
+                                    className="ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs"
+                                  >
+                                    {badgeValue}
+                                  </Badge>
+                                )}
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        );
+                      })}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -4,10 +4,8 @@ import {
   AlertTriangle,
   ArrowLeft,
   BookOpen,
-  CheckCircle2,
   ChevronDown,
   ClipboardCheck,
-  Clock,
   FileSearch,
   FileStack,
   FileText,
@@ -37,53 +35,12 @@ const moduleIcons: Record<string, any> = {
   "7": AlertTriangle,
 };
 
-// Module color schemes - clean, minimal palette
-const moduleColors: Record<
-  string,
-  { gradient: string; bg: string; text: string; ring: string }
-> = {
-  "1": {
-    gradient: "from-blue-500 to-blue-600",
-    bg: "bg-blue-50 dark:bg-blue-950/30",
-    text: "text-blue-700 dark:text-blue-300",
-    ring: "ring-blue-200/50 dark:ring-blue-800/50",
-  },
-  "2": {
-    gradient: "from-emerald-500 to-emerald-600",
-    bg: "bg-emerald-50 dark:bg-emerald-950/30",
-    text: "text-emerald-700 dark:text-emerald-300",
-    ring: "ring-emerald-200/50 dark:ring-emerald-800/50",
-  },
-  "3": {
-    gradient: "from-sky-500 to-sky-600",
-    bg: "bg-sky-50 dark:bg-sky-950/30",
-    text: "text-sky-700 dark:text-sky-300",
-    ring: "ring-sky-200/50 dark:ring-sky-800/50",
-  },
-  "4": {
-    gradient: "from-slate-600 to-slate-700",
-    bg: "bg-slate-50 dark:bg-slate-950/30",
-    text: "text-slate-700 dark:text-slate-300",
-    ring: "ring-slate-200/50 dark:ring-slate-800/50",
-  },
-  "5": {
-    gradient: "from-violet-500 to-violet-600",
-    bg: "bg-violet-50 dark:bg-violet-950/30",
-    text: "text-violet-700 dark:text-violet-300",
-    ring: "ring-violet-200/50 dark:ring-violet-800/50",
-  },
-  "6": {
-    gradient: "from-fuchsia-500 to-fuchsia-600",
-    bg: "bg-fuchsia-50 dark:bg-fuchsia-950/30",
-    text: "text-fuchsia-700 dark:text-fuchsia-300",
-    ring: "ring-fuchsia-200/50 dark:ring-fuchsia-800/50",
-  },
-  "7": {
-    gradient: "from-indigo-500 to-indigo-600",
-    bg: "bg-indigo-50 dark:bg-indigo-950/30",
-    text: "text-indigo-700 dark:text-indigo-300",
-    ring: "ring-indigo-200/50 dark:ring-indigo-800/50",
-  },
+// Module color scheme - unified primary palette
+const moduleColorScheme = {
+  gradient: "from-primary to-primary",
+  bg: "bg-primary/10 dark:bg-primary/20",
+  text: "text-primary dark:text-primary",
+  ring: "ring-primary/20 dark:ring-primary/30",
 };
 
 interface SubModule {
@@ -126,7 +83,7 @@ export default function ModuleDetailView({
   onBack,
 }: ModuleDetailViewProps) {
   const Icon = moduleIcons[moduleNumber] || FileText;
-  const colors = moduleColors[moduleNumber] || moduleColors["1"];
+  const colors = moduleColorScheme;
   const completion =
     moduleData.totalSubModules > 0
       ? Math.round(
@@ -146,7 +103,7 @@ export default function ModuleDetailView({
   };
 
   return (
-    <div className="fade-in -mx-6 -my-6 animate-in space-y-8 rounded-lg bg-slate-100/50 px-6 py-6 duration-500 dark:bg-slate-950/50">
+    <div className="fade-in -mx-6 -my-6 animate-in space-y-6 px-6 py-6 duration-500">
       {/* Back Button */}
       <Button
         variant="ghost"
@@ -158,11 +115,11 @@ export default function ModuleDetailView({
         Back
       </Button>
 
-      {/* Module Section - Bordered Container */}
-      <div className="overflow-hidden rounded-lg border border-border/40 bg-card dark:bg-slate-900/40">
+      {/* Module Section - Clean header without background */}
+      <div className="space-y-6">
         {/* Module Header */}
-        <div className="border-border/40 border-b bg-gradient-to-r from-slate-50/50 to-slate-50/30 p-6 dark:from-slate-800/30 dark:to-slate-800/20">
-          <div className="mb-6 flex items-start justify-between gap-4">
+        <div className="space-y-4">
+          <div className="flex items-start justify-between gap-4">
             <div className="flex flex-1 items-start gap-4">
               <div
                 className={`rounded-xl bg-gradient-to-br p-3 ${colors.gradient} shadow-lg ${colors.ring} shrink-0 ring-4`}
@@ -216,7 +173,7 @@ export default function ModuleDetailView({
         </div>
 
         {/* Sub-Modules List */}
-        <div className="p-6">
+        <div className="space-y-2">
           {loading ? (
             <div className="flex min-h-[300px] items-center justify-center">
               <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />

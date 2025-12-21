@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
-import { upsertDocument } from "@/lib/primus/db-helper";
+import { createDocumentRevision, upsertDocument } from "@/lib/primus/db-helper";
 import { createDocxBufferFromText } from "@/server/docgen";
 import { callLLM_fillTemplate } from "@/server/llm";
 import { loadModuleSpec, loadSubmoduleSpec } from "@/server/primus/loader";
@@ -286,6 +286,20 @@ IMPORTANT: When writing procedures, incorporate the organization's compliance re
     });
 
     console.log(`[API] Document record created with ID: ${documentId}`);
+
+    // Create revision record for initial document creation
+    await createDocumentRevision(
+      documentId,
+      orgId,
+      1,
+      "created",
+      s3Key,
+      "draft",
+      userId,
+      "Initial document generated from specification",
+    );
+
+    console.log(`[API] Revision record created for document ${documentId}`);
 
     return NextResponse.json(
       {

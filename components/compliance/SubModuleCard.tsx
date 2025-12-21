@@ -7,6 +7,7 @@ import {
   Download,
   FileEdit,
   FileText,
+  History,
   Loader2,
   MoreVertical,
   Sparkles,
@@ -20,6 +21,8 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import GenerateDocumentDialog from "@/components/compliance/GenerateDocumentDialog";
 import UploadDocumentDialog from "@/components/compliance/UploadDocumentDialog";
+import EvidenceUploadFlow from "@/components/compliance/EvidenceUploadFlow";
+import { RevisionHistoryDialog } from "@/components/compliance/RevisionHistoryDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys, useUserProfile } from "@/lib/compliance/queries";
@@ -88,8 +91,12 @@ export default function SubModuleCard({
   const queryClient = useQueryClient();
   const [showGenerateDialog, setShowGenerateDialog] = useState(false);
   const [showUploadDialog, setShowUploadDialog] = useState(false);
+  const [showEvidenceFlow, setShowEvidenceFlow] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showRevisionHistory, setShowRevisionHistory] = useState(false);
+  const [revisionHistoryDocId, setRevisionHistoryDocId] = useState<string | null>(null);
+  const [revisionHistoryDocTitle, setRevisionHistoryDocTitle] = useState<string | null>(null);
 
   // Fetch user profile if we have an updatedBy userId
   const { data: updatedByUser } = useUserProfile(subModule.document?.updatedBy);
@@ -103,7 +110,7 @@ export default function SubModuleCard({
         label: "No Document",
         variant: "outline" as const,
         className:
-          "bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-900/30 dark:text-slate-400",
+          "bg-primary/5 text-primary border-primary/20 dark:bg-primary/10 dark:text-primary",
       };
     }
 
@@ -116,7 +123,7 @@ export default function SubModuleCard({
           label: "Published",
           variant: "default" as const,
           className:
-            "bg-emerald-500/10 text-emerald-700 border-emerald-200 dark:text-emerald-400",
+            "bg-primary/10 text-primary border-primary/20 dark:text-primary dark:border-primary/30",
         };
       case "draft":
         return {
@@ -124,7 +131,7 @@ export default function SubModuleCard({
           label: "Draft",
           variant: "outline" as const,
           className:
-            "bg-amber-500/10 text-amber-700 border-amber-200 dark:text-amber-400",
+            "bg-primary/10 text-primary border-primary/20 dark:text-primary",
         };
       case "archived":
         return {
@@ -132,14 +139,14 @@ export default function SubModuleCard({
           label: "Archived",
           variant: "outline" as const,
           className:
-            "bg-slate-500/10 text-slate-600 border-slate-200 dark:text-slate-400",
+            "bg-primary/5 text-primary border-primary/20 dark:text-primary",
         };
       default:
         return {
           icon: AlertCircle,
           label: "Unknown",
           variant: "outline" as const,
-          className: "bg-slate-500/10 text-slate-600 border-slate-200",
+          className: "bg-primary/5 text-primary border-primary/20",
         };
     }
   };
@@ -226,11 +233,11 @@ export default function SubModuleCard({
   };
 
   const handleUpload = () => {
-    setShowUploadDialog(true);
+    setShowEvidenceFlow(true);
   };
 
   const handleUploadSuccess = () => {
-    setShowUploadDialog(false);
+    setShowEvidenceFlow(false);
     if (onDocumentGenerated) {
       onDocumentGenerated();
     }
@@ -244,15 +251,6 @@ export default function SubModuleCard({
     setShowGenerateDialog(false);
     if (onDocumentGenerated) {
       onDocumentGenerated();
-    }
-  };
-
-  const handleView = () => {
-    if (subModule.document?.id) {
-      setIsNavigating(true);
-      router.push(
-        `/dashboard/compliance/documents/${subModule.document.id}/edit?mode=view&backTo=${encodeURIComponent(`/dashboard/compliance?module=${moduleNumber}`)}`,
-      );
     }
   };
 
@@ -271,11 +269,11 @@ export default function SubModuleCard({
   if (hasDocument) {
     return (
       <div
-        className={`group relative rounded-lg border transition-all duration-200 border-emerald-200 bg-emerald-50/30 shadow-sm shadow-emerald-100/50 hover:shadow-md hover:shadow-emerald-100/50 dark:border-emerald-900/50 dark:bg-emerald-950/10 ${
+        className={`group relative rounded-lg border transition-all duration-200 border-border bg-card/50 shadow-sm hover:shadow-md hover:bg-card dark:hover:bg-card/80 ${
           isNested ? "border-l-4" : ""
         }`}
         style={
-          isNested ? { borderLeftColor: `rgb(16 185 129)` } : {}
+          isNested ? { borderLeftColor: `var(--primary)` } : {}
         }
       >
       <div className="space-y-3 p-4">
@@ -285,16 +283,12 @@ export default function SubModuleCard({
           <div className="flex shrink-0 items-center gap-2.5">
             {/* Enhanced icon with completion indicator */}
             <div
-              className={`relative rounded-md p-1.5 ${colors.bg} ${
-                isPublished
-                  ? "ring-2 ring-emerald-400/30 ring-offset-1"
-                  : ""
-              }`}
+              className={`relative rounded-md p-1.5 ${colors.bg}`}
             >
               <FileText className={`h-3.5 w-3.5 ${colors.text}`} />
               {isPublished && (
-                <div className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-950">
-                  <CheckCircle2 className="h-2.5 w-2.5 text-white" />
+                <div className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary ring-2 ring-white dark:ring-slate-950">
+                  <CheckCircle2 className="h-2.5 w-2.5 text-primary-foreground" />
                 </div>
               )}
             </div>
@@ -328,10 +322,10 @@ export default function SubModuleCard({
           </div>
 
           {/* Line 3: Version + Updated info + Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-slate-200 border-t pt-3 dark:border-slate-800">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-primary/20 border-t pt-3 dark:border-primary/30">
             {/* Version and Update Info */}
             <div className="flex min-w-0 flex-1 items-center gap-3">
-              <span className="flex items-center gap-1.5 font-mono text-emerald-600 text-xs dark:text-emerald-400">
+              <span className="flex items-center gap-1.5 font-mono text-muted-foreground text-xs">
                 <span className="font-semibold">v{subModule.document!.version}</span>
               </span>
               
@@ -346,7 +340,7 @@ export default function SubModuleCard({
                 <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
                   <User className="h-3 w-3" />
                   <span className="truncate">
-                    {updatedByUser.firstName} {updatedByUser.lastName}
+                    {updatedByUser?.firstName || updatedByUser?.email || "Unknown"}
                   </span>
                 </span>
               )}
@@ -361,29 +355,32 @@ export default function SubModuleCard({
                 onClick={handleEdit}
                 disabled={isNavigating}
               >
-                {isNavigating ? (
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                ) : (
-                  <FileEdit className="h-3.5 w-3.5" />
-                )}
-                <span>Edit</span>
+                <FileEdit className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">View / Edit</span>
               </Button>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-8 w-8 p-0"
-                  >
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                     <MoreVertical className="h-4 w-4" />
-                    <span className="sr-only">More actions</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={handleDownload}>
                     <Download className="mr-2 h-4 w-4" />
                     Download
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={(e) => {
+                      if (subModule.document) {
+                        setRevisionHistoryDocId(subModule.document.id);
+                        setRevisionHistoryDocTitle(subModule.document.title);
+                        setShowRevisionHistory(true);
+                      }
+                    }}
+                  >
+                    <History className="mr-2 h-4 w-4" />
+                    View History
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
@@ -411,14 +408,43 @@ export default function SubModuleCard({
         />
 
         {/* Document Upload Dialog */}
-        <UploadDocumentDialog
+        {/* <UploadDocumentDialog
           open={showUploadDialog}
           onClose={() => setShowUploadDialog(false)}
           moduleNumber={moduleNumber}
           subModuleCode={subModule.code}
           subModuleName={subModule.name}
           onSuccess={handleUploadSuccess}
+        /> */}
+
+        {/* Evidence Upload Flow */}
+        <EvidenceUploadFlow
+          open={showEvidenceFlow}
+          onClose={() => setShowEvidenceFlow(false)}
+          subModuleId={subModule.code}
+          subModuleName={subModule.name}
+          onAnalysisComplete={(analysisId, analysis) => {
+            handleUploadSuccess();
+          }}
         />
+
+
+
+        {/* Revision History Dialog */}
+        {revisionHistoryDocId && (
+          <RevisionHistoryDialog
+            open={showRevisionHistory}
+            onOpenChange={(open) => {
+              setShowRevisionHistory(open);
+              if (!open) {
+                setRevisionHistoryDocId(null);
+                setRevisionHistoryDocTitle(null);
+              }
+            }}
+            documentId={revisionHistoryDocId}
+            documentTitle={revisionHistoryDocTitle || "Document"}
+          />
+        )}
 
         {/* Delete Confirmation Dialog */}
         <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
@@ -511,18 +537,18 @@ export default function SubModuleCard({
             variant="outline"
             size="sm"
             className="h-8 gap-1.5 px-3 text-xs"
-            onClick={handleUpload}
+            onClick={handleCreate}
           >
-            <Upload className="h-3.5 w-3.5" />
-            <span>Upload</span>
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Generate</span>
           </Button>
           <Button
             size="sm"
             className="h-8 gap-1.5 px-3 text-xs"
-            onClick={handleCreate}
+            onClick={handleUpload}
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Create</span>
+            <Upload className="h-3.5 w-3.5" />
+            <span>Upload</span>
           </Button>
         </div>
       </div>
@@ -539,14 +565,41 @@ export default function SubModuleCard({
       />
 
       {/* Document Upload Dialog */}
-      <UploadDocumentDialog
+      {/* <UploadDocumentDialog
         open={showUploadDialog}
         onClose={() => setShowUploadDialog(false)}
         moduleNumber={moduleNumber}
         subModuleCode={subModule.code}
         subModuleName={subModule.name}
         onSuccess={handleUploadSuccess}
+      /> */}
+
+      {/* Evidence Upload Flow */}
+      <EvidenceUploadFlow
+        open={showEvidenceFlow}
+        onClose={() => setShowEvidenceFlow(false)}
+        subModuleId={subModule.code}
+        subModuleName={subModule.name}
+        onAnalysisComplete={(analysisId, analysis) => {
+          handleUploadSuccess();
+        }}
       />
+
+      {/* Revision History Dialog */}
+      {revisionHistoryDocId && (
+        <RevisionHistoryDialog
+          open={showRevisionHistory}
+          onOpenChange={(open) => {
+            setShowRevisionHistory(open);
+            if (!open) {
+              setRevisionHistoryDocId(null);
+              setRevisionHistoryDocTitle(null);
+            }
+          }}
+          documentId={revisionHistoryDocId}
+          documentTitle={revisionHistoryDocTitle || "Document"}
+        />
+      )}
     </div>
   );
 }

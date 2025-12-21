@@ -53,6 +53,22 @@ export interface Document {
 }
 
 /**
+ * Document revision record
+ */
+export interface DocumentRevision {
+  id: string;
+  document_id: string;
+  org_id: string;
+  version: number;
+  action: "created" | "edited" | "published" | "restored";
+  content_key: string;
+  status: "draft" | "published" | "archived";
+  user_id: string;
+  notes: string | null;
+  created_at: string;
+}
+
+/**
  * Check if org has enabled Primus framework
  */
 export async function isFrameworkEnabled(
@@ -346,5 +362,81 @@ export async function getDocumentsBySubModule(
     throw new Error(
       `Failed to fetch documents: ${error instanceof Error ? error.message : String(error)}`,
     );
+  }
+}
+
+/**
+ * Create a document revision record
+ * Called whenever a document is created, edited, or published
+ */
+export async function createDocumentRevision(
+  documentId: string,
+  orgId: string,
+  version: number,
+  action: "created" | "edited" | "published" | "restored",
+  contentKey: string,
+  status: "draft" | "published" | "archived",
+  userId: string,
+  notes?: string | null,
+): Promise<string> {
+  try {
+    const result = await query<{ id: string }>(
+      `INSERT INTO document_revision 
+       (document_id, org_id, version, action, content_key, status, user_id, notes, created_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
+       RETURNING id`,
+      [documentId, orgId, version, action, contentKey, status, userId, notes || null],
+    );
+    return result.rows[0].id;
+  } catch (error) {
+    console.error("Error creating document revision:", error);
+    throw new Error(
+      `Failed to create document revision: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+}
+
+/**
+ * Get all revisions for a document
+ */
+export async function getDocumentRevisions(
+  documentId: string,
+  orgId: string,
+): Promise<DocumentRevision[]> {
+  try {
+    const result = await query<DocumentRevision>(
+      `SELECT * FROM document_revision 
+       WHERE document_id = $1 AND org_id = $2
+       ORDER BY version DESC`,
+      [documentId, orgId],
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching document revisions:", error);
+    throw new Error(
+      `Failed to fetch document revisions: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+}
+
+/**
+ * Get a specific revision by version number
+ */
+export async function getDocumentRevisionByVersion(
+  documentId: string,
+  orgId: string,
+  version: number,
+): Promise<DocumentRevision | null> {
+  try {
+    const result = await query<DocumentRevision>(
+      `SELECT * FROM document_revision 
+       WHERE document_id = $1 AND org_id = $2 AND version = $3
+       LIMIT 1`,
+      [documentId, orgId, version],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error fetching document revision:", error);
+    return null;
   }
 }

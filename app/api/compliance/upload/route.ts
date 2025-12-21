@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
-import { upsertDocument } from "@/lib/primus/db-helper";
+import { createDocumentRevision, upsertDocument } from "@/lib/primus/db-helper";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";
@@ -165,6 +165,20 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`[API] Document record created with ID: ${documentId}`);
+
+    // Create revision record for initial document upload
+    await createDocumentRevision(
+      documentId,
+      orgId,
+      1,
+      "created",
+      s3Key,
+      "draft",
+      userId,
+      `Document uploaded: ${file.name}`,
+    );
+
+    console.log(`[API] Revision record created for document ${documentId}`);
 
     return NextResponse.json(
       {

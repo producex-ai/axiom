@@ -69,7 +69,8 @@
         "Test results show soil is negative or within regulatory limits",
         "Test results are documented and maintained",
         "Testing is conducted before agricultural use begins",
-        "Appropriate regulatory standards are referenced"
+        "Appropriate regulatory standards are referenced",
+        "Equivalent expressions for test results are acceptable: 'negative', 'within limits', 'below detection limits', '<acceptable threshold'"
       ],
       "verificationExpectations": "Review of soil test reports and results before growing begins",
       "monitoringExpectations": "One-time testing before agricultural use, re-testing if concerns arise"
@@ -183,6 +184,9 @@
         "If planting within 60 days of flooding, soil testing is mandatory",
         "Soil tests are conducted by qualified laboratory",
         "Tests include microbial pathogens (E. coli, Salmonella, etc.)",
+        "Microbial acceptance criteria specified: E. coli <126 MPN/100mL, Salmonella <1 CFU/100mL (or equivalent testing standards)",
+        "Equivalent expressions for Salmonella are acceptable: '<1 CFU/100mL', 'Absence in 100mL sample', 'negative for Salmonella'",
+        "Equivalent expressions for E. coli are acceptable: '<126 MPN/100mL', 'Absence in 100mL', 'negative for E. coli'",
         "Tests include other relevant contaminants based on flood water source",
         "Test results show soil is negative or within regulatory limits",
         "Test results are documented before planting occurs",
