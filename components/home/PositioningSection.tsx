@@ -115,7 +115,7 @@ export default function PositioningSection() {
                   {t(`differentiators.${diff.key}.description`)}
                 </p>
                 <div className="space-y-3">
-                  {Object.values(t.raw(`differentiators.${diff.key}.details`)).map(
+                  {(Object.values(t.raw(`differentiators.${diff.key}.details`)) as string[]).map(
                     (point: string, index: number) => (
                       <div key={index} className="flex items-center">
                         <CheckCircle

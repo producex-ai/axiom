@@ -97,7 +97,7 @@ export default function SolutionSection() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  {Object.values(t.raw(`features.${feature.id}.details`)).map(
+                  {(Object.values(t.raw(`features.${feature.id}.details`)) as string[]).map(
                     (detail: string, index: number) => (
                       <div
                         key={index}

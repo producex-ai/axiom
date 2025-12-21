@@ -252,7 +252,7 @@ export function convertHtmlToMarkdown(html: string): string {
 
   // Add rule for strikethrough
   turndownService.addRule("strikethrough", {
-    filter: ["del", "s", "strike"],
+    filter: ["del", "s"],
     replacement: (content) => `~~${content}~~`,
   });
 

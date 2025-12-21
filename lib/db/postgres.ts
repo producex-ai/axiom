@@ -5,7 +5,7 @@
  * Provides a connection pool for efficient database access.
  */
 
-import { Pool, type PoolClient, type QueryResult } from "pg";
+import { Pool, type PoolClient, type QueryResult, type QueryResultRow } from "pg";
 
 // Singleton pool instance
 let pool: Pool | null = null;
@@ -76,13 +76,13 @@ export function getPool(): Pool {
 }
 
 /**
- * Execute a query with the pool
+ * Execute a SQL query
  *
  * @param text SQL query text
  * @param params Query parameters
  * @returns Query result
  */
-export async function query<T = any>(
+export async function query<T extends QueryResultRow = any>(
   text: string,
   params?: any[],
 ): Promise<QueryResult<T>> {

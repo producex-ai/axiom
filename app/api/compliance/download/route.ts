@@ -42,7 +42,6 @@ export async function GET(request: NextRequest) {
 
     // Convert stream to buffer
     const chunks: Uint8Array[] = [];
-    // @ts-expect-error - Body is a readable stream
     for await (const chunk of response.Body) {
       chunks.push(chunk);
     }

@@ -72,7 +72,7 @@ export default function CustomerSection() {
                 </p>
 
                 <div className="mb-6 space-y-3">
-                  {Object.values(t.raw(`roles.${role.key}.benefits`)).map(
+                  {(Object.values(t.raw(`roles.${role.key}.benefits`)) as string[]).map(
                     (benefit: string, index: number) => (
                       <div key={index} className="flex items-start">
                         <CheckCircle

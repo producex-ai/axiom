@@ -96,10 +96,12 @@ interface SubModule {
   hasSubSubModules?: boolean;
   document?: {
     id: string;
-    status: "draft" | "ready" | "archived";
+    status: "draft" | "published" | "archived";
     title: string;
     contentKey: string;
     version: number;
+    updatedAt?: string;
+    updatedBy?: string | null;
   };
   subSubModules?: SubModule[];
 }

@@ -8,13 +8,10 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getAccessToken } from "@/lib/auth";
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
-export async function GET(request: NextRequest, { params }: RouteContext) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     const { id: userId } = await params;
     

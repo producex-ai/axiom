@@ -22,16 +22,13 @@ import { getDocumentById } from "@/lib/primus/db-helper";
 
 const s3 = new S3Client({ region: process.env.AWS_REGION! });
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
 /**
  * GET - Fetch document content as Markdown
  */
-export async function GET(request: NextRequest, { params }: RouteContext) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     // Authenticate
     const authContext = await getAuthContext(request);
@@ -115,7 +112,10 @@ export async function GET(request: NextRequest, { params }: RouteContext) {
  * Converts to DOCX and uploads to S3
  * Updates document metadata in database
  */
-export async function PUT(request: NextRequest, { params }: RouteContext) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     // Authenticate
     const authContext = await getAuthContext(request);

@@ -10,16 +10,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { deleteDocument, getDocumentById } from "@/lib/primus/db-helper";
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
 /**
  * GET - Retrieve document by ID
  */
-export async function GET(request: NextRequest, { params }: RouteContext) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     // Authenticate
     const authContext = await getAuthContext(request);
@@ -28,7 +25,7 @@ export async function GET(request: NextRequest, { params }: RouteContext) {
     }
 
     const { orgId } = authContext;
-    const { id } = params;
+    const { id } = await params;
 
     // Fetch document
     const document = await getDocumentById(id, orgId);
@@ -59,7 +56,10 @@ export async function GET(request: NextRequest, { params }: RouteContext) {
 /**
  * DELETE - Soft delete document
  */
-export async function DELETE(request: NextRequest, { params }: RouteContext) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     // Authenticate
     const authContext = await getAuthContext(request);
@@ -68,7 +68,7 @@ export async function DELETE(request: NextRequest, { params }: RouteContext) {
     }
 
     const { orgId, userId } = authContext;
-    const { id } = params;
+    const { id } = await params;
 
     // Soft delete
     const deleted = await deleteDocument(id, orgId, userId);
