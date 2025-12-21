@@ -1,0 +1,137 @@
+{
+  "code": "5.05",
+  "title": "Worker Practices",
+  "requirements": [
+    {
+      "code": "5.05.01",
+      "question": "Are workers washing and sanitizing their hands before starting work each day, after using the restroom, after breaks, before putting on gloves and whenever hands may be contaminated?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.02",
+      "question": "Are workers' fingernails clean, short and free of nail polish?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.03",
+      "question": "Are workers who are working directly or indirectly with food, without evidence of boils, sores, open wounds and are not exhibiting signs of foodborne illness?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.04",
+      "question": "Are workers wearing effective hair restraints that contain all hair?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.05",
+      "question": "Are workers not observed wearing watches, jewelry (plain band permitted), studs, false eyelashes, false fingernails, etc.?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.06",
+      "question": "Are all workers wearing protective outer garments suitable for the operation (e.g., appropriate clean clothes, smocks, aprons, sleeves, non-latex gloves)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.07",
+      "question": "Do workers remove protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break, before using the toilets and when going home at the end of their shift?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.08",
+      "question": "Is there a designated area for workers to leave protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break and before using the toilets?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.09",
+      "question": "Are worker personal items being stored in such a way that they are not a potential food safety risk to product, equipment or materials?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.10",
+      "question": "Is smoking, eating, chewing and drinking confined to designated areas, and spitting is prohibited in all areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.11",
+      "question": "Is fresh potable drinking water in clean containers readily accessible to workers?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.12",
+      "question": "Are all items removed from garment (shirt, blouse, etc.) top pockets, and unsecured items are not worn (e.g., pens, glasses on top of the head, Bluetooth devices, etc.)?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.05.13",
+      "question": "Are first aid kits adequately stocked and readily available to workers in the facility, and are blue band aids used?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Workers must wash and sanitize hands thoroughly before starting work, after using restroom facilities, after breaks, before putting on gloves, and whenever hands may become contaminated during work activities",
+    "Worker fingernails must be kept clean, trimmed short, and free of nail polish or artificial nails that could harbor bacteria or become foreign material hazards",
+    "Workers with boils, sores, open wounds, or exhibiting symptoms of foodborne illness (diarrhea, vomiting, fever, jaundice, sore throat with fever) must be excluded from food handling areas and reported to management",
+    "All workers in food production areas must wear effective hair restraints (hairnets, caps, beard nets as applicable) that fully contain all head and facial hair to prevent contamination",
+    "Workers must not wear jewelry, watches, false eyelashes, or false fingernails in food production areas; only plain wedding bands are permitted to minimize foreign material and bacterial harborage risks",
+    "Workers must wear clean protective outer garments appropriate to their work areas including smocks, aprons, sleeves, and gloves (non-latex preferred) that are suitable for the specific operation",
+    "Protective outer garments must be removed before using toilet facilities, during breaks, and at the end of shifts to prevent transfer of contamination between production and non-production areas",
+    "Designated areas must be provided for workers to properly hang or store protective garments when removed for breaks or restroom use, preventing garment contact with contamination sources",
+    "Worker personal belongings including phones, bags, medications, and food items must be stored in designated areas separate from production zones to prevent food safety contamination risks",
+    "Eating, drinking (except water), smoking, and chewing (gum, tobacco) must be restricted to designated break areas; spitting is strictly prohibited throughout all facility areas",
+    "Fresh potable drinking water must be readily accessible to all workers in clean, covered containers or fountains with single-use cups to maintain hydration without contamination risks",
+    "Items such as pens, thermometers, phones, and tools must not be stored in shirt or apron pockets; glasses, Bluetooth devices, and other unsecured items must not be worn on head or loosely attached where they could fall into products",
+    "First aid kits must be adequately stocked with supplies including blue-colored bandages (for detectability), antiseptic, gloves, and related items; kits must be readily accessible and regularly inspected for completeness"
+  ],
+  "capaInject": [
+    "When inadequate handwashing practices are observed, immediately enforce handwashing requirements with direct supervision, install additional signage in multiple languages at handwashing stations, implement observation programs with documented compliance verification, and provide refresher training on proper handwashing technique and critical timing",
+    "If workers have improper fingernail condition, immediately provide nail clippers and cleaning brushes at entry points, establish pre-shift inspection procedures with documented verification, implement policies requiring glove use for workers who cannot maintain acceptable nail standards, and enforce disciplinary measures for repeated violations",
+    "Upon identifying workers with health conditions or illness symptoms, immediately exclude them from food handling areas, refer to occupational health services for assessment, establish a written illness reporting and exclusion policy with clear criteria, train supervisors on symptom recognition, and maintain confidential health records",
+    "When hair restraint violations are observed, immediately provide proper hair restraints, establish pre-shift inspection stations with documented compliance checks, install mirrors at entry points for self-inspection, require beard nets for workers with facial hair, and implement progressive discipline for non-compliance",
+    "If jewelry or prohibited items are observed, immediately require removal and storage in lockers, establish clear written policies on permitted and prohibited items, conduct pre-shift inspections with documented verification, provide storage for items removed during shift, and enforce consistent disciplinary actions",
+    "For inadequate or unsuitable protective garments, immediately provide appropriate clean garments, establish daily garment inspection and exchange programs, implement color-coding by department or task, ensure adequate inventory of all sizes, and establish laundering or disposal procedures to maintain garment cleanliness",
+    "When workers fail to remove garments before breaks or restroom use, install signage reminding workers to remove garments, establish designated garment storage areas adjacent to break rooms and restrooms, implement observation programs with supervisory enforcement, and provide training emphasizing cross-contamination prevention",
+    "If personal items pose food safety risks, immediately relocate items to designated storage areas, provide adequate locker facilities separate from production areas, prohibit phones and personal items in production zones, conduct routine inspections of production areas for personal items, and enforce storage policies through progressive discipline",
+    "When eating, drinking, or smoking violations occur in production areas, immediately stop the activity, reinforce designated area policies through signage and training, establish clear visual demarcation of permitted areas, implement supervisory monitoring programs, and enforce prohibition of spitting through training and discipline",
+    "If drinking water access is inadequate, immediately provide additional water stations with clean cups or covered coolers at convenient locations, establish daily cleaning and refilling schedules, ensure ice for coolers comes from potable sources, provide cups in dispensers preventing hand contact, and monitor water quality periodically",
+    "When unsecured items are found on workers, immediately require removal to lockers, provide pens, tools, and equipment that can be securely attached or stored in provided tool belts, establish policies requiring secured pocket flaps or use of pocketless garments, and conduct pre-shift inspections verifying compliance",
+    "If first aid kits are inadequately stocked or inaccessible, immediately restock all supplies, establish monthly inspection checklists with signed verification, ensure kits are located within specified distance of all work areas, post kit locations on facility maps, train designated first aid responders, and implement procedures requiring bandage color verification (blue) before restocking"
+  ],
+  "traceabilityInject": [
+    "Maintain handwashing observation records documenting compliance checks, critical handwashing moments verified, non-compliance observations, corrective actions taken, and trend analysis identifying problem areas or times",
+    "Keep pre-shift inspection logs documenting worker hygiene compliance including fingernail condition, hair restraints, jewelry, protective garments, and health status with corrective actions for non-conformances",
+    "Document illness reporting and exclusion records including worker symptoms, date reported, exclusion period, medical clearance for return to work, and confidential medical information in secure files separate from production records",
+    "Retain training records for worker hygiene practices showing training dates, topics covered (handwashing, personal hygiene, illness reporting), trainer identification, and worker verification of understanding",
+    "Maintain protective garment inventory and laundering records including garment distribution, cleaning schedules, garment condition inspections, and replacement activities ensuring adequate supply of clean garments",
+    "Keep records of personal storage facility inspections documenting locker availability, cleanliness, separation from production areas, and any findings of personal items in production zones with corrective actions",
+    "Document first aid kit inspection logs showing inspection date, inspector name, contents verification against standard list, items requiring restocking, blue bandage verification, and corrective actions completed",
+    "Retain incident reports for any hygiene-related product contamination events including investigation findings, worker practices involved, corrective actions implemented, and effectiveness verification to prevent recurrence"
+  ],
+  "micro_inject": [
+    "Inadequate handwashing is the primary transmission route for fecal-oral pathogens including E. coli O157:H7, Salmonella, Shigella, Hepatitis A virus, and Norovirus which collectively cause millions of foodborne illnesses annually",
+    "Fingernails harbor significantly higher bacterial loads than fingertips including Staphylococcus aureus, E. coli, and Salmonella; artificial nails and nail polish create additional surfaces for bacterial adhesion and biofilm formation that handwashing cannot effectively remove",
+    "Workers with boils or open wounds may be colonized with Staphylococcus aureus which can produce heat-stable enterotoxins in food products causing staphylococcal food poisoning; even after bacterial death, toxins remain active and dangerous",
+    "A single human hair can carry 50,000-100,000 bacteria including Staphylococcus species and potential pathogens from environmental sources; hair contamination is both a food safety hazard and quality defect with high consumer complaint potential",
+    "Jewelry and watches create crevices and surfaces that harbor bacteria and cannot be adequately cleaned through handwashing; studies show bacterial populations under rings can be 1000 times higher than on adjacent skin",
+    "Contaminated protective garments can serve as fomites transferring pathogens from restrooms, break areas, or outdoor environments into food production areas when workers fail to change or remove garments appropriately",
+    "Personal items including phones and bags frequently contact contaminated surfaces and can harbor pathogens; studies show mobile phones carry higher bacterial loads than toilet seats including MRSA, E. coli, and Salmonella",
+    "Eating, drinking, or smoking in production areas introduces saliva which may contain foodborne illness agents (Hepatitis A, Norovirus) and creates opportunities for hand-to-mouth contact followed by hand-to-food-product transfer without proper handwashing",
+    "Inadequate hydration access may discourage workers from drinking, leading to dehydration and potentially increased likelihood of fainting or decreased hygiene awareness; conversely, providing water in production areas creates contamination risks requiring controlled access points",
+    "Unsecured items falling from pockets or heads represent physical hazards in products and may carry biological contamination from environmental sources outside production areas where the items were previously handled or stored",
+    "Non-blue bandages that fall into products are difficult to detect visually and may not be captured by metal detectors or x-ray machines, allowing contamination to reach consumers; blue color provides contrast against most food products for visual detection",
+    "Wounds treated with contaminated first aid supplies or improperly protected with inadequate bandages continue to shed bacteria including antibiotic-resistant Staphylococcus aureus into the production environment"
+  ]
+}

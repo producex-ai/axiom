@@ -1,0 +1,177 @@
+{
+  "code": "5.04",
+  "title": "Operational Practices",
+  "requirements": [
+    {
+      "code": "5.04.01",
+      "question": "Does the process flow, facility layout, worker control, utensil control, internal vehicle use, etc. ensure that finished products are not contaminated by raw products/ingredients?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.02",
+      "question": "Are all exposed materials (product, packaging, etc.) protected from overhead contamination (e.g., ladders, drive assemblies, condensation, lubricants, walkways, loose panels, degrading insulation, etc.)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.03",
+      "question": "Are production areas clean and well maintained; especially lights, ducts, fans, floor areas by the walls and equipment, and other hard to reach areas?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.04",
+      "question": "Where facilities are not completely enclosed, are there measures in place to mitigate potential hazards?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.05",
+      "question": "Is all re-work / re-packaging handled correctly?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.06",
+      "question": "Are raw ingredients examined before use?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.07",
+      "question": "Are products produced on-site coded (carton and unit packaging) for the day of production?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.08",
+      "question": "Are foreign material control methods (e.g., metal detectors, metal traps, magnets, x-ray machines, visual inspection, etc.) in place and regularly tested (where relevant) to ensure proper operation?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.09",
+      "question": "Does the facility use the appropriate method and equipment for verifying the concentrations of the anti-microbial chemical (product contact water, terminal sanitizers, dip stations, etc.) being used?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.10",
+      "question": "Are hand washing stations adequate in number and appropriately located for worker access and monitoring usage?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.11",
+      "question": "Are hand washing stations in working order, have water of suitable temperature and pressure, adequately stocked (e.g. disposable towels, unscented soap, etc.) and restricted to hand washing purposes only?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.12",
+      "question": "Are toilet facilities adequate in number and location and are they appropriately stocked (e.g., toilet paper.)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.13",
+      "question": "Are secondary hand sanitation stations adequate in number and location, and are the stations maintained properly?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.14",
+      "question": "Are foot baths, foamers or dry powdered sanitizing stations adequate in number and location, and are the stations maintained properly?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.15",
+      "question": "Are single service containers used for their intended purpose only so that potential cross contamination is prevented?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.16",
+      "question": "Are re-usable containers cleanable and clearly designated for the specific purpose (trash, raw product, finished product, re-work, ice, etc.) such that cross contamination is prevented?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.04.17",
+      "question": "Are devices used to measure, regulate or control temperature, pH, acidity, water activity, and other conditions that affect food safety, working properly and adequately maintained?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Process flow and facility layout must prevent cross-contamination between raw and finished products through physical separation, directional flow, personnel controls, and equipment/utensil segregation",
+    "All exposed food products, ingredients, and packaging materials must be protected from overhead contamination sources including condensation, lubricants, broken lights, degrading infrastructure, and personnel traffic on elevated platforms",
+    "Production areas must be maintained in a clean and sanitary condition with particular attention to overhead structures, lighting fixtures, ventilation ducts, floor-wall junctions, and areas around equipment that are difficult to access",
+    "Open or semi-enclosed facilities must implement specific hazard mitigation measures appropriate to the environmental risks including protection from weather, pests, dust, and other external contamination sources",
+    "Rework and re-packaging operations must be controlled through documented procedures that ensure proper identification, segregation, handling, and re-integration into production without compromising food safety or quality",
+    "Raw ingredients must be visually inspected before use to detect defects, contamination, or quality issues that could affect finished product safety or quality",
+    "All products produced on-site must be coded on both carton and unit packaging with production date information to enable traceability and recall capability",
+    "Foreign material control devices (metal detectors, x-ray machines, filters, screens, magnets) must be installed at critical control points, regularly tested for sensitivity and effectiveness, and maintained in proper working order",
+    "Antimicrobial chemical concentrations (sanitizers, chlorine, peroxyacetic acid, etc.) used on product contact surfaces or in product contact water must be verified using appropriate test methods and equipment with documented frequency and results",
+    "Handwashing stations must be adequate in number based on workforce size, strategically located for easy worker access at facility entry points and after restroom use, and positioned to enable supervisor monitoring of compliance",
+    "Handwashing stations must be fully functional with tempered running water, liquid soap (unscented preferred), single-use towels, waste receptacles, and signage; stations must be dedicated to handwashing only, not used for other purposes",
+    "Toilet facilities must be adequate in number per regulatory requirements, conveniently located to minimize worker travel time, properly stocked with toilet paper and waste receptacles, and maintained in sanitary condition",
+    "Secondary hand sanitizing stations (alcohol-based or other approved sanitizers) must supplement handwashing stations, be adequate in number and location throughout production areas, and maintained with supplies and functionality",
+    "Foot baths, foam sanitizing stations, or dry sanitizer mat stations must be strategically located at facility entry points and between zones, maintained at proper chemical concentrations or effectiveness, and cleaned/replaced regularly",
+    "Single-service containers and utensils must be used only for their intended purpose and discarded after use to prevent cross-contamination; they must never be reused for different materials or applications",
+    "Reusable containers must be constructed of cleanable materials, clearly designated and color-coded for specific purposes (raw vs. cooked, allergen vs. non-allergen, product vs. waste), and maintained in sanitary condition",
+    "Monitoring and control devices (thermometers, pH meters, water activity meters, etc.) must be properly calibrated, maintained in working order, and verified for accuracy according to defined schedules to ensure critical parameters remain within food safety limits"
+  ],
+  "capaInject": [
+    "If cross-contamination risks are identified in process flow, immediately implement physical barriers or spatial separation, establish directional traffic patterns with clearly marked flow paths, designate separate equipment and utensils for raw and finished products, and consider time-separation if space is limited",
+    "When overhead contamination hazards are discovered, immediately protect exposed products by covering or moving them, repair or replace damaged infrastructure (lights, panels, insulation), install drip shields or splash guards under equipment, and implement routine overhead inspection and maintenance programs",
+    "For production area cleanliness deficiencies, immediately conduct deep cleaning including all hard-to-reach areas, establish a master sanitation schedule with defined frequencies and responsibilities, implement pre-operational inspections with documented verification, and increase cleaning frequency in problem areas",
+    "In open or semi-enclosed facilities with inadequate hazard mitigation, immediately assess environmental risks, install barriers such as air curtains, screens, or plastic strip curtains, establish enhanced cleaning protocols, implement environmental monitoring programs, and consider infrastructure improvements for permanent enclosure",
+    "When rework or re-packaging procedures are not followed correctly, immediately segregate and hold affected materials, conduct food safety assessment, establish written rework procedures with approval steps and traceability requirements, train personnel on proper handling, and implement supervisory verification",
+    "If raw ingredient inspection reveals quality or safety defects, immediately reject and segregate defective materials, notify supplier of issues, enhance receiving inspection procedures with documented standards and training for inspectors, and consider supplier corrective action requests or alternate sourcing",
+    "When production coding is missing, incorrect, or illegible, immediately halt production until coding equipment is repaired, verify affected product lot identification through production records, implement coding verification checks, establish preventive maintenance for coding equipment, and train operators on proper code application",
+    "If foreign material control devices fail sensitivity tests, immediately stop production, recalibrate or repair equipment, establish test procedures with documented frequency and sensitivity standards, maintain test pieces and records, and evaluate affected products produced since last successful test for potential contamination",
+    "When antimicrobial chemical concentrations are out of specification, immediately discontinue use, prepare fresh solution at proper concentration, establish written procedures for mixing and testing, verify test equipment calibration, train personnel on proper testing methods, and increase monitoring frequency during start-up periods",
+    "For inadequate handwashing station capacity or accessibility, immediately increase the number of stations based on workforce and facility layout assessment, relocate stations to high-traffic areas and facility entry points, ensure visibility for monitoring purposes, and post multilingual handwashing instruction signs",
+    "When handwashing stations are non-functional or inadequately stocked, immediately repair or replace equipment, establish daily stocking and functionality checks with documented accountability, install appropriate signage restricting use to handwashing only, and implement disciplinary measures for misuse",
+    "If toilet facilities are inadequate or unsanitary, immediately clean and sanitize facilities, increase number of toilets based on workforce size and regulatory requirements, establish frequent cleaning and restocking schedules with documented completion, and install self-closing doors and proper ventilation",
+    "When secondary hand sanitizing stations are inadequate, immediately install additional stations at strategic locations (production entry points, after glove changes, between tasks), verify sanitizer effectiveness and concentration, establish refill and maintenance schedules, and train workers on proper use supplementing handwashing",
+    "For inadequate or poorly maintained foot sanitation stations, immediately replace sanitizing solutions or mats, verify proper chemical concentration using test strips, establish daily monitoring and replacement schedules, ensure adequate sizing to prevent bypassing, and implement supervisory verification of worker compliance",
+    "If single-service containers are being reused, immediately remove all single-service items from production area, provide adequate supplies of appropriate containers for all uses, educate personnel on cross-contamination risks, establish clear visual differentiation between single-service and reusable items, and implement spot-checks for compliance",
+    "When reusable containers lack proper designation or are used for wrong purposes, immediately implement color-coding system with clear labeling, segregate containers by use category, establish cleaning and sanitizing procedures specific to each container type, train personnel on proper container selection, and audit container use regularly",
+    "If monitoring/control devices are malfunctioning or out of calibration, immediately remove from service, calibrate or replace devices using certified standards, establish preventive maintenance and calibration schedules, maintain calibration records with traceability to certified standards, and verify critical control parameters using backup measurement methods until primary devices are restored"
+  ],
+  "traceabilityInject": [
+    "Maintain facility layout diagrams clearly showing raw product zones, finished product zones, physical barriers, traffic flow patterns, and critical control points for cross-contamination prevention",
+    "Document overhead protection measures including locations of drip shields, equipment maintenance schedules for overhead infrastructure, and inspection records identifying and correcting potential overhead contamination sources",
+    "Keep master sanitation schedules and cleaning logs for production areas documenting date, areas cleaned, cleaning agents used, personnel responsible, and verification inspections with corrective actions for deficiencies",
+    "Retain rework handling records including identification of rework materials, food safety assessment, reprocessing procedures followed, lot traceability through rework process, and approval for re-integration into production",
+    "Maintain receiving inspection records for raw ingredients showing date received, lot identification, condition assessment, defects noted, acceptance/rejection decision, and supplier notification of quality issues",
+    "Keep production coding records documenting code formats used, coding equipment maintenance and calibration, verification checks of code legibility and accuracy, and troubleshooting records for coding failures",
+    "Document foreign material control device testing records including test date, device location, test method, sensitivity verification, pass/fail results, corrective actions for failures, and preventive maintenance activities",
+    "Retain antimicrobial chemical monitoring logs showing sanitizer type, concentration testing results, test method used, frequency of testing, corrective actions for out-of-specification results, and equipment calibration records",
+    "Maintain handwashing station monitoring records documenting daily functionality checks, stocking verification, maintenance activities, worker compliance observations, and corrective actions for deficiencies",
+    "Keep toilet facility cleaning and maintenance logs showing cleaning frequency, restocking activities, functionality issues, repairs completed, and compliance with regulatory requirements for number of facilities",
+    "Document foot bath and secondary sanitizing station maintenance records including solution preparation dates, concentration testing results, replacement frequency, effectiveness verification, and corrective actions",
+    "Retain container management records showing container designation, color-coding schemes, cleaning and sanitizing logs, inspection findings, and corrective actions for misuse or cross-contamination risks",
+    "Maintain calibration and maintenance records for all monitoring devices (thermometers, pH meters, water activity meters) including calibration standards used, calibration frequency, results, adjustments made, and device replacement history"
+  ],
+  "micro_inject": [
+    "Cross-contamination between raw and ready-to-eat products can transfer pathogenic bacteria including Listeria monocytogenes, Salmonella, and E. coli O157:H7, causing serious foodborne illness outbreaks with high morbidity and mortality rates",
+    "Overhead contamination from condensation provides moisture that supports growth of psychrotrophic pathogens like Listeria that can multiply at refrigeration temperatures, while lubricant drips can contain heavy metals and toxic compounds",
+    "Inadequate cleaning of production areas allows biofilm formation on surfaces and equipment where Listeria monocytogenes and other pathogens can persist for months or years, continuously contaminating products despite cleaning efforts",
+    "Open facility environments expose products to airborne pathogens, dust containing Salmonella or E. coli from animal sources, and opportunistic pathogens from environmental sources including water and soil",
+    "Improper rework handling can re-introduce aged materials with elevated pathogen levels back into fresh production, or mix products with different food safety profiles creating unpredictable contamination patterns",
+    "Defective raw ingredients may harbor high levels of pathogenic bacteria, mycotoxins, or allergens that processing steps cannot adequately eliminate, leading to contamination of finished products throughout the production run",
+    "Foreign material contamination can introduce pathogenic bacteria from environmental sources; for example, metal fragments may carry soil bacteria including Clostridium botulinum spores or Listeria from outdoor environments",
+    "Inadequate antimicrobial chemical concentrations fail to achieve log reductions in pathogen levels on product contact surfaces or in wash water, allowing bacterial survival and product contamination, while excessive concentrations can leave toxic residues",
+    "Poor hand hygiene is one of the primary vectors for transmitting fecal pathogens (E. coli, Salmonella, Shigella, Hepatitis A, Norovirus) from workers to food products, causing numerous large-scale outbreaks annually",
+    "Inadequate toilet facilities or handwashing access increases the likelihood of fecal contamination entering the production environment through worker contact with products, equipment, or food contact surfaces",
+    "Secondary sanitizing stations supplement handwashing but do not replace it; alcohol-based sanitizers are less effective against non-enveloped viruses (Norovirus, Hepatitis A) and bacterial spores requiring proper handwashing as the primary control",
+    "Foot traffic between contaminated and clean areas can transfer pathogens on shoe soles; foot baths with inadequate sanitizer concentration or infrequent changes become sources of contamination rather than control points",
+    "Container misuse creates cross-contamination pathways transferring allergens, pathogens, or chemical residues between incompatible materials; for example, containers used for raw product and then finished product without adequate cleaning",
+    "Malfunctioning temperature control allows rapid pathogen multiplication; Salmonella can double every 20 minutes at room temperature, while inadequate pH control can permit growth of acid-tolerant pathogens like E. coli O157:H7 in acidified products"
+  ]
+}

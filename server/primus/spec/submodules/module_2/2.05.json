@@ -1,0 +1,136 @@
+{
+  "code": "2.05",
+  "title": "Inspection",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "chemical inventory",
+    "safety data sheets",
+    "chemical storage",
+    "product quality",
+    "contamination prevention"
+  ],
+  "description": "Requirements for maintaining chemical inventory logs, Safety Data Sheets, proper chemical storage and labeling, and ensuring product and material quality",
+  "requirements": [
+    {
+      "id": "2.05.01",
+      "code": "2.05.01",
+      "required": true,
+      "points": 3,
+      "text": "Are there chemical inventory logs for chemicals, including pesticides and fertilizers?",
+      "keywords": [
+        "chemical inventory",
+        "inventory logs",
+        "pesticides",
+        "fertilizers",
+        "chemical tracking"
+      ],
+      "mandatoryStatements": [
+        "Chemical inventory logs are maintained",
+        "Logs include all chemicals used on the operation (pesticides, fertilizers, sanitizers, etc.)",
+        "Logs track receipt, storage location, and use of chemicals",
+        "Inventory is updated regularly",
+        "Logs support traceability of chemical applications",
+        "Inventory helps ensure proper chemical rotation and prevents expired products from being used"
+      ],
+      "verificationExpectations": "Monthly verification of chemical inventory accuracy",
+      "monitoringExpectations": "Update inventory immediately upon receipt or use of chemicals"
+    },
+    {
+      "id": "2.05.02",
+      "code": "2.05.02",
+      "required": true,
+      "points": 3,
+      "text": "Are copies of all Safety Data Sheets on file and fully accessible at all times with clear indexes?",
+      "keywords": [
+        "Safety Data Sheets",
+        "SDS",
+        "MSDS",
+        "chemical safety information",
+        "accessibility",
+        "indexing"
+      ],
+      "mandatoryStatements": [
+        "Safety Data Sheets (SDS) are on file for all chemicals",
+        "SDS are current and up to date",
+        "SDS are fully accessible to workers at all times",
+        "Clear index or table of contents facilitates quick access",
+        "SDS are available in language(s) understood by workers",
+        "New chemicals cannot be used until SDS is obtained and filed",
+        "SDS are reviewed with workers during chemical safety training"
+      ],
+      "verificationExpectations": "Quarterly audit of SDS file for completeness and accessibility",
+      "monitoringExpectations": "Obtain and file SDS immediately when new chemicals are received"
+    },
+    {
+      "id": "2.05.03",
+      "code": "2.05.03",
+      "required": true,
+      "points": 15,
+      "text": "Are all chemicals (pesticides, fertilizers, sanitizers, detergents, lubricants, etc.) stored securely, safely and are they labeled correctly?",
+      "keywords": [
+        "chemical storage",
+        "secure storage",
+        "chemical labeling",
+        "safety",
+        "pesticide storage",
+        "fertilizer storage"
+      ],
+      "mandatoryStatements": [
+        "Chemicals are stored in secure, locked areas with limited access",
+        "Storage area is designed to prevent spills and contain leaks",
+        "Incompatible chemicals are segregated",
+        "All chemicals are in original containers or properly labeled secondary containers",
+        "Labels include chemical name, hazard warnings, and use instructions",
+        "Storage conditions (temperature, ventilation) are appropriate",
+        "Storage area is organized and clean",
+        "Access to chemical storage is controlled and logged if appropriate",
+        "Chemical storage area is located away from food contact surfaces and water sources"
+      ],
+      "verificationExpectations": "Monthly inspection of chemical storage areas for security and labeling compliance",
+      "monitoringExpectations": "Daily verification that storage areas are locked and secure, immediate correction of labeling deficiencies"
+    },
+    {
+      "id": "2.05.04",
+      "code": "2.05.04",
+      "required": true,
+      "points": 15,
+      "text": "Are the crop, ingredients (including water), food contact packaging and food contact surfaces within accepted tolerances for spoilage and without evidence of adulteration? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "product quality",
+        "spoilage",
+        "adulteration",
+        "contamination",
+        "food contact surfaces",
+        "water quality",
+        "packaging integrity"
+      ],
+      "mandatoryStatements": [
+        "Crop is inspected and within quality specifications",
+        "No evidence of spoilage, decay, or quality defects",
+        "Water used in operation meets quality standards",
+        "Food contact packaging is clean, intact, and suitable for use",
+        "Food contact surfaces are clean, maintained, and in good repair",
+        "No evidence of physical, chemical, or biological contamination",
+        "No evidence of adulteration (contamination with filth, foreign material, etc.)",
+        "Regular inspection and monitoring of product and material quality",
+        "Rejected product and materials are identified and segregated",
+        "Product hold and release procedures are followed"
+      ],
+      "verificationExpectations": "Daily inspection of crop, materials, and surfaces during operations",
+      "monitoringExpectations": "Continuous monitoring during harvest and handling, immediate action if spoilage or adulteration detected"
+    }
+  ],
+  "micro_inject": ["fsms", "chemical"],
+  "capaInject": [
+    "If chemical inventory logs not maintained: implement inventory system immediately, train responsible personnel within 7 days",
+    "If Safety Data Sheets missing or not accessible: obtain missing SDS within 24 hours, do not use chemicals without SDS, implement clear indexing system",
+    "If chemicals not stored securely or labeled correctly: immediate correction, re-label all chemicals, enhance security measures, retrain personnel",
+    "If spoilage or adulteration detected: immediate product hold, do not harvest or pack affected product, investigate extent of issue, dispose of or remediate as appropriate, audit fails"
+  ],
+  "traceabilityInject": [
+    "Chemical inventory logs must be traceable to specific chemicals, receipt dates, and usage",
+    "Safety Data Sheets must be traceable to specific chemicals and suppliers",
+    "Chemical storage inspections must be traceable to inspection dates and findings",
+    "Product quality inspections must be traceable to specific lots, dates, and inspectors"
+  ]
+}

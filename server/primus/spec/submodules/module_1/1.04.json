@@ -1,0 +1,182 @@
+{
+  "code": "1.04",
+  "title": "Internal and External Inspections",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "internal audits",
+    "self-assessments",
+    "regulatory inspections",
+    "calibration",
+    "measuring devices"
+  ],
+  "description": "Systematic internal audit program and procedures for handling external inspections, including calibration and verification of measuring and monitoring devices",
+  "requirements": [
+    {
+      "id": "1.04.01",
+      "code": "1.04.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented procedure for how internal audits are to be performed at the operations, including frequency and covering all processes impacting food safety and the related documents and records?",
+      "keywords": [
+        "internal audit",
+        "audit procedure",
+        "audit frequency",
+        "audit scope",
+        "audit coverage"
+      ],
+      "mandatoryStatements": [
+        "Internal audit procedure is documented",
+        "Audit frequency is defined (minimum annually for all food safety processes)",
+        "Procedure covers all processes impacting food safety",
+        "Audit scope includes review of documents and records",
+        "Audit checklist or criteria are defined",
+        "Auditor qualifications and independence requirements are specified",
+        "Audit planning, execution, and reporting processes are described",
+        "Follow-up on audit findings is required"
+      ],
+      "verificationExpectations": "Annual review of internal audit procedure for adequacy, verification that all food safety processes are audited at required frequency",
+      "monitoringExpectations": "Quarterly verification that audits are conducted per schedule, immediate scheduling of overdue audits"
+    },
+    {
+      "id": "1.04.02",
+      "code": "1.04.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there documented evidence of the internal audits performed, detailing findings and corrective actions?",
+      "keywords": [
+        "audit records",
+        "audit reports",
+        "audit findings",
+        "audit corrective actions",
+        "audit evidence"
+      ],
+      "mandatoryStatements": [
+        "Internal audit reports are maintained for all audits conducted",
+        "Reports document audit date, auditor(s), scope, and areas audited",
+        "All findings (conformances and non-conformances) are documented",
+        "Non-conformances are categorized by severity",
+        "Corrective actions are documented for all non-conformances",
+        "Responsible parties and target completion dates are identified",
+        "Verification of corrective action effectiveness is documented",
+        "Audit records are retained per record retention procedure"
+      ],
+      "verificationExpectations": "Annual review of audit records for completeness, quarterly verification of corrective action closure",
+      "monitoringExpectations": "Immediate documentation of audit findings, monthly monitoring of corrective action progress"
+    },
+    {
+      "id": "1.04.03",
+      "code": "1.04.03",
+      "required": true,
+      "points": 3,
+      "text": "Are there written procedures for handling regulatory inspections?",
+      "keywords": [
+        "regulatory inspection",
+        "inspection procedure",
+        "regulatory response",
+        "inspector escort",
+        "inspection protocol"
+      ],
+      "mandatoryStatements": [
+        "Procedure for handling regulatory inspections is documented",
+        "Procedure identifies who is authorized to interact with inspectors",
+        "Inspector escort and access protocols are defined",
+        "Document and record access procedures are specified",
+        "Response to inspector requests is described",
+        "Post-inspection follow-up process is defined",
+        "Communication with management during inspection is specified"
+      ],
+      "verificationExpectations": "Annual review of inspection handling procedure, verification after each regulatory inspection that procedure was followed",
+      "monitoringExpectations": "Immediate notification to management when regulatory inspection begins, real-time adherence to procedure during inspection"
+    },
+    {
+      "id": "1.04.04",
+      "code": "1.04.04",
+      "required": true,
+      "points": 5,
+      "text": "Are there records of regulatory inspections and/or contracted inspections, company responses and corrective actions, if any?",
+      "keywords": [
+        "inspection records",
+        "regulatory reports",
+        "inspection findings",
+        "regulatory corrective actions",
+        "inspection responses"
+      ],
+      "mandatoryStatements": [
+        "Records of all regulatory and contracted inspections are maintained",
+        "Inspection reports from authorities are kept on file",
+        "Company responses to inspection findings are documented",
+        "Corrective actions for inspection findings are documented and tracked",
+        "Verification of corrective action completion is documented",
+        "Clearance or follow-up communications from authorities are maintained",
+        "Records are organized and readily retrievable"
+      ],
+      "verificationExpectations": "Annual review of inspection records and corrective action closure, verification that all findings are addressed",
+      "monitoringExpectations": "Immediate documentation of inspection results, weekly monitoring of regulatory corrective action progress"
+    },
+    {
+      "id": "1.04.05",
+      "code": "1.04.05",
+      "required": true,
+      "points": 10,
+      "text": "Are there documented calibration and/or accuracy verification procedures for measuring and monitoring devices used in the operations that are related to the safety of the product?",
+      "keywords": [
+        "calibration",
+        "accuracy verification",
+        "measuring devices",
+        "monitoring equipment",
+        "calibration procedure"
+      ],
+      "mandatoryStatements": [
+        "Calibration/accuracy verification procedures are documented",
+        "All measuring and monitoring devices related to food safety are identified",
+        "Calibration frequency is defined for each device type",
+        "Calibration methods and standards are specified",
+        "Acceptable accuracy tolerances are defined",
+        "Procedure identifies who is authorized to perform calibration",
+        "Actions to take when device is out of calibration are specified",
+        "Traceability to national or international standards is established where applicable"
+      ],
+      "verificationExpectations": "Annual review of calibration procedures and device inventory, quarterly verification that calibrations are current",
+      "monitoringExpectations": "Calibration performed at specified frequencies, immediate verification before first use of new devices"
+    },
+    {
+      "id": "1.04.06",
+      "code": "1.04.06",
+      "required": true,
+      "points": 5,
+      "text": "Are calibration and/or accuracy verification records maintained and are they consistent with the requirements outlined in the SOP(s) for instruments and measuring devices requiring calibration?",
+      "keywords": [
+        "calibration records",
+        "verification records",
+        "calibration documentation",
+        "device history",
+        "calibration compliance"
+      ],
+      "mandatoryStatements": [
+        "Calibration records are maintained for all devices requiring calibration",
+        "Records include device identification, calibration date, results, and calibrator identification",
+        "Records show traceability to calibration standards used",
+        "Calibration frequency in records matches procedure requirements",
+        "Out-of-calibration results and corrective actions are documented",
+        "Records are organized and retrievable by device",
+        "Historical calibration data is maintained for trend analysis"
+      ],
+      "verificationExpectations": "Annual audit of calibration records for completeness and compliance, quarterly spot-check of device calibration status",
+      "monitoringExpectations": "Immediate documentation of calibration results, monthly review of upcoming calibration due dates"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If internal audit not conducted per schedule: conduct audit immediately, investigate scheduling failure, implement reminder system",
+    "If audit findings not addressed: immediate action on critical findings, escalate to management, set aggressive completion dates",
+    "If regulatory inspection identifies non-conformances: immediate containment, complete corrective actions per regulatory timeline, verify effectiveness",
+    "If measuring device found out of calibration: immediate removal from service, assess impact on product safety, recalibrate or replace within 24 hours",
+    "If calibration records incomplete: reconstruct records if possible, implement enhanced calibration tracking system within 30 days"
+  ],
+  "traceabilityInject": [
+    "Internal audit records must trace findings to specific areas, dates, and corrective actions",
+    "Regulatory inspection records must trace from initial findings through corrective action verification and closure",
+    "Calibration records must trace device history including all calibrations, adjustments, and out-of-spec events",
+    "All measuring devices must be uniquely identified and traceable to calibration records"
+  ]
+}

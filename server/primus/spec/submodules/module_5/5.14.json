@@ -1,0 +1,85 @@
+{
+  "code": "5.14",
+  "parentCode": "5",
+  "title": "Maintenance & Sanitation Files",
+  "requirements": [
+    {
+      "code": "5.14.01",
+      "question": "Does the facility have a preventative maintenance program that includes a schedule and completion records?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.02",
+      "question": "Are there logs of maintenance work and repairs and are they signed off when work is completed?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.03",
+      "question": "Are there logs showing that equipment is properly cleaned and sanitized after maintenance and repair work has been completed?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.04",
+      "question": "Is there a written cleaning schedule (Master Sanitation Schedule) that shows what and where is to be cleaned and how often?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.05",
+      "question": "Are there written cleaning and sanitation procedures (Sanitation Standard Operating Procedures) for the facility and all equipment?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.06",
+      "question": "Are cleaning and sanitation logs on file that show what was done, when and by who?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.07",
+      "question": "Are there records showing verification of cleaning and sanitizing chemical concentrations?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.08",
+      "question": "Are there documented procedures and completion records for clean-in-place (CIP) activities (e.g., cleaning re-circulating water systems such as washing flumes, ice injectors, hydrocoolers, chilled water systems, ice makers, etc.), where applicable?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.09",
+      "question": "Are there sanitation logs on file indicating that floor drains are cleaned on a regular basis (minimum daily in wet and fresh-cut production areas)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.10",
+      "question": "Are there records showing filters in air conditioning, evaporative coolers, ventilation and air filtration units are regularly cleaned and replaced?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.11",
+      "question": "Are there records showing cooling units are maintenance serviced and cleaned at least every 12 months or more frequently as required?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.12",
+      "question": "Is there a routine program and written procedure to verify cleaning effectiveness using rapid surface monitoring checks (e.g., ATP, allergen specific proteins, general proteins)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.14.13",
+      "question": "Is there a documented glass and brittle plastic management procedure (including company glass and brittle plastic policy, glass breakage procedure and where necessary a glass register)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

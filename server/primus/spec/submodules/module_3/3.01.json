@@ -1,0 +1,134 @@
+{
+  "code": "3.01",
+  "title": "General",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "indoor agriculture operations",
+    "controlled environment agriculture",
+    "food safety program",
+    "hygiene rules",
+    "IPM"
+  ],
+  "description": "General requirements for indoor agriculture operations including on-site food safety responsibility, organic certification (if applicable), hygiene and health rules, and integrated pest management programs",
+  "requirements": [
+    {
+      "id": "3.01.01",
+      "code": "3.01.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a trained on-site person responsible for the operation's food safety program?",
+      "keywords": [
+        "food safety program",
+        "on-site responsibility",
+        "trained personnel",
+        "food safety manager",
+        "qualified person"
+      ],
+      "mandatoryStatements": [
+        "A specific person is designated as responsible for food safety program",
+        "Person is on-site at the indoor agriculture operation",
+        "Person has received food safety training appropriate to their role",
+        "Training records document food safety qualifications",
+        "Person has authority to implement food safety decisions",
+        "Responsibilities are clearly defined in job description or organizational chart"
+      ],
+      "verificationExpectations": "Annual verification of food safety manager training and competency, quarterly verification of food safety program implementation",
+      "monitoringExpectations": "Daily presence of food safety manager verified, ongoing monitoring of food safety program activities"
+    },
+    {
+      "id": "3.01.02",
+      "code": "3.01.02",
+      "required": false,
+      "points": 0,
+      "text": "If the operation is growing under organic principles, is there written documentation of current certification by an accredited organic certification organization?",
+      "keywords": [
+        "organic certification",
+        "organic principles",
+        "accredited certification",
+        "certification documentation",
+        "organic operations"
+      ],
+      "mandatoryStatements": [
+        "If claiming organic status, current organic certification is maintained",
+        "Certification is from an accredited organic certification organization",
+        "Certification documentation is available for review",
+        "Certification scope covers the products being grown",
+        "Certification is current and not expired"
+      ],
+      "verificationExpectations": "Annual verification of organic certification status and renewal, verification during organic product production",
+      "monitoringExpectations": "Monitor certification expiration dates, ensure certification remains current throughout production season"
+    },
+    {
+      "id": "3.01.03",
+      "code": "3.01.03",
+      "required": true,
+      "points": 15,
+      "text": "Does the operation have written food safety hygiene and health rules covering at least worker and visitor hygiene and health, infants and toddlers, animal presence in growing and storage areas, fecal matter, dropped product, blood and bodily fluids?",
+      "keywords": [
+        "hygiene rules",
+        "health rules",
+        "worker hygiene",
+        "visitor hygiene",
+        "infants",
+        "toddlers",
+        "animal presence",
+        "fecal matter",
+        "dropped product",
+        "blood",
+        "bodily fluids"
+      ],
+      "mandatoryStatements": [
+        "Written food safety hygiene and health rules are documented",
+        "Rules address worker hygiene and health requirements",
+        "Rules address visitor hygiene and health requirements",
+        "Policy prohibits infants and toddlers in growing and storage areas",
+        "Policy prohibits animals in growing and storage areas",
+        "Procedures address response to fecal matter contamination",
+        "Procedures address handling of dropped product",
+        "Procedures address response to blood and bodily fluid contamination",
+        "Rules are communicated to all workers and visitors",
+        "Rules are posted in appropriate locations"
+      ],
+      "verificationExpectations": "Annual review of hygiene and health rules, quarterly verification that rules are followed and communicated",
+      "monitoringExpectations": "Daily monitoring of worker and visitor hygiene compliance, immediate response to hygiene violations"
+    },
+    {
+      "id": "3.01.04",
+      "code": "3.01.04",
+      "required": false,
+      "points": 0,
+      "text": "Is there a documented and implemented Integrated Pest Management (IPM) program in place?",
+      "keywords": [
+        "IPM",
+        "integrated pest management",
+        "pest management program",
+        "documented IPM",
+        "implemented IPM"
+      ],
+      "mandatoryStatements": [
+        "Integrated Pest Management (IPM) program is documented",
+        "IPM program is implemented in indoor agriculture operation",
+        "Program defines pest prevention strategies",
+        "Program includes monitoring and detection methods",
+        "Program specifies control measures appropriate for indoor agriculture",
+        "Program emphasizes non-chemical controls where possible",
+        "Records demonstrate IPM program implementation"
+      ],
+      "verificationExpectations": "Annual review of IPM program effectiveness, quarterly verification of IPM activities",
+      "monitoringExpectations": "Weekly monitoring of pest activity, ongoing implementation of IPM strategies"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If no trained food safety person on-site: immediately designate responsible person, provide required training within 30 days",
+    "If hygiene and health rules not documented: develop and document rules within 14 days, train all personnel within 30 days",
+    "If hygiene violations observed: immediate corrective action, retraining of affected personnel within 7 days",
+    "If IPM program not documented or implemented: develop program within 30 days, implement monitoring within 14 days"
+  ],
+  "traceabilityInject": [
+    "Food safety manager training records must be traceable to specific training dates and content",
+    "Organic certification documentation must be traceable to certification body and scope",
+    "Hygiene rule violations and corrective actions must be documented and traceable",
+    "IPM program records must be traceable to specific activities, dates, and personnel"
+  ]
+}

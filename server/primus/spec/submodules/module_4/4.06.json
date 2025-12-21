@@ -1,0 +1,103 @@
+{
+  "code": "4.06",
+  "title": "Post-harvest Treatments",
+  "requirements": [
+    {
+      "code": "4.06.01",
+      "question": "Is there any post-harvest treatment performed to the product in the growing area?",
+      "totalPoints": 0,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.06.01a",
+      "question": "Are there up to date records of all pesticides applied to the harvested product?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "A ZERO POINT (NON-COMPLIANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT. Lack of pesticide application records prevents verification of MRL compliance and creates unacceptable food safety risk."
+    },
+    {
+      "code": "4.06.01b",
+      "question": "Are all pesticides applied post-harvest authorized/registered by the authority/government of the country of production?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT. Use of unauthorized pesticides violates regulatory requirements and creates serious legal and food safety violations."
+    },
+    {
+      "code": "4.06.01c",
+      "question": "Are all pesticides applied post-harvest used as recommended/directed in the label?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT. Off-label pesticide use violates regulatory requirements and can result in unsafe residue levels."
+    },
+    {
+      "code": "4.06.01d",
+      "question": "Is there documentation of post-harvest pesticide Maximum Residue Limits (MRLs) compliance considering, country of destination, target crop(s) and active ingredients applied?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.06.01e",
+      "question": "Where the Maximum Residue Levels (MRLs) of the destination countries are lower (stricter) than the country of production or where required by buyer, do test results show that the MRLs of the intended markets are met?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.06.01f",
+      "question": "Is there a documented procedure that is followed for the post-harvest pesticide applications, considering mixing and loading, transporting, applying, surplus mix/tank rinsate disposal and equipment cleaning?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.06.01g",
+      "question": "Is there documentation that shows the individual(s) making decisions for post-harvest pesticide applications is competent?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.06.01h",
+      "question": "Is there documentation that shows that individuals who handle post-harvest pesticide materials are trained and are under the supervision of a trained person?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "All post-harvest pesticide applications must be recorded with complete details including product name, active ingredients, application date, rate, method, operator, and Pre-Harvest Interval (PHI) or Post-Harvest Interval.",
+    "Only pesticides authorized and registered by the government authority of the country of production may be applied to harvested product.",
+    "All post-harvest pesticides must be used strictly according to label directions including application rates, methods, timing, target crops, and safety precautions.",
+    "Documentation must demonstrate that pesticide Maximum Residue Limits (MRLs) for destination countries and target crops have been evaluated and will be met.",
+    "When destination country MRLs are stricter than production country limits, testing results must confirm compliance with the stricter standard before export.",
+    "A documented procedure covering all aspects of post-harvest pesticide application must be established and followed, including mixing, loading, transporting, applying, disposal of surplus mix and rinsates, and equipment cleaning.",
+    "Individuals making decisions regarding post-harvest pesticide applications must be demonstrably competent through documentation of qualifications, certifications, or formal training.",
+    "All personnel handling post-harvest pesticides must be trained on safe handling, application procedures, and emergency response, and must work under the supervision of a trained and competent person."
+  ],
+  "capaInject": [
+    "If pesticide application records are missing or incomplete: immediately implement a standardized recording system, train all applicators on documentation requirements, and conduct daily verification of record completeness.",
+    "If unauthorized pesticides are found: immediately halt use, quarantine any treated product, notify regulatory authorities as required, verify authorization status of all pesticides in inventory before resuming applications.",
+    "If off-label pesticide use is identified: immediately stop non-compliant applications, quarantine affected product, conduct MRL testing, investigate root cause, retrain all applicators on label compliance requirements.",
+    "If MRL compliance documentation is inadequate: develop a comprehensive MRL compliance matrix covering all crops, active ingredients, and destination markets, verify current applications meet requirements, implement pre-application MRL review procedure.",
+    "If procedures for pesticide handling are missing or inadequate: develop comprehensive SOPs covering all aspects of post-harvest pesticide operations, train personnel on new procedures, conduct supervised practice before independent operations.",
+    "If competency documentation for decision-makers is insufficient: verify qualifications of all pesticide decision-makers, provide additional training or certification as needed, designate qualified backup personnel.",
+    "If handler training is inadequate: implement a structured training program covering pesticide safety, application techniques, label comprehension, PPE use, and emergency response with competency testing before independent work.",
+    "Establish a pre-season review process to verify all planned post-harvest pesticides are authorized, label-compliant for intended uses, and MRL-compliant for target markets."
+  ],
+  "traceabilityInject": [
+    "Maintain complete pesticide application records traceable to specific harvest lots, dates, locations, products applied, rates, methods, operators, weather conditions, and equipment used.",
+    "Document pesticide product labels, Safety Data Sheets (SDS), and authorization/registration status for all pesticides in inventory with verification dates.",
+    "Track MRL compliance documentation including destination country requirements, crop-specific limits, active ingredient assessments, and testing results when applicable.",
+    "Maintain records of testing results for residue analysis with traceability to specific lots, harvest dates, pesticides applied, laboratory, test methods, and results.",
+    "Document procedures for all post-harvest pesticide operations including mixing/loading, transportation, application, equipment cleaning, and disposal with revision history.",
+    "Keep records of competency documentation for pesticide decision-makers including certifications, training certificates, qualifications, and renewal dates.",
+    "Maintain training records for all pesticide handlers including training dates, topics covered, trainers, assessments, and supervisor verification of competence.",
+    "Establish traceability between pesticide application records and harvest lot identification to enable rapid recall capability if residue issues are discovered."
+  ],
+  "micro_inject": [
+    "Emphasize that pesticide residues exceeding Maximum Residue Limits (MRLs) can cause regulatory rejections, recalls, and potential health risks to consumers.",
+    "Ensure understanding that different markets (US, EU, Canada, Japan, etc.) have varying MRL standards, and the strictest applicable limit must be met for the intended destination.",
+    "Verify that post-harvest pesticide applications do not introduce pathogens through contaminated water used for mixing or application equipment that contacts product.",
+    "Monitor for potential cross-contamination between treated and untreated products, especially when applying fungicides or sanitizers to harvested commodities.",
+    "Implement good agricultural practices to minimize pesticide residues including proper application timing, rates, and methods to reduce the need for post-harvest treatments.",
+    "Verify that equipment used for post-harvest pesticide applications is properly cleaned between different products to prevent cross-contamination of residues.",
+    "Ensure that any water used in post-harvest treatments (for mixing pesticides or washing) meets microbiological standards to prevent pathogen introduction while applying chemical treatments.",
+    "Understand that some post-harvest treatments (e.g., chlorine washes, ozone, peroxyacetic acid) may have antimicrobial benefits but must still comply with pesticide registration requirements if making antimicrobial claims."
+  ]
+}

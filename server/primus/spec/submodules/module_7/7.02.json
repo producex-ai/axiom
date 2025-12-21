@@ -1,0 +1,79 @@
+{
+  "code": "7.02",
+  "parentCode": "7",
+  "title": "Development of the Food Safety Plan",
+  "requirements": [
+    {
+      "code": "7.02.01",
+      "question": "Has a documented hazard analysis for each product (or product group) been conducted, showing the various types of hazards, their likelihood of occurrence, their associated severity and their preventive controls? This question must be scored. NA is not allowed.",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.02",
+      "question": "Where risk-based preventive controls are identified, have reasonably appropriate procedures, practices, and processes been developed to control identified hazard(s) are they appropriate and consistent with current scientific understanding?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.03",
+      "question": "Do the process preventive controls have critical limits, supported by relevant validation documentation, and do allergen, sanitation, supply chain or other preventive controls have parameters, values and targets (where relevant)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.04",
+      "question": "Have monitoring requirements and frequencies been determined and documented for the preventive controls?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.05",
+      "question": "Are there documents that show validation work for the process preventive controls and was this validation work performed by or overseen by a Preventive Controls Qualified Individual?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.06",
+      "question": "Do the Food Safety Plan, charts and/or procedures indicate that specific responsibilities have been assigned for the monitoring, recording, verification, and corrective action implementation?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.07",
+      "question": "Have standard operating procedures (SOPs) been created for the monitoring process(es) of the preventive controls, including those in plan or chart format (e.g., process preventive controls)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.08",
+      "question": "Have corrective action procedures been established for the preventive controls, including a detailed action plan for operators to follow if out of specification situations are observed (loss of control/deviation) and plans to adjust process back into control?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.09",
+      "question": "Have recording forms been developed for monitoring the preventive controls?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.10",
+      "question": "Have verification procedures and schedules been developed for the preventive controls?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.11",
+      "question": "If any preventive control has been identified, does the operation have a documented and implemented recall plan?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.02.12",
+      "question": "Is there documented evidence that the food safety plan (primary documents in the preventive controls food safety system) has been verified on-site?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

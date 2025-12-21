@@ -1,0 +1,66 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.03",
+  "title": "Chemical Storage and Handling in Harvest Areas",
+  "requirements": [
+    {
+      "code": "4.05.03a",
+      "question": "Are chemicals, including pesticides and cleaning agents, stored away from harvest and product handling areas?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Chemicals stored in harvest areas pose direct contamination risk and potential for product adulteration."
+    },
+    {
+      "code": "4.05.03b",
+      "question": "Are fuel containers, including gasoline and diesel, stored away from product and product contact surfaces?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.03c",
+      "question": "When chemicals must be present in harvest areas, are they properly labeled and secured?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.03d",
+      "question": "Are workers trained on the proper handling and storage of any chemicals present during harvest operations?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.03e",
+      "question": "Are there procedures to prevent cross-contamination between chemicals and harvested product?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Chemicals including pesticides, cleaning agents, and fertilizers must be stored away from harvest areas and product handling zones.",
+    "Fuel containers (gasoline, diesel, lubricants) must be stored and handled to prevent contamination of product or product contact surfaces.",
+    "When chemicals are necessarily present in harvest areas (e.g., sanitizers, equipment fuel), they must be properly labeled, secured, and separated from product.",
+    "Workers who handle or may come in contact with chemicals during harvest operations must receive appropriate training.",
+    "Procedures must be in place to prevent cross-contamination between chemicals and harvested product through separate storage, equipment, and handling."
+  ],
+  "capaInject": [
+    "Designate specific chemical storage areas well away from harvest operations with appropriate containment, ventilation, and security measures.",
+    "Establish protocols for any chemicals that must temporarily enter harvest areas including authorization, containment, labeling, and supervision requirements.",
+    "Implement color-coding or clear labeling systems to prevent confusion between chemical containers and food-safe containers or equipment.",
+    "Develop spill response procedures specific to chemical releases in or near harvest areas including product hold, cleanup, and clearance protocols.",
+    "Create inspection checklists for supervisors to verify proper chemical storage and handling compliance during harvest operations."
+  ],
+  "traceabilityInject": [
+    "Maintain inventory records of all chemicals present on-site including storage locations, quantities, and dates.",
+    "Document worker training on chemical handling including specific products, hazards, safe handling procedures, and emergency response.",
+    "Keep records of any chemical applications made in or near harvest areas including product name, rate, date, applicator, and re-entry interval.",
+    "Log any chemical spills or incidents in harvest areas including product affected, corrective actions, and disposition of potentially contaminated product.",
+    "Track movement of fuel and chemical containers with sign-out/sign-in procedures when they must enter harvest zones temporarily."
+  ],
+  "micro_inject": [
+    "Ensure workers understand that even small amounts of chemical residue can contaminate large volumes of product and create health hazards.",
+    "Verify that sanitizers and cleaning chemicals used near product are food-grade and approved for such use to minimize contamination risk.",
+    "Implement protocols to prevent chemical containers or equipment from serving as vectors for pathogen transfer if contaminated with soil or organic matter.",
+    "Monitor that fuel storage and handling does not create conditions favorable for microbial growth through spills or contamination of water sources.",
+    "Verify proper hand hygiene after any chemical handling to prevent transfer of chemicals or associated contamination to product surfaces."
+  ]
+}

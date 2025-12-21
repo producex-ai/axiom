@@ -1,0 +1,279 @@
+{
+  "module": "4",
+  "moduleName": "Harvest Crew",
+  "description": "Establishes comprehensive harvest crew good agricultural practices requirements including general food safety program oversight, inspection protocols, training programs, worker hygiene facilities and practices, harvest operations, post-harvest treatments, transportation and tracking, and on-site storage. Aligned with official PrimusGFS v4.0 Checklist Module 4 (Sections 4.01-4.08).",
+  "scope": "All harvest crew operations including worker hygiene, training, facilities, field inspections, harvest practices, post-harvest treatments, transportation, tracking, and on-site storage for operations within the organization's scope",
+  "totalSubmodules": 8,
+  "totalQuestions": 114,
+  "totalPoints": 1019,
+  "officialSource": "PGFS-ND-029-4 R0 July 31, 2025",
+  "submodules": [
+    {
+      "code": "4.01",
+      "name": "General",
+      "alias": "general",
+      "specFile": "4.01.json",
+      "questionsCount": 2,
+      "totalPoints": 25,
+      "micro_inject": ["fsms", "hygiene"]
+    },
+    {
+      "code": "4.02",
+      "name": "Inspection",
+      "alias": "inspection",
+      "specFile": "4.02.json",
+      "questionsCount": 3,
+      "totalPoints": 30,
+      "micro_inject": ["fsms", "inspection"]
+    },
+    {
+      "code": "4.03",
+      "name": "Training",
+      "alias": "training",
+      "specFile": "4.03.json",
+      "questionsCount": 4,
+      "totalPoints": 33,
+      "micro_inject": ["fsms", "training"]
+    },
+    {
+      "code": "4.04",
+      "name": "Harvest Worker Hygiene",
+      "alias": "harvest_worker_hygiene",
+      "specFile": "4.04/",
+      "questionsCount": 31,
+      "totalPoints": 241,
+      "hasSubSubmodules": true,
+      "subSubmodulesCount": 4,
+      "micro_inject": ["fsms", "hygiene", "sanitation"]
+    },
+    {
+      "code": "4.05",
+      "name": "Harvest Practices",
+      "alias": "harvest_practices",
+      "specFile": "4.05/",
+      "questionsCount": 46,
+      "totalPoints": 460,
+      "hasSubSubmodules": true,
+      "subSubmodulesCount": 8,
+      "micro_inject": ["fsms", "harvest"]
+    },
+    {
+      "code": "4.06",
+      "name": "Post-harvest Treatments",
+      "alias": "postharvest_treatments",
+      "specFile": "4.06.json",
+      "questionsCount": 9,
+      "totalPoints": 120,
+      "micro_inject": ["fsms", "pesticides", "mrl"]
+    },
+    {
+      "code": "4.07",
+      "name": "Transportation and Tracking",
+      "alias": "transportation_tracking",
+      "specFile": "4.07.json",
+      "questionsCount": 6,
+      "totalPoints": 40,
+      "micro_inject": ["fsms", "traceability", "transportation"]
+    },
+    {
+      "code": "4.08",
+      "name": "On-site Storage",
+      "alias": "onsite_storage",
+      "specFile": "4.08.json",
+      "questionsCount": 13,
+      "totalPoints": 70,
+      "micro_inject": ["fsms", "storage", "pest_control"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this document exists, what it achieves for harvest crew operations, business and compliance drivers"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What harvest operations/areas covered, who is responsible, any exclusions or limitations"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Minimum 5-8 relevant technical terms, harvest-specific terminology, GAP acronyms"
+      },
+      {
+        "number": 5,
+        "title": "Roles & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific positions with clearly defined harvest duties, authority levels, and accountability for food safety"
+      },
+      {
+        "number": 6,
+        "title": "Prerequisites & Reference Documents",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Related SOPs, standards (Primus GFS, FSMA PSR), regulatory requirements, training prerequisites"
+      },
+      {
+        "number": 7,
+        "title": "Hazard / Risk Analysis",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Harvest-specific hazards (contamination, hygiene failures, environmental risks), risk assessment, control measures"
+      },
+      {
+        "number": 8,
+        "title": "Procedures",
+        "required": true,
+        "minParagraphs": 8,
+        "contentGuidance": "Detailed step-by-step harvest procedures (minimum 8-12 steps), inspection protocols, hygiene practices, specific frequencies"
+      },
+      {
+        "number": 9,
+        "title": "Monitoring Plan",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor in harvest operations, how often, who is responsible, what records to keep, acceptance criteria"
+      },
+      {
+        "number": 10,
+        "title": "Verification & Validation Activities",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "How to verify harvest procedures are followed, validation that procedures are effective, audit/review frequency"
+      },
+      {
+        "number": 11,
+        "title": "Corrective & Preventive Action (CAPA) Protocol",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Triggers for CAPA in harvest operations, investigation steps, containment, root cause analysis, corrective actions, preventive measures"
+      },
+      {
+        "number": 12,
+        "title": "Traceability & Recall Elements",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Harvest documentation traceability, record linkages, lot/batch identification, harvest crew traceability"
+      },
+      {
+        "number": 13,
+        "title": "Record Retention & Document Control",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What harvest records are generated, retention periods, storage location, access control"
+      },
+      {
+        "number": 14,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 15,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (Prepared By, Reviewed By, Approved By)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "general": [
+      "trained person",
+      "on-site",
+      "food safety program",
+      "written rules",
+      "hygiene",
+      "health",
+      "infants",
+      "toddlers",
+      "animals",
+      "fecal matter",
+      "blood",
+      "bodily fluids"
+    ],
+    "inspection": [
+      "pre-harvest inspection",
+      "buffer zones",
+      "clearance",
+      "pre-operation inspection",
+      "inspection log",
+      "authorized harvest"
+    ],
+    "training": [
+      "food safety training",
+      "hygiene training",
+      "sanitation workers",
+      "chemical use",
+      "illness reporting",
+      "cuts",
+      "grazes",
+      "non-conformance",
+      "retraining"
+    ],
+    "harvest_worker_hygiene": [
+      "toilet facilities",
+      "handwashing stations",
+      "water testing",
+      "coliforms",
+      "E. coli",
+      "hand hygiene",
+      "sanitizing",
+      "health status",
+      "jewelry",
+      "hair restraints",
+      "protective garments",
+      "gloves",
+      "drinking water",
+      "first aid",
+      "trash receptacles",
+      "foreign material"
+    ],
+    "harvest_practices": [
+      "animal presence",
+      "fecal contamination",
+      "infants",
+      "toddlers",
+      "chemical storage",
+      "harvest safety"
+    ],
+    "sanitation": [
+      "cleaning procedures",
+      "sanitation schedule",
+      "chemical dilution",
+      "equipment cleaning",
+      "sanitizer concentration"
+    ],
+    "equipment_tools": [
+      "equipment condition",
+      "repair",
+      "maintenance",
+      "food contact surfaces",
+      "tool hygiene"
+    ],
+    "production_water": [
+      "water quality",
+      "testing frequency",
+      "water treatment",
+      "distribution system",
+      "sampling protocols"
+    ]
+  }
+}

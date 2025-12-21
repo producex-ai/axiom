@@ -1,0 +1,112 @@
+{
+  "code": "5.07",
+  "title": "Equipment Cleaning",
+  "requirements": [
+    {
+      "code": "5.07.01",
+      "question": "Are food contact equipment surfaces clean?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.02",
+      "question": "Are non-food contact equipment surfaces clean?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.03",
+      "question": "Are items (totes, bins, etc.) that are used to hold or store product clean?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.04",
+      "question": "During cleaning, are food products and packaging materials protected from contamination?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.05",
+      "question": "Are cooling units, including coils in coolers and freezers, clean and free of aged, dirty ice?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.06",
+      "question": "Where fans or other air circulation equipment are used, are they maintained and operated in a manner that minimizes the potential for contaminating product, equipment, and packaging materials?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.07",
+      "question": "Is stored equipment that is not used on a daily basis stored in a clean condition with food-contact surfaces protected and/or are they retained on cleaning schedules in some manner, even though they are not in use?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.08",
+      "question": "Are all utensils, hoses, and other items not being used, stored clean and in a manner to prevent contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.09",
+      "question": "Are maintenance tools that are used in the production and storage areas of the facility clean, sanitary and corrosion free?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.07.10",
+      "question": "Are excess lubricants and grease removed from the equipment and are lubricant catch pans fitted where needed?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "All food contact equipment surfaces must be maintained in a clean and sanitary condition free from product residues, soil, biofilm, and visible contamination",
+    "Non-food contact equipment surfaces must be kept clean to prevent accumulation of soil and harboring of pests that could indirectly contaminate food products or food contact areas",
+    "Totes, bins, containers, and other product-holding items must be cleaned and sanitized before use and maintained in sanitary condition between uses",
+    "During cleaning operations, all food products and packaging materials must be protected from contamination by cleaning chemicals, water spray, aerosols, and debris through covering, removal, or physical barriers",
+    "Cooling unit coils in refrigerators and freezers must be maintained clean and free from ice buildup, dust accumulation, and microbial growth that could contaminate products or reduce cooling efficiency",
+    "Fans and air circulation equipment must be cleaned regularly, positioned to avoid blowing across contaminated areas toward product zones, and maintained to prevent shedding of dust, condensation, or debris onto products",
+    "Equipment stored for infrequent use must be cleaned before storage, have food contact surfaces protected from dust and contamination, and either cleaned before use or maintained on periodic cleaning schedules even during storage periods",
+    "Utensils, hoses, squeegees, and other tools not actively in use must be stored in designated clean areas with proper orientation (hoses coiled and elevated, utensils hung or stored in sanitizer solutions) to prevent contamination and facilitate drainage",
+    "Maintenance tools used in production areas must be maintained in clean, sanitary, and corrosion-free condition, designated for food area use only, and stored separately from non-food area tools",
+    "Excess lubricants and grease must be removed from equipment surfaces to prevent accumulation, dripping onto products, or harboring contamination; catch pans must be installed under lubrication points and emptied regularly"
+  ],
+  "capaInject": [
+    "When food contact surfaces are found unclean, immediately cease production, thoroughly clean and sanitize all affected equipment, verify cleaning effectiveness through visual inspection and ATP testing or environmental swabs, identify root cause (inadequate cleaning procedures, insufficient time, lack of training), revise master sanitation schedule, and provide retraining on proper cleaning techniques",
+    "If non-food contact surfaces show excessive soil buildup, immediately clean affected areas, expand cleaning schedules to include previously overlooked surfaces, increase cleaning frequency in problem areas, assign specific accountability for non-food contact surface cleaning, and implement regular management verification inspections",
+    "For dirty product-holding containers, immediately remove from service, establish centralized cleaning and sanitizing stations with documented procedures, implement pre-use inspection requirements, consider disposable liners for difficult-to-clean containers, and establish container rotation systems ensuring adequate cleaning cycle time",
+    "When products or packaging are exposed during cleaning operations, immediately stop cleaning, assess contamination risk to exposed materials, quarantine potentially affected items, establish protocols requiring product removal or protection before cleaning activities, schedule cleaning during non-production periods where possible, and train cleaning personnel on product protection requirements",
+    "If cooling unit coils are dirty or ice-laden, immediately defrost and clean units, establish preventive maintenance schedules for coil cleaning, install drip pans to catch condensate, verify adequate drainage systems, monitor for ice buildup that indicates temperature cycling issues, and consider installing coil guards to prevent direct product contact",
+    "When fans contaminate products through airflow patterns, immediately assess fan placement and airflow direction, reposition or redirect fans to blow from clean areas toward less-clean areas, install filters on intake fans, increase fan cleaning frequency, establish airflow mapping studies, and consider installation of air curtains or HEPA filtration in critical areas",
+    "For stored equipment lacking cleanliness or protection, immediately clean all stored equipment, establish written storage procedures requiring cleaning before storage and protection of food contact surfaces (covers, wrapping, inverted storage), implement periodic cleaning even during storage periods (monthly minimum), label equipment with last cleaning date, and require cleaning verification before return to service",
+    "When utensils and tools are improperly stored, immediately relocate to designated storage areas, provide adequate racks, hooks, or containers for proper storage, establish elevation requirements to prevent floor contact, provide sanitizer buckets for short-term utensil storage with documented change frequency, mark tools for food-area-only use, and train personnel on proper storage orientation",
+    "If maintenance tools are dirty or corroded, immediately remove from service, clean and sanitize or replace tools, establish color-coding system differentiating food area tools from general maintenance tools, provide dedicated tool storage in production areas, implement tool inspection procedures before use, and consider stainless steel or non-corrosive tool alternatives for food areas",
+    "When excess lubricants are observed, immediately clean equipment to remove excess, install or empty catch pans, evaluate lubrication procedures for over-application, specify food-grade lubricants for all equipment in or near product zones, establish lubrication schedules preventing over-application, train maintenance personnel on minimum effective lubrication quantities, and inspect equipment regularly for lubricant migration or accumulation"
+  ],
+  "traceabilityInject": [
+    "Maintain master sanitation schedules documenting all equipment requiring cleaning with cleaning frequency, methods, chemicals used, responsible personnel, and verification requirements",
+    "Keep cleaning logs for all food contact equipment showing date cleaned, time, person performing cleaning, chemicals used, contact times, and verification signatures from supervisor or quality assurance",
+    "Document cleaning validation and verification records including ATP test results, environmental monitoring swabs for Listeria or other pathogens, visual inspection findings, and corrective actions for failures",
+    "Retain cleaning chemical usage logs showing chemical concentration, preparation date, test strip verification of concentration, and disposal dates for mixed solutions ensuring proper strength and freshness",
+    "Maintain equipment storage logs for infrequently used equipment documenting cleaning date before storage, protection methods applied, periodic cleaning during storage, and pre-use cleaning before return to service",
+    "Keep preventive maintenance schedules for cooling units, fans, and air circulation equipment showing maintenance frequency, activities performed (coil cleaning, filter replacement, fan cleaning), and findings of dirt, ice, or other contamination concerns",
+    "Document tool and utensil storage audits showing inspection dates, findings of improper storage, contamination of stored items, corrective actions taken, and verification of proper storage practices",
+    "Retain maintenance tool cleaning and designation records showing tool identification, food-area vs. non-food-area designation, cleaning procedures, inspection findings, and replacement dates for corroded or damaged tools"
+  ],
+  "micro_inject": [
+    "Biofilm formation on inadequately cleaned food contact surfaces provides protected environments where Listeria monocytogenes, Salmonella, and other pathogens can persist for extended periods and continuously contaminate products despite routine cleaning attempts",
+    "Dirty non-food contact surfaces serve as harborage for pests and reservoirs for environmental pathogens; dust and soil accumulation provides nutrients supporting bacterial growth and harbors Listeria species that can transfer to food contact areas through aerosols or worker contact",
+    "Product residues remaining in containers between uses provide nutrients for rapid bacterial growth; a single contaminated container can introduce millions of pathogenic bacteria into fresh product batches creating widespread contamination",
+    "Cleaning chemical spray and aerosols during active production can settle on food products introducing toxic chemical residues; additionally, aerosols from cleaning dirty equipment can distribute bacteria throughout the production environment contaminating previously clean areas",
+    "Dirty cooling coils and condensate accumulation create high-moisture environments ideal for Listeria monocytogenes growth; condensate dripping from contaminated coils directly onto products below is a common source of Listeria contamination in refrigerated foods",
+    "Fans blowing across dirty surfaces, trash areas, or floor drains toward product zones create aerosol transmission pathways for pathogens; Listeria and Salmonella can be distributed throughout facilities via air currents from contaminated sites to food contact surfaces",
+    "Equipment stored dirty or unprotected accumulates environmental contamination including dust, pest debris, and opportunistic pathogens; when returned to service, this contaminated equipment introduces stored pathogens directly into production lines",
+    "Improperly stored utensils contacting floors or contaminated surfaces become vectors for pathogen transfer; floor contact exposes tools to the highest bacterial loads in facilities including Listeria environmental strains that then transfer to products during use",
+    "Corroded maintenance tools shed rust particles into production areas while corrosion pits harbor bacteria that cannot be removed through cleaning; these tools introduce both physical and microbiological contamination each time they contact equipment or surfaces",
+    "Excess lubricants attract dust and dirt forming a paste-like substance that harbors bacteria in sheltered environments; lubricant drips onto products create consumer complaints and food safety concerns while providing growth medium for lipophilic bacterial species"
+  ]
+}

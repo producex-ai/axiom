@@ -1,0 +1,726 @@
+{
+  "code": "3.09",
+  "title": "Worker Hygiene",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "toilet facilities",
+    "hand washing",
+    "personal hygiene",
+    "protective clothing",
+    "worker health",
+    "facility sanitation"
+  ],
+  "description": "Comprehensive worker hygiene requirements including toilet facilities, hand washing stations, personal hygiene practices, protective garments, health monitoring, and hygiene behavior controls",
+  "requirements": [
+    {
+      "id": "3.09.01",
+      "code": "3.09.01",
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities adequate in number and location? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "toilet facilities",
+        "restroom adequacy",
+        "toilet number",
+        "toilet location",
+        "facility requirements"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are adequate in number for worker population",
+        "Toilet-to-worker ratio meets or exceeds regulatory requirements",
+        "Toilets are conveniently located for worker access",
+        "Distance from work areas allows reasonable access time",
+        "Separate facilities for different gender workers where required",
+        "Portable toilets used where permanent facilities not available",
+        "Facility adequacy reviewed as workforce changes"
+      ],
+      "verificationExpectations": "Annual verification of toilet adequacy relative to workforce size and regulations",
+      "monitoringExpectations": "Quarterly assessment of toilet adequacy, immediate addition if insufficient",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.01a",
+      "code": "3.09.01a",
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities located where they are not a risk of contamination to product, packaging, equipment, water sources and growing areas?",
+      "keywords": [
+        "toilet location",
+        "contamination prevention",
+        "facility placement",
+        "risk assessment"
+      ],
+      "mandatoryStatements": [
+        "Toilets are located away from product handling areas",
+        "Toilets do not present contamination risk to packaging or equipment",
+        "Toilet location prevents contamination of water sources",
+        "Toilets are not directly adjacent to growing areas",
+        "Adequate separation distance or barriers are provided",
+        "Toilet drainage does not pose contamination risk",
+        "Airflow patterns do not carry contamination from toilets to product areas"
+      ],
+      "verificationExpectations": "Annual risk assessment of toilet facility locations",
+      "monitoringExpectations": "Ongoing monitoring that toilet use does not create contamination risks",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.01b",
+      "code": "3.09.01b",
+      "required": true,
+      "points": 5,
+      "text": "Are toilet facilities designed and maintained to prevent contamination (e.g., free from leaks and cracks)?",
+      "keywords": [
+        "toilet condition",
+        "facility maintenance",
+        "leak prevention",
+        "structural integrity"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are structurally sound without cracks",
+        "No leaks from plumbing or waste systems",
+        "Facility design prevents contamination escape",
+        "Doors and vents function properly",
+        "Regular maintenance prevents deterioration",
+        "Repairs completed promptly when issues identified",
+        "Facility condition supports sanitary use"
+      ],
+      "verificationExpectations": "Weekly inspection of toilet facility condition",
+      "monitoringExpectations": "Daily checks for leaks or damage, immediate repair of sanitation issues"
+    },
+    {
+      "id": "3.09.01c",
+      "code": "3.09.01c",
+      "required": true,
+      "points": 3,
+      "text": "Are toilet facilities constructed of materials that are easy to clean?",
+      "keywords": [
+        "toilet construction",
+        "cleanable materials",
+        "facility design",
+        "sanitary construction"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are constructed of smooth, cleanable materials",
+        "Materials are non-porous and non-absorbent",
+        "Surfaces can be effectively cleaned and sanitized",
+        "Construction materials resist moisture and deterioration",
+        "Facility design facilitates cleaning access",
+        "Materials are appropriate for sanitation facility use"
+      ],
+      "verificationExpectations": "Annual assessment of toilet facility cleanability",
+      "monitoringExpectations": "Weekly verification that facilities can be effectively cleaned"
+    },
+    {
+      "id": "3.09.01d",
+      "code": "3.09.01d",
+      "required": true,
+      "points": 5,
+      "text": "Are toilet facilities supplied with toilet paper and is the toilet paper maintained properly (e.g., toilet paper rolls are not stored on the floor or in the urinals)?",
+      "keywords": [
+        "toilet paper",
+        "facility supplies",
+        "toilet paper storage",
+        "supply maintenance"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are adequately stocked with toilet paper",
+        "Toilet paper is maintained in sanitary condition",
+        "Toilet paper is not stored on floor",
+        "Toilet paper is not stored in urinals or other unsanitary locations",
+        "Storage method protects toilet paper from contamination",
+        "Regular restocking prevents shortages",
+        "Toilet paper dispensers are clean and functional"
+      ],
+      "verificationExpectations": "Daily verification that toilet facilities are properly stocked",
+      "monitoringExpectations": "Multiple daily checks of toilet paper availability and proper storage"
+    },
+    {
+      "id": "3.09.01e",
+      "code": "3.09.01e",
+      "required": true,
+      "points": 5,
+      "text": "Where used, is there a documented procedure for emptying the waste holding tanks in a hygienic manner and also in a way that prevents product, packaging, equipment, water systems and growing area contamination?",
+      "keywords": [
+        "waste tank emptying",
+        "portable toilet servicing",
+        "waste management",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "If portable toilets with holding tanks used, emptying procedure is documented",
+        "Procedure ensures hygienic emptying process",
+        "Procedure prevents contamination of product during emptying",
+        "Procedure prevents contamination of packaging, equipment, water sources",
+        "Procedure prevents growing area contamination",
+        "Emptying schedule is defined and followed",
+        "Service provider qualifications and procedures are verified",
+        "Emptying activities are performed when product handling not occurring"
+      ],
+      "verificationExpectations": "Quarterly review of waste tank emptying records and procedure compliance",
+      "monitoringExpectations": "Verification before each emptying event that contamination prevention measures are in place"
+    },
+    {
+      "id": "3.09.01f",
+      "code": "3.09.01f",
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities and hand washing stations clean and are there records showing cleaning, servicing and stocking is occurring regularly?",
+      "keywords": [
+        "toilet cleanliness",
+        "hand washing station cleanliness",
+        "cleaning records",
+        "restroom maintenance"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are maintained in clean condition",
+        "Hand washing stations are maintained clean",
+        "Cleaning records document facility cleaning frequency",
+        "Servicing records show regular maintenance activities",
+        "Stocking records demonstrate regular replenishment of supplies",
+        "Cleaning frequency is adequate for usage levels",
+        "Facilities are inspected and cleaned multiple times daily during peak use",
+        "Records show who cleaned facilities and when"
+      ],
+      "verificationExpectations": "Weekly review of toilet and hand washing station cleaning records",
+      "monitoringExpectations": "Multiple daily inspections and cleaning of facilities, immediate attention to cleanliness issues",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.02",
+      "code": "3.09.02",
+      "required": true,
+      "points": 5,
+      "text": "Is hand washing signage posted appropriately?",
+      "keywords": [
+        "hand washing signage",
+        "hygiene signs",
+        "hand washing reminders",
+        "signage placement"
+      ],
+      "mandatoryStatements": [
+        "Hand washing signage is posted at hand washing stations",
+        "Signs are posted at toilet facility exits",
+        "Signs are posted where entering product handling areas",
+        "Signage includes proper hand washing steps or reminders",
+        "Signs are in language(s) understood by workers",
+        "Signs use pictograms where appropriate for comprehension",
+        "Signage is clean, visible, and well-maintained"
+      ],
+      "verificationExpectations": "Quarterly inspection of hand washing signage adequacy and placement",
+      "monitoringExpectations": "Monthly checks that signage is visible and in good condition"
+    },
+    {
+      "id": "3.09.03",
+      "code": "3.09.03",
+      "required": true,
+      "points": 15,
+      "text": "Are hand washing stations adequate in number and appropriately located for worker access and monitoring usage? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "hand washing stations",
+        "hand wash adequacy",
+        "station location",
+        "worker access"
+      ],
+      "mandatoryStatements": [
+        "Hand washing stations are adequate in number for workforce",
+        "Stations are located for convenient worker access",
+        "Stations are positioned to encourage hand washing compliance",
+        "Station location allows monitoring of usage",
+        "Stations are located near toilet facilities",
+        "Stations are located at entry points to product handling areas",
+        "Additional stations provided in growing and harvest areas as needed"
+      ],
+      "verificationExpectations": "Annual assessment of hand washing station adequacy and placement",
+      "monitoringExpectations": "Quarterly review of station usage and adequacy, immediate addition if insufficient",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.03a",
+      "code": "3.09.03a",
+      "required": true,
+      "points": 15,
+      "text": "Are hand washing stations in working order (no leaks, free of clogged drains, etc.) and restricted to hand washing purposes only?",
+      "keywords": [
+        "hand wash station condition",
+        "station functionality",
+        "dedicated use",
+        "proper function"
+      ],
+      "mandatoryStatements": [
+        "Hand washing stations are fully functional",
+        "No leaks from faucets, pipes, or fixtures",
+        "Drains are not clogged and water flows freely",
+        "Stations are used only for hand washing (not other cleaning)",
+        "Hot and cold water available (or warm water)",
+        "Soap dispensers and towel dispensers functional",
+        "Stations are maintained in good repair",
+        "Regular inspection ensures continued functionality"
+      ],
+      "verificationExpectations": "Daily inspection of hand washing station functionality",
+      "monitoringExpectations": "Immediate repair of non-functional stations, temporary alternative provided until repaired",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.03b",
+      "code": "3.09.03b",
+      "required": true,
+      "points": 5,
+      "text": "Are hand wash stations clearly visible (e.g., situated outside the toilet facility) and easily accessible to workers?",
+      "keywords": [
+        "station visibility",
+        "station accessibility",
+        "convenient access",
+        "station placement"
+      ],
+      "mandatoryStatements": [
+        "Hand washing stations are clearly visible to workers",
+        "Stations are situated outside toilet facilities where possible",
+        "Station placement does not require searching or backtracking",
+        "Stations are easily accessible without barriers",
+        "Station location encourages use",
+        "Workers can reach stations without delay",
+        "Visibility and accessibility support hand washing compliance"
+      ],
+      "verificationExpectations": "Quarterly assessment of hand washing station visibility and accessibility",
+      "monitoringExpectations": "Ongoing observation that stations are being used regularly"
+    },
+    {
+      "id": "3.09.03c",
+      "code": "3.09.03c",
+      "required": true,
+      "points": 5,
+      "text": "Are hand wash stations adequately stocked with unscented soap and paper towels?",
+      "keywords": [
+        "hand wash supplies",
+        "soap",
+        "paper towels",
+        "unscented soap",
+        "station stocking"
+      ],
+      "mandatoryStatements": [
+        "Hand washing stations are stocked with soap",
+        "Soap is unscented to prevent product contamination",
+        "Paper towels or other single-use hand drying method available",
+        "Supplies are adequate for worker population and usage",
+        "Regular restocking prevents shortages",
+        "Soap and towels are maintained in clean dispensers",
+        "Backup supplies readily available for restocking"
+      ],
+      "verificationExpectations": "Daily verification that all hand washing stations are adequately stocked",
+      "monitoringExpectations": "Multiple daily checks of supply levels, immediate restocking when low"
+    },
+    {
+      "id": "3.09.04",
+      "code": "3.09.04",
+      "required": true,
+      "points": 15,
+      "text": "Are workers washing and sanitizing their hands before starting work each day, after using the restroom, after breaks, before putting on gloves and whenever hands may be contaminated?",
+      "keywords": [
+        "hand washing compliance",
+        "hand hygiene",
+        "hand sanitizing",
+        "worker behavior",
+        "hygiene practices"
+      ],
+      "mandatoryStatements": [
+        "Workers wash hands before starting work each day",
+        "Workers wash hands after using restroom",
+        "Workers wash hands after breaks",
+        "Workers wash hands before putting on gloves",
+        "Workers wash hands whenever hands may be contaminated",
+        "Hand washing includes proper technique and duration",
+        "Hand sanitizing is performed after washing where required",
+        "Supervisors monitor and enforce hand washing compliance"
+      ],
+      "verificationExpectations": "Daily monitoring of worker hand washing compliance",
+      "monitoringExpectations": "Continuous observation of hand washing behavior, immediate correction of non-compliance",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.09.05",
+      "code": "3.09.05",
+      "required": true,
+      "points": 5,
+      "text": "Are secondary-hand sanitation stations (e.g., touch-free dispensers) adequate in number and location, and are the stations properly maintained?",
+      "keywords": [
+        "hand sanitation stations",
+        "hand sanitizer",
+        "secondary sanitation",
+        "touch-free dispensers"
+      ],
+      "mandatoryStatements": [
+        "Secondary hand sanitation stations provided where needed",
+        "Stations are adequate in number for operations",
+        "Stations are located strategically in work areas",
+        "Touch-free dispensers used where possible",
+        "Stations are properly maintained and functional",
+        "Sanitizer is stocked and available",
+        "Sanitizer concentration is appropriate and effective"
+      ],
+      "verificationExpectations": "Weekly inspection of hand sanitation station adequacy and maintenance",
+      "monitoringExpectations": "Daily checks of sanitizer availability, immediate restocking when empty"
+    },
+    {
+      "id": "3.09.06",
+      "code": "3.09.06",
+      "required": true,
+      "points": 3,
+      "text": "Where there are foot baths, foamers or dry powdered sanitizing stations provided at entrances to growing areas, are the stations maintained properly?",
+      "keywords": [
+        "foot baths",
+        "footwear sanitation",
+        "entry sanitation",
+        "station maintenance"
+      ],
+      "mandatoryStatements": [
+        "If foot sanitation stations used, they are properly maintained",
+        "Solution concentration is tested and maintained",
+        "Stations are cleaned and solution changed regularly",
+        "Dry powder stations are stocked and functional",
+        "Foam stations operate properly and are stocked",
+        "Station placement is appropriate for contamination control",
+        "Workers use stations as required"
+      ],
+      "verificationExpectations": "Weekly inspection and testing of foot sanitation stations",
+      "monitoringExpectations": "Daily checks of solution concentration and station functionality"
+    },
+    {
+      "id": "3.09.07",
+      "code": "3.09.07",
+      "required": true,
+      "points": 5,
+      "text": "Are workers' fingernails clean, short and free of nail polish?",
+      "keywords": [
+        "fingernails",
+        "nail condition",
+        "nail polish",
+        "personal hygiene",
+        "grooming standards"
+      ],
+      "mandatoryStatements": [
+        "Workers maintain clean fingernails",
+        "Fingernails are kept short (not extending beyond fingertips)",
+        "No nail polish is worn by food handlers",
+        "No artificial nails or nail extensions worn",
+        "Grooming standards are defined in hygiene policy",
+        "Supervisors monitor compliance with nail standards",
+        "Non-compliance is corrected immediately"
+      ],
+      "verificationExpectations": "Daily observation of worker fingernail compliance during inspections",
+      "monitoringExpectations": "Continuous monitoring by supervisors, immediate correction of violations"
+    },
+    {
+      "id": "3.09.08",
+      "code": "3.09.08",
+      "required": true,
+      "points": 10,
+      "text": "Are workers who are working directly or indirectly with food free from signs of boils, sores, open wounds and are not exhibiting signs of foodborne illness?",
+      "keywords": [
+        "worker health",
+        "illness signs",
+        "wounds",
+        "boils",
+        "sores",
+        "health monitoring"
+      ],
+      "mandatoryStatements": [
+        "Workers with boils, sores, or open wounds are restricted from food handling",
+        "Wounds are properly covered with waterproof bandage if worker continues",
+        "Workers showing signs of illness are restricted from work",
+        "Illness signs include vomiting, diarrhea, fever, jaundice, sore throat with fever",
+        "Daily health checks identify ill or injured workers",
+        "Ill workers are excluded until cleared per health policy",
+        "Wound coverings are monitored for integrity during work"
+      ],
+      "verificationExpectations": "Daily health screening of workers before starting work",
+      "monitoringExpectations": "Continuous monitoring for signs of illness or injury, immediate restriction of affected workers"
+    },
+    {
+      "id": "3.09.09",
+      "code": "3.09.09",
+      "required": true,
+      "points": 5,
+      "text": "Are workers not observed wearing watches, jewelry (plain band permitted), studs, false eyelashes, false fingernails, etc.?",
+      "keywords": [
+        "jewelry policy",
+        "watches",
+        "personal items",
+        "foreign objects",
+        "dress code"
+      ],
+      "mandatoryStatements": [
+        "Workers do not wear watches in food handling areas",
+        "Jewelry is not worn except plain wedding band",
+        "No earrings, studs, or body jewelry worn",
+        "No false eyelashes or eyelash extensions worn",
+        "No false fingernails or nail extensions worn",
+        "Policy on personal items is documented and communicated",
+        "Supervisors enforce personal items policy"
+      ],
+      "verificationExpectations": "Daily observation of workers for prohibited personal items",
+      "monitoringExpectations": "Continuous monitoring, immediate removal of prohibited items"
+    },
+    {
+      "id": "3.09.10",
+      "code": "3.09.10",
+      "required": true,
+      "points": 5,
+      "text": "Are all workers wearing protective outer garments suitable for the operation (e.g., appropriate clean clothes, smocks, aprons, sleeves and non-latex gloves)?",
+      "keywords": [
+        "protective clothing",
+        "work garments",
+        "smocks",
+        "aprons",
+        "gloves",
+        "PPE"
+      ],
+      "mandatoryStatements": [
+        "Workers wear protective outer garments appropriate for their tasks",
+        "Garments include smocks, aprons, or sleeves as required",
+        "Gloves are worn where appropriate (non-latex to prevent allergen issues)",
+        "Protective garments are clean at start of shift",
+        "Garments provide adequate protection for product safety",
+        "Garment requirements are defined for each work area/task",
+        "Adequate supply of clean garments is maintained"
+      ],
+      "verificationExpectations": "Daily observation of worker protective garment compliance",
+      "monitoringExpectations": "Continuous monitoring, immediate provision of required garments if missing"
+    },
+    {
+      "id": "3.09.11",
+      "code": "3.09.11",
+      "required": true,
+      "points": 5,
+      "text": "Do workers remove protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break, before using the toilets and when going home at the end of their shift?",
+      "keywords": [
+        "garment removal",
+        "break procedures",
+        "toilet procedures",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Workers remove protective garments before breaks",
+        "Workers remove garments before using toilets",
+        "Workers remove garments when leaving at end of shift",
+        "Garment removal prevents contamination outside work areas",
+        "Procedure for garment removal is communicated to workers",
+        "Supervisors monitor compliance with garment removal policy",
+        "Clean garments provided after breaks and toilet use"
+      ],
+      "verificationExpectations": "Daily observation of garment removal compliance",
+      "monitoringExpectations": "Continuous monitoring at break areas and toilet entrances"
+    },
+    {
+      "id": "3.09.12",
+      "code": "3.09.12",
+      "required": true,
+      "points": 5,
+      "text": "Is there a designated area for workers to leave protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break and before using the toilets?",
+      "keywords": [
+        "garment storage",
+        "designated area",
+        "break area",
+        "garment hooks"
+      ],
+      "mandatoryStatements": [
+        "Designated area exists for storing protective garments",
+        "Area is located outside work zones",
+        "Area is near break areas and toilet facilities",
+        "Hooks, bins, or storage method prevents contamination",
+        "Area keeps garments separated from personal items",
+        "Storage area is clean and maintained",
+        "Workers know where to store garments"
+      ],
+      "verificationExpectations": "Monthly verification of garment storage area adequacy and cleanliness",
+      "monitoringExpectations": "Weekly inspection of storage area condition"
+    },
+    {
+      "id": "3.09.13",
+      "code": "3.09.13",
+      "required": true,
+      "points": 5,
+      "text": "Are worker personal items being stored in such a way that they are not a potential food safety risk to product, growing area, equipment or materials?",
+      "keywords": [
+        "personal items",
+        "personal belongings",
+        "storage lockers",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Workers' personal items are stored away from product areas",
+        "Designated storage area provided for personal belongings",
+        "Storage lockers or area prevents contamination risk",
+        "Personal items not stored in growing, production, or storage areas",
+        "Food, beverages, medicines kept separate from work areas",
+        "Storage area is clean and organized",
+        "Policy prohibits personal items in production areas"
+      ],
+      "verificationExpectations": "Weekly inspection that personal items properly stored",
+      "monitoringExpectations": "Daily checks that no personal items in production areas"
+    },
+    {
+      "id": "3.09.14",
+      "code": "3.09.14",
+      "required": true,
+      "points": 5,
+      "text": "Where required, are workers wearing effective hair restraints that contain all hair?",
+      "keywords": [
+        "hair restraints",
+        "hair nets",
+        "hair coverings",
+        "hairnets",
+        "head covering"
+      ],
+      "mandatoryStatements": [
+        "Workers wear hair restraints where required",
+        "Hair restraints effectively contain all hair",
+        "Restraints include hair nets, caps, or other effective coverings",
+        "Facial hair is also restrained where required",
+        "Hair restraints are worn properly (no hair protruding)",
+        "Requirements for hair restraints defined by work area/task",
+        "Compliance monitored by supervisors"
+      ],
+      "verificationExpectations": "Daily observation of hair restraint compliance",
+      "monitoringExpectations": "Continuous monitoring, immediate correction if hair not properly restrained"
+    },
+    {
+      "id": "3.09.15",
+      "code": "3.09.15",
+      "required": true,
+      "points": 3,
+      "text": "Are all items removed from garment (shirt, blouse, etc.) top pockets, and unsecured items are not worn (e.g., pens, glasses on top of head, Bluetooth devices, etc.)?",
+      "keywords": [
+        "pocket items",
+        "unsecured items",
+        "pens",
+        "foreign objects",
+        "loose items"
+      ],
+      "mandatoryStatements": [
+        "Workers remove items from top pockets before entering work areas",
+        "No pens or writing instruments in pockets",
+        "Glasses not worn on top of head",
+        "Bluetooth devices not worn loosely",
+        "No unsecured items that could fall into product",
+        "Policy on pocket items is communicated",
+        "Supervisors enforce pocket item policy"
+      ],
+      "verificationExpectations": "Daily observation of workers for prohibited pocket items",
+      "monitoringExpectations": "Continuous monitoring, immediate removal of loose items"
+    },
+    {
+      "id": "3.09.16",
+      "code": "3.09.16",
+      "required": true,
+      "points": 5,
+      "text": "Is smoking, eating, chewing and drinking confined to designated areas, and spitting is prohibited in all areas?",
+      "keywords": [
+        "smoking policy",
+        "eating areas",
+        "designated areas",
+        "spitting prohibition",
+        "behavior policy"
+      ],
+      "mandatoryStatements": [
+        "Smoking is confined to designated smoking areas away from production",
+        "Eating is confined to designated break areas",
+        "Chewing gum/tobacco is confined to break areas",
+        "Drinking is confined to break areas (except water at designated stations)",
+        "Spitting is strictly prohibited in all areas",
+        "Designated areas are clearly marked",
+        "Policy is communicated and enforced"
+      ],
+      "verificationExpectations": "Daily monitoring of compliance with eating/smoking policy",
+      "monitoringExpectations": "Continuous observation, immediate correction of violations"
+    },
+    {
+      "id": "3.09.17",
+      "code": "3.09.17",
+      "required": true,
+      "points": 10,
+      "text": "Is fresh potable drinking water in clean containers readily accessible to workers?",
+      "keywords": [
+        "drinking water",
+        "potable water",
+        "water access",
+        "worker welfare",
+        "hydration"
+      ],
+      "mandatoryStatements": [
+        "Fresh potable drinking water is provided to workers",
+        "Water is readily accessible during work hours",
+        "Water containers are clean and sanitary",
+        "Adequate quantity of water for workforce",
+        "Water is cool/refreshing especially in hot conditions",
+        "Water sources do not present contamination risk to product",
+        "Workers can access water without excessive delay"
+      ],
+      "verificationExpectations": "Daily verification that drinking water is available and accessible",
+      "monitoringExpectations": "Multiple daily checks of water availability and container cleanliness"
+    },
+    {
+      "id": "3.09.17a",
+      "code": "3.09.17a",
+      "required": true,
+      "points": 5,
+      "text": "Are single use cups provided (unless a drinking fountain is used) and made available near the drinking water?",
+      "keywords": [
+        "drinking cups",
+        "single use cups",
+        "disposable cups",
+        "drinking fountain"
+      ],
+      "mandatoryStatements": [
+        "Single use disposable cups provided at water stations",
+        "Cups are made available near drinking water",
+        "Adequate supply of cups maintained",
+        "Alternative: drinking fountain with sanitary design used",
+        "Cups stored in sanitary manner",
+        "Used cups disposed of properly",
+        "Cup supply restocked regularly"
+      ],
+      "verificationExpectations": "Daily verification that cups are adequately stocked",
+      "monitoringExpectations": "Multiple daily checks of cup availability"
+    },
+    {
+      "id": "3.09.18",
+      "code": "3.09.18",
+      "required": true,
+      "points": 5,
+      "text": "Are first aid kits adequately stocked and readily available to workers?",
+      "keywords": [
+        "first aid kits",
+        "first aid supplies",
+        "emergency supplies",
+        "worker safety"
+      ],
+      "mandatoryStatements": [
+        "First aid kits are available and accessible to workers",
+        "Kits are adequately stocked with appropriate supplies",
+        "Kits include bandages, antiseptic, and other basic first aid items",
+        "Waterproof bandages available for food handlers",
+        "First aid kit locations are clearly marked",
+        "Kits are inspected and restocked regularly",
+        "Workers know where first aid kits are located"
+      ],
+      "verificationExpectations": "Monthly inspection of first aid kit contents and accessibility",
+      "monitoringExpectations": "Quarterly verification of kit adequacy, immediate restocking of depleted items"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If toilet facilities inadequate: immediate addition of facilities or reduction of workforce, permanent solution within 30 days",
+    "If toilet location creates contamination risk: immediate risk assessment, relocation or barriers within 60 days",
+    "If hand washing stations inadequate or non-functional: immediate addition or repair, temporary stations until permanent solution",
+    "If workers not washing hands properly: immediate retraining, enhanced monitoring, disciplinary action for repeat violations",
+    "If workers have uncovered wounds or show illness signs: immediate exclusion from food handling, medical clearance required before return",
+    "If workers wearing prohibited items: immediate removal of items, retraining on policy",
+    "If drinking water not available: immediate provision of potable water, permanent solution within 24 hours"
+  ],
+  "traceabilityInject": [
+    "Toilet and hand washing station cleaning records must be traceable to specific times and personnel",
+    "Worker health screening must be documented while complying with privacy laws",
+    "First aid kit inspections must be traceable to specific dates and inventory checks",
+    "Worker hygiene violations must be documented with corrective actions"
+  ]
+}

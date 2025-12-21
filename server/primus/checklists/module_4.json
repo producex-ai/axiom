@@ -1,0 +1,122 @@
+{
+  "module": "4",
+  "moduleName": "Harvest Crew",
+  "sections": [
+    {
+      "code": "4.01",
+      "name": "Harvester Training & Hygiene",
+      "requirements": [
+        {
+          "code": "4.01.01",
+          "description": "Harvester training on hygiene, illness reporting, and proper harvest practices",
+          "mandatory": true,
+          "keywords": [
+            "harvester training",
+            "worker hygiene",
+            "harvest practices",
+            "employee training"
+          ]
+        },
+        {
+          "code": "4.01.02",
+          "description": "Hand washing requirements and facilities accessible to harvest crew",
+          "mandatory": true,
+          "keywords": [
+            "handwashing",
+            "harvest crew",
+            "hygiene facilities",
+            "portable toilets"
+          ]
+        },
+        {
+          "code": "4.01.03",
+          "description": "Illness policy requiring symptom reporting and work restrictions",
+          "mandatory": true,
+          "keywords": [
+            "illness policy",
+            "sick worker",
+            "symptom reporting",
+            "work restrictions"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4.02",
+      "name": "Harvest Equipment & Containers",
+      "requirements": [
+        {
+          "code": "4.02.01",
+          "description": "Harvest equipment cleaned and sanitized before use",
+          "mandatory": true,
+          "keywords": [
+            "harvest equipment",
+            "equipment sanitation",
+            "cleaning procedures",
+            "harvest tools"
+          ]
+        },
+        {
+          "code": "4.02.02",
+          "description": "Harvest containers inspected for cleanliness and damage",
+          "mandatory": true,
+          "keywords": [
+            "harvest containers",
+            "bins",
+            "totes",
+            "container inspection"
+          ]
+        },
+        {
+          "code": "4.02.03",
+          "description": "Dedicated harvest containers (not used for other purposes)",
+          "mandatory": true,
+          "keywords": [
+            "dedicated containers",
+            "single-use containers",
+            "container designation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4.03",
+      "name": "Harvest Procedures & Traceability",
+      "requirements": [
+        {
+          "code": "4.03.01",
+          "description": "Harvest procedures defining quality standards and contamination prevention",
+          "mandatory": true,
+          "keywords": [
+            "harvest procedures",
+            "harvest standards",
+            "quality criteria",
+            "harvest instructions"
+          ]
+        },
+        {
+          "code": "4.03.02",
+          "description": "Lot identification and traceability at point of harvest",
+          "mandatory": true,
+          "keywords": [
+            "lot identification",
+            "harvest traceability",
+            "lot codes",
+            "harvest date"
+          ]
+        },
+        {
+          "code": "4.03.03",
+          "description": "Product protection during harvest and transport to packing",
+          "mandatory": true,
+          "keywords": [
+            "product protection",
+            "covered product",
+            "transport",
+            "contamination prevention"
+          ]
+        }
+      ]
+    }
+  ]
+}

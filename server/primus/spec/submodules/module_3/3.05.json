@@ -1,0 +1,292 @@
+{
+  "code": "3.05",
+  "title": "Maintenance & Sanitation",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "preventative maintenance",
+    "sanitation programs",
+    "cleaning procedures",
+    "master sanitation schedule",
+    "SSOP",
+    "glass and brittle plastic control",
+    "equipment maintenance"
+  ],
+  "description": "Comprehensive maintenance and sanitation requirements including preventative maintenance programs, cleaning schedules and procedures, sanitation logs, filter maintenance, cooling unit servicing, glass and brittle plastic management, air circulation control, and light protection",
+  "requirements": [
+    {
+      "id": "3.05.01",
+      "code": "3.05.01",
+      "required": true,
+      "points": 10,
+      "text": "Does the operation have a preventative maintenance program that includes a schedule and completion records?",
+      "keywords": [
+        "preventative maintenance",
+        "maintenance program",
+        "maintenance schedule",
+        "PM program",
+        "completion records"
+      ],
+      "mandatoryStatements": [
+        "Preventative maintenance (PM) program is documented",
+        "PM schedule identifies all equipment requiring maintenance",
+        "Schedule specifies maintenance frequency for each equipment item",
+        "PM activities are defined for each equipment type",
+        "Completion records document when maintenance was performed",
+        "Records show who performed maintenance",
+        "Program prevents equipment failures that could impact food safety"
+      ],
+      "verificationExpectations": "Quarterly verification that PM schedule is followed and records are complete",
+      "monitoringExpectations": "Monthly review of PM completion, immediate attention to overdue maintenance"
+    },
+    {
+      "id": "3.05.02",
+      "code": "3.05.02",
+      "required": true,
+      "points": 10,
+      "text": "Are there logs of maintenance work and repairs and are they signed off when work is completed?",
+      "keywords": [
+        "maintenance logs",
+        "repair logs",
+        "work completion",
+        "maintenance records",
+        "sign-off"
+      ],
+      "mandatoryStatements": [
+        "Maintenance work logs are maintained for all equipment",
+        "Repair logs document corrective maintenance activities",
+        "Logs include date, equipment description, and work performed",
+        "Logs show who performed the maintenance or repair",
+        "Work completion is signed off by responsible person",
+        "Parts used and materials replaced are documented",
+        "Logs are organized and retrievable"
+      ],
+      "verificationExpectations": "Quarterly review of maintenance logs for completeness and proper sign-off",
+      "monitoringExpectations": "Weekly verification that maintenance work is logged and signed off upon completion"
+    },
+    {
+      "id": "3.05.03",
+      "code": "3.05.03",
+      "required": true,
+      "points": 10,
+      "text": "Is there a written cleaning schedule (Master Sanitation Schedule) that shows what and where is to be cleaned and how often?",
+      "keywords": [
+        "cleaning schedule",
+        "master sanitation schedule",
+        "MSS",
+        "cleaning frequency",
+        "cleaning plan"
+      ],
+      "mandatoryStatements": [
+        "Master Sanitation Schedule (MSS) is documented in writing",
+        "MSS identifies all areas, equipment, and surfaces to be cleaned",
+        "MSS specifies cleaning frequency for each item (daily, weekly, monthly, etc.)",
+        "MSS covers entire facility including growing areas, storage, and support areas",
+        "MSS includes both routine and deep cleaning activities",
+        "MSS is updated when facility or equipment changes occur",
+        "Responsibility for cleaning activities is assigned"
+      ],
+      "verificationExpectations": "Annual review of MSS for completeness and accuracy, quarterly verification that MSS is followed",
+      "monitoringExpectations": "Weekly monitoring of cleaning schedule adherence, immediate attention to missed cleaning activities"
+    },
+    {
+      "id": "3.05.04",
+      "code": "3.05.04",
+      "required": true,
+      "points": 10,
+      "text": "Are there written cleaning and sanitation procedures (Sanitation Standard Operating Procedures) for the indoor agriculture operation and all equipment that includes the frequency of cleaning and sanitizing, and instructions including chemical use details?",
+      "keywords": [
+        "SSOP",
+        "sanitation procedures",
+        "cleaning procedures",
+        "sanitation standard operating procedures",
+        "chemical instructions"
+      ],
+      "mandatoryStatements": [
+        "Sanitation Standard Operating Procedures (SSOP) are documented",
+        "SSOP cover the entire indoor agriculture operation",
+        "SSOP include procedures for all food contact equipment",
+        "Procedures specify cleaning and sanitizing frequency",
+        "Procedures include step-by-step instructions",
+        "Chemical use details are specified (concentration, contact time, application method)",
+        "Procedures address both cleaning (soil removal) and sanitizing (microbial reduction)",
+        "SSOP are accessible to cleaning personnel"
+      ],
+      "verificationExpectations": "Annual review of SSOP for accuracy and completeness, quarterly verification that procedures are followed",
+      "monitoringExpectations": "Weekly observation of sanitation activities, verification that procedures are followed correctly"
+    },
+    {
+      "id": "3.05.05",
+      "code": "3.05.05",
+      "required": true,
+      "points": 10,
+      "text": "Are cleaning and sanitation logs on file that show what was done, when and by who and details strength testing of anti-microbial solution used to sanitize surfaces?",
+      "keywords": [
+        "sanitation logs",
+        "cleaning records",
+        "sanitizer testing",
+        "antimicrobial concentration",
+        "cleaning documentation"
+      ],
+      "mandatoryStatements": [
+        "Cleaning and sanitation logs are maintained",
+        "Logs document what areas or equipment were cleaned",
+        "Logs show when cleaning was performed (date and time)",
+        "Logs identify who performed the cleaning",
+        "Logs include antimicrobial solution concentration test results",
+        "Test results confirm sanitizer strength meets specifications",
+        "Logs demonstrate that MSS and SSOP are being followed",
+        "Logs are reviewed and signed off by supervisor"
+      ],
+      "verificationExpectations": "Weekly review of sanitation logs for completeness and compliance with SSOP",
+      "monitoringExpectations": "Daily verification of sanitation log completion, immediate follow-up on missed activities or failed tests"
+    },
+    {
+      "id": "3.05.06",
+      "code": "3.05.06",
+      "required": true,
+      "points": 5,
+      "text": "Where used, are there records showing filters in air conditioning, evaporative coolers, ventilation and air filtration units are regularly cleaned and replaced?",
+      "keywords": [
+        "air filters",
+        "HVAC filters",
+        "filter maintenance",
+        "filter replacement",
+        "ventilation filters",
+        "air quality"
+      ],
+      "mandatoryStatements": [
+        "If air conditioning or ventilation systems used, filter maintenance records exist",
+        "Records show filter cleaning frequency",
+        "Records show filter replacement frequency",
+        "Filter maintenance schedule is based on manufacturer recommendations or operational needs",
+        "Records identify which units were serviced",
+        "Records show dates of filter cleaning/replacement",
+        "Clean filters maintain air quality and system efficiency"
+      ],
+      "verificationExpectations": "Quarterly verification of filter maintenance records and schedule compliance",
+      "monitoringExpectations": "Monthly checks of filter condition, adherence to cleaning/replacement schedule"
+    },
+    {
+      "id": "3.05.07",
+      "code": "3.05.07",
+      "required": true,
+      "points": 10,
+      "text": "Where used, are there records showing cooling units are maintenance serviced and cleaned at least every 12 months or more frequently as required?",
+      "keywords": [
+        "cooling unit maintenance",
+        "HVAC maintenance",
+        "annual servicing",
+        "cooling system cleaning",
+        "12 month service"
+      ],
+      "mandatoryStatements": [
+        "If cooling units used, maintenance service records exist",
+        "Records show cooling units serviced at least annually (every 12 months)",
+        "More frequent servicing if required by manufacturer or operational conditions",
+        "Service includes cleaning of cooling units",
+        "Records identify specific units serviced",
+        "Records show date of service and work performed",
+        "Service maintains cooling unit performance and prevents contamination"
+      ],
+      "verificationExpectations": "Annual verification that all cooling units have been serviced within required timeframe",
+      "monitoringExpectations": "Quarterly review of cooling unit service schedule, advance scheduling to ensure timely service"
+    },
+    {
+      "id": "3.05.08",
+      "code": "3.05.08",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented glass and brittle plastic management procedure (including company glass and brittle plastic policy, glass breakage procedure and where necessary a glass register)?",
+      "keywords": [
+        "glass management",
+        "brittle plastic",
+        "glass policy",
+        "breakage procedure",
+        "glass register",
+        "glass control"
+      ],
+      "mandatoryStatements": [
+        "Glass and brittle plastic management procedure is documented",
+        "Company policy on glass and brittle plastic in facility is defined",
+        "Glass breakage response procedure is established",
+        "Procedure includes product hold and area inspection protocols",
+        "Glass register maintained if glass items present in facility (where necessary)",
+        "Register identifies all glass and brittle plastic items by location",
+        "Regular inspection of glass and brittle plastic items for integrity",
+        "Personnel trained on glass breakage response"
+      ],
+      "verificationExpectations": "Annual review of glass and brittle plastic management program, quarterly verification of glass register accuracy",
+      "monitoringExpectations": "Weekly inspection of glass and brittle plastic items, immediate response to any breakage per procedure"
+    },
+    {
+      "id": "3.05.09",
+      "code": "3.05.09",
+      "required": true,
+      "points": 5,
+      "text": "If fans, or other air circulation equipment are used, are they operated in a manner that minimizes the potential for contaminating product, equipment, or packaging materials?",
+      "keywords": [
+        "fans",
+        "air circulation",
+        "airflow control",
+        "contamination prevention",
+        "air movement"
+      ],
+      "mandatoryStatements": [
+        "If fans or air circulation equipment used, operation is controlled to prevent contamination",
+        "Airflow patterns direct air away from exposed product",
+        "Fans do not blow debris or contaminants onto product or food contact surfaces",
+        "Air circulation equipment is positioned appropriately",
+        "Equipment is clean and well-maintained",
+        "Airflow direction is evaluated as part of facility design or risk assessment"
+      ],
+      "verificationExpectations": "Quarterly verification that air circulation equipment is positioned and operated appropriately",
+      "monitoringExpectations": "Weekly checks of fan operation and cleanliness, immediate adjustment if contamination risk identified"
+    },
+    {
+      "id": "3.05.10",
+      "code": "3.05.10",
+      "required": true,
+      "points": 15,
+      "text": "Are all lights in the facility that could potentially contaminate raw materials (e.g., seeds, transplants, soil, media), product, equipment or packaging shielded, coated or otherwise shatter resistant to protect product from contamination in the event of a breakage?",
+      "keywords": [
+        "light protection",
+        "shatter resistant lights",
+        "light shields",
+        "light coating",
+        "breakage protection"
+      ],
+      "mandatoryStatements": [
+        "All lights above or near raw materials, product, equipment, or packaging are protected",
+        "Light protection includes shields, coatings, or shatter-resistant bulbs/tubes",
+        "Protection prevents glass or material contamination in event of breakage",
+        "All areas where contamination could occur are covered by light protection policy",
+        "Broken or missing light protection is immediately replaced",
+        "Light protection is inspected regularly for integrity",
+        "Alternative lighting (LED, shatter-resistant) used where appropriate"
+      ],
+      "verificationExpectations": "Quarterly inspection of all light fixtures for adequate protection",
+      "monitoringExpectations": "Monthly checks of light protection integrity, immediate repair or replacement of damaged protection",
+      "riskLevel": "high"
+    }
+  ],
+  "micro_inject": ["sanitation", "glass_brittle_plastic"],
+  "capaInject": [
+    "If PM program not established or not followed: develop program within 30 days, immediate attention to overdue maintenance",
+    "If maintenance logs not maintained: establish logging system immediately, retroactively document recent maintenance within 7 days",
+    "If Master Sanitation Schedule not documented: develop MSS within 14 days, implement immediately",
+    "If SSOP not documented: develop SSOP within 14 days, train personnel on procedures within 7 days",
+    "If sanitation logs incomplete: immediate completion of current logs, implement daily verification process",
+    "If filter maintenance records missing: establish records immediately, service all filters within 30 days",
+    "If cooling units not serviced per schedule: immediate scheduling of service, complete within 30 days",
+    "If glass management procedure not documented: develop procedure within 14 days, conduct glass inventory within 7 days",
+    "If fans create contamination risk: immediate adjustment of fan operation, evaluate and reposition as needed",
+    "If light protection missing or damaged: immediate installation of protection or temporary measures, permanent correction within 48 hours"
+  ],
+  "traceabilityInject": [
+    "Preventative maintenance records must be traceable to specific equipment, dates, and activities",
+    "Sanitation logs must be traceable to specific areas, equipment, cleaning dates, and personnel",
+    "Antimicrobial concentration test results must be traceable to specific solutions and applications",
+    "Glass breakage incidents must be fully documented with traceability to affected areas and product disposition",
+    "Filter and cooling unit maintenance must be traceable to specific units and service dates"
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "code": "2.11",
+  "title": "Harvest Practices",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "harvest procedures",
+    "product handling",
+    "harvest hygiene",
+    "field packing",
+    "product protection"
+  ],
+  "description": "Requirements for safe harvest practices including harvest procedures, product handling standards, dropped product protocols, field packing hygiene, temperature control, and product protection during and after harvest",
+  "requirements": [
+    {
+      "id": "2.11.01",
+      "code": "2.11.01",
+      "required": true,
+      "points": 15,
+      "text": "Are there documented harvest procedures that address food safety requirements including product handling, hygiene, and contamination prevention?",
+      "keywords": [
+        "harvest procedures",
+        "product handling",
+        "contamination prevention",
+        "documented procedures"
+      ],
+      "mandatoryStatements": [
+        "Written harvest procedures are documented",
+        "Procedures address proper product handling techniques",
+        "Procedures address hygiene requirements during harvest",
+        "Procedures address contamination prevention measures",
+        "Procedures address what to do if contamination occurs",
+        "Procedures specify when harvest should be delayed or stopped",
+        "Procedures are communicated to harvest crew and supervisors",
+        "Procedures are reviewed and updated annually"
+      ],
+      "verificationExpectations": "Annual review of harvest procedures, verification during harvest observations",
+      "monitoringExpectations": "Daily supervision to ensure procedures are followed, immediate correction of deviations"
+    },
+    {
+      "id": "2.11.02",
+      "code": "2.11.02",
+      "required": true,
+      "points": 15,
+      "text": "Is product handled in a manner that minimizes physical damage and contamination risk?",
+      "keywords": [
+        "product handling",
+        "physical damage",
+        "contamination prevention",
+        "gentle handling"
+      ],
+      "mandatoryStatements": [
+        "Product is handled gently to minimize bruising and damage",
+        "Product is not thrown or dropped",
+        "Overfilling of containers is avoided",
+        "Product is protected from contamination during handling",
+        "Workers follow proper lifting and placement techniques",
+        "Damaged product is identified and segregated",
+        "Handling procedures prevent cross-contamination"
+      ],
+      "verificationExpectations": "Daily observation of product handling practices during harvest",
+      "monitoringExpectations": "Continuous supervision, immediate correction of improper handling"
+    },
+    {
+      "id": "2.11.03",
+      "code": "2.11.03",
+      "required": true,
+      "points": 15,
+      "text": "Is product that is dropped on the ground during harvest not placed into harvest containers and is it segregated from harvested product?",
+      "keywords": [
+        "dropped product",
+        "ground contact",
+        "product segregation",
+        "contamination control"
+      ],
+      "mandatoryStatements": [
+        "Product dropped on ground is not harvested",
+        "Dropped product is not placed in harvest containers",
+        "Dropped product is clearly segregated from good product",
+        "Policy on dropped product is communicated to harvest crew",
+        "Supervisors enforce dropped product policy",
+        "Dropped product is disposed of or diverted to non-food use",
+        "Violations of dropped product policy result in corrective action"
+      ],
+      "verificationExpectations": "Daily observation during harvest to ensure dropped product is not collected",
+      "monitoringExpectations": "Continuous supervision, zero tolerance enforcement of dropped product policy"
+    },
+    {
+      "id": "2.11.04",
+      "code": "2.11.04",
+      "required": true,
+      "points": 10,
+      "text": "If product is packed in the field, are food safety and hygiene controls in place equivalent to those in a packing facility?",
+      "keywords": [
+        "field packing",
+        "hygiene controls",
+        "food safety",
+        "packing area hygiene"
+      ],
+      "mandatoryStatements": [
+        "Field packing area is established and maintained",
+        "Packing surfaces are clean and sanitary",
+        "Packing equipment and materials are clean",
+        "Workers follow hygiene requirements during packing",
+        "Hand washing is available at packing area",
+        "Toilet facilities are accessible to packers",
+        "Product is protected from contamination during packing",
+        "Packing area is free from debris, pests, and other contamination sources",
+        "Same hygiene standards as indoor packing are applied"
+      ],
+      "verificationExpectations": "Daily inspection of field packing operations and hygiene compliance",
+      "monitoringExpectations": "Continuous supervision of field packing, immediate correction of hygiene violations"
+    },
+    {
+      "id": "2.11.05",
+      "code": "2.11.05",
+      "required": true,
+      "points": 10,
+      "text": "Is harvested product protected from contamination during field holding and transport?",
+      "keywords": [
+        "product protection",
+        "field holding",
+        "transport protection",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Harvested product is covered or protected while in field",
+        "Product containers are kept off the ground or on clean pallets",
+        "Product is protected from sun, rain, dust, and other environmental contamination",
+        "Product is protected from animal and pest access",
+        "Transport vehicles are clean and sanitary",
+        "Product is not transported with potential contaminants",
+        "Product is handled to maintain cold chain if required",
+        "Field holding time is minimized"
+      ],
+      "verificationExpectations": "Daily inspection of product protection during field holding and transport",
+      "monitoringExpectations": "Continuous monitoring, immediate correction if product exposed to contamination risk"
+    },
+    {
+      "id": "2.11.06",
+      "code": "2.11.06",
+      "required": true,
+      "points": 10,
+      "text": "If product requires cooling or temperature control, is it cooled promptly and maintained at proper temperature?",
+      "keywords": [
+        "temperature control",
+        "cooling",
+        "cold chain",
+        "refrigeration",
+        "product quality"
+      ],
+      "mandatoryStatements": [
+        "Product requiring cooling is moved to cooling facility promptly after harvest",
+        "Target cooling temperatures are defined based on product requirements",
+        "Cooling rates are monitored and documented",
+        "Product temperature is monitored during storage",
+        "Cold chain is maintained during transport",
+        "Temperature recording devices are used and calibrated",
+        "Out-of-temperature events trigger corrective action"
+      ],
+      "verificationExpectations": "Daily review of temperature records, verification of cooling performance",
+      "monitoringExpectations": "Continuous temperature monitoring, immediate action if temperatures exceed limits"
+    },
+    {
+      "id": "2.11.07",
+      "code": "2.11.07",
+      "required": true,
+      "points": 10,
+      "text": "Are harvest records maintained that enable traceability from field to first receiver?",
+      "keywords": [
+        "harvest records",
+        "traceability",
+        "field identification",
+        "lot tracking"
+      ],
+      "mandatoryStatements": [
+        "Harvest records are created for each harvest event",
+        "Records identify field or growing area harvested",
+        "Records identify harvest date",
+        "Records identify lot or batch code",
+        "Records link harvested product to receiving/packing records",
+        "Records enable one-step-back and one-step-forward traceability",
+        "Records are maintained for minimum 24 months",
+        "Records are organized and readily retrievable"
+      ],
+      "verificationExpectations": "Quarterly trace exercise to verify traceability system, monthly audit of record completeness",
+      "monitoringExpectations": "Daily creation and filing of harvest records, immediate documentation for each harvest lot"
+    },
+    {
+      "id": "2.11.08",
+      "code": "2.11.08",
+      "required": true,
+      "points": 10,
+      "text": "Are harvest activities suspended or delayed when conditions pose a contamination risk (e.g., after flooding, during heavy rain, when animal contamination is detected)?",
+      "keywords": [
+        "harvest suspension",
+        "adverse conditions",
+        "contamination risk",
+        "harvest delay"
+      ],
+      "mandatoryStatements": [
+        "Procedures specify conditions requiring harvest suspension",
+        "Harvest is suspended after flooding until assessment complete",
+        "Harvest may be delayed during heavy rain if it poses contamination risk",
+        "Harvest is immediately stopped if animal or human fecal contamination detected",
+        "Harvest is delayed if equipment or crew hygiene is inadequate",
+        "Decision authority for harvest suspension is clearly defined",
+        "Suspension decisions are documented with rationale",
+        "Conditions must be corrected and verified before resuming harvest"
+      ],
+      "verificationExpectations": "Review of any harvest suspension decisions and conditions",
+      "monitoringExpectations": "Real-time assessment of harvest conditions, immediate suspension if contamination risk identified"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If harvest procedures not documented: develop comprehensive procedures within 14 days, train all harvest personnel immediately",
+    "If product handling causes damage or contamination: immediate retraining, enhanced supervision, revise handling procedures if needed",
+    "If dropped product placed in harvest containers: immediate removal of entire affected lot, retrain crew, zero tolerance enforcement going forward",
+    "If field packing hygiene inadequate: immediate correction, enhance hygiene controls to match packing facility standards",
+    "If product not protected during holding or transport: immediate implementation of protection measures, inspect all exposed product",
+    "If temperature control not maintained: immediate cooling, product evaluation, enhance temperature monitoring and control",
+    "If harvest records not maintained: implement record system immediately, train personnel on traceability requirements",
+    "If harvest continues under contamination risk conditions: immediate harvest suspension, assess all harvested product, implement stronger decision criteria"
+  ],
+  "traceabilityInject": [
+    "Harvest records must be traceable to specific fields, harvest dates, and lot codes",
+    "Harvest records must enable traceability from field to first receiver or packing facility",
+    "Temperature records must be traceable to specific lots and storage/transport events",
+    "Harvest suspension decisions must be traceable to specific conditions and resolution actions"
+  ]
+}

@@ -1,0 +1,458 @@
+{
+  "code": "3.02",
+  "title": "Site",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "site management",
+    "facility layout",
+    "risk assessment",
+    "food defense",
+    "contamination control",
+    "site sanitation"
+  ],
+  "description": "Comprehensive site requirements for indoor agriculture operations including site mapping, traceability, risk assessment, food defense controls, exterior sanitation, storage practices, and contamination prevention",
+  "requirements": [
+    {
+      "id": "3.02.01",
+      "code": "3.02.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a map that accurately shows all aspects of the operation, including water sources and fixtures used to deliver water used in the operation?",
+      "keywords": [
+        "site map",
+        "facility map",
+        "water sources",
+        "water fixtures",
+        "operation layout"
+      ],
+      "mandatoryStatements": [
+        "Current and accurate site map exists for the indoor agriculture operation",
+        "Map shows all growing areas and operational zones",
+        "Map identifies all water sources (municipal, well, recycled, etc.)",
+        "Map shows all water fixtures and delivery points",
+        "Map includes key infrastructure and equipment locations",
+        "Map is updated when facility changes occur"
+      ],
+      "verificationExpectations": "Annual verification that site map is current and accurate, update within 30 days of any facility changes",
+      "monitoringExpectations": "Quarterly review of site map for accuracy, immediate update when changes occur"
+    },
+    {
+      "id": "3.02.02",
+      "code": "3.02.02",
+      "required": true,
+      "points": 15,
+      "text": "Are growing areas adequately identified or coded to enable trace back and trace forward in the event of a recall?",
+      "keywords": [
+        "growing area identification",
+        "traceability codes",
+        "trace back",
+        "trace forward",
+        "recall",
+        "area coding"
+      ],
+      "mandatoryStatements": [
+        "All growing areas are identified with unique codes or identifiers",
+        "Identification system enables trace back to specific growing locations",
+        "Identification system enables trace forward to finished product",
+        "Coding system links growing areas to harvest records",
+        "System supports rapid identification during recall scenarios",
+        "Growing area identifications are clearly visible and documented"
+      ],
+      "verificationExpectations": "Annual mock recall to verify traceability system effectiveness, quarterly verification of growing area identification accuracy",
+      "monitoringExpectations": "Daily verification that growing areas are properly identified, immediate correction of missing or unclear identifications"
+    },
+    {
+      "id": "3.02.03",
+      "code": "3.02.03",
+      "required": true,
+      "points": 15,
+      "text": "Has a documented risk assessment been developed, covering potential hazards associated with the site location and growing process including the flow of materials and personnel?",
+      "keywords": [
+        "risk assessment",
+        "hazard analysis",
+        "site hazards",
+        "process hazards",
+        "material flow",
+        "personnel flow"
+      ],
+      "mandatoryStatements": [
+        "Documented risk assessment exists for the site and operations",
+        "Assessment covers site location-specific hazards",
+        "Assessment evaluates growing process hazards",
+        "Assessment analyzes flow of materials for contamination risks",
+        "Assessment analyzes flow of personnel for contamination risks",
+        "Risk assessment identifies biological, chemical, and physical hazards",
+        "Assessment is signed off by qualified personnel",
+        "Assessment is reviewed and updated at least annually or when changes occur"
+      ],
+      "verificationExpectations": "Annual review and update of risk assessment, verification when operational changes occur",
+      "monitoringExpectations": "Quarterly review of identified risks and controls, ongoing monitoring of risk control effectiveness"
+    },
+    {
+      "id": "3.02.03a",
+      "code": "3.02.03a",
+      "required": true,
+      "points": 15,
+      "text": "Where the risk assessment identifies the need for control of any hazards, are these controls indicated in the assessment and implemented?",
+      "keywords": [
+        "hazard controls",
+        "risk controls",
+        "control implementation",
+        "control measures",
+        "risk mitigation"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment identifies specific controls for each identified hazard",
+        "Control measures are clearly documented in the assessment",
+        "All identified controls are implemented in operations",
+        "Controls are effective at reducing or eliminating hazards",
+        "Implementation of controls is verified through monitoring",
+        "Records demonstrate ongoing implementation of controls"
+      ],
+      "verificationExpectations": "Quarterly verification that all identified controls are implemented and effective",
+      "monitoringExpectations": "Daily or weekly monitoring of critical control implementation, immediate corrective action if controls not followed"
+    },
+    {
+      "id": "3.02.04",
+      "code": "3.02.04",
+      "required": true,
+      "points": 10,
+      "text": "Are the necessary food defense controls implemented in the operation?",
+      "keywords": [
+        "food defense",
+        "intentional contamination",
+        "security controls",
+        "access control",
+        "facility security"
+      ],
+      "mandatoryStatements": [
+        "Food defense controls are identified based on facility vulnerability assessment",
+        "Access control measures are implemented for facility and growing areas",
+        "Visitor management procedures are in place",
+        "Critical areas are secured against unauthorized access",
+        "Employees are trained on food defense awareness",
+        "Procedures address response to suspicious activity or threats",
+        "Controls are monitored and verified for effectiveness"
+      ],
+      "verificationExpectations": "Annual food defense vulnerability assessment, quarterly verification of security controls",
+      "monitoringExpectations": "Daily monitoring of access controls, immediate response to security breaches"
+    },
+    {
+      "id": "3.02.05",
+      "code": "3.02.05",
+      "required": true,
+      "points": 5,
+      "text": "Is the exterior area immediately outside the facility, including roads, yards and parking areas, free of litter, weeds and standing water?",
+      "keywords": [
+        "exterior sanitation",
+        "litter control",
+        "weed control",
+        "standing water",
+        "grounds maintenance",
+        "facility perimeter"
+      ],
+      "mandatoryStatements": [
+        "Exterior areas immediately outside facility are maintained clean",
+        "Roads and parking areas are free of litter and debris",
+        "Weeds are controlled in exterior areas",
+        "Standing water is eliminated or controlled",
+        "Regular cleaning and maintenance schedule for exterior areas",
+        "Exterior conditions do not attract pests or create contamination risks"
+      ],
+      "verificationExpectations": "Weekly inspection of exterior areas for cleanliness and maintenance",
+      "monitoringExpectations": "Daily visual checks of exterior areas, immediate cleanup of litter or standing water"
+    },
+    {
+      "id": "3.02.06",
+      "code": "3.02.06",
+      "required": true,
+      "points": 10,
+      "text": "Is any packaging stored outside, being stored protected?",
+      "keywords": [
+        "packaging storage",
+        "outdoor storage",
+        "packaging protection",
+        "storage conditions"
+      ],
+      "mandatoryStatements": [
+        "If packaging is stored outside, it is adequately protected from contamination",
+        "Packaging is covered or enclosed to prevent exposure to weather",
+        "Storage method prevents pest access to packaging materials",
+        "Packaging is elevated off ground to prevent moisture damage",
+        "Storage location minimizes risk of contamination",
+        "Packaging is inspected before use if stored outside"
+      ],
+      "verificationExpectations": "Weekly verification of outdoor packaging storage conditions",
+      "monitoringExpectations": "Daily checks of packaging storage protection, immediate correction if protection compromised"
+    },
+    {
+      "id": "3.02.07",
+      "code": "3.02.07",
+      "required": true,
+      "points": 5,
+      "text": "Are control measures being implemented for the outside storage of equipment, pallets, tires etc. (i.e., out of the mud, stacked to prevent pest harborage, away from the building perimeter)?",
+      "keywords": [
+        "equipment storage",
+        "pallet storage",
+        "outdoor storage",
+        "pest harborage",
+        "storage controls"
+      ],
+      "mandatoryStatements": [
+        "Equipment and materials stored outside are kept out of mud and water",
+        "Items are stacked or stored to prevent pest harborage",
+        "Storage is located away from building perimeter to reduce pest access",
+        "Storage areas are organized and maintained clean",
+        "Items are elevated or placed on clean surfaces",
+        "Unused equipment and materials are properly stored or removed"
+      ],
+      "verificationExpectations": "Weekly inspection of outdoor storage areas and practices",
+      "monitoringExpectations": "Weekly monitoring of outdoor storage conditions, immediate correction of pest harborage conditions"
+    },
+    {
+      "id": "3.02.08",
+      "code": "3.02.08",
+      "required": true,
+      "points": 3,
+      "text": "Is the area around the dumpster/cull truck/trash area clean?",
+      "keywords": [
+        "dumpster area",
+        "trash area",
+        "waste disposal",
+        "sanitation",
+        "waste management"
+      ],
+      "mandatoryStatements": [
+        "Area around dumpsters and trash receptacles is kept clean",
+        "Spillage and overflow are promptly cleaned up",
+        "Area is free of litter and debris",
+        "Regular cleaning schedule for trash areas is maintained",
+        "Trash area does not attract pests or create odors"
+      ],
+      "verificationExpectations": "Weekly inspection of trash area cleanliness",
+      "monitoringExpectations": "Daily monitoring of dumpster area, immediate cleanup of spills or overflow"
+    },
+    {
+      "id": "3.02.09",
+      "code": "3.02.09",
+      "required": true,
+      "points": 5,
+      "text": "Are outside garbage receptacles and dumpsters kept covered or closed?",
+      "keywords": [
+        "garbage receptacles",
+        "dumpsters",
+        "covered",
+        "closed",
+        "waste containment"
+      ],
+      "mandatoryStatements": [
+        "All outside garbage receptacles have covers or lids",
+        "Dumpsters are kept closed when not actively in use",
+        "Covers and lids are functional and in good repair",
+        "Practice of keeping containers covered is enforced",
+        "Covered containers prevent pest access and odor release"
+      ],
+      "verificationExpectations": "Weekly verification that dumpsters and receptacles are properly covered",
+      "monitoringExpectations": "Daily checks that trash containers remain covered, immediate correction if found open"
+    },
+    {
+      "id": "3.02.10",
+      "code": "3.02.10",
+      "required": true,
+      "points": 15,
+      "text": "Where soil, substrates or fertilizer (e.g., compost) are stored or handled, are measures in place to ensure seepage and runoff is collected or diverted and does not reach growing areas, product, or any of the water sources? A ZERO POINT DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "soil storage",
+        "substrate storage",
+        "fertilizer storage",
+        "compost",
+        "seepage control",
+        "runoff control",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Soil, substrates, and fertilizer storage locations are identified and controlled",
+        "Containment measures prevent seepage from reaching growing areas",
+        "Containment measures prevent runoff from reaching product",
+        "Containment measures prevent contamination of water sources",
+        "Berms, barriers, or drainage systems are in place where needed",
+        "Storage areas are located away from sensitive areas",
+        "Regular inspection of containment measures for effectiveness"
+      ],
+      "verificationExpectations": "Weekly verification of containment measures, immediate action if seepage or runoff detected",
+      "monitoringExpectations": "Daily monitoring of soil/substrate/fertilizer storage areas, especially after rain or irrigation",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.02.11",
+      "code": "3.02.11",
+      "required": true,
+      "points": 15,
+      "text": "Where there are fill stations for fuel, pesticides, or liquid fertilizer, is it evident that the location and/or use is not a risk of contamination to the product, water sources, growing areas, equipment, packaging materials, etc.?",
+      "keywords": [
+        "fill stations",
+        "fuel storage",
+        "pesticide storage",
+        "fertilizer storage",
+        "chemical handling",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Fill stations are located away from product, growing areas, and water sources",
+        "Physical separation or barriers prevent contamination",
+        "Secondary containment is provided for spill control",
+        "Fill station location and design minimize contamination risk",
+        "Procedures for safe filling operations are established",
+        "Spill response equipment and procedures are available",
+        "Regular inspection of fill stations for leaks or contamination"
+      ],
+      "verificationExpectations": "Quarterly verification of fill station safety and contamination prevention",
+      "monitoringExpectations": "Weekly monitoring of fill station condition, immediate response to spills or leaks",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.02.12",
+      "code": "3.02.12",
+      "required": true,
+      "points": 10,
+      "text": "Has the operation eliminated or adequately controlled any potential sources of contamination (physical, chemical or biological) not covered by other more specific questions?",
+      "keywords": [
+        "contamination sources",
+        "contamination control",
+        "physical hazards",
+        "chemical hazards",
+        "biological hazards"
+      ],
+      "mandatoryStatements": [
+        "All potential contamination sources are identified",
+        "Physical contamination sources are eliminated or controlled",
+        "Chemical contamination sources are eliminated or controlled",
+        "Biological contamination sources are eliminated or controlled",
+        "Controls are appropriate to the level of risk",
+        "Site-specific contamination risks are addressed",
+        "Regular review identifies new potential contamination sources"
+      ],
+      "verificationExpectations": "Quarterly site inspection for contamination sources, annual risk assessment update",
+      "monitoringExpectations": "Weekly monitoring of contamination controls, immediate action for new contamination risks"
+    },
+    {
+      "id": "3.02.13",
+      "code": "3.02.13",
+      "required": true,
+      "points": 15,
+      "text": "Is there no evidence of animal presence and/or animal activity (wild or domestic) in the audited area? If Total Conformance, go to 3.02.14",
+      "keywords": [
+        "animal presence",
+        "animal activity",
+        "wild animals",
+        "domestic animals",
+        "animal exclusion"
+      ],
+      "mandatoryStatements": [
+        "No animals (wild or domestic) are present in growing areas",
+        "No animals are present in storage areas or facility interior",
+        "No evidence of animal activity (tracks, droppings, nesting, damage)",
+        "Animal exclusion measures are effective",
+        "Building integrity prevents animal entry",
+        "Regular inspection for animal presence and activity"
+      ],
+      "verificationExpectations": "Daily inspection for animal presence and activity during operations",
+      "monitoringExpectations": "Continuous monitoring for animal presence, immediate response if animals detected",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.02.13a",
+      "code": "3.02.13a",
+      "required": true,
+      "points": 15,
+      "text": "Is there no evidence of evidence of animal fecal matter in the audited area? A ZERO POINT (NON-CONFORMANCE) DOWNSCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "animal fecal matter",
+        "feces",
+        "animal droppings",
+        "contamination",
+        "biological hazard"
+      ],
+      "mandatoryStatements": [
+        "No animal fecal matter is present in any audited areas",
+        "Growing areas are completely free of animal feces",
+        "Storage areas are free of animal feces",
+        "Immediate response procedures exist for fecal contamination",
+        "Product is protected from fecal contamination",
+        "Daily inspection confirms absence of fecal matter"
+      ],
+      "verificationExpectations": "Daily inspection for animal fecal matter before and during operations",
+      "monitoringExpectations": "Continuous vigilance for fecal contamination, immediate containment and cleanup if found",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.02.14",
+      "code": "3.02.14",
+      "required": true,
+      "points": 15,
+      "text": "Is there no evidence of human fecal matter in the audited area? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "human fecal matter",
+        "human waste",
+        "sanitation failure",
+        "biological hazard",
+        "contamination"
+      ],
+      "mandatoryStatements": [
+        "No human fecal matter is present anywhere in audited areas",
+        "Adequate restroom facilities prevent human waste contamination",
+        "Immediate response procedures exist for human waste incidents",
+        "Workers understand prohibition on open defecation",
+        "Facilities and policies prevent human fecal contamination",
+        "Daily inspection confirms absence of human fecal matter"
+      ],
+      "verificationExpectations": "Daily inspection for any signs of human fecal contamination",
+      "monitoringExpectations": "Continuous monitoring, zero tolerance for human fecal matter, immediate facility shutdown if found",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.02.15",
+      "code": "3.02.15",
+      "required": true,
+      "points": 10,
+      "text": "Is there no evidence of infants or toddlers in the audited area?",
+      "keywords": [
+        "infants",
+        "toddlers",
+        "children",
+        "childcare",
+        "visitor control"
+      ],
+      "mandatoryStatements": [
+        "Infants and toddlers are not present in growing areas",
+        "Infants and toddlers are not present in storage or production areas",
+        "Written policy prohibits infants and toddlers in audited areas",
+        "Policy is communicated to all workers",
+        "Alternative childcare arrangements are available if needed",
+        "Policy is enforced consistently"
+      ],
+      "verificationExpectations": "Daily verification that no infants or toddlers are in restricted areas",
+      "monitoringExpectations": "Continuous monitoring for presence of infants/toddlers, immediate removal if found",
+      "riskLevel": "medium"
+    }
+  ],
+  "micro_inject": ["fsms", "pest"],
+  "capaInject": [
+    "If site map inaccurate or missing: update map within 14 days, verify accuracy with facility walkthrough",
+    "If growing area identification inadequate: implement identification system within 30 days, conduct mock recall to verify",
+    "If risk assessment missing or inadequate: develop comprehensive assessment within 30 days, implement identified controls within 60 days",
+    "If identified hazard controls not implemented: immediate implementation of critical controls, complete all controls within 14 days",
+    "If seepage or runoff reaches growing areas or water sources: immediate containment, implement permanent controls within 7 days",
+    "If animal presence detected: immediate area clearance, enhance exclusion measures within 7 days, verify effectiveness",
+    "If animal fecal matter found: immediate product hold, area sanitization, investigation within 24 hours, enhanced monitoring",
+    "If human fecal matter found: immediate facility shutdown, comprehensive sanitization, full investigation, corrective actions before restart",
+    "If infants or toddlers found in restricted areas: immediate removal, policy reinforcement within 24 hours"
+  ],
+  "traceabilityInject": [
+    "Site map must show all areas relevant to product traceability",
+    "Growing area identification codes must be traceable to harvest records and finished product",
+    "Risk assessment must be traceable to identified hazards and implemented controls",
+    "Food defense activities must be documented and traceable",
+    "Any contamination incidents must be fully documented with traceability to affected product and areas"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "code": "4.07",
+  "title": "Transportation and Tracking",
+  "requirements": [
+    {
+      "code": "4.07.01",
+      "question": "Are the vehicles loading and transporting fresh produce from growing area to facility limited to this function only, maintained in proper condition, and adequate for the purpose?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.07.02",
+      "question": "During loading and transporting are harvested products protected from potential contamination?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.07.03",
+      "question": "Are cleaning and sanitation logs on file for transport vehicles that show what was done, when, where, by who, water source used, and who verified?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.07.04",
+      "question": "Is there a system in place to track product from the growing area?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.07.04a",
+      "question": "If product is being packed in the growing area, are the cartons, boxes, RPCs or any other packaging material used, identified with the harvesting date and growing location information?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.07.04b",
+      "question": "If product is being packed in the growing area and individual packing units are used (e.g., clamshells, bags, baskets or others), are these individual units identified with the harvesting date and growing location information?",
+      "totalPoints": 0,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Vehicles used for loading and transporting fresh produce from growing areas to facilities must be dedicated to this function only and not used for transporting potentially contaminating materials.",
+    "Transport vehicles must be maintained in proper condition with regular maintenance, inspections, and repairs to prevent contamination of harvested product.",
+    "Harvested products must be protected from potential contamination during all loading and transportation operations through appropriate covers, containers, or enclosed transport.",
+    "Cleaning and sanitation logs must be maintained for all transport vehicles documenting what cleaning was performed, when, where, by whom, water source used, and verification by supervisor.",
+    "A documented traceability system must be in place to track product from the growing area through transportation to the receiving facility.",
+    "When product is packed in the growing area, all packaging materials including cartons, boxes, RPCs, and other containers must be identified with harvesting date and growing location information.",
+    "Individual packing units such as clamshells, bags, and baskets used for field packing should be identified with harvest date and location information to enable lot-level traceability."
+  ],
+  "capaInject": [
+    "If transport vehicles are used for non-dedicated purposes: immediately designate specific vehicles for fresh produce transport only, mark vehicles clearly, implement vehicle use tracking system, audit compliance weekly.",
+    "If vehicle maintenance is inadequate: establish preventive maintenance schedule for all transport vehicles, conduct pre-trip inspections before each use, document all maintenance and repairs, remove vehicles from service until deficiencies are corrected.",
+    "If product protection during transport is insufficient: provide appropriate covers, tarps, or enclosed containers for all transported product, train drivers on proper loading and securing procedures, verify protection measures before departure.",
+    "If cleaning and sanitation logs are missing or incomplete: implement standardized cleaning log forms for all transport vehicles, train cleaning personnel on proper documentation, designate supervisor to verify and sign off on all cleaning activities daily.",
+    "If traceability system is not established: develop and implement a product tracking system that captures harvest date, location, lot identification, and vehicle used for transport with clear procedures for forward and backward traceability.",
+    "If field-packed products lack identification: provide labeling materials (labels, stamps, or pre-printed packaging) with harvest date and location fields, train packing crews on proper marking procedures, verify marking compliance before loading.",
+    "If individual packing units are not identified: implement consumer-level traceability by marking individual units with harvest date and location codes using labels, stamps, or printed packaging, verify marking before palletizing or loading.",
+    "Conduct regular audits of transportation operations to verify vehicle condition, product protection, cleaning compliance, and traceability system effectiveness with documented corrective actions for non-conformances."
+  ],
+  "traceabilityInject": [
+    "Maintain vehicle maintenance logs for all transport vehicles including dates, services performed, parts replaced, inspector, and vehicle identification.",
+    "Document pre-trip inspection checklists for each transport vehicle before loading including vehicle condition, cleanliness, temperature controls (if applicable), and approval by responsible person.",
+    "Keep cleaning and sanitation logs for transport vehicles with details on cleaning date, time, location, personnel, cleaning agents used, water source, procedures followed, and supervisor verification.",
+    "Establish product tracking records that link harvest lots to transport vehicles, departure times, arrival times, and receiving facility with traceability to specific harvest dates and field locations.",
+    "Maintain records of field packing operations including harvest date, field location, packing personnel, packaging materials used, lot codes assigned, and quantity packed by lot.",
+    "Document lot code assignments for field-packed products with clear explanation of code structure and traceability to harvest date, location, and packing crew.",
+    "Track packaging material inventory including date received, supplier, lot codes, usage dates, and quantity used with traceability to specific harvest lots packed.",
+    "Create shipping manifests or bills of lading that link transport vehicle, departure date/time, product lots loaded, quantities, destination facility, and receiver signature to enable complete chain of custody documentation."
+  ],
+  "micro_inject": [
+    "Emphasize that transport vehicles can be a significant source of cross-contamination if previously used to haul animals, manure, chemicals, or other contaminating materials.",
+    "Verify that cleaning and sanitation of transport vehicles effectively removes organic matter, pathogens, and chemical residues that could contaminate fresh produce during subsequent loads.",
+    "Ensure that transport vehicle surfaces that contact or could contact fresh produce are constructed of food-grade materials that can be effectively cleaned and sanitized.",
+    "Monitor for condensation, temperature abuse, or water accumulation in transport vehicles that could promote microbial growth and contamination of harvested product.",
+    "Implement proper product protection during transport to prevent contamination from dust, insects, birds, animals, or environmental sources during movement from field to facility.",
+    "Verify that any water used for cleaning transport vehicles meets microbiological quality standards to avoid introducing pathogens during the cleaning process.",
+    "Understand that effective traceability systems are critical for rapid response to foodborne illness outbreaks, enabling quick identification and removal of potentially contaminated product from commerce.",
+    "Ensure that field packing operations maintain hygienic conditions comparable to facility packing to prevent introduction of pathogens at the point of packing that will remain with the product through distribution."
+  ]
+}

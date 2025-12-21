@@ -1,0 +1,43 @@
+{
+  "code": "7.03",
+  "parentCode": "7",
+  "title": "Execution of the Food Safety Plan",
+  "requirements": [
+    {
+      "code": "7.03.01",
+      "question": "Is there documented evidence that all plant workers have attended a preventive control training, including specific training for workers directly involved with preventive controls?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.03.02",
+      "question": "Are the preventive control monitoring activities and frequencies in compliance with the Food Safety Plan, charts, and procedures?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.03.03",
+      "question": "Do workers directly involved with preventive control operations understand basic preventive control principles and their role in monitoring preventive controls?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.03.04",
+      "question": "Are preventive control associated records signed off (or initialed) by the workers who are carrying out and recording the preventive control activities?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.03.05",
+      "question": "Is there a deviation record detailing documented corrective actions when a deviation or deficiency of a preventive control occurs?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.03.06",
+      "question": "Are the records associated with preventive controls verified and signed off by a preventive controls qualified individual or trained designate (second signatory)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.01",
+  "title": "Animal and Fecal Contamination Control",
+  "requirements": [
+    {
+      "code": "4.05.01a",
+      "question": "Are harvest operations conducted to minimize the risk of contamination from domestic or wild animals?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Animal presence during harvest poses a direct contamination risk to fresh produce and must be controlled."
+    },
+    {
+      "code": "4.05.01b",
+      "question": "Are procedures in place to immediately stop harvest if animal fecal matter is observed in the harvest area?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Continuing harvest in the presence of visible fecal contamination creates unacceptable food safety risk."
+    },
+    {
+      "code": "4.05.01c",
+      "question": "Is there a documented procedure for addressing areas where animal activity or fecal contamination is found?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.01d",
+      "question": "Are buffer zones established around areas with signs of animal intrusion or contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.01e",
+      "question": "Are harvest workers trained to recognize signs of animal activity and contamination?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Harvest operations must be conducted in a manner that minimizes the risk of contamination from domestic or wild animals.",
+    "If animal fecal matter, blood, or bodily fluids are observed in the harvest area, harvesting must stop immediately in the affected area.",
+    "Areas where animal activity or fecal contamination is found must be evaluated and appropriate buffer zones established before harvest can resume.",
+    "Workers must be trained to recognize signs of animal intrusion including fecal matter, tracks, burrows, nests, or other evidence of animal presence.",
+    "Documented procedures must be in place for managing areas where animal contamination is detected."
+  ],
+  "capaInject": [
+    "Develop and implement a comprehensive animal intrusion prevention program including monitoring, exclusion measures, and response protocols.",
+    "Establish clear protocols for harvest crews to immediately report and respond to any signs of animal activity or fecal contamination.",
+    "Create a mapping system to document and track areas where animal activity has been observed and buffer zones established.",
+    "Implement pre-harvest field inspections specifically focused on detecting signs of animal intrusion before harvest crews enter.",
+    "Develop training modules with visual aids to help workers accurately identify animal feces, tracks, and other contamination indicators."
+  ],
+  "traceabilityInject": [
+    "Maintain records of all pre-harvest inspections including observations of animal activity or fecal matter and actions taken.",
+    "Document any instances where harvest was stopped due to animal contamination including location, date, time, and area affected.",
+    "Keep records of buffer zone establishment including GPS coordinates, dimensions, duration, and clearance authorization.",
+    "Track worker training on animal activity recognition including dates, participants, and assessment results.",
+    "Log any product holds or disposals resulting from confirmed or suspected animal contamination with full traceability to harvest lots."
+  ],
+  "micro_inject": [
+    "Emphasize that animal fecal matter can contain dangerous pathogens including E. coli O157:H7, Salmonella, and Campylobacter that can cause serious illness.",
+    "Ensure workers understand that even small amounts of fecal contamination can spread pathogens over large product volumes during harvest and packing.",
+    "Implement protocols to prevent cross-contamination from affected areas to clean areas through equipment, containers, or worker movement.",
+    "Verify that buffer zones are of adequate size to account for potential pathogen spread through soil, water runoff, or worker activity.",
+    "Monitor effectiveness of animal exclusion and contamination control measures through microbiological testing of product from high-risk areas."
+  ]
+}

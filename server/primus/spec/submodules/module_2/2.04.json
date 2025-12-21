@@ -1,0 +1,335 @@
+{
+  "code": "2.04",
+  "title": "Adjacent Land Use",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "adjacent land",
+    "neighboring properties",
+    "livestock operations",
+    "contamination risks",
+    "buffer zones"
+  ],
+  "description": "Requirements for assessing and mitigating risks from adjacent land use including intensive livestock operations, domestic/wild animals, manure storage, high-risk operations, and fecal contamination",
+  "requirements": [
+    {
+      "id": "2.04.01",
+      "code": "2.04.01",
+      "required": false,
+      "points": 0,
+      "text": "Is there evidence of intensive livestock production (e.g., feedlots, dairy operations, poultry houses, meat rendering operation) on adjacent or nearby land? If No, go to 2.04.02.",
+      "keywords": [
+        "intensive livestock",
+        "feedlots",
+        "dairy operations",
+        "poultry houses",
+        "meat rendering",
+        "adjacent land"
+      ],
+      "mandatoryStatements": [
+        "Adjacent land use is surveyed and documented",
+        "Presence of intensive livestock operations is identified",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of adjacent land use",
+      "monitoringExpectations": "Quarterly monitoring of adjacent land changes"
+    },
+    {
+      "id": "2.04.01a",
+      "code": "2.04.01a",
+      "required": true,
+      "points": 15,
+      "text": "Where there is intensive livestock production on the adjacent land, have appropriate measures been taken to mitigate this possible contamination source onto the growing area (e.g., buffer areas, physical barriers, foundation, fences, ditches, etc.)?",
+      "keywords": [
+        "mitigation measures",
+        "buffer zones",
+        "physical barriers",
+        "fences",
+        "ditches",
+        "contamination prevention",
+        "livestock proximity"
+      ],
+      "mandatoryStatements": [
+        "Risk from adjacent intensive livestock operation has been assessed",
+        "Buffer areas are established between livestock operation and growing areas",
+        "Physical barriers (fences, berms, vegetation) are installed where appropriate",
+        "Ditches or drainage controls prevent runoff from livestock area reaching growing areas",
+        "Mitigation measures are effective in preventing contamination",
+        "Measures are inspected and maintained regularly",
+        "Enhanced monitoring is conducted in growing areas nearest to livestock operation"
+      ],
+      "verificationExpectations": "Quarterly inspection of barriers and buffer zones, verification after heavy rain",
+      "monitoringExpectations": "Weekly monitoring of mitigation measures, immediate action if barriers compromised"
+    },
+    {
+      "id": "2.04.02",
+      "code": "2.04.02",
+      "required": false,
+      "points": 0,
+      "text": "Is there evidence of domestic animals and/or wild animals (includes homes with hobby farms, and non-commercial livestock) on adjacent or nearby land? If No, go to 2.04.03.",
+      "keywords": [
+        "domestic animals",
+        "wild animals",
+        "hobby farms",
+        "non-commercial livestock",
+        "adjacent property"
+      ],
+      "mandatoryStatements": [
+        "Presence of domestic or wild animals on adjacent land is identified",
+        "Type and proximity of animals is documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of adjacent land animal presence",
+      "monitoringExpectations": "Quarterly monitoring of adjacent property conditions"
+    },
+    {
+      "id": "2.04.02a",
+      "code": "2.04.02a",
+      "required": true,
+      "points": 15,
+      "text": "Where there are domestic and/or wild animals (includes homes with hobby farms, and non-commercial livestock) have physical measures been put in place to restrain the animals and their waste from entering the growing area (e.g., vegetative strips, windbreaks, physical barriers, berms, fences, diversion ditches)?",
+      "keywords": [
+        "animal restraint",
+        "physical barriers",
+        "vegetative strips",
+        "windbreaks",
+        "berms",
+        "fences",
+        "waste control"
+      ],
+      "mandatoryStatements": [
+        "Physical measures prevent animal access to growing areas",
+        "Fencing or barriers are properly maintained",
+        "Vegetative strips or windbreaks provide additional protection where appropriate",
+        "Berms or ditches control drainage from animal areas",
+        "Measures effectively restrain both animals and their waste",
+        "Barriers are inspected regularly for damage or breaches",
+        "Repairs to barriers are made promptly"
+      ],
+      "verificationExpectations": "Monthly inspection of physical barriers and exclusion measures",
+      "monitoringExpectations": "Weekly monitoring of barriers, immediate repair if breaches detected"
+    },
+    {
+      "id": "2.04.03",
+      "code": "2.04.03",
+      "required": false,
+      "points": 0,
+      "text": "Is there evidence of untreated animal manure piles, compost, biosolids, or non-synthetic amendment stored and/or applied on adjacent land? If No, go to 2.04.04.",
+      "keywords": [
+        "animal manure",
+        "compost",
+        "biosolids",
+        "non-synthetic amendments",
+        "adjacent storage",
+        "adjacent application"
+      ],
+      "mandatoryStatements": [
+        "Adjacent land is monitored for presence of manure, compost, or biosolids",
+        "Storage and application activities on adjacent land are documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Quarterly monitoring of adjacent land activities",
+      "monitoringExpectations": "Monthly observation of adjacent land for manure/compost presence"
+    },
+    {
+      "id": "2.04.03a",
+      "code": "2.04.03a",
+      "required": true,
+      "points": 15,
+      "text": "Where present, have physical measures been taken to secure untreated animal manure piles, compost, biosolids, or non-synthetic amendment stored and/or applied on adjacent land?",
+      "keywords": [
+        "manure containment",
+        "compost containment",
+        "physical barriers",
+        "runoff prevention",
+        "containment measures"
+      ],
+      "mandatoryStatements": [
+        "Physical barriers prevent runoff from manure/compost areas reaching growing areas",
+        "Berms, ditches, or drainage controls are in place",
+        "Vegetative buffers provide additional protection",
+        "Coordination with adjacent landowner on containment measures",
+        "Measures are effective during rain events",
+        "Barriers are inspected and maintained regularly",
+        "Enhanced monitoring after applications on adjacent land"
+      ],
+      "verificationExpectations": "Quarterly inspection of containment measures, verification after heavy rain",
+      "monitoringExpectations": "Weekly monitoring of barriers, increased monitoring during and after adjacent land applications"
+    },
+    {
+      "id": "2.04.03b",
+      "code": "2.04.03b",
+      "required": true,
+      "points": 10,
+      "text": "If biosolids are stored and/or applied on adjacent land, has the adjacent landowner supplied paperwork confirming the biosolids meet prevailing guidelines, governmental, or local standards?",
+      "keywords": [
+        "biosolids certification",
+        "regulatory compliance",
+        "biosolids standards",
+        "documentation",
+        "EPA 503",
+        "pathogen reduction"
+      ],
+      "mandatoryStatements": [
+        "Documentation from adjacent landowner confirms biosolids meet regulatory standards",
+        "Paperwork includes biosolids source and treatment information",
+        "Biosolids meet EPA Part 503 or equivalent local standards",
+        "Pathogen reduction requirements are met",
+        "Documentation is obtained before or during adjacent land application",
+        "Records are maintained for review"
+      ],
+      "verificationExpectations": "Annual review of biosolids documentation from adjacent landowner",
+      "monitoringExpectations": "Request updated documentation when biosolids applications occur on adjacent land"
+    },
+    {
+      "id": "2.04.04",
+      "code": "2.04.04",
+      "required": false,
+      "points": 0,
+      "text": "Is the growing area situated in a higher risk location where contamination could occur from nearby operations or functions (e.g., leach fields, runoff or potential flooding from sewers, toilet systems, industrial facilities, worker housing, etc.)? If No, go to 2.04.05.",
+      "keywords": [
+        "high risk location",
+        "leach fields",
+        "sewers",
+        "industrial facilities",
+        "worker housing",
+        "contamination sources"
+      ],
+      "mandatoryStatements": [
+        "Nearby operations and functions are surveyed and documented",
+        "High-risk contamination sources are identified",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of nearby operations and risk sources",
+      "monitoringExpectations": "Quarterly monitoring of nearby high-risk areas"
+    },
+    {
+      "id": "2.04.04a",
+      "code": "2.04.04a",
+      "required": true,
+      "points": 15,
+      "text": "Where the growing area is situated in a higher risk location, have appropriate measures been taken to mitigate risks related to nearby operations?",
+      "keywords": [
+        "risk mitigation",
+        "control measures",
+        "contamination prevention",
+        "buffer zones",
+        "drainage control"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment identifies specific risks from nearby operations",
+        "Mitigation measures are implemented based on identified risks",
+        "Physical barriers or buffer zones are established where needed",
+        "Drainage controls prevent contaminated runoff reaching growing areas",
+        "Enhanced monitoring is conducted in high-risk areas",
+        "Contingency plans exist for contamination events",
+        "Regular inspection of mitigation measures occurs"
+      ],
+      "verificationExpectations": "Quarterly inspection of risk mitigation measures",
+      "monitoringExpectations": "Weekly monitoring of control effectiveness, increased monitoring during high-risk periods"
+    },
+    {
+      "id": "2.04.05",
+      "code": "2.04.05",
+      "required": false,
+      "points": 0,
+      "text": "Is there evidence of any other potential risks in the adjacent land that could potentially lead to contamination of the growing area?",
+      "keywords": [
+        "other risks",
+        "adjacent hazards",
+        "contamination potential",
+        "site-specific risks"
+      ],
+      "mandatoryStatements": [
+        "Comprehensive survey of adjacent land risks is conducted",
+        "Any additional risk sources are identified and documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of all adjacent land risks",
+      "monitoringExpectations": "Quarterly monitoring for new or changing risks"
+    },
+    {
+      "id": "2.04.05a",
+      "code": "2.04.05a",
+      "required": true,
+      "points": 15,
+      "text": "Have appropriate measures been taken to mitigate risks related to nearby operations?",
+      "keywords": [
+        "risk mitigation",
+        "control implementation",
+        "contamination prevention",
+        "site-specific controls"
+      ],
+      "mandatoryStatements": [
+        "All identified adjacent land risks have appropriate mitigation measures",
+        "Measures are specific to the type and severity of risk",
+        "Implementation is verified and documented",
+        "Effectiveness of measures is monitored",
+        "Measures are maintained and updated as needed",
+        "Records demonstrate ongoing risk management"
+      ],
+      "verificationExpectations": "Quarterly verification of risk mitigation effectiveness",
+      "monitoringExpectations": "Ongoing monitoring per risk assessment, immediate action if control failures detected"
+    },
+    {
+      "id": "2.04.06",
+      "code": "2.04.06",
+      "required": false,
+      "points": 0,
+      "text": "Is there evidence of human fecal matter in the adjacent land to the audited area? If No, go to 2.05.01.",
+      "keywords": [
+        "human fecal matter",
+        "adjacent land contamination",
+        "sanitation",
+        "critical risk"
+      ],
+      "mandatoryStatements": [
+        "Adjacent land is monitored for human fecal contamination",
+        "Any evidence is immediately documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Regular inspection of adjacent land visible from operation",
+      "monitoringExpectations": "Weekly monitoring of adjacent land, immediate escalation if human fecal matter detected"
+    },
+    {
+      "id": "2.04.06a",
+      "code": "2.04.06a",
+      "required": true,
+      "points": 15,
+      "text": "Where there is evidence of human fecal matter in the adjacent land, are there adequate controls in place to mitigate risk (e.g., access controls (barriers), distance from the growing area and equipment, crop type and maturity, land condition, etc.)?",
+      "keywords": [
+        "fecal matter controls",
+        "risk mitigation",
+        "access barriers",
+        "buffer distance",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Immediate communication with adjacent landowner to address issue",
+        "Physical barriers prevent access from adjacent land to growing areas",
+        "Adequate buffer distance is maintained",
+        "Enhanced monitoring of growing areas nearest to contamination",
+        "Crop type and maturity are considered in risk assessment",
+        "Land condition and drainage patterns prevent contamination migration",
+        "Enhanced food safety measures in affected areas",
+        "Ongoing monitoring until adjacent land contamination is resolved"
+      ],
+      "verificationExpectations": "Daily monitoring while adjacent land contamination exists",
+      "monitoringExpectations": "Continuous monitoring, daily inspection of barriers and buffer zones, immediate escalation if risk increases"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If adjacent intensive livestock poses risk and no mitigation: immediately assess risk, implement barriers/buffers within 30 days, do not harvest nearest growing areas until controls verified",
+    "If domestic/wild animals from adjacent land can access growing area: immediately repair barriers, conduct daily inspections until barriers secure",
+    "If manure/compost runoff from adjacent land reaches growing area: immediate containment, communication with adjacent landowner, implement enhanced barriers within 30 days",
+    "If biosolids on adjacent land lack documentation: obtain documentation from adjacent landowner within 14 days or escalate concerns to management",
+    "If high-risk location without adequate controls: immediate risk assessment, implement mitigation measures within 30 days based on risk level",
+    "If human fecal matter on adjacent land: immediate communication with adjacent landowner, establish enhanced barriers, daily monitoring, do not harvest nearest growing areas until risk mitigated"
+  ],
+  "traceabilityInject": [
+    "Adjacent land use survey must be traceable to survey dates and findings",
+    "Risk assessments for adjacent land must be traceable to specific risks and mitigation measures",
+    "Biosolids documentation must be traceable to adjacent landowner and application dates",
+    "Monitoring records for adjacent land risks must be traceable to inspection dates and findings"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "code": "7.01",
+  "parentCode": "7",
+  "title": "General",
+  "requirements": [
+    {
+      "code": "7.01.01",
+      "question": "Is there a team responsible for the Food Safety Plan at the operation, with a leader assigned for the development, implementation and on-going maintenance of the Food Safety Plan?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.01.02",
+      "question": "Is there documented evidence that the food safety team members have been trained on Food Safety Plan development?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.01.03",
+      "question": "Does a product description exist for the products produced?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "7.01.04",
+      "question": "Has the process(es) been flow diagrammed in sufficient detail to completely describe the process or product handling/processing steps?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

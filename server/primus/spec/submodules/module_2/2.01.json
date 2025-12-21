@@ -1,0 +1,104 @@
+{
+  "code": "2.01",
+  "title": "General",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "farm operations",
+    "food safety program",
+    "organic certification",
+    "hygiene rules"
+  ],
+  "description": "Establishes general food safety requirements for farm operations including responsible personnel, organic certification documentation, and comprehensive hygiene and health rules",
+  "requirements": [
+    {
+      "id": "2.01.01",
+      "code": "2.01.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a trained on-site person responsible for the operation's food safety program?",
+      "keywords": [
+        "trained personnel",
+        "food safety program",
+        "responsible person",
+        "on-site",
+        "food safety manager"
+      ],
+      "mandatoryStatements": [
+        "On-site person is designated as responsible for food safety program",
+        "Responsible person has received food safety training",
+        "Training documentation is maintained",
+        "Person has authority to make food safety decisions",
+        "Contact information for responsible person is documented",
+        "Backup personnel are identified for absences"
+      ],
+      "verificationExpectations": "Annual verification of training currency and competency",
+      "monitoringExpectations": "Quarterly review of food safety program oversight activities"
+    },
+    {
+      "id": "2.01.02",
+      "code": "2.01.02",
+      "required": false,
+      "points": 0,
+      "text": "If the operation is growing under organic principles, is there written documentation of current certification by an accredited organic certification organization?",
+      "keywords": [
+        "organic certification",
+        "organic principles",
+        "accredited certification",
+        "certification documentation"
+      ],
+      "mandatoryStatements": [
+        "Current organic certification certificate is maintained (if applicable)",
+        "Certification is from an accredited organic certification organization",
+        "Certification scope covers the audited operation",
+        "Certification is valid and not expired"
+      ],
+      "verificationExpectations": "Annual verification of organic certification renewal",
+      "monitoringExpectations": "Review certification status before expiration date"
+    },
+    {
+      "id": "2.01.03",
+      "code": "2.01.03",
+      "required": true,
+      "points": 15,
+      "text": "Does the operation have written food safety hygiene and health rules covering at least worker and visitor hygiene and health, infants and toddlers, animal presence in growing and storage areas, fecal matter, dropped product, blood and bodily fluids?",
+      "keywords": [
+        "hygiene rules",
+        "health rules",
+        "worker hygiene",
+        "visitor hygiene",
+        "infants",
+        "toddlers",
+        "animal presence",
+        "fecal matter",
+        "dropped product",
+        "blood",
+        "bodily fluids"
+      ],
+      "mandatoryStatements": [
+        "Written food safety hygiene and health rules are documented",
+        "Rules address worker hygiene and health requirements",
+        "Rules address visitor hygiene and health requirements",
+        "Rules prohibit or control infants and toddlers in production areas",
+        "Rules address animal presence in growing and storage areas",
+        "Rules address handling of fecal matter contamination",
+        "Rules address handling of dropped product",
+        "Rules address handling of blood and bodily fluids",
+        "Rules are communicated to all workers and visitors",
+        "Rules are posted in appropriate locations"
+      ],
+      "verificationExpectations": "Annual review of hygiene rules for completeness, verification through observations during audits",
+      "monitoringExpectations": "Daily supervision of hygiene rule compliance, immediate correction of violations"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If no trained person responsible: designate responsible person immediately, provide training within 30 days",
+    "If organic certification expired: immediately cease organic claims, obtain renewal or discontinue organic operations",
+    "If hygiene rules incomplete or not followed: update rules immediately, retrain all personnel within 7 days, implement enhanced monitoring"
+  ],
+  "traceabilityInject": [
+    "Training records for responsible person must be traceable to specific training dates and training providers",
+    "Organic certification documentation must be traceable to certification body and certification dates",
+    "Hygiene rule training records must be traceable to specific employees and training dates"
+  ]
+}

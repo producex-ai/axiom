@@ -1,0 +1,255 @@
+{
+  "module": "2",
+  "moduleName": "Primary Production (Field Operations)",
+  "sections": [
+    {
+      "code": "2.01",
+      "name": "Site History & Risk Assessment",
+      "requirements": [
+        {
+          "code": "2.01.01",
+          "description": "Land use history documented for past 3 years",
+          "mandatory": true,
+          "keywords": [
+            "land history",
+            "previous use",
+            "site history",
+            "field history"
+          ]
+        },
+        {
+          "code": "2.01.02",
+          "description": "Risk assessment for adjacent land use (livestock, sewage, industrial)",
+          "mandatory": true,
+          "keywords": [
+            "adjacent land",
+            "neighboring operations",
+            "risk assessment",
+            "surrounding area"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2.02",
+      "name": "Soil Amendments & Manure Management",
+      "requirements": [
+        {
+          "code": "2.02.01",
+          "description": "Soil amendment risk assessment and approval process",
+          "mandatory": true,
+          "keywords": [
+            "soil amendments",
+            "manure",
+            "compost",
+            "organic fertilizer",
+            "animal waste"
+          ]
+        },
+        {
+          "code": "2.02.02",
+          "description": "Raw manure application banned; treated manure requires 120-day interval before harvest",
+          "mandatory": true,
+          "keywords": [
+            "raw manure",
+            "manure application",
+            "waiting period",
+            "120 days",
+            "interval"
+          ]
+        },
+        {
+          "code": "2.02.03",
+          "description": "Treatment verification records (time, temperature, pathogen testing)",
+          "mandatory": true,
+          "keywords": [
+            "treatment verification",
+            "composting records",
+            "pathogen test",
+            "thermal treatment"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2.03",
+      "name": "Agricultural Water",
+      "requirements": [
+        {
+          "code": "2.03.01",
+          "description": "Water source risk assessment (surface, well, municipal)",
+          "mandatory": true,
+          "keywords": [
+            "water source",
+            "irrigation water",
+            "water risk",
+            "water supply"
+          ]
+        },
+        {
+          "code": "2.03.02",
+          "description": "Water testing program based on risk (E. coli, generic coliforms)",
+          "mandatory": true,
+          "keywords": [
+            "water testing",
+            "microbial testing",
+            "E. coli",
+            "water quality",
+            "water analysis"
+          ]
+        },
+        {
+          "code": "2.03.03",
+          "description": "Corrective action for water test failures",
+          "mandatory": true,
+          "keywords": [
+            "water failure",
+            "corrective action",
+            "water treatment",
+            "failed test"
+          ]
+        },
+        {
+          "code": "2.03.04",
+          "description": "Water system maintenance and inspection records",
+          "mandatory": true,
+          "keywords": [
+            "water system",
+            "irrigation system",
+            "maintenance",
+            "inspection"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2.04",
+      "name": "Worker Health, Hygiene & Sanitation",
+      "requirements": [
+        {
+          "code": "2.04.01",
+          "description": "Field sanitation facilities (toilets, handwashing) within 1/4 mile or 5-minute walk",
+          "mandatory": true,
+          "keywords": [
+            "field sanitation",
+            "toilets",
+            "handwashing",
+            "restrooms",
+            "portable toilets"
+          ]
+        },
+        {
+          "code": "2.04.02",
+          "description": "Hand washing stations with soap, single-use towels, and potable water",
+          "mandatory": true,
+          "keywords": [
+            "handwashing station",
+            "soap",
+            "potable water",
+            "paper towels"
+          ]
+        },
+        {
+          "code": "2.04.03",
+          "description": "Worker hygiene training (handwashing, illness reporting, jewelry restrictions)",
+          "mandatory": true,
+          "keywords": [
+            "worker hygiene",
+            "hygiene training",
+            "personal hygiene",
+            "employee hygiene"
+          ]
+        },
+        {
+          "code": "2.04.04",
+          "description": "Illness policy requiring workers to report illness or symptoms",
+          "mandatory": true,
+          "keywords": [
+            "illness policy",
+            "sick worker",
+            "communicable disease",
+            "symptom reporting"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2.05",
+      "name": "Wildlife & Pest Management",
+      "requirements": [
+        {
+          "code": "2.05.01",
+          "description": "Wildlife intrusion minimization practices",
+          "mandatory": true,
+          "keywords": [
+            "wildlife",
+            "animal intrusion",
+            "pest management",
+            "feral animals"
+          ]
+        },
+        {
+          "code": "2.05.02",
+          "description": "Pre-harvest assessment for signs of animal contamination",
+          "mandatory": true,
+          "keywords": [
+            "pre-harvest inspection",
+            "animal contamination",
+            "fecal matter",
+            "field inspection"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2.06",
+      "name": "Harvest & Field Packing",
+      "requirements": [
+        {
+          "code": "2.06.01",
+          "description": "Harvest equipment cleaned and maintained",
+          "mandatory": true,
+          "keywords": [
+            "harvest equipment",
+            "cleaning",
+            "sanitation",
+            "equipment maintenance"
+          ]
+        },
+        {
+          "code": "2.06.02",
+          "description": "Harvest containers cleaned and inspected before use",
+          "mandatory": true,
+          "keywords": [
+            "harvest containers",
+            "bins",
+            "totes",
+            "container cleaning"
+          ]
+        },
+        {
+          "code": "2.06.03",
+          "description": "Product protection from contamination during harvest and transport",
+          "mandatory": true,
+          "keywords": [
+            "product protection",
+            "contamination prevention",
+            "covered product",
+            "transport"
+          ]
+        },
+        {
+          "code": "2.06.04",
+          "description": "Field traceability (lot codes, field IDs, harvest dates)",
+          "mandatory": true,
+          "keywords": [
+            "field traceability",
+            "lot identification",
+            "harvest date",
+            "field ID"
+          ]
+        }
+      ]
+    }
+  ]
+}

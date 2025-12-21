@@ -1,0 +1,403 @@
+{
+  "code": "2.08",
+  "title": "Agricultural Water",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "agricultural water",
+    "water sources",
+    "water quality",
+    "water testing",
+    "water treatment",
+    "irrigation",
+    "post-harvest water"
+  ],
+  "description": "Comprehensive agricultural water management requirements including source identification, quality standards, microbial testing, treatment systems, and distribution system maintenance for pre-harvest and post-harvest water use",
+  "requirements": [
+    {
+      "id": "2.08.01",
+      "code": "2.08.01",
+      "required": true,
+      "points": 5,
+      "text": "Are all water sources used for the operation identified and is the intended use for each source documented?",
+      "keywords": [
+        "water sources",
+        "source identification",
+        "intended use",
+        "water mapping"
+      ],
+      "mandatoryStatements": [
+        "All water sources are identified (wells, surface water, municipal, etc.)",
+        "Each water source has documented intended use",
+        "Uses include irrigation, spray applications, hand washing, equipment washing, etc.",
+        "Water sources are shown on site map",
+        "Source identification supports traceability and testing programs"
+      ],
+      "verificationExpectations": "Annual verification that all water sources are identified and documented",
+      "monitoringExpectations": "Update water source documentation when changes occur"
+    },
+    {
+      "id": "2.08.02",
+      "code": "2.08.02",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented water management system covering, as applicable: source, delivery, storage, distribution, quality, testing, and treatment of water?",
+      "keywords": [
+        "water management system",
+        "water quality",
+        "testing program",
+        "treatment",
+        "documentation"
+      ],
+      "mandatoryStatements": [
+        "Water management system is documented",
+        "System addresses water source characterization",
+        "System addresses water delivery and distribution",
+        "System addresses water storage if applicable",
+        "System addresses water quality standards and testing",
+        "System addresses water treatment if applicable",
+        "System is reviewed and updated annually"
+      ],
+      "verificationExpectations": "Annual review of water management system documentation",
+      "monitoringExpectations": "Update system when operational changes affect water use"
+    },
+    {
+      "id": "2.08.03",
+      "code": "2.08.03",
+      "required": true,
+      "points": 15,
+      "text": "Has a documented pre-harvest agricultural water assessment been developed addressing all water used directly or indirectly on the growing area during growing activities?",
+      "keywords": [
+        "pre-harvest water assessment",
+        "agricultural water",
+        "risk assessment",
+        "water sources"
+      ],
+      "mandatoryStatements": [
+        "Pre-harvest agricultural water assessment is documented",
+        "Assessment covers all water used directly on growing areas (irrigation, sprays)",
+        "Assessment covers all water used indirectly affecting growing areas",
+        "Assessment evaluates risk from each water source and use",
+        "Assessment identifies control measures for identified risks",
+        "Assessment is reviewed at least annually",
+        "Assessment is updated when water sources or uses change"
+      ],
+      "verificationExpectations": "Annual review of pre-harvest water assessment",
+      "monitoringExpectations": "Immediate assessment update when water-related changes occur"
+    },
+    {
+      "id": "2.08.04",
+      "code": "2.08.04",
+      "required": true,
+      "points": 10,
+      "text": "Is water used directly on the growing area during growing activities (e.g., irrigation, foliar application) sourced from a source determined to be safe or does the water meet required microbial quality standards (generic E. coli not to exceed a geometric mean of 126 CFU per 100 mL and a statistical threshold value of 410 CFU per 100 mL)?",
+      "keywords": [
+        "irrigation water",
+        "water quality standards",
+        "E. coli",
+        "microbial testing",
+        "geometric mean",
+        "126 CFU",
+        "410 CFU"
+      ],
+      "mandatoryStatements": [
+        "Water used directly on growing areas meets microbial quality standards OR source is determined safe",
+        "If testing required: generic E. coli geometric mean does not exceed 126 CFU/100mL",
+        "If testing required: no single sample exceeds statistical threshold value of 410 CFU/100mL",
+        "Testing conducted by qualified laboratory using approved methods",
+        "Test results are documented and reviewed",
+        "Water not meeting standards is not used until corrected and re-tested",
+        "Safe source determination is documented with scientific rationale"
+      ],
+      "verificationExpectations": "Review of all water test results, verification that non-compliant water is not used",
+      "monitoringExpectations": "Water testing at frequencies determined by risk assessment, immediate action if standards exceeded"
+    },
+    {
+      "id": "2.08.05",
+      "code": "2.08.05",
+      "required": true,
+      "points": 10,
+      "text": "Where pre-harvest agricultural water does not meet the required microbial quality standards, are mitigations being used to ensure the safety of the crop?",
+      "keywords": [
+        "water mitigation",
+        "treatment",
+        "time intervals",
+        "die-off",
+        "corrective measures"
+      ],
+      "mandatoryStatements": [
+        "If water does not meet standards, documented mitigation is implemented",
+        "Mitigation options include water treatment, time intervals before harvest, crop treatment, etc.",
+        "Mitigation is scientifically based and appropriate for risk level",
+        "Effectiveness of mitigation is verified",
+        "Mitigation is documented in water management system",
+        "Records demonstrate consistent application of mitigation measures"
+      ],
+      "verificationExpectations": "Quarterly verification that mitigations are implemented as planned",
+      "monitoringExpectations": "Ongoing monitoring of mitigation effectiveness, immediate action if mitigation fails"
+    },
+    {
+      "id": "2.08.06",
+      "code": "2.08.06",
+      "required": true,
+      "points": 5,
+      "text": "Is water used in mixing/applying crop sprays (e.g., crop protectants, growth regulators, foliar nutrients) of appropriate quality?",
+      "keywords": [
+        "spray water",
+        "crop protection",
+        "foliar sprays",
+        "water quality",
+        "mixing water"
+      ],
+      "mandatoryStatements": [
+        "Water used for mixing crop sprays is of appropriate quality",
+        "Water quality standards are defined for spray applications",
+        "Water is tested or source is verified as safe",
+        "Water quality does not compromise spray effectiveness or food safety",
+        "Records document water source used for spray mixing"
+      ],
+      "verificationExpectations": "Annual verification of spray water quality",
+      "monitoringExpectations": "Periodic testing based on risk assessment"
+    },
+    {
+      "id": "2.08.07",
+      "code": "2.08.07",
+      "required": true,
+      "points": 10,
+      "text": "Is water used for hand washing of appropriate microbial quality (potable or meeting EPA or local requirements)?",
+      "keywords": [
+        "hand washing water",
+        "potable water",
+        "drinking water standards",
+        "EPA standards",
+        "water quality"
+      ],
+      "mandatoryStatements": [
+        "Hand washing water is potable or meets EPA/local drinking water standards",
+        "Water quality is verified through testing or municipal water reports",
+        "Test results are documented",
+        "Non-compliant water is not used for hand washing",
+        "If municipal water, documentation of water quality is obtained",
+        "If well water, testing is conducted at appropriate frequency"
+      ],
+      "verificationExpectations": "Annual verification of hand washing water quality",
+      "monitoringExpectations": "Annual testing minimum for wells, immediate testing if contamination suspected"
+    },
+    {
+      "id": "2.08.08",
+      "code": "2.08.08",
+      "required": true,
+      "points": 10,
+      "text": "Is water that directly or indirectly contacts harvested product during or after harvest (including water used to make ice) of appropriate microbial quality (potable or meeting EPA or local requirements)?",
+      "keywords": [
+        "post-harvest water",
+        "product wash water",
+        "ice water",
+        "potable water",
+        "EPA standards"
+      ],
+      "mandatoryStatements": [
+        "Post-harvest water contacting product is potable or meets EPA/local standards",
+        "Water used to make ice meets potable water standards",
+        "Water quality is verified through testing or municipal reports",
+        "Test results are documented",
+        "Testing frequency is based on risk but minimum annually",
+        "Non-compliant water is not used until corrected and re-tested"
+      ],
+      "verificationExpectations": "Annual minimum verification of post-harvest water quality",
+      "monitoringExpectations": "Testing at defined frequencies, immediate testing if contamination suspected"
+    },
+    {
+      "id": "2.08.09",
+      "code": "2.08.09",
+      "required": true,
+      "points": 5,
+      "text": "Is water used for washing or rinsing food contact surfaces (e.g., harvest containers, equipment) of appropriate microbial quality (potable or meeting EPA or local requirements)?",
+      "keywords": [
+        "equipment wash water",
+        "food contact surface water",
+        "potable water",
+        "cleaning water"
+      ],
+      "mandatoryStatements": [
+        "Water used for washing food contact surfaces is potable or meets standards",
+        "Water quality is verified through testing or documentation",
+        "Test results are maintained",
+        "Non-compliant water is not used for washing food contact surfaces"
+      ],
+      "verificationExpectations": "Annual verification of equipment wash water quality",
+      "monitoringExpectations": "Annual testing minimum, immediate testing if contamination suspected"
+    },
+    {
+      "id": "2.08.10",
+      "code": "2.08.10",
+      "required": true,
+      "points": 5,
+      "text": "Where water treatment (e.g., chlorination, UV, filtration, ozone) is used, is there a documented water treatment plan and are there records confirming that the treatment is working effectively?",
+      "keywords": [
+        "water treatment",
+        "chlorination",
+        "UV treatment",
+        "filtration",
+        "ozone",
+        "treatment effectiveness",
+        "monitoring"
+      ],
+      "mandatoryStatements": [
+        "Water treatment plan is documented",
+        "Plan specifies treatment method, target parameters, and monitoring frequency",
+        "Treatment equipment is properly maintained",
+        "Treatment effectiveness is monitored (e.g., chlorine residuals, UV intensity)",
+        "Monitoring records are maintained",
+        "Corrective actions are taken when treatment is ineffective",
+        "Treatment system is validated initially and verified ongoing"
+      ],
+      "verificationExpectations": "Quarterly review of treatment monitoring records, annual validation of treatment effectiveness",
+      "monitoringExpectations": "Real-time or daily monitoring of treatment parameters, immediate action if out of specification"
+    },
+    {
+      "id": "2.08.11",
+      "code": "2.08.11",
+      "required": true,
+      "points": 10,
+      "text": "If water storage tanks or reservoirs are used, are they constructed, located, covered and maintained to prevent contamination?",
+      "keywords": [
+        "water storage",
+        "storage tanks",
+        "reservoirs",
+        "contamination prevention",
+        "tank maintenance"
+      ],
+      "mandatoryStatements": [
+        "Water storage tanks are constructed of food-grade or appropriate materials",
+        "Tanks are located to minimize contamination risk",
+        "Tanks are covered to prevent entry of debris, animals, and contaminants",
+        "Tank inlets and outlets are protected",
+        "Tanks are inspected regularly for integrity and cleanliness",
+        "Tanks are cleaned and sanitized at appropriate intervals",
+        "Cleaning and inspection records are maintained"
+      ],
+      "verificationExpectations": "Quarterly inspection of water storage tanks",
+      "monitoringExpectations": "Monthly visual inspection, annual internal inspection and cleaning"
+    },
+    {
+      "id": "2.08.12",
+      "code": "2.08.12",
+      "required": true,
+      "points": 10,
+      "text": "Are water distribution systems (pipes, hoses, irrigation systems, etc.) maintained and managed to prevent contamination?",
+      "keywords": [
+        "water distribution",
+        "pipes",
+        "hoses",
+        "irrigation system",
+        "contamination prevention",
+        "cross-connection"
+      ],
+      "mandatoryStatements": [
+        "Water distribution system is maintained in good repair",
+        "No cross-connections between potable and non-potable water systems",
+        "Hoses and pipes are stored properly when not in use (off ground, capped)",
+        "System is protected from back-siphonage and backflow",
+        "Distribution system is inspected regularly for leaks and damage",
+        "Repairs are made promptly",
+        "System is flushed or cleaned if contamination occurs"
+      ],
+      "verificationExpectations": "Quarterly inspection of water distribution system",
+      "monitoringExpectations": "Weekly visual checks during active use, immediate repair of leaks or damage"
+    },
+    {
+      "id": "2.08.13",
+      "code": "2.08.13",
+      "required": true,
+      "points": 5,
+      "text": "Are water testing methods, laboratories and sampling procedures appropriate and documented?",
+      "keywords": [
+        "water testing methods",
+        "laboratory accreditation",
+        "sampling procedures",
+        "test methods"
+      ],
+      "mandatoryStatements": [
+        "Water testing is conducted by qualified laboratory",
+        "Laboratory uses validated test methods (EPA-approved or equivalent)",
+        "Sampling procedures are documented and followed",
+        "Samples are collected by trained personnel",
+        "Sample integrity is maintained during transport",
+        "Chain of custody is documented if required",
+        "Test methods are appropriate for the water matrix and use"
+      ],
+      "verificationExpectations": "Annual verification of laboratory qualifications and test methods",
+      "monitoringExpectations": "Review each test report for completeness and validity"
+    },
+    {
+      "id": "2.08.14",
+      "code": "2.08.14",
+      "required": true,
+      "points": 5,
+      "text": "Where water testing results do not meet required standards, are documented corrective actions taken and is the effectiveness of corrective actions verified through re-testing?",
+      "keywords": [
+        "corrective actions",
+        "re-testing",
+        "water quality failure",
+        "verification"
+      ],
+      "mandatoryStatements": [
+        "Water not meeting standards is not used for intended purpose",
+        "Root cause of water quality failure is investigated",
+        "Corrective actions are implemented (treatment, source change, system repair, etc.)",
+        "Corrective actions are documented",
+        "Effectiveness is verified through re-testing",
+        "Water is not used until re-test confirms acceptable quality",
+        "Preventive measures are implemented to prevent recurrence"
+      ],
+      "verificationExpectations": "Review all corrective action records for water quality failures",
+      "monitoringExpectations": "Immediate corrective action when test failures occur, re-testing before resuming water use"
+    },
+    {
+      "id": "2.08.15",
+      "code": "2.08.15",
+      "required": true,
+      "points": 5,
+      "text": "Are all water quality records maintained and readily available?",
+      "keywords": [
+        "water records",
+        "record retention",
+        "test results",
+        "documentation"
+      ],
+      "mandatoryStatements": [
+        "All water test results are maintained",
+        "Water treatment monitoring records are maintained",
+        "Corrective action records for water issues are maintained",
+        "Records are organized and readily retrievable",
+        "Records are retained for at least 24 months or longer if required",
+        "Records support traceability and audit requirements"
+      ],
+      "verificationExpectations": "Quarterly audit of water quality record retention and organization",
+      "monitoringExpectations": "File records immediately upon receipt, periodic organization of records"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If water sources not identified: immediately document all water sources and intended uses",
+    "If water management system not documented: develop comprehensive system within 30 days",
+    "If pre-harvest water assessment not conducted: complete assessment within 30 days, do not use unevaluated water sources",
+    "If irrigation water exceeds microbial standards: immediately discontinue use, investigate source, treat or find alternative source, implement mitigation, re-test before use",
+    "If spray mixing water inappropriate quality: switch to appropriate water source immediately",
+    "If hand washing water not potable: provide potable water immediately, test well water or obtain municipal documentation",
+    "If post-harvest water not potable: immediately discontinue use, product hold if suspect contamination, provide potable water, test before resuming use",
+    "If equipment wash water not appropriate: switch to potable water immediately",
+    "If water treatment not effective: immediate corrective action, do not use water until treatment verified effective",
+    "If storage tanks contaminated or not maintained: clean and sanitize immediately, test water before use",
+    "If distribution system compromised: repair immediately, flush system, test water quality",
+    "If testing methods inappropriate: switch to qualified laboratory, re-test using appropriate methods",
+    "If water test failures not addressed: immediate investigation, corrective action, re-testing before water use",
+    "If water records not maintained: implement record keeping system immediately"
+  ],
+  "traceabilityInject": [
+    "Water sources must be traceable to specific locations on site map",
+    "Water test results must be traceable to specific sources, sampling dates, and laboratories",
+    "Water treatment records must be traceable to specific treatment systems, dates, and parameters",
+    "Corrective actions for water quality failures must be traceable to specific test results and verification testing"
+  ]
+}

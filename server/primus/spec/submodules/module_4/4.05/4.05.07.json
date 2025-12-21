@@ -1,0 +1,66 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.07",
+  "title": "Harvest Timing and Environmental Conditions",
+  "requirements": [
+    {
+      "code": "4.05.07a",
+      "question": "Are there criteria for determining when fields are suitable for harvest entry (e.g., after rain, irrigation, or pesticide application)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.07b",
+      "question": "Are appropriate waiting periods observed after water application events before harvest begins?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.07c",
+      "question": "Are pesticide pre-harvest intervals (PHI) and re-entry intervals (REI) documented and strictly followed?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Failure to observe pesticide intervals creates chemical residue violations and worker safety hazards."
+    },
+    {
+      "code": "4.05.07d",
+      "question": "Is there a system to communicate field clearance status to harvest supervisors before harvest begins?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.07e",
+      "question": "Are adverse weather conditions considered in harvest decisions to minimize contamination risk?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Criteria must be established for determining when fields are suitable and safe for harvest entry, considering factors such as recent irrigation, rainfall, flooding, or pesticide applications.",
+    "Appropriate waiting periods must be observed after significant water application events to allow fields to drain and reduce microbial contamination risk.",
+    "Pesticide pre-harvest intervals (PHI) and worker re-entry intervals (REI) must be strictly documented and followed before harvest operations begin.",
+    "A communication system must be in place to verify and document field clearance status before harvest crews are authorized to enter fields.",
+    "Harvest timing decisions must consider weather conditions that may increase contamination risk such as high winds, dust storms, or proximity to flooding."
+  ],
+  "capaInject": [
+    "Develop a field clearance protocol requiring written authorization from qualified personnel before harvest crews can enter any field.",
+    "Establish documented waiting periods after irrigation or rain events based on crop type, soil conditions, and water source to minimize microbial risk.",
+    "Implement a pesticide tracking system that clearly shows PHI and REI compliance with sign-off verification before harvest authorization.",
+    "Create a field status board or digital system that displays clearance status, restrictions, and expected clearance dates for all production areas.",
+    "Define adverse weather protocols including suspension criteria, assessment procedures, and clearance requirements before harvest can resume."
+  ],
+  "traceabilityInject": [
+    "Maintain field clearance records including field ID, clearance date/time, authorizing person, criteria met, and any restrictions or special handling requirements.",
+    "Document all pesticide applications with product name, application date/time, PHI, REI, and calculated clearance date before harvest.",
+    "Keep records of significant water events (irrigation, rain, flooding) including date, amount, source, and waiting period applied before harvest.",
+    "Log any harvest delays or suspensions due to weather or field conditions including reason, duration, and resumption authorization.",
+    "Track communication of field status to harvest supervisors including method (radio, text, meeting), time, recipient, and acknowledgment."
+  ],
+  "micro_inject": [
+    "Emphasize that harvesting too soon after irrigation or rain can introduce waterborne pathogens present in irrigation water or splash contamination from soil.",
+    "Ensure harvest timing protocols account for the increased microbial load on plant surfaces following water application events.",
+    "Implement monitoring to verify that adequate drying time prevents harvest equipment and workers from transferring soil and water contamination to product.",
+    "Verify that field clearance procedures prevent harvest during conditions that increase pathogen transfer risk through environmental contamination.",
+    "Monitor compliance with waiting periods to ensure product safety while balancing operational needs and product quality requirements."
+  ]
+}

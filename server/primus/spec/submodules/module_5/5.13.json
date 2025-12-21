@@ -1,0 +1,55 @@
+{
+  "code": "5.13",
+  "parentCode": "5",
+  "title": "Operation Monitoring Records",
+  "requirements": [
+    {
+      "code": "5.13.01",
+      "question": "Are there inspection records for incoming goods (e.g., raw materials, ingredients and packing materials)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.02",
+      "question": "Are there inspection logs on incoming trailers (and other forms of transport) for rodents and insects, cleanliness, holes and temperature control of the trailer (for food requiring temperature control for safety and/or as required per buyer specifications)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.03",
+      "question": "Are there records for the necessary process monitoring activities (e.g., pH, water temperature vs. product temperature, metal detection, X-ray, labeling, heating processes, reduction/kill step processes, postharvest pesticides (e.g., fungicides), control of water activity, drying, etc.), showing, for example, monitoring frequencies, results and where necessary the corrective actions?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.04",
+      "question": "Are there records (with corrective actions) that show anti-microbial (e.g., free chlorine, peroxyacetic acid) concentration testing of product contact water and ice solutions prior to start up and throughout the production runs?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.05",
+      "question": "Are there records of monitoring for build-up of organic material (turbidity) and changing of recirculated and batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.06",
+      "question": "Are there records (with corrective actions) that show anti-microbial concentration testing of hand/foot/tool dip stations, and are there stock check and replenishment records for gel and spray stations?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.07",
+      "question": "Is there a tool accountability program for knives and similar cutting hand tools used in the production area?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.13.08",
+      "question": "Is there a pre-operation inspection log?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

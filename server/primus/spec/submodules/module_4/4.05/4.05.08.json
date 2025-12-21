@@ -1,0 +1,65 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.08",
+  "title": "Post-Harvest Handling and Transport",
+  "requirements": [
+    {
+      "code": "4.05.08a",
+      "question": "Are harvested products promptly moved to designated collection or staging areas to minimize field exposure time?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.08b",
+      "question": "Are staging areas for harvested product maintained to prevent contamination from soil, water, pests, or other sources?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.08c",
+      "question": "Are transport vehicles and trailers inspected and cleaned before loading harvested product?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.08d",
+      "question": "Is product protected during loading and transport to prevent physical damage and contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.08e",
+      "question": "Are temperature and time controls implemented during post-harvest handling to maintain product quality and safety?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Harvested products must be promptly moved from harvest areas to designated collection or staging areas to minimize exposure to environmental contamination and temperature abuse.",
+    "Staging areas for harvested product must be designed and maintained to prevent contamination from soil, standing water, pests, equipment, or other sources.",
+    "Transport vehicles and trailers must be inspected for cleanliness and condition before loading product, with documented verification.",
+    "Product must be properly secured and protected during loading and transport to prevent physical damage, temperature abuse, and environmental contamination.",
+    "Appropriate temperature and time controls must be implemented based on product type to maintain quality and prevent microbial growth during post-harvest handling."
+  ],
+  "capaInject": [
+    "Establish maximum holding times for product in field staging areas before movement to cooling or packing facilities.",
+    "Design staging areas with appropriate surfaces (paved, gravel, or compacted), drainage, and protection from environmental contamination sources.",
+    "Develop vehicle inspection checklists covering cleanliness, structural integrity, absence of odors or previous cargo residue, and suitability for food transport.",
+    "Implement loading procedures that minimize handling time, prevent product damage, ensure proper stacking, and protect from environmental exposure.",
+    "Define temperature monitoring requirements and holding time limits for different product types from harvest through transport to facility."
+  ],
+  "traceabilityInject": [
+    "Maintain records of product movement from harvest to staging areas including time, lot/field ID, quantity, and responsible person.",
+    "Document staging area inspections including date, time, area condition, deficiencies found, and corrective actions before product placement.",
+    "Keep vehicle inspection records including date, vehicle/trailer ID, inspector, inspection results, cleaning performed, and approval for loading.",
+    "Track loading times, departure times, arrival times, and any delays during transport with vehicle ID and product lot traceability.",
+    "Log temperature monitoring data during post-harvest handling including time, location, product temperature, ambient conditions, and corrective actions if out of range."
+  ],
+  "micro_inject": [
+    "Emphasize that extended holding times in warm conditions allow rapid multiplication of any bacteria present on product surfaces.",
+    "Ensure staging areas do not create new contamination risks through proximity to animal activity, standing water, or equipment contamination.",
+    "Implement protocols for vehicle inspection to prevent cross-contamination from previous cargo, soil, or other contamination sources.",
+    "Verify that loading and transport procedures minimize opportunities for pathogen introduction or growth through proper timing and temperature control.",
+    "Monitor post-harvest handling practices to ensure the food safety gains from good harvest practices are not compromised during subsequent handling."
+  ]
+}

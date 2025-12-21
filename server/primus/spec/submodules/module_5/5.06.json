@@ -1,0 +1,70 @@
+{
+  "code": "5.06",
+  "title": "Equipment",
+  "requirements": [
+    {
+      "code": "5.06.01",
+      "question": "Are food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.06.02",
+      "question": "Are non-food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.06.03",
+      "question": "Does food contact equipment design, placement, and condition (e.g., smooth surfaces, smooth weld seams, non-toxic materials, corrosion-resistant, non-porous, non-absorbent) facilitate effective cleaning and maintenance?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.06.04",
+      "question": "Are thermometers (independent of thermostat probes) present in all coolers and freezers?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.06.05",
+      "question": "Are all thermometers non-glass and non-mercury?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Food contact equipment surfaces must be free of flaking paint, corrosion, rust, and any unhygienic repair materials such as tape, string, or cardboard that could contaminate products or harbor pathogens",
+    "Non-food contact equipment surfaces must also be maintained free of flaking paint, corrosion, rust, and unhygienic materials to prevent contamination through transfer or particulate fallout onto food contact areas",
+    "Food contact equipment must be designed with smooth, non-porous, non-absorbent surfaces, smooth weld seams, and constructed of non-toxic, corrosion-resistant materials that can be effectively cleaned and sanitized",
+    "Independent thermometers separate from thermostat control probes must be installed in all refrigerated coolers and freezers to verify actual product storage temperatures and detect equipment malfunctions",
+    "All thermometers used in food production and storage areas must be non-glass and non-mercury types to eliminate physical and chemical contamination risks from breakage"
+  ],
+  "capaInject": [
+    "When food contact surfaces show flaking paint, corrosion, or rust, immediately remove equipment from service, assess extent of product contamination risk, strip and re-coat surfaces with food-grade epoxy or paint, replace corroded components with stainless steel or food-grade alternatives, and establish preventive maintenance inspection schedules to detect deterioration before failure",
+    "If unhygienic repair materials (tape, string, cardboard) are found on equipment, immediately remove all temporary repairs, replace with proper food-grade materials and permanent repair methods, establish policies prohibiting use of non-approved materials, provide proper repair supplies and training to maintenance personnel, and conduct facility-wide audits for similar issues",
+    "For non-food contact equipment showing deterioration, immediately assess contamination transfer risk to food contact areas, prioritize repairs based on proximity to food products, establish preventive maintenance schedules for all equipment, implement color-coded tools and parts designation (food vs. non-food contact), and maintain equipment condition logs",
+    "When equipment design impedes effective cleaning, evaluate equipment for replacement or modification, install removable panels or access ports to reach difficult areas, consider equipment with tool-free disassembly capability, establish enhanced cleaning procedures with verification requirements, and evaluate new equipment purchases against sanitary design criteria",
+    "If coolers or freezers lack independent thermometers, immediately install calibrated thermometers in representative locations (warmest spots), position for easy reading without opening doors, establish temperature monitoring logs with defined frequency and acceptance criteria, implement alarm systems for out-of-range temperatures, and verify thermostat accuracy against independent measurements",
+    "Upon discovering glass or mercury thermometers, immediately remove them from service, replace with digital or spirit-filled (alcohol-based) thermometers, conduct facility audit to identify and remove all glass and mercury devices, establish purchasing specifications prohibiting glass and mercury, and provide training on physical and chemical hazard prevention"
+  ],
+  "traceabilityInject": [
+    "Maintain equipment condition inspection records documenting inspection date, equipment identification, findings of paint condition, corrosion, rust, or unauthorized repairs, corrective actions taken, and verification of repair completion",
+    "Keep equipment maintenance logs showing preventive maintenance schedules, work performed, parts replaced, cleaning procedures, and equipment condition assessment with photographic documentation of repairs",
+    "Document equipment design and sanitary evaluation records including sanitary design criteria assessment, cleaning validation studies, equipment modification records, and new equipment purchase justifications demonstrating improved cleanability",
+    "Retain thermometer calibration records showing calibration method (ice bath, boiling water, or certified standards), calibration frequency, results, adjustments made, and replacement dates for failed thermometers",
+    "Maintain temperature monitoring logs for all coolers and freezers documenting daily temperature readings, alarm events, out-of-specification occurrences, corrective actions, and equipment service records",
+    "Keep equipment inventory records identifying all food contact and non-food contact equipment with unique identifiers, materials of construction, cleaning requirements, and maintenance schedules",
+    "Document glass and mercury elimination audits showing locations inspected, devices found and removed, replacement devices installed, and ongoing verification that prohibited items remain excluded from facility"
+  ],
+  "micro_inject": [
+    "Flaking paint from food contact surfaces can harbor Listeria monocytogenes and other pathogenic bacteria in crevices and chips; paint particles that detach become foreign material contamination and potential vehicles for pathogen transfer to products",
+    "Rust and corrosion create pitted surfaces with increased surface area and crevices that provide ideal harborage for bacterial biofilm formation; Listeria biofilms in corrosion pits can persist for years despite cleaning and resist sanitizer penetration",
+    "Porous or absorbent food contact materials can absorb product residues, moisture, and bacteria into the material matrix where they cannot be reached by cleaning; subsequent release of trapped bacteria contaminates future product batches",
+    "Rough surfaces, including coarse weld seams and damaged equipment surfaces, provide increased surface area for bacterial attachment and biofilm development; cleanability decreases exponentially as surface roughness increases beyond critical thresholds",
+    "Unhygienic repair materials like tape, cardboard, or string used on equipment provide nutrients, moisture retention, and protected environments for bacterial growth; these materials cannot be effectively cleaned or sanitized and continuously shed particles and bacteria",
+    "Temperature monitoring failures that go undetected due to lack of independent thermometers can result in extended time-temperature abuse allowing psychrotrophic pathogens like Listeria monocytogenes to multiply to dangerous levels before detection",
+    "Glass thermometer breakage in refrigeration units or processing equipment can contaminate large quantities of product with glass fragments and potentially toxic mercury; glass shards may not be detected by metal detectors or x-ray equipment",
+    "Mercury from broken thermometers is highly toxic and can vaporize at room temperature; mercury contamination in food facilities is extremely difficult to remediate and may require extensive facility closure, decontamination, and product destruction"
+  ]
+}

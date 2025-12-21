@@ -1,0 +1,141 @@
+{
+  "code": "4.03",
+  "title": "Training",
+  "moduleName": "Module 4: Harvest Crew",
+  "appliesTo": [
+    "worker training",
+    "sanitation worker training",
+    "food handler health procedures",
+    "corrective action records"
+  ],
+  "description": "Establishes comprehensive training requirements for harvest crew including food safety hygiene training, sanitation worker training, illness reporting procedures, and documentation of training events and corrective actions",
+  "requirements": [
+    {
+      "id": "4.03.01",
+      "code": "4.03.01",
+      "required": true,
+      "points": 15,
+      "text": "Is there a food safety hygiene training program covering new and existing workers and are there records of these training events?",
+      "keywords": [
+        "food safety training",
+        "hygiene training",
+        "new workers",
+        "existing workers",
+        "training records",
+        "training events",
+        "training program"
+      ],
+      "mandatoryStatements": [
+        "Food safety hygiene training program is documented",
+        "Program covers new workers before they start work",
+        "Program includes refresher training for existing workers",
+        "Training content addresses personal hygiene, handwashing, illness reporting, and food safety practices",
+        "Training is provided in languages understood by workers",
+        "Records document date, topics covered, trainer, and attendees",
+        "Training attendance is verified through sign-in sheets or equivalent",
+        "Training effectiveness is evaluated"
+      ],
+      "verificationExpectations": "Quarterly verification that all workers have received required training, annual review of training program content and effectiveness",
+      "monitoringExpectations": "Verification that new workers complete training before starting work, monthly review of training completion rates, observation of worker practices to confirm training effectiveness"
+    },
+    {
+      "id": "4.03.02",
+      "code": "4.03.02",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented training program with training logs for the sanitation workers, including best practices and chemical use details?",
+      "keywords": [
+        "sanitation workers",
+        "training program",
+        "training logs",
+        "best practices",
+        "chemical use",
+        "cleaning procedures",
+        "sanitizer handling"
+      ],
+      "mandatoryStatements": [
+        "Documented training program exists for sanitation workers",
+        "Training covers sanitation best practices and procedures",
+        "Training includes proper chemical use, dilution, and application",
+        "Training addresses personal protective equipment (PPE) requirements",
+        "Training covers chemical safety and emergency response",
+        "Training logs document dates, topics, trainers, and attendees",
+        "Competency of sanitation workers is verified",
+        "Refresher training is provided at defined intervals"
+      ],
+      "verificationExpectations": "Quarterly verification of sanitation worker training completion and competency, annual review of training program and chemical use procedures",
+      "monitoringExpectations": "Observation of sanitation practices to verify training effectiveness, immediate retraining if improper procedures observed"
+    },
+    {
+      "id": "4.03.03",
+      "code": "4.03.03",
+      "required": true,
+      "points": 10,
+      "text": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering any illnesses that might be a contamination risk to the products being produced, and return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors can check procedure/policy but not the actual records).",
+      "keywords": [
+        "illness reporting",
+        "cuts",
+        "grazes",
+        "food handler health",
+        "contamination risk",
+        "return to work",
+        "communicable disease",
+        "health procedures"
+      ],
+      "mandatoryStatements": [
+        "Written procedures require reporting of cuts, grazes, and illnesses",
+        "Procedures identify illnesses that pose contamination risk (gastrointestinal illness, jaundice, infected wounds, etc.)",
+        "Procedures specify to whom workers must report health issues",
+        "Return to work requirements are clearly defined",
+        "Procedures are communicated to all food handlers",
+        "Procedures are available in languages understood by workers",
+        "Workers acknowledge understanding of reporting requirements",
+        "Confidentiality of health information is maintained per applicable laws"
+      ],
+      "verificationExpectations": "Annual review of illness reporting procedures for completeness and regulatory compliance, quarterly verification of procedure communication to workers",
+      "monitoringExpectations": "Daily supervisor observation for signs of illness or injury, immediate response to reported health issues, verification that ill/injured workers are appropriately excluded or restricted"
+    },
+    {
+      "id": "4.03.04",
+      "code": "4.03.04",
+      "required": true,
+      "points": 3,
+      "text": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
+      "keywords": [
+        "non-conformance",
+        "corrective actions",
+        "retraining",
+        "violations",
+        "disciplinary action",
+        "compliance monitoring",
+        "worker violations"
+      ],
+      "mandatoryStatements": [
+        "System exists to document worker food safety non-conformances",
+        "Records identify specific violation, date, and worker involved",
+        "Corrective actions are documented for each non-conformance",
+        "Retraining is provided when non-conformances indicate knowledge gaps",
+        "Retraining records are maintained",
+        "Progressive disciplinary measures are applied for repeated violations",
+        "Effectiveness of corrective actions is verified",
+        "Trends in non-conformances are analyzed"
+      ],
+      "verificationExpectations": "Monthly review of non-conformance records and corrective action completion, quarterly analysis of non-conformance trends",
+      "monitoringExpectations": "Immediate documentation of observed non-conformances, verification that corrective actions and retraining are completed within defined timeframes"
+    }
+  ],
+  "micro_inject": ["fsms", "training"],
+  "capaInject": [
+    "If untrained workers found in harvest operations: immediate removal from food handling duties, complete training before return to work",
+    "If training program gaps identified: revise program within 14 days, retrain affected workers within 30 days",
+    "If sanitation workers lack chemical use training: immediate removal from sanitation duties, complete training before return to duties",
+    "If illness reporting violations: immediate retraining, increased supervision, escalate for repeated failures",
+    "If non-conformances not documented or addressed: immediate documentation, complete corrective actions within 48 hours, review of monitoring effectiveness"
+  ],
+  "traceabilityInject": [
+    "Training records must be traceable to specific workers, dates, topics, and trainers",
+    "Sanitation worker training must be traceable to specific chemical use authorizations",
+    "Non-conformance records must be traceable to specific incidents, workers, and corrective actions",
+    "Retraining must be traceable to specific non-conformances or knowledge gaps identified"
+  ]
+}

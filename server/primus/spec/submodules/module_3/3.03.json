@@ -1,0 +1,327 @@
+{
+  "code": "3.03",
+  "title": "Pest Control",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "pest management",
+    "pest control program",
+    "pest monitoring",
+    "pest exclusion",
+    "facility sanitation"
+  ],
+  "description": "Comprehensive pest control requirements for indoor agriculture including written policies, effective pest control programs, documentation, monitoring devices, building integrity, and pest-proofing measures",
+  "requirements": [
+    {
+      "id": "3.03.01",
+      "code": "3.03.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a written policy prohibiting animals in the facility, including the growing areas and any packaging or equipment storage areas?",
+      "keywords": [
+        "animal policy",
+        "no animals",
+        "animal prohibition",
+        "facility access",
+        "animal exclusion"
+      ],
+      "mandatoryStatements": [
+        "Written policy prohibits all animals in the facility",
+        "Policy covers growing areas, storage areas, and production zones",
+        "Policy applies to both wild and domestic animals",
+        "Policy is communicated to all personnel",
+        "Policy enforcement procedures are established",
+        "Exceptions (if any) are clearly defined and controlled"
+      ],
+      "verificationExpectations": "Annual review of animal prohibition policy, quarterly verification of policy communication and enforcement",
+      "monitoringExpectations": "Daily monitoring for animal presence, immediate enforcement of animal prohibition policy"
+    },
+    {
+      "id": "3.03.02",
+      "code": "3.03.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there an effective pest control program in place? A ZERO POINT (NON-CONFORMANCE) DOWNSCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "pest control program",
+        "effective program",
+        "pest management",
+        "program effectiveness"
+      ],
+      "mandatoryStatements": [
+        "Comprehensive pest control program is established and implemented",
+        "Program addresses all relevant pest types for indoor agriculture",
+        "Program includes prevention, monitoring, and control measures",
+        "Program is demonstrably effective (no pest infestations)",
+        "Program is appropriate for indoor agriculture environment",
+        "Program is reviewed and updated regularly",
+        "Records demonstrate program implementation and effectiveness"
+      ],
+      "verificationExpectations": "Quarterly verification of pest control program effectiveness, annual program review",
+      "monitoringExpectations": "Weekly monitoring of pest activity, continuous implementation of pest control measures",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.03.03",
+      "code": "3.03.03",
+      "required": true,
+      "points": 15,
+      "text": "Is the pest control program properly documented, detailing the scope of the program, target pests and frequency of checks, including a copy of the contract with the extermination company (if used), Pest Control Operator license(s)/training (if baits are used), and insurance documents?",
+      "keywords": [
+        "pest control documentation",
+        "program scope",
+        "target pests",
+        "pest control contract",
+        "PCO license",
+        "pest control training"
+      ],
+      "mandatoryStatements": [
+        "Pest control program documentation includes program scope",
+        "Target pests for the indoor agriculture operation are identified",
+        "Inspection and monitoring frequency is documented",
+        "Contract with pest control company on file (if external service used)",
+        "Pest Control Operator licenses/certifications on file (if baits used)",
+        "Insurance documentation for pest control services on file",
+        "Training records for in-house pest control personnel",
+        "All documentation is current and accessible"
+      ],
+      "verificationExpectations": "Annual verification of all pest control documentation currency and completeness",
+      "monitoringExpectations": "Quarterly review of pest control documentation, immediate update when changes occur"
+    },
+    {
+      "id": "3.03.04",
+      "code": "3.03.04",
+      "required": true,
+      "points": 10,
+      "text": "Is there a schematic drawing/plan of the indoor agriculture operation, showing numbered locations of all pest monitoring devices (e.g., rodent traps, bait stations, insect light traps, etc.) both inside and outside the facility?",
+      "keywords": [
+        "pest control map",
+        "device locations",
+        "numbered devices",
+        "schematic",
+        "pest monitoring plan"
+      ],
+      "mandatoryStatements": [
+        "Schematic drawing/plan of facility exists for pest control",
+        "All pest monitoring device locations are shown on plan",
+        "Each device location is numbered or uniquely identified",
+        "Plan shows both interior and exterior device locations",
+        "Plan is current and reflects actual device placement",
+        "Plan is updated when devices are added, moved, or removed"
+      ],
+      "verificationExpectations": "Annual verification that pest control map matches actual device locations, update within 30 days of changes",
+      "monitoringExpectations": "Quarterly comparison of map to actual device placement, immediate update for device changes"
+    },
+    {
+      "id": "3.03.05",
+      "code": "3.03.05",
+      "required": true,
+      "points": 10,
+      "text": "Are service reports created for pest control checks detailing inspection records, application records, and corrective actions of issues noted (in-house and/or contract)?",
+      "keywords": [
+        "pest control reports",
+        "service reports",
+        "inspection records",
+        "application records",
+        "corrective actions"
+      ],
+      "mandatoryStatements": [
+        "Service reports are created for all pest control checks",
+        "Reports detail inspection findings for each device location",
+        "Reports document any pesticide or bait applications",
+        "Reports identify pest activity or issues found",
+        "Reports document corrective actions taken for any issues",
+        "Reports are maintained for both in-house and contract services",
+        "Reports are signed and dated by responsible person"
+      ],
+      "verificationExpectations": "Quarterly review of pest control service reports for completeness and follow-up",
+      "monitoringExpectations": "Review of each service report upon receipt, verification that corrective actions are completed"
+    },
+    {
+      "id": "3.03.06",
+      "code": "3.03.06",
+      "required": true,
+      "points": 10,
+      "text": "Are closed doors, and windows to the outside pest proof?",
+      "keywords": [
+        "pest-proof doors",
+        "pest-proof windows",
+        "building integrity",
+        "pest exclusion",
+        "sealed openings"
+      ],
+      "mandatoryStatements": [
+        "Doors to outside are pest-proof when closed",
+        "Windows to outside are pest-proof (sealed or screened)",
+        "Door seals and sweeps are intact and functional",
+        "No gaps or openings allow pest entry",
+        "Screens (if used) are intact without holes or tears",
+        "Self-closing mechanisms function properly on exterior doors",
+        "Regular inspection and maintenance of pest-proofing measures"
+      ],
+      "verificationExpectations": "Quarterly inspection of all exterior doors and windows for pest-proofing integrity",
+      "monitoringExpectations": "Weekly checks of door and window pest-proofing, immediate repair of gaps or damage"
+    },
+    {
+      "id": "3.03.07",
+      "code": "3.03.07",
+      "required": true,
+      "points": 10,
+      "text": "Is the area outside the facility free of evidence of pest activity?",
+      "keywords": [
+        "exterior pest activity",
+        "outside pest control",
+        "perimeter pest management",
+        "pest evidence"
+      ],
+      "mandatoryStatements": [
+        "Exterior area around facility shows no evidence of pest activity",
+        "No rodent burrows, tracks, or droppings outside facility",
+        "No insect nesting or breeding sites in exterior areas",
+        "Exterior conditions do not attract or harbor pests",
+        "Vegetation and debris management prevents pest harborage",
+        "Regular inspection of exterior areas for pest activity"
+      ],
+      "verificationExpectations": "Weekly inspection of facility exterior for pest activity evidence",
+      "monitoringExpectations": "Daily visual checks of exterior perimeter, immediate response to pest activity signs"
+    },
+    {
+      "id": "3.03.08",
+      "code": "3.03.08",
+      "required": true,
+      "points": 10,
+      "text": "Are pest control devices located away from exposed raw materials (e.g., seeds, transplants, soil, media), finished goods and packaging, and poisonous bait stations are not used within the facility?",
+      "keywords": [
+        "device placement",
+        "bait station location",
+        "contamination prevention",
+        "device positioning"
+      ],
+      "mandatoryStatements": [
+        "Pest control devices are not placed near exposed raw materials",
+        "Devices are located away from finished goods and product",
+        "Devices are positioned away from packaging materials",
+        "Poisonous bait stations are not used inside the facility",
+        "Device placement prevents contamination risk",
+        "Only appropriate device types are used in product areas"
+      ],
+      "verificationExpectations": "Quarterly verification of pest control device placement appropriateness",
+      "monitoringExpectations": "Monthly checks of device locations, immediate relocation if contamination risk identified"
+    },
+    {
+      "id": "3.03.09",
+      "code": "3.03.09",
+      "required": true,
+      "points": 5,
+      "text": "Are pest control devices maintained in a clean and intact condition and marked as monitored (or bar code scanned) on a regular basis?",
+      "keywords": [
+        "device maintenance",
+        "device cleanliness",
+        "monitoring marks",
+        "device condition",
+        "barcode scanning"
+      ],
+      "mandatoryStatements": [
+        "All pest control devices are maintained clean",
+        "Devices are intact and functional",
+        "Devices are marked or tagged when monitored",
+        "Date of last monitoring is visible on device or in system",
+        "Barcode scanning system used (if applicable)",
+        "Regular monitoring schedule is followed",
+        "Damaged devices are repaired or replaced promptly"
+      ],
+      "verificationExpectations": "Monthly verification that all devices are monitored according to schedule",
+      "monitoringExpectations": "Weekly or bi-weekly monitoring of all pest control devices per schedule"
+    },
+    {
+      "id": "3.03.10",
+      "code": "3.03.10",
+      "required": true,
+      "points": 5,
+      "text": "Are interior and exterior building perimeter pest control devices adequate in number and location?",
+      "keywords": [
+        "device adequacy",
+        "device coverage",
+        "perimeter protection",
+        "device density"
+      ],
+      "mandatoryStatements": [
+        "Sufficient number of pest control devices for facility size",
+        "Devices are strategically located for maximum effectiveness",
+        "All potential pest entry points are covered",
+        "Interior devices provide adequate coverage of sensitive areas",
+        "Exterior perimeter has appropriate device spacing",
+        "Device placement follows industry best practices",
+        "Device adequacy is reviewed and adjusted as needed"
+      ],
+      "verificationExpectations": "Annual review of device adequacy and placement, adjustment when facility changes occur",
+      "monitoringExpectations": "Quarterly assessment of pest control coverage, immediate addition of devices if gaps identified"
+    },
+    {
+      "id": "3.03.11",
+      "code": "3.03.11",
+      "required": true,
+      "points": 5,
+      "text": "Are all pest control devices identified by a number or other code (e.g., barcode)?",
+      "keywords": [
+        "device identification",
+        "device numbering",
+        "barcode",
+        "unique identifiers",
+        "device coding"
+      ],
+      "mandatoryStatements": [
+        "Every pest control device has a unique identifier",
+        "Identification number or code is clearly visible on device",
+        "Device IDs match those on facility pest control map",
+        "Device identification system is consistent throughout facility",
+        "Barcode or other tracking system used (if applicable)",
+        "Device IDs are recorded in monitoring records"
+      ],
+      "verificationExpectations": "Annual verification that all devices are properly identified and match documentation",
+      "monitoringExpectations": "Quarterly check that device identifications are visible and accurate"
+    },
+    {
+      "id": "3.03.12",
+      "code": "3.03.12",
+      "required": true,
+      "points": 5,
+      "text": "Are all pest control devices effective and bait stations secured?",
+      "keywords": [
+        "device effectiveness",
+        "secured bait stations",
+        "device functionality",
+        "bait station security"
+      ],
+      "mandatoryStatements": [
+        "All pest control devices are functioning effectively",
+        "Bait stations are securely anchored or locked",
+        "Devices are appropriate for target pests",
+        "Devices are in good working condition",
+        "Bait stations cannot be easily moved or opened by unauthorized persons",
+        "Device effectiveness is verified through monitoring results",
+        "Ineffective devices are replaced or adjusted"
+      ],
+      "verificationExpectations": "Quarterly verification of device effectiveness and bait station security",
+      "monitoringExpectations": "Monthly checks of device functionality and security, immediate repair or replacement of ineffective devices"
+    }
+  ],
+  "micro_inject": ["pest"],
+  "capaInject": [
+    "If no animal prohibition policy: develop and implement policy within 7 days, communicate to all personnel immediately",
+    "If pest control program ineffective: immediate enhanced monitoring, engage pest control expert within 48 hours, implement remedial measures within 7 days",
+    "If pest control documentation incomplete: complete all required documentation within 14 days, verify licenses and insurance are current",
+    "If pest control map inaccurate: update map within 7 days, verify all device locations",
+    "If service reports incomplete: immediately complete current reports, implement reporting checklist to ensure completeness",
+    "If doors or windows not pest-proof: immediate temporary sealing, permanent repair within 14 days",
+    "If exterior pest activity detected: immediate pest control measures, enhanced monitoring, eliminate harborage within 7 days",
+    "If device placement creates contamination risk: immediately relocate devices, review and adjust placement plan",
+    "If devices not monitored per schedule: immediate monitoring of all devices, retrain personnel within 7 days",
+    "If bait stations not secured: immediately secure all stations, verify security of all devices within 24 hours"
+  ],
+  "traceabilityInject": [
+    "Pest control service reports must be traceable to specific dates, device locations, and service personnel",
+    "Pest control device monitoring must be traceable to specific devices, dates, and findings",
+    "Any pest activity must be documented with traceability to locations, dates, and corrective actions",
+    "Pest control contractor activities must be traceable through service reports and documentation"
+  ]
+}

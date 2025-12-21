@@ -1,0 +1,55 @@
+{
+  "code": "5.18",
+  "parentCode": "5",
+  "title": "Allergen Control",
+  "requirements": [
+    {
+      "code": "5.18.01",
+      "question": "Does the operation handle or store any food allergens? Information gathering question",
+      "totalPoints": 0,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.02",
+      "question": "Are there adequate storage controls (e.g., separation, identification, etc.) that ensure that allergens are not contaminating other raw materials?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.03",
+      "question": "Is there a dedicated allergen production line or adequate clean down and production procedures that prevent allergen cross contamination?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.04",
+      "question": "Are utensils and work in progress storage containers identified in order to prevent allergen cross contamination?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.05",
+      "question": "Does re-work handling take into account the issues associated with allergen containing products?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.06",
+      "question": "Are workers trained with respect to allergen risks and the facility allergen cross contamination controls (including hand washing between production runs) and are there records of this allergen training?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.07",
+      "question": "Are worker practices adequate and being followed to protect against allergen cross-contact and against contamination of food?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.18.08",
+      "question": "Are all products manufactured on site labeled correctly with respect to allergens?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ]
+}

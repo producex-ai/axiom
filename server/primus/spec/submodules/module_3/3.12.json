@@ -1,0 +1,189 @@
+{
+  "code": "3.12",
+  "title": "Pesticide Usage",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "pesticide application",
+    "pesticide records",
+    "pesticide compliance",
+    "MRL compliance",
+    "pre-harvest intervals"
+  ],
+  "description": "Requirements for pesticide usage including application records, authorization/registration compliance, label compliance, pre-harvest interval adherence, MRL documentation, and destination market compliance",
+  "requirements": [
+    {
+      "id": "3.12.01",
+      "code": "3.12.01",
+      "required": true,
+      "points": 15,
+      "text": "Are there up-to-date records of all pesticides applied during production (including soil and substrate pre-plant treatments, and any post-harvest treatments)? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "pesticide records",
+        "application records",
+        "pesticide documentation",
+        "spray records",
+        "treatment records"
+      ],
+      "mandatoryStatements": [
+        "Complete records exist for all pesticide applications",
+        "Records include pre-plant treatments of soil and substrates",
+        "Records include post-harvest treatments if applicable",
+        "Records are current and up-to-date",
+        "Records include date, pesticide name, active ingredient, target pest",
+        "Records include application rate, method, equipment used",
+        "Records include applicator name and growing area treated",
+        "Records are maintained and readily accessible"
+      ],
+      "verificationExpectations": "Monthly review of pesticide application records for completeness and accuracy",
+      "monitoringExpectations": "Documentation completed immediately after each pesticide application",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.12.02",
+      "code": "3.12.02",
+      "required": true,
+      "points": 15,
+      "text": "Are all pesticides applied, authorized/registered by the authority/government of the country of production? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "pesticide registration",
+        "authorized pesticides",
+        "legal pesticides",
+        "EPA registration",
+        "regulatory compliance"
+      ],
+      "mandatoryStatements": [
+        "All pesticides applied are authorized/registered for use",
+        "Registration/authorization is from government authority of country of production",
+        "Pesticides are registered for the specific crop being grown",
+        "Pesticides are registered for use in indoor/protected agriculture (where applicable)",
+        "Registration documentation is maintained on file",
+        "Only approved pesticides are stored and available for use",
+        "Operation stays current with changes in pesticide registrations"
+      ],
+      "verificationExpectations": "Annual verification that all pesticides in use are currently registered",
+      "monitoringExpectations": "Verification of registration before first use of any new pesticide",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.12.03",
+      "code": "3.12.03",
+      "required": true,
+      "points": 15,
+      "text": "Are all pesticides applied as recommended/directed in the label? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "label compliance",
+        "pesticide label",
+        "application rate",
+        "label directions",
+        "proper use"
+      ],
+      "mandatoryStatements": [
+        "All pesticides are applied according to label directions",
+        "Application rates comply with label specifications",
+        "Application methods follow label recommendations",
+        "Application timing follows label requirements",
+        "Target pests are listed on label",
+        "Crop type is listed on label for the pesticide used",
+        "Safety precautions and PPE requirements on label are followed",
+        "Labels are readily available for reference"
+      ],
+      "verificationExpectations": "Quarterly verification that pesticide applications comply with label directions",
+      "monitoringExpectations": "Pre-application review of label requirements, verification during application",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.12.04",
+      "code": "3.12.04",
+      "required": true,
+      "points": 15,
+      "text": "Where harvesting is restricted by pre-harvest intervals, are required pre-harvest intervals on product labels, national (e.g., EPA) registration and any federal, state or local regulations and guidelines being adhered to? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "pre-harvest interval",
+        "PHI",
+        "harvest restriction",
+        "days to harvest",
+        "re-entry interval"
+      ],
+      "mandatoryStatements": [
+        "Pre-harvest intervals (PHI) are identified for all pesticides used",
+        "PHI from pesticide label is followed",
+        "PHI from national registration requirements is followed",
+        "PHI from federal, state, and local regulations is followed",
+        "Most restrictive PHI is applied when multiple sources exist",
+        "Harvest scheduling considers all applicable PHIs",
+        "Records demonstrate PHI compliance for all harvests",
+        "Product is not harvested before PHI expires"
+      ],
+      "verificationExpectations": "Verification before each harvest that all applicable PHIs have been met",
+      "monitoringExpectations": "Daily or per-harvest verification of PHI compliance, harvest scheduling accounts for PHIs",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.12.05",
+      "code": "3.12.05",
+      "required": true,
+      "points": 15,
+      "text": "Is there documentation of pesticide Maximum Residue Limits (MRLs) CONFORMANCE considering country of destination, target crop(s), and active ingredients applied?",
+      "keywords": [
+        "MRL",
+        "maximum residue limits",
+        "residue compliance",
+        "destination market",
+        "pesticide residues"
+      ],
+      "mandatoryStatements": [
+        "MRL requirements are documented for destination countries",
+        "Documentation considers all destination markets for the product",
+        "MRLs are documented for specific crops being grown",
+        "MRLs are documented for all active ingredients applied",
+        "Documentation shows conformance or compliance strategy",
+        "Most restrictive MRLs are identified when selling to multiple markets",
+        "MRL information is current and from authoritative sources",
+        "Pesticide selection considers MRL compliance"
+      ],
+      "verificationExpectations": "Annual review of MRL documentation and compliance strategy, update when markets or pesticides change",
+      "monitoringExpectations": "MRL check before first use of any new pesticide, ongoing monitoring of MRL changes in destination markets"
+    },
+    {
+      "id": "3.12.06",
+      "code": "3.12.06",
+      "required": true,
+      "points": 15,
+      "text": "Where the MRLs of the destination countries are lower (stricter) than the country of production or where required by buyer, do test results show that Maximum Residue Limits (MRLs) of the intended markets are met?",
+      "keywords": [
+        "MRL testing",
+        "residue testing",
+        "pesticide testing",
+        "residue analysis",
+        "compliance testing"
+      ],
+      "mandatoryStatements": [
+        "If destination MRLs are stricter than production country, residue testing is performed",
+        "If buyer requires MRL testing, testing is performed",
+        "Test results demonstrate compliance with destination market MRLs",
+        "Testing frequency is appropriate for risk and buyer requirements",
+        "Testing is performed by qualified accredited laboratory",
+        "Test results are documented and retained",
+        "Non-compliant results trigger corrective actions and product hold"
+      ],
+      "verificationExpectations": "Quarterly review of residue testing results and MRL compliance",
+      "monitoringExpectations": "Testing performed per schedule, immediate review of results, product hold if non-compliant results received",
+      "riskLevel": "high"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If pesticide application records incomplete or missing: immediate documentation of all recent applications, enhanced record-keeping system implementation",
+    "If unauthorized pesticide used: immediate cessation of use, product hold pending risk assessment, regulatory notification if required",
+    "If pesticide not applied per label: immediate investigation, product hold, residue testing if indicated, enhanced training within 7 days",
+    "If pre-harvest interval not met: immediate product hold, regulatory consultation, product disposition determination, enhanced harvest scheduling controls",
+    "If MRL documentation inadequate: develop MRL documentation within 14 days, verify all current pesticide uses comply with destination MRLs",
+    "If MRL testing shows non-compliance: immediate product hold, notification of customers and buyers, product disposition determination, revision of pesticide program"
+  ],
+  "traceabilityInject": [
+    "Pesticide application records must be traceable to specific growing areas, batches, and harvest lots",
+    "Pre-harvest interval compliance must be traceable to specific pesticide applications and harvest dates",
+    "MRL testing results must be traceable to specific lots, growing areas, and applications",
+    "Pesticide inventory must be traceable to purchase records and usage records"
+  ]
+}

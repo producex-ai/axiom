@@ -1,0 +1,103 @@
+{
+  "code": "5.03",
+  "title": "Storage Areas & Packaging Materials",
+  "requirements": [
+    {
+      "code": "5.03.01",
+      "question": "Does the facility layout ensure separation of ingredients (including ice), products, and packaging stored to prevent cross contamination (this includes iced product pallets stored above pallets of product without adequate protection as well as any allergen cross contamination issues)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.02",
+      "question": "Is the facility's use restricted to the storage of food products?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.03",
+      "question": "Are rejected or on hold materials clearly identified and separated from other materials?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.04",
+      "question": "Are raw products, work in progress, ingredients (including water and ice), finished goods and food contact packaging within accepted tolerances for spoilage and without evidence of adulteration? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Spoilage or adulteration of products, ingredients, or packaging represents a fundamental breakdown in food safety controls and quality management. Spoiled products can harbor dangerous levels of pathogenic bacteria and toxins, while adulterated materials pose immediate public health hazards that cannot be tolerated under any food safety program."
+    },
+    {
+      "code": "5.03.05",
+      "question": "Are all storage areas clean, especially the racking structures, lights, ceilings, floor areas by the walls and other hard-to-reach areas?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.06",
+      "question": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) properly marked with rotation codes (receipt dates, manufacture dates, etc.)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.07",
+      "question": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) rotated using FIFO policy?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.08",
+      "question": "Are storage areas at the appropriate temperatures for the specific products being stored?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.03.09",
+      "question": "Where packaging is stored outside, is it being stored protected?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Facility layout must ensure physical separation of raw materials, ingredients (including ice), work-in-progress, finished products, and packaging materials to prevent cross-contamination including allergen cross-contact",
+    "Storage facilities must be dedicated exclusively to food products and food-grade materials; non-food items must not be stored in food storage areas",
+    "Rejected, on-hold, or quarantined materials must be clearly identified with labels or tags and physically separated from approved materials to prevent inadvertent use",
+    "All stored materials including raw products, work-in-progress, ingredients, finished goods, and packaging must be free from spoilage, adulteration, contamination, or quality defects",
+    "Storage areas must be maintained in a clean and sanitary condition with particular attention to hard-to-reach areas including racking structures, overhead lights, ceilings, floor perimeters, and wall-floor junctions",
+    "All materials must be clearly marked with rotation codes including receipt dates, manufacture dates, or lot codes to enable proper inventory management and traceability",
+    "Materials must be rotated using First-In-First-Out (FIFO) principles to ensure oldest stock is used first and to minimize risk of storing products beyond shelf life",
+    "Storage areas must be maintained at appropriate temperatures for specific products being stored with continuous monitoring and alarm systems for temperature-sensitive items",
+    "Packaging materials stored outdoors must be adequately protected from weather, pests, dust, and contamination using covers, enclosures, or weather-resistant structures"
+  ],
+  "capaInject": [
+    "If cross-contamination risks are identified due to inadequate separation, immediately implement physical barriers (walls, partitions, designated zones), establish traffic flow controls, reassess facility layout, and consider separate storage rooms for allergens or incompatible materials",
+    "When non-food items are found in food storage areas, immediately remove them, designate separate storage locations for non-food items, post signage restricting storage to food products only, and train personnel on proper storage segregation",
+    "If rejected or on-hold materials are not clearly identified or separated, immediately apply hold tags, move materials to a designated quarantine area with restricted access, implement a hold/release procedure with authorization requirements, and conduct inventory verification",
+    "Upon discovery of spoiled or adulterated products, immediately quarantine all affected materials, conduct a root cause investigation to determine source and extent, implement enhanced monitoring controls, dispose of compromised materials properly, and verify corrective actions prevent recurrence",
+    "When storage area cleanliness is deficient, immediately clean the areas thoroughly including hard-to-reach locations, establish a master sanitation schedule with defined frequencies and responsibilities, implement pre-operational inspections, and verify effectiveness through environmental monitoring or ATP testing",
+    "If materials lack proper rotation codes, immediately mark all materials with receipt or manufacture dates using durable labels, implement a receiving procedure that requires date marking, train warehouse personnel on coding requirements, and conduct regular inventory audits",
+    "When FIFO violations are discovered, immediately re-organize inventory to place oldest stock in accessible locations, implement visual management systems (color coding, date markers), train personnel on FIFO principles, and conduct supervisory verification of stock rotation practices",
+    "If storage temperature deviations occur, immediately move affected products to proper temperature zones, assess product integrity and safety, calibrate temperature monitoring devices, evaluate cooling system capacity, and implement temperature mapping studies to identify problem areas",
+    "For inadequately protected outdoor packaging storage, immediately cover exposed materials with tarps or move to enclosed storage, assess for contamination or damage, establish protection standards (covers, palletization, elevation), and conduct regular inspections of outdoor storage conditions"
+  ],
+  "traceabilityInject": [
+    "Maintain facility layout maps showing designated storage zones for raw materials, ingredients, work-in-progress, finished products, packaging, allergens, and quarantine areas with physical barriers or separation distances documented",
+    "Keep inventory records linking storage locations to specific lots or batches of materials enabling rapid identification and isolation during recalls or quality investigations",
+    "Document all materials placed on hold or rejected including date, reason, quantity, lot identification, location, and disposition decision (released or destroyed) with approval signatures",
+    "Retain product quality inspection records showing receipt inspections, periodic in-storage quality checks, and documentation of any spoilage, damage, or adulteration findings with corrective actions",
+    "Maintain cleaning and sanitation logs for storage areas showing date, areas cleaned, cleaning agents used, personnel performing cleaning, and verification inspections with corrective actions for deficiencies",
+    "Keep receiving records for all incoming materials documenting date marking application, rotation code assignment, and initial storage location assignment for traceability",
+    "Document temperature monitoring records for all temperature-controlled storage areas showing continuous or periodic temperatures, alarm events, corrective actions, and equipment calibration dates",
+    "Retain inspection records for outdoor packaging storage showing condition of protective covers, evidence of weather damage or pest activity, and corrective actions taken to maintain protection integrity"
+  ],
+  "micro_inject": [
+    "Cross-contamination between raw and ready-to-eat products can transfer pathogenic bacteria including Listeria monocytogenes, Salmonella, and E. coli O157:H7 leading to serious foodborne illness outbreaks",
+    "Allergen cross-contact through improper storage segregation can introduce undeclared allergens causing anaphylactic reactions in sensitive consumers, representing a life-threatening food safety hazard",
+    "Spoiled products support the growth of pathogenic bacteria and can produce bacterial toxins such as Staphylococcal enterotoxin or Clostridium botulinum toxin that remain hazardous even after cooking",
+    "Adulterated materials may contain chemical contaminants, microbiological pathogens, or foreign materials that compromise product safety and can cause acute or chronic health effects in consumers",
+    "Dirty storage areas accumulate organic matter that provides nutrients and harborage for pest infestation and serves as a reservoir for persistent environmental pathogens like Listeria monocytogenes",
+    "Failure to rotate stock using FIFO can result in extended storage times that allow psychrotrophic pathogens like Listeria to multiply to dangerous levels even under refrigeration temperatures",
+    "Temperature abuse during storage allows rapid multiplication of pathogenic bacteria; for example, Salmonella can double every 20 minutes at room temperature, quickly reaching infectious doses",
+    "Packaging materials contaminated through outdoor storage exposure can introduce dirt, pest debris, and environmental pathogens directly into food products during packaging operations, defeating all prior process controls"
+  ]
+}

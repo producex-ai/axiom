@@ -1,0 +1,231 @@
+{
+  "code": "1.01",
+  "title": "Management System",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "management",
+    "food safety policy",
+    "organizational structure",
+    "training",
+    "allergens",
+    "management review"
+  ],
+  "description": "Establishes the foundation of the food safety management system including documented policies, organizational structure, food safety culture, training systems, allergen control, and management review processes",
+  "requirements": [
+    {
+      "id": "1.01.01",
+      "code": "1.01.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented food safety policy detailing the company's commitment to food safety?",
+      "keywords": [
+        "food safety policy",
+        "documented policy",
+        "commitment",
+        "management commitment",
+        "policy statement"
+      ],
+      "mandatoryStatements": [
+        "Food safety policy is documented in writing",
+        "Policy details the company's commitment to food safety",
+        "Policy is signed by top management",
+        "Policy is communicated to all relevant personnel",
+        "Policy is reviewed and updated at defined intervals"
+      ],
+      "verificationExpectations": "Annual review of food safety policy during management review",
+      "monitoringExpectations": "Policy communication verified during employee orientation and annual training"
+    },
+    {
+      "id": "1.01.02",
+      "code": "1.01.02",
+      "required": true,
+      "points": 5,
+      "text": "Is there an established, implemented, and maintained food safety culture assessment plan that includes at least the following elements: communication, training, employee feedback, and performance measurement on food safety-related activities?",
+      "keywords": [
+        "food safety culture",
+        "culture assessment",
+        "communication",
+        "training",
+        "employee feedback",
+        "performance measurement"
+      ],
+      "mandatoryStatements": [
+        "Food safety culture assessment plan is documented",
+        "Plan includes communication strategies for food safety",
+        "Training component addresses food safety culture",
+        "Employee feedback mechanisms are established",
+        "Performance measurement methods for food safety activities are defined",
+        "Assessment is conducted at regular intervals"
+      ],
+      "verificationExpectations": "Annual verification of food safety culture assessment activities and results",
+      "monitoringExpectations": "Quarterly monitoring of culture indicators, employee feedback collection, and performance metrics"
+    },
+    {
+      "id": "1.01.03",
+      "code": "1.01.03",
+      "required": true,
+      "points": 10,
+      "text": "Is there an organizational chart showing all management and workers who are involved in safety related activities and documentation (job descriptions) detailing their food safety responsibilities?",
+      "keywords": [
+        "organizational chart",
+        "job descriptions",
+        "food safety responsibilities",
+        "roles",
+        "accountability",
+        "organizational structure"
+      ],
+      "mandatoryStatements": [
+        "Current organizational chart shows all personnel involved in food safety activities",
+        "Chart clearly identifies reporting relationships",
+        "Job descriptions exist for all food safety-related positions",
+        "Job descriptions detail specific food safety responsibilities",
+        "Authority levels for food safety decisions are clearly defined",
+        "Organizational structure supports food safety management system"
+      ],
+      "verificationExpectations": "Annual review of organizational chart and job descriptions for accuracy and completeness",
+      "monitoringExpectations": "Update organizational chart within 30 days of personnel changes affecting food safety roles"
+    },
+    {
+      "id": "1.01.04",
+      "code": "1.01.04",
+      "required": true,
+      "points": 5,
+      "text": "Is there a food safety committee and are there logs of food safety meetings with topics covered and attendees?",
+      "keywords": [
+        "food safety committee",
+        "committee meetings",
+        "meeting logs",
+        "meeting minutes",
+        "attendees",
+        "topics"
+      ],
+      "mandatoryStatements": [
+        "Food safety committee is established with defined membership",
+        "Committee includes representatives from key operational areas",
+        "Meeting logs document date, attendees, and topics discussed",
+        "Action items and responsible parties are recorded",
+        "Meetings occur at regular intervals (minimum quarterly)",
+        "Records demonstrate follow-up on action items"
+      ],
+      "verificationExpectations": "Annual audit of food safety committee meeting records for completeness and follow-through",
+      "monitoringExpectations": "Quarterly verification that meetings occurred and action items were addressed"
+    },
+    {
+      "id": "1.01.05",
+      "code": "1.01.05",
+      "required": true,
+      "points": 5,
+      "text": "Is there a training management system in place that shows what types of training are required for various job roles of specific workers, including who has been trained, when they were trained, which trainings they still need to take, and a training schedule?",
+      "keywords": [
+        "training management",
+        "training matrix",
+        "training records",
+        "training schedule",
+        "competency",
+        "job-specific training"
+      ],
+      "mandatoryStatements": [
+        "Training management system identifies required training by job role",
+        "System tracks individual employee training completion",
+        "Training dates and trainer information are recorded",
+        "System identifies training gaps and upcoming training needs",
+        "Training schedule is maintained and followed",
+        "Training effectiveness is evaluated"
+      ],
+      "verificationExpectations": "Quarterly verification that training is current for all employees and gaps are being addressed",
+      "monitoringExpectations": "Monthly review of training completion status and schedule adherence"
+    },
+    {
+      "id": "1.01.06",
+      "code": "1.01.06",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented allergen control program?",
+      "keywords": [
+        "allergen control",
+        "allergen program",
+        "allergen management",
+        "cross-contact prevention",
+        "allergen labeling",
+        "allergen handling"
+      ],
+      "mandatoryStatements": [
+        "Allergen control program is documented in writing",
+        "Program identifies all allergens present in facility",
+        "Procedures address allergen handling and storage",
+        "Cross-contact prevention measures are defined",
+        "Cleaning and sanitation procedures for allergen control are established",
+        "Labeling requirements for allergen-containing products are specified",
+        "Employee training on allergen control is required",
+        "Verification activities confirm program effectiveness"
+      ],
+      "verificationExpectations": "Annual allergen program review, quarterly verification of allergen controls, annual allergen cleaning validation",
+      "monitoringExpectations": "Daily monitoring of allergen controls, immediate verification after allergen changeovers"
+    },
+    {
+      "id": "1.01.07",
+      "code": "1.01.07",
+      "required": true,
+      "points": 15,
+      "text": "Is there documented management verification review of the entire food safety management system at least every 12 months, including an evaluation of resources, and are there records of changes made?",
+      "keywords": [
+        "management review",
+        "system review",
+        "resource evaluation",
+        "continuous improvement",
+        "management verification",
+        "annual review"
+      ],
+      "mandatoryStatements": [
+        "Management review is conducted at least annually",
+        "Review covers entire food safety management system",
+        "Resource adequacy is evaluated (personnel, equipment, infrastructure)",
+        "Review includes analysis of food safety performance data",
+        "Internal and external audit results are reviewed",
+        "Customer feedback and complaints are considered",
+        "Changes and improvements are identified and documented",
+        "Action items are assigned with responsible parties and timelines",
+        "Follow-up on previous review action items is included"
+      ],
+      "verificationExpectations": "Annual verification that management review occurred and covered all required elements",
+      "monitoringExpectations": "Quarterly monitoring of management review action item completion"
+    },
+    {
+      "id": "1.01.08",
+      "code": "1.01.08",
+      "required": true,
+      "points": 3,
+      "text": "Where specific industry guidelines or best practices exist for the crop and/or product, does the operation have a current copy of the document?",
+      "keywords": [
+        "industry guidelines",
+        "best practices",
+        "commodity-specific guidance",
+        "industry standards",
+        "reference documents"
+      ],
+      "mandatoryStatements": [
+        "Relevant industry guidelines and best practices are identified",
+        "Current copies of applicable documents are maintained",
+        "Documents are accessible to relevant personnel",
+        "Guidelines are incorporated into facility procedures where applicable"
+      ],
+      "verificationExpectations": "Annual review to ensure industry guidelines are current and applicable",
+      "monitoringExpectations": "Quarterly check for updates to industry guidelines and best practices"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If food safety policy is outdated or not communicated: update policy immediately, re-communicate to all staff within 7 days",
+    "If food safety culture gaps identified: develop action plan within 30 days, implement improvements within 90 days",
+    "If organizational chart or job descriptions are outdated: update within 14 days, communicate changes to affected personnel",
+    "If training gaps identified: provide required training within 30 days or remove from food safety-related duties",
+    "If allergen control failures detected: immediate product hold, investigation within 24 hours, corrective actions before restart",
+    "If management review not conducted: complete review within 30 days, address any identified resource or system gaps"
+  ],
+  "traceabilityInject": [
+    "Training records must be traceable to specific employees, training dates, and trainers",
+    "Food safety committee meeting records must be traceable to specific dates and action items",
+    "Management review records must trace decisions and changes to specific review meetings",
+    "Allergen control records must be traceable to specific products, batches, and control measures"
+  ]
+}

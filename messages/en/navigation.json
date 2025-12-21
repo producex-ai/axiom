@@ -1,0 +1,14 @@
+{
+  "brand": {
+    "name": "Axiom",
+    "tagline": "by ProduceX"
+  },
+  "links": {
+    "home": "Home",
+    "features": "Features",
+    "frameworks": "Frameworks",
+    "solutions": "Solutions"
+  },
+  "cta": "Login",
+  "logout": "Logout"
+}

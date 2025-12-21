@@ -1,0 +1,158 @@
+{
+  "code": "1.06",
+  "title": "Supplier/Service Provider Monitoring & Control",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "supplier approval",
+    "vendor management",
+    "supplier monitoring",
+    "specifications",
+    "laboratory services"
+  ],
+  "description": "Systematic procedures for evaluation, approval, and ongoing monitoring of suppliers and service providers to ensure food safety requirements are met",
+  "requirements": [
+    {
+      "id": "1.06.01",
+      "code": "1.06.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a written procedure detailing how suppliers and service providers are evaluated, approved, and include the ongoing verification activities including monitoring?",
+      "keywords": [
+        "supplier approval",
+        "supplier evaluation",
+        "supplier monitoring",
+        "vendor approval",
+        "supplier verification"
+      ],
+      "mandatoryStatements": [
+        "Supplier/service provider approval procedure is documented",
+        "Initial evaluation criteria are defined (certifications, audits, questionnaires, samples)",
+        "Approval process and authorization are specified",
+        "Risk-based categorization of suppliers is included",
+        "Ongoing verification and monitoring activities are defined",
+        "Re-evaluation frequency is specified based on risk",
+        "Performance criteria for continued approval are established",
+        "Procedure for suspending or removing suppliers is defined",
+        "Documentation requirements for approval and monitoring are specified"
+      ],
+      "verificationExpectations": "Annual review of supplier approval procedure, quarterly verification that suppliers are monitored per procedure",
+      "monitoringExpectations": "Immediate evaluation before first use of new supplier, ongoing monitoring per defined frequency (quarterly, annually, etc.)"
+    },
+    {
+      "id": "1.06.02",
+      "code": "1.06.02",
+      "required": true,
+      "points": 10,
+      "text": "Is there a list of approved suppliers and service providers including justification for use of any emergency (temporary) suppliers or providers?",
+      "keywords": [
+        "approved supplier list",
+        "supplier roster",
+        "emergency suppliers",
+        "temporary suppliers",
+        "supplier documentation"
+      ],
+      "mandatoryStatements": [
+        "Current list of approved suppliers and service providers is maintained",
+        "List includes supplier name, contact information, and materials/services provided",
+        "Approval date and approval status are documented",
+        "Emergency or temporary suppliers are clearly identified on list",
+        "Justification for use of emergency suppliers is documented",
+        "Emergency supplier approval follows abbreviated but documented process",
+        "List is readily accessible to purchasing and receiving personnel",
+        "List is updated promptly when suppliers are added, removed, or suspended"
+      ],
+      "verificationExpectations": "Annual audit of approved supplier list for accuracy and completeness, quarterly verification that only approved suppliers are used",
+      "monitoringExpectations": "Immediate update of list when supplier status changes, monthly review of purchasing records to confirm compliance"
+    },
+    {
+      "id": "1.06.03",
+      "code": "1.06.03",
+      "required": true,
+      "points": 10,
+      "text": "Are there current written food safety related specifications for all incoming products, ingredients, materials, services provided on-site, and outsourced services?",
+      "keywords": [
+        "specifications",
+        "raw material specs",
+        "ingredient specs",
+        "service specifications",
+        "food safety requirements"
+      ],
+      "mandatoryStatements": [
+        "Written specifications exist for all incoming products, ingredients, and materials",
+        "Specifications include food safety requirements (microbiological, chemical, physical, allergen)",
+        "Specifications are current and reflect latest requirements",
+        "Specifications for on-site services (pest control, sanitation, etc.) are documented",
+        "Specifications for outsourced processes are documented",
+        "Specifications are communicated to suppliers",
+        "Supplier acknowledgment or agreement to specifications is obtained",
+        "Specifications are reviewed and updated at defined intervals or when requirements change"
+      ],
+      "verificationExpectations": "Annual review of all specifications for currency and adequacy, verification that specifications are communicated to suppliers",
+      "monitoringExpectations": "Immediate development of specifications before first use of new materials, quarterly review of specification updates"
+    },
+    {
+      "id": "1.06.04",
+      "code": "1.06.04",
+      "required": true,
+      "points": 15,
+      "text": "Does the organization have documented evidence to ensure that all incoming products, ingredients, materials, services provided on-site, and outsourced service suppliers comply with the approval requirements and that all supplier verification activities (including monitoring) are being followed, as defined in the supplier approval procedure?",
+      "keywords": [
+        "supplier verification",
+        "supplier monitoring records",
+        "compliance evidence",
+        "supplier performance",
+        "verification activities"
+      ],
+      "mandatoryStatements": [
+        "Records demonstrate suppliers meet approval requirements (certifications, audit reports, etc.)",
+        "Receiving inspection or testing records verify incoming materials meet specifications",
+        "Certificates of Analysis (COAs) or Certificates of Compliance (COCs) are obtained and reviewed",
+        "Third-party audit reports or certifications are current and on file",
+        "Supplier performance is monitored (quality metrics, non-conformance rates, corrective actions)",
+        "Verification activities defined in procedure are documented as completed",
+        "Non-conformances with suppliers are documented and addressed",
+        "Re-evaluation of suppliers occurs at defined intervals with documented results"
+      ],
+      "verificationExpectations": "Annual audit of supplier verification records, quarterly review of supplier performance data",
+      "monitoringExpectations": "Verification at receiving for each delivery, quarterly supplier performance evaluation, immediate documentation of supplier non-conformances"
+    },
+    {
+      "id": "1.06.05",
+      "code": "1.06.05",
+      "required": true,
+      "points": 5,
+      "text": "Where food safety related testing is being performed by laboratory service providers, are these licensed and/or accredited laboratories (e.g., ISO 17025 or equivalent, national and local regulations, etc.)?",
+      "keywords": [
+        "laboratory accreditation",
+        "ISO 17025",
+        "licensed laboratory",
+        "laboratory certification",
+        "testing services"
+      ],
+      "mandatoryStatements": [
+        "Laboratories performing food safety testing are accredited to ISO 17025 or equivalent",
+        "Laboratory accreditation is current and covers relevant test methods",
+        "Accreditation certificates or licenses are maintained on file",
+        "Laboratories meet any national or local regulatory licensing requirements",
+        "Laboratory scope of accreditation matches testing needs",
+        "Alternative justification is documented if non-accredited lab is used (e.g., regulatory approval, rapid screening tests)",
+        "Laboratory performance is monitored through proficiency testing or split samples"
+      ],
+      "verificationExpectations": "Annual verification of laboratory accreditation/licensing currency, review of laboratory performance data",
+      "monitoringExpectations": "Verification of accreditation before engaging new laboratory, annual renewal of accreditation certificates"
+    }
+  ],
+  "micro_inject": ["fsms", "traceability"],
+  "capaInject": [
+    "If supplier not properly approved before use: immediate halt of material use, conduct approval evaluation within 7 days, disposition of material received from unapproved supplier",
+    "If supplier fails to meet specifications: place supplier on hold, investigate root cause, require corrective action before releasing hold, consider alternative suppliers",
+    "If supplier verification activities not performed: conduct overdue verifications immediately, investigate gap in monitoring system, implement tracking system within 30 days",
+    "If laboratory found not properly accredited: immediate engagement of accredited laboratory, re-test recent samples if necessary, verify accreditation before future use"
+  ],
+  "traceabilityInject": [
+    "Approved supplier list must trace to approval documentation and verification records",
+    "Specifications must be traceable to suppliers, purchase orders, and receiving inspections",
+    "Supplier verification records must trace to specific deliveries, lots, and test results",
+    "Laboratory accreditation must be traceable to specific test reports and methods used"
+  ]
+}

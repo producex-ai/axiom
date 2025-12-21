@@ -1,0 +1,43 @@
+{
+  "code": "5.15",
+  "parentCode": "5",
+  "title": "Worker Documentation",
+  "requirements": [
+    {
+      "code": "5.15.01",
+      "question": "Are there records of new worker food safety (GMP) orientation training (with topics covered and attendees) and are all workers required to sign the company's food safety hygiene and health policy?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.15.02",
+      "question": "Are there logs of ongoing worker food safety education training, including topics covered, attendees, etc.?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.15.03",
+      "question": "Are there training logs for the sanitation workers, including best practices and chemical use details?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.15.04",
+      "question": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering any illnesses that might be a contamination risk to the products being produced, and include return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors should check procedure/policy but not the actual records).",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.15.05",
+      "question": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.15.06",
+      "question": "Are visitors and contractors required to sign a log stating that they will comply with the operations' personal hygiene and health requirements?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    }
+  ]
+}

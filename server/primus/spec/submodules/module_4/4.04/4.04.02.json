@@ -1,0 +1,90 @@
+{
+  "parentCode": "4.04",
+  "code": "4.04.02",
+  "title": "Handwashing Stations",
+  "requirements": [
+    {
+      "code": "4.04.02a",
+      "question": "Are handwashing stations available and accessible to all personnel who handle product?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Handwashing stations must be available and accessible to all personnel who handle product to prevent contamination."
+    },
+    {
+      "code": "4.04.02b",
+      "question": "Are handwashing stations equipped with potable running water?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02c",
+      "question": "Are handwashing stations supplied with soap or suitable hand cleanser?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02d",
+      "question": "Are handwashing stations equipped with single-use towels or air dryers?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02e",
+      "question": "Are handwashing stations located in close proximity to toilet facilities?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02f",
+      "question": "Are handwashing stations clearly marked with signage?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02g",
+      "question": "Are handwashing stations maintained in a clean and sanitary condition?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02h",
+      "question": "Are waste receptacles provided at handwashing stations?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.02i",
+      "question": "Is there documentation of regular inspection and maintenance of handwashing stations?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "All handwashing stations must be equipped with potable running water, soap or suitable hand cleanser, and single-use towels or air dryers.",
+    "Handwashing stations must be located in close proximity to toilet facilities and easily accessible to all personnel who handle product.",
+    "Regular inspection and maintenance of handwashing stations must be documented to ensure continuous availability and functionality.",
+    "Proper signage must be displayed at all handwashing stations to remind workers of handwashing requirements.",
+    "Waste receptacles must be provided and maintained at all handwashing stations to prevent contamination."
+  ],
+  "capaInject": [
+    "Implement a daily inspection checklist for handwashing stations to ensure all supplies (soap, towels, water) are adequately stocked.",
+    "Establish a preventive maintenance schedule for handwashing station equipment including water supply systems and dispensers.",
+    "Install clear multilingual signage at all handwashing stations with proper handwashing technique instructions.",
+    "Assign responsibility for monitoring and restocking handwashing station supplies throughout the day.",
+    "Conduct periodic audits of handwashing station locations to ensure they meet accessibility requirements."
+  ],
+  "traceabilityInject": [
+    "Maintain logs of handwashing station inspections including date, time, inspector name, and condition assessment.",
+    "Document any maintenance or repairs performed on handwashing stations including parts replaced and service dates.",
+    "Keep records of supply inventory levels and restocking activities for handwashing stations.",
+    "Track the location and identification number of each handwashing station in the operation.",
+    "Record any deficiencies found during inspections and corrective actions taken with completion dates."
+  ],
+  "micro_inject": [
+    "Ensure handwashing stations are strategically located to minimize the risk of cross-contamination from toilet facilities to product handling areas.",
+    "Verify that handwashing procedures effectively reduce pathogenic bacteria on workers' hands through regular microbiological testing.",
+    "Monitor water quality at handwashing stations to ensure it meets potable water standards and does not introduce microbial contamination.",
+    "Implement protocols for immediate cleaning and sanitization of handwashing stations if contamination is suspected.",
+    "Ensure waste receptacles at handwashing stations are designed and maintained to prevent microbial growth and contamination."
+  ]
+}

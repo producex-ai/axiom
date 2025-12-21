@@ -1,0 +1,109 @@
+{
+  "code": "5.02",
+  "title": "Pest Control",
+  "requirements": [
+    {
+      "code": "5.02.01",
+      "question": "Are products or ingredients free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Presence of pests or pest evidence in products or ingredients represents an immediate and critical food safety hazard that can result in contamination with pathogens, allergens, filth, or toxins. This poses unacceptable public health risks and violates fundamental food safety requirements."
+    },
+    {
+      "code": "5.02.02",
+      "question": "Are packaging supplies free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Pest contamination of packaging materials can directly transfer to food products during packaging operations. This represents a critical breakdown in food safety controls and creates unacceptable contamination risks throughout the production chain."
+    },
+    {
+      "code": "5.02.03",
+      "question": "Are plant and storage areas free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.04",
+      "question": "Is the area outside the facility free of evidence of pest activity?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.05",
+      "question": "Is there an effective pest control program in place? A ZERO (NON-CONFORMANCE) SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "The complete absence of an effective pest control program represents a fundamental failure to implement preventive food safety controls. Without a documented pest control system, the facility cannot demonstrate adequate protection of food products from pest contamination and associated microbiological hazards."
+    },
+    {
+      "code": "5.02.06",
+      "question": "Are pest control devices located away from exposed raw materials, work-in-progress, ingredients (including water and ice), finished goods and packaging, and poisonous bait stations are not used within the facility?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.07",
+      "question": "Are pest control devices maintained in a clean and intact condition and marked as monitored (or bar code scanned) on a regular basis?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.08",
+      "question": "Are interior and exterior building perimeter pest control devices adequate in number and location?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.09",
+      "question": "Are all pest control devices identified by a number or other code (e.g. barcode)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.02.10",
+      "question": "Are all pest control devices effective and bait stations secured?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "All products, ingredients, and packaging materials must be completely free of pests (insects, rodents, birds, reptiles, mammals) and any evidence of pest activity including droppings, gnaw marks, or nesting materials",
+    "An effective documented pest control program must be implemented and maintained with regular monitoring, trend analysis, and corrective action procedures",
+    "Pest control devices must be strategically located away from exposed food products, ingredients, work-in-progress, and packaging materials to prevent contamination",
+    "Poisonous bait stations must not be used inside the facility; only mechanical traps or non-toxic monitoring devices are permitted in food production and storage areas",
+    "All pest control devices must be uniquely identified with numbers or barcodes to enable traceability and monitoring verification",
+    "Pest control devices must be maintained in clean and intact condition with documented evidence of regular monitoring through physical marks or electronic scanning",
+    "Interior and exterior building perimeters must have adequate pest control device coverage based on facility size, pest pressure, and vulnerability assessment",
+    "All pest control devices must be properly secured and effective in capturing or monitoring target pests without creating contamination hazards to food products"
+  ],
+  "capaInject": [
+    "If pests or pest evidence are found in products, ingredients, or packaging, immediately quarantine all affected materials, conduct a comprehensive facility inspection, identify entry points and harborage areas, implement intensive pest control measures, and verify elimination before resuming production",
+    "Establish a comprehensive Integrated Pest Management (IPM) program that includes facility design evaluation, exclusion measures, sanitation protocols, monitoring procedures, treatment methods, and documentation requirements with defined responsibilities",
+    "When pest control devices are found too close to food contact areas, immediately relocate devices to safe distances (minimum 6 feet from exposed products), reassess device placement throughout the facility, and update the facility pest control map",
+    "If poisonous bait stations are discovered inside the facility, immediately remove them, replace with mechanical traps or glue boards, notify the pest control operator, and audit all pest control devices to ensure compliance",
+    "Implement a pest control device monitoring schedule with defined frequencies (typically weekly or monthly depending on pest pressure), clear documentation requirements, and accountability for completion with supervisory verification",
+    "When pest control devices are damaged, dirty, or missing monitoring marks, immediately clean or replace devices, conduct monitoring verification, investigate why maintenance was missed, and retrain responsible personnel",
+    "If pest control device coverage is inadequate, conduct a pest risk assessment to identify vulnerable areas, install additional devices at strategic locations, update the facility pest control map, and increase monitoring frequency in high-risk zones",
+    "Establish a corrective action protocol for any pest sighting that includes immediate capture/elimination, root cause investigation, environmental modification, increased monitoring, and verification of effectiveness before closing the incident"
+  ],
+  "traceabilityInject": [
+    "Maintain comprehensive pest control service records including date of service, pest control operator name and license number, areas inspected, findings, treatments applied, and recommendations",
+    "Document all pest sightings or evidence findings with date, location, pest type, severity, immediate actions taken, root cause analysis, and corrective measures implemented",
+    "Keep a current facility pest control map showing all device locations with unique identifiers, device types, and monitoring frequency requirements",
+    "Maintain pest monitoring logs for all devices showing inspection date, inspector name, findings (pest captures or evidence), device condition, and any corrective actions required",
+    "Retain trend analysis reports showing pest activity patterns over time, seasonal variations, effectiveness of control measures, and continuous improvement initiatives",
+    "Document pest control training records for facility personnel covering pest identification, reporting procedures, sanitation requirements, and emergency response protocols",
+    "Keep records of pest control product applications including product name, EPA registration number, application method, areas treated, concentration, quantity used, and re-entry intervals",
+    "Maintain facility maintenance records addressing pest exclusion measures such as door seal repairs, screen installations, structural gap filling, and drainage improvements"
+  ],
+  "micro_inject": [
+    "Rodents carry numerous foodborne pathogens including Salmonella, E. coli O157:H7, Listeria monocytogenes, and hantavirus that can be transmitted through feces, urine, saliva, and hair contaminating food products",
+    "Insects such as flies, cockroaches, and stored product beetles serve as mechanical vectors for pathogenic bacteria transferring Salmonella, Shigella, and Campylobacter from contaminated sources to food contact surfaces and products",
+    "Bird droppings contain high concentrations of Salmonella, Campylobacter, and E. coli and can contaminate food products, packaging materials, and production equipment when birds gain access to facilities",
+    "Pest-related contamination creates harborage conditions for pathogen growth by introducing organic matter, moisture, and nutrients that support multiplication of Listeria monocytogenes and other foodborne bacteria",
+    "Effective pest control programs prevent the accumulation of pest feces and debris that can harbor spore-forming bacteria including Clostridium botulinum and Bacillus cereus in facility environments",
+    "Poisonous rodenticides used inside facilities can contaminate food products with anticoagulant toxins or attract rodents near food contact areas, increasing rather than decreasing contamination risks",
+    "Pest monitoring devices located too close to food products can attract pests into production areas and create new contamination vectors rather than serving their intended protective function",
+    "Inadequate pest control device coverage allows pest populations to establish harborage areas that become reservoirs for pathogen persistence and recurring contamination events throughout the facility"
+  ]
+}

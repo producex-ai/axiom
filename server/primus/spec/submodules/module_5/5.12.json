@@ -1,0 +1,25 @@
+{
+  "code": "5.12",
+  "parentCode": "5",
+  "title": "Pest Control Documentation",
+  "requirements": [
+    {
+      "code": "5.12.01",
+      "question": "Is the pest control program properly documented, detailing the scope of the program, target pests and frequency of checks, including a copy of the contract with the extermination company (if used), Pest Control Operator license(s)/training (if baits are used), and insurance documents?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.12.02",
+      "question": "Is there a schematic drawing/plan of the facility showing numbered locations of all pest monitoring devices (e.g., rodent traps, bait stations, insect light traps, etc.) both inside and outside the facility?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.12.03",
+      "question": "Are service reports created for pest control checks detailing inspection records, application records, and corrective actions of issues noted (in-house and/or contract)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

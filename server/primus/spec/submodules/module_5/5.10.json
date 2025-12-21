@@ -1,0 +1,37 @@
+{
+  "code": "5.10",
+  "parentCode": "5",
+  "title": "Site",
+  "requirements": [
+    {
+      "code": "5.10.01",
+      "question": "Is there a site plan showing the facility location, adjacent sites, roads, water sources, storm water, wastewater and other relevant features?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.10.02",
+      "question": "Is there a facility floor plan showing the layout of the building, production areas, storage areas, water sources and fixtures, layout of equipment and traffic flow patterns?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.10.03",
+      "question": "Has a documented risk assessment been performed to ensure that any food safety hazards relevant to facility location and adjacent land use are identified and controlled?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.10.04",
+      "question": "Is there a current certificate of inspection (or similar record) for backflow prevention assemblies on water lines into the facility?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.10.05",
+      "question": "Is there a trained on-site person responsible for the operation's food safety program?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "module": "3",
+  "moduleName": "Indoor Agriculture",
+  "description": "Establishes comprehensive requirements for indoor agriculture operations including controlled environment agriculture (CEA), facility management, environmental controls, pest management, sanitation, operational practices, water systems, growing media, harvest procedures, and worker welfare. Aligned with official PrimusGFS v4.0 Checklist Module 3 (Sections 3.01-3.14).",
+  "scope": "All aspects of indoor agriculture operations including growing facilities, environmental controls, production processes, and harvest activities within controlled environment settings",
+  "totalSubmodules": 14,
+  "totalQuestions": 139,
+  "totalPoints": 1343,
+  "officialSource": "PGFS-ND-029-3 R0 July 31, 2025",
+  "submodules": [
+    {
+      "code": "3.01",
+      "name": "General",
+      "alias": "general",
+      "specFile": "3.01.json",
+      "questionsCount": 4,
+      "totalPoints": 25,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.02",
+      "name": "Site",
+      "alias": "site",
+      "specFile": "3.02.json",
+      "questionsCount": 15,
+      "totalPoints": 163,
+      "micro_inject": ["fsms", "pest"]
+    },
+    {
+      "code": "3.03",
+      "name": "Pest Control",
+      "alias": "pest_control",
+      "specFile": "3.03.json",
+      "questionsCount": 12,
+      "totalPoints": 100,
+      "micro_inject": ["pest"]
+    },
+    {
+      "code": "3.04",
+      "name": "General Chemicals",
+      "alias": "general_chemicals",
+      "specFile": "3.04.json",
+      "questionsCount": 5,
+      "totalPoints": 46,
+      "micro_inject": ["chemical"]
+    },
+    {
+      "code": "3.05",
+      "name": "Maintenance & Sanitation",
+      "alias": "maintenance_sanitation",
+      "specFile": "3.05.json",
+      "questionsCount": 10,
+      "totalPoints": 95,
+      "micro_inject": ["sanitation", "glass_brittle_plastic"]
+    },
+    {
+      "code": "3.06",
+      "name": "Operational Practices",
+      "alias": "operational_practices",
+      "specFile": "3.06.json",
+      "questionsCount": 22,
+      "totalPoints": 195,
+      "micro_inject": ["fsms", "sanitation"]
+    },
+    {
+      "code": "3.07",
+      "name": "Receiving & Shipping",
+      "alias": "receiving_shipping",
+      "specFile": "3.07.json",
+      "questionsCount": 8,
+      "totalPoints": 48,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.08",
+      "name": "Training",
+      "alias": "training",
+      "specFile": "3.08.json",
+      "questionsCount": 4,
+      "totalPoints": 33,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.09",
+      "name": "Worker Hygiene",
+      "alias": "worker_hygiene",
+      "specFile": "3.09.json",
+      "questionsCount": 18,
+      "totalPoints": 138,
+      "micro_inject": ["fsms", "sanitation"]
+    },
+    {
+      "code": "3.10",
+      "name": "Agronomic Inputs",
+      "alias": "agronomic_inputs",
+      "specFile": "3.10.json",
+      "questionsCount": 8,
+      "totalPoints": 105,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.11",
+      "name": "Water Use",
+      "alias": "water_use",
+      "specFile": "3.11.json",
+      "questionsCount": 13,
+      "totalPoints": 135,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.12",
+      "name": "Pesticide Usage",
+      "alias": "pesticide_usage",
+      "specFile": "3.12.json",
+      "questionsCount": 6,
+      "totalPoints": 90,
+      "micro_inject": ["chemical"]
+    },
+    {
+      "code": "3.13",
+      "name": "Pesticide Handling & Application",
+      "alias": "pesticide_handling",
+      "specFile": "3.13.json",
+      "questionsCount": 3,
+      "totalPoints": 45,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "3.14",
+      "name": "Testing (CEA Operations Only)",
+      "alias": "testing_cea",
+      "specFile": "3.14.json",
+      "questionsCount": 11,
+      "totalPoints": 125,
+      "micro_inject": ["fsms"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this document exists, what it achieves for indoor agriculture operations, business and compliance drivers"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What indoor agriculture operations/areas covered, facility boundaries, who is responsible, any exclusions or limitations"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Minimum 5-8 relevant technical terms, acronyms (CEA, IPM, HVAC), or facility-specific terminology"
+      },
+      {
+        "number": 5,
+        "title": "Roles & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific positions with clearly defined duties for indoor agriculture operations, authority levels, and accountability"
+      },
+      {
+        "number": 6,
+        "title": "Prerequisites & Reference Documents",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Related SOPs, standards (Primus GFS, GFSI), regulatory requirements, industry best practices for indoor agriculture"
+      },
+      {
+        "number": 7,
+        "title": "Hazard / Risk Analysis",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Indoor agriculture-specific hazards (environmental controls, contamination risks, facility-specific hazards), risk assessment, control measures"
+      },
+      {
+        "number": 8,
+        "title": "Procedures",
+        "required": true,
+        "minParagraphs": 8,
+        "contentGuidance": "Detailed step-by-step procedures for indoor agriculture operations (minimum 8-12 steps), specific actions, frequencies, methods"
+      },
+      {
+        "number": 9,
+        "title": "Monitoring Plan",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor in indoor agriculture (environmental controls, sanitation, pest activity), how often, who is responsible, what records to keep, acceptance criteria"
+      },
+      {
+        "number": 10,
+        "title": "Verification & Validation Activities",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "How to verify procedures are followed in indoor operations, validation that procedures are effective, audit/review frequency"
+      },
+      {
+        "number": 11,
+        "title": "Corrective & Preventive Action (CAPA) Protocol",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Triggers for CAPA in indoor agriculture, investigation steps, containment, root cause analysis, corrective actions, preventive measures, verification"
+      },
+      {
+        "number": 12,
+        "title": "Traceability & Recall Elements",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Growing area identification, batch traceability, raw material traceability, record linkages"
+      },
+      {
+        "number": 13,
+        "title": "Record Retention & Document Control",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What records are generated, retention periods, storage location, access control"
+      },
+      {
+        "number": 14,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 15,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (Prepared By, Reviewed By, Approved By)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "general": [
+      "food safety program",
+      "organic certification",
+      "hygiene rules",
+      "health rules",
+      "IPM",
+      "integrated pest management"
+    ],
+    "site": [
+      "site map",
+      "traceability",
+      "risk assessment",
+      "food defense",
+      "animal presence",
+      "fecal matter",
+      "infants",
+      "exterior storage"
+    ],
+    "pest_control": [
+      "pest control program",
+      "IPM",
+      "pest devices",
+      "bait stations",
+      "pest monitoring",
+      "pest-proof",
+      "animals"
+    ],
+    "general_chemicals": [
+      "chemical inventory",
+      "safety data sheets",
+      "SDS",
+      "chemical storage",
+      "food grade",
+      "test strips",
+      "sanitizer concentration"
+    ],
+    "maintenance_sanitation": [
+      "preventative maintenance",
+      "cleaning schedule",
+      "master sanitation schedule",
+      "SSOP",
+      "glass and brittle plastic",
+      "filters",
+      "cooling units"
+    ],
+    "operational_practices": [
+      "daily inspection",
+      "harvest clearance",
+      "tool accountability",
+      "tool dips",
+      "FIFO",
+      "cross contamination",
+      "food contact surfaces",
+      "spoilage",
+      "adulteration"
+    ],
+    "receiving_shipping": [
+      "trailer inspection",
+      "incoming goods",
+      "pest inspection",
+      "dock equipment",
+      "transportation"
+    ],
+    "training": [
+      "food safety training",
+      "hygiene training",
+      "sanitation training",
+      "illness reporting",
+      "injury reporting"
+    ],
+    "worker_hygiene": [
+      "toilet facilities",
+      "handwashing",
+      "personal hygiene",
+      "protective clothing",
+      "jewelry",
+      "health monitoring",
+      "drinking water"
+    ],
+    "agronomic_inputs": [
+      "fertilizers",
+      "amendments",
+      "animal-based inputs",
+      "risk assessment",
+      "heavy metals",
+      "pathogens",
+      "thermal treatment"
+    ],
+    "water_use": [
+      "water sources",
+      "water risk assessment",
+      "water reuse",
+      "antimicrobial treatment",
+      "microbiological testing",
+      "backflow prevention",
+      "water storage"
+    ],
+    "pesticide_usage": [
+      "pesticide records",
+      "authorized pesticides",
+      "label compliance",
+      "pre-harvest intervals",
+      "PHI",
+      "MRL",
+      "maximum residue limits"
+    ],
+    "pesticide_handling": [
+      "pesticide procedures",
+      "mixing",
+      "loading",
+      "application",
+      "disposal",
+      "applicator competency",
+      "handler training"
+    ],
+    "testing_cea": [
+      "CEA operations",
+      "environmental monitoring",
+      "EM program",
+      "seed testing",
+      "product testing",
+      "compressed air testing",
+      "laboratory QA",
+      "laboratory separation"
+    ]
+  }
+}

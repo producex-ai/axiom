@@ -1,0 +1,92 @@
+{
+  "parentCode": "4.04",
+  "code": "4.04.03",
+  "title": "Worker Hygiene Practices",
+  "requirements": [
+    {
+      "code": "4.04.03a",
+      "question": "Are workers required to wash hands before starting work, after using toilet facilities, and after any activity that may contaminate hands?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Proper handwashing practices are critical to prevent contamination of product and must be enforced at all times."
+    },
+    {
+      "code": "4.04.03b",
+      "question": "Are workers prohibited from eating, drinking, smoking, or chewing gum in product handling areas?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "These activities introduce contamination risks and are prohibited in product handling areas."
+    },
+    {
+      "code": "4.04.03c",
+      "question": "Are workers required to wear clean clothing appropriate for their job duties?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.03d",
+      "question": "Are workers with open wounds, infections, or illnesses excluded from product handling activities?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Workers with open wounds, infections, or illnesses can directly contaminate product and must be excluded from handling activities."
+    },
+    {
+      "code": "4.04.03e",
+      "question": "Are workers instructed to report illnesses or health conditions that may affect food safety?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.03f",
+      "question": "Are jewelry, watches, and other personal items restricted in product handling areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.03g",
+      "question": "Are workers' fingernails kept short, clean, and free of nail polish or artificial nails?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.03h",
+      "question": "Is there a system in place to monitor and enforce worker hygiene practices?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.03i",
+      "question": "Are hygiene requirements communicated to workers in a language they understand?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Workers must wash hands before starting work, after using toilet facilities, after breaks, and after any activity that may contaminate hands.",
+    "Eating, drinking, smoking, and chewing gum are strictly prohibited in all product handling and packing areas.",
+    "Workers with open wounds, infections, diarrhea, vomiting, or other illnesses that may contaminate product must be excluded from food handling activities.",
+    "All workers must wear clean clothing and maintain personal cleanliness appropriate for their job duties.",
+    "Workers must be trained on proper hygiene practices and requirements must be communicated in languages they understand."
+  ],
+  "capaInject": [
+    "Develop and implement a comprehensive worker hygiene policy that clearly defines requirements and consequences for non-compliance.",
+    "Establish a health screening process for workers before they begin work each day to identify potential illness or infection.",
+    "Create multilingual hygiene signage and training materials to ensure all workers understand requirements regardless of language barriers.",
+    "Implement a monitoring system with designated supervisors to observe and enforce hygiene practices throughout the workday.",
+    "Establish a reporting protocol for workers to confidentially report health conditions without fear of retaliation."
+  ],
+  "traceabilityInject": [
+    "Maintain records of worker hygiene training including dates, topics covered, and worker signatures acknowledging understanding.",
+    "Document daily health screening results and any workers excluded from product handling due to health conditions.",
+    "Keep logs of hygiene monitoring activities including observations, violations found, and corrective actions taken.",
+    "Record distribution of personal protective equipment and hygiene supplies to workers.",
+    "Track incidents where hygiene violations were observed and disciplinary actions implemented."
+  ],
+  "micro_inject": [
+    "Emphasize the critical role of proper handwashing in reducing pathogenic bacteria transfer from workers to product surfaces.",
+    "Ensure workers understand that illnesses caused by bacteria such as E. coli, Salmonella, and Norovirus can be transmitted through contaminated hands.",
+    "Implement protocols for workers to avoid touching their face, hair, or other body parts while handling product to prevent cross-contamination.",
+    "Monitor compliance with hygiene practices during high-risk activities such as after bathroom use or when returning from break areas.",
+    "Verify that hygiene enforcement prevents introduction of human pathogens into the production environment."
+  ]
+}

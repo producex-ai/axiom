@@ -1,0 +1,419 @@
+{
+  "code": "3.11",
+  "title": "Water Use",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "water sources",
+    "water quality",
+    "water testing",
+    "irrigation water",
+    "water treatment",
+    "water safety"
+  ],
+  "description": "Comprehensive water use requirements including water source assessment, risk assessment, water reuse protocols, antimicrobial treatment monitoring, microbiological testing, sampling procedures, corrective actions, source inspections, backflow prevention, and water storage",
+  "requirements": [
+    {
+      "id": "3.11.01",
+      "code": "3.11.01",
+      "required": false,
+      "points": 0,
+      "text": "What source(s) of water is used in the operation? Information gathering question",
+      "keywords": [
+        "water sources",
+        "information gathering",
+        "municipal water",
+        "well water",
+        "recycled water"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies all water sources used in operation",
+        "Examples: municipal, well, surface water, recycled/reclaimed, rainwater",
+        "Information used to determine applicable water quality requirements"
+      ],
+      "verificationExpectations": "Documentation of all water sources used in operation",
+      "monitoringExpectations": "Update information when water sources change"
+    },
+    {
+      "id": "3.11.01a",
+      "code": "3.11.01a",
+      "required": false,
+      "points": 0,
+      "text": "What is this water source used for (e.g., irrigation, crop protection, fertigation, etc.)? Information gathering question",
+      "keywords": [
+        "water use",
+        "information gathering",
+        "irrigation",
+        "fertigation",
+        "crop protection"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies how water sources are used",
+        "Examples: irrigation, crop protection, fertigation, cleaning, cooling",
+        "Information used to determine risk level and testing requirements"
+      ],
+      "verificationExpectations": "Documentation of water use purposes",
+      "monitoringExpectations": "Update information when water uses change"
+    },
+    {
+      "id": "3.11.01b",
+      "code": "3.11.01b",
+      "required": false,
+      "points": 0,
+      "text": "What types of irrigation methods are used (e.g., micro-irrigation, overhead, drip, flood, hydroponic (specify type))? Information gathering question",
+      "keywords": [
+        "irrigation methods",
+        "information gathering",
+        "drip irrigation",
+        "overhead irrigation",
+        "hydroponics"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies irrigation methods used",
+        "Examples: micro-irrigation, overhead, drip, flood, hydroponic systems",
+        "For hydroponics, specific type should be identified",
+        "Information used to assess water contact and contamination risks"
+      ],
+      "verificationExpectations": "Documentation of irrigation methods used",
+      "monitoringExpectations": "Update information when irrigation methods change"
+    },
+    {
+      "id": "3.11.01c",
+      "code": "3.11.01c",
+      "required": false,
+      "points": 0,
+      "text": "Does the water come in contact with the edible portion of the crop? Information gathering question",
+      "keywords": [
+        "water contact",
+        "information gathering",
+        "edible portion",
+        "direct contact"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response indicates if water directly contacts edible portions",
+        "Direct contact increases food safety risk",
+        "Information determines appropriate water quality standards"
+      ],
+      "verificationExpectations": "Documentation of water contact with edible portions",
+      "monitoringExpectations": "Reassess when irrigation methods or crops change"
+    },
+    {
+      "id": "3.11.01d",
+      "code": "3.11.01d",
+      "required": false,
+      "points": 0,
+      "text": "Is water captured and re-used? Information gathering question",
+      "keywords": [
+        "water reuse",
+        "recycled water",
+        "information gathering",
+        "water recirculation"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response indicates if water is captured and reused",
+        "Water reuse requires specific monitoring and treatment controls",
+        "Information determines need for reuse procedures (question 3.11.03)"
+      ],
+      "verificationExpectations": "Documentation of water reuse practices",
+      "monitoringExpectations": "Update information when water management practices change"
+    },
+    {
+      "id": "3.11.02",
+      "code": "3.11.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there a documented risk assessment in place for all water used in the operation?",
+      "keywords": [
+        "water risk assessment",
+        "water safety",
+        "hazard analysis",
+        "water quality assessment"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment is documented for all water sources and uses",
+        "Assessment evaluates microbiological hazards",
+        "Assessment evaluates chemical hazards (heavy metals, nitrates, etc.)",
+        "Assessment considers water source characteristics and vulnerabilities",
+        "Assessment evaluates water application methods and contact with edible portions",
+        "Assessment identifies appropriate water quality standards",
+        "Risk assessment is reviewed and updated at least annually"
+      ],
+      "verificationExpectations": "Annual review of water risk assessment, update when sources or uses change",
+      "monitoringExpectations": "Quarterly verification that water controls align with risk assessment"
+    },
+    {
+      "id": "3.11.02a",
+      "code": "3.11.02a",
+      "required": true,
+      "points": 15,
+      "text": "Where the risk assessment identifies the need for control of any hazards, are these controls indicated in the assessment and implemented?",
+      "keywords": [
+        "water controls",
+        "hazard controls",
+        "control implementation",
+        "water treatment"
+      ],
+      "mandatoryStatements": [
+        "Water risk assessment identifies specific controls for each hazard",
+        "Controls are clearly documented in the assessment",
+        "All identified controls are implemented in operations",
+        "Controls may include treatment, testing, monitoring, or application method changes",
+        "Controls are appropriate for the identified risks",
+        "Implementation of controls is verified through monitoring and testing",
+        "Records demonstrate ongoing implementation of water controls"
+      ],
+      "verificationExpectations": "Quarterly verification that all water controls are implemented and effective",
+      "monitoringExpectations": "Daily or continuous monitoring of critical water controls"
+    },
+    {
+      "id": "3.11.03",
+      "code": "3.11.03",
+      "required": true,
+      "points": 10,
+      "text": "Where water is re-used, are there specific Standard Operating Procedures (SOPs) for the monitoring of anti-microbial parameters and changing of re-used water systems?",
+      "keywords": [
+        "water reuse",
+        "reuse procedures",
+        "antimicrobial monitoring",
+        "water change schedule",
+        "recirculation"
+      ],
+      "mandatoryStatements": [
+        "If water is reused, SOPs are documented for water system management",
+        "SOPs specify antimicrobial parameters to monitor (chlorine, pH, etc.)",
+        "SOPs define monitoring frequency for reused water",
+        "SOPs specify when water must be changed or replaced",
+        "SOPs address water treatment requirements for reuse",
+        "SOPs define acceptance criteria for reused water quality",
+        "Personnel are trained on water reuse procedures"
+      ],
+      "verificationExpectations": "Quarterly review of water reuse SOP compliance and effectiveness",
+      "monitoringExpectations": "Daily or per-shift monitoring of reused water parameters per SOP"
+    },
+    {
+      "id": "3.11.04",
+      "code": "3.11.04",
+      "required": true,
+      "points": 15,
+      "text": "Where anti-microbial water treatments (e.g., chlorination, PAA, U.V., ozone, etc.) are required, are there records of the monitoring frequencies, results and where necessary the corrective actions?",
+      "keywords": [
+        "water treatment",
+        "antimicrobial treatment",
+        "chlorination",
+        "UV treatment",
+        "ozone",
+        "PAA",
+        "treatment monitoring"
+      ],
+      "mandatoryStatements": [
+        "If antimicrobial water treatment is used, monitoring records are maintained",
+        "Records document monitoring frequency (continuous, hourly, daily as appropriate)",
+        "Records show treatment parameter results (chlorine level, UV intensity, etc.)",
+        "Monitoring frequency is appropriate for risk and treatment type",
+        "Records document corrective actions when parameters are out of specification",
+        "Treatment equipment maintenance is documented",
+        "Records demonstrate consistent effective treatment"
+      ],
+      "verificationExpectations": "Weekly review of water treatment monitoring records and corrective actions",
+      "monitoringExpectations": "Continuous or frequent monitoring of water treatment parameters, immediate corrective action if out of specification",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.11.05",
+      "code": "3.11.05",
+      "required": true,
+      "points": 15,
+      "text": "Are there results for microbiological tests conducted on the water (taken from the closest practical point of use) at the required and/or expected frequency? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "water testing",
+        "microbiological testing",
+        "water quality",
+        "E. coli",
+        "generic E. coli",
+        "coliforms"
+      ],
+      "mandatoryStatements": [
+        "Microbiological testing of water is conducted at required frequency",
+        "Samples are taken from closest practical point of use",
+        "Testing frequency is appropriate for water source, use, and risk",
+        "Testing includes appropriate indicators (generic E. coli, coliforms, etc.)",
+        "Test results are documented and retained",
+        "Testing is performed by qualified laboratory",
+        "Testing frequency meets regulatory and best practice requirements"
+      ],
+      "verificationExpectations": "Quarterly review of water testing records for frequency and compliance",
+      "monitoringExpectations": "Testing performed on schedule, immediate review of results when received",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.11.05a",
+      "code": "3.11.05a",
+      "required": true,
+      "points": 10,
+      "text": "Do written procedures (SOPs) exist covering proper sampling protocols which include where samples should be taken and how samples should be identified?",
+      "keywords": [
+        "sampling procedures",
+        "sampling protocol",
+        "water sampling",
+        "sample collection",
+        "sample identification"
+      ],
+      "mandatoryStatements": [
+        "Written water sampling procedures (SOPs) are documented",
+        "SOPs specify sampling locations (point of use, source, etc.)",
+        "SOPs describe proper sampling technique to prevent contamination",
+        "SOPs specify sample identification and labeling requirements",
+        "SOPs address sample handling and transportation",
+        "SOPs identify who is qualified to collect samples",
+        "Personnel are trained on sampling procedures"
+      ],
+      "verificationExpectations": "Annual review of water sampling SOPs, verification that procedures are followed",
+      "monitoringExpectations": "Verification of proper sampling technique during sample collection events"
+    },
+    {
+      "id": "3.11.05b",
+      "code": "3.11.05b",
+      "required": true,
+      "points": 10,
+      "text": "Do written procedures (SOPs) exist covering corrective action measures for unsuitable or abnormal water testing results?",
+      "keywords": [
+        "corrective actions",
+        "water test failures",
+        "unsuitable water",
+        "response procedures"
+      ],
+      "mandatoryStatements": [
+        "Written corrective action procedures exist for unsuitable water test results",
+        "SOPs define what constitutes unsuitable or abnormal results",
+        "SOPs specify immediate response actions (cease use, switch source, etc.)",
+        "SOPs define investigation and root cause analysis requirements",
+        "SOPs address resampling and retesting protocols",
+        "SOPs identify who has authority to make decisions on water suitability",
+        "SOPs define when operations can resume after unsuitable results"
+      ],
+      "verificationExpectations": "Annual review of water corrective action SOPs, verification of implementation when unsuitable results occur",
+      "monitoringExpectations": "Immediate implementation of corrective action procedures when unsuitable results received"
+    },
+    {
+      "id": "3.11.05c",
+      "code": "3.11.05c",
+      "required": true,
+      "points": 15,
+      "text": "If unsuitable or abnormal results have been detected, have documented corrective measures been performed?",
+      "keywords": [
+        "corrective actions",
+        "documented response",
+        "water test failures",
+        "remediation"
+      ],
+      "mandatoryStatements": [
+        "If unsuitable water results occurred, corrective measures are documented",
+        "Documentation shows immediate actions taken to protect product",
+        "Documentation shows investigation of root cause",
+        "Documentation shows corrective actions implemented",
+        "Documentation shows verification that corrective actions were effective",
+        "Product disposition is documented if water contact occurred",
+        "Corrective actions follow established SOPs"
+      ],
+      "verificationExpectations": "Review of corrective action documentation for completeness and effectiveness",
+      "monitoringExpectations": "Immediate documentation of all corrective actions when unsuitable results occur",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.11.06",
+      "code": "3.11.06",
+      "required": true,
+      "points": 5,
+      "text": "Are there records (with corrective actions) of periodic visual inspection of the condition of water source(s)?",
+      "keywords": [
+        "water source inspection",
+        "source monitoring",
+        "visual inspection",
+        "source condition"
+      ],
+      "mandatoryStatements": [
+        "Periodic visual inspections of water sources are conducted",
+        "Inspection records document condition of water sources",
+        "Inspections look for contamination risks, turbidity, debris, etc.",
+        "Inspection frequency is appropriate for source type and risk",
+        "Corrective actions are documented when issues identified",
+        "Inspections verify source protection measures are effective",
+        "Records link inspection findings to any necessary follow-up actions"
+      ],
+      "verificationExpectations": "Quarterly review of water source inspection records",
+      "monitoringExpectations": "Weekly or monthly visual inspections of water sources depending on risk"
+    },
+    {
+      "id": "3.11.07",
+      "code": "3.11.07",
+      "required": true,
+      "points": 10,
+      "text": "Where applicable, are there backflow prevention devices on all main lines, including where chemical, fertilizer and pesticide applications are made?",
+      "keywords": [
+        "backflow prevention",
+        "backflow preventer",
+        "cross-connection control",
+        "water contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Backflow prevention devices are installed where required",
+        "Devices are on main water lines to prevent contamination",
+        "Devices are installed where chemicals are injected into water systems",
+        "Devices are installed where fertilizers are applied through water systems",
+        "Devices are installed where pesticides are applied through water systems",
+        "Backflow preventers are tested and maintained per regulations",
+        "Testing and maintenance records are maintained"
+      ],
+      "verificationExpectations": "Annual testing and inspection of backflow prevention devices",
+      "monitoringExpectations": "Annual backflow preventer testing by qualified personnel, immediate repair if failures detected"
+    },
+    {
+      "id": "3.11.08",
+      "code": "3.11.08",
+      "required": true,
+      "points": 15,
+      "text": "If the operation stores water (tank, cistern, container), are the storage containers well maintained?",
+      "keywords": [
+        "water storage",
+        "storage tanks",
+        "cisterns",
+        "container maintenance",
+        "water tank condition"
+      ],
+      "mandatoryStatements": [
+        "If water is stored, storage containers are well maintained",
+        "Containers are structurally sound without cracks or leaks",
+        "Containers are covered or enclosed to prevent contamination",
+        "Containers prevent pest and debris entry",
+        "Containers are cleaned and sanitized on regular schedule",
+        "Container materials are appropriate for potable water storage",
+        "Inspection and maintenance records for storage containers are maintained"
+      ],
+      "verificationExpectations": "Quarterly inspection of water storage container condition and maintenance",
+      "monitoringExpectations": "Monthly visual inspection of water storage containers, immediate repair of damage or contamination risks",
+      "riskLevel": "high"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If water risk assessment not documented: develop assessment within 30 days, implement interim controls immediately",
+    "If water controls not implemented: immediate implementation of critical controls, complete all controls within 14 days",
+    "If water reuse SOPs not documented: document procedures within 14 days, enhance monitoring until SOPs complete",
+    "If antimicrobial treatment monitoring inadequate: immediate enhancement of monitoring, equipment check within 24 hours",
+    "If water testing not performed at required frequency: immediate testing, establish testing schedule, make up missed tests within 7 days",
+    "If unsuitable water test results: immediate cessation of water use, switch to alternative source, investigation within 24 hours, corrective actions before resuming use",
+    "If backflow prevention not adequate: immediate installation of temporary measures, permanent backflow preventers within 30 days",
+    "If water storage containers poorly maintained: immediate cleaning and repair, enhanced inspection until permanently corrected"
+  ],
+  "traceabilityInject": [
+    "Water sources must be traceable to specific uses and growing areas",
+    "Water treatment monitoring records must be traceable to specific water systems and dates",
+    "Water testing results must be traceable to specific sources, sampling locations, and dates",
+    "Corrective actions for water issues must be traceable to specific test results and affected areas/products",
+    "Backflow preventer testing must be traceable to specific devices and test dates"
+  ]
+}

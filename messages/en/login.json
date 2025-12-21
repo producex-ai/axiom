@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Sign In - Axiom",
+    "imageAlt": "Compliance documentation and food safety standards"
+  },
+  "hero": {
+    "headline": "Simplify Compliance Documentation",
+    "description": "AI-powered platform for compliance management and certification"
+  },
+  "form": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your Axiom account to continue",
+    "fields": {
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "rememberMe": "Remember me"
+    },
+    "actions": {
+      "signIn": "Sign in",
+      "signingIn": "Signing in...",
+      "forgotPassword": "Forgot password?",
+      "signUp": "Sign up"
+    },
+    "divider": "Or continue with",
+    "socialLogin": {
+      "google": "Google",
+      "facebook": "Facebook"
+    },
+    "noAccount": "Don't have an account?"
+  }
+}

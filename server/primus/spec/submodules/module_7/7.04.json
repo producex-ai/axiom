@@ -1,0 +1,13 @@
+{
+  "code": "7.04",
+  "parentCode": "7",
+  "title": "Re-analysis of the Food Safety Plan",
+  "requirements": [
+    {
+      "code": "7.04.01",
+      "question": "Is there documented evidence that there is a re-analysis of the Food Safety Plan at least once every 3 years and when significant changes are made?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

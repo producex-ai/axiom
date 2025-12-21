@@ -1,0 +1,590 @@
+{
+  "code": "3.06",
+  "title": "Operational Practices",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "daily operations",
+    "harvest procedures",
+    "equipment cleanliness",
+    "material handling",
+    "cross contamination prevention",
+    "facility maintenance"
+  ],
+  "description": "Comprehensive operational practices for indoor agriculture including daily inspections, harvest clearance, tool accountability, material handling, FIFO rotation, cross-contamination prevention, equipment condition and cleanliness, and facility sanitation",
+  "requirements": [
+    {
+      "id": "3.06.01",
+      "code": "3.06.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a daily inspection log, including but not limited to, checking worker hygiene (e.g., harvest crew, crop care workers), housekeeping of bathrooms, break area, growing area, and storage area?",
+      "keywords": [
+        "daily inspection",
+        "inspection log",
+        "worker hygiene",
+        "housekeeping",
+        "bathroom inspection",
+        "break area",
+        "growing area"
+      ],
+      "mandatoryStatements": [
+        "Daily inspection log is maintained",
+        "Log includes worker hygiene checks for harvest and crop care workers",
+        "Log includes bathroom housekeeping inspection",
+        "Log includes break area housekeeping inspection",
+        "Log includes growing area housekeeping inspection",
+        "Log includes storage area housekeeping inspection",
+        "Inspections are performed daily before operations begin",
+        "Non-conformances identified during inspection are documented and addressed"
+      ],
+      "verificationExpectations": "Weekly review of daily inspection logs for completeness and follow-up on issues",
+      "monitoringExpectations": "Daily completion of inspection log, immediate corrective action for identified issues"
+    },
+    {
+      "id": "3.06.02",
+      "code": "3.06.02",
+      "required": true,
+      "points": 5,
+      "text": "Are there records showing that blocks (or coded areas) are cleared for harvest?",
+      "keywords": [
+        "harvest clearance",
+        "block clearance",
+        "harvest authorization",
+        "area clearance",
+        "harvest records"
+      ],
+      "mandatoryStatements": [
+        "Records document clearance of growing areas for harvest",
+        "Clearance process verifies area is ready for harvest",
+        "Records identify specific blocks or coded areas being harvested",
+        "Clearance includes verification of food safety requirements",
+        "Authorization by qualified person before harvest begins",
+        "Records link harvest clearance to harvest activities"
+      ],
+      "verificationExpectations": "Weekly verification that harvest clearance records exist for all harvested areas",
+      "monitoringExpectations": "Daily verification of harvest clearance before harvest operations begin"
+    },
+    {
+      "id": "3.06.03",
+      "code": "3.06.03",
+      "required": true,
+      "points": 5,
+      "text": "Is there a tool accountability program for knives and similar cutting hand tools used in growing and harvesting areas?",
+      "keywords": [
+        "tool accountability",
+        "knife control",
+        "cutting tools",
+        "tool tracking",
+        "tool management"
+      ],
+      "mandatoryStatements": [
+        "Tool accountability program is established for cutting tools",
+        "Program covers knives and similar cutting hand tools",
+        "Tools are issued and returned with documentation",
+        "Tool inventory is maintained showing number and condition of tools",
+        "Missing or broken tools are immediately reported and investigated",
+        "Tools are inspected before issue and upon return",
+        "Records demonstrate tool accountability is maintained"
+      ],
+      "verificationExpectations": "Weekly verification of tool accountability records and tool inventory accuracy",
+      "monitoringExpectations": "Daily tool issue and return verification, immediate investigation of missing tools"
+    },
+    {
+      "id": "3.06.04",
+      "code": "3.06.04",
+      "required": true,
+      "points": 5,
+      "text": "Are tool dips being maintained properly in terms of anti-microbial solution strength and are records of the solution checks being maintained? AUDITORS SHOULD REQUIRE A TEST AT THE TIME OF THE AUDIT.",
+      "keywords": [
+        "tool dips",
+        "antimicrobial solution",
+        "sanitizer concentration",
+        "solution strength",
+        "tool sanitization"
+      ],
+      "mandatoryStatements": [
+        "Tool dip stations are maintained with antimicrobial solution",
+        "Solution concentration is tested and verified regularly",
+        "Test results are recorded with date, time, concentration, and personnel",
+        "Solution is changed when concentration falls below specification",
+        "Testing frequency is appropriate for usage level",
+        "Test equipment is calibrated and functional",
+        "Records demonstrate proper maintenance of tool dips"
+      ],
+      "verificationExpectations": "Daily verification of tool dip concentration testing and records",
+      "monitoringExpectations": "Per-shift or hourly testing of tool dip solution concentration, immediate solution change if out of specification"
+    },
+    {
+      "id": "3.06.05",
+      "code": "3.06.05",
+      "required": true,
+      "points": 15,
+      "text": "Are raw materials (e.g., seeds, transplants, soil, growing media), finished goods and food contact packaging within accepted tolerances for spoilage and without evidence of adulteration? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
+      "keywords": [
+        "spoilage",
+        "adulteration",
+        "raw materials",
+        "finished goods",
+        "food contact packaging",
+        "product quality",
+        "contamination"
+      ],
+      "mandatoryStatements": [
+        "Raw materials show no signs of spoilage or deterioration",
+        "Finished goods are within accepted quality tolerances",
+        "Food contact packaging is clean and free from contamination",
+        "No evidence of adulteration of any materials or products",
+        "Materials showing spoilage or damage are immediately segregated",
+        "Quality inspection procedures are in place and followed",
+        "Acceptance criteria for materials and products are defined and enforced"
+      ],
+      "verificationExpectations": "Daily inspection of raw materials, finished goods, and packaging for spoilage and adulteration",
+      "monitoringExpectations": "Continuous monitoring during operations, immediate rejection and segregation of adulterated or spoiled materials",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.06",
+      "code": "3.06.06",
+      "required": true,
+      "points": 5,
+      "text": "Are materials (commodities, packaging, inputs, etc.) properly marked with codes (receipt dates, manufacture dates, etc.)?",
+      "keywords": [
+        "material coding",
+        "date codes",
+        "lot codes",
+        "traceability codes",
+        "material identification"
+      ],
+      "mandatoryStatements": [
+        "All materials are properly marked with identification codes",
+        "Codes include receipt dates or manufacture dates as appropriate",
+        "Coding system supports traceability requirements",
+        "Codes are clearly visible and legible",
+        "Coding is applied upon receipt or as specified in procedures",
+        "Records link codes to specific material lots or batches"
+      ],
+      "verificationExpectations": "Weekly verification that all materials are properly coded and traceable",
+      "monitoringExpectations": "Daily checks of incoming materials for proper coding, immediate coding if missing"
+    },
+    {
+      "id": "3.06.07",
+      "code": "3.06.07",
+      "required": true,
+      "points": 5,
+      "text": "Are materials (commodities, packaging, etc.) rotated using FIFO policy?",
+      "keywords": [
+        "FIFO",
+        "first in first out",
+        "inventory rotation",
+        "material rotation",
+        "stock rotation"
+      ],
+      "mandatoryStatements": [
+        "FIFO (First In First Out) policy is established",
+        "Materials are stored and organized to facilitate FIFO",
+        "Oldest materials are used before newer materials",
+        "FIFO policy is communicated to all relevant personnel",
+        "Storage layout and practices support FIFO rotation",
+        "Monitoring verifies FIFO policy is followed"
+      ],
+      "verificationExpectations": "Weekly verification that FIFO policy is being followed in storage areas",
+      "monitoringExpectations": "Daily checks during material usage, immediate correction if FIFO not followed"
+    },
+    {
+      "id": "3.06.08",
+      "code": "3.06.08",
+      "required": true,
+      "points": 15,
+      "text": "Does the process flow, facility layout, worker control, utensil control, internal vehicle use, etc. ensure that finished goods are not contaminated by raw materials (e.g., seeds, transplants, soil, growing media)?",
+      "keywords": [
+        "process flow",
+        "cross contamination",
+        "facility layout",
+        "worker control",
+        "utensil control",
+        "segregation"
+      ],
+      "mandatoryStatements": [
+        "Process flow prevents cross-contamination from raw materials to finished goods",
+        "Facility layout provides adequate separation of raw and finished areas",
+        "Worker movement is controlled to prevent cross-contamination",
+        "Utensils and tools are segregated between raw and finished areas",
+        "Internal vehicles are cleaned between raw and finished area use",
+        "Physical barriers or procedures prevent contamination pathways",
+        "Flow analysis identifies and controls all contamination risks"
+      ],
+      "verificationExpectations": "Quarterly review of process flow and contamination prevention effectiveness",
+      "monitoringExpectations": "Daily monitoring of segregation practices, immediate correction of cross-contamination risks",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.09",
+      "code": "3.06.09",
+      "required": true,
+      "points": 15,
+      "text": "Is there proper storage and adequate separation of raw materials (e.g., seeds, transplants, soil, growing media), products and packaging?",
+      "keywords": [
+        "storage separation",
+        "material segregation",
+        "proper storage",
+        "raw material storage",
+        "packaging storage"
+      ],
+      "mandatoryStatements": [
+        "Raw materials are stored in designated areas separate from products",
+        "Packaging materials are stored separate from raw materials",
+        "Physical separation prevents cross-contamination",
+        "Storage areas are clearly identified and labeled",
+        "Separation distance or barriers are adequate",
+        "Storage conditions are appropriate for each material type",
+        "Storage layout supports food safety objectives"
+      ],
+      "verificationExpectations": "Monthly verification of storage segregation adequacy and effectiveness",
+      "monitoringExpectations": "Weekly checks of storage areas, immediate correction if segregation compromised",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.10",
+      "code": "3.06.10",
+      "required": true,
+      "points": 15,
+      "text": "Are all exposed materials (product, packaging, etc.) protected from overhead contamination (e.g., ladders, motors, condensation, lubricants, walkways, loose panels, degrading insulation, etc.)?",
+      "keywords": [
+        "overhead contamination",
+        "overhead protection",
+        "condensation",
+        "dripping",
+        "falling contamination"
+      ],
+      "mandatoryStatements": [
+        "Exposed materials are protected from overhead contamination sources",
+        "Protection includes coverage, barriers, or positioning",
+        "Overhead equipment does not drip or leak onto exposed materials",
+        "Condensation is controlled and does not drip onto products",
+        "Building structure is maintained to prevent falling debris",
+        "Walkways and catwalks do not present contamination risk",
+        "Regular inspection identifies and corrects overhead contamination risks"
+      ],
+      "verificationExpectations": "Monthly inspection of overhead areas and protection measures",
+      "monitoringExpectations": "Weekly visual checks for overhead contamination risks, immediate correction if identified",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.11",
+      "code": "3.06.11",
+      "required": true,
+      "points": 10,
+      "text": "Are all growing areas clean and well maintained; especially lights, ducts, fans, floor areas by walls and equipment, and other hard to reach areas?",
+      "keywords": [
+        "growing area cleanliness",
+        "facility maintenance",
+        "hard to reach areas",
+        "housekeeping",
+        "cleaning"
+      ],
+      "mandatoryStatements": [
+        "Growing areas are maintained clean at all times",
+        "Lights, ducts, and fans are clean and free from accumulation",
+        "Floor areas by walls and equipment are clean",
+        "Hard to reach areas are included in cleaning program",
+        "Cleaning frequency is adequate for operational conditions",
+        "No accumulation of dust, dirt, or debris in growing areas",
+        "Cleaning verification includes inspection of all areas"
+      ],
+      "verificationExpectations": "Weekly inspection of growing area cleanliness including hard to reach areas",
+      "monitoringExpectations": "Daily housekeeping verification, immediate cleanup of accumulation or debris"
+    },
+    {
+      "id": "3.06.12",
+      "code": "3.06.12",
+      "required": true,
+      "points": 5,
+      "text": "Are single service containers used for their intended purpose only so that potential cross contamination is prevented?",
+      "keywords": [
+        "single service containers",
+        "single use containers",
+        "cross contamination prevention",
+        "container use"
+      ],
+      "mandatoryStatements": [
+        "Single service containers are used only once for their intended purpose",
+        "Single service containers are not reused",
+        "Single service containers are not repurposed for different materials",
+        "Policy prohibits reuse of single service containers",
+        "Personnel are trained on single service container policy",
+        "Practice prevents cross-contamination from previous use"
+      ],
+      "verificationExpectations": "Weekly observation of container use practices",
+      "monitoringExpectations": "Daily verification that single service containers are not reused"
+    },
+    {
+      "id": "3.06.13",
+      "code": "3.06.13",
+      "required": true,
+      "points": 5,
+      "text": "Are re-usable containers cleanable or used with a liner and clearly designated for the specific purpose (seeds, product, packaging, etc.) such that cross contamination is prevented?",
+      "keywords": [
+        "reusable containers",
+        "container designation",
+        "container cleaning",
+        "liner use",
+        "cross contamination"
+      ],
+      "mandatoryStatements": [
+        "Reusable containers are made of cleanable materials",
+        "Containers are clearly designated for specific purpose (labeled or color-coded)",
+        "Containers are cleaned between uses according to SSOP",
+        "Alternatively, containers are used with disposable liners",
+        "Container designation prevents cross-contamination between different materials",
+        "Personnel are trained on container designation system",
+        "Container condition allows effective cleaning"
+      ],
+      "verificationExpectations": "Weekly verification of container designation and cleaning practices",
+      "monitoringExpectations": "Daily checks that containers are used for designated purposes only"
+    },
+    {
+      "id": "3.06.14",
+      "code": "3.06.14",
+      "required": true,
+      "points": 15,
+      "text": "Are food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "keywords": [
+        "food contact surfaces",
+        "equipment condition",
+        "flaking paint",
+        "corrosion",
+        "rust",
+        "unhygienic materials"
+      ],
+      "mandatoryStatements": [
+        "Food contact equipment surfaces have no flaking paint",
+        "Food contact surfaces are free from corrosion and rust",
+        "No tape, string, cardboard, or other unhygienic materials on food contact surfaces",
+        "Equipment surfaces are maintained in sanitary condition",
+        "Damaged equipment is removed from service until repaired",
+        "Regular inspection identifies equipment condition issues",
+        "Repairs are made with food-safe materials"
+      ],
+      "verificationExpectations": "Weekly inspection of food contact equipment condition",
+      "monitoringExpectations": "Daily pre-operational inspection of food contact surfaces, immediate removal from service if conditions found",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.15",
+      "code": "3.06.15",
+      "required": true,
+      "points": 10,
+      "text": "Are non-food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "keywords": [
+        "non-food contact surfaces",
+        "equipment condition",
+        "flaking paint",
+        "corrosion",
+        "facility maintenance"
+      ],
+      "mandatoryStatements": [
+        "Non-food contact equipment surfaces have no flaking paint",
+        "Non-food contact surfaces are free from corrosion and rust",
+        "No tape, string, cardboard, or other unhygienic materials that could contaminate",
+        "Equipment is maintained to prevent contamination from deterioration",
+        "Damaged non-food contact surfaces are repaired to prevent contamination risk",
+        "Regular inspection identifies maintenance needs"
+      ],
+      "verificationExpectations": "Monthly inspection of non-food contact equipment condition",
+      "monitoringExpectations": "Weekly visual checks, immediate repair if contamination risk identified"
+    },
+    {
+      "id": "3.06.16",
+      "code": "3.06.16",
+      "required": true,
+      "points": 15,
+      "text": "Does food contact equipment design, placement, and condition (e.g., smooth surfaces, smooth weld seams, non-toxic materials, corrosion-resistant, non-porous, non-absorbent) facilitate effective cleaning and maintenance?",
+      "keywords": [
+        "equipment design",
+        "sanitary design",
+        "cleanability",
+        "smooth surfaces",
+        "non-porous",
+        "non-absorbent"
+      ],
+      "mandatoryStatements": [
+        "Food contact equipment has smooth, cleanable surfaces",
+        "Weld seams are smooth and free from crevices",
+        "Equipment is made from non-toxic, food-safe materials",
+        "Materials are corrosion-resistant",
+        "Surfaces are non-porous and non-absorbent",
+        "Equipment design facilitates effective cleaning",
+        "Equipment placement allows access for cleaning and maintenance",
+        "Equipment condition supports sanitary operations"
+      ],
+      "verificationExpectations": "Annual review of equipment design and placement adequacy, quarterly verification of equipment condition",
+      "monitoringExpectations": "Weekly inspection of equipment cleanability and condition",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.17",
+      "code": "3.06.17",
+      "required": true,
+      "points": 15,
+      "text": "Are food contact equipment surfaces clean?",
+      "keywords": [
+        "food contact cleanliness",
+        "equipment cleanliness",
+        "surface cleanliness",
+        "sanitation"
+      ],
+      "mandatoryStatements": [
+        "All food contact equipment surfaces are visibly clean",
+        "No soil, residue, or buildup on food contact surfaces",
+        "Equipment is cleaned according to SSOP",
+        "Pre-operational inspection verifies cleanliness",
+        "Cleaning frequency is adequate for operations",
+        "Cleaning verification is documented",
+        "Equipment is protected from contamination between uses"
+      ],
+      "verificationExpectations": "Daily pre-operational inspection of food contact surface cleanliness",
+      "monitoringExpectations": "Continuous monitoring during operations, immediate re-cleaning if contamination occurs",
+      "riskLevel": "high"
+    },
+    {
+      "id": "3.06.18",
+      "code": "3.06.18",
+      "required": true,
+      "points": 10,
+      "text": "Are non-food contact equipment surfaces clean?",
+      "keywords": [
+        "non-food contact cleanliness",
+        "equipment cleanliness",
+        "facility housekeeping"
+      ],
+      "mandatoryStatements": [
+        "Non-food contact equipment surfaces are maintained clean",
+        "No accumulation of dirt, dust, or debris",
+        "Cleanliness prevents contamination of food contact areas",
+        "Cleaning schedule includes non-food contact surfaces",
+        "Cleaning frequency is appropriate for conditions",
+        "Non-food contact cleanliness supports overall sanitation"
+      ],
+      "verificationExpectations": "Weekly inspection of non-food contact surface cleanliness",
+      "monitoringExpectations": "Daily housekeeping verification, regular cleaning per schedule"
+    },
+    {
+      "id": "3.06.19",
+      "code": "3.06.19",
+      "required": true,
+      "points": 5,
+      "text": "Are trash receptacles adequate and placed in suitable locations?",
+      "keywords": [
+        "trash receptacles",
+        "waste containers",
+        "waste management",
+        "receptacle placement"
+      ],
+      "mandatoryStatements": [
+        "Trash receptacles are adequate in number for volume of waste",
+        "Receptacles are placed in convenient and appropriate locations",
+        "Placement prevents contamination of product and materials",
+        "Receptacles are clearly identified for waste",
+        "Receptacles are covered or designed to contain waste",
+        "Receptacle locations support good hygiene practices"
+      ],
+      "verificationExpectations": "Quarterly review of trash receptacle adequacy and placement",
+      "monitoringExpectations": "Weekly checks of receptacle condition and placement, immediate adjustment if inadequate"
+    },
+    {
+      "id": "3.06.20",
+      "code": "3.06.20",
+      "required": true,
+      "points": 10,
+      "text": "Are all utensils, hoses, and other items not being used, stored clean and in a manner to prevent contamination?",
+      "keywords": [
+        "utensil storage",
+        "equipment storage",
+        "hose storage",
+        "sanitary storage",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Utensils not in use are stored in clean condition",
+        "Hoses are stored off the floor and protected from contamination",
+        "Storage method prevents contamination of stored items",
+        "Storage areas are clean and organized",
+        "Items are protected from dust, pests, and other contaminants",
+        "Storage allows drainage and drying where appropriate",
+        "Stored items are readily accessible but not in the way of operations"
+      ],
+      "verificationExpectations": "Weekly inspection of utensil and equipment storage practices",
+      "monitoringExpectations": "Daily verification that items are stored properly, immediate correction of improper storage"
+    },
+    {
+      "id": "3.06.21",
+      "code": "3.06.21",
+      "required": true,
+      "points": 5,
+      "text": "Are floor drains constructed and located so they can be easily cleaned, do they appear clean, free from odors, in good repair, and flow in a manner that prevents contamination?",
+      "keywords": [
+        "floor drains",
+        "drain maintenance",
+        "drain cleanliness",
+        "drain flow",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Floor drains are constructed for easy cleaning",
+        "Drains are located to effectively remove water without creating contamination risk",
+        "Drains appear clean without accumulation of debris",
+        "Drains are free from foul odors indicating backup or poor maintenance",
+        "Drains are in good repair without cracks or damage",
+        "Drain flow is adequate and does not cause flooding or pooling",
+        "Drain design and flow prevent contamination of product areas"
+      ],
+      "verificationExpectations": "Weekly inspection of floor drain condition and cleanliness",
+      "monitoringExpectations": "Daily visual checks of drains, immediate cleaning if odors or backup detected"
+    },
+    {
+      "id": "3.06.22",
+      "code": "3.06.22",
+      "required": true,
+      "points": 5,
+      "text": "Are internal transport vehicles (e.g., forklifts, carts, pallet jacks, floor cleaners, etc.), clean, do not emit toxic fumes and are being used in a sanitary manner?",
+      "keywords": [
+        "internal vehicles",
+        "forklifts",
+        "carts",
+        "equipment cleanliness",
+        "sanitary use",
+        "toxic fumes"
+      ],
+      "mandatoryStatements": [
+        "Internal transport vehicles are maintained clean",
+        "Vehicles do not emit toxic fumes or exhaust in product areas",
+        "Vehicles are used in sanitary manner that prevents contamination",
+        "Vehicle wheels and surfaces are clean",
+        "Vehicles are appropriate for food facility use",
+        "Vehicle maintenance prevents leaks or contamination",
+        "Vehicle use follows traffic patterns that prevent cross-contamination"
+      ],
+      "verificationExpectations": "Weekly inspection of internal vehicle cleanliness and sanitary use",
+      "monitoringExpectations": "Daily checks of vehicle condition, immediate cleaning if contamination risk identified"
+    }
+  ],
+  "micro_inject": ["fsms", "sanitation"],
+  "capaInject": [
+    "If daily inspection log not maintained: implement log immediately, train personnel on daily inspection requirements",
+    "If harvest clearance not documented: immediate implementation of clearance process, halt harvest until clearance verified",
+    "If tool accountability not maintained: immediate tool inventory, implement accountability system within 7 days",
+    "If tool dip solutions not maintained: immediate testing and adjustment, increase testing frequency",
+    "If spoilage or adulteration found: immediate product hold, segregation, investigation within 24 hours, enhanced inspection",
+    "If FIFO not followed: immediate reorganization of storage, retrain personnel within 7 days",
+    "If cross-contamination risks identified: immediate implementation of controls, process flow review within 14 days",
+    "If food contact equipment condition unsanitary: immediate removal from service, repair or replace before use",
+    "If food contact surfaces not clean: immediate cleaning, investigate cleaning procedure effectiveness"
+  ],
+  "traceabilityInject": [
+    "Daily inspection logs must be traceable to specific dates and inspectors",
+    "Harvest clearance records must be traceable to specific growing areas and harvest batches",
+    "Tool accountability records must trace tools to specific users and shifts",
+    "Tool dip concentration test results must be traceable to specific stations, times, and personnel",
+    "Material codes must enable full trace back and trace forward"
+  ]
+}

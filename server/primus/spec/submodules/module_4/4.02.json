@@ -1,0 +1,107 @@
+{
+  "code": "4.02",
+  "title": "Inspection",
+  "moduleName": "Module 4: Harvest Crew",
+  "appliesTo": [
+    "pre-harvest inspections",
+    "buffer zones",
+    "pre-operation inspections",
+    "harvest area clearance"
+  ],
+  "description": "Establishes requirements for pre-harvest and pre-operation inspections to ensure harvest areas are cleared for operations and buffer zones are properly identified and respected",
+  "requirements": [
+    {
+      "id": "4.02.01",
+      "code": "4.02.01",
+      "required": true,
+      "points": 5,
+      "text": "Are there records of pre-harvest inspections and do they show that the current block (or coded area) is cleared for harvest? If there are no pre-harvest inspections got to 4.02.02.",
+      "keywords": [
+        "pre-harvest inspection",
+        "records",
+        "block clearance",
+        "coded area",
+        "cleared for harvest",
+        "harvest authorization"
+      ],
+      "mandatoryStatements": [
+        "Pre-harvest inspection records are maintained for each harvest area",
+        "Records identify the specific block or coded area inspected",
+        "Inspection results clearly indicate clearance status for harvest",
+        "Date of inspection and inspector name are recorded",
+        "Any issues or concerns identified during inspection are documented",
+        "Clearance decision is documented before harvest begins"
+      ],
+      "verificationExpectations": "Weekly review of pre-harvest inspection records for completeness and proper clearance documentation, annual audit of inspection process effectiveness",
+      "monitoringExpectations": "Pre-harvest inspection completed before each harvest event for each block or coded area, inspection records reviewed daily"
+    },
+    {
+      "id": "4.02.01a",
+      "code": "4.02.01a",
+      "required": true,
+      "points": 15,
+      "text": "Where pre-harvest inspections have discovered issues, have buffer zones been clearly identified, and at the time of the audit, are those buffer zones being respected?",
+      "keywords": [
+        "buffer zones",
+        "issues",
+        "clearly identified",
+        "respected",
+        "exclusion zones",
+        "marked areas",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Buffer zones are established when pre-harvest inspection issues are discovered",
+        "Buffer zones are clearly marked and identifiable in the field",
+        "Size and boundaries of buffer zones are documented",
+        "Reason for buffer zone establishment is recorded",
+        "Workers are trained on buffer zone locations and restrictions",
+        "Visual verification confirms buffer zones are being respected during harvest",
+        "Product from buffer zones is excluded from harvest",
+        "Buffer zone status is reassessed before removal"
+      ],
+      "verificationExpectations": "Daily verification during harvest that established buffer zones are properly marked and being respected, weekly review of buffer zone establishment and removal documentation",
+      "monitoringExpectations": "Continuous monitoring during harvest operations that no product is harvested from buffer zones, immediate supervisory response if buffer zone violations observed"
+    },
+    {
+      "id": "4.02.02",
+      "code": "4.02.02",
+      "required": true,
+      "points": 10,
+      "text": "Is there a pre-operation inspection log?",
+      "keywords": [
+        "pre-operation inspection",
+        "inspection log",
+        "daily inspection",
+        "equipment readiness",
+        "area readiness",
+        "startup inspection"
+      ],
+      "mandatoryStatements": [
+        "Pre-operation inspection log is maintained",
+        "Inspection is conducted before harvest operations begin each day",
+        "Log includes date, time, and inspector identification",
+        "Key inspection points are documented (equipment, worker facilities, harvest area conditions)",
+        "Any deficiencies found are recorded",
+        "Corrective actions for deficiencies are documented",
+        "Authorization to proceed with operations is recorded"
+      ],
+      "verificationExpectations": "Weekly review of pre-operation inspection logs for completeness and consistent use, quarterly audit that inspection addresses all critical control points",
+      "monitoringExpectations": "Daily verification that pre-operation inspection completed before harvest begins, immediate follow-up on any deficiencies identified"
+    }
+  ],
+  "micro_inject": ["fsms", "inspection"],
+  "capaInject": [
+    "If harvest occurs without pre-harvest inspection: immediate halt, conduct inspection, assess product safety before proceeding",
+    "If buffer zones not established when required: immediate establishment of buffer zones with 150% of recommended size, hold any potentially affected product",
+    "If buffer zone violations observed: immediate halt in affected area, investigate extent of violation, segregate and evaluate product from violation area",
+    "If pre-operation inspection not completed: halt operations, complete inspection, address any deficiencies before start",
+    "If repeated inspection deficiencies: root cause analysis within 7 days, implement preventive measures, additional training for inspection personnel"
+  ],
+  "traceabilityInject": [
+    "Pre-harvest inspection records must be traceable to specific blocks or coded areas and harvest dates",
+    "Buffer zone records must be traceable to inspection findings, establishment date, location, and removal authorization",
+    "Pre-operation inspection logs must be traceable to specific dates and shifts",
+    "Product must be traceable to pre-harvest and pre-operation inspection clearances"
+  ]
+}

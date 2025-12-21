@@ -1,0 +1,15 @@
+{
+  "category": "document_control",
+  "rules": {
+    "version_control_required": "All controlled documents display document number, revision number, effective date, and approval signatures. Documents are uniquely identifiable and version-controlled to prevent use of obsolete information.",
+    "obsolete_removal_mandatory": "Obsolete documents are immediately removed from all points of use upon revision. Obsolete documents retained for reference are clearly marked 'OBSOLETE - REFERENCE ONLY' and stored separately from current documents.",
+    "external_document_control": "External documents including regulatory requirements, customer specifications, and industry standards are controlled to ensure the latest version is available and used. External documents are reviewed annually for currency.",
+    "master_document_list": "A master document list is maintained identifying all controlled documents, their current revision status, and distribution locations. The list is updated whenever documents are created, revised, or obsoleted.",
+    "approval_before_use": "Documents are reviewed and approved by authorized personnel before use. Approval authority is defined by position/role and documented in the document control procedure.",
+    "distribution_controlled": "Document distribution is controlled to ensure relevant personnel have access to current versions. Distribution lists are maintained and updated when organizational changes occur.",
+    "change_management": "Document changes are managed through a formal review and approval process. Significant changes are communicated to affected personnel through training or documented notification.",
+    "electronic_document_backup": "Electronic documents are backed up regularly and protected against unauthorized modification. Access controls ensure only authorized personnel can edit controlled documents.",
+    "retention_policy_established": "Document and record retention periods are defined based on regulatory requirements, customer requirements, and business needs. Minimum retention is 2 years unless otherwise specified.",
+    "periodic_review_required": "All controlled documents are reviewed at least every 3 years to ensure continued relevance and accuracy. Review dates are tracked and overdue reviews flagged for management attention."
+  }
+}

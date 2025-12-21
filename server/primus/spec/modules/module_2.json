@@ -1,0 +1,302 @@
+{
+  "module": "2",
+  "moduleName": "Farm - Good Agricultural Practices",
+  "description": "Comprehensive farm food safety requirements covering general operations, site management, ground history, adjacent land risks, chemical control, training, field worker hygiene, agricultural water management, soil amendments, equipment sanitation, and harvest practices. Aligned with official PrimusGFS v4.0 Checklist Module 2 (Sections 2.01-2.11).",
+  "scope": "All aspects of farm operations for fresh produce cultivation including pre-harvest agricultural water, growing site management, worker hygiene, equipment and harvest crew practices",
+  "totalSubmodules": 11,
+  "totalQuestions": 94,
+  "totalPoints": 823,
+  "officialSource": "PGFS-ND-029-2 R0 July 31, 2025",
+  "submodules": [
+    {
+      "code": "2.01",
+      "name": "General",
+      "alias": "general",
+      "specFile": "2.01.json",
+      "questionsCount": 3,
+      "totalPoints": 25,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.02",
+      "name": "Site",
+      "alias": "site",
+      "specFile": "2.02.json",
+      "questionsCount": 13,
+      "totalPoints": 150,
+      "micro_inject": ["fsms", "pest"]
+    },
+    {
+      "code": "2.03",
+      "name": "Ground History",
+      "alias": "ground_history",
+      "specFile": "2.03.json",
+      "questionsCount": 9,
+      "totalPoints": 70,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.04",
+      "name": "Adjacent Land Use",
+      "alias": "adjacent_land",
+      "specFile": "2.04.json",
+      "questionsCount": 13,
+      "totalPoints": 105,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.05",
+      "name": "Inspection",
+      "alias": "inspection",
+      "specFile": "2.05.json",
+      "questionsCount": 4,
+      "totalPoints": 36,
+      "micro_inject": ["fsms", "chemical"]
+    },
+    {
+      "code": "2.06",
+      "name": "Training",
+      "alias": "training",
+      "specFile": "2.06.json",
+      "questionsCount": 3,
+      "totalPoints": 28,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.07",
+      "name": "Field Worker Hygiene",
+      "alias": "field_worker_hygiene",
+      "specFile": "2.07.json",
+      "questionsCount": 18,
+      "totalPoints": 143,
+      "micro_inject": ["fsms", "sanitation"]
+    },
+    {
+      "code": "2.08",
+      "name": "Agricultural Water",
+      "alias": "agricultural_water",
+      "specFile": "2.08.json",
+      "questionsCount": 15,
+      "totalPoints": 120,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.09",
+      "name": "Soil Amendments",
+      "alias": "soil_amendments",
+      "specFile": "2.09.json",
+      "questionsCount": 8,
+      "totalPoints": 71,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "2.10",
+      "name": "Equipment and Harvest Crew",
+      "alias": "equipment_harvest",
+      "specFile": "2.10.json",
+      "questionsCount": 10,
+      "totalPoints": 80,
+      "micro_inject": ["fsms", "sanitation"]
+    },
+    {
+      "code": "2.11",
+      "name": "Harvest Practices",
+      "alias": "harvest_practices",
+      "specFile": "2.11.json",
+      "questionsCount": 8,
+      "totalPoints": 95,
+      "micro_inject": ["fsms"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this document exists, what it achieves, business and compliance drivers for farm food safety"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What farm operations/areas covered, crop types, who is responsible, any exclusions or limitations"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Minimum 5-8 relevant terms: GAP, agricultural water, soil amendments, harvest crew, food contact surfaces, etc."
+      },
+      {
+        "number": 5,
+        "title": "Roles & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Farm manager, food safety coordinator, supervisors, workers - specific duties for each role"
+      },
+      {
+        "number": 6,
+        "title": "Prerequisites & Reference Documents",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Related SOPs, Primus GFS Module 2, FSMA Produce Safety Rule, worker training materials"
+      },
+      {
+        "number": 7,
+        "title": "Hazard / Risk Analysis",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Site-specific hazards (water contamination, animal intrusion, adjacent land risks), risk assessment, preventive controls"
+      },
+      {
+        "number": 8,
+        "title": "Procedures",
+        "required": true,
+        "minParagraphs": 10,
+        "contentGuidance": "Detailed procedures for water management, site maintenance, worker hygiene, harvest practices (minimum 10-15 steps)"
+      },
+      {
+        "number": 9,
+        "title": "Monitoring Plan",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor (water quality, site conditions, hygiene compliance), frequencies, responsible parties, acceptance criteria"
+      },
+      {
+        "number": 10,
+        "title": "Verification & Validation Activities",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Water testing verification, site inspections, hygiene audits, equipment cleaning validation"
+      },
+      {
+        "number": 11,
+        "title": "Corrective & Preventive Action (CAPA) Protocol",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Triggers (water test failures, animal intrusion, hygiene violations), investigation, containment, root cause, actions, verification"
+      },
+      {
+        "number": 12,
+        "title": "Traceability & Recall Elements",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Growing area identification, harvest records, traceability from field to pack, water source tracking"
+      },
+      {
+        "number": 13,
+        "title": "Record Retention & Document Control",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Farm records (water tests, site inspections, training, harvest logs), retention periods (24+ months), storage"
+      },
+      {
+        "number": 14,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 15,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (Prepared By, Reviewed By, Approved By)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "general": [
+      "trained personnel",
+      "organic certification",
+      "hygiene rules",
+      "food safety program"
+    ],
+    "site": [
+      "site map",
+      "traceability",
+      "risk assessment",
+      "food defense",
+      "exterior maintenance",
+      "animal presence",
+      "fecal matter"
+    ],
+    "ground_history": [
+      "land use history",
+      "soil testing",
+      "flooding",
+      "animal presence",
+      "non-agricultural use"
+    ],
+    "adjacent_land": [
+      "intensive livestock",
+      "buffer zones",
+      "manure",
+      "biosolids",
+      "adjacent land risks",
+      "mitigation measures"
+    ],
+    "inspection": [
+      "chemical inventory",
+      "Safety Data Sheets",
+      "chemical storage",
+      "product quality",
+      "adulteration"
+    ],
+    "training": [
+      "hygiene training",
+      "illness reporting",
+      "training records",
+      "corrective actions"
+    ],
+    "field_worker_hygiene": [
+      "toilet facilities",
+      "hand washing",
+      "gloves",
+      "jewelry",
+      "clean clothing",
+      "designated areas"
+    ],
+    "agricultural_water": [
+      "water quality",
+      "water testing",
+      "microbial standards",
+      "treatment",
+      "distribution system"
+    ],
+    "soil_amendments": [
+      "manure",
+      "compost",
+      "biosolids",
+      "waiting periods",
+      "treatment process",
+      "test results"
+    ],
+    "equipment_harvest": [
+      "equipment sanitation",
+      "harvest containers",
+      "cleaning procedures",
+      "sanitizing",
+      "food contact surfaces"
+    ],
+    "harvest_practices": [
+      "harvest procedures",
+      "product handling",
+      "dropped product",
+      "field packing",
+      "temperature control"
+    ]
+  }
+}

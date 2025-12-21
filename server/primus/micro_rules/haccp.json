@@ -1,0 +1,22 @@
+{
+  "category": "haccp",
+  "rules": {
+    "team_multidisciplinary": "The HACCP team includes multidisciplinary members with collective knowledge of the product, process, and food safety hazards. Team composition includes production, quality, maintenance, and sanitation representation.",
+    "team_leader_authority": "The HACCP team leader has the authority to make food safety decisions, stop production when critical limits are exceeded, and allocate resources for HACCP system maintenance and improvement.",
+    "training_verification": "HACCP team members complete formal HACCP training covering the 7 HACCP principles and 12 preliminary steps. Training certificates or documentation are maintained in personnel files.",
+    "flow_diagram_accuracy": "The process flow diagram is verified annually by physically walking the process from receiving through shipping. Verification confirms all steps, inputs, and potential hazards are accurately represented.",
+    "hazard_analysis_comprehensive": "The hazard analysis considers all potential biological (pathogens, allergens), chemical (cleaning agents, pesticides, heavy metals), and physical (glass, metal, plastic) hazards at each process step.",
+    "scientific_justification_required": "Hazard determinations and control measures are supported by scientific literature, regulatory guidance, pathogen studies, or expert consultation. References are documented in the HACCP plan.",
+    "ccp_decision_tree_applied": "CCPs are identified using the Codex decision tree or equivalent systematic method. Decision tree application is documented for each significant hazard showing the logic for CCP determination.",
+    "critical_limits_validated": "Critical limits are validated through scientific studies, challenge studies, regulatory guidance, or expert opinion demonstrating the limits effectively control the identified hazard.",
+    "monitoring_continuous_preferred": "Monitoring of CCPs is continuous or at a frequency that ensures the CCP remains in control. Continuous monitoring is used wherever technologically and economically feasible.",
+    "monitoring_records_realtime": "CCP monitoring records are completed in real-time by the person performing the monitoring. Records are not completed retrospectively from memory or after the fact.",
+    "corrective_action_immediate": "When critical limits are exceeded, corrective action is taken immediately to bring the process back into control. Production does not continue until the CCP is under control.",
+    "product_disposition_documented": "Product produced when a CCP is out of control is segregated and evaluated for disposition (release, rework, or destroy). Disposition decisions are documented with justification.",
+    "verification_independent": "HACCP verification activities are conducted by personnel independent of those performing monitoring. Verification includes record review, calibration checks, and observation of monitoring activities.",
+    "annual_reassessment": "The HACCP plan is reassessed annually or whenever significant changes occur (new product, new hazard, process change, equipment change, regulatory change). Reassessment is documented.",
+    "validation_before_implementation": "The HACCP plan is validated before implementation to confirm that the plan, when properly implemented, will effectively control the identified hazards.",
+    "revalidation_frequency": "HACCP plan revalidation is conducted at least every 3 years or when information emerges suggesting the plan may no longer be adequate (recalls, audit findings, new science).",
+    "records_complete_accurate": "HACCP records (monitoring, corrective actions, verification, validation) are complete, accurate, signed, dated, and maintained for the retention period (minimum 2 years or shelf life plus 6 months)."
+  }
+}

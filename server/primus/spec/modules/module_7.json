@@ -1,0 +1,307 @@
+{
+  "module": "7",
+  "moduleName": "Food Safety Plan (Preventive Controls)",
+  "description": "Food Safety Plan (Preventive Controls Requirements) covering the development, implementation, and execution of preventive controls systems. This module addresses team formation, hazard analysis, preventive controls, monitoring procedures, validation, verification, corrective actions, and re-analysis requirements.",
+  "scope": "This module applies to both domestic (U.S.) and foreign food facilities (outside the U.S.) that are required to register under Section 415 of the Food, Drug, and Cosmetic Act and comply with the Current Good Manufacturing Practice, Hazard Analysis, and Risk-Based Preventive Controls for Human Food requirements mandated by the FDA Food Safety Modernization Act (FSMA). Auditees have the option to present combined HACCP and Preventive Control Systems, but auditors must report/score separately.",
+  "totalSubmodules": 4,
+  "totalQuestions": 23,
+  "totalPoints": 285,
+  "officialSource": "PGFS-ND-029-7 R0 July 31, 2025",
+  "implementationStatus": "Complete",
+  "submodules": [
+    {
+      "code": "7.01",
+      "name": "General",
+      "specFile": "7.01.json",
+      "questionsCount": 4,
+      "totalPoints": 45,
+      "micro_inject": [
+        "fsms",
+        "preventive_controls",
+        "team",
+        "training",
+        "product_description",
+        "flow_diagram"
+      ]
+    },
+    {
+      "code": "7.02",
+      "name": "Development of the Food Safety Plan",
+      "specFile": "7.02.json",
+      "questionsCount": 12,
+      "totalPoints": 155,
+      "micro_inject": [
+        "fsms",
+        "preventive_controls",
+        "hazard_analysis",
+        "monitoring",
+        "validation",
+        "verification",
+        "corrective_actions",
+        "recall"
+      ]
+    },
+    {
+      "code": "7.03",
+      "name": "Execution of the Food Safety Plan",
+      "specFile": "7.03.json",
+      "questionsCount": 6,
+      "totalPoints": 75,
+      "micro_inject": [
+        "fsms",
+        "preventive_controls",
+        "training",
+        "monitoring",
+        "records",
+        "corrective_actions"
+      ]
+    },
+    {
+      "code": "7.04",
+      "name": "Re-analysis of the Food Safety Plan",
+      "specFile": "7.04.json",
+      "questionsCount": 1,
+      "totalPoints": 10,
+      "micro_inject": ["fsms", "preventive_controls", "review", "re_analysis"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this Food Safety Plan exists, FSMA compliance objectives, what it achieves for preventive controls"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What products/processes covered, facility operations included, FSMA applicability, who is responsible"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "FSMA/Preventive Controls terminology (PCQI, preventive control, process control, allergen control, sanitation control, supply chain control, etc.), minimum 8-10 terms"
+      },
+      {
+        "number": 5,
+        "title": "Food Safety Team & PCQI Qualifications",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Food Safety Plan team leader, Preventive Controls Qualified Individual (PCQI), team members with qualifications, training requirements, specific responsibilities"
+      },
+      {
+        "number": 6,
+        "title": "Product Description & Intended Use",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Complete product description for each product or product group, ingredients, processing characteristics, distribution method, intended use, target consumer"
+      },
+      {
+        "number": 7,
+        "title": "Process Flow Diagram",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Detailed flow diagram of all process steps, product handling steps, on-site verification statement"
+      },
+      {
+        "number": 8,
+        "title": "Hazard Analysis",
+        "required": true,
+        "minParagraphs": 4,
+        "contentGuidance": "Comprehensive hazard analysis for each product/product group, biological, chemical, physical hazards, likelihood of occurrence, severity assessment, preventive controls identification"
+      },
+      {
+        "number": 9,
+        "title": "Preventive Controls",
+        "required": true,
+        "minParagraphs": 4,
+        "contentGuidance": "Process preventive controls, allergen preventive controls, sanitation preventive controls, supply chain preventive controls, other preventive controls, reasonably appropriate procedures"
+      },
+      {
+        "number": 10,
+        "title": "Parameters, Critical Limits & Targets",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Process preventive control critical limits with validation documentation, allergen/sanitation/supply chain parameters and targets, scientific basis"
+      },
+      {
+        "number": 11,
+        "title": "Monitoring Procedures",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor, how to monitor, frequency of monitoring, who is responsible, monitoring equipment"
+      },
+      {
+        "number": 12,
+        "title": "Corrective Actions & Corrections",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Corrective action procedures for out-of-specification situations, loss of control handling, affected product disposition, process control restoration, correction procedures"
+      },
+      {
+        "number": 13,
+        "title": "Verification Procedures",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Verification activities and schedules, calibration procedures, record review by PCQI or designate, environmental monitoring, validation studies"
+      },
+      {
+        "number": 14,
+        "title": "Validation",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Validation work for process preventive controls, PCQI oversight of validation, scientific basis, validation documentation"
+      },
+      {
+        "number": 15,
+        "title": "Record Keeping & Documentation",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Food Safety Plan documentation, preventive control monitoring records, corrective action records, verification records, validation records, retention periods"
+      },
+      {
+        "number": 16,
+        "title": "Recall Plan",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Documented recall plan, recall procedures, notification processes, product retrieval, effectiveness checks"
+      },
+      {
+        "number": 17,
+        "title": "Re-analysis of Food Safety Plan",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Re-analysis at least once every 3 years, re-analysis when significant changes occur, documentation of re-analysis"
+      },
+      {
+        "number": 18,
+        "title": "Training & Implementation",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Preventive control training for all workers, specific training for workers directly involved with preventive controls, training documentation, competency assessment"
+      },
+      {
+        "number": 19,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 20,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (PCQI, Food Safety Team Leader, QA Manager, General Manager)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "fsma_general": [
+      "Food Safety Plan",
+      "preventive controls",
+      "FSMA",
+      "PCQI",
+      "FDA",
+      "food safety team",
+      "training",
+      "product description",
+      "flow diagram"
+    ],
+    "hazard_analysis": [
+      "biological hazards",
+      "chemical hazards",
+      "physical hazards",
+      "likelihood",
+      "severity",
+      "preventive controls"
+    ],
+    "preventive_controls": [
+      "process preventive control",
+      "allergen preventive control",
+      "sanitation preventive control",
+      "supply chain preventive control",
+      "reasonably appropriate"
+    ],
+    "parameters": [
+      "critical limits",
+      "parameters",
+      "values",
+      "targets",
+      "validation",
+      "scientific understanding"
+    ],
+    "monitoring": [
+      "monitoring frequency",
+      "monitoring procedures",
+      "monitoring activities",
+      "compliance",
+      "responsibility"
+    ],
+    "corrective_actions": [
+      "corrective action",
+      "correction",
+      "deviation",
+      "deficiency",
+      "out of specification",
+      "loss of control",
+      "affected product"
+    ],
+    "verification": [
+      "verification procedures",
+      "verification schedules",
+      "PCQI qualified individual",
+      "trained designate",
+      "record review",
+      "calibration"
+    ],
+    "validation": [
+      "validation work",
+      "validation documentation",
+      "PCQI oversight",
+      "scientific basis",
+      "process preventive controls"
+    ],
+    "records": [
+      "Food Safety Plan",
+      "monitoring records",
+      "corrective action records",
+      "verification records",
+      "signed off",
+      "initialed"
+    ],
+    "recall": [
+      "recall plan",
+      "documented",
+      "implemented",
+      "product retrieval",
+      "effectiveness"
+    ],
+    "reanalysis": [
+      "re-analysis",
+      "3 years",
+      "significant changes",
+      "documentation"
+    ],
+    "training": [
+      "preventive control training",
+      "workers",
+      "training documentation",
+      "competency",
+      "basic principles"
+    ]
+  }
+}

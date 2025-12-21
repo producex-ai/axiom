@@ -1,0 +1,433 @@
+{
+  "module": "5",
+  "moduleName": "Facility",
+  "description": "Establishes comprehensive good manufacturing practices (GMP) requirements for facility operations including general chemical safety and food defense, pest control programs, storage area management, operational practices, worker hygiene practices, equipment standards, equipment cleaning protocols, and general facility cleaning. Aligned with official PrimusGFS v4.0 Checklist Module 5 (Sections 5.01-5.18).",
+  "scope": "All facility operations including manufacturing, processing, packing, and storage areas for food products within the organization's scope of certification",
+  "totalSubmodules": 18,
+  "totalQuestions": 189,
+  "totalPoints": 1378,
+  "officialSource": "PGFS-ND-029-5 R0 July 31, 2025",
+  "implementationStatus": "Complete - All 18 submodules complete (sections 5.01-5.18 from official checklist).",
+  "submodules": [
+    {
+      "code": "5.01",
+      "name": "General",
+      "alias": "general",
+      "specFile": "5.01.json",
+      "questionsCount": 4,
+      "totalPoints": 45,
+      "micro_inject": ["fsms", "chemical_safety", "food_defense"]
+    },
+    {
+      "code": "5.02",
+      "name": "Pest Control",
+      "alias": "pest_control",
+      "specFile": "5.02.json",
+      "questionsCount": 10,
+      "totalPoints": 105,
+      "micro_inject": ["fsms", "pest_control", "automatic_failure"]
+    },
+    {
+      "code": "5.03",
+      "name": "Storage Areas & Packaging Materials",
+      "alias": "storage_areas",
+      "specFile": "5.03.json",
+      "questionsCount": 9,
+      "totalPoints": 95,
+      "micro_inject": [
+        "fsms",
+        "storage",
+        "cross_contamination",
+        "automatic_failure"
+      ]
+    },
+    {
+      "code": "5.04",
+      "name": "Operational Practices",
+      "alias": "operational_practices",
+      "specFile": "5.04.json",
+      "questionsCount": 17,
+      "totalPoints": 176,
+      "micro_inject": ["fsms", "gmp", "cross_contamination", "sanitation"]
+    },
+    {
+      "code": "5.05",
+      "name": "Worker Practices",
+      "alias": "worker_practices",
+      "specFile": "5.05.json",
+      "questionsCount": 13,
+      "totalPoints": 88,
+      "micro_inject": ["fsms", "hygiene", "gmp", "health"]
+    },
+    {
+      "code": "5.06",
+      "name": "Equipment",
+      "alias": "equipment",
+      "specFile": "5.06.json",
+      "questionsCount": 5,
+      "totalPoints": 55,
+      "micro_inject": ["fsms", "equipment", "food_contact_surfaces"]
+    },
+    {
+      "code": "5.07",
+      "name": "Equipment Cleaning",
+      "alias": "equipment_cleaning",
+      "specFile": "5.07.json",
+      "questionsCount": 10,
+      "totalPoints": 88,
+      "micro_inject": ["fsms", "sanitation", "cleaning"]
+    },
+    {
+      "code": "5.08",
+      "name": "General Cleaning",
+      "alias": "general_cleaning",
+      "specFile": "5.08.json",
+      "questionsCount": 14,
+      "totalPoints": 98,
+      "micro_inject": ["fsms", "sanitation", "waste"]
+    },
+    {
+      "code": "5.09",
+      "name": "Buildings and Grounds",
+      "alias": "buildings_grounds",
+      "specFile": "5.09.json",
+      "questionsCount": 19,
+      "totalPoints": 106,
+      "micro_inject": ["fsms", "facility", "pest_control", "sanitation"]
+    },
+    {
+      "code": "5.10",
+      "name": "Site",
+      "alias": "site",
+      "specFile": "5.10.json",
+      "questionsCount": 5,
+      "totalPoints": 33,
+      "micro_inject": ["fsms", "facility", "risk_assessment"]
+    },
+    {
+      "code": "5.11",
+      "name": "Chemical Files",
+      "alias": "chemical_files",
+      "specFile": "5.11.json",
+      "questionsCount": 3,
+      "totalPoints": 18,
+      "micro_inject": ["fsms", "chemical_safety", "documentation"]
+    },
+    {
+      "code": "5.12",
+      "name": "Pest Control Documentation",
+      "alias": "pest_control_documentation",
+      "specFile": "5.12.json",
+      "questionsCount": 3,
+      "totalPoints": 35,
+      "micro_inject": ["fsms", "pest_control", "documentation"]
+    },
+    {
+      "code": "5.13",
+      "name": "Operation Monitoring Records",
+      "alias": "operation_monitoring",
+      "specFile": "5.13.json",
+      "questionsCount": 8,
+      "totalPoints": 56,
+      "micro_inject": ["fsms", "monitoring", "documentation"]
+    },
+    {
+      "code": "5.14",
+      "name": "Maintenance & Sanitation Files",
+      "alias": "maintenance_sanitation",
+      "specFile": "5.14.json",
+      "questionsCount": 13,
+      "totalPoints": 120,
+      "micro_inject": ["fsms", "maintenance", "sanitation", "documentation"]
+    },
+    {
+      "code": "5.15",
+      "name": "Worker Documentation",
+      "alias": "worker_documentation",
+      "specFile": "5.15.json",
+      "questionsCount": 6,
+      "totalPoints": 41,
+      "micro_inject": ["fsms", "training", "documentation"]
+    },
+    {
+      "code": "5.16",
+      "name": "Testing",
+      "alias": "testing",
+      "specFile": "5.16.json",
+      "questionsCount": 12,
+      "totalPoints": 150,
+      "micro_inject": [
+        "fsms",
+        "testing",
+        "quality_assurance",
+        "microbiological"
+      ]
+    },
+    {
+      "code": "5.17",
+      "name": "Temperature Controlled Storage & Distribution Logs",
+      "alias": "temperature_logs",
+      "specFile": "5.17.json",
+      "questionsCount": 6,
+      "totalPoints": 40,
+      "micro_inject": [
+        "fsms",
+        "temperature_control",
+        "cold_chain",
+        "documentation"
+      ]
+    },
+    {
+      "code": "5.18",
+      "name": "Allergen Control",
+      "alias": "allergen_control",
+      "specFile": "5.18.json",
+      "questionsCount": 8,
+      "totalPoints": 35,
+      "micro_inject": ["fsms", "allergen", "cross_contamination", "labeling"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this document exists, what it achieves for facility GMP operations, business and compliance drivers"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What facility operations/areas covered, manufacturing/processing/packing/storage, who is responsible, any exclusions or limitations"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Minimum 5-8 relevant technical terms, GMP-specific terminology, facility operations acronyms"
+      },
+      {
+        "number": 5,
+        "title": "Roles & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific positions with clearly defined facility duties, authority levels, and accountability for food safety"
+      },
+      {
+        "number": 6,
+        "title": "Prerequisites & Reference Documents",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Related SOPs, standards (Primus GFS, FSMA), regulatory requirements, GMP guidelines, training prerequisites"
+      },
+      {
+        "number": 7,
+        "title": "Hazard / Risk Analysis",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Facility-specific hazards (contamination, pests, chemical hazards, physical hazards), risk assessment, control measures"
+      },
+      {
+        "number": 8,
+        "title": "Procedures",
+        "required": true,
+        "minParagraphs": 8,
+        "contentGuidance": "Detailed step-by-step facility GMP procedures (minimum 8-12 steps), cleaning protocols, pest control, equipment maintenance, specific frequencies"
+      },
+      {
+        "number": 9,
+        "title": "Monitoring Plan",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor in facility operations, how often, who is responsible, what records to keep, acceptance criteria"
+      },
+      {
+        "number": 10,
+        "title": "Verification & Validation Activities",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "How to verify facility procedures are followed, validation that procedures are effective, audit/review frequency"
+      },
+      {
+        "number": 11,
+        "title": "Corrective & Preventive Action (CAPA) Protocol",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Triggers for CAPA in facility operations, investigation steps, containment, root cause analysis, corrective actions, preventive measures"
+      },
+      {
+        "number": 12,
+        "title": "Traceability & Recall Elements",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Facility documentation traceability, record linkages, lot/batch identification, product tracking through facility"
+      },
+      {
+        "number": 13,
+        "title": "Record Retention & Document Control",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What facility records are generated, retention periods, storage location, access control"
+      },
+      {
+        "number": 14,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 15,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (Prepared By, Reviewed By, Approved By)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "general": [
+      "chemicals",
+      "pesticides",
+      "sanitizers",
+      "detergents",
+      "lubricants",
+      "food grade",
+      "non-food grade",
+      "GMP signs",
+      "food defense"
+    ],
+    "pest_control": [
+      "pests",
+      "insects",
+      "rodents",
+      "birds",
+      "reptiles",
+      "mammals",
+      "pest control program",
+      "pest control devices",
+      "bait stations",
+      "automatic failure"
+    ],
+    "storage_areas": [
+      "cross contamination",
+      "allergen",
+      "rejected materials",
+      "on hold",
+      "spoilage",
+      "adulteration",
+      "FIFO",
+      "rotation codes",
+      "temperature control",
+      "automatic failure"
+    ],
+    "operational_practices": [
+      "process flow",
+      "contamination prevention",
+      "overhead contamination",
+      "rework",
+      "re-packaging",
+      "foreign material control",
+      "metal detectors",
+      "anti-microbial",
+      "hand washing stations",
+      "toilet facilities",
+      "sanitation stations",
+      "foot baths"
+    ],
+    "worker_practices": [
+      "hand washing",
+      "sanitizing",
+      "fingernails",
+      "boils",
+      "sores",
+      "wounds",
+      "foodborne illness",
+      "hair restraints",
+      "jewelry",
+      "protective garments",
+      "gloves",
+      "drinking water",
+      "first aid"
+    ],
+    "equipment": [
+      "food contact surfaces",
+      "flaking paint",
+      "corrosion",
+      "rust",
+      "equipment design",
+      "thermometers",
+      "non-glass",
+      "non-mercury"
+    ],
+    "equipment_cleaning": [
+      "sanitation",
+      "cleaning schedule",
+      "product protection",
+      "cooling units",
+      "fans",
+      "stored equipment",
+      "utensils",
+      "maintenance tools",
+      "lubricants"
+    ],
+    "general_cleaning": ["spills", "waste", "garbage"],
+    "facility_maintenance": [
+      "building structure",
+      "walls",
+      "floors",
+      "ceilings",
+      "doors",
+      "windows",
+      "lighting",
+      "ventilation",
+      "condensation",
+      "temperature control"
+    ],
+    "water_supply": [
+      "potable water",
+      "water quality",
+      "testing",
+      "coliforms",
+      "E. coli",
+      "water treatment",
+      "backflow prevention"
+    ],
+    "ice": [
+      "ice quality",
+      "ice production",
+      "ice storage",
+      "ice handling",
+      "potable water source"
+    ],
+    "glass_brittle_plastics": [
+      "glass policy",
+      "breakage",
+      "physical hazards",
+      "brittle plastics"
+    ],
+    "waste_disposal": [
+      "waste containers",
+      "drainage",
+      "overflow",
+      "waste removal"
+    ],
+    "worker_facilities": [
+      "changing rooms",
+      "lockers",
+      "cafeteria",
+      "clean and dirty separation"
+    ]
+  }
+}

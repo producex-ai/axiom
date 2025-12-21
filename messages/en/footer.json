@@ -1,0 +1,54 @@
+{
+  "company": {
+    "name": "ProduceX",
+    "tagline": "Transforming Food Safety with Intelligence",
+    "description": "Leading the future of food safety compliance through AI-powered solutions."
+  },
+  "products": {
+    "title": "Products",
+    "axiom": {
+      "name": "Axiom",
+      "description": "Compliance Documentation & Management"
+    },
+    "visio": {
+      "name": "Visio",
+      "description": "Quality Control & Receiving"
+    },
+    "nexo": {
+      "name": "Nexo",
+      "description": "Dispute Resolution"
+    }
+  },
+  "companyLinks": {
+    "title": "Company",
+    "aboutUs": "About Us",
+    "careers": "Careers",
+    "press": "Press",
+    "contact": "Contact"
+  },
+  "resources": {
+    "title": "Resources",
+    "documentation": "Documentation",
+    "apiReference": "API Reference",
+    "caseStudies": "Case Studies",
+    "blog": "Blog"
+  },
+  "support": {
+    "title": "Support",
+    "helpCenter": "Help Center",
+    "community": "Community",
+    "status": "Status",
+    "security": "Security"
+  },
+  "social": {
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter",
+    "github": "GitHub"
+  },
+  "legal": {
+    "copyright": "© 2025 ProduceX. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy"
+  }
+}

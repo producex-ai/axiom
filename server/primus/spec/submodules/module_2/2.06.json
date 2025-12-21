@@ -1,0 +1,108 @@
+{
+  "code": "2.06",
+  "title": "Training",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "employee training",
+    "food safety training",
+    "hygiene training",
+    "illness reporting",
+    "corrective actions"
+  ],
+  "description": "Requirements for comprehensive food safety training programs including hygiene training, illness reporting procedures, and documentation of training and corrective actions",
+  "requirements": [
+    {
+      "id": "2.06.01",
+      "code": "2.06.01",
+      "required": true,
+      "points": 15,
+      "text": "Is there a food safety hygiene training program covering new and existing workers and are there records of these training events?",
+      "keywords": [
+        "hygiene training",
+        "training program",
+        "training records",
+        "new workers",
+        "existing workers",
+        "food safety training"
+      ],
+      "mandatoryStatements": [
+        "Food safety hygiene training program is documented",
+        "Program covers personal hygiene requirements",
+        "Training is provided to all new workers before starting work",
+        "Existing workers receive annual refresher training at minimum",
+        "Training is provided in language(s) understood by workers",
+        "Training records document date, attendees, topics, and trainer",
+        "Training includes handwashing, illness reporting, hygiene rules, and contamination prevention",
+        "Training effectiveness is assessed",
+        "Workers demonstrate understanding of food safety hygiene requirements"
+      ],
+      "verificationExpectations": "Quarterly audit of training records for completeness, annual assessment of training effectiveness",
+      "monitoringExpectations": "Immediate training of new workers, annual refresher training for all workers, ongoing verification of hygiene compliance"
+    },
+    {
+      "id": "2.06.02",
+      "code": "2.06.02",
+      "required": true,
+      "points": 10,
+      "text": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering from any illnesses that might be a contamination risk to the products being produced, and return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors can check procedure/policy but not actual records).",
+      "keywords": [
+        "illness reporting",
+        "cut reporting",
+        "injury reporting",
+        "return to work",
+        "food handler health",
+        "confidentiality"
+      ],
+      "mandatoryStatements": [
+        "Written procedure requires workers to report illnesses and injuries",
+        "Procedure specifies reportable illnesses (diarrhea, vomiting, jaundice, fever with sore throat, infected wounds, etc.)",
+        "Procedure requires reporting of cuts, grazes, and open wounds",
+        "Return to work criteria are defined",
+        "Procedure is communicated to all food handlers during orientation and training",
+        "Reporting process is confidential where required by law",
+        "Management response to reports is defined (evaluation, exclusion, restriction, medical clearance)",
+        "Workers understand obligation to report without fear of retaliation",
+        "Procedure is posted in appropriate locations"
+      ],
+      "verificationExpectations": "Annual review of illness reporting procedure, verification during training observations",
+      "monitoringExpectations": "Daily pre-work health checks where appropriate, immediate management response to illness reports"
+    },
+    {
+      "id": "2.06.03",
+      "code": "2.06.03",
+      "required": true,
+      "points": 3,
+      "text": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
+      "keywords": [
+        "non-conformance records",
+        "corrective actions",
+        "retraining",
+        "food safety violations",
+        "disciplinary actions"
+      ],
+      "mandatoryStatements": [
+        "System exists to document worker food safety violations",
+        "Non-conformances are documented with date, worker, and specific violation",
+        "Corrective actions are documented for each non-conformance",
+        "Retraining is provided when violations indicate lack of understanding",
+        "Repeat violations result in escalating corrective actions",
+        "Serious violations result in immediate action (removal from food handling, etc.)",
+        "Records demonstrate accountability and continuous improvement",
+        "Non-conformance trends are analyzed to identify systemic issues"
+      ],
+      "verificationExpectations": "Quarterly review of non-conformance records and corrective action effectiveness",
+      "monitoringExpectations": "Immediate documentation of violations, timely corrective actions including retraining within 7 days"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If training program incomplete or records inadequate: develop/update training program within 14 days, train all workers within 30 days, maintain complete records going forward",
+    "If illness reporting procedure not in place or not communicated: develop procedure immediately, train all workers within 7 days, post signage",
+    "If non-conformances not documented or corrective actions not taken: implement documentation system immediately, address all outstanding violations, retrain workers as needed"
+  ],
+  "traceabilityInject": [
+    "Training records must be traceable to specific employees, training dates, topics, and trainers",
+    "Illness reporting procedures must be traceable to specific communications and training events",
+    "Non-conformance records must be traceable to specific workers, violations, dates, and corrective actions"
+  ]
+}

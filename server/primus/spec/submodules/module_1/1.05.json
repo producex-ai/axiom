@@ -1,0 +1,158 @@
+{
+  "code": "1.05",
+  "title": "Release of Items/Product",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "product release",
+    "hold procedures",
+    "rejected items",
+    "customer complaints",
+    "product disposition"
+  ],
+  "description": "Systematic procedures for product release, handling of hold and rejected items, and managing customer food safety complaints and feedback",
+  "requirements": [
+    {
+      "id": "1.05.01",
+      "code": "1.05.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented product release procedure available?",
+      "keywords": [
+        "product release",
+        "release procedure",
+        "release criteria",
+        "release authorization",
+        "disposition"
+      ],
+      "mandatoryStatements": [
+        "Product release procedure is documented",
+        "Release criteria are clearly defined (testing, inspection, documentation review)",
+        "Responsible personnel for product release are identified",
+        "Procedure requires verification of all food safety requirements before release",
+        "Hold and quarantine procedures are included",
+        "Positive release system ensures only approved product is released",
+        "Emergency release procedures are defined if applicable"
+      ],
+      "verificationExpectations": "Annual review of product release procedure for adequacy, quarterly verification that releases follow procedure",
+      "monitoringExpectations": "Pre-release verification for each lot/batch, immediate documentation of release decision"
+    },
+    {
+      "id": "1.05.02",
+      "code": "1.05.02",
+      "required": true,
+      "points": 5,
+      "text": "Are there records of product releases kept on file?",
+      "keywords": [
+        "release records",
+        "lot release",
+        "batch release",
+        "release documentation",
+        "release history"
+      ],
+      "mandatoryStatements": [
+        "Product release records are maintained for all lots/batches",
+        "Records document date of release, lot/batch identifier, and authorizing person",
+        "Records show all release criteria were met (test results, inspections, etc.)",
+        "Traceability from product to release record is maintained",
+        "Records are organized and retrievable",
+        "Records are retained per record retention procedure",
+        "Release records support product traceability and recall capability"
+      ],
+      "verificationExpectations": "Annual audit of release records for completeness, quarterly verification of record organization and traceability",
+      "monitoringExpectations": "Immediate documentation at time of release, weekly review of release record completeness"
+    },
+    {
+      "id": "1.05.03",
+      "code": "1.05.03",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented procedure for handling on hold and rejected items?",
+      "keywords": [
+        "hold procedure",
+        "rejected items",
+        "quarantine",
+        "non-conforming product",
+        "disposition"
+      ],
+      "mandatoryStatements": [
+        "Procedure for handling hold and rejected items is documented",
+        "Segregation and identification requirements are specified",
+        "Physical controls to prevent unintended use or release are defined",
+        "Evaluation and disposition process is described",
+        "Authority for disposition decisions is identified",
+        "Disposal, rework, or downgrade options are specified",
+        "Documentation requirements for disposition are defined",
+        "Notification requirements (to customers, suppliers, regulators) are included if applicable"
+      ],
+      "verificationExpectations": "Annual review of hold/reject procedure, quarterly verification that segregated items are properly identified and controlled",
+      "monitoringExpectations": "Immediate segregation upon identification of non-conforming product, daily verification of physical controls"
+    },
+    {
+      "id": "1.05.04",
+      "code": "1.05.04",
+      "required": true,
+      "points": 5,
+      "text": "Are there records of the handling of on hold and rejected items kept on file?",
+      "keywords": [
+        "hold records",
+        "rejection records",
+        "disposition records",
+        "non-conformance tracking",
+        "hold history"
+      ],
+      "mandatoryStatements": [
+        "Records are maintained for all items placed on hold or rejected",
+        "Records document reason for hold/rejection, date, and quantity",
+        "Investigation and evaluation results are documented",
+        "Disposition decision and justification are recorded",
+        "Authority for disposition is documented (signature or electronic approval)",
+        "Final handling (disposal, rework, downgrade, release) is recorded",
+        "Records support traceability of non-conforming product",
+        "Trend analysis of holds/rejections is performed to identify systemic issues"
+      ],
+      "verificationExpectations": "Annual audit of hold/reject records, quarterly review of disposition compliance and trend analysis",
+      "monitoringExpectations": "Immediate documentation when items are placed on hold, weekly review of open holds for timely resolution"
+    },
+    {
+      "id": "1.05.05",
+      "code": "1.05.05",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented procedure for dealing with customer and buyer food safety complaints/feedback along with records and company responses, including corrective actions?",
+      "keywords": [
+        "customer complaints",
+        "complaint procedure",
+        "complaint handling",
+        "customer feedback",
+        "complaint investigation"
+      ],
+      "mandatoryStatements": [
+        "Customer complaint procedure is documented",
+        "Procedure covers receipt, documentation, and acknowledgment of complaints",
+        "Food safety complaints are prioritized and escalated appropriately",
+        "Investigation methodology is defined",
+        "Root cause analysis is required for food safety complaints",
+        "Corrective and preventive actions are implemented",
+        "Customer communication and response procedures are specified",
+        "Complaint records include: complaint details, investigation results, corrective actions, and customer response",
+        "Trend analysis of complaints is conducted",
+        "Lessons learned are incorporated into food safety system improvements"
+      ],
+      "verificationExpectations": "Annual audit of complaint handling procedure and records, quarterly trend analysis of complaints",
+      "monitoringExpectations": "Immediate acknowledgment of food safety complaints, timely investigation (within 24-48 hours), monthly review of open complaints"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If product released without meeting criteria: immediate recall assessment, investigate release failure, implement enhanced verification within 7 days",
+    "If release records incomplete or missing: reconstruct records if possible, implement checklist system to ensure completeness",
+    "If hold/rejected items not properly segregated: immediate physical segregation, investigate control failure, enhance identification system",
+    "If customer food safety complaint not properly investigated: immediate investigation, customer communication within 24 hours, corrective action within specified timeframe"
+  ],
+  "traceabilityInject": [
+    "Product release records must trace from lot/batch to all supporting test results and inspection records",
+    "Hold and rejection records must trace from identification through final disposition",
+    "Customer complaint records must trace from complaint receipt through investigation, corrective action, and customer response",
+    "All disposition decisions must be traceable to authorized personnel and supporting evaluation data"
+  ]
+}

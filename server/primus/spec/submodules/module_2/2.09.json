@@ -1,0 +1,224 @@
+{
+  "code": "2.09",
+  "title": "Soil Amendments",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "soil amendments",
+    "manure",
+    "compost",
+    "biosolids",
+    "non-synthetic amendments",
+    "organic fertilizers"
+  ],
+  "description": "Requirements for safe use of biological soil amendments including manure, compost, biosolids, and other non-synthetic amendments, covering treatment processes, waiting periods, testing, and application controls",
+  "requirements": [
+    {
+      "id": "2.09.01",
+      "code": "2.09.01",
+      "required": false,
+      "points": 0,
+      "text": "Are untreated or partly treated animal manure, compost made with animal manure, or other non-synthetic Biological Soil Amendments of Animal Origin (BSAAO) applied to growing areas or fields? If No, go to 2.09.08.",
+      "keywords": [
+        "animal manure",
+        "compost",
+        "BSAAO",
+        "biological soil amendments",
+        "untreated manure"
+      ],
+      "mandatoryStatements": [
+        "Use of animal manure or BSAAO is documented",
+        "Information gathering for compliance assessment"
+      ],
+      "verificationExpectations": "Annual review of soil amendment practices",
+      "monitoringExpectations": "Document all soil amendment applications"
+    },
+    {
+      "id": "2.09.02",
+      "code": "2.09.02",
+      "required": true,
+      "points": 15,
+      "text": "If untreated or partly treated animal manure or compost made with animal manure is applied to a growing area, is there a minimum of 120 days between application and harvest for crops in contact with the soil (or soil particles) and 90 days for crops not in contact with the soil?",
+      "keywords": [
+        "waiting period",
+        "120 days",
+        "90 days",
+        "manure application",
+        "harvest interval"
+      ],
+      "mandatoryStatements": [
+        "Minimum 120-day interval for crops contacting soil/soil particles",
+        "Minimum 90-day interval for crops not contacting soil",
+        "Application dates are documented",
+        "Harvest dates are documented",
+        "Waiting period compliance is verified before harvest",
+        "If intervals not met, product is not harvested or alternative mitigation is documented"
+      ],
+      "verificationExpectations": "Pre-harvest verification of waiting period compliance for all manure-amended fields",
+      "monitoringExpectations": "Track application dates and calculate harvest eligibility dates, do not harvest before intervals met"
+    },
+    {
+      "id": "2.09.03",
+      "code": "2.09.03",
+      "required": true,
+      "points": 15,
+      "text": "If biosolids are used, is there written verification that the biosolids meet prevailing guidelines, governmental or local standards (e.g., EPA Part 503 or equivalent)?",
+      "keywords": [
+        "biosolids",
+        "EPA Part 503",
+        "biosolids certification",
+        "regulatory compliance",
+        "pathogen reduction"
+      ],
+      "mandatoryStatements": [
+        "Written verification that biosolids meet regulatory standards",
+        "Documentation includes EPA Part 503 or equivalent certification",
+        "Biosolids classification is documented (Class A or Class B)",
+        "Pathogen reduction and vector attraction reduction are verified",
+        "Heavy metal limits are verified to be within standards",
+        "Certification or documentation is from biosolids supplier",
+        "Records are maintained for each biosolids shipment/application"
+      ],
+      "verificationExpectations": "Verification before each biosolids application",
+      "monitoringExpectations": "Obtain and review documentation before accepting and using biosolids"
+    },
+    {
+      "id": "2.09.04",
+      "code": "2.09.04",
+      "required": true,
+      "points": 10,
+      "text": "Where compost is used, is there documentation of the composting process (e.g., time, temperature, turning regime) that demonstrates that the process will eliminate pathogens?",
+      "keywords": [
+        "composting process",
+        "time-temperature",
+        "pathogen reduction",
+        "compost documentation",
+        "turning regime"
+      ],
+      "mandatoryStatements": [
+        "Composting process is documented",
+        "Time and temperature parameters are recorded",
+        "Turning/aeration regime is documented",
+        "Process achieves pathogen reduction (e.g., 55°C for 3 days with turning, or 131°F for 15 days with turning)",
+        "Process meets recognized composting standards (US Composting Council, EPA, OMRI, etc.)",
+        "Each compost batch has documentation or certificate of process",
+        "If purchased compost, supplier provides process documentation"
+      ],
+      "verificationExpectations": "Review composting process documentation before each use/purchase",
+      "monitoringExpectations": "Monitor composting process parameters if produced on-site, verify supplier documentation if purchased"
+    },
+    {
+      "id": "2.09.05",
+      "code": "2.09.05",
+      "required": true,
+      "points": 5,
+      "text": "Where treated animal manure or compost is used, is there documentation demonstrating that the treatment process is sufficient to reduce pathogens?",
+      "keywords": [
+        "treated manure",
+        "treatment process",
+        "pathogen reduction",
+        "documentation"
+      ],
+      "mandatoryStatements": [
+        "Treatment process for manure is documented",
+        "Process parameters demonstrate pathogen reduction",
+        "Treatment meets recognized standards or scientific literature",
+        "Treatment records are maintained for each batch",
+        "If commercial product, supplier provides treatment documentation",
+        "Treatment effectiveness may be verified through testing if required"
+      ],
+      "verificationExpectations": "Review treatment documentation before use",
+      "monitoringExpectations": "Monitor treatment process if done on-site, verify supplier documentation if purchased"
+    },
+    {
+      "id": "2.09.06",
+      "code": "2.09.06",
+      "required": true,
+      "points": 10,
+      "text": "Where animal manure, compost or other BSAAO is stored on-site, is it stored in a manner that prevents contamination of crops, water sources, and the growing environment?",
+      "keywords": [
+        "manure storage",
+        "compost storage",
+        "contamination prevention",
+        "runoff control",
+        "storage location"
+      ],
+      "mandatoryStatements": [
+        "Manure/compost storage area is located away from growing areas",
+        "Storage is located away from water sources",
+        "Storage area contains runoff and prevents leaching",
+        "Berms or containment systems are in place",
+        "Storage piles are covered or managed to prevent contamination",
+        "Storage area is clearly marked and access-controlled",
+        "Storage does not attract pests or create odor issues affecting production areas"
+      ],
+      "verificationExpectations": "Quarterly inspection of manure/compost storage areas",
+      "monitoringExpectations": "Weekly monitoring of storage conditions, immediate containment if runoff detected"
+    },
+    {
+      "id": "2.09.07",
+      "code": "2.09.07",
+      "required": true,
+      "points": 10,
+      "text": "Where animal manure, compost or other BSAAO is applied, are application methods and timing controlled to minimize contamination risk?",
+      "keywords": [
+        "application methods",
+        "application timing",
+        "incorporation",
+        "contamination control",
+        "weather conditions"
+      ],
+      "mandatoryStatements": [
+        "Application methods are designed to minimize contamination risk",
+        "Application timing considers weather and soil conditions",
+        "Amendments are incorporated into soil when possible",
+        "Application does not occur immediately before rain or irrigation if appropriate",
+        "Application equipment is cleaned between uses if appropriate",
+        "Workers handling amendments follow hygiene protocols",
+        "Application is documented with date, field, and amount"
+      ],
+      "verificationExpectations": "Review application records quarterly",
+      "monitoringExpectations": "Supervise applications, document each application event"
+    },
+    {
+      "id": "2.09.08",
+      "code": "2.09.08",
+      "required": true,
+      "points": 6,
+      "text": "Are all soil amendment application records maintained?",
+      "keywords": [
+        "application records",
+        "record keeping",
+        "soil amendment documentation",
+        "traceability"
+      ],
+      "mandatoryStatements": [
+        "All soil amendment applications are recorded",
+        "Records include date of application",
+        "Records include field or growing area identifier",
+        "Records include type and amount of amendment applied",
+        "Records include source/supplier of amendment",
+        "Records enable traceability from field to harvest",
+        "Records are retained for minimum 24 months",
+        "Records support calculation of waiting periods"
+      ],
+      "verificationExpectations": "Quarterly audit of soil amendment records for completeness",
+      "monitoringExpectations": "Record each application immediately, file records systematically"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If waiting periods not met: do not harvest affected fields until intervals satisfied, conduct risk assessment if urgent harvest needed",
+    "If biosolids lack regulatory compliance documentation: do not use biosolids, obtain proper documentation or switch to compliant source",
+    "If composting process inadequate: do not use compost, improve composting process to meet standards, verify effectiveness before use",
+    "If treated manure lacks documentation: do not use material, obtain treatment documentation or apply untreated waiting periods",
+    "If manure/compost storage poses contamination risk: immediate containment measures, relocate storage if necessary within 30 days",
+    "If application methods create contamination risk: immediately revise methods, retrain applicators, implement enhanced controls",
+    "If application records not maintained: implement record keeping system immediately, reconstruct records where possible"
+  ],
+  "traceabilityInject": [
+    "Soil amendment application records must be traceable to specific fields, application dates, and amendment sources",
+    "Waiting periods must be traceable through application records to harvest dates",
+    "Biosolids documentation must be traceable to specific shipments and suppliers",
+    "Composting process records must be traceable to specific batches and application fields"
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "code": "1.02",
+  "title": "Control of Documents and Records",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "document control",
+    "records management",
+    "version control",
+    "data security"
+  ],
+  "description": "Systematic control of documents and records to ensure current, accurate, secure, and accessible documentation throughout the facility",
+  "requirements": [
+    {
+      "id": "1.02.01",
+      "code": "1.02.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a written document control procedure (including document control register/record) describing how documents will be maintained, updated and replaced?",
+      "keywords": [
+        "document control procedure",
+        "document register",
+        "document maintenance",
+        "document updates",
+        "document control system"
+      ],
+      "mandatoryStatements": [
+        "Written document control procedure exists",
+        "Procedure describes document creation, review, and approval process",
+        "Document control register/record tracks all controlled documents",
+        "Procedure defines how documents are updated and replaced",
+        "Version control and effective date management are specified",
+        "Procedure identifies who is authorized to create and approve documents",
+        "Process for removing obsolete documents is defined"
+      ],
+      "verificationExpectations": "Annual audit of document control procedure and register for completeness and compliance",
+      "monitoringExpectations": "Quarterly review of document control register, immediate verification during document updates"
+    },
+    {
+      "id": "1.02.02",
+      "code": "1.02.02",
+      "required": true,
+      "points": 3,
+      "text": "Is there a documented and implemented procedure that requires all records to be stored for a minimum period of 24 months (or greater if legally required) or for at least the shelf life of the product if it is greater than 24 months?",
+      "keywords": [
+        "record retention",
+        "retention period",
+        "24 months",
+        "shelf life",
+        "storage requirements",
+        "legal requirements"
+      ],
+      "mandatoryStatements": [
+        "Record retention procedure is documented",
+        "Minimum retention period of 24 months is specified",
+        "Longer retention for products with shelf life exceeding 24 months",
+        "Legal and regulatory retention requirements are identified and met",
+        "Procedure defines record disposal process after retention period",
+        "Different record types and their specific retention requirements are identified"
+      ],
+      "verificationExpectations": "Annual audit of record retention compliance, verification that records meet minimum retention periods",
+      "monitoringExpectations": "Quarterly check of record storage and retention, annual disposal of expired records per procedure"
+    },
+    {
+      "id": "1.02.03",
+      "code": "1.02.03",
+      "required": true,
+      "points": 5,
+      "text": "Are both paper and electronic food safety related documents and records created, edited, stored and handled in a secure manner?",
+      "keywords": [
+        "document security",
+        "record security",
+        "electronic records",
+        "paper records",
+        "access control",
+        "data protection"
+      ],
+      "mandatoryStatements": [
+        "Paper documents are stored in secure, controlled-access locations",
+        "Electronic documents are password-protected or access-controlled",
+        "Backup systems exist for electronic records",
+        "Only authorized personnel can create, edit, or delete documents",
+        "Audit trails track changes to electronic documents",
+        "Physical security measures protect paper records from damage, loss, or unauthorized access",
+        "Environmental controls protect records from deterioration"
+      ],
+      "verificationExpectations": "Annual security audit of document and record storage systems, quarterly verification of backup systems",
+      "monitoringExpectations": "Monthly verification of access controls, immediate backup after critical record creation"
+    },
+    {
+      "id": "1.02.04",
+      "code": "1.02.04",
+      "required": true,
+      "points": 3,
+      "text": "Are records maintained in an organized and retrievable manner?",
+      "keywords": [
+        "record organization",
+        "retrievability",
+        "filing system",
+        "record accessibility",
+        "record indexing"
+      ],
+      "mandatoryStatements": [
+        "Records are organized using logical filing system (chronological, categorical, or alphanumeric)",
+        "Filing system is documented and understood by relevant personnel",
+        "Records can be retrieved quickly for audits or investigations",
+        "Index or catalog system helps locate specific records",
+        "Both paper and electronic records are systematically organized",
+        "Organization method supports traceability requirements"
+      ],
+      "verificationExpectations": "Annual verification of record organization system effectiveness, quarterly spot-checks of record retrieval",
+      "monitoringExpectations": "Monthly review of filing system compliance, immediate organization of new records upon creation"
+    },
+    {
+      "id": "1.02.05",
+      "code": "1.02.05",
+      "required": true,
+      "points": 5,
+      "text": "Are all records and test results that can have an impact on the food safety program verified by a qualified person independent of the individual(s) completing the records?",
+      "keywords": [
+        "record verification",
+        "independent review",
+        "qualified reviewer",
+        "test results",
+        "oversight",
+        "quality check"
+      ],
+      "mandatoryStatements": [
+        "Food safety-related records are verified by qualified personnel",
+        "Verifier is independent of the person who created the record",
+        "Verification includes review of completeness, accuracy, and compliance",
+        "Test results are reviewed by technically qualified personnel",
+        "Verification is documented (signature, date, or electronic approval)",
+        "Frequency of verification is defined based on risk",
+        "Non-conformances identified during verification trigger corrective action"
+      ],
+      "verificationExpectations": "Annual audit of record verification system, quarterly sampling of records to confirm independent verification",
+      "monitoringExpectations": "Daily or weekly verification of critical food safety records, immediate verification of out-of-specification test results"
+    }
+  ],
+  "micro_inject": ["document_control"],
+  "capaInject": [
+    "If document control procedure not followed: immediate correction of non-compliant documents, retraining within 7 days",
+    "If records not retained per procedure: investigate cause, recover records if possible, implement controls to prevent recurrence",
+    "If unauthorized access to documents/records detected: immediate password reset, investigate breach, implement enhanced security within 30 days",
+    "If records not retrievable: conduct immediate search, implement improved organization system within 14 days",
+    "If record verification not performed: immediate verification of all affected records, retraining of responsible personnel"
+  ],
+  "traceabilityInject": [
+    "Document control register must trace all document versions and revision history",
+    "Records must be traceable to specific dates, personnel, and activities",
+    "Electronic document audit trails must trace all changes, editors, and approval history",
+    "Record verification must be traceable to specific verifiers and verification dates"
+  ]
+}

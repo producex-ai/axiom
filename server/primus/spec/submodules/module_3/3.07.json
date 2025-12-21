@@ -1,0 +1,223 @@
+{
+  "code": "3.07",
+  "title": "Receiving & Shipping",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "receiving procedures",
+    "shipping procedures",
+    "trailer inspections",
+    "incoming goods",
+    "transportation sanitation"
+  ],
+  "description": "Requirements for receiving and shipping operations including trailer sanitation checks, incoming goods inspection, pest inspections, temperature controls, and dock equipment maintenance",
+  "requirements": [
+    {
+      "id": "3.07.01",
+      "code": "3.07.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented procedure for checking sanitary condition of truck trailers prior to unloading?",
+      "keywords": [
+        "receiving procedure",
+        "trailer inspection",
+        "sanitary condition",
+        "unloading procedure",
+        "pre-unloading check"
+      ],
+      "mandatoryStatements": [
+        "Documented procedure exists for trailer sanitation checks before unloading",
+        "Procedure specifies what to inspect (cleanliness, odors, damage, pests)",
+        "Procedure defines acceptance criteria for trailer sanitation",
+        "Procedure identifies who is responsible for inspection",
+        "Procedure includes rejection criteria and response",
+        "Procedure requires documentation of inspection results",
+        "Personnel are trained on trailer inspection procedure"
+      ],
+      "verificationExpectations": "Annual review of trailer inspection procedure, quarterly verification that procedure is followed",
+      "monitoringExpectations": "Pre-unloading inspection performed for every incoming trailer, documentation completed immediately"
+    },
+    {
+      "id": "3.07.02",
+      "code": "3.07.02",
+      "required": true,
+      "points": 5,
+      "text": "Are there inspection records for incoming goods (e.g., seeds, transplants, growing media, packing materials)?",
+      "keywords": [
+        "incoming inspection",
+        "receiving inspection",
+        "goods inspection",
+        "receiving records",
+        "quality check"
+      ],
+      "mandatoryStatements": [
+        "Inspection records are maintained for all incoming goods",
+        "Records document inspection of seeds, transplants, growing media",
+        "Records document inspection of packaging materials",
+        "Inspection includes verification of quality and condition",
+        "Records show date, inspector, supplier, and inspection results",
+        "Non-conforming goods are documented and segregated",
+        "Records support traceability of incoming materials"
+      ],
+      "verificationExpectations": "Weekly review of incoming goods inspection records for completeness",
+      "monitoringExpectations": "Inspection performed and documented for each incoming shipment"
+    },
+    {
+      "id": "3.07.03",
+      "code": "3.07.03",
+      "required": true,
+      "points": 10,
+      "text": "Are there inspection logs on incoming trailers (and other forms of transport) for rodents and insects, cleanliness, holes and/or as required per buyer specifications)?",
+      "keywords": [
+        "trailer inspection logs",
+        "pest inspection",
+        "cleanliness check",
+        "trailer condition",
+        "buyer specifications"
+      ],
+      "mandatoryStatements": [
+        "Inspection logs are maintained for all incoming trailers and transport",
+        "Logs document inspection for rodents and rodent evidence",
+        "Logs document inspection for insects and insect evidence",
+        "Logs document trailer cleanliness assessment",
+        "Logs document inspection for holes or damage",
+        "Logs include buyer-specified inspection criteria if applicable",
+        "Trailers failing inspection are rejected or corrected before unloading"
+      ],
+      "verificationExpectations": "Weekly review of trailer inspection logs for completeness and proper follow-up",
+      "monitoringExpectations": "Every incoming trailer inspected and logged before unloading"
+    },
+    {
+      "id": "3.07.04",
+      "code": "3.07.04",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented procedure for checking truck trailer temperature and reviewing sanitary condition of truck trailers prior to loading?",
+      "keywords": [
+        "shipping procedure",
+        "pre-loading inspection",
+        "trailer temperature",
+        "sanitary condition",
+        "loading procedure"
+      ],
+      "mandatoryStatements": [
+        "Documented procedure exists for trailer checks before loading",
+        "Procedure requires temperature verification for refrigerated loads",
+        "Procedure specifies sanitary condition inspection requirements",
+        "Procedure defines acceptance criteria for trailers",
+        "Procedure identifies responsible person for inspection",
+        "Procedure includes rejection criteria and alternative actions",
+        "Personnel are trained on pre-loading inspection procedure"
+      ],
+      "verificationExpectations": "Annual review of pre-loading inspection procedure, quarterly verification of compliance",
+      "monitoringExpectations": "Pre-loading inspection performed for every outgoing shipment"
+    },
+    {
+      "id": "3.07.05",
+      "code": "3.07.05",
+      "required": true,
+      "points": 5,
+      "text": "Are there records of shipping truck trailer (or other transportation systems) temperature and sanitary condition checks?",
+      "keywords": [
+        "shipping records",
+        "trailer inspection records",
+        "temperature records",
+        "sanitary condition records"
+      ],
+      "mandatoryStatements": [
+        "Records are maintained for all outgoing trailer inspections",
+        "Records document trailer temperature at loading (for temp-controlled)",
+        "Records document sanitary condition inspection results",
+        "Records show date, inspector, carrier, and inspection findings",
+        "Records link to specific shipments/loads",
+        "Non-conforming trailers are documented with corrective actions",
+        "Records demonstrate consistent inspection practice"
+      ],
+      "verificationExpectations": "Weekly review of shipping trailer inspection records",
+      "monitoringExpectations": "Inspection and documentation completed for each outgoing shipment"
+    },
+    {
+      "id": "3.07.06",
+      "code": "3.07.06",
+      "required": true,
+      "points": 5,
+      "text": "Are shipping trucks clean and in good condition?",
+      "keywords": [
+        "truck cleanliness",
+        "trailer condition",
+        "shipping vehicle condition",
+        "transport cleanliness"
+      ],
+      "mandatoryStatements": [
+        "Shipping trucks and trailers are visibly clean",
+        "No dirt, debris, or contamination in cargo areas",
+        "Trucks are in good physical condition without damage",
+        "No holes, tears, or openings that could allow contamination",
+        "No odors or evidence of previous incompatible loads",
+        "Refrigeration equipment functional (if applicable)",
+        "Trucks meet facility acceptance standards"
+      ],
+      "verificationExpectations": "Pre-loading inspection verifies truck cleanliness and condition",
+      "monitoringExpectations": "Visual inspection of every truck before loading, rejection if not acceptable"
+    },
+    {
+      "id": "3.07.07",
+      "code": "3.07.07",
+      "required": false,
+      "points": 0,
+      "text": "Is there a documented procedure for checking sanitary condition of truck trailers prior to unloading?",
+      "keywords": [
+        "unloading procedure",
+        "trailer sanitation",
+        "receiving procedure",
+        "duplicate question"
+      ],
+      "mandatoryStatements": [
+        "This appears to be a duplicate of 3.07.01",
+        "Same requirements as 3.07.01 apply"
+      ],
+      "verificationExpectations": "Same as 3.07.01",
+      "monitoringExpectations": "Same as 3.07.01"
+    },
+    {
+      "id": "3.07.08",
+      "code": "3.07.08",
+      "required": true,
+      "points": 3,
+      "text": "Are dock load levelers and buffers/shelters maintained in good condition, pest proof and debris free?",
+      "keywords": [
+        "dock levelers",
+        "dock equipment",
+        "dock maintenance",
+        "pest proofing",
+        "dock cleanliness"
+      ],
+      "mandatoryStatements": [
+        "Dock load levelers are maintained in good operating condition",
+        "Dock buffers and shelters are in good repair",
+        "Dock equipment is pest-proof (no gaps for pest entry)",
+        "Dock area is kept free of debris and accumulation",
+        "Regular inspection and maintenance of dock equipment",
+        "Dock equipment does not present contamination risk",
+        "Dock area cleanliness supports sanitary operations"
+      ],
+      "verificationExpectations": "Monthly inspection of dock equipment condition and cleanliness",
+      "monitoringExpectations": "Weekly checks of dock area, immediate cleanup of debris"
+    }
+  ],
+  "micro_inject": ["fsms", "pest"],
+  "capaInject": [
+    "If trailer inspection procedure not documented: develop procedure within 7 days, implement immediately",
+    "If incoming goods inspection records not maintained: implement inspection log immediately, retroactive documentation where possible",
+    "If trailer found with pests or unsanitary conditions: reject trailer, do not unload, find alternative transport",
+    "If pre-loading inspection not performed: immediate implementation, halt loading until inspection completed",
+    "If shipping records incomplete: immediate completion of records, implement verification process",
+    "If truck not clean or in poor condition: reject truck, delay loading until acceptable truck available",
+    "If dock equipment in poor condition: immediate repair, temporary measures to prevent pest entry or contamination"
+  ],
+  "traceabilityInject": [
+    "Incoming trailer inspection records must be traceable to specific shipments and received materials",
+    "Incoming goods inspection records must link to specific lots and storage locations",
+    "Outgoing trailer inspection records must be traceable to specific shipments and customers",
+    "Temperature records must be traceable to specific loads and trailers"
+  ]
+}

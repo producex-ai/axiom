@@ -1,0 +1,140 @@
+{
+  "module": "3",
+  "moduleName": "Greenhouse Operations",
+  "sections": [
+    {
+      "code": "3.01",
+      "name": "Growing Media & Substrate Management",
+      "requirements": [
+        {
+          "code": "3.01.01",
+          "description": "Growing media sourced from approved suppliers with food safety specifications",
+          "mandatory": true,
+          "keywords": [
+            "growing media",
+            "substrate",
+            "media sourcing",
+            "approved suppliers"
+          ]
+        },
+        {
+          "code": "3.01.02",
+          "description": "Media treatment or pasteurization when reused",
+          "mandatory": true,
+          "keywords": [
+            "media reuse",
+            "pasteurization",
+            "substrate treatment",
+            "sterilization"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.02",
+      "name": "Water & Nutrient Solution Management",
+      "requirements": [
+        {
+          "code": "3.02.01",
+          "description": "Water source risk assessment and testing program",
+          "mandatory": true,
+          "keywords": [
+            "water quality",
+            "nutrient solution",
+            "water testing",
+            "irrigation water"
+          ]
+        },
+        {
+          "code": "3.02.02",
+          "description": "Nutrient solution monitoring for microbial contamination",
+          "mandatory": true,
+          "keywords": [
+            "nutrient solution",
+            "recirculating system",
+            "solution testing",
+            "microbial monitoring"
+          ]
+        },
+        {
+          "code": "3.02.03",
+          "description": "Treatment systems (UV, filtration) validated and monitored",
+          "mandatory": true,
+          "keywords": [
+            "water treatment",
+            "UV treatment",
+            "filtration",
+            "treatment validation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.03",
+      "name": "Environmental Monitoring & Controls",
+      "requirements": [
+        {
+          "code": "3.03.01",
+          "description": "Environmental monitoring program for surfaces and growing areas",
+          "mandatory": true,
+          "keywords": [
+            "environmental monitoring",
+            "surface testing",
+            "environmental swabs",
+            "indicator organisms"
+          ]
+        },
+        {
+          "code": "3.03.02",
+          "description": "Pest exclusion measures (screens, positive pressure, door seals)",
+          "mandatory": true,
+          "keywords": [
+            "pest exclusion",
+            "screens",
+            "positive pressure",
+            "pest prevention"
+          ]
+        },
+        {
+          "code": "3.03.03",
+          "description": "Wildlife and domestic animal exclusion from greenhouse",
+          "mandatory": true,
+          "keywords": [
+            "wildlife exclusion",
+            "animal control",
+            "greenhouse security",
+            "animal barriers"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.04",
+      "name": "Worker Hygiene & Practices",
+      "requirements": [
+        {
+          "code": "3.04.01",
+          "description": "Hand washing facilities at all greenhouse entry points",
+          "mandatory": true,
+          "keywords": [
+            "handwashing",
+            "hygiene stations",
+            "greenhouse entry",
+            "hand hygiene"
+          ]
+        },
+        {
+          "code": "3.04.02",
+          "description": "Tool and equipment sanitation procedures",
+          "mandatory": true,
+          "keywords": [
+            "tool sanitation",
+            "equipment cleaning",
+            "pruning tools",
+            "harvest equipment"
+          ]
+        }
+      ]
+    }
+  ]
+}

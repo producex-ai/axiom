@@ -1,0 +1,79 @@
+{
+  "code": "5.16",
+  "parentCode": "5",
+  "title": "Testing",
+  "requirements": [
+    {
+      "code": "5.16.01",
+      "question": "Is there a written risk-based, scientifically valid environmental monitoring program?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.02",
+      "question": "Are there written risk-based corrective action procedures for when unacceptable environmental monitoring test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.03",
+      "question": "Are there records of environmental microbiological test results and does testing meet the program requirements?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.04",
+      "question": "Is there a written program describing the operation's requirements for other microbiological or chemical testing not identified in 5.16.01?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.05",
+      "question": "Are there written risk-based corrective action procedures for when unacceptable other microbiological or chemical test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.06",
+      "question": "Are there records of microbiological tests on water used in the facility (sampled from within the facility) and does the testing meet the program requirements?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.07",
+      "question": "Are there records of microbiological tests on ice used in the facility (either produced in-house or purchased) and does testing meet the program requirements?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.08",
+      "question": "Are there records of tests performed on compressed air or other mechanically introduced gases that are used directly on food and food contact surfaces and does testing meet the program requirements?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.09",
+      "question": "Are there records of other tests (e.g., spent sprout irrigation water, product, raw ingredients, etc.) that are performed for any reason (e.g., customer requirements, best practice, regulatory requirements) and does testing meet program requirements?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.10",
+      "question": "Are there records of corrective actions taken after any unsuitable testing results that describe the steps taken, responsibility for taking those steps, and actions taken to ensure that the cause of contamination has been identified and corrected?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.11",
+      "question": "Is there a documented training program with training records for the sampling personnel, including aseptic sampling collection techniques, sampling protocols and sample handling?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.16.12",
+      "question": "Where food safety related testing is being done in-house, is there a laboratory quality assurance manual with protocols and validated testing methods, evidence of training on testing protocols and methods, and relevant supporting documentation?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

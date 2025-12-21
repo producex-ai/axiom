@@ -1,0 +1,331 @@
+{
+  "code": "3.14",
+  "title": "Testing (CEA Operations Only)",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "CEA operations",
+    "environmental monitoring",
+    "microbiological testing",
+    "product testing",
+    "laboratory testing",
+    "compressed air testing"
+  ],
+  "description": "Requirements for testing programs in Controlled Environment Agriculture (CEA) operations including environmental monitoring, seed/product testing, corrective action procedures, sampling personnel training, laboratory quality assurance, and laboratory separation",
+  "requirements": [
+    {
+      "id": "3.14.01",
+      "code": "3.14.01",
+      "required": false,
+      "points": 0,
+      "text": "Is the operation a CEA operation? Information gathering. If the answer is YES, continue with the next question. If the answer is NO, the rest of Module 3 is not applicable. Information gathering question",
+      "keywords": [
+        "CEA",
+        "controlled environment agriculture",
+        "information gathering",
+        "applicability"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response determines if operation is Controlled Environment Agriculture (CEA)",
+        "If YES, questions 3.14.02 through 3.14.08 are applicable",
+        "If NO, remaining Module 3 questions are not applicable"
+      ],
+      "verificationExpectations": "Documentation of whether operation meets CEA definition",
+      "monitoringExpectations": "Reassess if operation type changes"
+    },
+    {
+      "id": "3.14.02",
+      "code": "3.14.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there a written risk-based, scientifically valid environmental monitoring program?",
+      "keywords": [
+        "environmental monitoring",
+        "EM program",
+        "risk-based testing",
+        "scientific validity",
+        "pathogen monitoring"
+      ],
+      "mandatoryStatements": [
+        "Written environmental monitoring (EM) program is documented",
+        "Program is risk-based (targets high-risk areas and food contact surfaces)",
+        "Program is scientifically valid (appropriate methods and sampling)",
+        "Program identifies what to test (surfaces, zones, indicators/pathogens)",
+        "Program identifies where to test (food contact surfaces, non-food contact, environment)",
+        "Program specifies testing frequency based on risk",
+        "Program defines acceptance criteria",
+        "Program includes trending and analysis of results"
+      ],
+      "verificationExpectations": "Annual review of EM program for scientific validity and risk-based approach",
+      "monitoringExpectations": "Quarterly verification that EM program is implemented as written"
+    },
+    {
+      "id": "3.14.02a",
+      "code": "3.14.02a",
+      "required": true,
+      "points": 10,
+      "text": "Are there written risk-based corrective action procedures for when unacceptable environmental monitoring results are received that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "keywords": [
+        "corrective actions",
+        "EM response",
+        "positive results",
+        "pathogen response",
+        "remediation procedures"
+      ],
+      "mandatoryStatements": [
+        "Written corrective action procedures exist for unacceptable EM results",
+        "Procedures are risk-based (escalate response based on finding location/organism)",
+        "Procedures describe specific steps to take for different scenarios",
+        "Procedures assign responsibility for corrective actions",
+        "Procedures address immediate containment and product hold",
+        "Procedures address investigation and root cause analysis",
+        "Procedures address verification that corrective actions were effective",
+        "Procedures define criteria for resuming operations"
+      ],
+      "verificationExpectations": "Annual review of EM corrective action procedures, verification of implementation when positives occur",
+      "monitoringExpectations": "Immediate implementation of corrective action procedures when unacceptable EM results received"
+    },
+    {
+      "id": "3.14.02b",
+      "code": "3.14.02b",
+      "required": true,
+      "points": 15,
+      "text": "Are there records of environmental microbiological test results and does testing meet the program requirements?",
+      "keywords": [
+        "EM records",
+        "testing records",
+        "environmental testing results",
+        "program compliance"
+      ],
+      "mandatoryStatements": [
+        "Environmental monitoring test results are documented and maintained",
+        "Records include all required test information (location, date, results, organisms)",
+        "Testing frequency meets program requirements",
+        "Testing locations match program requirements",
+        "Testing methods are appropriate and validated",
+        "Records demonstrate consistent implementation of EM program",
+        "Trends are analyzed and documented"
+      ],
+      "verificationExpectations": "Quarterly review of EM records for completeness and program compliance",
+      "monitoringExpectations": "Testing performed per schedule, results reviewed immediately upon receipt"
+    },
+    {
+      "id": "3.14.03",
+      "code": "3.14.03",
+      "required": true,
+      "points": 15,
+      "text": "Is there a written program describing the operation's requirements for seed testing, product testing, or other microbiological or chemical testing not identified in 3.14.02?",
+      "keywords": [
+        "seed testing",
+        "product testing",
+        "microbiological testing",
+        "chemical testing",
+        "testing program"
+      ],
+      "mandatoryStatements": [
+        "Written program describes all required testing beyond environmental monitoring",
+        "Program addresses seed testing if applicable",
+        "Program addresses finished product testing if applicable",
+        "Program addresses other microbiological testing as needed",
+        "Program addresses chemical testing as needed (heavy metals, pesticides, etc.)",
+        "Program specifies testing frequency, methods, and acceptance criteria",
+        "Program is risk-based and scientifically justified"
+      ],
+      "verificationExpectations": "Annual review of testing program for completeness and scientific validity",
+      "monitoringExpectations": "Quarterly verification that all required testing is performed per program"
+    },
+    {
+      "id": "3.14.03a",
+      "code": "3.14.03a",
+      "required": true,
+      "points": 10,
+      "text": "Are there written risk-based corrective action procedures for when unacceptable seed testing, product testing or other microbiological or chemical test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "keywords": [
+        "corrective actions",
+        "test failures",
+        "response procedures",
+        "product hold",
+        "investigation"
+      ],
+      "mandatoryStatements": [
+        "Written corrective action procedures exist for unacceptable test results",
+        "Procedures are risk-based and appropriate for different test types",
+        "Procedures describe specific steps for seed test failures",
+        "Procedures describe specific steps for product test failures",
+        "Procedures describe steps for other microbiological or chemical failures",
+        "Procedures assign responsibility for corrective actions",
+        "Procedures address product hold, investigation, and disposition",
+        "Procedures define verification of corrective action effectiveness"
+      ],
+      "verificationExpectations": "Annual review of corrective action procedures, verification when failures occur",
+      "monitoringExpectations": "Immediate implementation when unacceptable test results received"
+    },
+    {
+      "id": "3.14.03b",
+      "code": "3.14.03b",
+      "required": true,
+      "points": 15,
+      "text": "Are there records of other tests that are performed for any reason and does testing meet program requirements?",
+      "keywords": [
+        "testing records",
+        "test results",
+        "program compliance",
+        "documentation"
+      ],
+      "mandatoryStatements": [
+        "Records are maintained for all testing performed",
+        "Records include seed testing results if applicable",
+        "Records include product testing results if applicable",
+        "Records include other microbiological and chemical testing results",
+        "Testing frequency meets program requirements",
+        "Testing methods are documented and appropriate",
+        "Records demonstrate program compliance"
+      ],
+      "verificationExpectations": "Quarterly review of testing records for completeness and program compliance",
+      "monitoringExpectations": "Testing performed per schedule, results documented immediately upon receipt"
+    },
+    {
+      "id": "3.14.04",
+      "code": "3.14.04",
+      "required": true,
+      "points": 5,
+      "text": "Where used, are there records of tests performed on compressed air or other mechanically introduced gases that are used directly on food and food contact surfaces and does testing meet the program requirements?",
+      "keywords": [
+        "compressed air testing",
+        "gas testing",
+        "air quality",
+        "food contact"
+      ],
+      "mandatoryStatements": [
+        "If compressed air or gases contact food or food contact surfaces, testing is performed",
+        "Testing records are maintained",
+        "Testing includes microbiological and/or particle testing as appropriate",
+        "Testing frequency is defined in program",
+        "Testing methods are appropriate for intended use",
+        "Test results meet acceptance criteria",
+        "Non-conforming results trigger corrective actions"
+      ],
+      "verificationExpectations": "Annual review of compressed air/gas testing records and program compliance",
+      "monitoringExpectations": "Testing performed per schedule, results reviewed and documented"
+    },
+    {
+      "id": "3.14.05",
+      "code": "3.14.05",
+      "required": true,
+      "points": 15,
+      "text": "Are there records of corrective actions taken after unsuitable testing results that describe the steps taken, responsibility for taking those steps, and actions taken to ensure that the cause of contamination has been identified and corrected?",
+      "keywords": [
+        "corrective action records",
+        "investigation records",
+        "root cause",
+        "remediation",
+        "verification"
+      ],
+      "mandatoryStatements": [
+        "If unsuitable test results occurred, corrective action records exist",
+        "Records describe immediate actions taken (product hold, containment)",
+        "Records identify person responsible for corrective actions",
+        "Records document investigation and root cause analysis",
+        "Records show actions taken to correct the cause of contamination",
+        "Records show verification that corrective actions were effective",
+        "Records demonstrate that contamination source was identified and eliminated"
+      ],
+      "verificationExpectations": "Review of corrective action records for completeness and effectiveness",
+      "monitoringExpectations": "Complete documentation of all corrective actions for test failures"
+    },
+    {
+      "id": "3.14.06",
+      "code": "3.14.06",
+      "required": true,
+      "points": 10,
+      "text": "Is there a documented training program with training records for the sampling personnel, including aseptic sampling collection techniques, sampling protocols and sample handling?",
+      "keywords": [
+        "sampling training",
+        "aseptic technique",
+        "sampling protocols",
+        "personnel training",
+        "sample collection"
+      ],
+      "mandatoryStatements": [
+        "Documented training program exists for sampling personnel",
+        "Training covers aseptic sampling collection techniques",
+        "Training covers specific sampling protocols for each test type",
+        "Training covers proper sample handling and chain of custody",
+        "Training covers sample identification and labeling",
+        "Training records document who was trained, when, and on what topics",
+        "Only trained personnel collect samples",
+        "Retraining provided when procedures change"
+      ],
+      "verificationExpectations": "Annual review of sampling personnel training program and records",
+      "monitoringExpectations": "Verification that only trained personnel collect samples, observation of sampling technique"
+    },
+    {
+      "id": "3.14.07",
+      "code": "3.14.07",
+      "required": true,
+      "points": 10,
+      "text": "Where food safety related testing is being done in-house, is there a laboratory quality assurance manual with protocols and validated testing methods, evidence of training on testing protocols and methods, and relevant supporting documentation?",
+      "keywords": [
+        "laboratory QA",
+        "quality assurance manual",
+        "validated methods",
+        "laboratory protocols",
+        "testing methods"
+      ],
+      "mandatoryStatements": [
+        "If in-house testing performed, laboratory quality assurance manual exists",
+        "Manual includes protocols for all tests performed",
+        "Testing methods are validated for accuracy and reliability",
+        "Evidence of personnel training on testing methods is maintained",
+        "Supporting documentation includes method validations, equipment calibrations",
+        "Quality control procedures are documented and followed",
+        "Laboratory maintains appropriate records and documentation"
+      ],
+      "verificationExpectations": "Annual review of laboratory QA manual and supporting documentation",
+      "monitoringExpectations": "Quarterly verification that laboratory follows QA procedures and maintains records"
+    },
+    {
+      "id": "3.14.08",
+      "code": "3.14.08",
+      "required": true,
+      "points": 5,
+      "text": "Where there is an on-site laboratory, is it completely enclosed and separated from production and storage areas?",
+      "keywords": [
+        "laboratory separation",
+        "laboratory location",
+        "physical separation",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "If on-site laboratory exists, it is completely enclosed",
+        "Laboratory is physically separated from production areas",
+        "Laboratory is separated from product storage areas",
+        "Separation prevents cross-contamination between lab and production",
+        "Laboratory has separate air handling where appropriate",
+        "Laboratory access is controlled",
+        "Laboratory design prevents contamination risks"
+      ],
+      "verificationExpectations": "Annual verification of laboratory separation and contamination prevention measures",
+      "monitoringExpectations": "Ongoing monitoring that laboratory separation is maintained, traffic control enforced"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If environmental monitoring program not established: develop program within 30 days, begin baseline testing immediately",
+    "If EM corrective action procedures not documented: develop procedures within 14 days, implement immediate hold protocol for any positive results",
+    "If EM testing not performed per program: immediate catch-up testing, establish monitoring system to ensure future compliance",
+    "If unacceptable EM results: immediate product hold, area sanitization, investigation within 24 hours, verify effectiveness before restart",
+    "If testing program incomplete: develop comprehensive program within 30 days, initiate missing testing immediately",
+    "If corrective actions not documented: immediate documentation of past actions, implement documentation system",
+    "If sampling personnel not trained: immediate training before further sample collection, interim use of qualified personnel",
+    "If laboratory QA inadequate: develop QA program within 30 days, consider use of external laboratory until QA established",
+    "If laboratory not properly separated: immediate risk assessment, implement separation measures or discontinue in-house testing"
+  ],
+  "traceabilityInject": [
+    "Environmental monitoring results must be traceable to specific locations, dates, and sampling personnel",
+    "Test results must be traceable to specific lots, batches, or growing areas",
+    "Corrective actions must be traceable to specific test results and affected products",
+    "Sampling personnel training must be traceable to individuals and competencies",
+    "Laboratory testing must be traceable through chain of custody and sample identification"
+  ]
+}

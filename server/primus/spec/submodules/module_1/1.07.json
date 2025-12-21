@@ -1,0 +1,119 @@
+{
+  "code": "1.07",
+  "title": "Traceability and Recall",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "traceability",
+    "product tracking",
+    "recall procedures",
+    "trace forward",
+    "trace back",
+    "mock recalls"
+  ],
+  "description": "Comprehensive traceability system enabling one-step-back, one-step-forward tracking and effective recall procedures including mock recall testing",
+  "requirements": [
+    {
+      "id": "1.07.01",
+      "code": "1.07.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a document that indicates how the company product tracking system works, thereby enabling trace back and trace forward to occur in the event of a potential recall issue?",
+      "keywords": [
+        "traceability system",
+        "product tracking",
+        "trace back",
+        "trace forward",
+        "lot tracking",
+        "batch tracking"
+      ],
+      "mandatoryStatements": [
+        "Traceability system is documented describing how tracking works",
+        "System enables trace back to incoming materials and suppliers",
+        "System enables trace forward to customers and distribution",
+        "Lot or batch coding system is defined",
+        "Record linkages that enable traceability are specified",
+        "System covers all products, ingredients, and packaging materials",
+        "Timeframe for completing traceback/trace forward is defined",
+        "System supports one-step-back, one-step-forward traceability minimum",
+        "Electronic or manual tracking methods are described"
+      ],
+      "verificationExpectations": "Annual review of traceability system documentation, semi-annual mock recall testing",
+      "monitoringExpectations": "Daily verification that traceability records are being created, immediate verification when lot coding changes"
+    },
+    {
+      "id": "1.07.02",
+      "code": "1.07.02",
+      "required": true,
+      "points": 15,
+      "text": "Does the organization have a documented recall program including procedures, recall team roles and contact details, external contact listings, requirement for recall effectiveness checks, explanation of different recall classes and handling of recalled product?",
+      "keywords": [
+        "recall program",
+        "recall procedure",
+        "recall team",
+        "recall effectiveness",
+        "recall classification"
+      ],
+      "mandatoryStatements": [
+        "Recall program is documented with comprehensive procedures",
+        "Recall team members are identified with roles and responsibilities",
+        "Current contact information for recall team members is maintained",
+        "External contact list includes customers, suppliers, regulators, and media contacts",
+        "Recall initiation criteria and decision-making process are defined",
+        "Recall classification system (Class I, II, III or equivalent) is explained",
+        "Procedures for different recall classes are specified",
+        "Customer notification procedures and templates are included",
+        "Product retrieval and segregation procedures are defined",
+        "Recall effectiveness check methods are described",
+        "Disposition of recalled product (destruction, rework, return) is specified",
+        "Public communication and media response procedures are included",
+        "Recall closure and reporting requirements are defined"
+      ],
+      "verificationExpectations": "Annual review of recall program for completeness and accuracy of contact information, semi-annual mock recall exercises",
+      "monitoringExpectations": "Quarterly verification of recall team contact information, immediate update when personnel changes affect recall team"
+    },
+    {
+      "id": "1.07.03",
+      "code": "1.07.03",
+      "required": true,
+      "points": 10,
+      "text": "Is testing of recall procedures (including traceback) performed and documented at least every six months, and the company can demonstrate the ability to trace materials (one step forward, one step back) effectively?",
+      "keywords": [
+        "mock recall",
+        "recall testing",
+        "recall drill",
+        "traceability testing",
+        "recall exercise"
+      ],
+      "mandatoryStatements": [
+        "Mock recall exercises are conducted at least every six months",
+        "Mock recall includes traceback to suppliers/ingredients",
+        "Mock recall includes trace forward to customers/distribution",
+        "Exercise demonstrates one-step-back, one-step-forward capability minimum",
+        "Time required to complete traceback and trace forward is documented",
+        "Mock recall report documents exercise date, product selected, and results",
+        "Gaps or deficiencies identified during exercise are documented",
+        "Corrective actions to improve traceability or recall system are implemented",
+        "Effectiveness of traceback and trace forward is evaluated",
+        "Mock recall involves key recall team members"
+      ],
+      "verificationExpectations": "Annual audit of mock recall records, verification that exercises are conducted semi-annually as required",
+      "monitoringExpectations": "Semi-annual mock recall exercises conducted on schedule, immediate follow-up on identified gaps, quarterly verification of corrective action implementation"
+    }
+  ],
+  "micro_inject": ["fsms", "traceability"],
+  "capaInject": [
+    "If traceability system fails during mock recall: immediate investigation, implement improvements within 30 days, conduct follow-up mock recall to verify effectiveness",
+    "If traceback or trace forward takes excessive time: analyze bottlenecks, improve record systems or lot coding, reduce traceback time to acceptable level (typically 2-4 hours)",
+    "If recall team contact information is outdated: update immediately, implement quarterly verification process",
+    "If mock recall not conducted semi-annually: conduct overdue exercise immediately, investigate scheduling failure, implement calendar reminders",
+    "If actual recall occurs: activate recall program immediately, document all actions, conduct post-recall review within 30 days, implement improvements identified"
+  ],
+  "traceabilityInject": [
+    "Traceability system must link raw materials to finished products through production records",
+    "Lot codes must be traceable to production dates, lines, and personnel",
+    "Receiving records must be traceable to supplier lots and delivery dates",
+    "Shipping records must be traceable to customer orders and delivery dates",
+    "Mock recall records must trace the complete path from supplier through production to customer",
+    "All traceability records must be maintained for minimum 24 months or product shelf life plus 6 months"
+  ]
+}

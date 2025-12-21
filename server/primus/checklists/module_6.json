@@ -1,0 +1,433 @@
+{
+  "module": "6",
+  "moduleName": "HACCP",
+  "sections": [
+    {
+      "code": "6.01",
+      "name": "HACCP Team & Training",
+      "requirements": [
+        {
+          "code": "6.01.01",
+          "description": "HACCP team established with designated leader and multidisciplinary members",
+          "mandatory": true,
+          "keywords": [
+            "HACCP team",
+            "team leader",
+            "multidisciplinary",
+            "HACCP personnel"
+          ]
+        },
+        {
+          "code": "6.01.02",
+          "description": "HACCP team members trained in HACCP principles (Codex or equivalent)",
+          "mandatory": true,
+          "keywords": [
+            "HACCP training",
+            "HACCP principles",
+            "Codex",
+            "team training"
+          ]
+        },
+        {
+          "code": "6.01.03",
+          "description": "Training records maintained showing HACCP competency",
+          "mandatory": true,
+          "keywords": [
+            "HACCP training records",
+            "competency",
+            "training documentation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.02",
+      "name": "Product Description & Intended Use",
+      "requirements": [
+        {
+          "code": "6.02.01",
+          "description": "Product description including composition, processing, packaging, and storage conditions",
+          "mandatory": true,
+          "keywords": [
+            "product description",
+            "product composition",
+            "processing method",
+            "product characteristics"
+          ]
+        },
+        {
+          "code": "6.02.02",
+          "description": "Intended use and target consumer identified",
+          "mandatory": true,
+          "keywords": [
+            "intended use",
+            "target consumer",
+            "end user",
+            "product use"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.03",
+      "name": "Process Flow Diagram & Verification",
+      "requirements": [
+        {
+          "code": "6.03.01",
+          "description": "Process flow diagram covering all steps from receiving to shipping",
+          "mandatory": true,
+          "keywords": [
+            "process flow",
+            "flow diagram",
+            "process steps",
+            "processing sequence"
+          ]
+        },
+        {
+          "code": "6.03.02",
+          "description": "Flow diagram verified on-site by HACCP team annually or when process changes",
+          "mandatory": true,
+          "keywords": [
+            "flow diagram verification",
+            "on-site verification",
+            "annual verification"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.04",
+      "name": "Hazard Analysis",
+      "requirements": [
+        {
+          "code": "6.04.01",
+          "description": "Comprehensive hazard analysis identifying biological, chemical, and physical hazards",
+          "mandatory": true,
+          "keywords": [
+            "hazard analysis",
+            "biological hazards",
+            "chemical hazards",
+            "physical hazards",
+            "hazard identification"
+          ]
+        },
+        {
+          "code": "6.04.02",
+          "description": "Hazard evaluation determining likelihood and severity for each identified hazard",
+          "mandatory": true,
+          "keywords": [
+            "hazard evaluation",
+            "risk assessment",
+            "likelihood",
+            "severity",
+            "risk ranking"
+          ]
+        },
+        {
+          "code": "6.04.03",
+          "description": "Control measures identified for significant hazards",
+          "mandatory": true,
+          "keywords": [
+            "control measures",
+            "preventive measures",
+            "hazard control",
+            "control strategy"
+          ]
+        },
+        {
+          "code": "6.04.04",
+          "description": "Scientific justification or references cited for hazard determination",
+          "mandatory": true,
+          "keywords": [
+            "scientific justification",
+            "references",
+            "supporting documentation",
+            "evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.05",
+      "name": "Critical Control Points (CCPs)",
+      "requirements": [
+        {
+          "code": "6.05.01",
+          "description": "CCPs identified using decision tree or other systematic method",
+          "mandatory": true,
+          "keywords": [
+            "CCP",
+            "critical control point",
+            "decision tree",
+            "CCP determination"
+          ]
+        },
+        {
+          "code": "6.05.02",
+          "description": "CCP justification documented for each identified CCP",
+          "mandatory": true,
+          "keywords": [
+            "CCP justification",
+            "CCP rationale",
+            "why CCP",
+            "control justification"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.06",
+      "name": "Critical Limits",
+      "requirements": [
+        {
+          "code": "6.06.01",
+          "description": "Critical limits established for each CCP with scientific or regulatory basis",
+          "mandatory": true,
+          "keywords": [
+            "critical limits",
+            "CCP limits",
+            "control limits",
+            "target values"
+          ]
+        },
+        {
+          "code": "6.06.02",
+          "description": "Critical limits measurable and observable (time, temperature, pH, aw, visual inspection)",
+          "mandatory": true,
+          "keywords": [
+            "measurable",
+            "observable",
+            "quantifiable",
+            "objective criteria"
+          ]
+        },
+        {
+          "code": "6.06.03",
+          "description": "Scientific validation supporting critical limit adequacy",
+          "mandatory": true,
+          "keywords": [
+            "validation",
+            "scientific support",
+            "critical limit validation",
+            "adequacy study"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.07",
+      "name": "Monitoring Procedures",
+      "requirements": [
+        {
+          "code": "6.07.01",
+          "description": "Monitoring procedures defined (what, how, frequency, who) for each CCP",
+          "mandatory": true,
+          "keywords": [
+            "monitoring",
+            "CCP monitoring",
+            "monitoring frequency",
+            "monitoring procedure"
+          ]
+        },
+        {
+          "code": "6.07.02",
+          "description": "Monitoring frequency sufficient to detect loss of control",
+          "mandatory": true,
+          "keywords": [
+            "monitoring frequency",
+            "continuous monitoring",
+            "real-time monitoring",
+            "interval"
+          ]
+        },
+        {
+          "code": "6.07.03",
+          "description": "Monitoring records signed and dated by person performing monitoring",
+          "mandatory": true,
+          "keywords": [
+            "monitoring records",
+            "CCP records",
+            "signed records",
+            "monitoring log"
+          ]
+        },
+        {
+          "code": "6.07.04",
+          "description": "Monitoring equipment calibrated and maintained",
+          "mandatory": true,
+          "keywords": [
+            "equipment calibration",
+            "monitoring equipment",
+            "instrument maintenance",
+            "calibration frequency"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.08",
+      "name": "Corrective Actions",
+      "requirements": [
+        {
+          "code": "6.08.01",
+          "description": "Corrective action procedures established for each CCP deviation",
+          "mandatory": true,
+          "keywords": [
+            "corrective action",
+            "deviation",
+            "corrective measures",
+            "out of control"
+          ]
+        },
+        {
+          "code": "6.08.02",
+          "description": "Corrective actions address: process correction, affected product disposition, root cause, and prevention",
+          "mandatory": true,
+          "keywords": [
+            "process correction",
+            "product disposition",
+            "root cause",
+            "prevent recurrence"
+          ]
+        },
+        {
+          "code": "6.08.03",
+          "description": "Corrective action records documented with date, deviation description, action taken, and responsible person",
+          "mandatory": true,
+          "keywords": [
+            "corrective action records",
+            "deviation records",
+            "CA documentation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.09",
+      "name": "Verification Activities",
+      "requirements": [
+        {
+          "code": "6.09.01",
+          "description": "Verification activities defined and scheduled (calibration, record review, testing)",
+          "mandatory": true,
+          "keywords": [
+            "verification",
+            "verification activities",
+            "verification schedule",
+            "HACCP verification"
+          ]
+        },
+        {
+          "code": "6.09.02",
+          "description": "HACCP plan reviewed annually or when changes occur",
+          "mandatory": true,
+          "keywords": [
+            "HACCP review",
+            "annual review",
+            "plan review",
+            "reassessment"
+          ]
+        },
+        {
+          "code": "6.09.03",
+          "description": "Finished product testing or environmental monitoring performed where applicable",
+          "mandatory": true,
+          "keywords": [
+            "product testing",
+            "environmental monitoring",
+            "verification testing",
+            "finished product"
+          ]
+        },
+        {
+          "code": "6.09.04",
+          "description": "Verification records maintained showing activity, date, results, and responsible person",
+          "mandatory": true,
+          "keywords": [
+            "verification records",
+            "verification documentation",
+            "verification log"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.10",
+      "name": "Validation",
+      "requirements": [
+        {
+          "code": "6.10.01",
+          "description": "Initial validation proving HACCP plan effectiveness before implementation",
+          "mandatory": true,
+          "keywords": [
+            "validation",
+            "initial validation",
+            "HACCP validation",
+            "plan validation"
+          ]
+        },
+        {
+          "code": "6.10.02",
+          "description": "Revalidation conducted when significant changes occur or at least every 3 years",
+          "mandatory": true,
+          "keywords": [
+            "revalidation",
+            "periodic validation",
+            "validation frequency",
+            "3 years"
+          ]
+        },
+        {
+          "code": "6.10.03",
+          "description": "Validation studies documented with scientific evidence",
+          "mandatory": true,
+          "keywords": [
+            "validation study",
+            "scientific evidence",
+            "validation report",
+            "validation documentation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.11",
+      "name": "Record Keeping & Documentation",
+      "requirements": [
+        {
+          "code": "6.11.01",
+          "description": "HACCP plan documentation including all 12 steps and 7 principles",
+          "mandatory": true,
+          "keywords": [
+            "HACCP plan",
+            "HACCP documentation",
+            "12 steps",
+            "7 principles"
+          ]
+        },
+        {
+          "code": "6.11.02",
+          "description": "Records maintained for: monitoring, corrective actions, verification, validation",
+          "mandatory": true,
+          "keywords": [
+            "HACCP records",
+            "record retention",
+            "monitoring records",
+            "CA records"
+          ]
+        },
+        {
+          "code": "6.11.03",
+          "description": "Records retained for minimum 2 years or shelf life plus 6 months",
+          "mandatory": true,
+          "keywords": [
+            "record retention",
+            "retention period",
+            "2 years",
+            "shelf life"
+          ]
+        }
+      ]
+    }
+  ]
+}

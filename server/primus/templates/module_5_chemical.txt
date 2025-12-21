@@ -1,0 +1,445 @@
+CHEMICAL CONTROL & STORAGE PROGRAM
+[Company Name]
+Facility: [Facility Name]
+Document Number: [Document Number]
+Revision: [Revision Number]
+Effective Date: [Effective Date]
+Approved By: [Approved By], [Position]
+
+================================================================================
+1. TITLE & DOCUMENT CONTROL
+================================================================================
+Document Title: Chemical Control & Storage Program
+Document Owner: Safety & Compliance Manager
+Review Frequency: Annual or upon regulatory changes
+Next Review Date: [Review Date]
+
+This program ensures safe handling, storage, and use of chemicals in compliance 
+with Primus GFS Module 5.06.
+
+================================================================================
+2. PURPOSE / OBJECTIVE
+================================================================================
+To prevent chemical contamination of food products through:
+- Segregated storage away from food products
+- Proper labeling and identification
+- Approved chemical list for food-contact applications
+- Employee training on safe handling and PPE
+- SDS accessibility and emergency response
+
+================================================================================
+3. SCOPE
+================================================================================
+Applies to all chemicals used in the facility:
+- Cleaning and sanitizing chemicals
+- Pesticides and fumigants
+- Maintenance chemicals (lubricants, hydraulic fluids, refrigerants)
+- Laboratory chemicals and reagents
+- Office and administrative chemicals (minimal food safety risk)
+
+================================================================================
+4. DEFINITIONS & ABBREVIATIONS
+================================================================================
+SDS: Safety Data Sheet (formerly MSDS) - hazard communication document
+PPE: Personal Protective Equipment (gloves, goggles, aprons, respirators)
+Secondary Container: Container other than original manufacturer container (spray bottle, bucket)
+Food-Grade Chemical: Chemical approved for food-contact surfaces (NSF, FDA-compliant)
+Incompatible Chemicals: Chemicals that react hazardously if mixed (acids/bases, oxidizers/flammables)
+
+================================================================================
+5. ROLES & RESPONSIBILITIES
+================================================================================
+Safety & Compliance Manager:
+- Maintain approved chemical list
+- Review and approve new chemical requests
+- Ensure SDS accessibility
+- Oversee chemical training program
+
+Purchasing:
+- Order only approved chemicals
+- Obtain SDS before first delivery
+- Verify NSF/FDA status for food-contact chemicals
+
+Supervisors:
+- Ensure proper chemical use and PPE compliance
+- Investigate chemical-related incidents
+- Maintain secondary container labeling
+
+Employees:
+- Use only approved chemicals per instructions
+- Wear required PPE
+- Label secondary containers
+- Report spills and unsafe conditions immediately
+
+Maintenance:
+- Use food-grade lubricants on food equipment
+- Store maintenance chemicals separately
+- Dispose of waste chemicals per procedure
+
+================================================================================
+6. PREREQUISITES & REFERENCE DOCUMENTS
+================================================================================
+- Primus GFS v4.0 Module 5.06 (Chemical Control & Storage)
+- OSHA Hazard Communication Standard (29 CFR 1910.1200)
+- FDA Food Code Chapter 7 (Poisonous or Toxic Materials)
+- Approved Chemical List (Form CC-001)
+- SDS Binder (online system)
+- Spill Response Procedure
+
+================================================================================
+7. HAZARD / RISK ANALYSIS
+================================================================================
+Chemical Hazard: Contamination of food product or food-contact surfaces with 
+                 non-food-grade chemicals, cleaning agents, or pesticides
+Risk: Acute toxicity, allergen introduction, off-flavors, regulatory violation
+Control: Segregated storage, approved chemical list, labeling, training, food-grade 
+         chemicals for food-contact use
+
+================================================================================
+8. PROCEDURES
+================================================================================
+
+8.1 Approved Chemical List
+- Approved Chemical List maintained by Safety & Compliance Manager
+- List includes: chemical name, manufacturer, use, approval status (NSF, FDA, EPA), SDS date
+- Only chemicals on approved list may be purchased and used
+- New chemical requests submitted on Chemical Approval Request Form (CC-002)
+  * Justification for need
+  * SDS provided
+  * Alternative evaluation (why existing chemicals inadequate)
+  * Food-contact status verified if applicable
+- Chemical Approval Committee (Safety, QA, Production) reviews and approves/denies
+- Approved chemicals added to list; list updated quarterly
+
+8.2 Chemical Storage
+ALL CHEMICALS STORED IN DESIGNATED CHEMICAL STORAGE AREA PHYSICALLY SEPARATED FROM:
+- Raw materials and ingredients
+- Finished products
+- Packaging materials
+- Employee break areas and personal belongings
+
+Storage Requirements:
+- Chemical storage room/area clearly marked with signage: "CHEMICAL STORAGE - AUTHORIZED PERSONNEL ONLY"
+- Separate storage for different chemical types:
+  * Cleaning/sanitizing chemicals
+  * Pesticides (locked cabinet if stored on-site)
+  * Maintenance chemicals (lubricants, solvents)
+  * Incompatible chemicals segregated (acids away from bases, oxidizers away from flammables)
+- Shelving designed for chemical storage (chemically resistant, spill containment)
+- Products stored at or below eye level to prevent lifting hazards
+- Heavier containers stored on lower shelves
+- Secondary containment (trays, pallets) for liquid chemicals to contain spills
+- Ventilation adequate to prevent vapor accumulation
+- Emergency eyewash/shower accessible within 10 seconds if corrosive chemicals present
+- Spill cleanup materials (absorbent, neutralizers, PPE) located in storage area
+- Storage area locked when unattended; access restricted to trained personnel
+- Inventory log maintained (FIFO rotation to prevent expiration)
+
+8.3 Chemical Labeling
+Original Containers:
+- Chemicals maintained in original manufacturer containers when possible
+- Original labels must be legible and intact
+- Damaged labels replaced immediately (use SDS for information)
+
+SECONDARY CONTAINERS (SPRAY BOTTLES, BUCKETS, DISPENSERS) MUST BE LABELED WITH:
+- Chemical name (common name or product name)
+- Hazard warnings (corrosive, flammable, toxic, irritant)
+- Concentration (if diluted from concentrate)
+- Date prepared (if diluted solution with limited shelf life)
+
+Label Requirements:
+- Waterproof labels or permanent marker
+- Legible and durable
+- English and primary language of employees
+- Labels applied before container first use
+- "Water" labeled on water-only spray bottles to avoid confusion
+
+Unlabeled containers:
+- Unlabeled secondary containers disposed of immediately (do not attempt to identify contents)
+- Corrective action for unlabeled container: employee retraining, supervisor coaching
+
+8.4 Safety Data Sheets (SDS)
+- SDS obtained before chemical first use
+- SDS maintained in electronic system accessible 24/7 (online SDS management system)
+- Printed SDS binder maintained as backup in chemical storage area and main office
+- SDS available in English and Spanish (primary languages)
+- Employees trained on how to access and interpret SDS
+- SDS reviewed during chemical training covering:
+  * Hazard identification
+  * First aid measures
+  * Fire-fighting measures
+  * Spill response
+  * Safe handling and storage
+  * PPE requirements
+- SDS updated when new revision received from manufacturer (quarterly SDS update check)
+
+8.5 Personal Protective Equipment (PPE)
+- PPE REQUIREMENTS DOCUMENTED FOR EACH CHEMICAL based on SDS recommendations
+- PPE matrix posted in chemical storage area and use areas
+- Required PPE provided at no cost to employees
+
+Common PPE by chemical type:
+- Cleaning/Sanitizing Chemicals: Nitrile gloves, safety goggles, apron (if splash risk)
+- Acids/Alkalis (strong): Chemical-resistant gloves, face shield, apron, boots
+- Pesticides: As specified on product label (typically gloves, goggles, long sleeves)
+- Solvents/Degreasers: Nitrile gloves, safety glasses, ventilation
+
+PPE Inspection & Maintenance:
+- PPE inspected before each use for damage (torn gloves, scratched goggles)
+- Damaged PPE removed from service and replaced immediately
+- Reusable PPE cleaned and sanitized after each use
+- PPE storage racks located near use areas
+
+8.6 Chemical Training
+ALL PERSONNEL HANDLING CHEMICALS RECEIVE TRAINING BEFORE WORKING WITH CHEMICALS:
+
+Initial Training Topics:
+- Hazard Communication Standard overview
+- How to access and read SDS
+- Chemical hazards in the workplace
+- Approved chemical list and proper use
+- Safe handling procedures (dilution, mixing, application)
+- PPE requirements and proper use
+- Secondary container labeling requirements
+- Spill response procedures
+- Emergency first aid and eyewash/shower locations
+- Proper disposal procedures
+
+Hands-On Demonstration:
+- Proper dilution technique
+- Correct PPE donning and doffing
+- Secondary container labeling
+- Spill cleanup procedure
+
+Annual Refresher Training:
+- All chemical handlers receive annual refresher training
+- Training documented on Training Record (Form CC-003)
+- Training includes: trainee name, date, topics covered, trainer signature, trainee signature
+
+Job-Specific Training:
+- Sanitation staff: cleaning/sanitizing chemicals, concentration verification
+- Maintenance: food-grade lubricants, hydraulic fluids, refrigerants
+- Pest control coordinator: pesticide storage and record-keeping (if applicable)
+
+8.7 Chemical Use Procedures
+Cleaning/Sanitizing Chemicals:
+- Follow SSOP for correct product, concentration, contact time, and temperature
+- Verify sanitizer concentration using test strips (log results)
+- Rinse food-contact surfaces after cleaning if product label requires
+- Never mix chemicals unless specifically instructed (e.g., never mix bleach with acids)
+
+Maintenance Chemicals:
+- Food-grade (H1) lubricants required for equipment with potential food contact
+- Food-grade (3H) release agents for food molds and pans
+- Non-food-grade lubricants permitted only on non-food-contact equipment components
+- Excess lubricant wiped off to prevent dripping onto product or surfaces
+- Lubricant application documented on PM work order
+
+Pesticides:
+- Applied only by licensed applicator per Pest Control Program
+- If facility personnel apply pesticides (rare), applicator license required
+- Pesticide application log maintained (product, site, date, amount, applicator)
+
+8.8 Chemical Spill Response
+Minor Spill (< 1 gallon, low hazard):
+1. Evacuate immediate area; restrict access
+2. Don appropriate PPE (gloves, goggles)
+3. Contain spill with absorbent or spill kit materials
+4. Absorb liquid using absorbent pads or granular absorbent
+5. Place waste in labeled container for disposal
+6. Clean area with water or neutralizer as appropriate
+7. Dispose of waste per hazardous waste procedure
+8. Document spill on Spill Report Form (CC-004)
+
+Major Spill (> 1 gallon, high hazard, uncontrollable):
+1. Evacuate area; activate alarm if life safety risk
+2. Notify Supervisor and Safety Manager immediately
+3. Call emergency responders (911) if life safety risk or environmental release
+4. Do not attempt cleanup unless trained and equipped
+5. Provide SDS to emergency responders
+6. Secure area until professional cleanup completed
+
+Spill Kits:
+- Located in chemical storage area, sanitation closet, maintenance shop
+- Contents: absorbent pads, granular absorbent, neutralizers, PPE, disposal bags, instructions
+- Inspected monthly; replenished after use
+
+8.9 Chemical Inventory Management
+- Inventory conducted quarterly (Form CC-005)
+- FIFO rotation enforced; oldest stock used first
+- Expiration dates checked; expired chemicals disposed of properly
+- Minimum/maximum stock levels established to prevent over-accumulation
+- Damaged containers identified and repackaged or disposed of
+- Inventory records track: chemical name, quantity, date received, expiration, location
+
+8.10 Disposal of Chemicals
+- Chemicals disposed of per local, state, and federal regulations
+- Empty containers triple-rinsed and recycled (if accepted) or disposed as solid waste
+- Hazardous waste (pesticides, solvents, acids/bases) managed per Hazardous Waste Procedure
+- Disposal documented: chemical name, quantity, date, method, responsible person
+- Disposal records retained 3 years minimum
+
+================================================================================
+9. MONITORING PLAN
+================================================================================
+Activity: Chemical storage inspection
+Frequency: Weekly
+Responsible: Safety Coordinator
+Method: Inspect chemical storage area for proper segregation, labeling, spill containment
+Record: Chemical Storage Inspection Log (Form CC-006)
+Corrective Action: Correct deficiencies immediately; retrain responsible personnel
+
+Activity: Secondary container labeling verification
+Frequency: Daily (by supervisors during floor walk)
+Responsible: Department Supervisors
+Method: Random check 5 secondary containers; verify labels present and complete
+Record: Supervisor Daily Checklist
+Corrective Action: Dispose of unlabeled containers; retrain employee
+
+Activity: SDS accessibility check
+Frequency: Quarterly
+Responsible: Safety Manager
+Method: Test online SDS system; verify printed binder current
+Record: SDS Audit Log (Form CC-007)
+Corrective Action: Update system; replace missing SDS
+
+Activity: PPE compliance observation
+Frequency: Daily
+Responsible: Supervisors
+Method: Observe employees handling chemicals; verify correct PPE use
+Record: Supervisor observation notes; coach if non-compliance observed
+
+Activity: Spill kit inspection
+Frequency: Monthly
+Responsible: Safety Coordinator
+Method: Check spill kit contents complete and unexpired
+Record: Spill Kit Inspection Log (Form CC-008)
+Corrective Action: Replenish missing items within 48 hours
+
+================================================================================
+10. VERIFICATION & VALIDATION ACTIVITIES
+================================================================================
+- Annual internal audit of chemical control program (checklist audit)
+- Management review of chemical incidents and near-misses quarterly
+- Third-party audit during Primus GFS certification
+- Trend analysis: spills, labeling non-conformances, PPE violations
+- Employee interviews during audits to assess training effectiveness
+
+Validation Metrics:
+- Zero chemical contamination incidents
+- Zero chemical-related injuries
+- 100% secondary container labeling compliance (audit target)
+- 100% SDS availability
+- Decreasing trend in chemical-related non-conformances
+
+================================================================================
+11. CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL
+================================================================================
+Triggers:
+- Chemical contamination of product or food-contact surface
+- Unlabeled secondary container
+- Chemical stored in production area (outside designated storage)
+- SDS not available
+- PPE not used or used improperly
+- Spill incident
+- Audit finding related to chemical control
+
+Immediate Containment:
+- Remove non-compliant chemical from area
+- Segregate potentially contaminated product
+- Clean and sanitize affected surfaces
+- Provide missing PPE or SDS immediately
+
+Root Cause Analysis:
+- Why was procedure not followed? (lack of training, procedure unclear, shortcuts, equipment failure)
+- Five Why or Fishbone analysis documented
+
+Corrective Action:
+- Retrain personnel on correct procedure
+- Clarify procedure if ambiguous
+- Provide additional resources (labels, PPE, spill kits)
+- Disciplinary action if willful violation
+
+Preventive Action:
+- Enhance training materials (visual aids, videos, hands-on practice)
+- Increase inspection frequency in high-risk areas
+- Improve chemical storage design (better shelving, signage, containment)
+- Automate dilution systems to reduce handling
+
+Verification:
+- Follow-up observation within 7 days
+- Re-audit area within 30 days
+- Trend analysis to confirm issue resolved
+
+================================================================================
+12. TRACEABILITY & RECALL ELEMENTS
+================================================================================
+In the event of chemical contamination:
+- Identify production lots potentially exposed based on time/location of incident
+- Trace-forward to customers if product shipped
+- Product disposition: destroy, rework (if feasible and validated), or release with testing
+- Disposition decision documented with scientific justification
+- Regulatory notification if required (FDA reportable food registry)
+
+Chemical Lot Traceability:
+- Cleaning chemical lots recorded on sanitation logs
+- Sanitizer concentration logs link chemical lot to production date
+- Maintenance lubricant application linked to equipment and production lot via PM records
+
+================================================================================
+13. RECORD RETENTION & DOCUMENT CONTROL
+================================================================================
+Record Type: Approved Chemical List
+Retention: Current plus 3 years
+Location: Safety & Compliance shared drive
+
+Record Type: Chemical Approval Requests
+Retention: 3 years
+Location: Safety & Compliance records
+
+Record Type: SDS (electronic and printed)
+Retention: 30 years (OSHA requirement for employee exposure records)
+Location: Online SDS system; printed binder in safety office
+
+Record Type: Chemical Training Records
+Retention: Duration of employment plus 3 years
+Location: Human Resources / Training records
+
+Record Type: Chemical Storage Inspection Logs
+Retention: 2 years
+Location: Safety & Compliance records
+
+Record Type: Spill Reports
+Retention: 5 years
+Location: Safety & Compliance / Incident records
+
+Record Type: Chemical Inventory Logs
+Retention: 2 years
+Location: Safety & Compliance records
+
+================================================================================
+14. COMPLIANCE CROSSWALK (TABLE)
+================================================================================
+Primus Code | Requirement | Document Section | Evidence
+5.06.01 | Chemicals stored separately from food | Section 8.2 | Facility layout, chemical storage room signage, inspection logs
+5.06.02 | All chemicals labeled; secondary containers labeled | Section 8.3 | Labeling procedure, daily supervisor checks, audit results
+5.06.03 | SDS accessible for all chemicals | Section 8.4 | Online SDS system, printed binder, quarterly accessibility checks
+5.06.04 | Chemical training and PPE requirements documented | Section 8.5, 8.6 | Training records, PPE matrix, competency assessments
+5.06.05 | Approved chemical list maintained | Section 8.1 | Approved Chemical List, chemical approval process, quarterly updates
+
+================================================================================
+15. REVISION HISTORY & APPROVAL SIGNATURES
+================================================================================
+Revision | Effective Date | Summary of Changes | Approved By
+1 | [Initial Date] | Initial release | [Name], Safety Manager
+2 | [Date] | Added secondary container labeling details | [Name], Safety Manager
+[Current] | [Effective Date] | [Summary] | [Approved By], [Position]
+
+Prepared By: _________________________ Date: __________
+             [Name], [Position]
+
+Reviewed By: _________________________ Date: __________
+             [Name], Quality Manager
+
+Approved By: _________________________ Date: __________
+             [Approved By], [Position]

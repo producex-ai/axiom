@@ -1,0 +1,14 @@
+{
+  "brand": {
+    "name": "Axiom",
+    "tagline": "por ProduceX"
+  },
+  "links": {
+    "home": "Inicio",
+    "features": "Características",
+    "frameworks": "Marcos",
+    "solutions": "Soluciones"
+  },
+  "cta": "Iniciar Sesión",
+  "logout": "Cerrar Sesión"
+}

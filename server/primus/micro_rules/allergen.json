@@ -1,0 +1,15 @@
+{
+  "category": "allergen_control",
+  "rules": {
+    "allergen_assessment": "An allergen assessment identifies all allergens (as defined by FALCPA and customer requirements) present in the facility including raw materials, ingredients, rework, and finished products.",
+    "allergen_register": "An allergen register is maintained listing all products containing each allergen. The register is updated when formulations change or new products are introduced.",
+    "dedicated_equipment": "Where feasible, dedicated equipment, utensils, and storage containers are used for allergen-containing products. Dedicated items are clearly identified and labeled.",
+    "changeover_procedures": "Production changeover procedures define the sequence from high-allergen to low-allergen or allergen-free products. Allergen-containing products are scheduled last in production runs where possible.",
+    "cleaning_validation": "Allergen cleaning procedures are validated to demonstrate effective allergen removal. Validation methods include ATP testing, allergen swabs, or visual inspection with defined acceptance criteria.",
+    "rework_allergen_control": "Rework containing allergens is controlled to prevent cross-contact. Rework is only added to products containing the same allergen and at levels that do not affect label accuracy.",
+    "labeling_verification": "Label verification procedures ensure allergen information is accurate and complete. Labels are reviewed and approved before use, and label application is verified during production.",
+    "supplier_allergen_control": "Suppliers are required to declare all allergens in raw materials and ingredients. Allergen status is verified through COAs, specifications, and supplier audits.",
+    "allergen_training": "All personnel handling allergens receive training on cross-contact prevention, cleaning procedures, rework control, and label accuracy. Training is documented and conducted annually.",
+    "storage_segregation": "Allergen-containing materials are stored separately from allergen-free materials or protected to prevent cross-contact. Storage areas are clearly labeled to identify allergen presence."
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "code": "1.08",
+  "title": "Intentional Contamination",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "food fraud",
+    "food defense",
+    "intentional contamination",
+    "crisis management",
+    "security"
+  ],
+  "description": "Protection against intentional contamination including food fraud vulnerability assessment, food defense plan, crisis management, and visitor/contractor controls",
+  "requirements": [
+    {
+      "id": "1.08.01",
+      "code": "1.08.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a written food fraud vulnerability assessment (FFVA) and protection plan for all types of fraud, including all incoming and outgoing products?",
+      "keywords": [
+        "food fraud",
+        "FFVA",
+        "fraud vulnerability",
+        "economically motivated adulteration",
+        "authenticity",
+        "fraud mitigation"
+      ],
+      "mandatoryStatements": [
+        "Food fraud vulnerability assessment (FFVA) is documented",
+        "Assessment covers all incoming raw materials, ingredients, and packaging",
+        "Assessment covers all outgoing products",
+        "Types of food fraud considered include: substitution, dilution, counterfeiting, mislabeling, undeclared additives",
+        "Vulnerability factors are evaluated (opportunities, historical precedence, economic gain)",
+        "Fraud risks are prioritized based on vulnerability assessment",
+        "Mitigation strategies for identified fraud risks are documented",
+        "Fraud prevention plan includes supplier verification, testing, and monitoring activities",
+        "FFVA is reviewed and updated at least annually or when significant changes occur"
+      ],
+      "verificationExpectations": "Annual review and update of FFVA, quarterly verification that mitigation activities are performed",
+      "monitoringExpectations": "Ongoing supplier monitoring and testing per fraud prevention plan, immediate investigation of suspected fraud incidents"
+    },
+    {
+      "id": "1.08.02",
+      "code": "1.08.02",
+      "required": true,
+      "points": 5,
+      "text": "Is there a written food defense vulnerability assessment and food defense plan based on the risks associated with the operation?",
+      "keywords": [
+        "food defense",
+        "intentional contamination",
+        "vulnerability assessment",
+        "food defense plan",
+        "security measures"
+      ],
+      "mandatoryStatements": [
+        "Food defense vulnerability assessment is documented",
+        "Assessment identifies areas vulnerable to intentional contamination",
+        "Assessment considers both insider and outsider threats",
+        "Vulnerability assessment evaluates access points, processes, and products at risk",
+        "Food defense plan is based on vulnerability assessment results",
+        "Mitigation strategies address identified vulnerabilities",
+        "Physical security measures are specified (access control, locks, barriers, surveillance)",
+        "Personnel security measures are specified (background checks, training, supervision)",
+        "Plan includes monitoring and verification activities",
+        "Food defense plan is reviewed and updated at least annually or after security incidents"
+      ],
+      "verificationExpectations": "Annual review and update of food defense assessment and plan, quarterly verification of security controls",
+      "monitoringExpectations": "Daily verification of access controls and security measures, immediate investigation of security breaches"
+    },
+    {
+      "id": "1.08.03",
+      "code": "1.08.03",
+      "required": true,
+      "points": 5,
+      "text": "Are records associated with the food defense plan and its procedures being maintained, including monitoring, corrective action and verification records (where appropriate)?",
+      "keywords": [
+        "food defense records",
+        "security records",
+        "monitoring records",
+        "access logs",
+        "food defense documentation"
+      ],
+      "mandatoryStatements": [
+        "Food defense monitoring records are maintained",
+        "Access control logs document facility entry and exit",
+        "Security system records (surveillance, alarms) are maintained",
+        "Visitor and contractor logs are maintained",
+        "Food defense training records are maintained",
+        "Security incidents and investigations are documented",
+        "Corrective actions for security breaches are documented",
+        "Verification activities (inspections, audits) are documented",
+        "Records demonstrate food defense plan is being followed"
+      ],
+      "verificationExpectations": "Annual audit of food defense records, quarterly review of security incidents and trends",
+      "monitoringExpectations": "Daily review of access logs and security system alerts, immediate documentation of security incidents"
+    },
+    {
+      "id": "1.08.04",
+      "code": "1.08.04",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented crisis management plan?",
+      "keywords": [
+        "crisis management",
+        "emergency response",
+        "crisis plan",
+        "incident management",
+        "business continuity"
+      ],
+      "mandatoryStatements": [
+        "Crisis management plan is documented",
+        "Plan defines what constitutes a crisis (recall, contamination, natural disaster, security breach, etc.)",
+        "Crisis management team is identified with roles and responsibilities",
+        "Decision-making authority during crisis is clearly defined",
+        "Communication procedures during crisis are specified (internal and external)",
+        "Plan includes templates for crisis communications",
+        "Business continuity and recovery procedures are included",
+        "Plan addresses coordination with regulatory authorities and emergency services",
+        "Crisis management plan is reviewed and updated at least annually",
+        "Crisis response drills or tabletop exercises are conducted periodically"
+      ],
+      "verificationExpectations": "Annual review and update of crisis management plan, periodic testing through drills or tabletop exercises",
+      "monitoringExpectations": "Quarterly verification of crisis team contact information, immediate activation of plan when crisis occurs"
+    },
+    {
+      "id": "1.08.05",
+      "code": "1.08.05",
+      "required": true,
+      "points": 3,
+      "text": "Is there a current list of emergency contact phone numbers for management, law enforcement and appropriate regulatory agencies?",
+      "keywords": [
+        "emergency contacts",
+        "contact list",
+        "regulatory contacts",
+        "law enforcement",
+        "emergency numbers"
+      ],
+      "mandatoryStatements": [
+        "Emergency contact list is documented and current",
+        "List includes key management personnel with 24/7 contact information",
+        "Local law enforcement contacts are included",
+        "Relevant regulatory agencies are included (FDA, USDA, state/local health departments)",
+        "Emergency services contacts are included (fire, medical, hazmat)",
+        "Poison control and CDC contacts are included if applicable",
+        "Contact list is accessible to personnel who may need to make emergency calls",
+        "Contact list is reviewed and updated at least quarterly or when changes occur"
+      ],
+      "verificationExpectations": "Quarterly verification that emergency contact list is current and accessible",
+      "monitoringExpectations": "Immediate update when contact information changes, quarterly review of all contact information"
+    },
+    {
+      "id": "1.08.06",
+      "code": "1.08.06",
+      "required": true,
+      "points": 3,
+      "text": "Are visitors and contractors to the company operations required to adhere to food defense procedures?",
+      "keywords": [
+        "visitor control",
+        "contractor control",
+        "visitor procedures",
+        "escort requirements",
+        "visitor compliance"
+      ],
+      "mandatoryStatements": [
+        "Visitor and contractor food defense procedures are documented",
+        "Visitors and contractors are required to follow food defense procedures",
+        "Check-in and check-out procedures are established",
+        "Visitor log captures date, name, company, purpose, and escort",
+        "Identification or badges are issued to visitors and contractors",
+        "Escort requirements for different areas are defined",
+        "Visitors and contractors are briefed on relevant food safety and security rules",
+        "Access restrictions for high-risk areas are enforced",
+        "Visitor and contractor compliance is monitored during visit"
+      ],
+      "verificationExpectations": "Annual audit of visitor control procedures, quarterly review of visitor logs for completeness",
+      "monitoringExpectations": "Daily verification that visitors and contractors follow procedures, immediate intervention if non-compliance observed"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If food fraud identified or suspected: immediate hold of suspect material, investigation within 24 hours, notification to authorities if required, enhanced testing and supplier verification",
+    "If food defense vulnerability identified: immediate interim controls, implement permanent mitigation within 30 days, update food defense plan",
+    "If security breach occurs: immediate containment, investigate incident within 24 hours, implement corrective actions to prevent recurrence, update food defense plan within 14 days",
+    "If crisis occurs: activate crisis management plan immediately, document all actions, conduct post-crisis review within 30 days, implement improvements identified",
+    "If visitor or contractor violates food defense procedures: immediate removal from facility, investigate incident, enhance visitor controls within 7 days"
+  ],
+  "traceabilityInject": [
+    "Food fraud investigations must trace suspect materials to suppliers and products to customers",
+    "Security incident records must trace events, personnel involved, and corrective actions",
+    "Visitor and contractor logs must trace facility access to specific dates, times, and locations visited",
+    "Crisis management actions must be traceable through chronological incident logs and decision documentation"
+  ]
+}

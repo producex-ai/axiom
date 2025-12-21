@@ -1,0 +1,60 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.02",
+  "title": "Worker Access and Security Controls",
+  "requirements": [
+    {
+      "code": "4.05.02a",
+      "question": "Are measures in place to prevent unauthorized persons from entering harvest areas?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.02b",
+      "question": "Are infants and toddlers prohibited from harvest and product handling areas?",
+      "totalPoints": 15,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Infants and toddlers in harvest areas present uncontrolled contamination risks including fecal contamination from diapers."
+    },
+    {
+      "code": "4.05.02c",
+      "question": "Are visitors to harvest areas required to follow the same hygiene and safety requirements as workers?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.02d",
+      "question": "Is there a system to identify and track who is authorized to access harvest areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Measures must be in place to prevent unauthorized persons from entering harvest and product handling areas.",
+    "Infants and toddlers must be strictly prohibited from harvest areas due to the risk of fecal contamination from diapers.",
+    "All visitors to harvest areas must comply with the same hygiene, health, and safety requirements as harvest workers.",
+    "A system must be in place to identify who is authorized to access harvest areas and to track their presence.",
+    "Unauthorized access violations must be documented and addressed through corrective action."
+  ],
+  "capaInject": [
+    "Establish clear access control procedures for harvest areas including signage, physical barriers where practical, and supervisor monitoring.",
+    "Develop a visitor management protocol requiring hygiene briefing, health screening, and appropriate PPE before harvest area access.",
+    "Create a designated childcare area separate from harvest operations to ensure infants and toddlers cannot enter production zones.",
+    "Implement a badge or identification system to clearly distinguish authorized personnel from visitors in harvest areas.",
+    "Establish regular monitoring and enforcement of access control procedures with documented consequences for violations."
+  ],
+  "traceabilityInject": [
+    "Maintain visitor logs for harvest areas including name, company, date, time in/out, areas accessed, and supervisor authorization.",
+    "Document training provided to visitors before harvest area entry including hygiene requirements and date/signature.",
+    "Keep records of any unauthorized access incidents including investigation, corrective actions, and preventive measures implemented.",
+    "Track issuance and return of visitor identification badges or PPE with date, name, and supervisor signature.",
+    "Log daily supervisor checks of harvest areas for presence of unauthorized persons or children."
+  ],
+  "micro_inject": [
+    "Emphasize that infants and toddlers in diapers present a high risk for fecal contamination due to diaper leakage and potential pathogen shedding.",
+    "Ensure all visitors understand that they can introduce pathogens from outside the operation if proper hygiene protocols are not followed.",
+    "Implement protocols to verify that visitors have not recently been ill with diarrhea or vomiting before harvest area access.",
+    "Monitor that unauthorized persons do not create pathogen introduction pathways through improper hygiene or contaminated clothing.",
+    "Verify that access control measures prevent potential cross-contamination from non-production areas to harvest zones."
+  ]
+}

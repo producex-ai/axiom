@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Iniciar Sesión - Axiom",
+    "imageAlt": "Documentación de cumplimiento y estándares de seguridad alimentaria"
+  },
+  "hero": {
+    "headline": "Simplifique la Documentación de Cumplimiento",
+    "description": "Plataforma impulsada por IA para la gestión de cumplimiento y certificación"
+  },
+  "form": {
+    "title": "Bienvenido de vuelta",
+    "subtitle": "Inicia sesión en tu cuenta de Axiom para continuar",
+    "fields": {
+      "email": {
+        "label": "Dirección de correo electrónico",
+        "placeholder": "Ingresa tu correo electrónico"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "Ingresa tu contraseña"
+      },
+      "rememberMe": "Recordarme"
+    },
+    "actions": {
+      "signIn": "Iniciar sesión",
+      "signingIn": "Iniciando sesión...",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signUp": "Registrarse"
+    },
+    "divider": "O continúa con",
+    "socialLogin": {
+      "google": "Google",
+      "facebook": "Facebook"
+    },
+    "noAccount": "¿No tienes una cuenta?"
+  }
+}

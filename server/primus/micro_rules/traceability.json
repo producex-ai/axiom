@@ -1,0 +1,20 @@
+{
+  "category": "traceability",
+  "rules": {
+    "one_step_back_forward": "The traceability system links raw materials and ingredients (one step back) through production to finished products and customers (one step forward). Traceability records enable complete trace-forward and trace-back within the facility.",
+    "lot_identification_required": "All raw materials, work-in-process, and finished products are identified with unique lot codes. Lot codes include sufficient information to trace back to source and production date.",
+    "lot_code_format_standard": "Lot code format is standardized and documented. Lot codes are legible, durable, and applied consistently across all products and packaging levels.",
+    "mock_recall_annual": "A mock recall exercise is conducted at least annually to test traceability system effectiveness. The mock recall simulates a real recall scenario and includes trace-back and trace-forward components.",
+    "mock_recall_24_hours": "Mock recalls are completed within 24 hours from initiation to final product disposition verification. Completion time is measured and documented.",
+    "mock_recall_documentation": "Mock recall documentation includes lot selected, start time, end time, records reviewed, personnel involved, product quantity/location identified, findings, corrective actions, and lessons learned.",
+    "rework_traceability": "Rework and reprocessed product maintains traceability to original lot codes. Rework is identified separately and tracked through the rework process to ensure allergen and shelf-life integrity.",
+    "production_records_link": "Production records link raw material lot codes to finished product lot codes. Records include batch numbers, ingredient lots used, production date/time, and quantity produced.",
+    "supplier_lot_codes": "Supplier lot codes are recorded at receiving and linked to internal lot codes. Supplier COAs and delivery documents are retained with traceability records.",
+    "customer_ship_records": "Shipping records document finished product lot codes, customer name, ship date, quantity, and destination. Records enable rapid customer notification in the event of a recall.",
+    "record_retention_adequate": "Traceability records are retained for the product shelf life plus 6 months (minimum 2 years). Records are organized and retrievable within 4 hours.",
+    "electronic_traceability_backup": "Electronic traceability systems are backed up regularly and protected against data loss. Backup data is tested periodically to ensure restorability.",
+    "recall_team_defined": "A recall team with defined roles and responsibilities is established. Team members include management, quality, production, logistics, and customer service representation.",
+    "recall_notification_procedures": "Recall notification procedures define internal communication, customer notification, regulatory notification (FDA, USDA), and public notification methods and timelines.",
+    "product_disposition_protocol": "Recalled product disposition protocol defines segregation, holding, evaluation, and destruction procedures. Product is not released or destroyed without documented authorization."
+  }
+}

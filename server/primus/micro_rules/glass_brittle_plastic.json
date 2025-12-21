@@ -1,0 +1,15 @@
+{
+  "category": "glass_brittle_plastic",
+  "rules": {
+    "glass_register_maintained": "A comprehensive glass and brittle plastic register is maintained listing all glass and brittle plastic items in production, storage, and warehouse areas. The register includes item description, location, quantity, and inspection frequency.",
+    "register_inspection_frequency": "All items on the glass and brittle plastic register are physically inspected monthly to verify integrity. Inspection records document date, inspector, item condition, and any corrective actions taken.",
+    "light_protection_required": "All light fixtures located above or near exposed product, ingredients, or food contact surfaces are protected with shatterproof covers, sleeves, or coatings to prevent glass contamination in case of breakage.",
+    "breakage_procedure_documented": "A glass and brittle plastic breakage procedure defines immediate response actions including production stop, area containment, product segregation, thorough cleanup, management notification, and documentation requirements.",
+    "product_inspection_after_breakage": "When glass or brittle plastic breakage occurs in a production area, all product in the affected area undergoes enhanced inspection or is segregated and held pending disposition decision. Product disposition is documented.",
+    "equipment_inspection_after_breakage": "After glass or brittle plastic breakage, all equipment and food contact surfaces in the affected area are thoroughly inspected and cleaned before production resumes. Inspection and cleaning are documented.",
+    "breakage_records_maintained": "All glass and brittle plastic breakage incidents are documented including date, time, location, item broken, root cause, affected product disposition, corrective actions, and preventive measures implemented.",
+    "unnecessary_glass_eliminated": "Glass and brittle plastic are eliminated from production areas where feasible alternatives exist. Only essential items justified by food safety or regulatory requirements are permitted.",
+    "mercury_thermometers_prohibited": "Mercury-containing thermometers and glass thermometers are prohibited in all production and storage areas. Only metal-stem dial thermometers or electronic temperature monitoring devices are permitted.",
+    "personal_items_restricted": "Personal items containing glass or brittle plastic (watches, jewelry, cell phones with glass screens, personal containers) are prohibited in production areas. Designated storage areas are provided for personal belongings."
+  }
+}

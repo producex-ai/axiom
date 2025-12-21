@@ -1,0 +1,127 @@
+{
+  "code": "1.03",
+  "title": "Procedures and Corrective Actions",
+  "moduleName": "Module 1: Food Safety Management System",
+  "appliesTo": [
+    "standard operating procedures",
+    "SOPs",
+    "corrective actions",
+    "non-conformances",
+    "incident reporting"
+  ],
+  "description": "Establishment and maintenance of standardized procedures and systematic approach to handling non-conformances and corrective actions",
+  "requirements": [
+    {
+      "id": "1.03.01",
+      "code": "1.03.01",
+      "required": true,
+      "points": 5,
+      "text": "Is there a written and standardized procedure for creating Standard Operating Procedures (SOPs) and their content?",
+      "keywords": [
+        "SOP development",
+        "procedure creation",
+        "standardized format",
+        "SOP template",
+        "procedure requirements"
+      ],
+      "mandatoryStatements": [
+        "Written procedure exists for SOP creation and format",
+        "Procedure defines required SOP elements (title, purpose, scope, procedures, records, etc.)",
+        "Standardized template or format is specified",
+        "Approval and review process for SOPs is defined",
+        "Procedure ensures SOPs are clear, actionable, and specific to facility operations",
+        "Version control and document identification requirements are specified"
+      ],
+      "verificationExpectations": "Annual review of SOP creation procedure and existing SOPs for compliance with format requirements",
+      "monitoringExpectations": "Verification of format compliance for each new or revised SOP before approval"
+    },
+    {
+      "id": "1.03.02",
+      "code": "1.03.02",
+      "required": true,
+      "points": 5,
+      "text": "Are the written procedures available to relevant users and is a master copy maintained in a central file?",
+      "keywords": [
+        "SOP availability",
+        "procedure access",
+        "master copy",
+        "central file",
+        "controlled documents"
+      ],
+      "mandatoryStatements": [
+        "Written procedures are available to all relevant personnel who need them",
+        "Master copies of all procedures are maintained in central location",
+        "Master file is controlled and access is restricted",
+        "Procedures are accessible in work areas where activities are performed",
+        "Controlled copies are distributed to relevant areas",
+        "System tracks distribution of controlled copies"
+      ],
+      "verificationExpectations": "Annual audit of master file completeness and procedure distribution, quarterly verification of work area procedure availability",
+      "monitoringExpectations": "Immediate distribution of new or revised procedures to relevant areas, monthly check of work area procedure currency"
+    },
+    {
+      "id": "1.03.03",
+      "code": "1.03.03",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented corrective action procedure that describes the basic requirements for handling all non-conformances affecting food safety?",
+      "keywords": [
+        "corrective action",
+        "CAPA",
+        "non-conformance",
+        "corrective action procedure",
+        "root cause analysis"
+      ],
+      "mandatoryStatements": [
+        "Corrective action procedure is documented",
+        "Procedure defines what constitutes a non-conformance",
+        "Immediate containment actions are specified",
+        "Root cause analysis methodology is defined",
+        "Corrective action planning and implementation steps are described",
+        "Verification of corrective action effectiveness is required",
+        "Responsibility and authority for corrective actions are defined",
+        "Documentation requirements for corrective actions are specified"
+      ],
+      "verificationExpectations": "Annual audit of corrective action procedure and records, quarterly review of corrective action effectiveness",
+      "monitoringExpectations": "Immediate initiation of corrective action for food safety non-conformances, monthly review of open corrective actions"
+    },
+    {
+      "id": "1.03.04",
+      "code": "1.03.04",
+      "required": true,
+      "points": 5,
+      "text": "Is there an incident reporting system, also known as a Notice(s) of Unusual Occurrence and Corrective Actions Log (NUOCA)?",
+      "keywords": [
+        "incident reporting",
+        "NUOCA",
+        "unusual occurrence",
+        "incident log",
+        "deviation reporting"
+      ],
+      "mandatoryStatements": [
+        "Incident reporting system (NUOCA or equivalent) is established",
+        "System captures all unusual occurrences and deviations affecting food safety",
+        "Log includes incident description, date, time, responsible party, and immediate actions taken",
+        "System tracks corrective actions from initiation to completion",
+        "Personnel are trained to recognize and report incidents",
+        "Management reviews incident reports regularly",
+        "Trend analysis of incidents is conducted to identify systemic issues"
+      ],
+      "verificationExpectations": "Annual audit of NUOCA system completeness and effectiveness, quarterly trend analysis of incidents",
+      "monitoringExpectations": "Daily or weekly review of new incidents, monthly verification of corrective action completion"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If SOP does not meet format requirements: revise SOP to comply with procedure within 14 days, retrain users on revised version",
+    "If procedures not available in work areas: provide controlled copies immediately, investigate distribution process failure",
+    "If corrective action procedure not followed: immediate correction, investigate why procedure was bypassed, retrain within 7 days",
+    "If incidents not reported in NUOCA: conduct immediate training on reporting requirements, implement monitoring to ensure compliance"
+  ],
+  "traceabilityInject": [
+    "SOP master file must trace all procedure versions and revision history",
+    "Corrective action records must trace from initial non-conformance through effectiveness verification",
+    "NUOCA log must be traceable to specific incidents, dates, personnel, and resolution",
+    "All corrective actions must be traceable to root cause analysis and verification results"
+  ]
+}

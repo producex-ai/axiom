@@ -1,0 +1,121 @@
+{
+  "code": "5.09",
+  "parentCode": "5",
+  "title": "Buildings and Grounds",
+  "requirements": [
+    {
+      "code": "5.09.01",
+      "question": "Are all lights in the facility that could potentially contaminate raw materials, work in progress, ingredients (including ice), finished goods, equipment or packaging shielded, coated or otherwise shatter resistant to protect product from contamination in the event of breakage?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.02",
+      "question": "Has the operation eliminated or adequately controlled any potential metal, glass or brittle plastic contamination issues?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.03",
+      "question": "Has the facility eliminated or adequately controlled the use of wooden items or surfaces?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.04",
+      "question": "Is there adequate lighting in the production and storage areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.05",
+      "question": "Is ventilation adequate to control dust, condensation, odors and vapors?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.06",
+      "question": "Are floor surfaces in good condition, with no standing water, no debris trapping cracks and are they easy to clean?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.07",
+      "question": "Are there floor drains and waste trap systems located where they are needed for drainage?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.08",
+      "question": "Are exterior doors kept closed and are closed doors and windows to the outside pest-proof?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.09",
+      "question": "Are dock load levelers and buffers/shelters maintained in good condition, pest proof and debris free?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.10",
+      "question": "Are exterior walls free of holes to exclude pests, and are pipes, vents, and air ducts designed and protected in order to prevent pest entry (e.g., by using fine mesh)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.11",
+      "question": "Are interior walls and ceilings free of cracks and crevices to prevent pest harborage and allow proper sanitation?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.12",
+      "question": "Is an 18\" (46 cm) internal wall perimeter being maintained within the facility, with adequate access to these wall perimeters, thereby allowing inspection and cleaning?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.13",
+      "question": "Is the exterior area immediately outside the facility, including roads, yards and parking areas, free of litter, weeds and standing water?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.14",
+      "question": "Are control measures being implemented for the outside storage of equipment, pallets, tires, etc. (i.e., out of the mud, pipe ends capped, stacked to prevent pest harborage, away from the building perimeter)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.15",
+      "question": "Are pallets inspected to separate and replace dirty or broken pallets, and broken or dirty pallets are not in use?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.16",
+      "question": "Is the area around the dumpster/cull truck/trash area clean?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.17",
+      "question": "Are outside garbage receptacles and dumpsters kept covered or closed?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.18",
+      "question": "Are all water lines protected against back siphonage?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.09.19",
+      "question": "Where there is an on-site laboratory, is it completely enclosed and separated from production and storage areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ]
+}

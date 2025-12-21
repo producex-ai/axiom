@@ -1,0 +1,43 @@
+{
+  "code": "6.03",
+  "parentCode": "6",
+  "title": "Execution of the HACCP Plan on the Plant Floor",
+  "requirements": [
+    {
+      "code": "6.03.01",
+      "question": "Is there documented evidence that all plant workers have attended a HACCP training, including specific training for CCP operators?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.03.02",
+      "question": "Do CCP operators understand basic HACCP principles and their role in monitoring CCPs?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.03.03",
+      "question": "Are the CCP monitoring activities and frequencies in conformance with the HACCP Plan and CCP SOPs?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.03.04",
+      "question": "Are CCP monitoring records signed off (or initialed) by the operator(s) who are carrying out and recording the CCP check?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.03.05",
+      "question": "Are the CCP records reviewed and signed off by the food safety supervisor and/or management (second signatory)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.03.06",
+      "question": "Is there a deviation record detailing documented corrective actions when a deviation/loss of control of a CCP occurs (a critical control limit is exceeded)?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    }
+  ]
+}

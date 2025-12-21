@@ -1,0 +1,72 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.04",
+  "title": "Harvest Equipment and Container Safety",
+  "requirements": [
+    {
+      "code": "4.05.04a",
+      "question": "Are harvest containers maintained in good, clean condition and free from contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Contaminated or damaged harvest containers in direct contact with product create unacceptable food safety risk."
+    },
+    {
+      "code": "4.05.04b",
+      "question": "Are harvest containers protected from potential sources of contamination when not in use?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.04c",
+      "question": "Are harvest containers of food-grade construction or materials?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.04d",
+      "question": "Is harvest equipment inspected before use to ensure it is in good repair and adequately clean?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.04e",
+      "question": "Are procedures in place to prevent use of containers or equipment for both product and non-food uses?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.04f",
+      "question": "Are damaged harvest containers removed from service until repaired or replaced?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Harvest containers must be maintained in good, clean condition and free from soil, debris, pests, or other contamination.",
+    "Containers must be protected from contamination when not in use through proper storage off the ground and protected from environmental exposure.",
+    "Harvest containers that directly contact product must be of food-grade construction or materials that do not contaminate product.",
+    "All harvest equipment must be inspected before use to ensure it is in good repair, adequately clean, and suitable for its intended purpose.",
+    "Containers and equipment must be dedicated to food use and not used interchangeably with non-food materials or chemicals."
+  ],
+  "capaInject": [
+    "Establish a daily pre-use inspection protocol for harvest containers and equipment with acceptance criteria and reject procedures.",
+    "Designate clean container storage areas that are elevated off the ground, protected from weather, and segregated from contamination sources.",
+    "Implement a container identification or color-coding system to prevent mixing of product containers with chemical or non-food containers.",
+    "Develop a container maintenance and replacement program with criteria for removing damaged or contaminated containers from service.",
+    "Create sanitation schedules and procedures for harvest containers and equipment with monitoring and verification activities."
+  ],
+  "traceabilityInject": [
+    "Maintain records of container and equipment inspections including date, inspector, items checked, deficiencies found, and actions taken.",
+    "Document container cleaning and sanitation activities including date, time, method, sanitizer used, and responsible person.",
+    "Keep records of containers or equipment removed from service including reason for removal, repair or disposal action, and return to service authorization.",
+    "Track procurement of new harvest containers including supplier, date, food-grade certification, and initial sanitation before use.",
+    "Log any product holds or investigations related to container or equipment contamination with full traceability to affected product lots."
+  ],
+  "micro_inject": [
+    "Emphasize that harvest containers are in direct contact with product and can transfer pathogens if not properly cleaned and maintained.",
+    "Ensure containers are stored and handled to prevent accumulation of soil, water, or organic matter that could harbor pathogenic bacteria.",
+    "Implement protocols to prevent cross-contamination between dirty containers from previous use and clean product during harvest.",
+    "Verify that container materials and construction do not promote microbial growth or provide harborage for pathogens in cracks or crevices.",
+    "Monitor sanitation effectiveness of harvest containers through periodic microbiological swab testing of high-touch or product-contact surfaces."
+  ]
+}

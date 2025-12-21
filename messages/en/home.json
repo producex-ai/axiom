@@ -1,0 +1,500 @@
+{
+  "hero": {
+    "headline": {
+      "main": "Compliance Documentation.",
+      "highlight": "Powered by AI."
+    },
+    "subheadline": "Axiom transforms how food businesses achieve and maintain certifications. Generate, manage, and maintain compliance documents for Primus GFS, BRC, and FSSC 22000 with AI-powered intelligence.",
+    "cta": {
+      "primary": "Start Free Trial",
+      "secondary": "Watch Demo"
+    },
+    "trustIndicators": {
+      "frameworks": "Multi-Framework Support",
+      "aiPowered": "AI Document Generation",
+      "secure": "Enterprise Secure"
+    },
+    "dashboard": {
+      "title": "Compliance Dashboard",
+      "status": "Live",
+      "metrics": {
+        "completionRate": {
+          "value": "94%",
+          "label": "Documentation Complete"
+        },
+        "aiAccuracy": {
+          "value": "98%",
+          "label": "AI Accuracy"
+        },
+        "timeSaved": {
+          "value": "75%",
+          "label": "Time Saved"
+        },
+        "auditReady": {
+          "value": "100%",
+          "label": "Audit Ready"
+        }
+      },
+      "progress": {
+        "documents": {
+          "label": "Active Documents",
+          "value": "142/150"
+        },
+        "compliance": {
+          "label": "Compliance Status",
+          "value": "Excellent"
+        }
+      }
+    }
+  },
+  "problem": {
+    "headline": {
+      "main": "Compliance Documentation is a",
+      "highlight": "Major Bottleneck"
+    },
+    "subheadline": "Traditional compliance processes drain resources, delay certifications, and create unnecessary risk for food businesses.",
+    "painPoints": {
+      "manual": {
+        "title": "Manual & Time-Consuming",
+        "description": "Creating compliance documents from scratch takes weeks. Copy-pasting from templates, interpreting requirements, and formatting documents consumes valuable time.",
+        "issues": {
+          "weeks": "Weeks to complete documentation",
+          "interpretation": "Manual requirement interpretation",
+          "inconsistency": "Inconsistent document quality"
+        }
+      },
+      "costly": {
+        "title": "Expensive & Resource-Heavy",
+        "description": "Hiring consultants, dedicating staff time, and maintaining multiple framework certifications creates significant costs.",
+        "issues": {
+          "consultants": "$15k-$50k per framework certification",
+          "staffTime": "Hundreds of hours of staff time",
+          "maintenance": "Ongoing document maintenance burden"
+        }
+      },
+      "risk": {
+        "title": "Compliance Risk",
+        "description": "Incomplete documentation, missed requirements, and outdated documents put certifications and business operations at risk.",
+        "issues": {
+          "auditFailures": "Failed audits from incomplete docs",
+          "outdated": "Out-of-date documentation",
+          "gaps": "Missed compliance requirements"
+        }
+      }
+    },
+    "impact": {
+      "title": "The Real Cost of Manual Compliance",
+      "subtitle": "Industry data reveals the burden of traditional documentation processes",
+      "statistics": {
+        "timeCost": {
+          "value": "200-400hrs",
+          "label": "Hours to complete framework documentation"
+        },
+        "consultantCost": {
+          "value": "$35k",
+          "label": "Average consultant cost per certification"
+        },
+        "failureRate": {
+          "value": "28%",
+          "label": "Audit failure rate due to documentation gaps"
+        },
+        "maintenance": {
+          "value": "3-6mo",
+          "label": "Time to update all docs for new standards"
+        }
+      }
+    }
+  },
+  "solution": {
+    "headline": {
+      "main": "AI-Powered Compliance",
+      "highlight": "Documentation Platform"
+    },
+    "subheadline": "Generate complete, audit-ready documents in minutes. Manage entire frameworks with intelligent workflows. Maintain compliance effortlessly.",
+    "features": {
+      "aiGeneration": {
+        "title": "AI Document Generation",
+        "description": "Generate complete compliance documents from framework requirements in minutes, not weeks.",
+        "details": {
+          "instant": "Instant document creation from requirements",
+          "contextAware": "Context-aware content generation",
+          "frameworks": "Primus GFS, BRC, FSSC 22000 support"
+        }
+      },
+      "richEditor": {
+        "title": "Intelligent Editor with AI Assistant",
+        "description": "Edit documents with a powerful editor that includes AI-powered suggestions, formatting, and compliance checks.",
+        "details": {
+          "aiAssist": "AI writing assistance and refinement",
+          "formatting": "Professional formatting built-in",
+          "realtime": "Real-time collaboration ready"
+        }
+      },
+      "lifecycle": {
+        "title": "Complete Document Lifecycle",
+        "description": "Manage documents from draft to published with version control, audit trails, and automated workflows.",
+        "details": {
+          "versions": "Full version control and history",
+          "workflow": "Draft → Publish → Archive lifecycle",
+          "audit": "Complete audit trail tracking"
+        }
+      },
+      "framework": {
+        "title": "Multi-Framework Management",
+        "description": "Handle multiple certification frameworks from one platform with organized module structures.",
+        "details": {
+          "organized": "Framework → Module → Document hierarchy",
+          "switching": "Easy framework switching",
+          "dashboard": "Unified compliance dashboard"
+        }
+      }
+    },
+    "aiAssistant": {
+      "title": "Axiom AI Assistant",
+      "description": "Get intelligent help throughout your documentation journey with natural language assistance.",
+      "examples": {
+        "generate": "Generate document for Module 5.02",
+        "improve": "Improve this section for clarity",
+        "compliance": "Check if this meets BRC requirements"
+      },
+      "features": {
+        "generation": "Intelligent document generation",
+        "refinement": "Content improvement suggestions",
+        "compliance": "Compliance requirement checking",
+        "contextual": "Context-aware assistance"
+      }
+    },
+    "workflow": {
+      "title": "Simple 4-Step Process",
+      "steps": {
+        "select": {
+          "number": "01",
+          "title": "Select",
+          "description": "Choose your framework and modules"
+        },
+        "generate": {
+          "number": "02",
+          "title": "Generate",
+          "description": "AI creates complete documents"
+        },
+        "refine": {
+          "number": "03",
+          "title": "Refine",
+          "description": "Edit and customize with AI help"
+        },
+        "publish": {
+          "number": "04",
+          "title": "Publish",
+          "description": "Export audit-ready documents"
+        }
+      }
+    }
+  },
+  "metrics": {
+    "headline": {
+      "main": "Proven Results.",
+      "highlight": "Real Impact."
+    },
+    "subheadline": "See how Axiom transforms compliance documentation with measurable improvements in speed, cost, and quality.",
+    "primaryMetrics": {
+      "timeSaved": {
+        "value": "75%",
+        "label": "Time Saved",
+        "description": "Reduction in documentation time vs manual",
+        "trend": "↑ 18%"
+      },
+      "accuracy": {
+        "value": "98%",
+        "label": "AI Accuracy",
+        "description": "Content quality and requirement coverage",
+        "trend": "↑ 12%"
+      },
+      "costReduction": {
+        "value": "$28k",
+        "label": "Cost Savings",
+        "description": "Average savings per certification",
+        "trend": "↑ $5k"
+      },
+      "completion": {
+        "value": "94%",
+        "label": "Completion Rate",
+        "description": "Framework documentation completeness",
+        "trend": "↑ 15%"
+      }
+    },
+    "operationalMetrics": {
+      "documents": {
+        "value": "1,247",
+        "label": "Documents Generated",
+        "description": "Total compliance documents created"
+      },
+      "avgTime": {
+        "value": "8min",
+        "label": "Avg Generation Time",
+        "description": "Time to generate complete document"
+      },
+      "frameworks": {
+        "value": "3",
+        "label": "Supported Frameworks",
+        "description": "Primus GFS, BRC, FSSC 22000"
+      },
+      "auditSuccess": {
+        "value": "96%",
+        "label": "Audit Success",
+        "description": "First-time audit pass rate"
+      }
+    },
+    "dashboard": {
+      "title": "Performance Overview",
+      "subtitle": "Real-time metrics and compliance status",
+      "liveData": "Live Data",
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun"
+      },
+      "charts": {
+        "completionTrend": {
+          "title": "Documentation Completion Trend"
+        },
+        "generationVolume": {
+          "title": "Monthly Document Generation"
+        }
+      }
+    },
+    "benefits": {
+      "costSavings": {
+        "title": "Cost Reduction",
+        "value": "$28k",
+        "description": "Average savings per certification cycle"
+      },
+      "timeSaved": {
+        "title": "Time Efficiency",
+        "value": "75%",
+        "description": "Reduction in documentation time"
+      },
+      "qualityImprovement": {
+        "title": "Quality Boost",
+        "value": "98%",
+        "description": "Requirement coverage accuracy"
+      }
+    }
+  },
+  "customer": {
+    "headline": {
+      "main": "Built for Every",
+      "highlight": "Compliance Role"
+    },
+    "subheadline": "Axiom delivers value across your organization, from quality managers to compliance directors to audit teams.",
+    "roles": {
+      "qaDirector": {
+        "role": "Quality Assurance Director",
+        "avatar": "👔",
+        "valueDelivered": "Multi-framework management, team oversight, audit readiness",
+        "benefits": {
+          "oversight": "Oversee compliance across all frameworks",
+          "visibility": "Real-time visibility into documentation status",
+          "reporting": "Instant audit-ready reports",
+          "standards": "Maintain consistent quality standards"
+        },
+        "keyMetrics": {
+          "visibility": {
+            "label": "Compliance Visibility",
+            "value": "100%"
+          },
+          "auditReady": {
+            "label": "Audit Readiness",
+            "value": "96%"
+          }
+        }
+      },
+      "complianceManager": {
+        "role": "Compliance Manager",
+        "avatar": "📋",
+        "valueDelivered": "Document generation, requirement tracking, version control",
+        "benefits": {
+          "generation": "Generate documents in minutes with AI",
+          "tracking": "Track all requirements and completeness",
+          "versions": "Manage document versions effortlessly",
+          "collaboration": "Collaborate with team in real-time"
+        },
+        "keyMetrics": {
+          "productivity": {
+            "label": "Productivity Increase",
+            "value": "75%"
+          },
+          "accuracy": {
+            "label": "Documentation Accuracy",
+            "value": "98%"
+          }
+        }
+      },
+      "auditor": {
+        "role": "Internal Auditor",
+        "avatar": "🔍",
+        "valueDelivered": "Audit trails, document verification, gap identification",
+        "benefits": {
+          "trails": "Complete audit trails for all documents",
+          "verification": "Verify requirement coverage instantly",
+          "gaps": "Identify documentation gaps quickly",
+          "export": "Export audit-ready documentation"
+        },
+        "keyMetrics": {
+          "auditTime": {
+            "label": "Audit Prep Time",
+            "value": "-60%"
+          },
+          "passRate": {
+            "label": "First-Pass Rate",
+            "value": "96%"
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "qa": {
+        "quote": "Axiom cut our Primus GFS documentation time from 6 weeks to 3 days. The AI generation is remarkably accurate.",
+        "author": "Sarah Martinez",
+        "title": "QA Director",
+        "company": "Fresh Valley Foods",
+        "avatar": "SM"
+      },
+      "compliance": {
+        "quote": "Managing multiple certifications used to be overwhelming. Now we handle Primus, BRC, and FSSC from one platform.",
+        "author": "David Chen",
+        "title": "Compliance Manager",
+        "company": "Pacific Produce Group",
+        "avatar": "DC"
+      },
+      "auditor": {
+        "quote": "The audit trail and document history features have made our internal audits so much more efficient and thorough.",
+        "author": "Maria Rodriguez",
+        "title": "Internal Auditor",
+        "company": "Global Fresh Foods",
+        "avatar": "MR"
+      }
+    }
+  },
+  "positioning": {
+    "headline": {
+      "main": "The Modern Way to Manage",
+      "highlight": "Food Safety Compliance"
+    },
+    "subheadline": "Axiom isn't just a document generator—it's a complete compliance management platform built for the future of food safety.",
+    "differentiators": {
+      "aiFirst": {
+        "title": "True AI-First Platform",
+        "description": "Built from the ground up with AI at its core, not a legacy system with AI bolted on.",
+        "details": {
+          "intelligent": "Intelligent content generation",
+          "contextual": "Context-aware suggestions",
+          "learning": "Continuously improving models"
+        }
+      },
+      "multiFramework": {
+        "title": "Multi-Framework Support",
+        "description": "Manage Primus GFS, BRC, FSSC 22000, and more from a single unified platform.",
+        "details": {
+          "unified": "Unified dashboard for all frameworks",
+          "switching": "Seamless framework switching",
+          "updates": "Automatic standard updates"
+        }
+      },
+      "enterprise": {
+        "title": "Enterprise-Grade Security",
+        "description": "Bank-level security with SOC 2 compliance, encryption, and audit trails you can trust.",
+        "details": {
+          "encryption": "End-to-end encryption",
+          "compliance": "SOC 2 Type II certified",
+          "trails": "Complete audit trails"
+        }
+      }
+    },
+    "frameworks": {
+      "title": "Supported Certification Frameworks",
+      "subtitle": "Comprehensive coverage for major food safety standards",
+      "list": {
+        "primusGfs": {
+          "name": "Primus GFS",
+          "description": "Good Agricultural & Handling Practices",
+          "status": "Available Now"
+        },
+        "brc": {
+          "name": "BRC Food Safety",
+          "description": "British Retail Consortium Standards",
+          "status": "Coming Soon"
+        },
+        "fssc": {
+          "name": "FSSC 22000",
+          "description": "Food Safety System Certification",
+          "status": "Coming Soon"
+        }
+      }
+    },
+    "competitiveAdvantages": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Generate complete documents in minutes instead of weeks",
+        "metric": "8min avg generation"
+      },
+      "accuracy": {
+        "title": "Exceptionally Accurate",
+        "description": "AI-powered content that meets all framework requirements",
+        "metric": "98% accuracy rate"
+      },
+      "costEffective": {
+        "title": "Dramatically Lower Cost",
+        "description": "Replace expensive consultants with intelligent automation",
+        "metric": "$28k avg savings"
+      },
+      "modern": {
+        "title": "Modern Experience",
+        "description": "Beautiful, intuitive interface that teams actually want to use",
+        "metric": "4.8/5 user rating"
+      }
+    }
+  },
+  "cta": {
+    "headline": {
+      "main": "Ready to Transform Your",
+      "highlight": "Compliance Process?"
+    },
+    "subheadline": "Join forward-thinking food businesses who've already revolutionized their compliance documentation with Axiom's AI-powered platform.",
+    "stats": {
+      "timeSaved": {
+        "value": "75%",
+        "label": "Faster Documentation"
+      },
+      "accuracy": {
+        "value": "98%",
+        "label": "AI Accuracy Rate"
+      },
+      "costReduction": {
+        "value": "$28k",
+        "label": "Average Cost Savings"
+      }
+    },
+    "primaryCta": {
+      "text": "Start Free Trial",
+      "subtext": "No credit card required • 14-day trial"
+    },
+    "secondaryCta": {
+      "text": "Schedule a Demo",
+      "subtext": "See Axiom in action"
+    },
+    "urgency": {
+      "text": "Special Offer:",
+      "highlight": "50% off annual plans",
+      "condition": "for the first 3 months when you sign up this quarter"
+    },
+    "trustSignals": {
+      "soc2": "SOC 2 Type II Certified",
+      "encryption": "256-bit Encryption",
+      "uptime": "99.9% Uptime SLA",
+      "support": "Expert Support Team"
+    }
+  }
+}

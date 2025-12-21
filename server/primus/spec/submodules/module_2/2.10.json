@@ -1,0 +1,275 @@
+{
+  "code": "2.10",
+  "title": "Equipment and Harvest Crew",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "harvest equipment",
+    "harvest crew",
+    "equipment sanitation",
+    "harvest containers",
+    "food contact surfaces"
+  ],
+  "description": "Requirements for harvest equipment and crew hygiene including equipment sanitation procedures, cleaning schedules, harvest container management, and harvest crew hygiene practices",
+  "requirements": [
+    {
+      "id": "2.10.01",
+      "code": "2.10.01",
+      "required": true,
+      "points": 10,
+      "text": "Are harvest equipment and harvest containers (bins, crates, bags, boxes, lugs, totes, etc.) maintained in a clean and sanitary condition?",
+      "keywords": [
+        "harvest equipment",
+        "harvest containers",
+        "sanitary condition",
+        "cleanliness",
+        "maintenance"
+      ],
+      "mandatoryStatements": [
+        "Harvest equipment is visibly clean and sanitary",
+        "Harvest containers are visibly clean and sanitary",
+        "Equipment and containers are inspected before use",
+        "Damaged or soiled containers are not used",
+        "Equipment is cleaned at appropriate intervals",
+        "Containers are cleaned between uses or are single-use",
+        "Cleaning procedures are documented"
+      ],
+      "verificationExpectations": "Daily pre-harvest inspection of equipment and containers",
+      "monitoringExpectations": "Continuous monitoring during harvest, immediate removal of unclean equipment or containers"
+    },
+    {
+      "id": "2.10.02",
+      "code": "2.10.02",
+      "required": true,
+      "points": 10,
+      "text": "Are there documented cleaning and sanitizing procedures for harvest equipment and harvest containers?",
+      "keywords": [
+        "cleaning procedures",
+        "sanitizing procedures",
+        "documentation",
+        "sanitation program"
+      ],
+      "mandatoryStatements": [
+        "Written cleaning and sanitizing procedures exist",
+        "Procedures specify what equipment and containers to clean",
+        "Procedures specify cleaning frequency",
+        "Procedures specify cleaning methods and materials",
+        "Procedures specify sanitizing methods and concentrations if applicable",
+        "Procedures specify responsible personnel",
+        "Procedures are communicated and trained to relevant personnel"
+      ],
+      "verificationExpectations": "Annual review of cleaning procedures for completeness",
+      "monitoringExpectations": "Verify procedures are followed during cleaning activities"
+    },
+    {
+      "id": "2.10.03",
+      "code": "2.10.03",
+      "required": true,
+      "points": 10,
+      "text": "Are there records demonstrating that cleaning and sanitizing of equipment and harvest containers is occurring according to the documented procedures?",
+      "keywords": [
+        "cleaning records",
+        "sanitizing records",
+        "documentation",
+        "verification"
+      ],
+      "mandatoryStatements": [
+        "Cleaning and sanitizing activities are documented",
+        "Records include date and time of cleaning",
+        "Records include identification of equipment/containers cleaned",
+        "Records include name of person performing cleaning",
+        "Records demonstrate frequency matches procedure requirements",
+        "Records include verification that cleaning was effective",
+        "Non-conformances are documented and corrected"
+      ],
+      "verificationExpectations": "Weekly review of cleaning records for completeness and compliance",
+      "monitoringExpectations": "Daily recording of cleaning activities, immediate documentation of any cleaning issues"
+    },
+    {
+      "id": "2.10.04",
+      "code": "2.10.04",
+      "required": true,
+      "points": 5,
+      "text": "Is harvest equipment in good repair and maintained to minimize contamination risk?",
+      "keywords": [
+        "equipment maintenance",
+        "good repair",
+        "contamination prevention",
+        "equipment condition"
+      ],
+      "mandatoryStatements": [
+        "Harvest equipment is in good repair",
+        "No broken or damaged parts that contact product",
+        "Equipment surfaces are smooth and cleanable",
+        "Equipment does not have sharp edges or splinters",
+        "Equipment is maintained to prevent lubricant or fluid leaks onto product",
+        "Maintenance is performed regularly",
+        "Equipment is inspected before each use"
+      ],
+      "verificationExpectations": "Weekly inspection of equipment condition",
+      "monitoringExpectations": "Daily pre-use inspection, immediate repair or replacement of damaged equipment"
+    },
+    {
+      "id": "2.10.05",
+      "code": "2.10.05",
+      "required": true,
+      "points": 5,
+      "text": "Are harvest containers stored in a manner that protects them from contamination?",
+      "keywords": [
+        "container storage",
+        "contamination prevention",
+        "protected storage",
+        "clean storage"
+      ],
+      "mandatoryStatements": [
+        "Harvest containers are stored off the ground",
+        "Containers are stored under cover or protected from weather",
+        "Storage area is clean and organized",
+        "Containers are stored to prevent pest access",
+        "Clean containers are separated from dirty containers",
+        "Storage area is away from contamination sources",
+        "Containers are inspected before use even if stored properly"
+      ],
+      "verificationExpectations": "Weekly inspection of container storage areas",
+      "monitoringExpectations": "Daily verification of proper storage, immediate correction if contamination risk detected"
+    },
+    {
+      "id": "2.10.06",
+      "code": "2.10.06",
+      "required": true,
+      "points": 10,
+      "text": "Do harvest crew members follow hygiene requirements including hand washing, illness exclusion, and clean clothing?",
+      "keywords": [
+        "harvest crew hygiene",
+        "hand washing",
+        "illness exclusion",
+        "clean clothing",
+        "hygiene compliance"
+      ],
+      "mandatoryStatements": [
+        "Harvest crew members wash hands before starting work",
+        "Harvest crew members wash hands after restroom use",
+        "Harvest crew members wash hands after breaks",
+        "Ill workers are excluded from harvest activities",
+        "Harvest crew wears clean clothing",
+        "Harvest crew follows jewelry restrictions",
+        "Hygiene rules are communicated and enforced",
+        "Supervisors monitor hygiene compliance"
+      ],
+      "verificationExpectations": "Daily observation of harvest crew hygiene practices",
+      "monitoringExpectations": "Continuous supervision during harvest, immediate correction of violations"
+    },
+    {
+      "id": "2.10.07",
+      "code": "2.10.07",
+      "required": true,
+      "points": 10,
+      "text": "Have harvest crew members received food safety and hygiene training appropriate for their duties?",
+      "keywords": [
+        "harvest crew training",
+        "food safety training",
+        "hygiene training",
+        "training records"
+      ],
+      "mandatoryStatements": [
+        "Harvest crew receives food safety training before starting work",
+        "Training covers personal hygiene requirements",
+        "Training covers product handling requirements",
+        "Training covers illness reporting",
+        "Training is documented with records",
+        "Training is in language understood by workers",
+        "Refresher training is provided annually or as needed",
+        "Training effectiveness is assessed through observation"
+      ],
+      "verificationExpectations": "Quarterly audit of harvest crew training records",
+      "monitoringExpectations": "Train all new harvest crew before work begins, annual refresher for returning workers"
+    },
+    {
+      "id": "2.10.08",
+      "code": "2.10.08",
+      "required": true,
+      "points": 10,
+      "text": "Are toilet and hand washing facilities adequate and accessible for harvest crew?",
+      "keywords": [
+        "toilet facilities",
+        "hand washing facilities",
+        "harvest crew access",
+        "adequate facilities"
+      ],
+      "mandatoryStatements": [
+        "Adequate toilet facilities are provided for harvest crew",
+        "Adequate hand washing facilities are provided",
+        "Facilities are located within reasonable distance of harvest areas",
+        "Facilities meet same requirements as field worker facilities (Section 2.07)",
+        "Facilities are maintained clean and stocked",
+        "Facility locations do not pose contamination risk",
+        "Additional mobile facilities provided if harvest crew is in remote areas"
+      ],
+      "verificationExpectations": "Daily inspection of harvest crew toilet and hand washing facilities",
+      "monitoringExpectations": "Multiple daily checks during active harvest, immediate restocking and cleaning as needed"
+    },
+    {
+      "id": "2.10.09",
+      "code": "2.10.09",
+      "required": true,
+      "points": 5,
+      "text": "Is harvest equipment stored in a manner that protects it from contamination when not in use?",
+      "keywords": [
+        "equipment storage",
+        "contamination prevention",
+        "protected storage"
+      ],
+      "mandatoryStatements": [
+        "Harvest equipment is stored in protected area when not in use",
+        "Equipment is stored off the ground",
+        "Equipment is covered or stored under shelter",
+        "Storage area is clean and away from contamination sources",
+        "Equipment is stored to prevent pest access",
+        "Equipment is inspected and cleaned before storage if appropriate"
+      ],
+      "verificationExpectations": "Weekly inspection of equipment storage practices",
+      "monitoringExpectations": "Daily verification of proper storage after use"
+    },
+    {
+      "id": "2.10.10",
+      "code": "2.10.10",
+      "required": true,
+      "points": 5,
+      "text": "Are harvest crew personal items (food, beverages, cell phones, bags) prohibited from harvest areas?",
+      "keywords": [
+        "personal items",
+        "prohibited items",
+        "harvest area restrictions",
+        "contamination prevention"
+      ],
+      "mandatoryStatements": [
+        "Personal items are prohibited in harvest areas",
+        "Designated areas provided for storage of personal items",
+        "Policy is communicated to harvest crew",
+        "Supervisors enforce prohibition",
+        "Violations result in corrective action",
+        "Drinking water is provided in designated areas outside harvest zone"
+      ],
+      "verificationExpectations": "Daily inspection of harvest areas for personal items",
+      "monitoringExpectations": "Continuous supervision, immediate removal of personal items from harvest areas"
+    }
+  ],
+  "micro_inject": ["fsms", "sanitation"],
+  "capaInject": [
+    "If equipment or containers not clean: immediately remove from use, clean and sanitize before returning to service",
+    "If cleaning procedures not documented: develop procedures within 7 days, implement immediately",
+    "If cleaning records not maintained: implement record keeping immediately, ensure daily documentation",
+    "If equipment in poor repair: immediate removal from service, repair or replace before use",
+    "If containers not stored properly: reorganize storage immediately, implement proper storage controls",
+    "If harvest crew not following hygiene: immediate retraining, enhanced supervision, disciplinary action for violations",
+    "If harvest crew training inadequate: provide comprehensive training immediately before continued harvest work",
+    "If toilet/hand wash facilities inadequate for harvest crew: provide additional facilities immediately",
+    "If equipment not stored properly: implement proper storage immediately after each use",
+    "If personal items in harvest areas: immediate removal, retrain workers, disciplinary action for repeat violations"
+  ],
+  "traceabilityInject": [
+    "Equipment cleaning records must be traceable to specific equipment, cleaning dates, and personnel",
+    "Harvest container cleaning records must be traceable to container types, cleaning events, and verification",
+    "Harvest crew training records must be traceable to specific crew members, training dates, and topics",
+    "Equipment maintenance records must be traceable to specific equipment, maintenance dates, and work performed"
+  ]
+}

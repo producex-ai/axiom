@@ -1,0 +1,91 @@
+{
+  "code": "5.08",
+  "parentCode": "5",
+  "title": "General Cleaning",
+  "requirements": [
+    {
+      "code": "5.08.01",
+      "question": "Are spills cleaned up immediately?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.02",
+      "question": "Are waste and garbage frequently removed from production and storage areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.03",
+      "question": "Are floor drains and waste trap systems constructed and located so they can be easily cleaned, do they appear clean, free from odors, in good repair, and flow in a manner that prevents contamination (e.g., from high to low risk areas, from high risk directly to drain system)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.04",
+      "question": "Do high level areas, including overhead pipes, ducts, conduit, etc., appear clean?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.05",
+      "question": "Are plastic strip curtains maintained in good condition, kept clean and mounted so that the tips are not touching the floor?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.06",
+      "question": "Is personal protection equipment (PPE) for the sanitation crew in good condition and stored to prevent cross contamination to raw products, work in progress, ingredients, finished goods or packaging?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.07",
+      "question": "Is cleaning equipment maintained clean and stored properly?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.08",
+      "question": "Is cleaning equipment identified in order to prevent potential cross-contamination issues (e.g., production, maintenance, outside, restroom equipment)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.09",
+      "question": "Are all items used for sanitation appropriate for their designated purpose (e.g., no steel wool, metal bristles, etc.)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.10",
+      "question": "Are toilet facilities and hand washing stations clean?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.11",
+      "question": "Are worker break facilities clean, including microwaves and refrigerators, and no rotting or out of date foodstuffs?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.12",
+      "question": "Is the maintenance shop organized, with equipment and spares stored in a neat and tidy fashion?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.13",
+      "question": "Are internal transport vehicles (e.g., forklifts, bobcats, pallet jacks, carts, floor cleaners, etc.), clean, do not emit toxic fumes and are being used in a sanitary manner?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.08.14",
+      "question": "Are shipping trucks clean and in good condition?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ]
+}

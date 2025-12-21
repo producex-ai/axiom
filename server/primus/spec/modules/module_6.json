@@ -1,0 +1,258 @@
+{
+  "module": "6",
+  "moduleName": "HACCP",
+  "description": "HACCP System Requirements covering the development, implementation, and execution of HACCP plans. This module addresses team formation, hazard analysis, critical control points (CCPs), monitoring procedures, corrective actions, and on-floor execution of HACCP protocols.",
+  "scope": "This module will always be applicable to all facility operations. Auditees have the option to present combined HACCP and Preventive Control Systems, but auditors must report/score separately.",
+  "totalSubmodules": 3,
+  "totalQuestions": 22,
+  "totalPoints": 260,
+  "officialSource": "PGFS-ND-029-6 R0 July 31, 2025",
+  "implementationStatus": "Complete",
+  "submodules": [
+    {
+      "code": "6.01",
+      "name": "Development of the HACCP Plan",
+      "specFile": "6.01.json",
+      "questionsCount": 5,
+      "totalPoints": 50,
+      "micro_inject": [
+        "fsms",
+        "haccp",
+        "team",
+        "training",
+        "product_description",
+        "flow_chart"
+      ]
+    },
+    {
+      "code": "6.02",
+      "name": "HACCP Plan Requirements",
+      "specFile": "6.02.json",
+      "questionsCount": 11,
+      "totalPoints": 135,
+      "micro_inject": [
+        "fsms",
+        "haccp",
+        "hazard_analysis",
+        "ccp",
+        "critical_limits",
+        "monitoring",
+        "corrective_actions",
+        "verification"
+      ]
+    },
+    {
+      "code": "6.03",
+      "name": "Execution of the HACCP Plan on the Plant Floor",
+      "specFile": "6.03.json",
+      "questionsCount": 6,
+      "totalPoints": 75,
+      "micro_inject": [
+        "fsms",
+        "haccp",
+        "training",
+        "monitoring",
+        "records",
+        "corrective_actions"
+      ]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this HACCP document exists, what it achieves for food safety, business and compliance drivers"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What processes/products covered, facility operations included, who is responsible, any exclusions"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "HACCP-specific terminology (CCP, critical limit, verification, validation, etc.), minimum 5-8 terms"
+      },
+      {
+        "number": 5,
+        "title": "HACCP Team & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "HACCP team leader, team members with qualifications, training requirements, specific responsibilities"
+      },
+      {
+        "number": 6,
+        "title": "Product Description & Intended Use",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Complete product description, ingredients, processing characteristics, distribution method, intended use, target consumer"
+      },
+      {
+        "number": 7,
+        "title": "Process Flow Diagram",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Detailed flow chart of all process steps, on-site verification statement, diagram validation records"
+      },
+      {
+        "number": 8,
+        "title": "Hazard Analysis (Principle 1)",
+        "required": true,
+        "minParagraphs": 4,
+        "contentGuidance": "Comprehensive hazard analysis for biological, chemical, physical hazards at each step, likelihood of occurrence, severity assessment, control measures"
+      },
+      {
+        "number": 9,
+        "title": "Critical Control Points - CCPs (Principle 2)",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "CCP determination using decision tree, justification for each CCP, documentation of logic applied"
+      },
+      {
+        "number": 10,
+        "title": "Critical Limits (Principle 3)",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific critical limits for each CCP, validation documentation supporting limits, scientific/regulatory basis"
+      },
+      {
+        "number": 11,
+        "title": "Monitoring Procedures (Principle 4)",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor, how to monitor, frequency of monitoring, who is responsible, monitoring equipment and calibration"
+      },
+      {
+        "number": 12,
+        "title": "Corrective Actions (Principle 5)",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific corrective action procedures when critical limits are exceeded, deviation handling, affected product disposition, process control restoration"
+      },
+      {
+        "number": 13,
+        "title": "Verification Procedures (Principle 6)",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Verification activities and schedules for each CCP, calibration procedures, record review frequency, validation studies"
+      },
+      {
+        "number": 14,
+        "title": "Record Keeping (Principle 7)",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "HACCP plan documentation, CCP monitoring records, corrective action records, verification records, retention periods"
+      },
+      {
+        "number": 15,
+        "title": "HACCP Plan Review & Maintenance",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Annual review requirements, review when significant changes occur, plan modification procedures"
+      },
+      {
+        "number": 16,
+        "title": "Training & Implementation",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "HACCP principles training for all workers, specific CCP operator training, training documentation, competency assessment"
+      },
+      {
+        "number": 17,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 18,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (HACCP Team Leader, Food Safety Manager, QA Manager, General Manager)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "haccp_general": [
+      "HACCP",
+      "hazard analysis",
+      "critical control point",
+      "CCP",
+      "food safety",
+      "team",
+      "training",
+      "product description",
+      "flow diagram"
+    ],
+    "hazard_analysis": [
+      "biological hazards",
+      "chemical hazards",
+      "physical hazards",
+      "likelihood",
+      "severity",
+      "control measures",
+      "preventive measures"
+    ],
+    "ccp": [
+      "critical control point",
+      "decision tree",
+      "critical limit",
+      "monitoring",
+      "verification",
+      "validation"
+    ],
+    "monitoring": [
+      "monitoring frequency",
+      "monitoring procedures",
+      "monitoring equipment",
+      "calibration",
+      "responsibility",
+      "recording"
+    ],
+    "corrective_actions": [
+      "deviation",
+      "loss of control",
+      "corrective action plan",
+      "affected product",
+      "process adjustment",
+      "root cause"
+    ],
+    "verification": [
+      "verification schedule",
+      "verification activities",
+      "record review",
+      "calibration",
+      "validation studies"
+    ],
+    "records": [
+      "HACCP plan",
+      "monitoring records",
+      "corrective action records",
+      "verification records",
+      "retention",
+      "documentation"
+    ],
+    "training": [
+      "HACCP principles",
+      "CCP operators",
+      "training records",
+      "competency",
+      "basic HACCP understanding"
+    ]
+  }
+}

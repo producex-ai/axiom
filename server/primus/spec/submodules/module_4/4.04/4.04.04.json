@@ -1,0 +1,71 @@
+{
+  "parentCode": "4.04",
+  "code": "4.04.04",
+  "title": "Worker Safety and Hygiene Supplies",
+  "requirements": [
+    {
+      "code": "4.04.04a",
+      "question": "Are first aid supplies readily available and accessible to harvest crew workers?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.04b",
+      "question": "Are bandages and wound coverings waterproof and brightly colored for easy detection?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.04c",
+      "question": "Are gloves available and used appropriately when required for worker protection or product safety?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.04d",
+      "question": "Are hand sanitizers or disinfectants available in areas where handwashing facilities are not immediately accessible?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.04e",
+      "question": "Is personal protective equipment (PPE) provided and maintained in good condition?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.04.04f",
+      "question": "Are adequate supplies maintained for all hygiene stations throughout the workday?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "First aid supplies must be readily available and accessible to all harvest crew workers in case of injury.",
+    "All bandages and wound coverings used in product handling areas must be waterproof and brightly colored (e.g., blue) for easy visual detection if they become dislodged.",
+    "Gloves must be available for worker protection and product safety, and workers must be trained on when and how to use them properly.",
+    "Hand sanitizers or approved disinfectants must be available in field locations where handwashing facilities are not immediately accessible.",
+    "All personal protective equipment must be maintained in good, sanitary condition and replaced when damaged or worn."
+  ],
+  "capaInject": [
+    "Establish an inventory management system for first aid supplies, bandages, gloves, and other hygiene materials with regular stock checks.",
+    "Implement a preventive replacement schedule for PPE and hygiene supplies before they become worn or depleted.",
+    "Create protocols for proper use and disposal of gloves to prevent cross-contamination between tasks or areas.",
+    "Designate responsibility for monitoring hygiene supply levels and restocking throughout the workday.",
+    "Develop training programs on proper PPE use, including when gloves are required and how to change them to prevent contamination."
+  ],
+  "traceabilityInject": [
+    "Maintain inventory records of all hygiene supplies including purchase dates, quantities, and distribution to work areas.",
+    "Document first aid incidents including date, worker name, type of injury, treatment provided, and whether worker continued in product handling.",
+    "Keep records of PPE distribution to workers including glove sizes, types provided, and replacement frequency.",
+    "Log inspections of first aid kits and hygiene supply stations including date, inspector, and items restocked.",
+    "Track any product holds or investigations related to missing bandages or other foreign material concerns."
+  ],
+  "micro_inject": [
+    "Ensure that use of hand sanitizers complements but does not replace proper handwashing with soap and water, especially after bathroom use.",
+    "Verify that gloves are used correctly and do not create a false sense of security that leads to reduced handwashing frequency.",
+    "Monitor that workers change gloves between different tasks or after contamination events to prevent cross-contamination.",
+    "Confirm that first aid supplies and bandages do not become sources of contamination themselves through improper storage or handling.",
+    "Ensure brightly colored bandages facilitate detection and removal if they contaminate product, reducing microbiological risk from wounds."
+  ]
+}

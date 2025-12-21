@@ -1,0 +1,37 @@
+{
+  "code": "6.01",
+  "parentCode": "6",
+  "title": "Development of the HACCP Plan",
+  "requirements": [
+    {
+      "code": "6.01.01",
+      "question": "Is there a team responsible for the HACCP system at the operation, with an assigned leader for the development, implementation and on-going maintenance of the HACCP system?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.01.02",
+      "question": "Is there documented evidence that the HACCP team members have been trained on HACCP principles?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.01.03",
+      "question": "Does a product description exist for the products produced?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.01.04",
+      "question": "Has the process(es) been flow charted in sufficient detail to completely describe the process or product handling/processing steps?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "6.01.05",
+      "question": "Is there documented evidence that the flow chart(s) has been verified on-site?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "code": "4.08",
+  "title": "On-site Storage",
+  "requirements": [
+    {
+      "code": "4.08.01",
+      "question": "Is there an on-site storage for items and/or equipment used in the harvesting process (e.g., packing material, cartons, clamshells, re-usable containers, disinfectants, grading/packing tables, RPCs, harvesting equipment, etc.)?",
+      "totalPoints": 0,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.01a",
+      "question": "Is on-site storage for items and/or equipment used in the harvesting process (e.g., packing material, cartons, clamshells, re-usable containers, disinfectants, grading/packing tables, RPCs, harvesting equipment, etc.) clean and secure?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.02",
+      "question": "Are packaging, containers, and harvesting equipment stored to prevent cross contamination (this includes RPCs, cartons, clamshells, bins, and other harvesting type of containers that are single use or reusable, etc.)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.03",
+      "question": "Are there cleaning logs for the storage area(s)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04",
+      "question": "Is there a documented and effective pest control program in place for fixed location storage areas?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04a",
+      "question": "Are pest control devices located away from items and/or equipment used in the harvesting process (e.g., packing material, cartons, clamshells, re-usable containers, disinfectants, grading/packing tables, RPCs, harvesting equipment, etc.), and poisonous bait stations are not used inside the storage areas?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04b",
+      "question": "Are pest control devices maintained in a clean and intact condition and marked as monitored (or bar code scanned) on a regular basis?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04c",
+      "question": "Are pest control devices adequate in number and location?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04d",
+      "question": "If storage areas are fully enclosed, are measures taken to prevent pest entry?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04e",
+      "question": "Are all pest control devices identified by a number or other code (e.g., barcode)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04f",
+      "question": "Are all pest control devices effective and bait traps secured?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04g",
+      "question": "Is there a schematic drawing/plan of the storage area showing numbered locations of all pest monitoring devices, both inside and outside the storage area?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.08.04h",
+      "question": "Are service reports created for pest control checks detailing inspection records, application records, and corrective actions of issues noted (in-house and/or contract)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "On-site storage areas for harvest-related items and equipment must be maintained in a clean and secure condition to prevent contamination and unauthorized access.",
+    "Packaging materials, containers, and harvesting equipment must be stored in a manner that prevents cross-contamination from environmental sources, pests, chemicals, or other contaminating materials.",
+    "Cleaning logs must be maintained for all storage areas documenting cleaning date, personnel, procedures performed, and verification.",
+    "A documented and effective pest control program must be established for all fixed location storage areas including monitoring, treatment, and verification activities.",
+    "Pest control devices must be strategically located away from stored items and equipment, and poisonous bait stations must not be used inside storage areas where they could contaminate food contact materials.",
+    "All pest control devices must be maintained in clean and intact condition with regular monitoring documented through marks, tags, or barcode scanning.",
+    "The number and location of pest control devices must be adequate to effectively monitor and control pest activity throughout the storage area.",
+    "For fully enclosed storage areas, physical measures must be implemented to prevent pest entry including door seals, screens, air curtains, or other exclusion methods.",
+    "All pest control devices must be uniquely identified by number, code, or barcode to enable tracking and documentation of monitoring activities.",
+    "Pest control devices must be effective for their intended purpose with bait traps properly secured to prevent tampering, spillage, or access by non-target organisms.",
+    "A schematic drawing or map of the storage area must be maintained showing the numbered locations of all pest monitoring devices both inside and outside the storage area.",
+    "Service reports for pest control activities must be created and maintained detailing inspection findings, treatments applied, pest activity trends, and corrective actions taken for identified issues."
+  ],
+  "capaInject": [
+    "If storage areas are not clean or secure: implement immediate cleaning, establish regular cleaning schedule with assigned responsibilities, improve security measures such as locks, fencing, or access control, conduct daily inspections.",
+    "If cross-contamination risks are identified: reorganize storage layout to separate incompatible materials, elevate materials off ground, cover or enclose sensitive items, establish traffic flow patterns to minimize contamination.",
+    "If cleaning logs are missing or incomplete: implement standardized cleaning log forms for all storage areas, train personnel on proper documentation, assign supervisor to verify and sign off on cleaning activities.",
+    "If pest control program is inadequate or undocumented: develop comprehensive pest control program including monitoring schedule, treatment protocols, responsible personnel, and documentation requirements, contract qualified pest control service if needed.",
+    "If pest control device placement is improper: relocate devices to positions away from stored materials, remove poisonous bait stations from inside storage areas, use only mechanical traps or monitoring devices in food storage zones.",
+    "If pest control devices are not properly maintained: establish regular inspection and maintenance schedule for all devices, replace damaged or ineffective devices immediately, implement monitoring verification system.",
+    "If pest control device coverage is inadequate: conduct pest risk assessment to determine appropriate device locations, add devices to areas with pest activity or high risk, ensure devices cover all entry points and vulnerable areas.",
+    "If pest exclusion measures are lacking: install door sweeps, repair holes and gaps, add screens to openings, implement air curtains, establish procedures to keep doors closed when not in use.",
+    "If pest control devices lack identification: implement numbering or barcoding system for all devices, update schematic drawings with current device locations and numbers, train personnel on device identification.",
+    "If pest control service reports are missing: establish reporting requirements for all pest control activities (in-house or contract), review reports monthly for trends, implement corrective actions for recurring issues."
+  ],
+  "traceabilityInject": [
+    "Maintain cleaning logs for storage areas including date, time, personnel, areas cleaned, procedures performed, chemicals used, and supervisor verification with retention for at least 12 months.",
+    "Document storage area inspections including date, inspector, condition observations, temperature/humidity (if applicable), pest signs, deficiencies noted, and corrective actions required.",
+    "Keep records of pest control program documentation including program procedures, monitoring schedules, device locations, treatment protocols, and personnel responsibilities.",
+    "Maintain pest control monitoring records for each device including device number, location, inspection date, inspector, pest activity observed, device condition, and actions taken.",
+    "Document pest control service reports (in-house or contractor) including service date, areas inspected, pest activity trends, treatments applied, materials used, recommendations, and technician identification.",
+    "Maintain schematic drawings of storage areas showing pest control device locations with revision dates and verification that drawings match actual device placements.",
+    "Track pest control device inventory including device type, ID numbers, installation dates, maintenance history, and replacement dates to ensure device effectiveness.",
+    "Document corrective actions for pest control issues including issue description, date identified, actions taken, responsible person, verification of effectiveness, and preventive measures implemented.",
+    "Establish traceability between storage area cleaning, pest control activities, and any product or material holds or rejections resulting from storage-related contamination concerns."
+  ],
+  "micro_inject": [
+    "Emphasize that pests such as rodents, birds, and insects can contaminate food contact surfaces and packaging materials with pathogenic bacteria including Salmonella, E. coli, and Listeria through droppings, urine, and direct contact.",
+    "Verify that storage areas for packaging materials are dry and well-ventilated to prevent mold and bacterial growth on cardboard, wood pallets, and other cellulose-based materials that could transfer to food products.",
+    "Ensure that pest control methods do not introduce chemical contamination to food contact surfaces through improper use of pesticides, rodenticides, or insecticides in proximity to stored materials.",
+    "Monitor for conditions that support pest harborage and breeding including moisture, food debris, clutter, and entry points that allow pests access to storage areas.",
+    "Implement First-In-First-Out (FIFO) inventory rotation to prevent long-term storage of materials that could attract pests or develop microbial contamination.",
+    "Verify that cleaning procedures for storage areas effectively remove organic matter, spills, and debris that could attract pests or support microbial growth.",
+    "Understand that effective pest exclusion is the primary defense against contamination, making physical barriers and sanitation more important than chemical control methods.",
+    "Ensure that any reusable containers (RPCs, bins) stored on-site are properly cleaned and sanitized before storage and protected from recontamination during storage to prevent pathogen transfer to fresh product during subsequent use."
+  ]
+}

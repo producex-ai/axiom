@@ -1,0 +1,25 @@
+{
+  "code": "5.11",
+  "parentCode": "5",
+  "title": "Chemical Files",
+  "requirements": [
+    {
+      "code": "5.11.01",
+      "question": "Are there current Safety Data Sheets (SDS), and copies of specimen labels for chemicals used, where the full label is not immediately accessible (e.g., rodent chemicals, product sanitizers)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.11.02",
+      "question": "Are there chemical inventory logs for chemicals, including pesticides, fertilizers and cleaning and sanitizing chemicals?",
+      "totalPoints": 3,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.11.03",
+      "question": "Are there specific Standard Operating Procedures (SOPs) for the monitoring of anti-microbial parameters in single pass and/or recirculated/batch water systems, changing of recirculated/batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.) and for monitoring pH and water temperature (if applicable)?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ]
+}

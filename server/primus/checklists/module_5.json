@@ -1,0 +1,491 @@
+{
+  "module": "5",
+  "moduleName": "Facility & Operations",
+  "sections": [
+    {
+      "code": "5.01",
+      "name": "Facility Design & Construction",
+      "requirements": [
+        {
+          "code": "5.01.01",
+          "description": "Facility designed to prevent cross-contamination between raw and RTE areas",
+          "mandatory": true,
+          "keywords": [
+            "facility design",
+            "cross-contamination",
+            "zoning",
+            "segregation",
+            "raw and RTE"
+          ]
+        },
+        {
+          "code": "5.01.02",
+          "description": "Walls, floors, ceilings maintained in good repair and cleanable",
+          "mandatory": true,
+          "keywords": [
+            "walls",
+            "floors",
+            "ceilings",
+            "good repair",
+            "cleanable surfaces"
+          ]
+        },
+        {
+          "code": "5.01.03",
+          "description": "Adequate lighting in all work areas (minimum 540 lux in inspection areas)",
+          "mandatory": true,
+          "keywords": ["lighting", "illumination", "540 lux", "light intensity"]
+        },
+        {
+          "code": "5.01.04",
+          "description": "Ventilation adequate to control odors, vapors, and condensation",
+          "mandatory": true,
+          "keywords": [
+            "ventilation",
+            "air flow",
+            "condensation control",
+            "vapor control"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.02",
+      "name": "Sanitation Standard Operating Procedures (SSOPs)",
+      "requirements": [
+        {
+          "code": "5.02.01",
+          "description": "Written SSOPs for all food contact surfaces, equipment, and environments",
+          "mandatory": true,
+          "keywords": [
+            "SSOP",
+            "sanitation procedures",
+            "cleaning procedures",
+            "cleaning instructions"
+          ]
+        },
+        {
+          "code": "5.02.02",
+          "description": "Cleaning frequency, chemicals, concentrations, contact time, and responsible persons defined",
+          "mandatory": true,
+          "keywords": [
+            "cleaning frequency",
+            "sanitizer concentration",
+            "contact time",
+            "cleaning schedule"
+          ]
+        },
+        {
+          "code": "5.02.03",
+          "description": "Pre-operational inspection to verify cleanliness before production",
+          "mandatory": true,
+          "keywords": [
+            "pre-op inspection",
+            "pre-operational",
+            "cleanliness verification",
+            "start-up check"
+          ]
+        },
+        {
+          "code": "5.02.04",
+          "description": "Sanitation monitoring records (including sanitizer concentration verification)",
+          "mandatory": true,
+          "keywords": [
+            "sanitation records",
+            "sanitizer test",
+            "concentration verification",
+            "cleaning log"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.03",
+      "name": "Pest Control",
+      "requirements": [
+        {
+          "code": "5.03.01",
+          "description": "Pest control program with licensed contractor or qualified personnel",
+          "mandatory": true,
+          "keywords": [
+            "pest control",
+            "pest management",
+            "licensed contractor",
+            "pest program"
+          ]
+        },
+        {
+          "code": "5.03.02",
+          "description": "Pest control devices mapped and inspected monthly (minimum)",
+          "mandatory": true,
+          "keywords": [
+            "pest devices",
+            "bait stations",
+            "device map",
+            "monthly inspection",
+            "trap inspection"
+          ]
+        },
+        {
+          "code": "5.03.03",
+          "description": "Rodenticides prohibited inside production or storage areas",
+          "mandatory": true,
+          "keywords": [
+            "rodenticides",
+            "bait",
+            "indoor bait",
+            "no rodenticides inside"
+          ]
+        },
+        {
+          "code": "5.03.04",
+          "description": "All exterior bait stations tamper-resistant, locked, and secured",
+          "mandatory": true,
+          "keywords": [
+            "tamper-resistant",
+            "locked bait stations",
+            "exterior bait",
+            "secured stations"
+          ]
+        },
+        {
+          "code": "5.03.05",
+          "description": "Pest activity trending and corrective action for pest evidence",
+          "mandatory": true,
+          "keywords": [
+            "pest activity",
+            "pest trends",
+            "pest corrective action",
+            "pest sightings"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.04",
+      "name": "Glass, Brittle Plastic & Hard Foreign Material Control",
+      "requirements": [
+        {
+          "code": "5.04.01",
+          "description": "Glass and brittle plastic register maintained and inspected",
+          "mandatory": true,
+          "keywords": [
+            "glass register",
+            "brittle plastic",
+            "glass inventory",
+            "glass log"
+          ]
+        },
+        {
+          "code": "5.04.02",
+          "description": "Light fixtures protected with shatterproof covers or sleeves",
+          "mandatory": true,
+          "keywords": [
+            "light covers",
+            "shatterproof",
+            "light sleeves",
+            "protected lights"
+          ]
+        },
+        {
+          "code": "5.04.03",
+          "description": "Glass breakage procedure including segregation, inspection, and documentation",
+          "mandatory": true,
+          "keywords": [
+            "glass breakage",
+            "breakage procedure",
+            "glass policy",
+            "broken glass"
+          ]
+        },
+        {
+          "code": "5.04.04",
+          "description": "Magnets, X-ray, or metal detectors used where applicable",
+          "mandatory": false,
+          "keywords": [
+            "metal detector",
+            "X-ray",
+            "magnet",
+            "foreign material detection"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.05",
+      "name": "Water & Ice",
+      "requirements": [
+        {
+          "code": "5.05.01",
+          "description": "Potable water used for all food contact applications",
+          "mandatory": true,
+          "keywords": [
+            "potable water",
+            "drinking water",
+            "water quality",
+            "food contact water"
+          ]
+        },
+        {
+          "code": "5.05.02",
+          "description": "Water testing at minimum annually for microbial and chemical contaminants",
+          "mandatory": true,
+          "keywords": [
+            "water testing",
+            "annual water test",
+            "microbial water",
+            "water analysis"
+          ]
+        },
+        {
+          "code": "5.05.03",
+          "description": "Ice made from potable water and handled under sanitary conditions",
+          "mandatory": true,
+          "keywords": ["ice", "ice production", "ice handling", "potable ice"]
+        },
+        {
+          "code": "5.05.04",
+          "description": "Backflow prevention devices installed and tested annually",
+          "mandatory": true,
+          "keywords": [
+            "backflow prevention",
+            "backflow preventer",
+            "cross-connection",
+            "annual test"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.06",
+      "name": "Chemical Control & Storage",
+      "requirements": [
+        {
+          "code": "5.06.01",
+          "description": "Chemicals stored separately from food products and packaging",
+          "mandatory": true,
+          "keywords": [
+            "chemical storage",
+            "chemical segregation",
+            "separate storage",
+            "chemical area"
+          ]
+        },
+        {
+          "code": "5.06.02",
+          "description": "All chemicals labeled and secondary containers labeled with contents",
+          "mandatory": true,
+          "keywords": [
+            "chemical labels",
+            "secondary container",
+            "labeling",
+            "container identification"
+          ]
+        },
+        {
+          "code": "5.06.03",
+          "description": "Safety Data Sheets (SDS) accessible for all chemicals",
+          "mandatory": true,
+          "keywords": [
+            "SDS",
+            "safety data sheets",
+            "MSDS",
+            "chemical information"
+          ]
+        },
+        {
+          "code": "5.06.04",
+          "description": "Chemical usage training and PPE requirements documented",
+          "mandatory": true,
+          "keywords": [
+            "chemical training",
+            "PPE",
+            "personal protective equipment",
+            "safe handling"
+          ]
+        },
+        {
+          "code": "5.06.05",
+          "description": "Approved chemical list maintained for food-contact sanitizers",
+          "mandatory": true,
+          "keywords": [
+            "approved chemicals",
+            "chemical list",
+            "sanitizer approval",
+            "food-grade chemicals"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.07",
+      "name": "Equipment Maintenance & Calibration",
+      "requirements": [
+        {
+          "code": "5.07.01",
+          "description": "Preventive maintenance program for all critical equipment",
+          "mandatory": true,
+          "keywords": [
+            "preventive maintenance",
+            "PM program",
+            "equipment maintenance",
+            "maintenance schedule"
+          ]
+        },
+        {
+          "code": "5.07.02",
+          "description": "Calibration program for monitoring and measuring devices",
+          "mandatory": true,
+          "keywords": [
+            "calibration",
+            "equipment calibration",
+            "instrument calibration",
+            "calibration schedule"
+          ]
+        },
+        {
+          "code": "5.07.03",
+          "description": "Maintenance tools and lubricants stored separately and food-grade where required",
+          "mandatory": true,
+          "keywords": [
+            "maintenance tools",
+            "food-grade lubricants",
+            "tool storage",
+            "lubricant approval"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.08",
+      "name": "Personnel Practices & Hygiene",
+      "requirements": [
+        {
+          "code": "5.08.01",
+          "description": "Hand washing facilities at all production entry points with soap, towels, and signage",
+          "mandatory": true,
+          "keywords": [
+            "handwashing",
+            "hand washing stations",
+            "soap",
+            "hand hygiene",
+            "signage"
+          ]
+        },
+        {
+          "code": "5.08.02",
+          "description": "Jewelry, watches, and personal items restricted in production areas",
+          "mandatory": true,
+          "keywords": [
+            "jewelry policy",
+            "personal items",
+            "watches",
+            "jewelry restrictions"
+          ]
+        },
+        {
+          "code": "5.08.03",
+          "description": "Eating, drinking, and smoking restricted to designated areas",
+          "mandatory": true,
+          "keywords": [
+            "eating policy",
+            "drinking",
+            "smoking",
+            "designated areas",
+            "break areas"
+          ]
+        },
+        {
+          "code": "5.08.04",
+          "description": "Visitor and contractor control procedures including PPE and hygiene",
+          "mandatory": true,
+          "keywords": [
+            "visitor control",
+            "contractor",
+            "visitor policy",
+            "guest procedures"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.09",
+      "name": "Receiving & Incoming Material Control",
+      "requirements": [
+        {
+          "code": "5.09.01",
+          "description": "Incoming material inspection for damage, contamination, and temperature",
+          "mandatory": true,
+          "keywords": [
+            "receiving inspection",
+            "incoming materials",
+            "receiving procedures",
+            "acceptance criteria"
+          ]
+        },
+        {
+          "code": "5.09.02",
+          "description": "Rejection criteria and procedures for non-conforming materials",
+          "mandatory": true,
+          "keywords": [
+            "rejection",
+            "non-conforming",
+            "material rejection",
+            "receiving rejection"
+          ]
+        },
+        {
+          "code": "5.09.03",
+          "description": "Supplier COA review and retention",
+          "mandatory": true,
+          "keywords": [
+            "certificate of analysis",
+            "COA",
+            "supplier documentation",
+            "lot documentation"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5.10",
+      "name": "Storage & Warehousing",
+      "requirements": [
+        {
+          "code": "5.10.01",
+          "description": "FIFO or FEFO inventory rotation system",
+          "mandatory": true,
+          "keywords": [
+            "FIFO",
+            "FEFO",
+            "inventory rotation",
+            "first in first out",
+            "stock rotation"
+          ]
+        },
+        {
+          "code": "5.10.02",
+          "description": "Temperature monitoring for refrigerated and frozen storage",
+          "mandatory": true,
+          "keywords": [
+            "temperature monitoring",
+            "cold storage",
+            "refrigeration",
+            "freezer temperature"
+          ]
+        },
+        {
+          "code": "5.10.03",
+          "description": "Products stored off floor and away from walls to allow inspection and airflow",
+          "mandatory": true,
+          "keywords": [
+            "off floor",
+            "away from walls",
+            "storage height",
+            "pallet storage"
+          ]
+        }
+      ]
+    }
+  ]
+}

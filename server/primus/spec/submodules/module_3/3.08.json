@@ -1,0 +1,132 @@
+{
+  "code": "3.08",
+  "title": "Training",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "food safety training",
+    "hygiene training",
+    "sanitation training",
+    "worker training",
+    "training records"
+  ],
+  "description": "Requirements for food safety and hygiene training programs including new and existing worker training, sanitation worker training, illness reporting procedures, and non-conformance documentation",
+  "requirements": [
+    {
+      "id": "3.08.01",
+      "code": "3.08.01",
+      "required": true,
+      "points": 15,
+      "text": "Is there a food safety hygiene training program covering new and existing workers and are there records of these training events?",
+      "keywords": [
+        "food safety training",
+        "hygiene training",
+        "worker training",
+        "training program",
+        "training records"
+      ],
+      "mandatoryStatements": [
+        "Food safety hygiene training program is documented",
+        "Program covers both new hires and existing workers",
+        "Training includes food safety and personal hygiene practices",
+        "Initial training provided before workers begin food handling",
+        "Refresher training provided at least annually",
+        "Training records document attendees, date, topics, and trainer",
+        "Training effectiveness is evaluated",
+        "Training content is appropriate for worker roles and risks"
+      ],
+      "verificationExpectations": "Quarterly verification that all workers have current training, annual review of training program content",
+      "monitoringExpectations": "Monthly review of training records, immediate training for new hires before starting work"
+    },
+    {
+      "id": "3.08.02",
+      "code": "3.08.02",
+      "required": true,
+      "points": 5,
+      "text": "Is there a documented training program with training logs for the sanitation workers, including best practices and chemical use details?",
+      "keywords": [
+        "sanitation training",
+        "cleaning training",
+        "chemical training",
+        "sanitation worker training",
+        "SSOP training"
+      ],
+      "mandatoryStatements": [
+        "Documented training program exists specifically for sanitation workers",
+        "Training covers cleaning and sanitizing best practices",
+        "Training includes proper chemical handling and use",
+        "Training covers concentration testing and verification",
+        "Training addresses safety precautions for chemical use",
+        "Training logs document sanitation worker training completion",
+        "Retraining provided when procedures change or performance issues identified"
+      ],
+      "verificationExpectations": "Quarterly verification that sanitation workers have current specialized training",
+      "monitoringExpectations": "Initial training before assignment to sanitation duties, annual refresher training minimum"
+    },
+    {
+      "id": "3.08.03",
+      "code": "3.08.03",
+      "required": true,
+      "points": 10,
+      "text": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering any illnesses that might be a contamination risk to the products being produced, and return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors can check procedure/policy but not the actual records).",
+      "keywords": [
+        "illness reporting",
+        "injury reporting",
+        "cuts and grazes",
+        "health policy",
+        "return to work",
+        "worker health"
+      ],
+      "mandatoryStatements": [
+        "Written procedure requires reporting of cuts, grazes, and wounds",
+        "Written procedure requires reporting of illnesses that could contaminate product",
+        "Procedure identifies reportable illnesses (vomiting, diarrhea, jaundice, fever, sore throat)",
+        "Procedure defines return to work requirements after illness",
+        "Procedure is communicated to all food handlers",
+        "Procedure complies with health privacy laws where applicable",
+        "Management response procedure for reported illnesses/injuries is defined",
+        "Procedure includes work restrictions for ill or injured workers"
+      ],
+      "verificationExpectations": "Annual review of illness reporting procedure, quarterly verification that procedure is communicated",
+      "monitoringExpectations": "Ongoing monitoring that workers understand and follow reporting requirements"
+    },
+    {
+      "id": "3.08.04",
+      "code": "3.08.04",
+      "required": true,
+      "points": 3,
+      "text": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
+      "keywords": [
+        "non-conformance records",
+        "corrective actions",
+        "retraining",
+        "worker violations",
+        "disciplinary records"
+      ],
+      "mandatoryStatements": [
+        "Records are maintained for worker food safety non-conformances",
+        "Records document nature of non-conformance",
+        "Records show corrective actions taken",
+        "Corrective actions include retraining where appropriate",
+        "Retraining is documented with date and topics covered",
+        "Repeat violations are escalated appropriately",
+        "Records demonstrate that non-conformances are addressed effectively"
+      ],
+      "verificationExpectations": "Quarterly review of non-conformance records and corrective action effectiveness",
+      "monitoringExpectations": "Immediate documentation of non-conformances, corrective action within 24-48 hours"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If food safety training program not established: develop program within 14 days, train all personnel within 30 days",
+    "If workers lack current training: immediate training scheduling, completion within 14 days, remove from food handling until trained",
+    "If sanitation worker training inadequate: immediate specialized training, verify competency before assigning sanitation duties",
+    "If illness reporting procedure not documented or communicated: document procedure within 7 days, communicate to all workers immediately",
+    "If non-conformances not documented or not addressed: immediate documentation system implementation, address all current issues within 7 days"
+  ],
+  "traceabilityInject": [
+    "Training records must be traceable to specific employees, dates, topics, and trainers",
+    "Non-conformance records must be traceable to specific workers, incidents, and corrective actions",
+    "Retraining records must be traceable to specific non-conformances or procedure changes",
+    "Illness reports must be documented in compliance with privacy laws while maintaining food safety controls"
+  ]
+}

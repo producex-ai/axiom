@@ -1,0 +1,85 @@
+{
+  "code": "4.01",
+  "title": "General",
+  "moduleName": "Module 4: Harvest Crew",
+  "appliesTo": [
+    "harvest crew operations",
+    "food safety program",
+    "hygiene and health rules"
+  ],
+  "description": "Establishes the foundational requirements for harvest crew operations including on-site food safety responsibility and written hygiene and health rules covering worker and visitor hygiene, health protocols, and contamination prevention",
+  "requirements": [
+    {
+      "id": "4.01.01",
+      "code": "4.01.01",
+      "required": true,
+      "points": 10,
+      "text": "Is there a trained on-site person(s) responsible for the operation's food safety program?",
+      "keywords": [
+        "trained person",
+        "on-site",
+        "food safety program",
+        "responsibility",
+        "qualified personnel",
+        "site supervision"
+      ],
+      "mandatoryStatements": [
+        "Trained person(s) is designated as responsible for food safety program",
+        "Person is on-site during harvest operations",
+        "Training records demonstrate food safety competency",
+        "Responsibilities are documented and understood",
+        "Authority to stop operations if food safety is compromised",
+        "Contact information is readily available"
+      ],
+      "verificationExpectations": "Annual verification of training records and competency, quarterly observation of food safety oversight activities",
+      "monitoringExpectations": "Daily verification that trained person is on-site during harvest operations, weekly review of food safety decisions and actions"
+    },
+    {
+      "id": "4.01.02",
+      "code": "4.01.02",
+      "required": true,
+      "points": 15,
+      "text": "Does the operation have a written food safety hygiene and health rules covering at least worker and visitor hygiene and health, infants and toddlers, animal presence in growing and storage areas, fecal matter, dropped product, blood and bodily fluids?",
+      "keywords": [
+        "written rules",
+        "hygiene",
+        "health",
+        "workers",
+        "visitors",
+        "infants",
+        "toddlers",
+        "animals",
+        "fecal matter",
+        "dropped product",
+        "blood",
+        "bodily fluids"
+      ],
+      "mandatoryStatements": [
+        "Written food safety hygiene and health rules are documented",
+        "Rules cover worker hygiene and health requirements",
+        "Rules cover visitor hygiene and health requirements",
+        "Policy addresses infants and toddlers in operational areas",
+        "Rules prohibit or control animal presence in growing and storage areas",
+        "Procedures address fecal matter contamination response",
+        "Rules cover dropped product handling and disposition",
+        "Procedures address blood and bodily fluids contamination response",
+        "Rules are communicated to all workers and visitors",
+        "Rules are available in languages understood by workers"
+      ],
+      "verificationExpectations": "Annual review of written hygiene and health rules for completeness and current applicability, quarterly verification of rule communication",
+      "monitoringExpectations": "Daily observation of hygiene and health rule compliance, immediate response to violations or contamination events"
+    }
+  ],
+  "micro_inject": ["fsms", "hygiene"],
+  "capaInject": [
+    "If no trained person on-site: halt harvest operations, designate and train qualified person within 24 hours before restart",
+    "If written hygiene and health rules missing or incomplete: develop comprehensive rules within 7 days, train all personnel before next harvest",
+    "If hygiene rule violations observed: immediate retraining, document corrective action, escalate for repeated violations",
+    "If contamination events occur: immediate product containment, investigate root cause within 24 hours, implement preventive measures before restart"
+  ],
+  "traceabilityInject": [
+    "Training records for on-site food safety responsible person must be traceable to dates, topics, and trainers",
+    "Hygiene and health rule communications must be traceable to specific training dates and attendees",
+    "Contamination event records must be traceable to date, location, product affected, and corrective actions taken"
+  ]
+}

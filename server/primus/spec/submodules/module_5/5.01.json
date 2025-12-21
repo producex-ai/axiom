@@ -1,0 +1,70 @@
+{
+  "code": "5.01",
+  "title": "General",
+  "requirements": [
+    {
+      "code": "5.01.01",
+      "question": "Are all chemicals (pesticides, sanitizers, detergents, lubricants, etc.) stored securely, safely and are they labeled correctly?",
+      "totalPoints": 15,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.01.02",
+      "question": "Are \"food grade\" and \"non-food grade\" chemicals used appropriately, according to the label and not commingled?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.01.03",
+      "question": "Are signs supporting GMPs posted appropriately?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.01.04",
+      "question": "Are the necessary food defense controls implemented in the operation?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "All chemicals including pesticides, sanitizers, detergents, and lubricants must be stored securely in designated areas with proper labeling indicating contents, hazards, and usage instructions",
+    "Food grade chemicals must be clearly separated from non-food grade chemicals to prevent cross-contamination and used only according to manufacturer label instructions",
+    "Good Manufacturing Practice (GMP) signage must be prominently displayed in appropriate areas throughout the facility to remind workers of hygiene and safety requirements",
+    "Food defense controls must be implemented to prevent intentional contamination or adulteration of food products through access control, visitor management, and security measures",
+    "Chemical storage areas must be designed to contain spills and leaks with adequate ventilation and emergency response equipment readily available",
+    "All chemical containers must maintain original labels or have equivalent labeling that includes Safety Data Sheets (SDS) and usage concentrations",
+    "Facility management must conduct regular inspections of chemical storage areas to verify compliance with safety and segregation requirements",
+    "Food defense vulnerability assessments must be conducted and documented with corrective actions implemented for identified weaknesses"
+  ],
+  "capaInject": [
+    "Establish a comprehensive chemical inventory management system with designated storage locations, labeling requirements, and regular inspection schedules",
+    "Implement a chemical segregation procedure that physically separates food grade from non-food grade chemicals using locked cabinets, separate rooms, or clearly marked zones",
+    "Develop and post GMP reminder signs at critical control points including entry areas, handwashing stations, toilet facilities, and production zones with multilingual content as needed",
+    "Create a food defense plan that includes access control procedures, visitor sign-in requirements, security camera coverage, and employee background check policies",
+    "When chemical labeling violations are found, immediately remove mislabeled or unlabeled chemicals from use, properly label or dispose of them, and retrain personnel on chemical handling procedures",
+    "If food grade and non-food grade chemicals are found commingled, immediately segregate them, assess risk of contamination, and implement physical barriers to prevent future occurrences",
+    "Establish a preventive maintenance schedule for GMP signage to replace faded, damaged, or missing signs and verify visibility and comprehension during worker training sessions",
+    "Conduct annual food defense vulnerability assessments and update security measures based on findings, regulatory changes, and industry best practices"
+  ],
+  "traceabilityInject": [
+    "Maintain a master chemical inventory log documenting all chemicals on-site including product name, supplier, receipt date, storage location, and SDS availability",
+    "Document chemical segregation inspections with date, inspector name, findings, and corrective actions taken for any non-conformances",
+    "Keep records of GMP signage installation and maintenance including sign location, language(s), installation date, and replacement schedule",
+    "Maintain food defense logs documenting visitor access, employee badge issuance, security incidents, vulnerability assessments, and corrective action implementation",
+    "Retain chemical usage logs for cleaning and sanitation chemicals showing dilution rates, application areas, frequency, and personnel performing the activities",
+    "Document employee training records on chemical handling, GMP requirements, and food defense awareness with training dates, topics covered, and verification of understanding",
+    "Keep receiving records for all chemicals including inspection for proper labeling, damage, and verification that only approved chemicals are accepted",
+    "Maintain correspondence with chemical suppliers including SDS updates, product reformulations, and regulatory compliance certificates"
+  ],
+  "micro_inject": [
+    "Improper chemical storage or use can result in direct contamination of food products with toxic substances leading to serious public health consequences and product recalls",
+    "Non-food grade chemicals used inappropriately on food contact surfaces can leave residues that harbor pathogenic bacteria including Listeria monocytogenes, Salmonella, and E. coli",
+    "GMP signage serves as a critical reminder system to prevent behavioral contamination vectors such as improper handwashing which can transfer pathogens from workers to products",
+    "Food defense controls prevent intentional adulteration with biological, chemical, or physical contaminants that could cause widespread illness or death in the consuming population",
+    "Chemical cross-contamination between food grade and non-food grade products can introduce antimicrobial-resistant bacteria or chemical residues that compromise food safety",
+    "Proper chemical segregation prevents accidental use of toxic substances in food production areas where they could come into contact with products, ingredients, or food contact surfaces",
+    "Food defense vulnerabilities create opportunities for intentional introduction of pathogens or toxins by disgruntled employees, terrorists, or other malicious actors",
+    "Effective GMP implementation supported by visible signage reduces the likelihood of cross-contamination events that can introduce allergens, pathogens, or foreign materials into finished products"
+  ]
+}

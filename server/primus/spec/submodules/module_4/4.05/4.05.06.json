@@ -1,0 +1,65 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.06",
+  "title": "Field Sanitation Practices",
+  "requirements": [
+    {
+      "code": "4.05.06a",
+      "question": "Are field sanitation stations maintained with adequate supplies throughout the harvest day?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.06b",
+      "question": "Are procedures in place for cleaning and sanitizing harvest tools and equipment between uses or fields?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.06c",
+      "question": "Is there a protocol for managing waste and trash during harvest operations to prevent product contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.06d",
+      "question": "Are procedures enforced to prevent workers from placing personal items on or near product contact surfaces?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.06e",
+      "question": "Is there adequate supervision to ensure sanitation practices are followed during harvest operations?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Field sanitation stations must be maintained throughout the harvest day with adequate supplies of soap, water, towels, and sanitizer.",
+    "Harvest tools and equipment that contact product must be cleaned and sanitized at appropriate intervals to prevent cross-contamination.",
+    "Waste and trash must be managed through designated receptacles and regular removal to prevent attraction of pests and product contamination.",
+    "Workers must be prohibited from placing personal items (lunch boxes, water bottles, phones, etc.) on or near product contact surfaces.",
+    "Adequate supervision must be present during harvest operations to monitor and enforce compliance with sanitation requirements."
+  ],
+  "capaInject": [
+    "Establish a field sanitation monitoring program with designated personnel responsible for checking and restocking supplies hourly or as needed.",
+    "Develop tool and equipment sanitation schedules based on risk assessment, with defined frequencies and verification procedures.",
+    "Implement a waste management protocol including placement of adequate receptacles, regular emptying schedule, and proper disposal methods.",
+    "Create designated areas for personal item storage away from harvest operations with clear signage and worker training.",
+    "Define supervisor-to-worker ratios and monitoring responsibilities to ensure adequate oversight of sanitation practices during harvest."
+  ],
+  "traceabilityInject": [
+    "Maintain logs of field sanitation station checks including time, supplies checked, deficiencies noted, and restocking actions.",
+    "Document tool and equipment cleaning and sanitization activities including date, time, item cleaned, method used, and responsible person.",
+    "Keep records of waste removal from harvest areas including frequency, volume, disposal location, and responsible contractor if applicable.",
+    "Log any violations of personal item policies including date, worker, description, and corrective action taken.",
+    "Track supervisor presence during harvest operations including names, areas covered, hours, and sanitation observations documented."
+  ],
+  "micro_inject": [
+    "Emphasize that harvest tools and equipment can transfer pathogens between plants, rows, or fields if not properly cleaned and sanitized.",
+    "Ensure adequate sanitation supplies are maintained to prevent situations where workers cannot practice proper hygiene due to supply depletion.",
+    "Implement protocols for waste receptacles to be covered and emptied frequently to prevent them from becoming sources of contamination or pest attraction.",
+    "Verify that personal items do not create cross-contamination pathways from non-food areas to product contact surfaces during harvest.",
+    "Monitor that supervisor presence and engagement are adequate to identify and correct sanitation lapses before product contamination occurs."
+  ]
+}

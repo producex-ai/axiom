@@ -1,0 +1,346 @@
+PEST CONTROL PROGRAM
+[Company Name]
+Facility: [Facility Name]
+Document Number: [Document Number]
+Revision: [Revision Number]
+Effective Date: [Effective Date]
+Approved By: [Approved By], [Position]
+
+================================================================================
+1. TITLE & DOCUMENT CONTROL
+================================================================================
+Document Title: Pest Control Program
+Document Owner: Facility Manager
+Review Frequency: Annual or upon audit findings
+Next Review Date: [Review Date]
+
+This program establishes comprehensive pest management to prevent pest activity 
+and contamination in compliance with Primus GFS Module 5.03.
+
+================================================================================
+2. PURPOSE / OBJECTIVE
+================================================================================
+To prevent pest entry, harborage, and infestation through:
+- Exclusion measures and facility maintenance
+- Monitoring and early detection
+- Effective treatment with minimal chemical use
+- Trending and continuous improvement
+
+================================================================================
+3. SCOPE
+================================================================================
+Applies to all facility areas including:
+- Production and processing areas
+- Warehouses and storage
+- Exterior grounds and perimeter
+- Employee facilities (break rooms, restrooms, locker rooms)
+
+================================================================================
+4. DEFINITIONS & ABBREVIATIONS
+================================================================================
+Pest: Insects, rodents, birds, or other animals that may contaminate product or 
+      compromise food safety
+IPM: Integrated Pest Management - strategy emphasizing exclusion, sanitation, 
+     and monitoring over chemical treatments
+Bait Station: Tamper-resistant device containing rodenticide or monitoring device
+Device Map: Diagram showing location and ID of all pest control devices
+Exclusion: Physical barriers preventing pest entry (door sweeps, screens, seals)
+
+================================================================================
+5. ROLES & RESPONSIBILITIES
+================================================================================
+Facility Manager:
+- Overall program oversight
+- Contractor performance evaluation
+- Resource allocation for exclusion improvements
+
+Pest Control Contractor:
+- Licensed applicator conducting monthly inspections
+- Device servicing and bait replenishment
+- Treatment recommendations and execution
+- Service report generation
+
+Quality Assurance:
+- Service report review and approval
+- Trending and corrective action verification
+- Internal pest audit quarterly
+
+Maintenance:
+- Exclusion measure repairs (door sweeps, screens, seals)
+- Responding to contractor recommendations within 48 hours
+
+All Employees:
+- Report pest sightings immediately to supervisor
+- Maintain sanitation to eliminate food and harborage
+
+================================================================================
+6. PREREQUISITES & REFERENCE DOCUMENTS
+================================================================================
+- Primus GFS v4.0 Module 5.03 (Pest Control)
+- FDA Food Code Chapter 6 (Physical Facilities)
+- Pest Control Service Agreement
+- Pest Device Map (Drawing PD-001)
+- Glass & Brittle Plastic Register (includes UV light traps)
+
+================================================================================
+7. HAZARD / RISK ANALYSIS
+================================================================================
+Biological Hazard: Pathogens transmitted by rodents (Salmonella, E. coli, Listeria)
+Physical Hazard: Pest filth, droppings, hair, insect parts in product
+Control Strategy: Exclusion, monitoring, immediate corrective action, rodenticide 
+                  restricted to exterior only
+
+================================================================================
+8. PROCEDURES
+================================================================================
+
+8.1 Pest Control Contractor Selection
+- Contractor licensed and insured per state/local requirements
+- Applicator licenses verified annually and kept on file
+- Service agreement defines frequency (monthly minimum), scope, and reporting
+- Contractor uses only EPA-registered pesticides approved for food facilities
+
+8.2 Pest Device Map
+- Comprehensive device map maintained showing:
+  * Device ID number (sequential numbering)
+  * Device type (mechanical snap trap, glue board, UV light trap, exterior bait station)
+  * Exact location (room, aisle, wall position)
+- Map updated within 48 hours when devices added, removed, or relocated
+- Map posted in maintenance office and provided to contractor
+
+8.3 Interior Pest Control
+- NO RODENTICIDES PERMITTED INSIDE PRODUCTION, PROCESSING, OR STORAGE AREAS
+- Interior rodent control achieved through mechanical snap traps and glue boards only
+- Mechanical traps placed along walls at 10-15 foot intervals in high-risk areas
+- Glue boards used in areas where snap traps pose injury risk
+- UV light insect traps installed away from product exposure (to avoid attracting pests to product)
+- Devices secured to prevent removal or tampering
+
+8.4 Exterior Pest Control
+- Exterior bait stations placed at 30-50 foot intervals around building perimeter
+- ALL EXTERIOR BAIT STATIONS MUST BE:
+  * Tamper-resistant with locking mechanism
+  * Anchored or weighted to prevent movement (minimum 10 lbs or staked)
+  * Labeled with warning signage and applicator contact information
+- Bait stations placed away from doors/docks to avoid attracting pests to entries
+- Rodenticide bait blocks secured on rods to prevent removal by non-target animals
+
+8.5 Monthly Pest Inspection & Servicing
+Contractor performs monthly service including:
+1. Inspect all devices per device map
+2. Record device condition, pest activity, and bait consumption
+3. Replace consumed bait, reset traps, clean glue boards as needed
+4. Inspect facility for signs of pest activity (droppings, gnaw marks, tracks)
+5. Inspect exclusion measures (doors, screens, wall penetrations)
+6. Provide written service report within 48 hours of visit
+
+Service report includes:
+- Date and time of service
+- Applicator name and license number
+- Device inspection results (by device ID)
+- Pest activity observations and locations
+- Corrective actions taken
+- Recommendations for facility improvements
+- Pesticides applied (product name, EPA number, application site, amount)
+
+8.6 Service Report Review
+- Quality Manager reviews service report within 5 business days
+- Any findings or recommendations entered into CAPA system with due dates
+- High-priority recommendations (active infestation, structural gaps) addressed within 48 hours
+- Routine recommendations (exclusion improvements) addressed within 30 days
+- Follow-up actions documented on service report
+
+8.7 Pest Sighting Response
+Immediate Action:
+1. Employee reports sighting to supervisor immediately
+2. Supervisor inspects area and documents observation (type, location, time)
+3. Quality Manager notified within 2 hours
+4. Area inspected for product contamination; affected product segregated
+5. Pest Control Coordinator contacted for supplemental treatment if needed
+6. Root cause investigation initiated
+
+Documentation:
+- Pest Sighting Log (Form PC-001) completed
+- Photographic evidence when possible
+- Product disposition decision and justification
+- Corrective action to eliminate conducive conditions
+
+8.8 Exclusion Measures
+- Exterior doors equipped with self-closing mechanisms and tight-fitting seals
+- Door sweeps installed with maximum 1/4 inch gap
+- Damaged door sweeps replaced within 48 hours
+- Screens installed on openable windows and vents (16-mesh minimum)
+- Damaged screens repaired or replaced within 48 hours
+- Utility penetrations (pipes, conduits, cables) sealed with rodent-proof material
+- Roof vents equipped with bird screens
+- Exterior lighting positioned away from doors to avoid attracting insects
+- Landscaping maintained 18 inches from building foundation
+- Dumpsters and refuse containers located minimum 50 feet from building with tight-fitting lids
+
+8.9 Sanitation & Housekeeping
+- Spills cleaned immediately to eliminate food attractants
+- Food waste removed from production areas at end of each shift
+- Refuse containers emptied daily and kept covered
+- Exterior refuse area cleaned weekly; spillage removed immediately
+- Pallets and equipment stored off floor and away from walls to enable inspection
+- Clutter eliminated to remove harborage sites
+
+8.10 Pest Trending & Analysis
+Quarterly Trend Analysis:
+- Device activity summarized by location and pest type
+- Trends identified (increasing activity, hot spots, seasonal patterns)
+- Root causes investigated (sanitation gaps, exclusion failures, exterior conducive conditions)
+- Preventive actions implemented based on trends
+- Trending report presented at management review meeting
+
+Annual Program Review:
+- Contractor performance evaluated (response time, report quality, treatment effectiveness)
+- Device placement optimized based on activity trends
+- Budget reviewed and adjusted based on facility needs
+
+================================================================================
+9. MONITORING PLAN
+================================================================================
+Activity: Pest control device inspection
+Frequency: Monthly (by contractor)
+Responsible: Licensed Pest Control Contractor
+Method: Visual inspection of all devices per device map; record activity
+Record: Pest Control Service Report
+Corrective Action: Treatment per IPM strategy; facility notification if structural issues
+
+Activity: Service report review and follow-up
+Frequency: Within 5 business days of service
+Responsible: Quality Manager
+Method: Review service report; verify recommendations addressed
+Record: Service Report Review Checklist (Form PC-002)
+
+Activity: Internal pest audit
+Frequency: Quarterly
+Responsible: Quality Assurance
+Method: Physical inspection of 100% devices; verify map accuracy; check exclusion measures
+Record: Internal Pest Audit Report (Form PC-003)
+
+Activity: Pest activity trending
+Frequency: Quarterly
+Responsible: Quality Manager
+Method: Analyze service report data; identify trends and hot spots
+Record: Pest Activity Trend Report (Form PC-004)
+
+================================================================================
+10. VERIFICATION & VALIDATION ACTIVITIES
+================================================================================
+- Annual contractor license verification (renewed before expiration)
+- Device map accuracy verified quarterly (100% physical verification)
+- Exclusion measure effectiveness assessed during internal audits
+- Third-party pest audit conducted during Primus GFS certification audit
+- Management review of pest program performance annually
+
+Validation Evidence:
+- Zero pest-related customer complaints
+- No pest activity in production areas
+- Decreasing exterior device activity demonstrating effective exclusion
+- No audit non-conformances related to pest control
+
+================================================================================
+11. CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL
+================================================================================
+Triggers:
+- Live pest observed in production or storage area
+- Pest droppings, gnaw marks, or nesting materials found
+- Increased device activity indicating control failure
+- Customer complaint related to pest contamination
+- Audit finding related to pest control
+
+Immediate Containment:
+- Stop production in affected area
+- Inspect and segregate potentially affected product
+- Implement enhanced monitoring (daily checks)
+- Deploy additional devices in affected area
+- Sanitation deep-clean of affected area
+
+Root Cause Analysis:
+- Identify entry point (exclusion failure, open door, incoming materials)
+- Assess sanitation adequacy (food/water sources, harborage)
+- Evaluate device placement and effectiveness
+- Review contractor service frequency and thoroughness
+
+Corrective Actions:
+- Repair exclusion failures immediately
+- Enhance sanitation procedures
+- Increase device density in high-risk areas
+- Adjust service frequency if needed
+- Retrain employees on pest prevention
+
+Preventive Actions:
+- Quarterly facility walk-through identifying potential entry points
+- Proactive exclusion upgrades (door replacements, building envelope improvements)
+- Seasonal preparedness (rodent pressure increases in fall/winter)
+
+Verification:
+- Follow-up inspection 7 days after corrective action
+- Continued monitoring for 30 days to confirm effectiveness
+- Trending analysis to verify issue resolved
+
+================================================================================
+12. TRACEABILITY & RECALL ELEMENTS
+================================================================================
+Pest contamination incidents linked to production records to identify affected lots.
+- Date/time of pest evidence discovery
+- Production lots in affected area during exposure window
+- Product disposition decision (release with enhanced inspection, rework, destroy)
+- Justification for disposition documented
+
+If pest contamination in finished product:
+- Trace-forward to identify customer shipments
+- Recall initiated per Recall Procedure if product distributed
+- Root cause investigation and preventive action implementation
+
+================================================================================
+13. RECORD RETENTION & DOCUMENT CONTROL
+================================================================================
+Record Type: Pest Control Service Reports
+Retention: 3 years
+Location: Quality Assurance records / Pest Control binder
+
+Record Type: Contractor License & Insurance Certificates
+Retention: Current plus 1 year
+Location: Purchasing / Contractor file
+
+Record Type: Pest Sighting Logs & Corrective Actions
+Retention: 3 years
+Location: Quality Assurance / CAPA records
+
+Record Type: Pest Activity Trend Reports
+Retention: 3 years
+Location: Quality Assurance / Management Review records
+
+Record Type: Internal Pest Audit Reports
+Retention: 3 years
+Location: Quality Assurance / Audit records
+
+================================================================================
+14. COMPLIANCE CROSSWALK (TABLE)
+================================================================================
+Primus Code | Requirement | Document Section | Evidence
+5.03.01 | Pest control program with licensed contractor | Section 8.1 | Service agreement, contractor licenses on file
+5.03.02 | Devices mapped and inspected monthly | Section 8.2, 8.5, 9 | Device map, monthly service reports
+5.03.03 | Rodenticides prohibited indoors | Section 8.3 | Interior device map showing mechanical traps only
+5.03.04 | Exterior bait stations tamper-resistant, locked, secured | Section 8.4 | Device specifications, physical verification during audits
+5.03.05 | Pest activity trending and corrective action | Section 8.10, 11 | Quarterly trend reports, CAPA records
+
+================================================================================
+15. REVISION HISTORY & APPROVAL SIGNATURES
+================================================================================
+Revision | Effective Date | Summary of Changes | Approved By
+1 | [Initial Date] | Initial release | [Name], Facility Manager
+2 | [Date] | Clarified interior rodenticide prohibition | [Name], Facility Manager
+[Current] | [Effective Date] | [Summary] | [Approved By], [Position]
+
+Prepared By: _________________________ Date: __________
+             [Name], [Position]
+
+Reviewed By: _________________________ Date: __________
+             [Name], Quality Manager
+
+Approved By: _________________________ Date: __________
+             [Approved By], [Position]

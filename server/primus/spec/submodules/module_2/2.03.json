@@ -1,0 +1,234 @@
+{
+  "code": "2.03",
+  "title": "Ground History",
+  "moduleName": "Module 2: Farm",
+  "appliesTo": [
+    "growing areas",
+    "land use history",
+    "soil testing",
+    "flooding",
+    "animal presence history"
+  ],
+  "description": "Requirements for documenting and assessing ground history including previous land use, non-agricultural functions, animal presence, flooding events, and associated risk mitigation measures",
+  "requirements": [
+    {
+      "id": "2.03.01",
+      "code": "2.03.01",
+      "required": false,
+      "points": 0,
+      "text": "Were growing area(s) used for growing food crops last season?",
+      "keywords": [
+        "previous use",
+        "crop history",
+        "land use",
+        "growing history"
+      ],
+      "mandatoryStatements": [
+        "Documentation exists showing previous use of growing areas",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of growing area use history",
+      "monitoringExpectations": "Document land use changes at beginning of each growing season"
+    },
+    {
+      "id": "2.03.02",
+      "code": "2.03.02",
+      "required": false,
+      "points": 0,
+      "text": "Has the growing area(s) been used for any non-agricultural functions? If No, go to 2.03.03.",
+      "keywords": [
+        "non-agricultural use",
+        "land history",
+        "previous function",
+        "contamination risk"
+      ],
+      "mandatoryStatements": [
+        "Records document any previous non-agricultural use of growing areas",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "One-time or periodic verification of land use history",
+      "monitoringExpectations": "Document land history before first agricultural use"
+    },
+    {
+      "id": "2.03.02a",
+      "code": "2.03.02a",
+      "required": true,
+      "points": 15,
+      "text": "If the growing area has been used previously for non-agricultural functions, have soil tests been conducted showing soil was negative or within an appropriate regulatory agency's approved limits for contaminants?",
+      "keywords": [
+        "soil testing",
+        "contaminant testing",
+        "regulatory limits",
+        "soil contamination",
+        "heavy metals",
+        "pollutants"
+      ],
+      "mandatoryStatements": [
+        "Soil tests have been conducted by qualified laboratory",
+        "Tests cover relevant contaminants based on previous use (heavy metals, petroleum products, etc.)",
+        "Test results show soil is negative or within regulatory limits",
+        "Test results are documented and maintained",
+        "Testing is conducted before agricultural use begins",
+        "Appropriate regulatory standards are referenced"
+      ],
+      "verificationExpectations": "Review of soil test reports and results before growing begins",
+      "monitoringExpectations": "One-time testing before agricultural use, re-testing if concerns arise"
+    },
+    {
+      "id": "2.03.03",
+      "code": "2.03.03",
+      "required": false,
+      "points": 0,
+      "text": "Has the growing area(s) been used for any purpose that included the presence of animals in the growing area (e.g., animal husbandry, grazing land for animals) in the last 12 months? If No, go to 2.03.04.",
+      "keywords": [
+        "animal presence",
+        "grazing land",
+        "animal husbandry",
+        "previous animal use",
+        "pasture"
+      ],
+      "mandatoryStatements": [
+        "Records document any animal presence in growing areas within past 12 months",
+        "Type of animal activity is documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Annual review of land use history",
+      "monitoringExpectations": "Document any animal presence before planting"
+    },
+    {
+      "id": "2.03.03a",
+      "code": "2.03.03a",
+      "required": true,
+      "points": 10,
+      "text": "If the land was used previously for any purpose that included the presence of animals in the growing area (e.g., animal husbandry or grazing land for animals), has a risk assessment been performed?",
+      "keywords": [
+        "risk assessment",
+        "animal presence risk",
+        "biological hazard",
+        "pathogen risk"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment is documented",
+        "Assessment considers type and duration of animal presence",
+        "Assessment considers pathogen risks (E. coli, Salmonella, etc.)",
+        "Assessment determines if waiting period or testing is needed",
+        "Assessment identifies control measures to mitigate risk",
+        "Risk assessment is reviewed before planting"
+      ],
+      "verificationExpectations": "Review of risk assessment before planting in previously animal-used areas",
+      "monitoringExpectations": "One-time risk assessment, updated if new information emerges"
+    },
+    {
+      "id": "2.03.04",
+      "code": "2.03.04",
+      "required": false,
+      "points": 0,
+      "text": "Has flooding from uncontrolled causes occurred on the growing area(s) since the previous growth cycle? If No, go to 2.03.05.",
+      "keywords": [
+        "flooding",
+        "flood waters",
+        "uncontrolled flooding",
+        "natural disaster",
+        "contamination event"
+      ],
+      "mandatoryStatements": [
+        "Flooding events are documented if they occurred",
+        "Extent and duration of flooding is recorded",
+        "Source of flood water is documented",
+        "Information gathering for risk assessment purposes"
+      ],
+      "verificationExpectations": "Document flooding events as they occur",
+      "monitoringExpectations": "Immediate documentation after flooding event"
+    },
+    {
+      "id": "2.03.04a",
+      "code": "2.03.04a",
+      "required": true,
+      "points": 15,
+      "text": "If the growing area(s) and product was affected from the flood waters, is there documented evidence of a risk assessment, and that corrective measures were taken to affected land and product?",
+      "keywords": [
+        "flood risk assessment",
+        "corrective measures",
+        "flood impact",
+        "contaminated product",
+        "land remediation"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment was conducted after flooding event",
+        "Assessment evaluates contamination risk from flood waters",
+        "Assessment considers flood water source and duration of flooding",
+        "Corrective measures for affected land are documented",
+        "Product disposition decisions are documented",
+        "Waiting periods before replanting are established if needed",
+        "Assessment determines if soil testing is required",
+        "Control measures are implemented before resuming operations"
+      ],
+      "verificationExpectations": "Review of flood assessment and corrective actions before resuming production",
+      "monitoringExpectations": "Immediate assessment after flooding, ongoing monitoring of affected areas"
+    },
+    {
+      "id": "2.03.04b",
+      "code": "2.03.04b",
+      "required": true,
+      "points": 15,
+      "text": "If planting is to be done earlier than 60 days from a flooding event, have soil tests been conducted on the flooded area(s) showing the soil was negative or within an appropriate regulatory agency's approved limits for contaminants?",
+      "keywords": [
+        "soil testing",
+        "flood contamination",
+        "60 day waiting period",
+        "microbial testing",
+        "contaminant testing"
+      ],
+      "mandatoryStatements": [
+        "If planting within 60 days of flooding, soil testing is mandatory",
+        "Soil tests are conducted by qualified laboratory",
+        "Tests include microbial pathogens (E. coli, Salmonella, etc.)",
+        "Tests include other relevant contaminants based on flood water source",
+        "Test results show soil is negative or within regulatory limits",
+        "Test results are documented before planting occurs",
+        "If test results are unsatisfactory, planting is delayed"
+      ],
+      "verificationExpectations": "Review of soil test reports before planting in flood-affected areas",
+      "monitoringExpectations": "Testing conducted before planting if less than 60 days since flood"
+    },
+    {
+      "id": "2.03.04c",
+      "code": "2.03.04c",
+      "required": true,
+      "points": 10,
+      "text": "If septic or sewage systems adjacent to the growing area were affected by the flood waters, is there a documented inspection after flooding to ensure they are functioning properly and are not a source of contamination?",
+      "keywords": [
+        "septic system",
+        "sewage system",
+        "flood damage",
+        "system inspection",
+        "contamination source"
+      ],
+      "mandatoryStatements": [
+        "Adjacent septic/sewage systems are identified",
+        "Post-flood inspection of septic/sewage systems is documented",
+        "Inspection verifies systems are functioning properly",
+        "Inspection confirms systems are not leaking or damaged",
+        "Repairs are completed before resuming operations if damage found",
+        "Verification that systems are not contaminating growing areas",
+        "Inspection is conducted by qualified personnel"
+      ],
+      "verificationExpectations": "Review of inspection documentation after flooding events",
+      "monitoringExpectations": "Immediate inspection after flooding, follow-up to verify proper function"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If soil contamination found from non-agricultural use: do not plant until soil is remediated or replacement soil is used, conduct follow-up testing",
+    "If animal presence risk assessment not conducted: complete assessment before planting, implement identified controls",
+    "If flooding occurred and no risk assessment: immediately conduct assessment, do not harvest affected product until assessment complete",
+    "If planting within 60 days of flood without soil testing: immediate soil testing required, halt planting until results received",
+    "If septic/sewage system damaged by flood: immediate repair required, do not operate in affected areas until systems verified functional"
+  ],
+  "traceabilityInject": [
+    "Land use history must be traceable to specific time periods and activities",
+    "Soil test results must be traceable to specific sampling dates, locations, and laboratories",
+    "Flood risk assessments must be traceable to specific flooding events and affected areas",
+    "Septic/sewage system inspection records must be traceable to inspection dates and inspectors"
+  ]
+}

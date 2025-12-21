@@ -1,0 +1,243 @@
+DOCUMENT CONTROL PROCEDURE
+[Company Name]
+Facility: [Facility Name]
+Document Number: [Document Number]
+Revision: [Revision Number]
+Effective Date: [Effective Date]
+Approved By: [Approved By], [Position]
+
+================================================================================
+1. TITLE & DOCUMENT CONTROL
+================================================================================
+Document Title: Document Control Procedure
+Document Owner: Quality Assurance Manager
+Review Frequency: Annual or upon significant change
+Next Review Date: [Review Date]
+
+This document establishes the system for document approval, distribution, 
+revision control, obsolete document removal, and external document management.
+
+================================================================================
+2. PURPOSE / OBJECTIVE
+================================================================================
+To ensure that:
+- All documents affecting food safety and quality are controlled
+- Current, approved documents are available at all points of use
+- Obsolete documents are removed from use
+- Document changes are reviewed and approved before implementation
+- External documents (regulations, standards) are current
+
+================================================================================
+3. SCOPE
+================================================================================
+This procedure applies to all controlled documents including:
+- Food safety management system documents (policies, procedures, work instructions)
+- HACCP plans and supporting documents
+- Specifications (raw materials, finished products, packaging)
+- Forms and records templates
+- External documents (regulations, customer requirements, industry standards)
+
+================================================================================
+4. DEFINITIONS & ABBREVIATIONS
+================================================================================
+Controlled Document: Document subject to formal review, approval, and change control
+Obsolete Document: Document superseded by a newer revision
+Master Document List: Register of all controlled documents and their current status
+External Document: Document originating outside the organization (regulatory, customer specs)
+FSMS: Food Safety Management System
+
+================================================================================
+5. ROLES & RESPONSIBILITIES
+================================================================================
+Quality Assurance Manager:
+- Maintains master document list
+- Approves document control procedure changes
+- Ensures document control audit compliance
+
+Document Owners:
+- Draft new documents and revisions
+- Ensure technical accuracy
+- Initiate document review cycle
+
+Management Approvers:
+- Review and approve documents before release
+- Authority defined by document type and impact
+
+All Employees:
+- Use only current approved documents
+- Report obsolete documents found at points of use
+
+================================================================================
+6. PREREQUISITES & REFERENCE DOCUMENTS
+================================================================================
+- Primus GFS v4.0 Module 1.02 (Document Control)
+- 21 CFR Part 117 (Preventive Controls for Human Food)
+- ISO 9001:2015 Documented Information requirements
+- Master Document List (Form DC-001)
+
+================================================================================
+7. HAZARD / RISK ANALYSIS
+================================================================================
+Risk: Use of obsolete or unapproved documents leading to non-conforming product, 
+regulatory violation, or food safety incident.
+
+Control: Formal document approval, version control, obsolete document removal, 
+and training on current procedures.
+
+================================================================================
+8. PROCEDURES
+================================================================================
+
+8.1 Document Creation
+1. Document Owner identifies need and drafts new document using standard template
+2. Document assigned unique number from Document Control Register
+3. Draft reviewed by cross-functional team (production, QA, sanitation)
+4. Revisions incorporated and final draft prepared
+5. Document submitted to Management Approver for signature
+6. Upon approval, document released and added to Master Document List
+
+8.2 Document Approval
+- Authority matrix defines approval requirements by document type
+- Critical food safety documents require Quality Manager approval minimum
+- HACCP plan changes require HACCP Team Leader approval
+- Approver signature and date documented on document
+
+8.3 Document Distribution
+- Controlled copies distributed to designated locations (digital or printed)
+- Distribution list maintained for each document
+- Users notified of new or revised documents via email and training
+- Printed controlled copies stamped "CONTROLLED COPY"
+
+8.4 Document Revision
+1. Change request submitted to Document Owner with justification
+2. Document Owner drafts revision with changes highlighted or tracked
+3. Significant changes reviewed by affected departments
+4. Revised document approved per approval matrix
+5. Revision number incremented (e.g., Rev 2 to Rev 3)
+6. Effective date updated
+7. Obsolete revision removed from all locations within 48 hours
+8. Users trained on changes if impacting procedures
+
+8.5 Obsolete Document Removal
+- Upon new revision release, all obsolete copies removed from points of use
+- Electronic obsolete documents moved to archive folder marked "OBSOLETE"
+- Printed obsolete documents collected, stamped "OBSOLETE - DO NOT USE", shredded or archived
+- Verification check conducted within 7 days to confirm removal
+- One archived copy retained for reference with "OBSOLETE" watermark
+
+8.6 External Document Control
+- External documents (FDA regulations, USDA guidelines, customer specs, standards) identified and registered
+- Responsible person assigned to monitor for updates
+- External documents reviewed annually to confirm currency
+- When updated version issued, obsolete version replaced within 30 days
+- External documents stored in designated controlled location
+
+8.7 Master Document List Maintenance
+- Master Document List (MDL) maintained electronically
+- MDL includes: document number, title, revision, effective date, owner, distribution
+- MDL updated within 24 hours of document creation, revision, or obsolescence
+- MDL available to all personnel via shared network drive
+
+8.8 Record Retention
+- Obsolete document archive retained 2 years minimum (or per customer/regulatory requirement)
+- Electronic backup performed weekly
+- Records retention schedule maintained per Record Management Procedure
+
+================================================================================
+9. MONITORING PLAN
+================================================================================
+Activity: Master Document List accuracy verification
+Frequency: Monthly
+Responsible: Document Control Coordinator
+Method: Random sample 10 documents; verify current revision at point of use
+Record: Document Control Audit Log (Form DC-002)
+Corrective Action: Replace incorrect version immediately; investigate root cause
+
+Activity: External document currency review
+Frequency: Annually (or per regulatory update alerts)
+Responsible: Quality Manager
+Method: Review external document sources; compare to facility copies
+Record: External Document Review Log (Form DC-003)
+
+================================================================================
+10. VERIFICATION & VALIDATION ACTIVITIES
+================================================================================
+- Internal audit of document control annually per Internal Audit Schedule
+- Management review of document control performance quarterly
+- Verification that obsolete documents are not in use during facility inspections
+- User interviews during audits to confirm awareness of current documents
+
+================================================================================
+11. CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL
+================================================================================
+Trigger: Obsolete document found in use, incorrect revision at workstation, 
+undocumented changes, missing external document update
+
+Immediate Action: Remove obsolete document; replace with current version; 
+brief affected personnel
+
+Root Cause Analysis: Investigate why document control failed (distribution 
+missed, lack of training, inadequate removal verification)
+
+Corrective Action: Implement controls to prevent recurrence (enhanced distribution 
+checklist, additional training, automated distribution system)
+
+Preventive Action: Trend analysis of document control issues quarterly; 
+identify systemic gaps
+
+Verification: Follow-up audit within 30 days to confirm effectiveness
+
+================================================================================
+12. TRACEABILITY & RECALL ELEMENTS
+================================================================================
+Document revision history enables traceability of procedures in effect during 
+product production. In recall scenarios, document version effective at time 
+of production identified to determine applicable procedures and controls.
+
+Revision History Table maintained in each document showing:
+- Revision number
+- Effective date
+- Summary of changes
+- Approver name
+
+================================================================================
+13. RECORD RETENTION & DOCUMENT CONTROL
+================================================================================
+Record Type: Document Control Audit Logs
+Retention: 2 years
+Location: Quality Assurance shared drive
+
+Record Type: Obsolete Document Archive
+Retention: 2 years
+Location: Document Control Archive folder
+
+Record Type: External Document Review Logs
+Retention: 3 years
+Location: Quality Assurance records
+
+================================================================================
+14. COMPLIANCE CROSSWALK (TABLE)
+================================================================================
+Primus Code | Requirement | Document Section | Evidence
+1.02.01 | Document approval, versioning, revision control | Section 8.1, 8.2, 8.4 | Approval signatures, revision numbers, Master Document List
+1.02.02 | Obsolete documents removed | Section 8.5 | Obsolete removal verification records
+1.02.03 | External documents controlled and current | Section 8.6 | External Document Review Log, annual review records
+1.02.04 | Record retention policy (2 years minimum) | Section 13 | Record Retention Schedule
+1.02.05 | Master document list maintained | Section 8.7 | Master Document List updated monthly
+
+================================================================================
+15. REVISION HISTORY & APPROVAL SIGNATURES
+================================================================================
+Revision | Effective Date | Summary of Changes | Approved By
+1 | [Initial Date] | Initial release | [Name], QA Manager
+2 | [Date] | Added external document control section | [Name], QA Manager
+[Current] | [Effective Date] | [Summary] | [Approved By], [Position]
+
+Prepared By: _________________________ Date: __________
+             [Name], [Position]
+
+Reviewed By: _________________________ Date: __________
+             [Name], Quality Manager
+
+Approved By: _________________________ Date: __________
+             [Approved By], [Position]

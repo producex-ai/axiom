@@ -1,0 +1,162 @@
+{
+  "code": "3.04",
+  "title": "General Chemicals",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "chemical management",
+    "chemical storage",
+    "chemical safety",
+    "sanitizer management",
+    "chemical inventory"
+  ],
+  "description": "Requirements for proper management, storage, and use of chemicals in indoor agriculture operations including inventory control, safety data sheets, storage security, food grade designation, and sanitizer concentration verification",
+  "requirements": [
+    {
+      "id": "3.04.01",
+      "code": "3.04.01",
+      "required": true,
+      "points": 3,
+      "text": "Are there chemical inventory logs for chemicals, including pesticides, fertilizers and cleaning and sanitizing chemicals?",
+      "keywords": [
+        "chemical inventory",
+        "inventory logs",
+        "pesticides",
+        "fertilizers",
+        "cleaning chemicals",
+        "sanitizing chemicals"
+      ],
+      "mandatoryStatements": [
+        "Chemical inventory log is maintained for all chemicals on site",
+        "Inventory includes pesticides used in facility or operation",
+        "Inventory includes fertilizers and growing nutrients",
+        "Inventory includes all cleaning chemicals",
+        "Inventory includes all sanitizing chemicals",
+        "Inventory is updated when chemicals are received or used",
+        "Inventory shows chemical name, quantity, and location"
+      ],
+      "verificationExpectations": "Quarterly verification of chemical inventory accuracy through physical inventory count",
+      "monitoringExpectations": "Monthly review of chemical inventory logs, immediate update when chemicals added or depleted"
+    },
+    {
+      "id": "3.04.02",
+      "code": "3.04.02",
+      "required": true,
+      "points": 3,
+      "text": "Are copies of all Safety Data Sheets on file and fully accessible at all times with clear indexes?",
+      "keywords": [
+        "safety data sheets",
+        "SDS",
+        "MSDS",
+        "chemical safety information",
+        "accessible documentation"
+      ],
+      "mandatoryStatements": [
+        "Safety Data Sheets (SDS) are on file for every chemical on site",
+        "SDS are readily accessible to all employees at all times",
+        "Clear index or table of contents helps locate specific SDS",
+        "SDS are current versions (updated within 3 years)",
+        "Electronic or physical SDS access does not require special authorization",
+        "SDS are available in language(s) understood by employees",
+        "Emergency response information from SDS is readily available"
+      ],
+      "verificationExpectations": "Annual verification that SDS are current, complete, and accessible",
+      "monitoringExpectations": "Quarterly check of SDS files for completeness, immediate addition of SDS for new chemicals"
+    },
+    {
+      "id": "3.04.03",
+      "code": "3.04.03",
+      "required": true,
+      "points": 15,
+      "text": "Are all chemicals (pesticides, fertilizers, sanitizers, detergents, lubricants, etc.) stored securely, safely and are they labeled correctly?",
+      "keywords": [
+        "chemical storage",
+        "secure storage",
+        "safe storage",
+        "chemical labeling",
+        "chemical identification"
+      ],
+      "mandatoryStatements": [
+        "All chemicals are stored in secure, designated storage areas",
+        "Chemical storage prevents unauthorized access",
+        "Chemical storage prevents contamination of product, equipment, or materials",
+        "Incompatible chemicals are segregated",
+        "All chemical containers are properly labeled with contents",
+        "Original labels are maintained or transfer containers are properly labeled",
+        "Storage area is well-ventilated and appropriate for chemical types",
+        "Secondary containment provided for liquid chemicals where appropriate",
+        "Chemical storage area is clean and organized"
+      ],
+      "verificationExpectations": "Quarterly inspection of chemical storage areas for security, safety, and proper labeling",
+      "monitoringExpectations": "Weekly checks of chemical storage conditions, immediate correction of labeling or storage deficiencies"
+    },
+    {
+      "id": "3.04.04",
+      "code": "3.04.04",
+      "required": true,
+      "points": 10,
+      "text": "Are \"food grade\" and \"non-food grade\" chemicals used appropriately, according to the label and not commingled?",
+      "keywords": [
+        "food grade",
+        "non-food grade",
+        "chemical designation",
+        "appropriate use",
+        "chemical separation"
+      ],
+      "mandatoryStatements": [
+        "Food grade chemicals are clearly identified and segregated",
+        "Non-food grade chemicals are clearly identified and segregated",
+        "Food grade chemicals are used only for food contact applications",
+        "Non-food grade chemicals are not used on food contact surfaces",
+        "Chemicals are used according to label instructions",
+        "Storage prevents commingling of food grade and non-food grade chemicals",
+        "Personnel are trained on appropriate use of food grade vs non-food grade chemicals"
+      ],
+      "verificationExpectations": "Quarterly verification that food grade chemicals are properly identified and used appropriately",
+      "monitoringExpectations": "Monthly inspection of chemical storage for proper segregation, daily monitoring of chemical use practices"
+    },
+    {
+      "id": "3.04.05",
+      "code": "3.04.05",
+      "required": true,
+      "points": 15,
+      "text": "Does the operation use the appropriate test strips, test kits or test probes for verifying the concentrations of anti-microbial chemicals (e.g., product contact water, sanitizers, dip stations, etc.) being used, are they in operational condition and are they being used correctly?",
+      "keywords": [
+        "test strips",
+        "test kits",
+        "concentration testing",
+        "antimicrobial verification",
+        "sanitizer concentration",
+        "chemical testing"
+      ],
+      "mandatoryStatements": [
+        "Appropriate test strips, kits, or probes are available for all antimicrobial chemicals used",
+        "Test equipment is specific to the chemicals being tested",
+        "Test equipment is in operational condition (not expired, properly calibrated)",
+        "Test equipment is used correctly according to manufacturer instructions",
+        "Testing is performed at required frequency",
+        "Test results are recorded",
+        "Corrective action is taken when concentrations are out of specification",
+        "Personnel are trained on proper use of test equipment"
+      ],
+      "verificationExpectations": "Quarterly verification that test equipment is appropriate, operational, and used correctly",
+      "monitoringExpectations": "Daily or per-use testing of antimicrobial concentrations, immediate adjustment if out of specification",
+      "riskLevel": "high"
+    }
+  ],
+  "micro_inject": ["chemical"],
+  "capaInject": [
+    "If chemical inventory not maintained: establish inventory immediately, conduct physical inventory within 7 days",
+    "If SDS missing or inaccessible: obtain missing SDS within 24 hours, establish accessible filing system within 7 days",
+    "If chemicals not stored securely or safely: immediate containment of hazards, establish proper storage within 7 days",
+    "If chemicals not labeled correctly: immediate labeling of all containers, remove unlabeled chemicals until identified",
+    "If food grade and non-food grade chemicals commingled: immediate segregation, retrain personnel within 7 days",
+    "If antimicrobial concentrations not tested or incorrect: immediate testing and adjustment, verify effectiveness before use",
+    "If test equipment expired or not operational: replace immediately, halt use of untested antimicrobials until testing capability restored"
+  ],
+  "traceabilityInject": [
+    "Chemical inventory records must be traceable to receipt dates, lot numbers, and usage",
+    "Antimicrobial concentration test results must be traceable to specific solutions, dates, and personnel",
+    "Chemical usage must be traceable to specific applications and batches (where applicable)",
+    "Any chemical incidents or deviations must be fully documented with traceability"
+  ]
+}

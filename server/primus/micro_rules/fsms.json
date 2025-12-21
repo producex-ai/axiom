@@ -1,0 +1,18 @@
+{
+  "category": "fsms",
+  "description": "Core Food Safety Management System (FSMS) requirements applicable across all Module 1 submodules",
+  "rules": {
+    "fsms_001": "Management must demonstrate commitment to food safety through documented policy, resource allocation, and regular review of food safety performance.",
+    "fsms_002": "Food safety objectives must be established, measurable, and reviewed at defined intervals with evidence of progress tracking.",
+    "fsms_003": "Roles, responsibilities, and authorities for food safety management must be defined, documented, and communicated to all relevant personnel.",
+    "fsms_004": "Competency requirements must be established for all positions affecting food safety, with documented evidence of training and qualification.",
+    "fsms_005": "Document control procedures must ensure only current, approved versions of documents are available at points of use.",
+    "fsms_006": "Records must be legible, identifiable, retrievable, protected from damage, and retained for defined periods (minimum 2 years or as required by regulation).",
+    "fsms_007": "Internal audits must be conducted at planned intervals covering all aspects of the food safety management system.",
+    "fsms_008": "Corrective actions must include investigation of root cause, implementation of corrections, verification of effectiveness, and documentation of all steps.",
+    "fsms_009": "Preventive actions must be taken to eliminate causes of potential non-conformances based on trend analysis and risk assessment.",
+    "fsms_010": "Management review must be conducted at defined intervals with documented evidence of decisions and actions taken.",
+    "fsms_011": "Communication processes must ensure food safety information flows effectively between all levels and functions within the organization.",
+    "fsms_012": "Emergency preparedness and response procedures must be established, tested annually through mock exercises, and updated based on lessons learned."
+  }
+}

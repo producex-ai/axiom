@@ -1,0 +1,43 @@
+{
+  "code": "5.17",
+  "parentCode": "5",
+  "title": "Temperature Controlled Storage & Distribution Logs",
+  "requirements": [
+    {
+      "code": "5.17.01",
+      "question": "Are there records of final product temperature checks for temperature sensitive product?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.17.02",
+      "question": "Are there temperature logs for the production area (if refrigerated)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.17.03",
+      "question": "Are there temperature logs for storage rooms?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.17.04",
+      "question": "Is there a documented procedure for checking truck trailer temperature and reviewing sanitary condition of truck trailers prior to loading?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.17.05",
+      "question": "Are there records of shipping truck trailer (or other transportation systems) temperature checks, indicating the truck trailer temperature settings and that the truck trailer was pre-cooled prior to loading?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "5.17.06",
+      "question": "Are there sanitary condition logs for shipping truck trailers (or other transportation systems)?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    }
+  ]
+}

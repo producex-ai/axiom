@@ -1,0 +1,207 @@
+{
+  "code": "4.04.01",
+  "parentCode": "4.04",
+  "title": "Toilet Facilities",
+  "moduleName": "Module 4: Harvest Crew - Harvest Worker Hygiene",
+  "appliesTo": [
+    "toilet facilities",
+    "restroom facilities",
+    "sanitation facilities",
+    "worker facilities"
+  ],
+  "description": "Establishes requirements for adequate, properly located, designed, maintained, supplied, and serviced toilet facilities for harvest crew operations",
+  "requirements": [
+    {
+      "id": "4.04.01",
+      "code": "4.04.01",
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities adequate in number and location? A ZERO POINT (NON-COMPLIANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "keywords": [
+        "toilet facilities",
+        "adequate number",
+        "location",
+        "restrooms",
+        "worker access",
+        "sanitation facilities",
+        "automatic failure"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are provided in adequate numbers based on worker population",
+        "Facilities meet or exceed regulatory requirements for worker-to-toilet ratios",
+        "Toilet locations provide reasonable access to all harvest areas",
+        "Facilities are strategically placed to encourage use and discourage field contamination",
+        "Additional facilities are provided as crew size increases",
+        "Facility placement considers distance and travel time for workers"
+      ],
+      "verificationExpectations": "Daily verification of adequate facilities for current crew size, quarterly review of facility adequacy as operations change",
+      "monitoringExpectations": "Daily count of operational toilet facilities and comparison to crew size, immediate action if facilities become inadequate"
+    },
+    {
+      "id": "4.04.01a",
+      "code": "4.04.01a",
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities located where they are not a risk of contamination to product, packaging, equipment, water sources and growing areas?",
+      "keywords": [
+        "toilet location",
+        "contamination risk",
+        "product safety",
+        "packaging protection",
+        "equipment protection",
+        "water source protection",
+        "growing area protection"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are positioned away from harvest areas",
+        "Facilities are located to prevent contamination of product contact surfaces",
+        "Placement prevents contamination risk to packaging materials",
+        "Facilities are positioned away from equipment storage and use areas",
+        "Toilets are located away from water sources (wells, irrigation water, wash water)",
+        "Facility placement considers prevailing winds and drainage patterns",
+        "Minimum setback distances from sensitive areas are maintained"
+      ],
+      "verificationExpectations": "Annual evaluation of toilet placement relative to operational areas, immediate assessment if operational areas change",
+      "monitoringExpectations": "Daily verification that no contamination pathways exist from toilets to product or production areas"
+    },
+    {
+      "id": "4.04.01b",
+      "code": "4.04.01b",
+      "required": true,
+      "points": 5,
+      "text": "Are toilet facilities designed and maintained to prevent contamination (e.g., free from leaks and cracks)?",
+      "keywords": [
+        "toilet design",
+        "maintenance",
+        "leak prevention",
+        "structural integrity",
+        "containment",
+        "facility condition"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are designed with proper containment systems",
+        "Facilities are regularly inspected for leaks and structural damage",
+        "Cracks, holes, or damage are repaired promptly",
+        "Waste containment systems function properly without leaks",
+        "Facility design prevents waste overflow or spillage",
+        "Maintenance records document repairs and preventive maintenance"
+      ],
+      "verificationExpectations": "Weekly inspection of facility integrity and containment systems, monthly review of maintenance records",
+      "monitoringExpectations": "Daily inspection for visible leaks or damage, immediate repair of any containment failures"
+    },
+    {
+      "id": "4.04.01c",
+      "code": "4.04.01c",
+      "required": true,
+      "points": 3,
+      "text": "Are toilet facilities constructed of materials that are easy to clean?",
+      "keywords": [
+        "construction materials",
+        "easy to clean",
+        "cleanable surfaces",
+        "non-porous materials",
+        "sanitation",
+        "facility materials"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities are constructed of smooth, non-porous materials",
+        "Interior surfaces are designed for easy cleaning and sanitizing",
+        "Materials resist bacterial growth and moisture damage",
+        "Construction allows effective cleaning of all surfaces",
+        "Materials withstand repeated cleaning and sanitizing"
+      ],
+      "verificationExpectations": "Annual evaluation of facility materials and cleanability, assessment during facility repairs or upgrades",
+      "monitoringExpectations": "Daily verification that facilities can be effectively cleaned"
+    },
+    {
+      "id": "4.04.01d",
+      "code": "4.04.01d",
+      "required": true,
+      "points": 5,
+      "text": "Are toilet facilities supplied with toilet paper and is the toilet paper maintained properly (e.g., toilet paper rolls are not stored on the floor or in the urinals)?",
+      "keywords": [
+        "toilet paper",
+        "supplies",
+        "proper storage",
+        "sanitary conditions",
+        "restocking",
+        "supply maintenance"
+      ],
+      "mandatoryStatements": [
+        "Toilet paper is provided in all toilet facilities",
+        "Adequate supply is maintained at all times",
+        "Toilet paper is stored in sanitary manner off the floor",
+        "Dispensers or holders protect toilet paper from contamination",
+        "Extra rolls are stored properly, not in unsanitary locations",
+        "Regular checks ensure continuous availability"
+      ],
+      "verificationExpectations": "Weekly verification of supply adequacy and storage practices",
+      "monitoringExpectations": "Daily inspection of toilet paper availability and proper storage, immediate restocking when low"
+    },
+    {
+      "id": "4.04.01e",
+      "code": "4.04.01e",
+      "required": true,
+      "points": 5,
+      "text": "Where used, is there a documented procedure for emptying the waste holding tanks in a hygienic manner and also in a way that prevents product, packaging, equipment, water systems and growing area contamination?",
+      "keywords": [
+        "waste holding tanks",
+        "emptying procedure",
+        "hygienic disposal",
+        "contamination prevention",
+        "waste management",
+        "documented procedure"
+      ],
+      "mandatoryStatements": [
+        "Documented procedure exists for waste tank emptying",
+        "Procedure specifies frequency of emptying based on usage",
+        "Hygienic practices for waste handling are defined",
+        "Procedure prevents contamination to product and production areas",
+        "Emptying occurs away from harvest operations",
+        "Equipment used for waste handling is dedicated and identified",
+        "Personnel performing waste handling are trained",
+        "Records document date, time, and person responsible for waste disposal"
+      ],
+      "verificationExpectations": "Monthly review of waste disposal records, quarterly audit of procedure compliance",
+      "monitoringExpectations": "Verification that waste disposal follows documented procedure, immediate investigation if contamination risk identified"
+    },
+    {
+      "id": "4.04.01f",
+      "code": "4.04.01f",
+      "required": true,
+      "points": 10,
+      "text": "Are the toilet facilities and hand washing stations clean and are there records showing cleaning, servicing and stocking is occurring regularly?",
+      "keywords": [
+        "facility cleanliness",
+        "cleaning records",
+        "servicing",
+        "stocking",
+        "regular maintenance",
+        "sanitation logs"
+      ],
+      "mandatoryStatements": [
+        "Toilet facilities and handwashing stations are visibly clean",
+        "Cleaning schedule is established and followed",
+        "Cleaning frequency is adequate for usage levels",
+        "Records document date, time, and person who performed cleaning",
+        "Servicing of facilities is documented (waste removal, repairs)",
+        "Stocking of supplies (soap, paper towels, toilet paper) is recorded",
+        "Records demonstrate consistent, regular maintenance",
+        "Deficiencies are documented and corrected promptly"
+      ],
+      "verificationExpectations": "Weekly review of cleaning and maintenance records for completeness and frequency, quarterly audit of actual facility conditions versus records",
+      "monitoringExpectations": "Daily verification of facility cleanliness and supply stocking, immediate cleaning if unsanitary conditions observed"
+    }
+  ],
+  "micro_inject": ["fsms", "hygiene", "sanitation"],
+  "capaInject": [
+    "If toilet facilities inadequate: immediately provide additional facilities or reduce crew size, achieve compliance before continuing operations",
+    "If toilet facilities pose contamination risk: immediately relocate or modify, complete risk assessment before restart",
+    "If toilet facility structural failures: immediate repair, provide alternative facilities until repaired",
+    "If waste disposal procedures not followed: immediate retraining, investigate contamination risk, implement additional controls"
+  ],
+  "traceabilityInject": [
+    "Toilet facility cleaning and maintenance records must be traceable to dates, persons, and facilities serviced",
+    "Waste disposal records must be traceable to specific dates, personnel, and disposal locations"
+  ]
+}

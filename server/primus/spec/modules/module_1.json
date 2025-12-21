@@ -1,0 +1,263 @@
+{
+  "module": "1",
+  "moduleName": "Food Safety Management System (FSMS)",
+  "description": "Establishes comprehensive food safety management system requirements including management systems, document control, procedures, internal audits, product release, supplier control, traceability, and intentional contamination prevention. Aligned with official PrimusGFS v4.0 Checklist Module 1 (Sections 1.01-1.08).",
+  "scope": "All aspects of food safety management system development, implementation, maintenance, and continuous improvement within the organization",
+  "totalSubmodules": 8,
+  "totalQuestions": 42,
+  "totalPoints": 288,
+  "officialSource": "PGFS-ND-029-1 R0 July 31, 2025",
+  "submodules": [
+    {
+      "code": "1.01",
+      "name": "Management System",
+      "alias": "management_system",
+      "specFile": "1.01.json",
+      "questionsCount": 8,
+      "totalPoints": 58,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "1.02",
+      "name": "Control of Documents and Records",
+      "alias": "document_control",
+      "specFile": "1.02.json",
+      "questionsCount": 5,
+      "totalPoints": 21,
+      "micro_inject": ["fsms", "document_control"]
+    },
+    {
+      "code": "1.03",
+      "name": "Procedures and Corrective Actions",
+      "alias": "procedures_capa",
+      "specFile": "1.03.json",
+      "questionsCount": 4,
+      "totalPoints": 20,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "1.04",
+      "name": "Internal and External Inspections",
+      "alias": "inspections",
+      "specFile": "1.04.json",
+      "questionsCount": 6,
+      "totalPoints": 48,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "1.05",
+      "name": "Release of Items/Product",
+      "alias": "product_release",
+      "specFile": "1.05.json",
+      "questionsCount": 5,
+      "totalPoints": 30,
+      "micro_inject": ["fsms"]
+    },
+    {
+      "code": "1.06",
+      "name": "Supplier/Service Provider Monitoring & Control",
+      "alias": "supplier_control",
+      "specFile": "1.06.json",
+      "questionsCount": 5,
+      "totalPoints": 50,
+      "micro_inject": ["fsms", "traceability"]
+    },
+    {
+      "code": "1.07",
+      "name": "Traceability and Recall",
+      "alias": "traceability_recall",
+      "specFile": "1.07.json",
+      "questionsCount": 3,
+      "totalPoints": 35,
+      "micro_inject": ["fsms", "traceability"]
+    },
+    {
+      "code": "1.08",
+      "name": "Intentional Contamination",
+      "alias": "intentional_contamination",
+      "specFile": "1.08.json",
+      "questionsCount": 6,
+      "totalPoints": 26,
+      "micro_inject": ["fsms"]
+    }
+  ],
+  "documentStructureTemplate": {
+    "sections": [
+      {
+        "number": 1,
+        "title": "Title & Document Control",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Document identification (number, title, version, dates), approval signatures, distribution list"
+      },
+      {
+        "number": 2,
+        "title": "Purpose / Objective",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Why this document exists, what it achieves, business and compliance drivers"
+      },
+      {
+        "number": 3,
+        "title": "Scope",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What operations/areas covered, who is responsible, any exclusions or limitations"
+      },
+      {
+        "number": 4,
+        "title": "Definitions & Abbreviations",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Minimum 5-8 relevant technical terms, acronyms, or facility-specific terminology"
+      },
+      {
+        "number": 5,
+        "title": "Roles & Responsibilities",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Specific positions with clearly defined duties, authority levels, and accountability"
+      },
+      {
+        "number": 6,
+        "title": "Prerequisites & Reference Documents",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Related SOPs, standards (Primus GFS, GFSI), regulatory requirements, training prerequisites"
+      },
+      {
+        "number": 7,
+        "title": "Hazard / Risk Analysis",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Module-appropriate hazards (documentation failures, system gaps), risk assessment, control measures"
+      },
+      {
+        "number": 8,
+        "title": "Procedures",
+        "required": true,
+        "minParagraphs": 8,
+        "contentGuidance": "Detailed step-by-step procedures (minimum 8-12 steps), specific actions, frequencies, methods"
+      },
+      {
+        "number": 9,
+        "title": "Monitoring Plan",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "What to monitor, how often, who is responsible, what records to keep, acceptance criteria"
+      },
+      {
+        "number": 10,
+        "title": "Verification & Validation Activities",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "How to verify procedures are followed, validation that procedures are effective, audit/review frequency"
+      },
+      {
+        "number": 11,
+        "title": "Corrective & Preventive Action (CAPA) Protocol",
+        "required": true,
+        "minParagraphs": 3,
+        "contentGuidance": "Triggers for CAPA, investigation steps, containment, root cause analysis, corrective actions, preventive measures, verification"
+      },
+      {
+        "number": 12,
+        "title": "Traceability & Recall Elements",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "Documentation traceability, record linkages, system audit trails"
+      },
+      {
+        "number": 13,
+        "title": "Record Retention & Document Control",
+        "required": true,
+        "minParagraphs": 2,
+        "contentGuidance": "What records are generated, retention periods, storage location, access control"
+      },
+      {
+        "number": 14,
+        "title": "Compliance Crosswalk",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Table mapping Primus Code | Requirement | Document Section | Evidence"
+      },
+      {
+        "number": 15,
+        "title": "Revision History & Approval Signatures",
+        "required": true,
+        "minParagraphs": 1,
+        "contentGuidance": "Revision table (version, date, description) and signature lines (Prepared By, Reviewed By, Approved By)"
+      }
+    ]
+  },
+  "complianceKeywords": {
+    "management_system": [
+      "policy",
+      "commitment",
+      "food safety culture",
+      "organizational chart",
+      "committee",
+      "training management",
+      "allergen control",
+      "management review"
+    ],
+    "document_control": [
+      "version",
+      "approval",
+      "distribution",
+      "retention",
+      "24 months",
+      "security",
+      "retrievable",
+      "verification"
+    ],
+    "procedures_capa": [
+      "SOP",
+      "standard operating procedures",
+      "corrective action",
+      "NUOCA",
+      "non-conformance",
+      "root cause"
+    ],
+    "inspections": [
+      "internal audit",
+      "regulatory inspection",
+      "calibration",
+      "accuracy verification",
+      "measuring devices",
+      "audit findings"
+    ],
+    "product_release": [
+      "release procedure",
+      "release criteria",
+      "hold",
+      "rejected items",
+      "customer complaints",
+      "disposition"
+    ],
+    "supplier_control": [
+      "supplier approval",
+      "supplier monitoring",
+      "specifications",
+      "verification activities",
+      "laboratory accreditation",
+      "ISO 17025"
+    ],
+    "traceability_recall": [
+      "traceability",
+      "trace back",
+      "trace forward",
+      "recall program",
+      "mock recall",
+      "one step back one step forward"
+    ],
+    "intentional_contamination": [
+      "food fraud",
+      "FFVA",
+      "food defense",
+      "crisis management",
+      "emergency contacts",
+      "visitor control"
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "code": "3.13",
+  "title": "Pesticide Handling & Application",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "pesticide handling",
+    "pesticide application",
+    "applicator training",
+    "pesticide procedures",
+    "applicator competency"
+  ],
+  "description": "Requirements for pesticide handling and application including documented procedures for mixing, loading, transporting, applying, disposal, equipment cleaning, applicator competency, and applicator training and supervision",
+  "requirements": [
+    {
+      "id": "3.13.01",
+      "code": "3.13.01",
+      "required": true,
+      "points": 15,
+      "text": "Is there a documented procedure that is followed for the pesticide applications, considering mixing and loading, transporting, applying, surplus mix/tank rinsate disposal and equipment cleaning?",
+      "keywords": [
+        "pesticide procedures",
+        "application procedures",
+        "mixing procedures",
+        "pesticide disposal",
+        "equipment cleaning"
+      ],
+      "mandatoryStatements": [
+        "Documented pesticide application procedure exists",
+        "Procedure covers mixing and loading of pesticides",
+        "Procedure covers safe transport of pesticides and spray equipment",
+        "Procedure covers application methods and techniques",
+        "Procedure covers disposal of surplus pesticide mix",
+        "Procedure covers disposal of tank rinsate",
+        "Procedure covers equipment cleaning after application",
+        "Procedure addresses safety and environmental protection",
+        "Procedure is followed for all pesticide applications"
+      ],
+      "verificationExpectations": "Annual review of pesticide handling procedures, quarterly verification that procedures are followed",
+      "monitoringExpectations": "Observation of pesticide handling activities to verify procedure compliance"
+    },
+    {
+      "id": "3.13.02",
+      "code": "3.13.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there documentation that shows the individual(s) making decisions for pesticide applications is competent?",
+      "keywords": [
+        "applicator competency",
+        "pesticide decision maker",
+        "qualified person",
+        "certification",
+        "pest control advisor"
+      ],
+      "mandatoryStatements": [
+        "Individual(s) making pesticide application decisions are identified",
+        "Documentation demonstrates competency of decision makers",
+        "Competency documentation may include licenses, certifications, training records",
+        "Decision makers have appropriate education or experience in pest management",
+        "Decision makers understand pesticide labels, regulations, and safety",
+        "Competency documentation is current and maintained on file",
+        "Only competent individuals authorize pesticide applications"
+      ],
+      "verificationExpectations": "Annual verification of decision maker competency documentation currency",
+      "monitoringExpectations": "Verification that only authorized competent persons make pesticide decisions"
+    },
+    {
+      "id": "3.13.03",
+      "code": "3.13.03",
+      "required": true,
+      "points": 15,
+      "text": "Is there documentation that shows that individuals who handle pesticide materials are trained and are under the supervision of a trained person?",
+      "keywords": [
+        "applicator training",
+        "pesticide handler training",
+        "handler certification",
+        "supervision",
+        "worker protection"
+      ],
+      "mandatoryStatements": [
+        "All individuals handling pesticides are trained",
+        "Training documentation is maintained for all pesticide handlers",
+        "Training covers safe handling, mixing, application, and disposal",
+        "Training covers label comprehension and compliance",
+        "Training covers personal protective equipment (PPE) use",
+        "Training covers emergency response procedures",
+        "Handlers work under supervision of trained/qualified person",
+        "Training is refreshed periodically and when procedures change"
+      ],
+      "verificationExpectations": "Quarterly verification that all pesticide handlers have current training",
+      "monitoringExpectations": "Verification of training before allowing individuals to handle pesticides, observation of supervision during operations"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If pesticide handling procedures not documented: develop procedures within 14 days, implement immediately, train personnel within 7 days",
+    "If decision maker competency not documented: obtain documentation within 14 days, interim supervision by qualified person until documented",
+    "If pesticide handlers not trained: immediate training before further pesticide handling, enhanced supervision until training complete",
+    "If procedures not followed: immediate correction, retraining within 7 days, enhanced monitoring for 30 days"
+  ],
+  "traceabilityInject": [
+    "Pesticide application decisions must be traceable to specific competent individuals",
+    "Pesticide handler training must be traceable to specific individuals, dates, and training content",
+    "Pesticide applications must be traceable to trained and supervised handlers",
+    "Supervision records should link handlers to qualified supervisors"
+  ]
+}

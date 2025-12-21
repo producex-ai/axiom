@@ -1,0 +1,335 @@
+{
+  "code": "3.10",
+  "title": "Agronomic Inputs",
+  "moduleName": "Module 3: Indoor Agriculture",
+  "appliesTo": [
+    "fertilizers",
+    "amendments",
+    "growing inputs",
+    "soil amendments",
+    "risk assessment",
+    "input safety"
+  ],
+  "description": "Requirements for agronomic inputs including fertilizers and amendments (both animal-based and non-animal based), risk assessments, regulatory compliance, application records, certificates of analysis, and thermal treatment of growing media",
+  "requirements": [
+    {
+      "id": "3.10.01",
+      "code": "3.10.01",
+      "required": false,
+      "points": 0,
+      "text": "What type(s) of fertilizers and amendments are used in the growing operation? Information gathering question",
+      "keywords": [
+        "fertilizers",
+        "amendments",
+        "information gathering",
+        "input types"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies types of fertilizers and amendments used",
+        "Information used to determine applicable subsequent questions"
+      ],
+      "verificationExpectations": "Documentation of fertilizer and amendment types used in operation",
+      "monitoringExpectations": "Update information when input types change"
+    },
+    {
+      "id": "3.10.01a",
+      "code": "3.10.01a",
+      "required": false,
+      "points": 0,
+      "text": "Are animal based or derived amendments used in the growing operation? Information gathering question",
+      "keywords": [
+        "animal-based amendments",
+        "manure",
+        "compost",
+        "animal derived",
+        "information gathering"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies if animal-based or derived amendments are used",
+        "If yes, questions 3.10.02 and 3.10.02a apply"
+      ],
+      "verificationExpectations": "Documentation of animal-based amendment use",
+      "monitoringExpectations": "Update information when amendment types change"
+    },
+    {
+      "id": "3.10.01b",
+      "code": "3.10.01b",
+      "required": false,
+      "points": 0,
+      "text": "Are non-animal based or derived amendments used in the growing operation? Information gathering question",
+      "keywords": [
+        "non-animal amendments",
+        "plant-based",
+        "mineral amendments",
+        "information gathering"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies if non-animal based amendments are used",
+        "If yes, questions 3.10.03 and 3.10.03a apply"
+      ],
+      "verificationExpectations": "Documentation of non-animal amendment use",
+      "monitoringExpectations": "Update information when amendment types change"
+    },
+    {
+      "id": "3.10.01c",
+      "code": "3.10.01c",
+      "required": false,
+      "points": 0,
+      "text": "Are synthetic fertilizers used as an input (e.g., ammonium nitrate, ammonium sulfate, chemically synthesized urea, etc.)? Information gathering question",
+      "keywords": [
+        "synthetic fertilizers",
+        "chemical fertilizers",
+        "ammonium nitrate",
+        "urea",
+        "information gathering"
+      ],
+      "mandatoryStatements": [
+        "This is an information gathering question",
+        "Response identifies if synthetic fertilizers are used",
+        "Examples include ammonium nitrate, ammonium sulfate, synthesized urea"
+      ],
+      "verificationExpectations": "Documentation of synthetic fertilizer use",
+      "monitoringExpectations": "Update information when fertilizer types change"
+    },
+    {
+      "id": "3.10.02",
+      "code": "3.10.02",
+      "required": true,
+      "points": 15,
+      "text": "Is there a documented risk assessment in place for all animal-based or derived fertilizers and amendments used in the growing operation?",
+      "keywords": [
+        "risk assessment",
+        "animal-based fertilizers",
+        "manure risk",
+        "pathogen risk",
+        "amendment safety"
+      ],
+      "mandatoryStatements": [
+        "If animal-based or derived amendments used, risk assessment is documented",
+        "Assessment addresses pathogen contamination risks",
+        "Assessment evaluates heavy metal risks",
+        "Assessment considers application methods and timing",
+        "Assessment identifies hazards specific to each amendment type",
+        "Assessment includes biological, chemical, and physical hazards",
+        "Risk assessment is reviewed and updated at least annually"
+      ],
+      "verificationExpectations": "Annual review of animal-based amendment risk assessment",
+      "monitoringExpectations": "Review risk assessment when new animal-based amendments introduced"
+    },
+    {
+      "id": "3.10.02a",
+      "code": "3.10.02a",
+      "required": true,
+      "points": 15,
+      "text": "Where the risk assessment identifies the need for control of any hazards, are these controls indicated in the assessment and implemented?",
+      "keywords": [
+        "hazard controls",
+        "risk controls",
+        "control implementation",
+        "amendment controls"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment identifies specific controls for each hazard",
+        "Controls are clearly documented in the assessment",
+        "All identified controls are implemented in operations",
+        "Controls may include treatment, application timing, application methods",
+        "Controls are effective at reducing or eliminating hazards",
+        "Implementation of controls is verified through monitoring",
+        "Records demonstrate ongoing implementation of controls"
+      ],
+      "verificationExpectations": "Quarterly verification that all amendment controls are implemented and effective",
+      "monitoringExpectations": "Daily or per-application monitoring of control implementation"
+    },
+    {
+      "id": "3.10.03",
+      "code": "3.10.03",
+      "required": true,
+      "points": 15,
+      "text": "Is there a documented risk assessment in place for all fertilizers and amendments not containing animal-based or derived components used in the growing operation?",
+      "keywords": [
+        "risk assessment",
+        "non-animal fertilizers",
+        "synthetic fertilizers",
+        "amendment safety"
+      ],
+      "mandatoryStatements": [
+        "If non-animal based fertilizers/amendments used, risk assessment is documented",
+        "Assessment addresses heavy metal contamination risks",
+        "Assessment evaluates chemical hazards",
+        "Assessment considers application methods and rates",
+        "Assessment identifies hazards specific to each input type",
+        "Assessment includes biological, chemical, and physical hazards",
+        "Risk assessment is reviewed and updated at least annually"
+      ],
+      "verificationExpectations": "Annual review of non-animal based input risk assessment",
+      "monitoringExpectations": "Review risk assessment when new inputs introduced"
+    },
+    {
+      "id": "3.10.03a",
+      "code": "3.10.03a",
+      "required": true,
+      "points": 15,
+      "text": "Where the risk assessment identifies the need for control of any hazards, are these controls indicated in the assessment and implemented?",
+      "keywords": [
+        "hazard controls",
+        "fertilizer controls",
+        "control implementation",
+        "input management"
+      ],
+      "mandatoryStatements": [
+        "Risk assessment identifies specific controls for each hazard",
+        "Controls are clearly documented in the assessment",
+        "All identified controls are implemented in operations",
+        "Controls are appropriate for the specific input and hazard",
+        "Controls are effective at reducing or eliminating hazards",
+        "Implementation of controls is verified through monitoring",
+        "Records demonstrate ongoing implementation of controls"
+      ],
+      "verificationExpectations": "Quarterly verification that all input controls are implemented and effective",
+      "monitoringExpectations": "Daily or per-application monitoring of control implementation"
+    },
+    {
+      "id": "3.10.04",
+      "code": "3.10.04",
+      "required": true,
+      "points": 15,
+      "text": "Are the fertilizers and/or amendments being used according to local and national regulations or guidelines?",
+      "keywords": [
+        "regulatory compliance",
+        "fertilizer regulations",
+        "amendment regulations",
+        "legal compliance"
+      ],
+      "mandatoryStatements": [
+        "All fertilizers and amendments used are approved for use",
+        "Use complies with local regulations and guidelines",
+        "Use complies with national/federal regulations",
+        "Application rates comply with regulatory limits",
+        "Application timing follows regulatory requirements",
+        "Required documentation and registrations are maintained",
+        "Operation stays current with regulatory changes"
+      ],
+      "verificationExpectations": "Annual verification of regulatory compliance for all inputs",
+      "monitoringExpectations": "Quarterly review of regulatory compliance, immediate action if regulations change"
+    },
+    {
+      "id": "3.10.05",
+      "code": "3.10.05",
+      "required": true,
+      "points": 15,
+      "text": "Are there fertilizer and/or amendment use records available for each growing area, including application records?",
+      "keywords": [
+        "application records",
+        "fertilizer records",
+        "amendment records",
+        "traceability",
+        "usage logs"
+      ],
+      "mandatoryStatements": [
+        "Fertilizer and amendment application records are maintained",
+        "Records identify specific growing areas where applied",
+        "Records show application dates",
+        "Records show application rates and methods",
+        "Records identify specific products applied",
+        "Records show who performed applications",
+        "Records support traceability and compliance verification"
+      ],
+      "verificationExpectations": "Quarterly review of fertilizer/amendment application records for completeness",
+      "monitoringExpectations": "Documentation completed for each application event"
+    },
+    {
+      "id": "3.10.06",
+      "code": "3.10.06",
+      "required": true,
+      "points": 10,
+      "text": "Are there Certificate(s) of Analysis (CoA), specifications, product label or other documents available for review provided by the supplier stating the components of the material and that cover heavy metal testing?",
+      "keywords": [
+        "certificate of analysis",
+        "CoA",
+        "heavy metals",
+        "supplier documentation",
+        "specifications"
+      ],
+      "mandatoryStatements": [
+        "Certificates of Analysis (CoA) are obtained from suppliers",
+        "CoA or specifications state material components",
+        "Documentation covers heavy metal testing results",
+        "Heavy metals tested include cadmium, lead, arsenic, mercury at minimum",
+        "Test results show compliance with acceptable limits",
+        "Documentation is current and corresponds to materials in use",
+        "Alternative: product labels provide required information"
+      ],
+      "verificationExpectations": "Annual verification that CoA or specifications are on file for all inputs",
+      "monitoringExpectations": "CoA obtained before first use of any new fertilizer or amendment"
+    },
+    {
+      "id": "3.10.07",
+      "code": "3.10.07",
+      "required": true,
+      "points": 10,
+      "text": "Are there Certificate(s) of Analysis (CoA) from the supplier(s) that cover pathogen testing (plus any other legally/best practice required testing) and does the grower have relevant letters of guarantee regarding supplier SOPs and logs?",
+      "keywords": [
+        "certificate of analysis",
+        "pathogen testing",
+        "supplier guarantees",
+        "supplier SOPs",
+        "microbial testing"
+      ],
+      "mandatoryStatements": [
+        "Certificates of Analysis covering pathogen testing are obtained",
+        "Pathogen testing appropriate for amendment type (especially animal-based)",
+        "Testing includes legally required pathogens (E. coli, Salmonella, etc.)",
+        "Supplier provides letters of guarantee regarding their processes",
+        "Supplier documentation includes SOPs and logs where applicable",
+        "Testing frequency is appropriate for risk level",
+        "Documentation demonstrates supplier quality controls"
+      ],
+      "verificationExpectations": "Annual verification of pathogen testing documentation for relevant inputs",
+      "monitoringExpectations": "CoA and supplier guarantees obtained before use of high-risk amendments"
+    },
+    {
+      "id": "3.10.08",
+      "code": "3.10.08",
+      "required": true,
+      "points": 10,
+      "text": "Where practiced, are there records of growing media substrate (including soil) thermal treatment processes?",
+      "keywords": [
+        "thermal treatment",
+        "soil treatment",
+        "substrate treatment",
+        "pasteurization",
+        "sterilization",
+        "heat treatment"
+      ],
+      "mandatoryStatements": [
+        "If thermal treatment of growing media is practiced, records are maintained",
+        "Records document thermal treatment parameters (time and temperature)",
+        "Records show which batches or lots were treated",
+        "Treatment records demonstrate effective pathogen reduction",
+        "Temperature monitoring equipment is calibrated",
+        "Records link treated media to growing areas where used",
+        "Treatment process is validated for effectiveness"
+      ],
+      "verificationExpectations": "Quarterly review of thermal treatment records where applicable",
+      "monitoringExpectations": "Documentation completed for each thermal treatment batch"
+    }
+  ],
+  "micro_inject": ["fsms"],
+  "capaInject": [
+    "If risk assessment for amendments not documented: develop assessment within 30 days, halt use of high-risk amendments until assessment complete",
+    "If amendment hazard controls not implemented: immediate implementation of critical controls, complete all controls within 14 days",
+    "If fertilizer/amendment use not compliant with regulations: immediate cessation of non-compliant use, regulatory consultation within 7 days",
+    "If application records not maintained: immediate implementation of record system, retroactive documentation where possible",
+    "If CoA or pathogen testing not available: obtain from supplier within 14 days, consider alternative suppliers if not provided",
+    "If thermal treatment records missing: implement documentation immediately, verify treatment effectiveness"
+  ],
+  "traceabilityInject": [
+    "Fertilizer and amendment application records must be traceable to specific growing areas and harvest batches",
+    "Certificates of Analysis must be traceable to specific lots of fertilizers/amendments received and used",
+    "Thermal treatment records must be traceable to specific media batches and growing areas where used",
+    "Supplier documentation must be traceable to specific products and suppliers"
+  ]
+}

@@ -1,0 +1,500 @@
+{
+  "hero": {
+    "headline": {
+      "main": "Documentación de Cumplimiento.",
+      "highlight": "Impulsada por IA."
+    },
+    "subheadline": "Axiom transforma cómo las empresas alimentarias logran y mantienen certificaciones. Genere, gestione y mantenga documentos de cumplimiento para Primus GFS, BRC y FSSC 22000 con inteligencia impulsada por IA.",
+    "cta": {
+      "primary": "Iniciar Prueba Gratuita",
+      "secondary": "Ver Demostración"
+    },
+    "trustIndicators": {
+      "frameworks": "Soporte Multi-Marco",
+      "aiPowered": "Generación de Documentos IA",
+      "secure": "Seguridad Empresarial"
+    },
+    "dashboard": {
+      "title": "Panel de Cumplimiento",
+      "status": "En Vivo",
+      "metrics": {
+        "completionRate": {
+          "value": "94%",
+          "label": "Documentación Completa"
+        },
+        "aiAccuracy": {
+          "value": "98%",
+          "label": "Precisión de IA"
+        },
+        "timeSaved": {
+          "value": "75%",
+          "label": "Tiempo Ahorrado"
+        },
+        "auditReady": {
+          "value": "100%",
+          "label": "Listo para Auditoría"
+        }
+      },
+      "progress": {
+        "documents": {
+          "label": "Documentos Activos",
+          "value": "142/150"
+        },
+        "compliance": {
+          "label": "Estado de Cumplimiento",
+          "value": "Excelente"
+        }
+      }
+    }
+  },
+  "problem": {
+    "headline": {
+      "main": "La Documentación de Cumplimiento es un",
+      "highlight": "Gran Cuello de Botella"
+    },
+    "subheadline": "Los procesos de cumplimiento tradicionales drenan recursos, retrasan certificaciones y crean riesgos innecesarios para las empresas alimentarias.",
+    "painPoints": {
+      "manual": {
+        "title": "Manual y Consume Mucho Tiempo",
+        "description": "Crear documentos de cumplimiento desde cero toma semanas. Copiar y pegar de plantillas, interpretar requisitos y formatear documentos consume tiempo valioso.",
+        "issues": {
+          "weeks": "Semanas para completar documentación",
+          "interpretation": "Interpretación manual de requisitos",
+          "inconsistency": "Calidad de documento inconsistente"
+        }
+      },
+      "costly": {
+        "title": "Costoso y Consume Recursos",
+        "description": "Contratar consultores, dedicar tiempo del personal y mantener múltiples certificaciones de marcos crea costos significativos.",
+        "issues": {
+          "consultants": "$15k-$50k por certificación de marco",
+          "staffTime": "Cientos de horas de tiempo del personal",
+          "maintenance": "Carga de mantenimiento de documentos continuo"
+        }
+      },
+      "risk": {
+        "title": "Riesgo de Cumplimiento",
+        "description": "Documentación incompleta, requisitos perdidos y documentos desactualizados ponen en riesgo las certificaciones y operaciones comerciales.",
+        "issues": {
+          "auditFailures": "Auditorías fallidas por documentos incompletos",
+          "outdated": "Documentación desactualizada",
+          "gaps": "Requisitos de cumplimiento perdidos"
+        }
+      }
+    },
+    "impact": {
+      "title": "El Costo Real del Cumplimiento Manual",
+      "subtitle": "Los datos de la industria revelan la carga de los procesos de documentación tradicionales",
+      "statistics": {
+        "timeCost": {
+          "value": "200-400hrs",
+          "label": "Horas para completar documentación de marco"
+        },
+        "consultantCost": {
+          "value": "$35k",
+          "label": "Costo promedio de consultor por certificación"
+        },
+        "failureRate": {
+          "value": "28%",
+          "label": "Tasa de falla de auditoría debido a brechas de documentación"
+        },
+        "maintenance": {
+          "value": "3-6mo",
+          "label": "Tiempo para actualizar todos los documentos para nuevos estándares"
+        }
+      }
+    }
+  },
+  "solution": {
+    "headline": {
+      "main": "Plataforma de Documentación de Cumplimiento",
+      "highlight": "Impulsada por IA"
+    },
+    "subheadline": "Genere documentos completos y listos para auditoría en minutos. Gestione marcos completos con flujos de trabajo inteligentes. Mantenga el cumplimiento sin esfuerzo.",
+    "features": {
+      "aiGeneration": {
+        "title": "Generación de Documentos IA",
+        "description": "Genere documentos de cumplimiento completos desde requisitos de marco en minutos, no semanas.",
+        "details": {
+          "instant": "Creación instantánea de documentos desde requisitos",
+          "contextAware": "Generación de contenido consciente del contexto",
+          "frameworks": "Soporte para Primus GFS, BRC, FSSC 22000"
+        }
+      },
+      "richEditor": {
+        "title": "Editor Inteligente con Asistente IA",
+        "description": "Edite documentos con un poderoso editor que incluye sugerencias impulsadas por IA, formato y verificaciones de cumplimiento.",
+        "details": {
+          "aiAssist": "Asistencia y refinamiento de escritura IA",
+          "formatting": "Formato profesional integrado",
+          "realtime": "Listo para colaboración en tiempo real"
+        }
+      },
+      "lifecycle": {
+        "title": "Ciclo de Vida Completo de Documentos",
+        "description": "Gestione documentos desde borrador hasta publicado con control de versiones, registros de auditoría y flujos de trabajo automatizados.",
+        "details": {
+          "versions": "Control de versiones e historial completo",
+          "workflow": "Ciclo de vida Borrador → Publicar → Archivar",
+          "audit": "Seguimiento completo de registro de auditoría"
+        }
+      },
+      "framework": {
+        "title": "Gestión Multi-Marco",
+        "description": "Maneje múltiples marcos de certificación desde una plataforma con estructuras de módulos organizadas.",
+        "details": {
+          "organized": "Jerarquía Marco → Módulo → Documento",
+          "switching": "Cambio fácil de marco",
+          "dashboard": "Panel de cumplimiento unificado"
+        }
+      }
+    },
+    "aiAssistant": {
+      "title": "Asistente IA Axiom",
+      "description": "Obtenga ayuda inteligente durante su viaje de documentación con asistencia en lenguaje natural.",
+      "examples": {
+        "generate": "Generar documento para Módulo 5.02",
+        "improve": "Mejorar esta sección para claridad",
+        "compliance": "Verificar si esto cumple con los requisitos BRC"
+      },
+      "features": {
+        "generation": "Generación inteligente de documentos",
+        "refinement": "Sugerencias de mejora de contenido",
+        "compliance": "Verificación de requisitos de cumplimiento",
+        "contextual": "Asistencia consciente del contexto"
+      }
+    },
+    "workflow": {
+      "title": "Proceso Simple de 4 Pasos",
+      "steps": {
+        "select": {
+          "number": "01",
+          "title": "Seleccionar",
+          "description": "Elija su marco y módulos"
+        },
+        "generate": {
+          "number": "02",
+          "title": "Generar",
+          "description": "IA crea documentos completos"
+        },
+        "refine": {
+          "number": "03",
+          "title": "Refinar",
+          "description": "Edite y personalice con ayuda IA"
+        },
+        "publish": {
+          "number": "04",
+          "title": "Publicar",
+          "description": "Exporte documentos listos para auditoría"
+        }
+      }
+    }
+  },
+  "metrics": {
+    "headline": {
+      "main": "Resultados Comprobados.",
+      "highlight": "Impacto Real."
+    },
+    "subheadline": "Vea cómo Axiom transforma la documentación de cumplimiento con mejoras medibles en velocidad, costo y calidad.",
+    "primaryMetrics": {
+      "timeSaved": {
+        "value": "75%",
+        "label": "Tiempo Ahorrado",
+        "description": "Reducción en tiempo de documentación vs manual",
+        "trend": "↑ 18%"
+      },
+      "accuracy": {
+        "value": "98%",
+        "label": "Precisión de IA",
+        "description": "Calidad de contenido y cobertura de requisitos",
+        "trend": "↑ 12%"
+      },
+      "costReduction": {
+        "value": "$28k",
+        "label": "Ahorro de Costos",
+        "description": "Ahorro promedio por certificación",
+        "trend": "↑ $5k"
+      },
+      "completion": {
+        "value": "94%",
+        "label": "Tasa de Finalización",
+        "description": "Completitud de documentación de marco",
+        "trend": "↑ 15%"
+      }
+    },
+    "operationalMetrics": {
+      "documents": {
+        "value": "1,247",
+        "label": "Documentos Generados",
+        "description": "Total de documentos de cumplimiento creados"
+      },
+      "avgTime": {
+        "value": "8min",
+        "label": "Tiempo Promedio de Generación",
+        "description": "Tiempo para generar documento completo"
+      },
+      "frameworks": {
+        "value": "3",
+        "label": "Marcos Soportados",
+        "description": "Primus GFS, BRC, FSSC 22000"
+      },
+      "auditSuccess": {
+        "value": "96%",
+        "label": "Éxito de Auditoría",
+        "description": "Tasa de aprobación de auditoría al primer intento"
+      }
+    },
+    "dashboard": {
+      "title": "Resumen de Rendimiento",
+      "subtitle": "Métricas en tiempo real y estado de cumplimiento",
+      "liveData": "Datos en Vivo",
+      "months": {
+        "jan": "Ene",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Abr",
+        "may": "May",
+        "jun": "Jun"
+      },
+      "charts": {
+        "completionTrend": {
+          "title": "Tendencia de Finalización de Documentación"
+        },
+        "generationVolume": {
+          "title": "Generación Mensual de Documentos"
+        }
+      }
+    },
+    "benefits": {
+      "costSavings": {
+        "title": "Reducción de Costos",
+        "value": "$28k",
+        "description": "Ahorro promedio por ciclo de certificación"
+      },
+      "timeSaved": {
+        "title": "Eficiencia de Tiempo",
+        "value": "75%",
+        "description": "Reducción en tiempo de documentación"
+      },
+      "qualityImprovement": {
+        "title": "Mejora de Calidad",
+        "value": "98%",
+        "description": "Precisión de cobertura de requisitos"
+      }
+    }
+  },
+  "customer": {
+    "headline": {
+      "main": "Construido para Cada",
+      "highlight": "Rol de Cumplimiento"
+    },
+    "subheadline": "Axiom ofrece valor en toda su organización, desde gerentes de calidad hasta directores de cumplimiento y equipos de auditoría.",
+    "roles": {
+      "qaDirector": {
+        "role": "Director de Aseguramiento de Calidad",
+        "avatar": "👔",
+        "valueDelivered": "Gestión multi-marco, supervisión de equipo, preparación para auditoría",
+        "benefits": {
+          "oversight": "Supervise el cumplimiento en todos los marcos",
+          "visibility": "Visibilidad en tiempo real del estado de documentación",
+          "reporting": "Informes instantáneos listos para auditoría",
+          "standards": "Mantenga estándares de calidad consistentes"
+        },
+        "keyMetrics": {
+          "visibility": {
+            "label": "Visibilidad de Cumplimiento",
+            "value": "100%"
+          },
+          "auditReady": {
+            "label": "Preparación para Auditoría",
+            "value": "96%"
+          }
+        }
+      },
+      "complianceManager": {
+        "role": "Gerente de Cumplimiento",
+        "avatar": "📋",
+        "valueDelivered": "Generación de documentos, seguimiento de requisitos, control de versiones",
+        "benefits": {
+          "generation": "Genere documentos en minutos con IA",
+          "tracking": "Rastree todos los requisitos y completitud",
+          "versions": "Gestione versiones de documentos sin esfuerzo",
+          "collaboration": "Colabore con el equipo en tiempo real"
+        },
+        "keyMetrics": {
+          "productivity": {
+            "label": "Aumento de Productividad",
+            "value": "75%"
+          },
+          "accuracy": {
+            "label": "Precisión de Documentación",
+            "value": "98%"
+          }
+        }
+      },
+      "auditor": {
+        "role": "Auditor Interno",
+        "avatar": "🔍",
+        "valueDelivered": "Registros de auditoría, verificación de documentos, identificación de brechas",
+        "benefits": {
+          "trails": "Registros de auditoría completos para todos los documentos",
+          "verification": "Verifique cobertura de requisitos instantáneamente",
+          "gaps": "Identifique brechas de documentación rápidamente",
+          "export": "Exporte documentación lista para auditoría"
+        },
+        "keyMetrics": {
+          "auditTime": {
+            "label": "Tiempo de Preparación de Auditoría",
+            "value": "-60%"
+          },
+          "passRate": {
+            "label": "Tasa de Aprobación al Primer Intento",
+            "value": "96%"
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "qa": {
+        "quote": "Axiom redujo nuestro tiempo de documentación de Primus GFS de 6 semanas a 3 días. La generación de IA es notablemente precisa.",
+        "author": "Sarah Martínez",
+        "title": "Directora de QA",
+        "company": "Fresh Valley Foods",
+        "avatar": "SM"
+      },
+      "compliance": {
+        "quote": "Gestionar múltiples certificaciones solía ser abrumador. Ahora manejamos Primus, BRC y FSSC desde una plataforma.",
+        "author": "David Chen",
+        "title": "Gerente de Cumplimiento",
+        "company": "Pacific Produce Group",
+        "avatar": "DC"
+      },
+      "auditor": {
+        "quote": "Las funciones de registro de auditoría e historial de documentos han hecho nuestras auditorías internas mucho más eficientes y completas.",
+        "author": "María Rodríguez",
+        "title": "Auditora Interna",
+        "company": "Global Fresh Foods",
+        "avatar": "MR"
+      }
+    }
+  },
+  "positioning": {
+    "headline": {
+      "main": "La Forma Moderna de Gestionar",
+      "highlight": "Cumplimiento de Seguridad Alimentaria"
+    },
+    "subheadline": "Axiom no es solo un generador de documentos, es una plataforma completa de gestión de cumplimiento construida para el futuro de la seguridad alimentaria.",
+    "differentiators": {
+      "aiFirst": {
+        "title": "Plataforma Verdaderamente IA-First",
+        "description": "Construida desde cero con IA en su núcleo, no un sistema heredado con IA agregada.",
+        "details": {
+          "intelligent": "Generación inteligente de contenido",
+          "contextual": "Sugerencias conscientes del contexto",
+          "learning": "Modelos que mejoran continuamente"
+        }
+      },
+      "multiFramework": {
+        "title": "Soporte Multi-Marco",
+        "description": "Gestione Primus GFS, BRC, FSSC 22000 y más desde una sola plataforma unificada.",
+        "details": {
+          "unified": "Panel unificado para todos los marcos",
+          "switching": "Cambio de marco sin problemas",
+          "updates": "Actualizaciones automáticas de estándares"
+        }
+      },
+      "enterprise": {
+        "title": "Seguridad de Nivel Empresarial",
+        "description": "Seguridad de nivel bancario con cumplimiento SOC 2, encriptación y registros de auditoría en los que puede confiar.",
+        "details": {
+          "encryption": "Encriptación de extremo a extremo",
+          "compliance": "Certificado SOC 2 Tipo II",
+          "trails": "Registros de auditoría completos"
+        }
+      }
+    },
+    "frameworks": {
+      "title": "Marcos de Certificación Soportados",
+      "subtitle": "Cobertura completa para los principales estándares de seguridad alimentaria",
+      "list": {
+        "primusGfs": {
+          "name": "Primus GFS",
+          "description": "Buenas Prácticas Agrícolas y de Manejo",
+          "status": "Disponible Ahora"
+        },
+        "brc": {
+          "name": "BRC Food Safety",
+          "description": "Estándares del Consorcio Minorista Británico",
+          "status": "Próximamente"
+        },
+        "fssc": {
+          "name": "FSSC 22000",
+          "description": "Certificación del Sistema de Seguridad Alimentaria",
+          "status": "Próximamente"
+        }
+      }
+    },
+    "competitiveAdvantages": {
+      "speed": {
+        "title": "Rápido como un Rayo",
+        "description": "Genere documentos completos en minutos en lugar de semanas",
+        "metric": "8min generación promedio"
+      },
+      "accuracy": {
+        "title": "Excepcionalmente Preciso",
+        "description": "Contenido impulsado por IA que cumple todos los requisitos del marco",
+        "metric": "98% tasa de precisión"
+      },
+      "costEffective": {
+        "title": "Dramáticamente Menor Costo",
+        "description": "Reemplace consultores costosos con automatización inteligente",
+        "metric": "$28k ahorro promedio"
+      },
+      "modern": {
+        "title": "Experiencia Moderna",
+        "description": "Interfaz hermosa e intuitiva que los equipos realmente quieren usar",
+        "metric": "4.8/5 calificación de usuario"
+      }
+    }
+  },
+  "cta": {
+    "headline": {
+      "main": "¿Listo para Transformar Su",
+      "highlight": "Proceso de Cumplimiento?"
+    },
+    "subheadline": "Únase a empresas alimentarias con visión de futuro que ya han revolucionado su documentación de cumplimiento con la plataforma impulsada por IA de Axiom.",
+    "stats": {
+      "timeSaved": {
+        "value": "75%",
+        "label": "Documentación Más Rápida"
+      },
+      "accuracy": {
+        "value": "98%",
+        "label": "Tasa de Precisión de IA"
+      },
+      "costReduction": {
+        "value": "$28k",
+        "label": "Ahorro Promedio de Costos"
+      }
+    },
+    "primaryCta": {
+      "text": "Iniciar Prueba Gratuita",
+      "subtext": "Sin tarjeta de crédito requerida • Prueba de 14 días"
+    },
+    "secondaryCta": {
+      "text": "Programar una Demostración",
+      "subtext": "Ver Axiom en acción"
+    },
+    "urgency": {
+      "text": "Oferta Especial:",
+      "highlight": "50% de descuento en planes anuales",
+      "condition": "durante los primeros 3 meses cuando se registre este trimestre"
+    },
+    "trustSignals": {
+      "soc2": "Certificado SOC 2 Tipo II",
+      "encryption": "Encriptación de 256 bits",
+      "uptime": "99.9% SLA de Tiempo de Actividad",
+      "support": "Equipo de Soporte Experto"
+    }
+  }
+}

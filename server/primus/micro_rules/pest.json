@@ -1,0 +1,14 @@
+{
+  "category": "pest_control",
+  "rules": {
+    "no_indoor_rodenticides": "Rodenticides are strictly prohibited inside production, processing, and storage buildings. All rodent control inside these areas must use mechanical traps only.",
+    "tamper_resistant_requirement": "All exterior bait stations must be tamper-resistant, locked, and physically secured to the ground or structure to prevent movement or unauthorized access.",
+    "device_map_requirement": "The facility maintains a detailed pest control device map showing device IDs, device type (mechanical trap, glue board, UV light trap, exterior bait station), and exact physical location. This map is updated whenever devices are added, removed, or relocated.",
+    "contractor_license_verification": "The pest control contractor's applicator licenses and certifications are verified annually and copies kept on file. The facility confirms licenses are current and in good standing before service begins each year.",
+    "monthly_inspection_minimum": "All pest control devices are inspected monthly at minimum. Inspection records document date, inspector name, device condition, pest activity observations, and corrective actions taken.",
+    "trend_analysis_required": "Pest activity data is analyzed quarterly to identify trends, hot spots, and recurring issues. Corrective actions are implemented when trends indicate increased activity or control failures.",
+    "corrective_action_documented": "Any evidence of pest activity (droppings, gnaw marks, live or dead pests) triggers documented corrective action including immediate containment, root cause analysis, and preventive measures to eliminate conditions conducive to pest activity.",
+    "exclusion_maintenance": "Building exclusion measures (door sweeps, screens, wall/floor penetrations sealed) are inspected and maintained to prevent pest entry. Damaged exclusion devices are repaired within 48 hours.",
+    "contractor_service_reports": "Pest control service reports are reviewed by management within 5 business days of service. Any findings or recommendations are addressed with documented follow-up actions and timelines."
+  }
+}

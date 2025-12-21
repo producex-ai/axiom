@@ -1,0 +1,390 @@
+{
+  "module": "1",
+  "moduleName": "Food Safety Management System",
+  "sections": [
+    {
+      "code": "1.01",
+      "name": "Food Safety Policy & Commitment",
+      "requirements": [
+        {
+          "code": "1.01.01",
+          "description": "A documented food safety policy signed by senior management that demonstrates commitment to food safety and legal compliance",
+          "mandatory": true,
+          "keywords": [
+            "food safety policy",
+            "senior management",
+            "commitment",
+            "legal compliance",
+            "policy statement"
+          ]
+        },
+        {
+          "code": "1.01.02",
+          "description": "Policy communicated to all employees and available throughout the facility",
+          "mandatory": true,
+          "keywords": [
+            "policy communication",
+            "employee awareness",
+            "available",
+            "displayed"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.02",
+      "name": "Document Control & Record Management",
+      "requirements": [
+        {
+          "code": "1.02.01",
+          "description": "Document approval, versioning, and revision control system",
+          "mandatory": true,
+          "keywords": [
+            "document control",
+            "version",
+            "revision",
+            "approval",
+            "controlled documents"
+          ]
+        },
+        {
+          "code": "1.02.02",
+          "description": "Obsolete documents removed from all points of use",
+          "mandatory": true,
+          "keywords": [
+            "obsolete documents",
+            "remove",
+            "withdrawn",
+            "outdated documents"
+          ]
+        },
+        {
+          "code": "1.02.03",
+          "description": "External documents (regulations, standards, customer specs) controlled and kept current",
+          "mandatory": true,
+          "keywords": [
+            "external documents",
+            "regulations",
+            "standards",
+            "customer specifications",
+            "current"
+          ]
+        },
+        {
+          "code": "1.02.04",
+          "description": "Record retention policy established (minimum 2 years or per legal requirement)",
+          "mandatory": true,
+          "keywords": [
+            "record retention",
+            "retention period",
+            "archive",
+            "records management"
+          ]
+        },
+        {
+          "code": "1.02.05",
+          "description": "Master document list maintained",
+          "mandatory": true,
+          "keywords": ["master list", "document register", "document inventory"]
+        }
+      ]
+    },
+    {
+      "code": "1.03",
+      "name": "Management Responsibility & Organizational Structure",
+      "requirements": [
+        {
+          "code": "1.03.01",
+          "description": "Food safety team leader designated with authority and responsibility",
+          "mandatory": true,
+          "keywords": [
+            "food safety team leader",
+            "designated",
+            "authority",
+            "responsibility"
+          ]
+        },
+        {
+          "code": "1.03.02",
+          "description": "Organizational chart showing reporting lines and food safety responsibilities",
+          "mandatory": true,
+          "keywords": [
+            "organizational chart",
+            "reporting lines",
+            "structure",
+            "hierarchy"
+          ]
+        },
+        {
+          "code": "1.03.03",
+          "description": "Management review of FSMS conducted at least annually",
+          "mandatory": true,
+          "keywords": [
+            "management review",
+            "annual review",
+            "system review",
+            "top management"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.04",
+      "name": "Internal Audits",
+      "requirements": [
+        {
+          "code": "1.04.01",
+          "description": "Internal audit program covering all FSMS elements at least annually",
+          "mandatory": true,
+          "keywords": [
+            "internal audit",
+            "audit program",
+            "audit schedule",
+            "annual audit"
+          ]
+        },
+        {
+          "code": "1.04.02",
+          "description": "Auditors trained and competent; must not audit own work",
+          "mandatory": true,
+          "keywords": [
+            "auditor competence",
+            "auditor training",
+            "independence",
+            "qualified auditor"
+          ]
+        },
+        {
+          "code": "1.04.03",
+          "description": "Audit findings documented with corrective actions and verification",
+          "mandatory": true,
+          "keywords": [
+            "audit findings",
+            "audit report",
+            "corrective action",
+            "follow-up"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.05",
+      "name": "Corrective & Preventive Action (CAPA)",
+      "requirements": [
+        {
+          "code": "1.05.01",
+          "description": "CAPA procedure established addressing root cause analysis",
+          "mandatory": true,
+          "keywords": [
+            "corrective action",
+            "preventive action",
+            "CAPA",
+            "root cause",
+            "5 why"
+          ]
+        },
+        {
+          "code": "1.05.02",
+          "description": "CAPA records include problem description, root cause, corrective action, responsibility, timeline, and verification",
+          "mandatory": true,
+          "keywords": [
+            "CAPA records",
+            "root cause analysis",
+            "corrective action plan",
+            "verification"
+          ]
+        },
+        {
+          "code": "1.05.03",
+          "description": "Trend analysis performed to identify recurring issues",
+          "mandatory": true,
+          "keywords": [
+            "trend analysis",
+            "recurring issues",
+            "patterns",
+            "data analysis"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.06",
+      "name": "Training & Competency",
+      "requirements": [
+        {
+          "code": "1.06.01",
+          "description": "Training program identifying competency requirements for each position",
+          "mandatory": true,
+          "keywords": [
+            "training program",
+            "competency",
+            "job requirements",
+            "training matrix"
+          ]
+        },
+        {
+          "code": "1.06.02",
+          "description": "New employee food safety orientation before starting work",
+          "mandatory": true,
+          "keywords": [
+            "new hire training",
+            "orientation",
+            "induction",
+            "initial training"
+          ]
+        },
+        {
+          "code": "1.06.03",
+          "description": "Training records maintained showing date, topic, trainer, attendees, and assessment",
+          "mandatory": true,
+          "keywords": [
+            "training records",
+            "training documentation",
+            "attendance",
+            "competency assessment"
+          ]
+        },
+        {
+          "code": "1.06.04",
+          "description": "Refresher training conducted annually or when procedures change",
+          "mandatory": true,
+          "keywords": [
+            "refresher training",
+            "retraining",
+            "annual training",
+            "update training"
+          ]
+        },
+        {
+          "code": "1.06.05",
+          "description": "HACCP team members trained in HACCP principles",
+          "mandatory": true,
+          "keywords": [
+            "HACCP training",
+            "HACCP team",
+            "HACCP principles",
+            "hazard analysis"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.07",
+      "name": "Supplier Approval & Monitoring",
+      "requirements": [
+        {
+          "code": "1.07.01",
+          "description": "Approved supplier list maintained for raw materials and packaging",
+          "mandatory": true,
+          "keywords": [
+            "approved supplier",
+            "supplier list",
+            "vendor approval",
+            "supplier program"
+          ]
+        },
+        {
+          "code": "1.07.02",
+          "description": "Supplier approval criteria documented (audits, certifications, COAs)",
+          "mandatory": true,
+          "keywords": [
+            "supplier approval",
+            "approval criteria",
+            "supplier evaluation",
+            "supplier qualification"
+          ]
+        },
+        {
+          "code": "1.07.03",
+          "description": "Supplier performance monitoring and re-evaluation program",
+          "mandatory": true,
+          "keywords": [
+            "supplier monitoring",
+            "supplier performance",
+            "supplier re-evaluation",
+            "annual review"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.08",
+      "name": "Product Traceability & Recall",
+      "requirements": [
+        {
+          "code": "1.08.01",
+          "description": "Traceability system linking raw materials to finished products (one step back, one step forward)",
+          "mandatory": true,
+          "keywords": [
+            "traceability",
+            "lot traceability",
+            "trace forward",
+            "trace back",
+            "batch tracking"
+          ]
+        },
+        {
+          "code": "1.08.02",
+          "description": "Mock recall conducted at least annually and completed within 24 hours",
+          "mandatory": true,
+          "keywords": [
+            "mock recall",
+            "recall test",
+            "trace exercise",
+            "annual recall"
+          ]
+        },
+        {
+          "code": "1.08.03",
+          "description": "Recall plan documented with team roles, notification procedures, and product disposition",
+          "mandatory": true,
+          "keywords": [
+            "recall plan",
+            "recall procedure",
+            "product withdrawal",
+            "notification process"
+          ]
+        },
+        {
+          "code": "1.08.04",
+          "description": "Traceability records retained for shelf life plus 6 months (minimum 2 years)",
+          "mandatory": true,
+          "keywords": [
+            "traceability records",
+            "record retention",
+            "lot records",
+            "batch records"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "1.09",
+      "name": "Complaint Handling",
+      "requirements": [
+        {
+          "code": "1.09.01",
+          "description": "Customer complaint system with investigation, root cause, and corrective action",
+          "mandatory": true,
+          "keywords": [
+            "complaint handling",
+            "customer complaint",
+            "complaint investigation",
+            "complaint log"
+          ]
+        },
+        {
+          "code": "1.09.02",
+          "description": "Complaint trend analysis to identify systemic issues",
+          "mandatory": true,
+          "keywords": [
+            "complaint analysis",
+            "complaint trends",
+            "patterns",
+            "recurring complaints"
+          ]
+        }
+      ]
+    }
+  ]
+}

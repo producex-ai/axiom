@@ -1,0 +1,15 @@
+{
+  "category": "chemical_control",
+  "rules": {
+    "separate_storage_required": "All chemicals, cleaning agents, sanitizers, and pesticides are stored in a designated area physically separated from raw materials, finished products, and packaging materials. Chemical storage areas are clearly marked with appropriate signage.",
+    "secondary_container_labeling": "All secondary containers (spray bottles, dispensers, buckets) are labeled with the chemical name and hazard information. Labels are legible, waterproof, and include concentration if diluted.",
+    "sds_accessibility": "Safety Data Sheets (SDS) are maintained for all chemicals used in the facility and are readily accessible to all employees who handle chemicals. SDS are available in English and the primary language of employees.",
+    "ppe_requirements_documented": "Personal protective equipment (PPE) requirements for each chemical are documented based on SDS recommendations. Required PPE (gloves, goggles, aprons, respirators) is provided, maintained, and used as specified.",
+    "chemical_training_required": "All personnel handling chemicals receive training on safe handling, storage, emergency response, and proper PPE use before working with chemicals. Training is documented and refresher training provided annually.",
+    "approved_chemical_list": "An approved chemical list is maintained for all chemicals used in food production areas. Only food-grade or NSF-registered chemicals are used on food contact surfaces. Non-approved chemicals are prohibited.",
+    "spill_response_procedure": "A chemical spill response procedure is documented and includes immediate containment, notification, cleanup, disposal, and reporting requirements. Spill kits are located in chemical storage areas.",
+    "inventory_management": "Chemical inventory is managed to ensure FIFO rotation and prevent accumulation of expired or obsolete products. Inventory records track chemical name, quantity, date received, and expiration date.",
+    "disposal_procedures": "Chemical disposal procedures comply with local, state, and federal regulations. Disposal records document chemical name, quantity, date, method, and responsible person.",
+    "incompatible_segregation": "Incompatible chemicals (acids/bases, oxidizers/flammables) are stored separately to prevent hazardous reactions. Storage areas are designed with secondary containment where required."
+  }
+}

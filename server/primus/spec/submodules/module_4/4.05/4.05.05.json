@@ -1,0 +1,72 @@
+{
+  "parentCode": "4.05",
+  "code": "4.05.05",
+  "title": "Product Handling Procedures",
+  "requirements": [
+    {
+      "code": "4.05.05a",
+      "question": "Are workers trained to handle product in a manner that prevents physical damage and contamination?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.05b",
+      "question": "Are procedures in place to minimize the time between harvest and cooling or processing?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.05c",
+      "question": "Is product protected from direct contact with soil during harvest operations?",
+      "totalPoints": 10,
+      "isAutomaticFailure": true,
+      "automaticFailureReason": "Product contact with soil presents direct microbial contamination risk from pathogens in soil."
+    },
+    {
+      "code": "4.05.05d",
+      "question": "Are procedures in place to segregate damaged or suspect product from sound product?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.05e",
+      "question": "Are harvest containers filled to appropriate levels to prevent product damage and contamination?",
+      "totalPoints": 5,
+      "isAutomaticFailure": false
+    },
+    {
+      "code": "4.05.05f",
+      "question": "Is product protected from contamination during transport from field to packing or storage areas?",
+      "totalPoints": 10,
+      "isAutomaticFailure": false
+    }
+  ],
+  "mandatoryStatements": [
+    "Workers must be trained to handle product gently to prevent bruising, cutting, or other physical damage that could provide entry points for pathogens.",
+    "Procedures must minimize the time between harvest and cooling or processing to maintain product quality and reduce microbial growth.",
+    "Product must be protected from direct contact with soil throughout harvest operations to prevent contamination with soil-borne pathogens.",
+    "Damaged, dropped, or suspect product must be segregated from sound product to prevent cross-contamination.",
+    "Product must be protected from environmental contamination during transport from field to packing or storage facilities."
+  ],
+  "capaInject": [
+    "Develop detailed product handling procedures specific to each crop type including acceptable practices and prohibited actions.",
+    "Implement a quality control program with visual inspections during harvest to identify and segregate damaged or contaminated product.",
+    "Establish maximum time limits from harvest to cooling for different product types and monitor compliance through timestamped records.",
+    "Create protocols for protecting product from soil contact including proper container use, careful handling, and immediate removal if dropped.",
+    "Design transport procedures that minimize exposure time, prevent physical damage, and protect product from dust, debris, and environmental contamination."
+  ],
+  "traceabilityInject": [
+    "Maintain harvest time records showing start time, completion time, and time to cooling for each lot or field section.",
+    "Document any product segregation including reason (damage, drop, contamination), quantity, location, and disposition.",
+    "Keep records of product quality inspections during harvest including inspector, time, observations, and corrective actions.",
+    "Track transport times and conditions from field to facility including vehicle/trailer ID, departure time, arrival time, and temperature if applicable.",
+    "Log any deviations from standard handling procedures including description, impact assessment, and corrective actions taken."
+  ],
+  "micro_inject": [
+    "Emphasize that physical damage to product (cuts, bruises, breaks) creates entry points for pathogens and increases risk of microbial growth.",
+    "Ensure workers understand that soil contains high levels of bacteria including E. coli, Salmonella, and Listeria that can contaminate product surfaces.",
+    "Implement protocols to minimize warm holding times which allow rapid multiplication of any bacteria present on product surfaces.",
+    "Verify that segregation of damaged product prevents cross-contamination through direct contact or shared containers and equipment.",
+    "Monitor that transport conditions do not create opportunities for microbial growth through extended warm temperatures or moisture accumulation."
+  ]
+}
