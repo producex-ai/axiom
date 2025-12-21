@@ -16,9 +16,9 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: "Visio - AI-Powered Supply Chain Quality Control | ProduceX",
+  title: "Axiom - AI-Powered compliance manager | ProduceX",
   description:
-    "Transform your receiving operations with Visio's AI-powered quality control. Real-time inspections, automated workflows, and intelligent insights for the modern supply chain.",
+    "Transform your receiving operations with Axiom's AI-powered compliance control. Streamline documentation, ensure regulatory adherence, and enhance efficiency with intelligent automation tailored for the produce industry.",
 };
 
 const locales = ["en", "es"];
