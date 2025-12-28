@@ -51,13 +51,6 @@ export const LightweightScoreSummary: React.FC<LightweightScoreSummaryProps> = (
             {analysis.structureScore}%
           </p>
         </div>
-
-        <div className="p-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-          <p className="text-xs text-slate-600 dark:text-slate-400 mb-2">Audit Ready</p>
-          <p className={`text-3xl font-bold ${getScoreColor(analysis.auditReadinessScore)}`}>
-            {analysis.auditReadinessScore}%
-          </p>
-        </div>
       </div>
 
       <div className="mt-6 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50">
