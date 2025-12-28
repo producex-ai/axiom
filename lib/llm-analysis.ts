@@ -553,6 +553,8 @@ async function extractDocumentFacts({
           sectionCount: 0,
           totalMatchLength: 0,
           contextualRelevance: 0,
+          specificMatches: 0,
+          genericMatches: 0
         },
       });
     }
@@ -1122,8 +1124,7 @@ async function assessComplianceFromFacts(
           ? Object.values(finding.details).filter((v) => v === "yes").length /
             Object.keys(finding.details).length
           : 0.8
-      }, specificMatches=${finding.matchQuality.specificMatches}, totalLength=${
-        finding.matchQuality.totalLength
+      }, specificMatches=${finding.matchQuality.specificMatches}
       }`
     );
     const match = assessHighConfidenceMatch(finding, req);
