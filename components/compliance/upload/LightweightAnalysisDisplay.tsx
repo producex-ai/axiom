@@ -55,7 +55,7 @@ export const LightweightScoreSummary: React.FC<LightweightScoreSummaryProps> = (
 
       <div className="mt-6 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50">
         <p className="text-xs text-blue-900 dark:text-blue-200">
-          <span className="font-semibold">Next Steps:</span> View detailed analysis and choose actions like Merge, Improve, or Generate from scratch.
+          <span className="font-semibold">Next Steps:</span> View detailed analysis and choose actions like Accept, Improve, or Generate from scratch from main screen.
         </p>
       </div>
     </div>
@@ -99,7 +99,7 @@ export const AnalysisSuccessMessage: React.FC<SuccessMessageProps> = ({ document
           Analysis Complete
         </p>
         <p className="text-sm text-emerald-800 dark:text-emerald-200 mt-1">
-          {documentCount} document{documentCount !== 1 ? "s" : ""} analyzed successfully. Review the scores above and choose your next action.
+          {documentCount} document{documentCount !== 1 ? "s" : ""} analyzed successfully. Review the scores below and choose your next action.
         </p>
       </div>
     </div>

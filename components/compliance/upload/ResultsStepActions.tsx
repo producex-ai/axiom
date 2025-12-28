@@ -110,7 +110,7 @@ export const ResultsStepActions: React.FC<ResultsStepActionsProps> = ({
                 ) : (
                   <>
                     <Sparkles className="mr-2 h-4 w-4" />
-                    Auto-Complete Documentation
+                    Enhance with Axiom
                   </>
                 )}
               </Button>
@@ -133,7 +133,7 @@ export const ResultsStepActions: React.FC<ResultsStepActionsProps> = ({
                 ) : (
                   <>
                     <Sparkles className="mr-2 h-4 w-4" />
-                    Auto-Complete Documentation
+                    Enhance with Axiom
                   </>
                 )}
               </Button>

@@ -64,7 +64,7 @@ export function AuditDialog({
     : null;
 
   // Check if audit readiness score is >90%
-  const canPublishWithWarning = analysisScores && analysisScores.audit > 90;
+  const canPublishWithWarning = analysisScores && analysisScores.audit > 85 && analysisScores.overall > 85;
 
   // Debug logging
   React.useEffect(() => {
@@ -127,7 +127,7 @@ export function AuditDialog({
                   Audit Score: {analysisScores?.audit}% - Ready to Publish
                 </p>
                 <p className="text-amber-800 text-sm mt-1">
-                  Some flagged items may be false positives. If you've verified
+                  Some flagged items may be good to have, Not a mandatory audit requirement. If you've verified
                   the data, you can safely publish.
                 </p>
               </div>

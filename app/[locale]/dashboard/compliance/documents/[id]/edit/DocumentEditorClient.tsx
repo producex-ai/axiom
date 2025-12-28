@@ -29,6 +29,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const [content, setContent] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
+  const [documentStatus, setDocumentStatus] = useState<string>("draft");
   const [userHasEdited, setUserHasEdited] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [documentMetadata, setDocumentMetadata] = useState<any>(null);
@@ -73,6 +74,8 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       const data = await response.json();
       const markdown = data.content;
       const html = convertMarkdownToHtml(markdown);
+      const currentStatus = data.metadata?.status || "draft";
+      setDocumentStatus(currentStatus);
 
       setContent(html);
       setOriginalContent(markdown);
@@ -348,7 +351,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                   <Button
                     size="sm"
                     onClick={() => handlePublish()}
-                    disabled={!hasChanges || publishing || loading}
+                    disabled={(!hasChanges && documentStatus !== "draft") || publishing || loading}
                   >
                     {publishing ? (
                       <>
