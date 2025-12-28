@@ -35,7 +35,7 @@ import { createDocxBufferFromText } from "@/server/docgen";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";
-export const maxDuration = 900; // 15 minutes - needed for 15+ section generation
+export const maxDuration = 300; // 5 minutes - Vercel hobby plan max
 
 export async function POST(request: NextRequest) {
   try {

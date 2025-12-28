@@ -26,7 +26,7 @@ import { analyzeCompliance } from "@/lib/llm-analysis";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";
-export const maxDuration = 600; // 10 minutes - full analysis comprehensive
+export const maxDuration = 300; // 5 minutes - Vercel hobby plan max
 
 export async function POST(request: NextRequest) {
   try {
