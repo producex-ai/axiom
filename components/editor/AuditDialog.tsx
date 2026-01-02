@@ -64,7 +64,7 @@ export function AuditDialog({
     : null;
 
   // Check if audit readiness score is >90%
-  const canPublishWithWarning = analysisScores && analysisScores.audit > 85 && analysisScores.overall > 85;
+  const canPublishWithWarning = analysisScores && analysisScores.audit >= 85 && analysisScores.overall >= 85;
 
   // Debug logging
   React.useEffect(() => {
@@ -259,14 +259,10 @@ export function AuditDialog({
         <DialogFooter className="gap-3 pt-3 border-t flex-col-reverse sm:flex-row shrink-0">
           <Button
             onClick={onFixClick}
-            className={`min-w-32 ${
-              canPublishWithWarning
-                ? "bg-blue-600 hover:bg-blue-700"
-                : "bg-red-600 hover:bg-red-700"
-            } text-white`}
+            variant={"outline"}
+            className="bg-white-600 text-black"
           >
-            <AlertCircle className="h-4 w-4 mr-2" />
-            {canPublishWithWarning ? "Fix Issues (Optional)" : "Fix Issues"}
+            {canPublishWithWarning ? "Close" : "Fix Issues"}
           </Button>
           {canPublishWithWarning && onPublishClick && (
             <Button

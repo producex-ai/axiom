@@ -40,6 +40,7 @@ export interface SubModuleWithState extends SubModule {
     title: string;
     contentKey: string;
     version: number;
+    analysisScore?: any | null;
     updatedBy?: string | null;
     updatedAt?: string;
   };
@@ -56,6 +57,7 @@ export interface SubSubModuleWithState extends SubSubModule {
     title: string;
     contentKey: string;
     version: number;
+    analysisScore?: any | null;
     updatedBy?: string | null;
     updatedAt?: string;
   };
@@ -186,6 +188,7 @@ function processSubModule(
           title: doc.title,
           contentKey: doc.content_key,
           version: doc.current_version,
+          analysisScore: doc.analysis_score,
           updatedBy: doc.updated_by || doc.created_by,
           updatedAt: doc.updated_at,
         }
@@ -214,6 +217,7 @@ function processSubSubModule(
           title: doc.title,
           contentKey: doc.content_key,
           version: doc.current_version,
+          analysisScore: doc.analysis_score,
           updatedBy: doc.updated_by || doc.created_by,
           updatedAt: doc.updated_at,
         }

@@ -1188,17 +1188,25 @@ function assessHighConfidenceMatch(
     .map(([key, _]) => key);
 
   const totalElements = Object.keys(finding.details).length;
-  const coverage =
-    totalElements > 0 ? foundElements.length / totalElements : 0.8;
-
-  // FIXED: Access the correct properties
+  
+  // PRODUCTION FIX: Evidence-based coverage calculation
+  // Calculates coverage from actual evidence quality, not keyword-based element detection
   const specificMatches = finding.matchQuality.specificMatches;
-  const totalLength = finding.matchQuality.totalMatchLength; // Changed from totalLength
+  const totalLength = finding.matchQuality.totalMatchLength;
   const sectionCount = finding.matchQuality.sectionCount;
-  const hasSpecificTerms = finding.matchQuality.hasSpecificTerms;
+  
+  const coverage = Math.min(1.0,
+    (specificMatches / 5) * 0.5 +      // 50% weight: specific term matches
+    (Math.min(totalLength, 1000) / 1000) * 0.3 +  // 30% weight: content depth
+    (Math.min(sectionCount, 5) / 5) * 0.2      // 20% weight: section breadth
+  );
+  
+  // Fallback to element-based coverage if available and higher
+  const elementCoverage = totalElements > 0 ? foundElements.length / totalElements : 0;
+  const finalCoverage = Math.max(coverage, elementCoverage);
 
   console.log(
-    `[MATCH-DEBUG] ${requirement.id}: specific=${specificMatches}, length=${totalLength}, sections=${sectionCount}, hasSpecific=${hasSpecificTerms}`
+    `[MATCH-DEBUG] ${requirement.id}: specific=${specificMatches}, length=${totalLength}, sections=${sectionCount}, coverage=${(finalCoverage * 100).toFixed(0)}%`
   );
 
   let status: "covered" | "partial" | "missing";
@@ -1209,7 +1217,7 @@ function assessHighConfidenceMatch(
   // EXCELLENT (95-98): High confidence + high coverage + strong evidence
   if (
     finding.confidence >= 0.95 &&
-    coverage >= 0.8 &&
+    finalCoverage >= 0.8 &&
     specificMatches >= 5 &&
     totalLength >= 800
   ) {
@@ -1218,7 +1226,7 @@ function assessHighConfidenceMatch(
     console.log(
       `[ASSESSMENT] ${requirement.id}: COVERED-EXCELLENT (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(
         0
       )}% coverage, ${specificMatches} specific matches, ${totalLength} chars)`
     );
@@ -1226,7 +1234,7 @@ function assessHighConfidenceMatch(
   // GOOD (90-94): High confidence + good coverage + solid evidence
   else if (
     finding.confidence >= 0.9 &&
-    coverage >= 0.7 &&
+    finalCoverage >= 0.7 &&
     specificMatches >= 3 &&
     totalLength >= 500
   ) {
@@ -1235,7 +1243,7 @@ function assessHighConfidenceMatch(
     console.log(
       `[ASSESSMENT] ${requirement.id}: COVERED-GOOD (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(
         0
       )}% coverage, ${specificMatches} specific matches)`
     );
@@ -1243,7 +1251,7 @@ function assessHighConfidenceMatch(
   // ADEQUATE (85-89): High confidence + adequate evidence
   else if (
     finding.confidence >= 0.85 &&
-    coverage >= 0.6 &&
+    finalCoverage >= 0.6 &&
     specificMatches >= 2 &&
     totalLength >= 300
   ) {
@@ -1252,13 +1260,13 @@ function assessHighConfidenceMatch(
     console.log(
       `[ASSESSMENT] ${requirement.id}: COVERED-ADEQUATE (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(0)}% coverage)`
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(0)}% coverage)`
     );
   }
   // COVERED-BASIC (80-84): Good confidence + basic evidence
   else if (
     finding.confidence >= 0.7 &&
-    coverage >= 0.5 &&
+    finalCoverage >= 0.5 &&
     (specificMatches >= 1 || totalLength >= 200)
   ) {
     status = "covered";
@@ -1266,30 +1274,30 @@ function assessHighConfidenceMatch(
     console.log(
       `[ASSESSMENT] ${requirement.id}: COVERED-BASIC (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(0)}% coverage)`
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(0)}% coverage)`
     );
   }
   // PARTIAL-STRONG (70-79): Good evidence but gaps
   else if (
     finding.confidence >= 0.7 &&
-    (coverage >= 0.4 || specificMatches >= 1)
+    (finalCoverage >= 0.4 || specificMatches >= 1)
   ) {
     status = "partial";
     score = 75;
     console.log(
       `[ASSESSMENT] ${requirement.id}: PARTIAL-STRONG (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(0)}% coverage)`
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(0)}% coverage)`
     );
   }
   // PARTIAL-WEAK (50-69): Some evidence but significant gaps
-  else if (finding.confidence >= 0.5 || coverage >= 0.3) {
+  else if (finding.confidence >= 0.5 || finalCoverage >= 0.3) {
     status = "partial";
     score = 60;
     console.log(
       `[ASSESSMENT] ${requirement.id}: PARTIAL-WEAK (${(
         finding.confidence * 100
-      ).toFixed(0)}% confidence, ${(coverage * 100).toFixed(0)}% coverage)`
+      ).toFixed(0)}% confidence, ${(finalCoverage * 100).toFixed(0)}% coverage)`
     );
   }
   // MINIMAL (0-49): Barely mentioned
@@ -1307,7 +1315,7 @@ function assessHighConfidenceMatch(
     requirementId: requirement.id,
     status,
     score,
-    coverage,
+    coverage: finalCoverage,
     missingElements:
       missingElements.length > 0
         ? missingElements
@@ -1530,17 +1538,30 @@ ${idx + 1}. ID: ${g.requirementId}
    Requirement: ${getRequirementTitle(g.requirementId, checklist)}
    Status: ${g.status}
    Score: ${g.score}/100
-   Gaps: ${g.missingElements.join(", ")}
+   Confidence: ${(g.confidence * 100).toFixed(0)}%
+   
+   EXISTING EVIDENCE FOUND IN DOCUMENT:
+   "${g.evidence.substring(0, 400)}"
+   
+   TEXT ANCHOR (location in document): "${g.textAnchor}"
+   SOURCE FILE: ${g.sourceFile}
+   
+   IDENTIFIED GAPS: ${g.missingElements.join(", ")}
 `
   )
   .join("\n")}
 
 Generate 3-5 specific, actionable recommendations. Focus on what to ADD or CLARIFY.
 
+CRITICAL: For each recommendation:
+1. Reference the EXACT location using the text anchor provided
+2. Specify WHETHER to modify existing content or add new section
+3. Provide specific paragraph/section guidance like "After paragraph starting with 'X'" or "Modify section containing 'Y'"
+
 IMPORTANT: You MUST respond with ONLY valid JSON. No markdown, no code blocks, no extra text.
 
 Format your response as:
-{"recommendations":[{"requirementId":"1.01.01","priority":"high","category":"content","recommendation":"Brief description","specificGuidance":"What to do","exampleText":"Specific example","suggestedLocation":"Where to add"}]}
+{"recommendations":[{"requirementId":"1.01.01","priority":"high","category":"content","recommendation":"Brief description","specificGuidance":"What to do","exampleText":"Specific example","suggestedLocation":"Reference text anchor and specific paragraph/section to edit","textAnchor":"Copy the text anchor from above"}]}
 
 Respond with JSON only:`;
 
@@ -1643,7 +1664,10 @@ function generateFallbackRecommendations(
           ? `Address the following gaps: ${gap.missingElements.join(", ")}`
           : "Add more specific details, examples, and measurable criteria",
       exampleText: `Review requirement ${gap.requirementId} and ensure all mandatory elements are documented with specific procedures, responsibilities, and frequencies`,
-      suggestedLocation: `Section covering ${gap.requirementId}`,
+      suggestedLocation: gap.textAnchor 
+        ? `Near section containing: "${gap.textAnchor.substring(0, 60)}..."`
+        : `Section covering ${gap.requirementId}`,
+      textAnchor: gap.textAnchor || "",
     };
   });
 }
@@ -1869,12 +1893,20 @@ ${topItems
     (item, idx) =>
       `${idx + 1}. ${item.requirementId}: Score ${item.score}/100, Coverage ${(
         item.coverage * 100
-      ).toFixed(0)}%`
+      ).toFixed(0)}%
+      
+   EXISTING CONTENT:
+   "${item.evidence.substring(0, 300)}"
+   
+   TEXT ANCHOR: "${item.textAnchor}"
+   SOURCE: ${item.sourceFile}`
   )
   .join("\n")}
 
+Provide specific suggestions referencing the text anchor for precise location guidance.
+
 Respond with JSON only (no markdown):
-{"recommendations":[{"requirementId":"1.01.01","priority":"medium","category":"content","recommendation":"Brief","specificGuidance":"Details","exampleText":"Example","suggestedLocation":"Location"}]}`;
+{"recommendations":[{"requirementId":"1.01.01","priority":"medium","category":"content","recommendation":"Brief","specificGuidance":"Details","exampleText":"Example","suggestedLocation":"Specific location referencing text anchor","textAnchor":"Text anchor from above"}]}`;
 
   try {
     const response = await callBedrock(prompt, 1500);
@@ -1946,7 +1978,10 @@ function generateFallbackImprovements(
       recommendation,
       specificGuidance,
       exampleText,
-      suggestedLocation: `Section covering ${item.requirementId}`,
+      suggestedLocation: item.textAnchor
+        ? `Near section containing: "${item.textAnchor.substring(0, 60)}..."`
+        : `Section covering ${item.requirementId}`,
+      textAnchor: item.textAnchor || "",
     };
   });
 }

@@ -28,7 +28,7 @@ interface GenerateDocumentDialogProps {
   moduleName: string;
   subModuleCode: string;
   subModuleName: string;
-  onSuccess?: () => void;
+  onSuccess?: (documentId?: string) => void;
 }
 
 type GenerationStep = "questions" | "generating" | "complete";
@@ -45,6 +45,7 @@ export default function GenerateDocumentDialog({
   const [currentStep, setCurrentStep] = useState<GenerationStep>("questions");
   const [answers, setAnswers] = useState<Record<string, string | boolean>>({});
   const [generatedDocKey, setGeneratedDocKey] = useState<string>("");
+  const [generatedDocId, setGeneratedDocId] = useState<string>("");
   const [generatedFileName, setGeneratedFileName] = useState<string>("");
   const [isCoreExpanded, setIsCoreExpanded] = useState(true);
 
@@ -64,6 +65,7 @@ export default function GenerateDocumentDialog({
       setCurrentStep("questions");
       setAnswers({});
       setGeneratedDocKey("");
+      setGeneratedDocId("");
       setGeneratedFileName("");
     }
   }, [open]);
@@ -72,7 +74,7 @@ export default function GenerateDocumentDialog({
   const handleClose = () => {
     // Call onSuccess when closing after successful generation
     if (currentStep === "complete" && onSuccess) {
-      onSuccess();
+      onSuccess(generatedDocId);
     }
     onClose();
   };
@@ -112,6 +114,7 @@ export default function GenerateDocumentDialog({
       });
 
       setGeneratedDocKey(result.contentKey);
+      setGeneratedDocId(result.documentId);
       setGeneratedFileName(result.fileName);
       setCurrentStep("complete");
 

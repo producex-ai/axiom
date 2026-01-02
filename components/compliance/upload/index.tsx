@@ -98,6 +98,7 @@ export default function EvidenceUploadFlow({
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   // Reset state when dialog opens/closes
   // STATELESS MODAL: Do NOT fetch existing evidence on reopen
@@ -120,22 +121,35 @@ export default function EvidenceUploadFlow({
     }
   }, [open]);
 
-  const handleClose = useCallback(() => {
-    // Delete uploaded evidence files when modal closes (whether accepted or not)
-    // This ensures clean state for next upload
-    if (uploadedEvidence.length > 0) {
-      uploadedEvidence.forEach((evidence) => {
-        // Call delete endpoint for each uploaded file
+  const cleanupEvidenceAndS3 = useCallback(async (evidenceList: Evidence[]) => {
+    // Delete uploaded evidence files from database and S3
+    if (evidenceList.length > 0) {
+      const deletePromises = evidenceList.map((evidence) =>
         fetch(`/api/evidence/${evidence.id}`, {
           method: "DELETE",
         }).catch((error) => {
           console.warn(`Failed to delete evidence ${evidence.id}:`, error);
-        });
-      });
+        })
+      );
+      
+      await Promise.all(deletePromises);
+      console.log("[Cleanup] Deleted evidence files from DB and S3");
     }
+  }, []);
+
+  const handleClose = useCallback(async () => {
+    // Cancel any ongoing analysis operations
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      console.log("[Cleanup] Aborted ongoing analysis");
+    }
+
+    // Delete uploaded evidence files when modal closes (whether accepted or not)
+    // This ensures clean state for next upload
+    await cleanupEvidenceAndS3(uploadedEvidence);
     
     onClose();
-  }, [uploadedEvidence, onClose]);
+  }, [uploadedEvidence, onClose, cleanupEvidenceAndS3]);
 
   const handleFileSelect = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -366,6 +380,9 @@ export default function EvidenceUploadFlow({
         onAnalysisComplete(analysisId, analysisResult);
       }
 
+      // Clean up evidence files after successful improvement
+      await cleanupEvidenceAndS3(uploadedEvidence);
+
       await queryClient.invalidateQueries({
         queryKey: complianceKeys.overview(),
       });
@@ -373,7 +390,7 @@ export default function EvidenceUploadFlow({
         queryKey: complianceKeys.evidenceByModule(subModuleId),
       });
 
-      handleClose();
+      onClose(); // Use onClose directly instead of handleClose to avoid double cleanup
       
       // Show loading toast and redirect to edit page
       if (response.documentId) {
@@ -394,7 +411,7 @@ export default function EvidenceUploadFlow({
     } finally {
       setIsImproving(false);
     }
-  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, handleClose, router]);
+  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, cleanupEvidenceAndS3, uploadedEvidence, onClose, router]);
 
   const handleAcceptDocument = useCallback(async () => {
     setIsAccepting(true);
@@ -404,6 +421,9 @@ export default function EvidenceUploadFlow({
       if (onAnalysisComplete) {
         onAnalysisComplete(analysisId, analysisResult);
       }
+
+      // Clean up evidence files after successful acceptance
+      await cleanupEvidenceAndS3(uploadedEvidence);
 
       // Invalidate and refetch overview data in parallel
       await Promise.all([
@@ -415,7 +435,7 @@ export default function EvidenceUploadFlow({
         }),
       ]);
 
-      handleClose();
+      onClose(); // Use onClose directly instead of handleClose to avoid double cleanup
       
       // Show loading toast and redirect to edit page
       if (response.documentId) {
@@ -436,7 +456,7 @@ export default function EvidenceUploadFlow({
     } finally {
       setIsAccepting(false);
     }
-  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, handleClose, router]);
+  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, cleanupEvidenceAndS3, uploadedEvidence, onClose, router]);
 
   // Step 1: Upload Evidence
   if (currentStep === "upload") {

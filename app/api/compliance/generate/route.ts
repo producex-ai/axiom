@@ -282,7 +282,8 @@ IMPORTANT: When writing procedures, incorporate the organization's compliance re
       content_key: s3Key,
       current_version: 1,
       created_by: userId,
-      updated_by: null,
+      updated_by: userId, // Set updated_by to track who created/updated the document
+      analysis_score: null,
     });
 
     console.log(`[API] Document record created with ID: ${documentId}`);

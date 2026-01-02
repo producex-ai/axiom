@@ -1,11 +1,12 @@
 "use client";
 
-import { Edit, Eye, Globe, Loader2 } from "lucide-react";
+import { Edit, Eye, Globe, Loader2, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { DocumentEditor } from "@/components/editor";
+import { AuditDialog } from "@/components/editor/AuditDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +14,7 @@ import {
   convertMarkdownToHtml,
 } from "@/lib/document-converters";
 import { complianceKeys } from "@/lib/compliance/queries";
+import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface EditParams {
   params: Promise<{ id: string }>;
@@ -32,6 +34,9 @@ export default function EditDocumentPage({ params }: EditParams) {
   const [userHasEdited, setUserHasEdited] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [documentMetadata, setDocumentMetadata] = useState<any>(null);
+  const [auditDialogOpen, setAuditDialogOpen] = useState(false);
+  const [auditResults, setAuditResults] = useState<any>(null);
+  const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -77,6 +82,14 @@ export default function EditDocumentPage({ params }: EditParams) {
       setContent(html);
       setOriginalContent(markdown);
       setDocumentMetadata(data.metadata);
+      
+      // Load existing analysis results if available
+      if (data.metadata?.analysisScore) {
+        console.log("[EditDocument] Loaded existing analysis results:", data.metadata.analysisScore);
+        setAuditResults(data.metadata.analysisScore);
+        setAuditIssues(data.metadata.analysisScore.risks || []);
+      }
+      
       setHasChanges(false);
       setUserHasEdited(false);
       editorStabilizedRef.current = false;
@@ -119,43 +132,56 @@ export default function EditDocumentPage({ params }: EditParams) {
         markdown = markdown.trim();
       }
 
-      const response = await fetch(`/api/compliance/documents/${id}/content`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: markdown,
-        }),
-      });
+      // Use the built-in publish flow which includes audit validation
+      const result = await executePublishFlow(
+        id,
+        markdown,
+        documentMetadata?.title || "Document"
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to publish document");
+      // Always show the audit dialog with results
+      setAuditResults(result.fullAnalysis);
+      setAuditIssues(result.highRiskIssues || []);
+      setAuditDialogOpen(true);
+
+      // If successful, prepare for navigation after dialog is closed
+      if (result.success) {
+        await queryClient.invalidateQueries({
+          queryKey: complianceKeys.allDocuments(),
+        });
+        await queryClient.invalidateQueries({
+          queryKey: complianceKeys.overview(),
+        });
+
+        setOriginalContent(markdown);
+        setHasChanges(false);
+        setUserHasEdited(false);
+        setDocumentMetadata((prev: any) => ({
+          ...prev,
+          status: "published",
+          version: result.version,
+        }));
       }
 
-      await queryClient.invalidateQueries({
-        queryKey: complianceKeys.allDocuments(),
-      });
-      await queryClient.invalidateQueries({
-        queryKey: complianceKeys.overview(),
-      });
-
-      setOriginalContent(markdown);
-      setHasChanges(false);
-      setUserHasEdited(false);
-      setMode("view");
-      setDocumentMetadata((prev: any) => ({ ...prev, status: "published" }));
-      toast.success("Document published successfully");
-
-      setTimeout(() => {
-        router.push("/dashboard/documents");
-      }, 500);
+      setPublishing(false);
     } catch (err) {
       console.error("Error publishing document:", err);
       const message =
         err instanceof Error ? err.message : "Failed to publish document";
       setError(message);
       toast.error(message);
-    } finally {
       setPublishing(false);
+    }
+  };
+
+  const handleAuditDialogClose = () => {
+    setAuditDialogOpen(false);
+    // If document was successfully published, navigate away
+    if (documentMetadata?.status === "published") {
+      toast.success("Document published successfully");
+      setTimeout(() => {
+        router.push("/dashboard/documents");
+      }, 500);
     }
   };
 
@@ -281,23 +307,44 @@ export default function EditDocumentPage({ params }: EditParams) {
               </Button>
 
               {mode === "edit" && (
-                <Button
-                  size="sm"
-                  onClick={handlePublish}
-                  disabled={!hasChanges || publishing || loading}
-                >
-                  {publishing ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Publishing...
-                    </>
-                  ) : (
-                    <>
-                      <Globe className="mr-2 h-4 w-4" />
-                      Publish
-                    </>
+                <>
+                  {auditResults && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setAuditDialogOpen(true)}
+                    >
+                      {auditIssues.length > 0 ? (
+                        <>
+                          <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
+                          Review Issues ({auditIssues.length})
+                        </>
+                      ) : (
+                        <>
+                          <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
+                          Review Analysis
+                        </>
+                      )}
+                    </Button>
                   )}
-                </Button>
+                  <Button
+                    size="sm"
+                    onClick={handlePublish}
+                    disabled={!hasChanges || publishing || loading}
+                  >
+                    {publishing ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Publishing...
+                      </>
+                    ) : (
+                      <>
+                        <Globe className="mr-2 h-4 w-4" />
+                        Publish
+                      </>
+                    )}
+                  </Button>
+                </>
               )}
             </div>
           </div>
@@ -324,6 +371,16 @@ export default function EditDocumentPage({ params }: EditParams) {
           />
         </div>
       </main>
+
+      {/* Audit Dialog */}
+      <AuditDialog
+        open={auditDialogOpen}
+        onClose={handleAuditDialogClose}
+        issues={auditIssues}
+        onFixClick={handleAuditDialogClose}
+        version={documentMetadata?.version || 1}
+        fullAnalysis={auditResults}
+      />
     </div>
   );
 }

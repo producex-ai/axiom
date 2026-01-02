@@ -59,6 +59,12 @@ interface SubModule {
     title: string;
     contentKey: string;
     version: number;
+    analysisScore?: {
+      overallScore?: number;
+      contentScore?: number;
+      structureScore?: number;
+      auditReadinessScore?: number;
+    } | null;
     updatedAt?: string;
     updatedBy?: string | null;
   };
@@ -236,10 +242,22 @@ export default function SubModuleCard({
     setShowEvidenceFlow(true);
   };
 
-  const handleUploadSuccess = () => {
+  const handleUploadSuccess = (documentId?: string) => {
     setShowEvidenceFlow(false);
+    
+    // Invalidate queries to refresh data
+    queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+    
     if (onDocumentGenerated) {
       onDocumentGenerated();
+    }
+    
+    // Redirect to edit page if we have a document ID
+    if (documentId) {
+      setIsNavigating(true);
+      router.push(
+        `/dashboard/compliance/documents/${documentId}/edit?mode=edit&backTo=${encodeURIComponent(`/dashboard/compliance?module=${moduleNumber}`)}`
+      );
     }
   };
 
@@ -247,10 +265,22 @@ export default function SubModuleCard({
     setShowGenerateDialog(true);
   };
 
-  const handleGenerateSuccess = () => {
+  const handleGenerateSuccess = (documentId?: string) => {
     setShowGenerateDialog(false);
+    
+    // Invalidate queries to refresh data
+    queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+    
     if (onDocumentGenerated) {
       onDocumentGenerated();
+    }
+    
+    // Redirect to edit page if we have a document ID
+    if (documentId) {
+      setIsNavigating(true);
+      router.push(
+        `/dashboard/compliance/documents/${documentId}/edit?mode=edit&backTo=${encodeURIComponent(`/dashboard/compliance?module=${moduleNumber}`)}`
+      );
     }
   };
 
@@ -310,8 +340,8 @@ export default function SubModuleCard({
             <StatusIcon className="h-3 w-3" />
             {status.label}
           </Badge>
-        </div>          {/* Line 2: Metadata (requirements count) */}
-          <div className="flex items-center gap-3 text-muted-foreground text-xs">
+        </div>          {/* Line 2: Metadata (requirements count + compliance scores) */}
+          <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs">
             {subModule.questionsCount !== undefined &&
               subModule.questionsCount > 0 && (
                 <span className="flex items-center gap-1">
@@ -319,6 +349,26 @@ export default function SubModuleCard({
                   <span>requirements</span>
                 </span>
               )}
+            
+            {subModule.document?.analysisScore && (
+              <>
+                <span className="hidden text-muted-foreground/50 sm:inline">•</span>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  {subModule.document.analysisScore.overallScore !== undefined && (
+                    <span className="flex items-center gap-1 whitespace-nowrap">
+                      <span className="text-muted-foreground/70">Overall Score -</span>
+                      <span className="font-medium">{Math.round(subModule.document.analysisScore.overallScore)}%</span>
+                    </span>
+                  )}
+                  {subModule.document.analysisScore.auditReadinessScore !== undefined && (
+                    <span className="flex items-center gap-1 whitespace-nowrap">
+                      <span className="text-muted-foreground/70">Audit Score -</span>
+                      <span className="font-medium">{Math.round(subModule.document.analysisScore.auditReadinessScore)}%</span>
+                    </span>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Line 3: Version + Updated info + Actions */}
@@ -424,7 +474,9 @@ export default function SubModuleCard({
           subModuleId={subModule.code}
           subModuleName={subModule.name}
           onAnalysisComplete={(analysisId, analysis) => {
-            handleUploadSuccess();
+            // Extract document ID from analysis if available
+            const documentId = analysis?.documentId || analysisId;
+            handleUploadSuccess(documentId);
           }}
         />
 
@@ -581,7 +633,9 @@ export default function SubModuleCard({
         subModuleId={subModule.code}
         subModuleName={subModule.name}
         onAnalysisComplete={(analysisId, analysis) => {
-          handleUploadSuccess();
+          // Extract document ID from analysis if available
+          const documentId = analysis?.documentId || analysisId;
+          handleUploadSuccess(documentId);
         }}
       />
 

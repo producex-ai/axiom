@@ -60,6 +60,20 @@ export async function POST(request: NextRequest) {
       analysisId,
     });
 
+    // Fetch the compliance analysis result to store with document
+    const analysisResult = await query(
+      `SELECT analysis_result FROM compliance_analysis 
+       WHERE id = $1 AND org_id = $2`,
+      [analysisId, orgId],
+    );
+
+    let analysisScore = null;
+    if (analysisResult.rows.length > 0) {
+      const analysisData = analysisResult.rows[0].analysis_result;
+      analysisScore = typeof analysisData === 'string' ? JSON.parse(analysisData) : analysisData;
+      console.log("[API] Retrieved compliance analysis for document");
+    }
+
     // Fetch the single evidence document
     const evidenceResult = await query(
       `SELECT id, filename, extracted_text_key FROM uploaded_evidence 
@@ -132,12 +146,13 @@ export async function POST(request: NextRequest) {
     const documentResult = await query(
       `INSERT INTO document 
        (id, org_id, framework_id, module_id, sub_module_id, sub_sub_module_id, 
-        title, status, content_key, current_version, created_by, updated_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        title, status, content_key, current_version, analysis_score, created_by, updated_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        ON CONFLICT (org_id, framework_id, module_id, sub_module_id, sub_sub_module_id) 
        DO UPDATE SET 
          content_key = EXCLUDED.content_key, 
          current_version = document.current_version + 1, 
+         analysis_score = EXCLUDED.analysis_score,
          updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
        RETURNING id`,
@@ -152,6 +167,7 @@ export async function POST(request: NextRequest) {
         "draft",
         s3Key,
         1,
+        analysisScore ? JSON.stringify(analysisScore) : null,
         userId,
         userId,
       ],

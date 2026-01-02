@@ -45,6 +45,7 @@ export interface Document {
   status: "draft" | "published" | "archived";
   content_key: string;
   current_version: number;
+  analysis_score: any | null;
   created_by: string | null;
   updated_by: string | null;
   created_at: string;

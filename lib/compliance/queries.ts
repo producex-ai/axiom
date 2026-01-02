@@ -35,6 +35,12 @@ export interface SubModuleWithState {
     title: string;
     contentKey: string;
     version: number;
+    analysisScore?: {
+      overallScore?: number;
+      contentScore?: number;
+      structureScore?: number;
+      auditReadinessScore?: number;
+    } | null;
     updatedBy?: string | null;
     updatedAt?: string;
   };

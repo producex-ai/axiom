@@ -26,6 +26,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const [mode, setMode] = useState<"view" | "edit">(initialMode);
   const [loading, setLoading] = useState(true);
   const [publishing, setPublishing] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [content, setContent] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
@@ -80,6 +81,14 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setContent(html);
       setOriginalContent(markdown);
       setDocumentMetadata(data.metadata);
+      
+      // Load existing analysis results if available
+      if (data.metadata?.analysisScore) {
+        console.log("[DocumentEditor] Loaded existing analysis results:", data.metadata.analysisScore);
+        setAuditAnalysis(data.metadata.analysisScore);
+        setAuditIssues(data.metadata.analysisScore.risks || []);
+      }
+      
       setHasChanges(false);
       setUserHasEdited(false);
       editorStabilizedRef.current = false;
@@ -93,6 +102,62 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setError(err instanceof Error ? err.message : "Failed to load document");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+      setError(null);
+
+      let markdown = convertHtmlToMarkdown(content);
+      
+      // Strip document title if it appears at the beginning (safety check)
+      if (documentMetadata?.title) {
+        const titlePatterns = [
+          new RegExp(`^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+          new RegExp(`^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+        ];
+        
+        for (const pattern of titlePatterns) {
+          markdown = markdown.replace(pattern, '');
+        }
+        markdown = markdown.trim();
+      }
+
+      // Save document without version increment or analysis
+      const response = await fetch(`/api/compliance/documents/${documentId}/save`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: markdown }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to save document");
+      }
+
+      const result = await response.json();
+
+      // Update local state after successful save
+      setOriginalContent(markdown);
+      setHasChanges(false);
+      setUserHasEdited(false);
+
+      // Show success confirmation
+      toast.success(result.message, {
+        description: `Changes saved to v${result.version}`,
+      });
+
+      // Invalidate cache in background
+      await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+    } catch (err) {
+      console.error("Error saving document:", err);
+      const message = err instanceof Error ? err.message : "Failed to save document";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -328,30 +393,44 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
 
               {mode === "edit" && (
                 <>
-                  {auditIssues.length > 0 && (
+                  {auditAnalysis && (
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => setAuditIssuesOpen(true)}
                     >
-                      <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
-                      Review Issues ({auditIssues.length})
-                    </Button>
-                  )}
-                  {auditAnalysis && auditAnalysis.auditReadinessScore >= 90 && auditIssues.length === 0 && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setAuditIssuesOpen(true)}
-                    >
-                      <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
-                      Review Results
+                      {auditIssues.length > 0 ? (
+                        <>
+                          <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
+                          Review Issues ({auditIssues.length})
+                        </>
+                      ) : (
+                        <>
+                          <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
+                          Review Analysis
+                        </>
+                      )}
                     </Button>
                   )}
                   <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSave}
+                    disabled={!hasChanges || saving || publishing || loading}
+                  >
+                    {saving ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      "Save"
+                    )}
+                  </Button>
+                  <Button
                     size="sm"
                     onClick={() => handlePublish()}
-                    disabled={(!hasChanges && documentStatus !== "draft") || publishing || loading}
+                    disabled={(!hasChanges && documentStatus !== "draft") || publishing || saving || loading}
                   >
                     {publishing ? (
                       <>
@@ -378,7 +457,10 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
         onClose={() => setAuditIssuesOpen(false)}
         issues={auditIssues}
         onFixClick={() => setAuditIssuesOpen(false)}
-        onPublishClick={() => handlePublish(true)}
+        onPublishClick={() => {
+          setAuditIssuesOpen(false);
+          handlePublish(true);
+        }}
         version={lastPublishedVersion}
         fullAnalysis={auditAnalysis}
       />

@@ -193,16 +193,20 @@ export async function POST(request: NextRequest) {
       ? subModuleId 
       : null;
 
+    // Store analysis score from compliance_analysis table
+    const analysisScore = typeof analysisData === 'string' ? JSON.parse(analysisData) : analysisData;
+
     // Create or update document record
     const documentResult = await query(
       `INSERT INTO document 
        (id, org_id, framework_id, module_id, sub_module_id, sub_sub_module_id, 
-        title, status, content_key, current_version, created_by, updated_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        title, status, content_key, current_version, analysis_score, created_by, updated_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        ON CONFLICT (org_id, framework_id, module_id, sub_module_id, sub_sub_module_id) 
        DO UPDATE SET 
          content_key = EXCLUDED.content_key, 
          current_version = document.current_version + 1, 
+         analysis_score = EXCLUDED.analysis_score,
          updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
        RETURNING id`,
@@ -217,6 +221,7 @@ export async function POST(request: NextRequest) {
         "draft",
         s3Key,
         1,
+        JSON.stringify(analysisScore),
         userId,
         userId,
       ],

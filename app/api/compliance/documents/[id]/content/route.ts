@@ -96,6 +96,7 @@ export async function GET(
         updatedBy: document.updated_by,
         createdAt: document.created_at,
         updatedAt: document.updated_at,
+        analysisScore: document.analysis_score, // Include stored analysis results
       },
     });
   } catch (error) {
@@ -114,7 +115,7 @@ export async function GET(
  * PUT - Publish document
  * Converts edited Markdown content to DOCX and uploads to S3
  * Updates document status to published in database
- * All saves go directly to published state
+ * Increments version number
  */
 export async function PUT(
   request: NextRequest,
@@ -131,7 +132,7 @@ export async function PUT(
     const { id } = await params;
 
     // Parse request body
-    const { content, status = "published" } = await request.json();
+    const { content, status = "published", analysisScore = null } = await request.json();
 
     if (!content || typeof content !== "string") {
       return NextResponse.json(
@@ -187,16 +188,31 @@ export async function PUT(
     // Update document in database with provided status
     const newStatus = status;
 
-    await query(
-      `UPDATE document 
-       SET content_key = $1, 
-           current_version = $2, 
-           status = $3,
-           updated_by = $4, 
-           updated_at = NOW()
-       WHERE id = $5 AND org_id = $6`,
-      [newS3Key, newVersion, newStatus, userId, id, orgId],
-    );
+    // Build update query - include analysis_score if provided (only on publish)
+    if (analysisScore && status === "published") {
+      await query(
+        `UPDATE document 
+         SET content_key = $1, 
+             current_version = $2, 
+             status = $3,
+             analysis_score = $4,
+             updated_by = $5, 
+             updated_at = NOW()
+         WHERE id = $6 AND org_id = $7`,
+        [newS3Key, newVersion, newStatus, JSON.stringify(analysisScore), userId, id, orgId],
+      );
+    } else {
+      await query(
+        `UPDATE document 
+         SET content_key = $1, 
+             current_version = $2, 
+             status = $3,
+             updated_by = $4, 
+             updated_at = NOW()
+         WHERE id = $5 AND org_id = $6`,
+        [newS3Key, newVersion, newStatus, userId, id, orgId],
+      );
+    }
 
     console.log(
       `[API] ✅ Document ${newStatus} (version ${newVersion})`,

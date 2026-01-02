@@ -26,17 +26,17 @@ export interface AuditRiskIssue {
 /**
  * Step 1: Persist draft version
  * Always saves changes regardless of audit result
- * Uses existing /content endpoint with status: "draft"
- * Returns new version number
+ * Uses /save endpoint to persist without incrementing version
+ * Returns current version number
  */
 export async function persistDraftVersion(
   documentId: string,
   content: string
 ): Promise<{ version: number; contentKey: string }> {
-  const response = await fetch(`/api/compliance/documents/${documentId}/content`, {
-    method: "PUT",
+  const response = await fetch(`/api/compliance/documents/${documentId}/save`, {
+    method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content, status: "draft" }),
+    body: JSON.stringify({ content }),
   });
 
   if (!response.ok) {
@@ -92,19 +92,21 @@ export async function validateAuditReadiness(
 
 /**
  * Step 3: Finalize publish
- * Transitions document state to published
+ * Transitions document state to published and increments version
  * Uses existing /content endpoint with status: "published"
  * Only called if audit validation passed
+ * Stores updated analysis score with document
  */
 export async function finalizePublishState(
   documentId: string,
   content: string,
-  version: number
-): Promise<{ status: string }> {
+  version: number,
+  analysisScore?: any
+): Promise<{ status: string; version: number }> {
   const response = await fetch(`/api/compliance/documents/${documentId}/content`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content, status: "published" }),
+    body: JSON.stringify({ content, status: "published", analysisScore }),
   });
 
   if (!response.ok) {
@@ -113,7 +115,7 @@ export async function finalizePublishState(
   }
 
   const data = await response.json();
-  return { status: data.status };
+  return { status: data.status, version: data.version };
 }
 
 /**
@@ -147,35 +149,66 @@ export async function executePublishFlow(
       const { highRiskIssues, fullAnalysis } = await validateAuditReadiness(documentId, content, title);
       console.log(`[PublishFlow] Audit validation complete: ${highRiskIssues.length} high-risk issues`);
 
+      // Save analysis score to database (regardless of validation result)
+      if (fullAnalysis) {
+        console.log("[PublishFlow] Saving analysis score to database...");
+        try {
+          const response = await fetch(`/api/compliance/documents/${documentId}/analysis-score`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ analysisScore: fullAnalysis }),
+          });
+          if (response.ok) {
+            console.log("[PublishFlow] ✅ Analysis score saved");
+          }
+        } catch (error) {
+          console.error("[PublishFlow] Failed to save analysis score:", error);
+          // Continue anyway - this is non-critical
+        }
+      }
+
       // Step 3: Conditional state transition
       if (highRiskIssues.length > 0) {
         // Issues found - block publish but keep draft
-        console.log("[PublishFlow] ⚠️ High-risk issues found, blocking publish state transition");
         return {
           success: false,
           version,
           status: "draft",
           highRiskIssues,
           fullAnalysis,
-          message: "Document saved but cannot be published due to high-risk audit issues",
+          message: "Document saved. Please check audit issues before publishing.",
         };
       }
+
+      // No issues - finalize publish with updated analysis score
+      console.log("[PublishFlow] Step 3: Finalizing publish state with analysis score...");
+      const { status, version: publishedVersion } = await finalizePublishState(documentId, content, version, fullAnalysis);
+      console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
+
+      return {
+        success: true,
+        version: publishedVersion,
+        status,
+        highRiskIssues: [],
+        fullAnalysis,
+        message: "Document published successfully",
+      };
     } else {
       console.log("[PublishFlow] Step 2: Skipping audit validation (user override)");
+      
+      // Validation skipped - finalize publish without new analysis
+      console.log("[PublishFlow] Step 3: Finalizing publish state...");
+      const { status, version: publishedVersion } = await finalizePublishState(documentId, content, version);
+      console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
+
+      return {
+        success: true,
+        version: publishedVersion,
+        status,
+        highRiskIssues: [],
+        message: "Document published successfully",
+      };
     }
-
-    // No issues (or validation skipped) - finalize publish
-    console.log("[PublishFlow] Step 3: Finalizing publish state...");
-    const { status } = await finalizePublishState(documentId, content, version);
-    console.log(`[PublishFlow] ✅ Document published successfully (status: ${status})`);
-
-    return {
-      success: true,
-      version,
-      status,
-      highRiskIssues: [],
-      message: "Document published successfully",
-    };
   } catch (error) {
     console.error("[PublishFlow] Error:", error);
     throw error;

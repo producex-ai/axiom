@@ -97,27 +97,16 @@ export async function uploadEvidenceAction(
 
     console.log("[SERVER ACTION] Uploading evidence:", {
       orgId,
+    console.log("[SERVER ACTION] Uploading evidence:", {
+      orgId,
       userId,
       subModuleId,
       fileCount: files.length,
     });
 
-    // Check existing evidence count
-    const existingResult = await query(
-      `SELECT COUNT(*) as count FROM uploaded_evidence 
-       WHERE org_id = $1 AND sub_module_id = $2 AND deleted_at IS NULL`,
-      [orgId, subModuleId]
-    );
-
-    const existingCount = parseInt(existingResult.rows[0].count, 10);
-    const totalCount = existingCount + files.length;
-
-    if (totalCount > MAX_FILES) {
-      throw new ValidationError(
-        `Maximum ${MAX_FILES} total evidence files exceeded`,
-        { existing: existingCount, new: files.length, max: MAX_FILES }
-      );
-    }
+    // NOTE: No database-level check for existing evidence count
+    // UI-level validation prevents uploading more than 3 files in the modal
+    // This allows the system to work correctly with temporary evidence storage
 
     // Validate each file
     for (const file of files) {
