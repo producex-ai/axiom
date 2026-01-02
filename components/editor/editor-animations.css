@@ -1,0 +1,277 @@
+/* Modern Editor Animations & Polish */
+
+/* Smooth fade-in animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Shimmer effect for AI processing */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Pulse animation for AI sparkles */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Slide in from top */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from bottom */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Editor specific styles */
+.editor-content {
+  /* Smooth focus transitions */
+  transition: box-shadow 0.2s ease;
+}
+
+.editor-content:focus-within {
+  outline: none;
+}
+
+/* Bubble menu animations */
+.bubble-menu {
+  animation: fadeInScale 150ms ease-out;
+}
+
+/* AI suggestion shimmer */
+.ai-suggestion.processing {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--primary-rgb), 0.1) 0%,
+    rgba(var(--primary-rgb), 0.2) 50%,
+    rgba(var(--primary-rgb), 0.1) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Sparkle glow effect */
+.sparkle-icon {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Smooth height transitions for collapsible sections */
+.collapsible {
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Selection highlight */
+.ProseMirror ::selection {
+  background: rgba(var(--primary-rgb, 59 130 246), 0.2);
+}
+
+/* Placeholder animation */
+.ProseMirror .is-empty:before {
+  animation: fadeInScale 0.3s ease;
+}
+
+/* Floating elements shadow */
+.floating-element {
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Button hover effects */
+.editor-button {
+  transition: all 0.15s ease;
+}
+
+.editor-button:hover {
+  transform: translateY(-1px);
+}
+
+.editor-button:active {
+  transform: translateY(0);
+}
+
+/* Diff highlight animations */
+.diff-added {
+  animation: slideInFromBottom 0.3s ease;
+}
+
+.diff-removed {
+  animation: slideInFromTop 0.3s ease;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Kbd (keyboard shortcut) styling */
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  box-shadow: 
+    0 1px 0 rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth scrolling */
+.editor-scroll-container {
+  scroll-behavior: smooth;
+}
+
+/* Focus ring for accessibility */
+.focusable:focus-visible {
+  outline: 2px solid rgba(var(--primary-rgb, 59 130 246), 0.5);
+  outline-offset: 2px;
+}
+
+/* Micro-interaction: button press */
+.pressable:active {
+  transform: scale(0.98);
+}
+
+/* Toast/notification slide in */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Command palette backdrop */
+.command-palette-backdrop {
+  backdrop-filter: blur(4px);
+  animation: fadeInScale 0.15s ease;
+}
+
+/* Tooltip animations */
+.tooltip {
+  animation: fadeInScale 0.1s ease;
+}
+
+/* Link hover effect */
+.ProseMirror a {
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ProseMirror a:hover {
+  border-bottom: 2px solid currentColor;
+}
+
+/* Code block smooth appearance */
+.ProseMirror pre {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Image zoom effect */
+.ProseMirror img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: zoom-in;
+}
+
+.ProseMirror img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Blockquote accent animation */
+.ProseMirror blockquote {
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.ProseMirror blockquote:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+
+.ProseMirror blockquote:hover:before {
+  width: 6px;
+}
+
+/* Selection menu positioning */
+.selection-menu {
+  will-change: transform, opacity;
+  transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+/* Staggered list animations */
+.staggered-item {
+  animation: slideInFromBottom 0.3s ease backwards;
+}
+
+.staggered-item:nth-child(1) { animation-delay: 0.05s; }
+.staggered-item:nth-child(2) { animation-delay: 0.1s; }
+.staggered-item:nth-child(3) { animation-delay: 0.15s; }
+.staggered-item:nth-child(4) { animation-delay: 0.2s; }
+.staggered-item:nth-child(5) { animation-delay: 0.25s; }
+
+/* Dark mode smooth transitions */
+@media (prefers-color-scheme: dark) {
+  * {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -37,6 +37,7 @@ export interface DocumentEditorProps {
   readOnly?: boolean;
   onSave?: (content: string) => Promise<void>;
   onChange?: (content: string) => void;
+  onToggleReadOnly?: () => void;
   showToolbar?: boolean;
   showAI?: boolean;
   placeholder?: string;

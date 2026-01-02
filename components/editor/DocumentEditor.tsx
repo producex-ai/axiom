@@ -4,28 +4,37 @@ import FileHandler from "@tiptap/extension-file-handler";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Link from "@tiptap/extension-link";
 import * as React from "react";
-import { Separator } from "@/components/ui/separator";
 import type { DocumentEditorProps } from "@/lib/editor/types";
 import { cn } from "@/lib/utils";
-import { AIToolbar } from "./AIToolbar";
-import { FloatingAIMenu } from "./FloatingAIMenu";
-import { FormattingToolbar } from "./FormattingToolbar";
+import { EditorBubbleMenu } from "./EditorBubbleMenu";
+import { SlashCommandExtension } from "./SlashCommand";
+import { AIDiffView, AIProcessingIndicator } from "./AIDiffView";
+import { CommandPalette } from "./CommandPalette";
+import { MinimalTopBar } from "./MinimalTopBar";
+import { useEditorAI } from "@/hooks/use-editor-ai";
 
 export function DocumentEditor({
   documentTitle,
   initialContent = "",
   readOnly = false,
   onChange,
+  onSave,
+  onToggleReadOnly,
   showToolbar = true,
   showAI = true,
-  placeholder = "Start writing your document...",
+  placeholder = "Start writing your document... Press '/' for AI commands",
 }: DocumentEditorProps) {
-  const [floatingAIOpen, setFloatingAIOpen] = React.useState(false);
-  const [floatingAIPosition, setFloatingAIPosition] = React.useState({
-    top: 0,
-    left: 0,
-  });
+  const [aiSuggestion, setAiSuggestion] = React.useState<{
+    original: string;
+    suggestion: string;
+  } | null>(null);
+  const [isAIProcessing, setIsAIProcessing] = React.useState(false);
+  const [showBubbleAI, setShowBubbleAI] = React.useState(false);
+
+  // Use a ref to store the AI command handler so it can be used in the extension
+  const handleAICommandRef = React.useRef<(instruction: string) => Promise<void>>();
 
   const editor = useEditor({
     extensions: [
@@ -34,10 +43,16 @@ export function DocumentEditor({
           levels: [1, 2, 3, 4, 5, 6],
         },
       }),
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: "text-primary underline underline-offset-4 cursor-pointer",
+        },
+      }),
       Placeholder.configure({
         placeholder,
         emptyEditorClass:
-          "before:content-[attr(data-placeholder)] before:absolute before:text-muted-foreground before:pointer-events-none",
+          "before:content-[attr(data-placeholder)] before:absolute before:text-muted-foreground before:pointer-events-none before:h-0",
       }),
       FileHandler.configure({
         allowedMimeTypes: [
@@ -85,27 +100,50 @@ export function DocumentEditor({
           });
         },
       }),
+      // Add slash command for AI
+      ...(showAI
+        ? [
+            SlashCommandExtension({
+              onAICommand: (editor, command) => {
+                handleAICommandRef.current?.(command);
+              },
+            }),
+          ]
+        : []),
     ],
     immediatelyRender: false,
     editable: !readOnly,
     editorProps: {
       attributes: {
         class: cn(
-          "prose prose-sm max-w-none",
-          "min-h-[500px] px-8 py-6",
-          "focus:outline-none",
-          "prose-headings:font-semibold",
-          "prose-h1:text-3xl prose-h1:mb-4 prose-h1:mt-6",
-          "prose-h2:text-2xl prose-h2:mb-3 prose-h2:mt-5",
-          "prose-h3:text-xl prose-h3:mb-2 prose-h3:mt-4",
-          "prose-p:mb-3 prose-p:leading-7",
+          // Modern typography
+          "prose prose-base dark:prose-invert max-w-none",
+          "min-h-[calc(100vh-200px)]",
+          // Full width padding
+          "px-8 py-12 md:px-12 lg:px-16",
+          // Remove borders and outlines
+          "focus:outline-none border-none",
+          // Typography improvements
+          "prose-headings:font-semibold prose-headings:tracking-tight",
+          "prose-h1:text-4xl prose-h1:mb-4 prose-h1:mt-8",
+          "prose-h2:text-3xl prose-h2:mb-3 prose-h2:mt-6",
+          "prose-h3:text-2xl prose-h3:mb-2 prose-h3:mt-5",
+          "prose-p:mb-4 prose-p:leading-relaxed prose-p:text-[16px]",
+          // Lists
           "prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6",
           "prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6",
-          "prose-li:my-1",
-          "prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm",
-          "prose-pre:bg-muted prose-pre:p-4 prose-pre:rounded-lg",
-          "prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic",
-          "prose-hr:my-6 prose-hr:border-border",
+          "prose-li:my-2 prose-li:leading-relaxed",
+          // Code
+          "prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none",
+          "prose-pre:bg-muted prose-pre:p-4 prose-pre:rounded-lg prose-pre:border",
+          // Blockquotes
+          "prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:not-italic prose-blockquote:font-normal",
+          // Links
+          "prose-a:text-primary prose-a:underline prose-a:underline-offset-4",
+          // HR
+          "prose-hr:my-8 prose-hr:border-border",
+          // Images
+          "prose-img:rounded-lg prose-img:shadow-sm",
           readOnly && "opacity-90",
         ),
       },
@@ -115,6 +153,74 @@ export function DocumentEditor({
       onChange?.(editor.getHTML());
     },
   });
+
+  // Handle AI command execution
+  const handleAICommand = React.useCallback(
+    async (instruction: string) => {
+      if (!editor) return;
+
+      const { from, to } = editor.state.selection;
+      const selectedText = editor.state.doc.textBetween(from, to, " ");
+
+      if (!selectedText) {
+        // If no selection, don't process
+        return;
+      }
+
+      setIsAIProcessing(true);
+      setAiSuggestion(null);
+
+      try {
+        // Use existing Bedrock API
+        const response = await fetch("/api/bedrock", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            instruction,
+            text: selectedText,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.output) {
+          setAiSuggestion({
+            original: selectedText,
+            suggestion: data.output,
+          });
+        }
+      } catch (error) {
+        console.error("AI processing error:", error);
+      } finally {
+        setIsAIProcessing(false);
+      }
+    },
+    [editor],
+  );
+
+  // Update the ref whenever the callback changes
+  React.useEffect(() => {
+    handleAICommandRef.current = handleAICommand;
+  }, [handleAICommand]);
+
+  const handleAcceptSuggestion = React.useCallback(() => {
+    if (!editor || !aiSuggestion) return;
+
+    const { from, to } = editor.state.selection;
+    if (from !== to) {
+      // Replace selected text
+      editor.chain().focus().deleteSelection().insertContent(aiSuggestion.suggestion).run();
+    } else {
+      // Replace entire content if no selection
+      editor.chain().focus().setContent(aiSuggestion.suggestion).run();
+    }
+
+    setAiSuggestion(null);
+  }, [editor, aiSuggestion]);
+
+  const handleRejectSuggestion = React.useCallback(() => {
+    setAiSuggestion(null);
+  }, []);
 
   // Update editable state when readOnly changes
   React.useEffect(() => {
@@ -130,43 +236,40 @@ export function DocumentEditor({
       isInitialMount.current = false;
       return;
     }
-    
+
     if (editor && initialContent !== editor.getHTML() && !editor.isFocused) {
       editor.commands.setContent(initialContent);
     }
   }, [initialContent, editor]);
 
-  // Handle text selection for floating AI menu
+  // Keyboard shortcuts
   React.useEffect(() => {
-    if (!editor || !showAI) return;
+    if (!editor) return;
 
-    const handleSelection = () => {
-      const selection = window.getSelection();
-      if (!selection || selection.rangeCount === 0) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Save shortcut (Cmd/Ctrl + S)
+      if ((e.metaKey || e.ctrlKey) && e.key === "s") {
+        e.preventDefault();
+        onSave?.();
+      }
 
-      const text = selection.toString().trim();
-      if (text.length < 2) return;
-
-      const editorEl = editor.view.dom;
-      if (!editorEl || !editorEl.contains(selection.anchorNode)) return;
-
-      // Don't show if AI toolbar popover is open
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
-
-      setFloatingAIPosition({
-        top: rect.top + window.scrollY - 10,
-        left: rect.left + window.scrollX + rect.width / 2,
-      });
+      // AI Assistant shortcut (Cmd/Ctrl + /)
+      if ((e.metaKey || e.ctrlKey) && e.key === "/") {
+        e.preventDefault();
+        const { from, to } = editor.state.selection;
+        if (from !== to) {
+          setShowBubbleAI(true);
+        }
+      }
     };
 
-    document.addEventListener("mouseup", handleSelection);
-    return () => document.removeEventListener("mouseup", handleSelection);
-  }, [editor, showAI]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [editor, onSave]);
 
   if (!editor) {
     return (
-      <div className="flex min-h-[500px] items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="animate-pulse text-muted-foreground">
           Loading editor...
         </div>
@@ -175,35 +278,44 @@ export function DocumentEditor({
   }
 
   return (
-    <div className="flex h-full flex-col rounded-lg border bg-background shadow-sm">
-      {showToolbar && (
-        <>
-          <div className="flex items-center gap-2 border-b p-2">
-            {showAI && (
-              <>
-                <AIToolbar editor={editor} documentTitle={documentTitle} />
-                <Separator orientation="vertical" className="h-8" />
-              </>
-            )}
-            <div className="flex-1 overflow-x-auto">
-              <FormattingToolbar editor={editor} />
-            </div>
-          </div>
-        </>
-      )}
+    <div className="flex h-full flex-col border rounded-lg shadow-sm bg-background overflow-hidden">
 
-      <div className="flex-1 overflow-y-auto bg-white">
+      {/* Editor Content - Full width */}
+      <div className="flex-1 overflow-y-auto">
+        {/* TipTap Editor */}
         <EditorContent editor={editor} />
+
+        {/* AI Processing Indicator - Fixed at bottom */}
+        {isAIProcessing && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100]">
+            <AIProcessingIndicator />
+          </div>
+        )}
+
+        {/* AI Diff View - Fixed at bottom */}
+        {aiSuggestion && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] w-full max-w-4xl px-4">
+            <AIDiffView
+              original={aiSuggestion.original}
+              suggestion={aiSuggestion.suggestion}
+              onAccept={handleAcceptSuggestion}
+              onReject={handleRejectSuggestion}
+            />
+          </div>
+        )}
       </div>
 
-      {showAI && (
-        <FloatingAIMenu
+      {/* Floating Bubble Menu */}
+      {showAI && !readOnly && (
+        <EditorBubbleMenu
           editor={editor}
-          isOpen={floatingAIOpen}
-          onClose={() => setFloatingAIOpen(false)}
-          position={floatingAIPosition}
-          documentTitle={documentTitle}
+          onAICommand={handleAICommand}
         />
+      )}
+
+      {/* Command Palette (Cmd+K) */}
+      {showAI && !readOnly && (
+        <CommandPalette editor={editor} onAICommand={handleAICommand} />
       )}
     </div>
   );

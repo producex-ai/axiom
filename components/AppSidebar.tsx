@@ -1,12 +1,10 @@
 "use client";
 
 import {
-  ChevronDown,
   ClipboardList,
   FileText,
   LayoutDashboard,
   ScrollText,
-  Settings,
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
@@ -162,26 +160,6 @@ export function AppSidebar() {
                   </SidebarMenuItem>
                 );
               })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
-            Account
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild className="group px-3">
-                  <Link href="/dashboard/settings">
-                    <Settings className="size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                    <span className="group-hover:text-foreground transition-colors">
-                      Settings
-                    </span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

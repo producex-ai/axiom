@@ -52,8 +52,13 @@ export async function POST(request: NextRequest) {
     });
 
     // Parse subModuleId to get moduleNumber and code
-    const [moduleNumber, ...rest] = subModuleId.split(".");
-    const subModuleCode = subModuleId;
+    // Handle sub-sub-modules (e.g., "4.04.01" -> module: "4", subModule: "4.04")
+    const codeParts = subModuleId.split(".");
+    const moduleNumber = codeParts[0];
+    const isSubSubModule = codeParts.length === 3;
+    const subModuleCode = isSubSubModule
+      ? `${codeParts[0]}.${codeParts[1]}`
+      : subModuleId;
 
     // Fetch uploaded evidence
     const evidenceResult = await query(

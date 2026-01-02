@@ -465,8 +465,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
 
       {/* Editor */}
       <main className="flex-1 overflow-hidden">
-        <div className="container mx-auto h-full px-4 py-6">
-          <DocumentEditor
+        <DocumentEditor
             documentId={documentId}
             documentTitle={documentMetadata?.title || "Document"}
             initialContent={content}
@@ -478,11 +477,13 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                 setUserHasEdited(true);
               }
             }}
+            onToggleReadOnly={() => {
+              setMode(mode === "view" ? "edit" : "view");
+            }}
             showToolbar={mode === "edit"}
             showAI={mode === "edit"}
             placeholder="Start editing your document..."
           />
-        </div>
       </main>
     </div>
   );

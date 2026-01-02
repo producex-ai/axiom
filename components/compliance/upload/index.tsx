@@ -137,18 +137,23 @@ export default function EvidenceUploadFlow({
     }
   }, []);
 
-  const handleClose = useCallback(async () => {
+  const handleClose = useCallback(() => {
     // Cancel any ongoing analysis operations
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
       console.log("[Cleanup] Aborted ongoing analysis");
     }
 
-    // Delete uploaded evidence files when modal closes (whether accepted or not)
-    // This ensures clean state for next upload
-    await cleanupEvidenceAndS3(uploadedEvidence);
-    
+    // Close dialog immediately for better UX
     onClose();
+
+    // Delete uploaded evidence files in the background
+    // This ensures clean state for next upload without blocking the UI
+    if (uploadedEvidence.length > 0) {
+      cleanupEvidenceAndS3(uploadedEvidence).catch((error) => {
+        console.warn("[Cleanup] Failed to cleanup evidence:", error);
+      });
+    }
   }, [uploadedEvidence, onClose, cleanupEvidenceAndS3]);
 
   const handleFileSelect = useCallback(
