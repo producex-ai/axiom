@@ -50,6 +50,7 @@ const COMPLIANCE_SECTIONS: ComplianceSection[] = [
     name: "Prerequisites & Reference Documents",
     priority: "medium",
     description: "Prerequisites, related procedures, regulatory references",
+    isBatchable: true,
   },
   {
     id: 7,
@@ -93,6 +94,7 @@ const COMPLIANCE_SECTIONS: ComplianceSection[] = [
     name: "Record Retention & Document Control",
     priority: "medium",
     description: "What records are maintained, how long, and access controls",
+    isBatchable: true,
   },
   {
     id: 14,
@@ -420,23 +422,26 @@ ${section.description}
 
   const prompt = `You are a professional compliance document writer specializing in Primus GFS certification.
 
-TASK: Generate the following low-priority compliance document sections CONCISELY. Each section should be 300-500 words maximum.
+TASK: Generate the following compliance document sections CONCISELY. Each section should be 300-500 words maximum.
 
 ${sectionPrompts}
 
-INSTRUCTIONS:
-1. Write CONCISE, PROFESSIONAL sections
-2. Use bullet points and tables where appropriate to reduce verbosity
-3. Focus on essential information only
-4. Each section should be standalone
-5. Include specific procedures, frequencies, responsibilities
-6. Use formal compliance language
-7. Keep each section to 1 page or less
-8. Do NOT include template placeholders
+CRITICAL INSTRUCTIONS:
+1. Write CONCISE, PROFESSIONAL sections - NO document headers or titles
+2. DO NOT use markdown bold syntax (**) - write plain text only
+3. For field labels use plain text: "Document Number:" not "Document Number: **"
+4. Use bullet points and tables where appropriate to reduce verbosity
+5. Focus on essential information only
+6. Each section should be standalone
+7. Include specific procedures, frequencies, responsibilities
+8. Use formal compliance language
+9. Keep each section to 1 page or less
+10. Do NOT include template placeholders or [TO BE COMPLETED]
+11. DO NOT create full document titles within sections
 
 FORMAT YOUR RESPONSE EXACTLY AS:
 --- SECTION_START: [id] ---
-[Section content]
+[Section content in plain text without ** formatting]
 --- SECTION_END: [id] ---
 
 Start now:`;
@@ -736,24 +741,25 @@ ${relevantEvidence}
 APPLICABLE REQUIREMENTS:
 ${relevantRequirements}
 
-INSTRUCTIONS:
-1. Write a CONCISE yet COMPREHENSIVE professional section for "${section.name}"
-2. ${pageGuidance}
-3. Use information from the uploaded evidence where available
-4. Fill gaps with professional compliance language (no verbose explanations)
-5. Use bullet points, tables, and numbered lists instead of long paragraphs
-6. Include specific procedures, frequencies, and responsibilities
-7. Use formal compliance/audit language
-8. Make the section implementable and auditable
-9. Do NOT include template placeholders or [TO BE COMPLETED]
-10. Reference relevant requirements where applicable
-11. Eliminate redundant information - be direct and precise
-12. Focus on actionable content, not explanatory preamble
+CRITICAL INSTRUCTIONS:
+1. Write ONLY the section content for "${section.name}" - DO NOT create a full document header
+2. DO NOT write document titles like "FOOD SAFETY MANAGEMENT SYSTEM MANUAL" or similar
+3. DO NOT use markdown bold syntax with ** - write plain text only
+4. Start directly with section number: ${section.id}. ${section.name}
+5. ${pageGuidance}
+6. Use information from the uploaded evidence where available
+7. Use bullet points, tables, and numbered lists instead of long paragraphs
+8. Include specific procedures, frequencies, and responsibilities
+9. Use formal compliance/audit language
+10. Do NOT include template placeholders or [TO BE COMPLETED]
+11. Reference relevant requirements where applicable
+12. Eliminate redundant information - be direct and precise
+13. For field labels (like "Document Number:"), use plain text without bold markers
 
 OUTPUT FORMAT:
 ${section.id}. ${section.name}
 
-[Write concise, well-structured section content.]
+[Write concise section content without document headers or markdown formatting]
 
 Start writing now:`;
 }
@@ -887,12 +893,21 @@ function cleanSectionContent(content: string): string {
   // Remove leading # symbols (markdown headers)
   cleaned = cleaned.replace(/^#+\s+/gm, "");
 
-  // Clean up double asterisks that aren't part of bold emphasis
-  // Keep single ** for emphasis, but remove unnecessary ** before colons or at line starts
-  cleaned = cleaned
-    .replace(/\*\*\*+/g, "**") // Convert multiple asterisks to double
-    .replace(/^\*\*([^*]+):\s*/gm, "$1: ") // Remove ** before field names
-    .replace(/^- \*\*([^*]+):\*\*\s*/gm, "- $1: "); // Clean list items
+  // Clean up ALL double asterisks (markdown bold syntax)
+  // Remove ** before field names: "**Field Name:" -> "Field Name:"
+  cleaned = cleaned.replace(/^\*\*([^*]+):\s*/gm, "$1: ");
+  
+  // Remove ** after colons: "Field: **" -> "Field:"
+  cleaned = cleaned.replace(/:\s*\*\*\s*/g, ": ");
+  
+  // Remove ** in list items: "- **Item:**" -> "- Item:"
+  cleaned = cleaned.replace(/^- \*\*([^*]+):\*\*\s*/gm, "- $1: ");
+  
+  // Remove ** around words: "**text**" -> "text"
+  cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, "$1");
+  
+  // Remove standalone ** or multiple asterisks
+  cleaned = cleaned.replace(/\*\*+/g, "");
 
   // Normalize spacing around colons
   cleaned = cleaned.replace(/:\s+/g, ": ");

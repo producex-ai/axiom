@@ -299,7 +299,9 @@ export default function SubModuleCard({
   if (hasDocument) {
     return (
       <div
-        className={`group relative rounded-lg border transition-all duration-200 border-border bg-card/50 shadow-sm hover:shadow-md hover:bg-card dark:hover:bg-card/80 ${
+        onClick={!isNavigating ? handleEdit : undefined}
+        aria-disabled={isNavigating}
+        className={`group relative ${isNavigating ? "cursor-not-allowed opacity-80" : "cursor-pointer"} rounded-lg border transition-all duration-200 border-border bg-card/50 shadow-sm hover:shadow-md hover:bg-card dark:hover:bg-card/80 ${
           isNested ? "border-l-4" : ""
         }`}
         style={
@@ -357,13 +359,25 @@ export default function SubModuleCard({
                   {subModule.document.analysisScore.overallScore !== undefined && (
                     <span className="flex items-center gap-1 whitespace-nowrap">
                       <span className="text-muted-foreground/70">Overall Score -</span>
-                      <span className="font-medium">{Math.round(subModule.document.analysisScore.overallScore)}%</span>
+                      <span className={`font-medium ${
+                        subModule.document.analysisScore.overallScore > 85
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : subModule.document.analysisScore.overallScore >= 75
+                          ? "text-amber-600 dark:text-amber-400"
+                          : "text-red-600 dark:text-red-400"
+                      }`}>{Math.round(subModule.document.analysisScore.overallScore)}%</span>
                     </span>
                   )}
                   {subModule.document.analysisScore.auditReadinessScore !== undefined && (
                     <span className="flex items-center gap-1 whitespace-nowrap">
                       <span className="text-muted-foreground/70">Audit Score -</span>
-                      <span className="font-medium">{Math.round(subModule.document.analysisScore.auditReadinessScore)}%</span>
+                      <span className={`font-medium ${
+                        subModule.document.analysisScore.auditReadinessScore > 85
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : subModule.document.analysisScore.auditReadinessScore >= 75
+                          ? "text-amber-600 dark:text-amber-400"
+                          : "text-red-600 dark:text-red-400"
+                      }`}>{Math.round(subModule.document.analysisScore.auditReadinessScore)}%</span>
                     </span>
                   )}
                 </div>
@@ -402,7 +416,10 @@ export default function SubModuleCard({
                 variant="outline"
                 size="sm"
                 className="h-8 gap-1.5 px-3 text-xs"
-                onClick={handleEdit}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEdit();
+                }}
                 disabled={isNavigating}
               >
                 <FileEdit className="h-3.5 w-3.5" />
@@ -411,17 +428,26 @@ export default function SubModuleCard({
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-8 w-8 p-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={handleDownload}>
+                  <DropdownMenuItem onClick={(e) => {
+                    e.stopPropagation();
+                    handleDownload();
+                  }}>
                     <Download className="mr-2 h-4 w-4" />
                     Download
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={(e) => {
+                      e.stopPropagation();
                       if (subModule.document) {
                         setRevisionHistoryDocId(subModule.document.id);
                         setRevisionHistoryDocTitle(subModule.document.title);
@@ -434,7 +460,10 @@ export default function SubModuleCard({
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onClick={() => setShowDeleteDialog(true)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowDeleteDialog(true);
+                    }}
                     className="text-destructive focus:text-destructive"
                   >
                     <Trash2 className="mr-2 h-4 w-4" />
@@ -473,9 +502,8 @@ export default function SubModuleCard({
           onClose={() => setShowEvidenceFlow(false)}
           subModuleId={subModule.code}
           subModuleName={subModule.name}
-          onAnalysisComplete={(analysisId, analysis) => {
-            // Extract document ID from analysis if available
-            const documentId = analysis?.documentId || analysisId;
+          onAnalysisComplete={(documentId, analysis) => {
+            // The documentId parameter now contains the actual document ID from the API response
             handleUploadSuccess(documentId);
           }}
         />
@@ -632,9 +660,8 @@ export default function SubModuleCard({
         onClose={() => setShowEvidenceFlow(false)}
         subModuleId={subModule.code}
         subModuleName={subModule.name}
-        onAnalysisComplete={(analysisId, analysis) => {
-          // Extract document ID from analysis if available
-          const documentId = analysis?.documentId || analysisId;
+        onAnalysisComplete={(documentId, analysis) => {
+          // The documentId parameter now contains the actual document ID from the API response
           handleUploadSuccess(documentId);
         }}
       />

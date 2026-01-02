@@ -376,32 +376,57 @@ export default function EvidenceUploadFlow({
     try {
       const response = await improveDocument(subModuleId, analysisId);
 
-      if (onAnalysisComplete) {
-        onAnalysisComplete(analysisId, analysisResult);
+      if (!response.documentId) {
+        throw new Error("No document ID returned from improve API");
       }
+
+      console.log("[Upload Flow] Document improved:", response.documentId);
 
       // Clean up evidence files after successful improvement
       await cleanupEvidenceAndS3(uploadedEvidence);
 
-      await queryClient.invalidateQueries({
-        queryKey: complianceKeys.overview(),
-      });
-      await queryClient.invalidateQueries({
+      // Show loading state
+      const loadingToastId = toast.loading("Loading compliance data...");
+      
+      // Invalidate stale queries
+      queryClient.invalidateQueries({
         queryKey: complianceKeys.evidenceByModule(subModuleId),
       });
 
-      onClose(); // Use onClose directly instead of handleClose to avoid double cleanup
-      
-      // Show loading toast and redirect to edit page
-      if (response.documentId) {
-        const loadingToastId = toast.loading("Opening document editor...");
-        setTimeout(() => {
-          router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
-          toast.dismiss(loadingToastId);
-          toast.success("Document ready for editing");
-        }, 500);
+      // Give database a moment to ensure transaction is fully committed
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Fetch overview data and wait for it to complete before navigation
+      // This ensures the document editor page has all necessary data
+      console.log("[Upload Flow] Fetching overview data...");
+      await queryClient.fetchQuery({
+        queryKey: complianceKeys.overview(),
+        queryFn: async () => {
+          const res = await fetch("/api/frameworks/primus/overview");
+          if (!res.ok) {
+            throw new Error("Failed to fetch compliance overview");
+          }
+          return res.json();
+        },
+        staleTime: 0, // Force fresh fetch
+      });
+
+      console.log("[Upload Flow] Overview data loaded");
+
+      // Close dialog first
+      onClose();
+      toast.dismiss(loadingToastId);
+
+      // If callback is provided, let it handle navigation. Otherwise navigate here.
+      if (onAnalysisComplete) {
+        // Pass the actual document ID from the response
+        onAnalysisComplete(response.documentId, analysisResult);
+        toast.success("Document ready for editing");
       } else {
-        toast.success("Document improved with AI-generated sections");
+        // No callback - navigate directly
+        console.log("[Upload Flow] No callback, navigating to:", response.documentId);
+        router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
+        toast.success("Document ready for editing");
       }
     } catch (error) {
       console.error("Improve error:", error);
@@ -418,35 +443,57 @@ export default function EvidenceUploadFlow({
     try {
       const response = await acceptDocument(subModuleId, analysisId);
 
-      if (onAnalysisComplete) {
-        onAnalysisComplete(analysisId, analysisResult);
+      if (!response.documentId) {
+        throw new Error("No document ID returned from accept API");
       }
+
+      console.log("[Upload Flow] Document accepted:", response.documentId);
 
       // Clean up evidence files after successful acceptance
       await cleanupEvidenceAndS3(uploadedEvidence);
 
-      // Invalidate and refetch overview data in parallel
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: complianceKeys.overview(),
-        }),
-        queryClient.invalidateQueries({
-          queryKey: complianceKeys.evidenceByModule(subModuleId),
-        }),
-      ]);
-
-      onClose(); // Use onClose directly instead of handleClose to avoid double cleanup
+      // Show loading state
+      const loadingToastId = toast.loading("Loading compliance data...");
       
-      // Show loading toast and redirect to edit page
-      if (response.documentId) {
-        const loadingToastId = toast.loading("Opening document editor...");
-        setTimeout(() => {
-          router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
-          toast.dismiss(loadingToastId);
-          toast.success("Document ready for editing");
-        }, 500);
+      // Invalidate stale queries
+      queryClient.invalidateQueries({
+        queryKey: complianceKeys.evidenceByModule(subModuleId),
+      });
+
+      // Give database a moment to ensure transaction is fully committed
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Fetch overview data and wait for it to complete before navigation
+      // This ensures the document editor page has all necessary data
+      console.log("[Upload Flow] Fetching overview data...");
+      await queryClient.fetchQuery({
+        queryKey: complianceKeys.overview(),
+        queryFn: async () => {
+          const res = await fetch("/api/frameworks/primus/overview");
+          if (!res.ok) {
+            throw new Error("Failed to fetch compliance overview");
+          }
+          return res.json();
+        },
+        staleTime: 0, // Force fresh fetch
+      });
+
+      console.log("[Upload Flow] Overview data loaded");
+
+      // Close dialog first
+      onClose();
+      toast.dismiss(loadingToastId);
+
+      // If callback is provided, let it handle navigation. Otherwise navigate here.
+      if (onAnalysisComplete) {
+        // Pass the actual document ID from the response
+        onAnalysisComplete(response.documentId, analysisResult);
+        toast.success("Document ready for editing");
       } else {
-        toast.success("Document saved and attached to module");
+        // No callback - navigate directly
+        console.log("[Upload Flow] No callback, navigating to:", response.documentId);
+        router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
+        toast.success("Document ready for editing");
       }
     } catch (error) {
       console.error("Accept error:", error);
@@ -531,23 +578,45 @@ export default function EvidenceUploadFlow({
 
             <div className="flex-1 overflow-y-auto pr-4">
               <div className="space-y-6">
-                {/* SCORE SUMMARY DISPLAY (always show 4 scores) */}
+                {/* SCORE SUMMARY DISPLAY - Only show when all documents are relevant */}
                 <>
-                  <AnalysisSuccessMessage documentCount={uploadedEvidence.length} />
+                  <AnalysisSuccessMessage 
+                    documentCount={uploadedEvidence.length}
+                    hasRelevanceIssues={!analysisResult.documentRelevance?.allRelevant}
+                    relevantCount={analysisResult.documentRelevance?.issues?.filter(i => i.isRelevant).length}
+                  />
                   <RelevanceWarning
                     isBlocked={
                       analysisResult.documentRelevance?.analysisBlocked === true
                     }
                     analysisId={analysisId}
                   />
-                  {!analysisResult.documentRelevance?.analysisBlocked && (
+                  
+                  {/* Only show scores if all documents are relevant or no relevance check was performed */}
+                  {!analysisResult.documentRelevance?.analysisBlocked && 
+                   (analysisResult.documentRelevance?.allRelevant !== false) && (
                     <LightweightScoreSummary
                       analysis={{
                         overallScore: analysisResult.overallScore,
                         contentScore: analysisResult.contentScore,
                         structureScore: analysisResult.structureScore,
                         auditReadinessScore: analysisResult.auditReadinessScore,
+                        canImprove: analysisResult.canImprove,
+                        canMerge: analysisResult.canMerge,
+                        shouldGenerateFromScratch: analysisResult.shouldGenerateFromScratch,
+                        documentRelevance: analysisResult.documentRelevance,
                       }}
+                    />
+                  )}
+                  
+                  {/* Show relevance issues only if documents are not all relevant */}
+                  {!analysisResult.documentRelevance?.allRelevant && 
+                   hasRelevanceIssues && 
+                   analysisResult.documentRelevance?.issues && (
+                    <RelevanceIssues
+                      issues={analysisResult.documentRelevance.issues}
+                      expandedIndex={expandedRelevanceIssue}
+                      onToggleExpand={setExpandedRelevanceIssue}
                     />
                   )}
                 </>

@@ -1,34 +1,37 @@
-import { type NextRequest, NextResponse } from "next/server";
-import createIntlMiddleware from "next-intl/middleware";
-import { getUserProfileForMiddleware } from "@/actions/auth";
-import {
-  getUserType,
-  isAuthenticatedWithToken,
-  isTokenExpired,
-  refreshAccessTokenForMiddleware,
-} from "@/lib/auth";
-import { createLocalizedUrl, parseLocalePath } from "@/lib/locale-utils";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { type NextRequest, NextResponse } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
+
+import { createLocalizedUrl, parseLocalePath } from '@/lib/locale-utils';
 
 // Create the internationalization middleware
 const intlMiddleware = createIntlMiddleware({
-  locales: ["en", "es"],
-  defaultLocale: "en",
+  locales: ['en', 'es'],
+  defaultLocale: 'en',
 });
 
-// Define protected routes that require authentication for the app
-// (we use a single set of app routes now; role-based routes can be reintroduced later)
-const protectedRoutes = ["/dashboard", "/document", "/tasks"];
+// Define protected routes that require authentication
+const isProtectedRoute = createRouteMatcher([
+  '/:locale/dsahboard(.*)',
+  '/:locale/document(.*)',
+]);
 
-export default async function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth, request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for API routes, static files, and Next.js internals
+  // Skip middleware for static files and Next.js internals (but NOT API routes)
   if (
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/_vercel") ||
-    pathname.includes(".")
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/_vercel') ||
+    (pathname.includes('.') && !pathname.startsWith('/api'))
   ) {
+    return NextResponse.next();
+  }
+
+  // For API routes, just let Clerk process auth but don't apply intl middleware
+  if (pathname.startsWith('/api')) {
+    // Clerk will still process auth, but we return early to skip intl middleware
+    // This allows auth() to work in API routes
     return NextResponse.next();
   }
 
@@ -36,155 +39,85 @@ export default async function middleware(request: NextRequest) {
   const { locale, pathWithoutLocale, hasLocalePrefix } =
     parseLocalePath(pathname);
 
-  // Get authentication token
-  let token = request.cookies.get("access_token")?.value || null;
-  let refreshedToken: string | null = null;
+  // Get user from Clerk
+  const { userId, orgId } = await auth();
+  const userIsAuthenticated = !!userId;
 
-  // If token present but expired, attempt to refresh once
-  if (token && isTokenExpired(token)) {
-    console.log("Token expired, attempting to refresh");
-    refreshedToken = await refreshAccessTokenForMiddleware(
-      request.headers.get("cookie") || "",
-    );
-    if (refreshedToken) {
-      token = refreshedToken;
-    } else {
-      token = null;
-    }
-  }
-  const userIsAuthenticated = isAuthenticatedWithToken(token || undefined);
-
-  // If a token is present, attempt to fetch and log the user's profile
-  // for debugging purposes. Use the middleware-compatible helper which
-  // accepts the raw token and runs in a server context.
-  if (token) {
+  // Handle home page access - redirect authenticated users to their dashboard
+  if (pathWithoutLocale === '/' && userIsAuthenticated && orgId) {
+    console.log('Authenticated user accessing home page, redirecting');
     try {
-      const profile = await getUserProfileForMiddleware(token);
-      if (profile) {
-        console.log("Middleware: user profile:", profile);
+      // Get organization info to determine user type
+      const authData = await auth();
+      const sessionClaims = authData.sessionClaims as
+        | {
+            org_metadata?: {
+              org_type?: string;
+            };
+          }
+        | undefined;
+
+      // Access org metadata from session claims
+      if (sessionClaims?.org_metadata?.org_type) {    
+        const dashboardUrl = createLocalizedUrl(
+          `dashboard`,
+          locale,
+          request.url
+        );
+        return NextResponse.redirect(dashboardUrl);
       }
-    } catch (e) {
-      console.error("Middleware: failed to fetch user profile for logging", e);
+    } catch (error) {
+      // If profile fetch fails, continue to home page
+      console.error('Error fetching user organization in middleware', error);
     }
   }
 
-  // Prevent redirect loop: allow the login page to load normally without
-  // adding a `redirect` query param. This stops middleware from redirecting
-  // `/en/login` -> `/en/login?redirect=/en/login` repeatedly.
-  const isLoginRoute =
-    pathWithoutLocale === "/login" || pathWithoutLocale.startsWith("/login/");
-  if (isLoginRoute) {
-    const res = intlMiddleware(request);
-    if (refreshedToken) {
-      res.cookies.set("access_token", refreshedToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-      });
-    }
-    return res;
-  }
+  // Check if the current path is a protected route
+  if (isProtectedRoute(request)) {
+    // Protect the route
+    await auth.protect();
 
-  // Handle home page access - redirect authenticated users to the unified dashboard
-  if (pathWithoutLocale === "/" && userIsAuthenticated && token) {
-    try {
-      const dashboardUrl = createLocalizedUrl(
-        `/dashboard`,
-        locale,
-        request.url,
-      );
-      const res = NextResponse.redirect(dashboardUrl);
-      if (refreshedToken) {
-        res.cookies.set("access_token", refreshedToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          path: "/",
-        });
+    // If user is authenticated, check if they're accessing the correct role-based route
+    if (userIsAuthenticated && orgId) {
+      try {
+        const authData = await auth();
+        const sessionClaims = authData.sessionClaims as
+          | {
+              org_metadata?: {
+                org_type?: string;
+              };
+            }
+          | undefined;
+      } catch (error) {
+        // If organization fetch fails for role check, log error but allow access
+        // This prevents blocking legitimate users if API is temporarily unavailable
+        console.error(
+          'Error fetching organization for role verification',
+          error
+        );
       }
-      return res;
-    } catch (e) {
-      console.error("Error redirecting to dashboard in middleware", e);
     }
-  }
-
-  // Check if the current path (without locale) is a protected route
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathWithoutLocale.startsWith(route),
-  );
-
-  if (isProtectedRoute) {
-    // If the route is protected, ensure the user is authenticated.
-    if (!userIsAuthenticated) {
-      const loginUrl = createLocalizedUrl("/login", locale, request.url);
-      loginUrl.searchParams.set("redirect", pathname);
-      const res = NextResponse.redirect(loginUrl);
-      if (refreshedToken) {
-        res.cookies.set("access_token", refreshedToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          path: "/",
-        });
-      }
-      return res;
-    }
-    // Authenticated users are allowed to access the unified app routes.
   }
 
   // Handle paths without locale prefix - redirect to include locale
-  if (!hasLocalePrefix && pathWithoutLocale !== "/") {
+  if (!hasLocalePrefix && pathWithoutLocale !== '/') {
     const localizedUrl = createLocalizedUrl(
       pathWithoutLocale,
       locale,
-      request.url,
+      request.url
     );
-    const res = NextResponse.redirect(localizedUrl);
-    if (refreshedToken) {
-      res.cookies.set("access_token", refreshedToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-      });
-    }
-    return res;
-  }
-
-  // If the user is not authenticated and is trying to access any route
-  // other than the locale root (e.g. `/en`), redirect them to the login page.
-  // This enforces a default-app-auth policy while keeping the home/marketing
-  // page public.
-  if (!userIsAuthenticated && pathWithoutLocale !== "/") {
-    const loginUrl = createLocalizedUrl("/login", locale, request.url);
-    loginUrl.searchParams.set("redirect", pathname);
-    const res = NextResponse.redirect(loginUrl);
-    if (refreshedToken) {
-      res.cookies.set("access_token", refreshedToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-      });
-    }
-    return res;
+    return NextResponse.redirect(localizedUrl);
   }
 
   // Apply internationalization middleware for all other requests
-  const res = intlMiddleware(request);
-  if (refreshedToken) {
-    res.cookies.set("access_token", refreshedToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-    });
-  }
-  return res;
-}
+  return intlMiddleware(request);
+});
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ["/", "/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Match all routes including API routes for Clerk auth
+  matcher: [
+    '/((?!_next|_vercel).*)',
+    '/',
+    '/(api|trpc)(.*)',
+  ],
 };

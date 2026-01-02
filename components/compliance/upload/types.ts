@@ -26,10 +26,12 @@ export interface SummaryAnalysisResult {
   analysisId?: string;
   // Include relevance check in summary
   documentRelevance?: {
+    allRelevant?: boolean;
     analysisBlocked: boolean;
     issues: Array<{
       documentName: string;
       relevanceScore: number;
+      isRelevant: boolean;
       suggestedTopic: string;
       reasoning: string;
       recommendation: string;
@@ -37,6 +39,7 @@ export interface SummaryAnalysisResult {
   };
   // Include action flags for UI buttons
   canImprove?: boolean;
+  canMerge?: boolean;
   shouldGenerateFromScratch?: boolean;
 }
 
@@ -56,10 +59,12 @@ export interface FullAnalysisResult {
   canMerge: boolean;
   shouldGenerateFromScratch: boolean;
   documentRelevance?: {
+    allRelevant?: boolean;
     analysisBlocked: boolean;
     issues: Array<{
       documentName: string;
       relevanceScore: number;
+      isRelevant: boolean;
       suggestedTopic: string;
       reasoning: string;
       recommendation: string;

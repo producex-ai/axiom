@@ -294,6 +294,14 @@ export async function analyzeCompliance({
     subModuleDescription,
   });
 
+  // ✅ CRITICAL FIX: Block analysis if documents are not relevant
+  if (relevanceCheck.shouldBlockAnalysis) {
+    console.log("[LLM-ANALYSIS-V3] ❌ Analysis blocked: Documents not relevant to this submodule");
+    console.log("[LLM-ANALYSIS-V3] Issues:", relevanceCheck.issues);
+    
+    return createBlockedAnalysisResult(relevanceCheck, checklist);
+  }
+
   console.log("[LLM-ANALYSIS-V3] Phase 1: Extracting facts from documents...");
   const facts = await extractDocumentFacts({ checklist, documents });
 
@@ -571,7 +579,7 @@ async function extractDocumentFacts({
 }
 
 function extractRequirementWithQuality(
-  requirement: { id: string; title: string; description?: string },
+  requirement: { id: string; title: string; description?: string; keywords?: string[] },
   documentText: string,
   sourceFile: string
 ): ExtractedFact {
@@ -662,78 +670,15 @@ function extractSpecificKeywords(requirement: {
   id: string;
   title: string;
   description?: string;
+  keywords?: string[];
 }): string[] {
   const text = requirement.title + " " + (requirement.description || "");
   const specificTerms: string[] = [];
 
-  // CRITICAL FIX: Map requirement ID to document section topics
-  const idMatch = requirement.id.match(/1\.01\.(\d+)/);
-  if (idMatch) {
-    const reqNum = idMatch[1];
-
-    // Map requirement numbers to their expected document topics
-    const topicMap: Record<string, string[]> = {
-      "01": [
-        "food safety policy",
-        "policy statement",
-        "management commitment",
-        "signed policy",
-      ],
-      "02": [
-        "food safety culture",
-        "culture program",
-        "culture initiatives",
-        "employee engagement",
-        "shared values",
-      ],
-      "03": [
-        "organizational chart",
-        "organization chart",
-        "organizational structure",
-        "reporting structure",
-        "job descriptions",
-      ],
-      "04": [
-        "food safety committee",
-        "safety committee",
-        "committee meeting",
-        "FSC",
-        "committee operations",
-      ],
-      "05": [
-        "training program",
-        "training system",
-        "training management",
-        "employee training",
-        "competency",
-      ],
-      "06": [
-        "allergen control",
-        "allergen program",
-        "allergen management",
-        "cross-contact",
-        "allergen handling",
-      ],
-      "07": [
-        "management review",
-        "annual review",
-        "system review",
-        "systematic evaluation",
-        "management review process",
-      ],
-      "08": [
-        "industry guidelines",
-        "industry standards",
-        "best practices",
-        "industry-specific",
-        "applicable guidelines",
-      ],
-    };
-
-    const mappedTerms = topicMap[reqNum] || [];
-    specificTerms.push(...mappedTerms);
-
-    console.log(`[KEYWORD-MAP] ${requirement.id} -> ${mappedTerms.join(", ")}`);
+  // Use keywords from the submodule JSON if available
+  if (requirement.keywords && requirement.keywords.length > 0) {
+    specificTerms.push(...requirement.keywords);
+    console.log(`[KEYWORD-JSON] ${requirement.id} -> ${requirement.keywords.join(", ")}`);
   }
 
   // Extract quoted phrases (high priority)
@@ -773,6 +718,7 @@ function extractSpecificKeywords(requirement: {
 function extractGenericKeywords(requirement: {
   title: string;
   description?: string;
+  keywords?: string[];
 }): string[] {
   const text = (
     requirement.title +
@@ -1178,7 +1124,7 @@ async function assessComplianceFromFacts(
 
 function assessHighConfidenceMatch(
   finding: ExtractedFact,
-  requirement: { id: string; title: string; description?: string }
+  requirement: { id: string; title: string; description?: string; keywords?: string[] }
 ): ComplianceMatch {
   const foundElements = Object.entries(finding.details).filter(
     ([_, value]) => value === "yes"
@@ -1332,7 +1278,7 @@ function assessHighConfidenceMatch(
 // Validate borderline cases with LLM
 async function validateMediumConfidenceFindings(
   findings: ExtractedFact[],
-  requirements: Array<{ id: string; title: string; description?: string }>,
+  requirements: Array<{ id: string; title: string; description?: string; keywords?: string[] }>,
   documents: { fileName: string; text: string }[]
 ): Promise<ComplianceMatch[]> {
   const fullText = documents.map((d) => d.text).join("\n\n");
@@ -1773,13 +1719,117 @@ OUTPUT JSON (no markdown):
 // UTILITY FUNCTIONS
 // ============================================================================
 
+/**
+ * Create a blocked analysis result when documents are not relevant to the submodule
+ */
+function createBlockedAnalysisResult(
+  relevanceCheck: {
+    allRelevant: boolean;
+    issues: DocumentRelevanceIssue[];
+    shouldBlockAnalysis: boolean;
+  },
+  checklist: any
+): EnhancedAnalysisResult {
+  const requirementsList = extractRequirementList(checklist);
+  
+  // All requirements are missing since document is not relevant
+  const missing = {
+    count: requirementsList.length,
+    requirements: requirementsList.map((req) => ({
+      id: req.id,
+      title: req.title,
+      severity: "high" as const,
+      impact: "Document not relevant to this submodule - requirements cannot be assessed",
+    })),
+  };
+
+  const contentCoverage = requirementsList.map((req) => ({
+    questionId: req.id,
+    status: "missing" as const,
+    evidenceSnippet: "Document not relevant to this submodule",
+    confidence: 0,
+    sourceFile: "N/A",
+  }));
+
+  const coverageMap: Record<string, "covered" | "partial" | "missing"> = {};
+  requirementsList.forEach((req) => {
+    coverageMap[req.id] = "missing";
+  });
+
+  // Generate recommendations based on relevance issues
+  const recommendations: EnhancedAnalysisResult["recommendations"] = relevanceCheck.issues.map((issue) => ({
+    priority: "high" as const,
+    category: "content" as const,
+    recommendation: `Document "${issue.documentName}" is not relevant to this submodule. ${issue.recommendation}`,
+    specificGuidance: `This document addresses: ${issue.identifiedTopic}. Expected topics: ${issue.suggestedTopic}. Missing: ${issue.requirementsMissing.join(", ")}`,
+  }));
+
+  return {
+    overallScore: 0,
+    contentScore: 0,
+    structureScore: 0,
+    auditReadinessScore: 0,
+    documentRelevance: { ...relevanceCheck, analysisBlocked: true },
+    canImprove: false,
+    canMerge: false,
+    shouldGenerateFromScratch: true,
+    contentCoverage,
+    structuralAnalysis: {
+      hasTitlePage: false,
+      hasPurposeStatement: false,
+      hasRolesResponsibilities: false,
+      hasProcedures: false,
+      hasMonitoringPlan: false,
+      hasRecordKeeping: false,
+      hasCAPA: false,
+      hasTraceability: false,
+      overallStructureQuality: "poor" as const,
+      missingStructuralElements: [],
+      score: 0,
+    },
+    auditReadiness: {
+      languageProfessionalism: "poor" as const,
+      procedureImplementability: "poor" as const,
+      monitoringAdequacy: "poor" as const,
+      verificationMechanisms: "poor" as const,
+      recordKeepingClarity: "poor" as const,
+      overallAuditReadiness: "not-ready" as const,
+      auditRisks: [],
+      score: 0,
+    },
+    recommendations,
+    missingRequirements: missing.requirements.map((m) => ({
+      questionId: m.id,
+      description: m.title,
+      severity: m.severity,
+    })),
+    covered: {
+      count: 0,
+      requirements: [],
+    },
+    partial: {
+      count: 0,
+      requirements: [],
+    },
+    missing,
+    risks: recommendations.map((r, i) => ({
+      riskId: `RISK-${i + 1}`,
+      description: r.recommendation,
+      severity: "high" as const,
+      recommendation: r.specificGuidance || "Upload relevant documents for this submodule",
+    })),
+    coverageMap,
+  };
+}
+
 function extractRequirementList(
   checklist: any
-): Array<{ id: string; title: string; description?: string }> {
+): Array<{ id: string; title: string; description?: string; keywords?: string[] }> {
   const requirements: Array<{
     id: string;
     title: string;
     description?: string;
+    keywords?: string[];
   }> = [];
 
   if (!checklist) return requirements;
@@ -1794,6 +1844,7 @@ function extractRequirementList(
             item.mandatoryStatements?.join("; ") ||
             item.guidance ||
             item.description,
+          keywords: item.keywords || [],
         });
       }
     });
@@ -1812,6 +1863,7 @@ function extractRequirementList(
               item.mandatoryStatements?.join("; ") ||
               item.guidance ||
               item.description,
+            keywords: item.keywords || [],
           });
         }
       });
@@ -1827,6 +1879,7 @@ function extractRequirementList(
               req.mandatoryStatements?.join("; ") ||
               req.guidance ||
               req.description,
+            keywords: req.keywords || [],
           });
         }
       });
@@ -1844,6 +1897,7 @@ function extractRequirementList(
                   q.mandatoryStatements?.join("; ") ||
                   q.guidance ||
                   q.description,
+                keywords: q.keywords || [],
               });
             }
           });

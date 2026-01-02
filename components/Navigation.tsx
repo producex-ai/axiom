@@ -2,20 +2,22 @@
 
 import { LogOut, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LocaleToggle } from "@/components/ui/locale-toggle";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function Navigation() {
   const t = useTranslations("navigation");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const params = useParams();
   const pathname = usePathname();
+  const router = useRouter();
   const locale = params.locale as string;
-  const { isAuthenticated, isLoading, logout } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
+  const { signOut } = useClerk();
 
   // Check if we're on the home page to show section navigation
   const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/`;
@@ -37,12 +39,12 @@ export default function Navigation() {
 
   const handleLogout = async () => {
     setIsMobileMenuOpen(false);
-    await logout();
+    await signOut(() => router.push(`/${locale}`));
   };
 
   // Helper function to render authentication button
   const renderAuthButton = (isMobile = false) => {
-    if (isLoading) {
+    if (!isLoaded) {
       return (
         <Button disabled className={isMobile ? "mt-4 w-full" : ""}>
           XXXX
@@ -50,7 +52,7 @@ export default function Navigation() {
       );
     }
 
-    if (isAuthenticated) {
+    if (isSignedIn) {
       return (
         <Button
           variant="outline"

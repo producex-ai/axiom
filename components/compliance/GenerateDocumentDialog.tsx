@@ -72,10 +72,6 @@ export default function GenerateDocumentDialog({
 
   // Handle modal close
   const handleClose = () => {
-    // Call onSuccess when closing after successful generation
-    if (currentStep === "complete" && onSuccess) {
-      onSuccess(generatedDocId);
-    }
     onClose();
   };
 
@@ -116,9 +112,14 @@ export default function GenerateDocumentDialog({
       setGeneratedDocKey(result.contentKey);
       setGeneratedDocId(result.documentId);
       setGeneratedFileName(result.fileName);
-      setCurrentStep("complete");
 
       toast.success(`${subModuleName} document created successfully.`);
+      
+      // Immediately call onSuccess and close dialog without showing complete step
+      if (onSuccess) {
+        onSuccess(result.documentId);
+      }
+      onClose();
     } catch (error) {
       console.error("Document generation failed:", error);
       setCurrentStep("questions");

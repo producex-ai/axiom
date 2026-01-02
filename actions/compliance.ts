@@ -10,7 +10,7 @@
  */
 
 import { randomUUID } from "crypto";
-import { getAccessToken, decodeJWTPayload } from "@/lib/auth";
+import { auth } from "@clerk/nextjs/server";
 import { query } from "@/lib/db/postgres";
 import { uploadToS3, extractTextFromDOCX, deleteFromS3, getFromS3 } from "@/lib/s3-utils";
 import { ActionResponse, ValidationError, AuthenticationError, ServerError, createErrorResponse, createSuccessResponse } from "./utils";
@@ -27,38 +27,18 @@ const ALLOWED_MIME_TYPES = [
  */
 async function getAuthContext(): Promise<{ orgId: string; userId: string }> {
   try {
-    const token = await getAccessToken();
-    if (!token) {
+    const { userId, orgId } = await auth();
+    
+    if (!userId) {
       throw new AuthenticationError();
     }
 
-    const payload = decodeJWTPayload(token);
-    if (!payload || !payload.sub) {
-      throw new AuthenticationError();
-    }
-
-    const userId = payload.sub;
-    const api = `${process.env.API_BASE_URL}/v1/profile/${userId}`;
-
-    const response = await fetch(api, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new AuthenticationError();
-    }
-
-    const profile = await response.json();
-    if (!profile || !profile.organization_id) {
+    if (!orgId) {
       throw new AuthenticationError();
     }
 
     return {
-      orgId: profile.organization_id,
+      orgId,
       userId,
     };
   } catch (error) {

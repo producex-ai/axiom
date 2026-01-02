@@ -79,41 +79,43 @@ export const ResultsStepActions: React.FC<ResultsStepActionsProps> = ({
         ) : isSingleDocument ? (
           // SINGLE DOCUMENT: Show Auto-Complete + Accept & Save
           <>
-            {onAccept && (
-              <Button
-                onClick={onAccept}
-                disabled={isAccepting || isImproving}
-                variant="outline"
-                className="flex-1"
-              >
-                {isAccepting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
-                  </>
-                ) : (
-                  "Accept & Save"
-                )}
-              </Button>
-            )}
             {canImprove && (
-              <Button
-                onClick={onImprove}
-                disabled={isImproving || isAccepting}
-                className="flex-1"
-              >
-                {isImproving ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enhancing...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Enhance with Axiom
-                  </>
+              <>
+                {onAccept && (
+                  <Button
+                    onClick={onAccept}
+                    disabled={isAccepting || isImproving}
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    {isAccepting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      "Accept & Save"
+                    )}
+                  </Button>
                 )}
-              </Button>
+                <Button
+                  onClick={onImprove}
+                  disabled={isImproving || isAccepting}
+                  className="flex-1"
+                >
+                  {isImproving ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Enhancing...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Enhance with Axiom
+                    </>
+                  )}
+                </Button>
+              </>
             )}
           </>
         ) : (

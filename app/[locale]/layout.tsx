@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -42,26 +43,28 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body
-        className={`${figtree.className} antialiased`}
-        suppressHydrationWarning
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang={locale} suppressHydrationWarning>
+        <body
+          className={`${figtree.className} antialiased`}
+          suppressHydrationWarning
         >
-          <NavigationProgress />
-          <QueryProvider>
-            <NextIntlClientProvider messages={messages}>
-              {children}
-              <Toaster />
-            </NextIntlClientProvider>
-          </QueryProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavigationProgress />
+            <QueryProvider>
+              <NextIntlClientProvider messages={messages}>
+                {children}
+                <Toaster />
+              </NextIntlClientProvider>
+            </QueryProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

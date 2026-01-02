@@ -32,7 +32,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import type { AuditRiskIssue } from "@/lib/editor/publish-flow";
 
 interface AuditDialogProps {
@@ -48,7 +47,6 @@ interface AuditDialogProps {
 export function AuditDialog({
   open,
   onClose,
-  issues,
   onFixClick,
   onPublishClick,
   version,
@@ -75,9 +73,6 @@ export function AuditDialog({
   }, [fullAnalysis, analysisScores, canPublishWithWarning]);
 
   const recommendations = fullAnalysis?.recommendations || [];
-  const contentCoverage = fullAnalysis?.contentCoverage || [];
-  const structuralAnalysis = fullAnalysis?.structuralAnalysis || null;
-  const risks = fullAnalysis?.risks || [];
 
   // Group recommendations by category for better organization
   const recommendationsByCategory = recommendations.reduce(
@@ -108,11 +103,10 @@ export function AuditDialog({
         <DialogHeader className="space-y-2 shrink-0">
           <DialogTitle className="flex items-center gap-3 text-xl">
             <AlertCircle className="h-6 w-6 text-red-600" />
-            <span>Cannot Publish Document</span>
+            <span>Document analysis</span>
           </DialogTitle>
           <DialogDescription className="text-sm">
-            Document v{version} saved. Compliance issues must be resolved before
-            publishing.
+            Document v{version} saved. Take a look at the analysis results below before publishing.
           </DialogDescription>
         </DialogHeader>
 

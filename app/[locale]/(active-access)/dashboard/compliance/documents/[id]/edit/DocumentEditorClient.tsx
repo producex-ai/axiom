@@ -37,7 +37,6 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const [auditIssuesOpen, setAuditIssuesOpen] = useState(false);
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
-  const [lastPublishedVersion, setLastPublishedVersion] = useState<number>(0);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -203,7 +202,6 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
         setOriginalContent(markdown);
         setHasChanges(false);
         setUserHasEdited(false);
-        setLastPublishedVersion(result.version || 0);
 
         if (result.success) {
           // ✅ Publish succeeded - transition to published state
@@ -461,7 +459,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
           setAuditIssuesOpen(false);
           handlePublish(true);
         }}
-        version={lastPublishedVersion}
+        version={documentMetadata?.version}
         fullAnalysis={auditAnalysis}
       />
 

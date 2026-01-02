@@ -24,6 +24,31 @@ export const LightweightScoreSummary: React.FC<LightweightScoreSummaryProps> = (
     }
   };
 
+  // Generate contextual next steps message based on analysis results
+  const getNextStepsMessage = () => {
+    const hasRelevanceIssues = !analysis.documentRelevance?.allRelevant;
+    const canImprove = analysis.canImprove;
+    const shouldGenerate = analysis.shouldGenerateFromScratch;
+    const canMerge = analysis.canMerge;
+
+    // If there are relevance issues, prioritize that
+    if (hasRelevanceIssues) {
+      return "Some documents may not be relevant to this module. Review the relevance issues below, then Accept valid documents or upload corrected files.";
+    }
+
+    // Build available actions list
+    const actions: string[] = ["Accept"];
+    if (canMerge) actions.push("Merge");
+    if (canImprove) actions.push("Improve");
+    if (shouldGenerate) actions.push("Generate from scratch");
+
+    const actionsList = actions.length > 1 
+      ? `${actions.slice(0, -1).join(", ")}, or ${actions[actions.length - 1]}`
+      : actions[0];
+
+    return `View detailed analysis and choose actions like ${actionsList} from main screen.`;
+  };
+
   return (
     <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900/30">
       <p className="mb-6 text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
@@ -53,9 +78,17 @@ export const LightweightScoreSummary: React.FC<LightweightScoreSummaryProps> = (
         </div>
       </div>
 
-      <div className="mt-6 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50">
-        <p className="text-xs text-blue-900 dark:text-blue-200">
-          <span className="font-semibold">Next Steps:</span> View detailed analysis and choose actions like Accept, Improve, or Generate from scratch from main screen.
+      <div className={`mt-6 p-4 rounded-lg border ${
+        !analysis.documentRelevance?.allRelevant 
+          ? "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50"
+          : "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/50"
+      }`}>
+        <p className={`text-xs ${
+          !analysis.documentRelevance?.allRelevant
+            ? "text-amber-900 dark:text-amber-200"
+            : "text-blue-900 dark:text-blue-200"
+        }`}>
+          <span className="font-semibold">Next Steps:</span> {getNextStepsMessage()}
         </p>
       </div>
     </div>
@@ -85,12 +118,39 @@ export const RelevanceWarning: React.FC<RelevanceWarningProps> = ({ isBlocked, a
 
 interface SuccessMessageProps {
   documentCount: number;
+  hasRelevanceIssues?: boolean;
+  relevantCount?: number;
 }
 
 /**
  * Success message after analysis
  */
-export const AnalysisSuccessMessage: React.FC<SuccessMessageProps> = ({ documentCount }) => {
+export const AnalysisSuccessMessage: React.FC<SuccessMessageProps> = ({ 
+  documentCount, 
+  hasRelevanceIssues = false,
+  relevantCount 
+}) => {
+  // Show warning style if there are relevance issues
+  if (hasRelevanceIssues) {
+    return (
+      <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50">
+        <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="font-medium text-amber-900 dark:text-amber-100">
+            Analysis Complete - Relevance Issues Detected
+          </p>
+          <p className="text-sm text-amber-800 dark:text-amber-200 mt-1">
+            {documentCount} document{documentCount !== 1 ? "s" : ""} analyzed. 
+            {relevantCount !== undefined && relevantCount < documentCount && (
+              <> Only {relevantCount} of {documentCount} document{documentCount !== 1 ? "s" : ""} appear{relevantCount === 1 ? "s" : ""} relevant to this module.</>
+            )}
+            {" "}Please review the issues below and either remove irrelevant documents or upload corrected files before accepting.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50">
       <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />

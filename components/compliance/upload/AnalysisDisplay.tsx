@@ -18,9 +18,9 @@ export const ScoreSummary: React.FC<ScoreSummaryProps> = ({ analysis }) => {
       <div className="flex items-baseline gap-2">
         <span
           className={`text-5xl font-bold ${
-            analysis.overallScore >= 50
+            analysis.overallScore > 85
               ? "text-emerald-600 dark:text-emerald-400"
-              : analysis.overallScore >= 30
+              : analysis.overallScore >= 75
               ? "text-amber-600 dark:text-amber-400"
               : "text-red-600 dark:text-red-400"
           }`}

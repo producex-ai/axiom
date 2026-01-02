@@ -178,7 +178,8 @@ export default function ModuleOverview({
           return (
             <Card
               key={module.module}
-              className="group relative overflow-hidden border-2 transition-all duration-300 hover:border-primary/20 hover:shadow-lg"
+              className="group relative overflow-hidden border-2 transition-all duration-300 hover:border-primary/20 hover:shadow-lg cursor-pointer"
+              onClick={() => onModuleClick(module.module)}
             >
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${colors.bgGradient} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
@@ -246,7 +247,10 @@ export default function ModuleOverview({
                 <Button
                   className="w-full transition-all group-hover:shadow-md"
                   variant="outline"
-                  onClick={() => onModuleClick(module.module)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onModuleClick(module.module);
+                  }}
                 >
                   View Details
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
