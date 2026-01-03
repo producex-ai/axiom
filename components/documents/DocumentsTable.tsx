@@ -38,6 +38,7 @@ interface Document {
   id: string;
   title: string;
   status: "draft" | "published" | "archived";
+  framework_id: string;
   module_id: string;
   sub_module_id: string;
   current_version: number;
@@ -197,7 +198,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                     {formatRelativeTime(doc.updated_at)}
                   </TableCell>
                   <TableCell className="text-sm">
-                    {doc.module_id === "company"
+                    {doc.framework_id === "company_docs"
                       ? "Company Document"
                       : `${doc.module_id}.${doc.sub_module_id}`}
                   </TableCell>

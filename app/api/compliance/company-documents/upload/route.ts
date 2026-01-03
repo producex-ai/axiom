@@ -1,10 +1,12 @@
 /**
  * POST /api/compliance/company-documents/upload
- * Upload a standalone company document (not tied to any module)
+ * Upload a document and associate it with a specific module and sub-module
  *
  * Form data:
  * - file: File (DOCX document)
  * - title: string (document title)
+ * - moduleId: string (module ID, e.g., "1", "2", "4")
+ * - subModuleId: string (sub-module ID, e.g., "1.01", "2.02")
  *
  * Returns: Document metadata
  */
@@ -31,10 +33,12 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const file = formData.get("file") as File;
     const title = formData.get("title") as string;
+    const moduleId = formData.get("moduleId") as string;
+    const subModuleId = formData.get("subModuleId") as string;
 
-    if (!file || !title) {
+    if (!file || !title || !moduleId || !subModuleId) {
       return NextResponse.json(
-        { error: "File and title are required" },
+        { error: "File, title, moduleId, and subModuleId are required" },
         { status: 400 },
       );
     }
@@ -58,7 +62,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate S3 key
+    // Generate S3 docs/${orgId}/primus_gfs/uploaded/${subModule
     const documentId = randomUUID();
     const s3Key = `company-documents/${orgId}/${documentId}/${file.name}`;
 
@@ -73,7 +77,7 @@ export async function POST(request: NextRequest) {
 
     await s3.send(uploadCommand);
 
-    console.log(`[API] Uploaded company document to S3: ${s3Key}`);
+    console.log(`[API] Uploaded document to S3: ${s3Key}`);
 
     // Store document metadata in database
     const result = await query(
@@ -86,11 +90,11 @@ export async function POST(request: NextRequest) {
       [
         documentId,
         orgId,
-        "company_docs", // Special framework ID for company documents
-        "company", // Special module ID for company documents
-        "company", // Special sub-module ID for company documents
+        "primus_gfs", // Framework ID
+        moduleId, // Module ID from form
+        subModuleId, // Sub-module ID from form
         title,
-        "published", // Company uploaded docs are published by default
+        "published", // Uploaded docs are published by default
         s3Key,
         1, // Version 1
         userId,
@@ -100,7 +104,7 @@ export async function POST(request: NextRequest) {
 
     const document = result.rows[0];
 
-    console.log(`[API] Created company document record: ${documentId}`);
+    console.log(`[API] Created document record: ${documentId} for module ${moduleId}.${subModuleId}`);
 
     return NextResponse.json({
       success: true,
@@ -115,7 +119,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("[API] Error uploading company document:", error);
+    console.error("[API] Error uploading document:", error);
     return NextResponse.json(
       {
         error: "Failed to upload document",
