@@ -10,10 +10,13 @@ const intlMiddleware = createIntlMiddleware({
   defaultLocale: 'en',
 });
 
+// Define allowed roles
+const ALLOWED_ROLES = ['director', 'manager', 'admin', 'org:admin'];
+
 // Define protected routes that require authentication
 const isProtectedRoute = createRouteMatcher([
-  '/:locale/dsahboard(.*)',
-  '/:locale/document(.*)',
+  '/:locale/dashboard(.*)',
+  '/:locale/documents(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, request: NextRequest) => {
@@ -51,11 +54,29 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
       const authData = await auth();
       const sessionClaims = authData.sessionClaims as
         | {
+            o?: {
+              rol?: string;
+            };
             org_metadata?: {
               org_type?: string;
             };
           }
         | undefined;
+
+      // Check user role first
+      const userRole = sessionClaims?.o?.rol;
+      console.log(userRole);
+      
+      // If user doesn't have an allowed role, redirect to no-access
+      if (userRole && !ALLOWED_ROLES.includes(userRole)) {
+        console.log(`User with role '${userRole}' redirected to no-access from home`);
+        const noAccessUrl = createLocalizedUrl(
+          'no-access',
+          locale,
+          request.url
+        );
+        return NextResponse.redirect(noAccessUrl);
+      }
 
       // Access org metadata from session claims
       if (sessionClaims?.org_metadata?.org_type) {    
@@ -77,17 +98,33 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
     // Protect the route
     await auth.protect();
 
-    // If user is authenticated, check if they're accessing the correct role-based route
+    // If user is authenticated, check their role
     if (userIsAuthenticated && orgId) {
       try {
         const authData = await auth();
         const sessionClaims = authData.sessionClaims as
           | {
+              o?: {
+                rol?: string;
+              };
               org_metadata?: {
                 org_type?: string;
               };
             }
           | undefined;
+
+        // Check if user has an allowed role
+        const userRole = sessionClaims?.o?.rol;
+         console.log(userRole);
+        if (userRole && !ALLOWED_ROLES.includes(userRole)) {
+          console.log(`User with role '${userRole}' denied access`);
+          const noAccessUrl = createLocalizedUrl(
+            'no-access',
+            locale,
+            request.url
+          );
+          return NextResponse.redirect(noAccessUrl);
+        }
       } catch (error) {
         // If organization fetch fails for role check, log error but allow access
         // This prevents blocking legitimate users if API is temporarily unavailable

@@ -13,7 +13,7 @@ export default async function SignInPage() {
         <div className='relative hidden lg:flex lg:w-1/2'>
           <div className='absolute inset-0 z-10 bg-gradient-to-br from-emerald-600/20 to-emerald-800/40' />
           <img
-            src='https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            src='/images/compliance_image.jpg'
             alt={t('page.imageAlt')}
             className='h-full w-full object-cover'
           />
