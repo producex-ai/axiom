@@ -107,10 +107,20 @@ You generate ONE complete audit-ready Standard Operating Procedure (SOP) per sub
 CRITICAL OUTPUT REQUIREMENTS:
 ✓ Only the final SOP document text (plain text format)
 ✓ Complete content for all 15 sections (MANDATORY - no skipping - highest priority)
-✓ Actual procedures, not descriptions of procedures
+✓ Actual procedures with step-by-step instructions, not descriptions
 ✓ Specific values from provided answers
 ✓ Minimum 2500 words for comprehensive audit-ready content
 ✓ ALL requirements from the specification integrated naturally
+
+AUDIT-READY PROCEDURAL REQUIREMENTS (CRITICAL):
+⚡ Write SPECIFIC step-by-step procedures: "1. The FSM reviews... 2. If deficiency found... 3. Complete Form..."
+⚡ Include SPECIFIC forms/documents: "Form FSM-TR-01", "Document #1.01-POL-001", "Checklist QA-AUD-05"
+⚡ Use SPECIFIC frequencies: "Every Monday at 9:00 AM", "Within 24 hours of discovery", "Quarterly (Jan, Apr, Jul, Oct)"
+⚡ Specify RESPONSIBLE parties: Use job titles consistently ("Food Safety Manager", "QA Supervisor", "Line Supervisor")
+⚡ Include ACCEPTANCE criteria: "Training completion rate must be ≥95%", "Temperature must be ≤40°F"
+⚡ Add DECISION points: "If X occurs, proceed to Section Y", "When criteria not met, initiate CAPA per Section 11"
+⚡ Reference RECORD locations: "Records stored in SharePoint/Quality/Training", "Filed in QA Office Cabinet 3"
+⚡ Generate realistic form numbers using pattern: {SECTION}-{TYPE}-{NUMBER} (e.g., "FSM-TR-01", "CAPA-INV-02")
 
 CRITICAL RULE FOR LARGE SUBMODULES (15+ requirements):
 ⚡ Your PRIMARY goal is completing ALL 15 SECTIONS
@@ -118,7 +128,7 @@ CRITICAL RULE FOR LARGE SUBMODULES (15+ requirements):
 ⚡ Do NOT make early sections excessively long at the expense of later sections
 ⚡ Distribute content evenly - complete coverage is more important than excessive detail
 ⚡ Section 8 (Procedures) should be comprehensive but concise - 1-2 paragraphs per requirement
-⚡ BUDGET YOUR TOKENS: Reserve sufficient space to complete sections 9-15
+⚡ BUDGET YOUR TOKENS: Reserve minimum 10,000 tokens for sections 9-15
 
 YOUR OUTPUT MUST NOT CONTAIN:
 ✗ Bracketed meta-comments like "[...]", "[continued]", "[fill in]"
@@ -468,35 +478,92 @@ function buildSectionGuidance(
 
   // Section 9: Monitoring
   blocks.push(
-    `SECTION 9: MONITORING - Cover monitoring for requirements with monitoring expectations`,
+    `SECTION 9: MONITORING PLAN - Specific monitoring procedures for each requirement`,
   );
   const monitoringCount = submoduleSpec.requirements.filter(
     (r) => r.required && r.monitoringExpectations,
   ).length;
   blocks.push(
-    `${monitoringCount} requirements need monitoring: frequencies, methods, records, responsible parties`,
+    `${monitoringCount} requirements need monitoring. For EACH, specify:`,
+  );
+  blocks.push(
+    `- WHO monitors (specific job title)`,
+  );
+  blocks.push(
+    `- WHEN (specific frequency: "Daily at 8 AM", "Every Monday", "Within 24 hours")`,
+  );
+  blocks.push(
+    `- HOW (method: "Visual inspection using Checklist MON-01", "Review Form XYZ")`,
+  );
+  blocks.push(
+    `- WHAT form/record used (generate realistic form numbers like MON-TR-01, MON-AUD-02)`,
+  );
+  blocks.push(
+    `- ACCEPTANCE criteria ("≥95% completion", "No deficiencies", "Within limits")`,
+  );
+  blocks.push(
+    `- WHAT happens if criteria not met ("Initiate CAPA per Section 11")`,
   );
   blocks.push("");
 
   // Section 10: Verification
   blocks.push(
-    `SECTION 10: VERIFICATION - Cover verification for requirements with verification expectations`,
+    `SECTION 10: VERIFICATION & VALIDATION ACTIVITIES - Independent checks of monitoring effectiveness`,
   );
   const verificationCount = submoduleSpec.requirements.filter(
     (r) => r.required && r.verificationExpectations,
   ).length;
   blocks.push(
-    `${verificationCount} requirements need verification: audit schedules, validation methods`,
+    `${verificationCount} requirements need verification. For EACH, specify:`,
+  );
+  blocks.push(
+    `- Verification method: "Internal audit using Checklist VER-01", "Management review of reports"`,
+  );
+  blocks.push(
+    `- Frequency: "Quarterly", "Semi-annually", "Annually on [specific month]"`,
+  );
+  blocks.push(
+    `- Responsible party: Specific job title ("QA Manager", "Internal Auditor")`,
+  );
+  blocks.push(
+    `- Records generated: "Audit Report VER-AUD-01", "Validation Study Report VER-VAL-01"`,
+  );
+  blocks.push(
+    `- Record retention period: "3 years", "5 years", "Life of facility"`,
   );
   blocks.push("");
 
   // Section 11: CAPA
   blocks.push(
-    `SECTION 11: CAPA PROTOCOL - Standard trigger → investigate → correct → prevent format`,
+    `SECTION 11: CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL - Step-by-step procedures`,
+  );
+  blocks.push(
+    `Use this format (be SPECIFIC):`,
+  );
+  blocks.push(
+    `1. TRIGGERS: List specific triggers ("Monitoring failure", "Audit finding", "Customer complaint")`,
+  );
+  blocks.push(
+    `2. INITIATION: "Within X hours, [Job Title] completes Form CAPA-INIT-01"`,
+  );
+  blocks.push(
+    `3. INVESTIGATION: "[Job Title] conducts root cause analysis using 5-Why or Fishbone method within Y days"`,
+  );
+  blocks.push(
+    `4. CORRECTIVE ACTIONS: "Immediate actions documented on Form CAPA-CORR-01 within Z hours"`,
+  );
+  blocks.push(
+    `5. PREVENTIVE ACTIONS: "Long-term actions to prevent recurrence, documented with timelines"`,
+  );
+  blocks.push(
+    `6. VERIFICATION: "QA Manager verifies effectiveness within [timeframe] using [method]"`,
+  );
+  blocks.push(
+    `7. CLOSURE: "CAPA closed by [Job Title] when verified effective, filed in [location]"`,
   );
   if (submoduleSpec.capaInject && submoduleSpec.capaInject.length > 0) {
     blocks.push(
-      `Include ${Math.min(submoduleSpec.capaInject.length, 5)} key CAPA protocols from spec`,
+      `Include ${Math.min(submoduleSpec.capaInject.length, 5)} specific CAPA scenarios from spec`,
     );
   }
   blocks.push("");
@@ -517,13 +584,37 @@ function buildSectionGuidance(
 
   // Sections 13-15
   blocks.push(
-    "SECTION 13: RECORDS - What records, retention periods, storage locations (2-3 paragraphs)",
+    "SECTION 13: RECORD RETENTION & DOCUMENT CONTROL",
   );
   blocks.push(
-    "SECTION 14: CROSSWALK TABLE - Format: Primus Code | Requirement | Section | Evidence",
+    "Create a detailed table with columns: Record Type | Form Number | Retention Period | Storage Location | Responsible Party",
   );
   blocks.push(
-    "SECTION 15: REVISION HISTORY & SIGNATURES - Table + 3 signature lines",
+    "Examples: 'Training Records | FSM-TR-01 | 2 years | SharePoint/Quality/Training | Food Safety Manager'",
+  );
+  blocks.push(
+    "Include ALL records generated by procedures in Sections 8-11 (monitoring forms, audit reports, CAPA records, etc.)",
+  );
+  blocks.push(
+    "",
+  );
+  blocks.push(
+    "SECTION 14: COMPLIANCE CROSSWALK TABLE",
+  );
+  blocks.push(
+    "Format as table: Primus Code | Requirement | Section Reference | Evidence/Form Number",
+  );
+  blocks.push(
+    "Example: '1.01.01 | Food Safety Policy | Section 2, 8 | Document FSM-POL-001, Form FSM-REV-01'",
+  );
+  blocks.push(
+    "Include ALL Primus GFS requirements from this submodule",
+  );
+  blocks.push(
+    "",
+  );
+  blocks.push(
+    "SECTION 15: REVISION HISTORY & APPROVAL SIGNATURES - Table with Version, Date, Description + 3 signature lines",
   );
   blocks.push("");
 
@@ -576,8 +667,27 @@ DO NOT ADD:
 ✗ Explanations of what you generated
 ✗ Any text after the "Approved By" signature line
 
+CORRECT FORMAT EXAMPLE (with Markdown formatting):
+### 1.01.01 - Food Safety Policy Documentation
+
+**Requirement:** A documented food safety policy detailing company's commitment to food safety
+**Implementation Status:** Yes
+
+The purpose of this Standard Operating Procedure...
+
+INCORRECT FORMAT (DO NOT USE):
+Plain text without formatting (lacks structure for Word conversion)
+
 Your response MUST end exactly at the signature lines. Generate nothing after that point.
 =================================
+
+FORMATTING GUIDELINES:
+=================================
+✓ USE Markdown for proper formatting (will be converted to DOCX)
+✓ Headers: Use ### for requirement subsections (e.g., "### 1.01.01 - Food Safety Policy")
+✓ Bold: Use **text** for emphasis (e.g., "**Requirement:**", "**Implementation Status:**")
+✓ Lists: Use standard list formatting ("- Item" or "1. Item")
+✓ This Markdown will be automatically converted to proper Word formatting
 
 Generate the final SOP document now. Output ONLY the complete document text with no preamble, no meta-commentary, no explanations. Start with the title and end with the approval signatures.`;
 }

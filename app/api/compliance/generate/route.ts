@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
     const moduleContext = {
       moduleNumber: moduleSpec.module,
       moduleName: moduleSpec.moduleName,
+      subModuleName: submoduleSpec.title, // ✅ FIX: Add subModuleName for LLM functions
       complianceStandard: "Primus GFS v4.0",
       submoduleCode: submoduleSpec.code,
       submoduleTitle: submoduleSpec.title,

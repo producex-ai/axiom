@@ -298,17 +298,18 @@ export default function SubModuleCard({
   // Render card with document (enhanced 3-line layout)
   if (hasDocument) {
     return (
-      <div
-        onClick={!isNavigating ? handleEdit : undefined}
-        aria-disabled={isNavigating}
-        className={`group relative ${isNavigating ? "cursor-not-allowed opacity-80" : "cursor-pointer"} rounded-lg border transition-all duration-200 border-border bg-card/50 shadow-sm hover:shadow-md hover:bg-card dark:hover:bg-card/80 ${
-          isNested ? "border-l-4" : ""
-        }`}
-        style={
-          isNested ? { borderLeftColor: `var(--primary)` } : {}
-        }
-      >
-      <div className="space-y-3 p-4">
+      <>
+        <div
+          onClick={!isNavigating ? handleEdit : undefined}
+          aria-disabled={isNavigating}
+          className={`group relative ${isNavigating ? "cursor-not-allowed opacity-80" : "cursor-pointer"} rounded-lg border transition-all duration-200 border-border bg-card/50 shadow-sm hover:shadow-md hover:bg-card dark:hover:bg-card/80 ${
+            isNested ? "border-l-4" : ""
+          }`}
+          style={
+            isNested ? { borderLeftColor: `var(--primary)` } : {}
+          }
+        >
+          <div className="space-y-3 p-4">
         {/* Line 1: Icon + Code + Title + Status Badge */}
         <div className="flex min-w-0 items-start gap-3">
           {/* Icon + Code */}
@@ -474,9 +475,10 @@ export default function SubModuleCard({
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Document Generation Dialog */}
-        <GenerateDocumentDialog
+      {/* Document Generation Dialog */}
+      <GenerateDocumentDialog
           open={showGenerateDialog}
           onClose={() => setShowGenerateDialog(false)}
           moduleNumber={moduleNumber}
@@ -485,16 +487,6 @@ export default function SubModuleCard({
           subModuleName={subModule.name}
           onSuccess={handleGenerateSuccess}
         />
-
-        {/* Document Upload Dialog */}
-        {/* <UploadDocumentDialog
-          open={showUploadDialog}
-          onClose={() => setShowUploadDialog(false)}
-          moduleNumber={moduleNumber}
-          subModuleCode={subModule.code}
-          subModuleName={subModule.name}
-          onSuccess={handleUploadSuccess}
-        /> */}
 
         {/* Evidence Upload Flow */}
         <EvidenceUploadFlow
@@ -507,8 +499,6 @@ export default function SubModuleCard({
             handleUploadSuccess(documentId);
           }}
         />
-
-
 
         {/* Revision History Dialog */}
         {revisionHistoryDocId && (
@@ -541,7 +531,10 @@ export default function SubModuleCard({
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
-                onClick={handleDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete();
+                }}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               >
                 Delete
@@ -549,21 +542,22 @@ export default function SubModuleCard({
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-      </div>
+      </>
     );
   }
 
   // Render card without document (simple 2-line layout - original design)
   return (
-    <div
-      className={`group relative rounded-lg border border-dashed transition-all duration-200 border-border bg-card hover:border-border/80 hover:bg-accent/50 ${
-        isNested ? "border-l-4" : ""
-      }`}
-      style={
-        isNested ? { borderLeftColor: `hsl(var(--primary))` } : {}
-      }
-    >
-      <div className="space-y-3 p-4">
+    <>
+      <div
+        className={`group relative rounded-lg border border-dashed transition-all duration-200 border-border bg-card hover:border-border/80 hover:bg-accent/50 ${
+          isNested ? "border-l-4" : ""
+        }`}
+        style={
+          isNested ? { borderLeftColor: `hsl(var(--primary))` } : {}
+        }
+      >
+        <div className="space-y-3 p-4">
         {/* Line 1: Icon + Code + Title + Status Badge (desktop) */}
         <div className="flex min-w-0 items-center gap-3">
           {/* Icon + Code */}
@@ -632,55 +626,46 @@ export default function SubModuleCard({
           </Button>
         </div>
       </div>
-
-      {/* Document Generation Dialog */}
-      <GenerateDocumentDialog
-        open={showGenerateDialog}
-        onClose={() => setShowGenerateDialog(false)}
-        moduleNumber={moduleNumber}
-        moduleName={moduleName}
-        subModuleCode={subModule.code}
-        subModuleName={subModule.name}
-        onSuccess={handleGenerateSuccess}
-      />
-
-      {/* Document Upload Dialog */}
-      {/* <UploadDocumentDialog
-        open={showUploadDialog}
-        onClose={() => setShowUploadDialog(false)}
-        moduleNumber={moduleNumber}
-        subModuleCode={subModule.code}
-        subModuleName={subModule.name}
-        onSuccess={handleUploadSuccess}
-      /> */}
-
-      {/* Evidence Upload Flow */}
-      <EvidenceUploadFlow
-        open={showEvidenceFlow}
-        onClose={() => setShowEvidenceFlow(false)}
-        subModuleId={subModule.code}
-        subModuleName={subModule.name}
-        onAnalysisComplete={(documentId, analysis) => {
-          // The documentId parameter now contains the actual document ID from the API response
-          handleUploadSuccess(documentId);
-        }}
-      />
-
-      {/* Revision History Dialog */}
-      {revisionHistoryDocId && (
-        <RevisionHistoryDialog
-          open={showRevisionHistory}
-          onOpenChange={(open) => {
-            setShowRevisionHistory(open);
-            if (!open) {
-              setRevisionHistoryDocId(null);
-              setRevisionHistoryDocTitle(null);
-            }
-          }}
-          documentId={revisionHistoryDocId}
-          documentTitle={revisionHistoryDocTitle || "Document"}
-        />
-      )}
     </div>
-  );
+
+    {/* Document Generation Dialog */}
+    <GenerateDocumentDialog
+      open={showGenerateDialog}
+      onClose={() => setShowGenerateDialog(false)}
+      moduleNumber={moduleNumber}
+      moduleName={moduleName}
+      subModuleCode={subModule.code}
+      subModuleName={subModule.name}
+      onSuccess={handleGenerateSuccess}
+    />
+
+    {/* Evidence Upload Flow */}
+    <EvidenceUploadFlow
+      open={showEvidenceFlow}
+      onClose={() => setShowEvidenceFlow(false)}
+      subModuleId={subModule.code}
+      subModuleName={subModule.name}
+      onAnalysisComplete={(documentId, analysis) => {
+        // The documentId parameter now contains the actual document ID from the API response
+        handleUploadSuccess(documentId);
+      }}
+    />
+
+    {/* Revision History Dialog */}
+    {revisionHistoryDocId && (
+      <RevisionHistoryDialog
+        open={showRevisionHistory}
+        onOpenChange={(open) => {
+          setShowRevisionHistory(open);
+          if (!open) {
+            setRevisionHistoryDocId(null);
+            setRevisionHistoryDocTitle(null);
+          }
+        }}
+        documentId={revisionHistoryDocId}
+        documentTitle={revisionHistoryDocTitle || "Document"}
+      />
+    )}
+  </>
+);
 }

@@ -160,6 +160,7 @@ export async function POST(request: NextRequest) {
       status: "draft",
       content_key: s3Key,
       current_version: 1,
+      analysis_score: null,
       created_by: userId,
       updated_by: null,
     });

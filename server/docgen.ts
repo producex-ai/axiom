@@ -1,5 +1,45 @@
 import { Document, HeadingLevel, Packer, Paragraph, TextRun } from "docx";
 
+/**
+ * Parse a line with Markdown formatting (bold, italic) into TextRuns
+ * Handles: **bold**, *italic*, and plain text
+ */
+function parseMarkdownInline(text: string): TextRun[] {
+  const runs: TextRun[] = [];
+  let remaining = text;
+  
+  // Pattern to match **bold** and *italic* (non-greedy)
+  const pattern = /(\*\*(.+?)\*\*)|(\*(.+?)\*)/g;
+  let lastIndex = 0;
+  let match;
+  
+  while ((match = pattern.exec(remaining)) !== null) {
+    // Add plain text before match
+    if (match.index > lastIndex) {
+      const plainText = remaining.slice(lastIndex, match.index);
+      if (plainText) runs.push(new TextRun(plainText));
+    }
+    
+    // Add formatted text
+    if (match[1]) {
+      // Bold: **text**
+      runs.push(new TextRun({ text: match[2], bold: true }));
+    } else if (match[3]) {
+      // Italic: *text*
+      runs.push(new TextRun({ text: match[4], italics: true }));
+    }
+    
+    lastIndex = pattern.lastIndex;
+  }
+  
+  // Add remaining plain text
+  if (lastIndex < remaining.length) {
+    runs.push(new TextRun(remaining.slice(lastIndex)));
+  }
+  
+  return runs.length > 0 ? runs : [new TextRun(text)];
+}
+
 export async function createDocxBufferFromText(text: string): Promise<Buffer> {
   const lines = text.split("\n");
   const paragraphs: Paragraph[] = [];
@@ -17,8 +57,22 @@ export async function createDocxBufferFromText(text: string): Promise<Buffer> {
     let heading: (typeof HeadingLevel)[keyof typeof HeadingLevel] | undefined;
     let textContent = trimmedLine;
 
+    // Pattern 0: Markdown headers (### Header)
+    const markdownHeader = trimmedLine.match(/^(#{1,6})\s+(.+)$/);
+    if (markdownHeader) {
+      const level = markdownHeader[1].length; // Number of # characters
+      textContent = markdownHeader[2]; // Text after ###
+      
+      if (level === 1) heading = HeadingLevel.HEADING_1;
+      else if (level === 2) heading = HeadingLevel.HEADING_2;
+      else if (level === 3) heading = HeadingLevel.HEADING_3;
+      else if (level === 4) heading = HeadingLevel.HEADING_4;
+      else if (level === 5) heading = HeadingLevel.HEADING_5;
+      else heading = HeadingLevel.HEADING_6;
+    }
+
     // Pattern 1: Lines ending with ":" might be headings
-    if (trimmedLine.endsWith(":") && trimmedLine.length < 100) {
+    if (trimmedLine.endsWith(":") && trimmedLine.length < 100 && !heading) {
       heading = HeadingLevel.HEADING_2;
       textContent = trimmedLine.slice(0, -1); // Remove the colon
     }
@@ -48,6 +102,7 @@ export async function createDocxBufferFromText(text: string): Promise<Buffer> {
 
     // Create paragraph with appropriate styling
     if (heading) {
+      // For headings, parse inline markdown (but don't apply bold/italic to heading itself)
       paragraphs.push(
         new Paragraph({
           text: textContent,
@@ -59,10 +114,11 @@ export async function createDocxBufferFromText(text: string): Promise<Buffer> {
         }),
       );
     } else {
-      // Regular paragraph
+      // Regular paragraph - parse Markdown inline formatting (**bold**, *italic*)
+      const textRuns = parseMarkdownInline(trimmedLine);
       paragraphs.push(
         new Paragraph({
-          children: [new TextRun(trimmedLine)],
+          children: textRuns,
           spacing: {
             before: 100,
             after: 100,

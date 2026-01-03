@@ -77,8 +77,6 @@ export async function uploadEvidenceAction(
 
     console.log("[SERVER ACTION] Uploading evidence:", {
       orgId,
-    console.log("[SERVER ACTION] Uploading evidence:", {
-      orgId,
       userId,
       subModuleId,
       fileCount: files.length,

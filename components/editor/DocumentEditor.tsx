@@ -12,17 +12,12 @@ import { EditorBubbleMenu } from "./EditorBubbleMenu";
 import { SlashCommandExtension } from "./SlashCommand";
 import { AIDiffView, AIProcessingIndicator } from "./AIDiffView";
 import { CommandPalette } from "./CommandPalette";
-import { MinimalTopBar } from "./MinimalTopBar";
-import { useEditorAI } from "@/hooks/use-editor-ai";
 
 export function DocumentEditor({
-  documentTitle,
   initialContent = "",
   readOnly = false,
   onChange,
   onSave,
-  onToggleReadOnly,
-  showToolbar = true,
   showAI = true,
   placeholder = "Start writing your document... Press '/' for AI commands",
 }: DocumentEditorProps) {
@@ -34,7 +29,7 @@ export function DocumentEditor({
   const [showBubbleAI, setShowBubbleAI] = React.useState(false);
 
   // Use a ref to store the AI command handler so it can be used in the extension
-  const handleAICommandRef = React.useRef<(instruction: string) => Promise<void>>();
+  const handleAICommandRef = React.useRef<(instruction: string) => Promise<void> | null>(null);
 
   const editor = useEditor({
     extensions: [
@@ -250,7 +245,7 @@ export function DocumentEditor({
       // Save shortcut (Cmd/Ctrl + S)
       if ((e.metaKey || e.ctrlKey) && e.key === "s") {
         e.preventDefault();
-        onSave?.();
+        onSave?.(editor.getHTML());
       }
 
       // AI Assistant shortcut (Cmd/Ctrl + /)
