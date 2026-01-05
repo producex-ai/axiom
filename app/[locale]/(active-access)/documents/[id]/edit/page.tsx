@@ -1,19 +1,19 @@
 "use client";
 
-import { Edit, Eye, Globe, Loader2, AlertCircle } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { AlertCircle, Edit, Eye, Globe, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
 import { DocumentEditor } from "@/components/editor";
 import { AuditDialog } from "@/components/editor/AuditDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { complianceKeys } from "@/lib/compliance/queries";
 import {
   convertHtmlToMarkdown,
   convertMarkdownToHtml,
 } from "@/lib/document-converters";
-import { complianceKeys } from "@/lib/compliance/queries";
 import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface EditParams {
@@ -82,14 +82,17 @@ export default function EditDocumentPage({ params }: EditParams) {
       setContent(html);
       setOriginalContent(markdown);
       setDocumentMetadata(data.metadata);
-      
+
       // Load existing analysis results if available
       if (data.metadata?.analysisScore) {
-        console.log("[EditDocument] Loaded existing analysis results:", data.metadata.analysisScore);
+        console.log(
+          "[EditDocument] Loaded existing analysis results:",
+          data.metadata.analysisScore,
+        );
         setAuditResults(data.metadata.analysisScore);
         setAuditIssues(data.metadata.analysisScore.risks || []);
       }
-      
+
       setHasChanges(false);
       setUserHasEdited(false);
       editorStabilizedRef.current = false;
@@ -136,7 +139,7 @@ export default function EditDocumentPage({ params }: EditParams) {
       const result = await executePublishFlow(
         id,
         markdown,
-        documentMetadata?.title || "Document"
+        documentMetadata?.title || "Document",
       );
 
       // Always show the audit dialog with results
@@ -180,7 +183,7 @@ export default function EditDocumentPage({ params }: EditParams) {
     if (documentMetadata?.status === "published") {
       toast.success("Document published successfully");
       setTimeout(() => {
-        router.push("/dashboard/documents");
+        router.push("/documents");
       }, 500);
     }
   };
@@ -192,7 +195,7 @@ export default function EditDocumentPage({ params }: EditParams) {
       );
       if (!confirmed) return;
     }
-    router.push("/dashboard/documents");
+    router.push("/documents");
   };
 
   const toggleMode = () => {

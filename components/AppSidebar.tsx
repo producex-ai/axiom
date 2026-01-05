@@ -38,7 +38,7 @@ const mainMenuItems = [
   {
     title: "Tasks",
     icon: ClipboardList,
-    href: "/dashboard/tasks",
+    href: "/tasks",
     badge: "3",
   },
 ];
@@ -65,13 +65,13 @@ const complianceItems = [
   {
     title: "Primus GFS",
     icon: ShieldCheck,
-    href: "/dashboard/compliance",
+    href: "/compliance",
     badgeKey: "compliance",
   },
   {
     title: "Company Documents",
     icon: FileText,
-    href: "/dashboard/documents",
+    href: "/documents",
   },
 ];
 

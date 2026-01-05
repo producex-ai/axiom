@@ -1,10 +1,20 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { Download, Eye, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,16 +32,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { complianceKeys } from "@/lib/compliance/queries";
 
 interface Document {
@@ -194,7 +194,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                   <TableCell className="text-center">
                     v{doc.current_version}
                   </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
+                  <TableCell className="text-muted-foreground text-sm">
                     {formatRelativeTime(doc.updated_at)}
                   </TableCell>
                   <TableCell className="text-sm">
@@ -216,7 +216,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                       <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuItem
                           onClick={() =>
-                            router.push(`/dashboard/documents/${doc.id}/view`)
+                            router.push(`/documents/${doc.id}/view`)
                           }
                         >
                           <Eye className="mr-2 h-4 w-4" />
@@ -224,7 +224,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
-                            router.push(`/dashboard/documents/${doc.id}/edit`)
+                            router.push(`/documents/${doc.id}/edit`)
                           }
                         >
                           <Pencil className="mr-2 h-4 w-4" />
@@ -264,7 +264,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
 
       {/* Pagination */}
       <div className="flex items-center justify-between space-x-2 py-4">
-        <div className="text-sm text-muted-foreground">
+        <div className="text-muted-foreground text-sm">
           Page {currentPage + 1} of {totalPages || 1}
         </div>
         <div className="flex space-x-2">

@@ -1,16 +1,26 @@
 "use client";
 
-import { ArrowLeft, Edit, Eye, Globe, Loader2, AlertCircle } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  AlertCircle,
+  ArrowLeft,
+  Edit,
+  Eye,
+  Globe,
+  Loader2,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
 import { DocumentEditor } from "@/components/editor";
 import { AuditDialog } from "@/components/editor/AuditDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { convertHtmlToMarkdown, convertMarkdownToHtml } from "@/lib/document-converters";
 import { complianceKeys } from "@/lib/compliance/queries";
+import {
+  convertHtmlToMarkdown,
+  convertMarkdownToHtml,
+} from "@/lib/document-converters";
 import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface DocumentEditorClientProps {
@@ -18,7 +28,10 @@ interface DocumentEditorClientProps {
   initialMode: "view" | "edit";
 }
 
-export default function DocumentEditorClient({ documentId, initialMode }: DocumentEditorClientProps) {
+export default function DocumentEditorClient({
+  documentId,
+  initialMode,
+}: DocumentEditorClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
@@ -48,14 +61,14 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       // Normalize both sides for comparison
       const currentMarkdown = convertHtmlToMarkdown(content)
         .trim()
-        .replace(/\n{3,}/g, '\n\n') // Normalize multiple newlines
-        .replace(/\s+$/gm, ''); // Remove trailing whitespace from lines
-      
+        .replace(/\n{3,}/g, "\n\n") // Normalize multiple newlines
+        .replace(/\s+$/gm, ""); // Remove trailing whitespace from lines
+
       const originalMarkdownNormalized = originalContent
         .trim()
-        .replace(/\n{3,}/g, '\n\n')
-        .replace(/\s+$/gm, '');
-      
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/\s+$/gm, "");
+
       setHasChanges(currentMarkdown !== originalMarkdownNormalized);
     }
   }, [content, originalContent, userHasEdited]);
@@ -65,7 +78,9 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`/api/compliance/documents/${documentId}/content`);
+      const response = await fetch(
+        `/api/compliance/documents/${documentId}/content`,
+      );
 
       if (!response.ok) {
         throw new Error("Failed to load document");
@@ -80,18 +95,21 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setContent(html);
       setOriginalContent(markdown);
       setDocumentMetadata(data.metadata);
-      
+
       // Load existing analysis results if available
       if (data.metadata?.analysisScore) {
-        console.log("[DocumentEditor] Loaded existing analysis results:", data.metadata.analysisScore);
+        console.log(
+          "[DocumentEditor] Loaded existing analysis results:",
+          data.metadata.analysisScore,
+        );
         setAuditAnalysis(data.metadata.analysisScore);
         setAuditIssues(data.metadata.analysisScore.risks || []);
       }
-      
+
       setHasChanges(false);
       setUserHasEdited(false);
       editorStabilizedRef.current = false;
-      
+
       // Allow editor to stabilize before tracking changes
       setTimeout(() => {
         editorStabilizedRef.current = true;
@@ -110,26 +128,35 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setError(null);
 
       let markdown = convertHtmlToMarkdown(content);
-      
+
       // Strip document title if it appears at the beginning (safety check)
       if (documentMetadata?.title) {
         const titlePatterns = [
-          new RegExp(`^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
-          new RegExp(`^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+          new RegExp(
+            `^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+            "i",
+          ),
+          new RegExp(
+            `^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+            "i",
+          ),
         ];
-        
+
         for (const pattern of titlePatterns) {
-          markdown = markdown.replace(pattern, '');
+          markdown = markdown.replace(pattern, "");
         }
         markdown = markdown.trim();
       }
 
       // Save document without version increment or analysis
-      const response = await fetch(`/api/compliance/documents/${documentId}/save`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: markdown }),
-      });
+      const response = await fetch(
+        `/api/compliance/documents/${documentId}/save`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content: markdown }),
+        },
+      );
 
       if (!response.ok) {
         const error = await response.json();
@@ -149,10 +176,13 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       });
 
       // Invalidate cache in background
-      await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+      await queryClient.invalidateQueries({
+        queryKey: complianceKeys.overview(),
+      });
     } catch (err) {
       console.error("Error saving document:", err);
-      const message = err instanceof Error ? err.message : "Failed to save document";
+      const message =
+        err instanceof Error ? err.message : "Failed to save document";
       setError(message);
       toast.error(message);
     } finally {
@@ -166,22 +196,32 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       setError(null);
 
       let markdown = convertHtmlToMarkdown(content);
-      
+
       // Strip document title if it appears at the beginning (safety check)
       if (documentMetadata?.title) {
         const titlePatterns = [
-          new RegExp(`^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
-          new RegExp(`^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+          new RegExp(
+            `^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+            "i",
+          ),
+          new RegExp(
+            `^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+            "i",
+          ),
         ];
-        
+
         for (const pattern of titlePatterns) {
-          markdown = markdown.replace(pattern, '');
+          markdown = markdown.replace(pattern, "");
         }
         markdown = markdown.trim();
       }
 
       // Show loading toast while executing publish flow
-      const loadingToastId = toast.loading(skipValidation ? "Publishing document..." : "Saving and validating document...");
+      const loadingToastId = toast.loading(
+        skipValidation
+          ? "Publishing document..."
+          : "Saving and validating document...",
+      );
 
       try {
         // Execute the complete publish flow:
@@ -192,7 +232,7 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
           documentId,
           markdown,
           documentMetadata?.title || "Document",
-          { skipValidation }
+          { skipValidation },
         );
 
         // Dismiss loading toast
@@ -213,7 +253,9 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
           }));
 
           // Invalidate cache
-          await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+          await queryClient.invalidateQueries({
+            queryKey: complianceKeys.overview(),
+          });
 
           // Show success confirmation
           toast.success(result.message, {
@@ -252,10 +294,13 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       }
 
       // Invalidate cache in background
-      await queryClient.invalidateQueries({ queryKey: complianceKeys.overview() });
+      await queryClient.invalidateQueries({
+        queryKey: complianceKeys.overview(),
+      });
     } catch (err) {
       console.error("Error in publish flow:", err);
-      const message = err instanceof Error ? err.message : "Failed to publish document";
+      const message =
+        err instanceof Error ? err.message : "Failed to publish document";
       setError(message);
       toast.error(message);
     } finally {
@@ -266,11 +311,11 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const handleBack = () => {
     if (hasChanges) {
       const confirmed = confirm(
-        "You have unsaved changes. Are you sure you want to leave?"
+        "You have unsaved changes. Are you sure you want to leave?",
       );
       if (!confirmed) return;
     }
-    
+
     if (backTo) {
       router.push(backTo);
     } else {
@@ -281,11 +326,13 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
   const toggleMode = () => {
     if (mode === "view") {
       setMode("edit");
-      router.replace(`/dashboard/compliance/documents/${documentId}/edit?mode=edit`, { scroll: false });
+      router.replace(`/compliance/documents/${documentId}/edit?mode=edit`, {
+        scroll: false,
+      });
     } else {
       if (hasChanges) {
         const confirmed = confirm(
-          "You have unsaved changes. Switching to view mode will discard them. Continue?"
+          "You have unsaved changes. Switching to view mode will discard them. Continue?",
         );
         if (!confirmed) return;
       }
@@ -293,7 +340,9 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       const html = convertMarkdownToHtml(originalContent);
       setContent(html);
       setHasChanges(false);
-      router.replace(`/dashboard/compliance/documents/${documentId}/edit?mode=view`, { scroll: false });
+      router.replace(`/compliance/documents/${documentId}/edit?mode=view`, {
+        scroll: false,
+      });
     }
   };
 
@@ -336,13 +385,16 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
               </Button>
-              
+
               <div className="min-w-0 flex-1">
                 <h1 className="truncate font-semibold text-xl">
                   {documentMetadata?.title || "Document"}
                 </h1>
                 <div className="mt-1 flex items-center gap-2">
-                  <Badge variant={mode === "edit" ? "default" : "outline"} className="text-xs">
+                  <Badge
+                    variant={mode === "edit" ? "default" : "outline"}
+                    className="text-xs"
+                  >
                     {mode === "view" ? (
                       <>
                         <Eye className="mr-1 h-3 w-3" />
@@ -428,7 +480,12 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
                   <Button
                     size="sm"
                     onClick={() => handlePublish()}
-                    disabled={(!hasChanges && documentStatus !== "draft") || publishing || saving || loading}
+                    disabled={
+                      (!hasChanges && documentStatus !== "draft") ||
+                      publishing ||
+                      saving ||
+                      loading
+                    }
                   >
                     {publishing ? (
                       <>
@@ -466,24 +523,24 @@ export default function DocumentEditorClient({ documentId, initialMode }: Docume
       {/* Editor */}
       <main className="flex-1 overflow-hidden">
         <DocumentEditor
-            documentId={documentId}
-            documentTitle={documentMetadata?.title || "Document"}
-            initialContent={content}
-            readOnly={mode === "view"}
-            onChange={(newContent) => {
-              setContent(newContent);
-              // Only mark as edited if editor has stabilized
-              if (editorStabilizedRef.current) {
-                setUserHasEdited(true);
-              }
-            }}
-            onToggleReadOnly={() => {
-              setMode(mode === "view" ? "edit" : "view");
-            }}
-            showToolbar={mode === "edit"}
-            showAI={mode === "edit"}
-            placeholder="Start editing your document..."
-          />
+          documentId={documentId}
+          documentTitle={documentMetadata?.title || "Document"}
+          initialContent={content}
+          readOnly={mode === "view"}
+          onChange={(newContent) => {
+            setContent(newContent);
+            // Only mark as edited if editor has stabilized
+            if (editorStabilizedRef.current) {
+              setUserHasEdited(true);
+            }
+          }}
+          onToggleReadOnly={() => {
+            setMode(mode === "view" ? "edit" : "view");
+          }}
+          showToolbar={mode === "edit"}
+          showAI={mode === "edit"}
+          placeholder="Start editing your document..."
+        />
       </main>
     </div>
   );
