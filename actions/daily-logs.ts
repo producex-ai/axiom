@@ -1,6 +1,6 @@
 'use server';
 
-import { auth } from '@clerk/nextjs/server';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 
@@ -16,6 +16,58 @@ import {
   submitDailyLogForApproval,
   updateDailyLogTasks,
 } from '@/db/queries/daily-logs';
+
+/**
+ * Enrich daily logs with user names from Clerk
+ */
+async function enrichLogsWithUserNames(
+  logs: DailyLogWithDetails[]
+): Promise<DailyLogWithDetails[]> {
+  if (logs.length === 0) return logs;
+
+  try {
+    const client = await clerkClient();
+
+    // Collect unique user IDs
+    const userIds = new Set<string>();
+    for (const log of logs) {
+      if (log.assignee_id) userIds.add(log.assignee_id);
+      if (log.reviewer_id) userIds.add(log.reviewer_id);
+    }
+
+    // Fetch user data from Clerk
+    const userMap = new Map<string, string>();
+    await Promise.all(
+      Array.from(userIds).map(async (userId) => {
+        try {
+          const user = await client.users.getUser(userId);
+          const name =
+            [user.firstName, user.lastName].filter(Boolean).join(' ') ||
+            user.emailAddresses[0]?.emailAddress ||
+            'Unknown User';
+          userMap.set(userId, name);
+        } catch (error) {
+          console.error(`Error fetching user ${userId}:`, error);
+          userMap.set(userId, 'Unknown User');
+        }
+      })
+    );
+
+    // Enrich logs with names
+    return logs.map((log) => ({
+      ...log,
+      assignee_name: log.assignee_id
+        ? userMap.get(log.assignee_id) || null
+        : null,
+      reviewer_name: log.reviewer_id
+        ? userMap.get(log.reviewer_id) || null
+        : null,
+    }));
+  } catch (error) {
+    console.error('Error enriching logs with user names:', error);
+    return logs;
+  }
+}
 
 // Validation schemas
 const UpdateTasksSchema = z.object({
@@ -59,7 +111,8 @@ export async function getDailyLogsAction(filters?: {
     endDate: filters?.endDate ? new Date(filters.endDate) : undefined,
   };
 
-  return getDailyLogs(orgId, parsedFilters);
+  const logs = await getDailyLogs(orgId, parsedFilters);
+  return enrichLogsWithUserNames(logs);
 }
 
 /**
@@ -73,7 +126,11 @@ export async function getDailyLogByIdAction(
     return null;
   }
 
-  return getDailyLogById(id, orgId);
+  const log = await getDailyLogById(id, orgId);
+  if (!log) return null;
+
+  const enriched = await enrichLogsWithUserNames([log]);
+  return enriched[0] || null;
 }
 
 /**
@@ -85,7 +142,8 @@ export async function getMyPendingLogsAction(): Promise<DailyLogWithDetails[]> {
     return [];
   }
 
-  return getMyPendingLogs(orgId, userId);
+  const logs = await getMyPendingLogs(orgId, userId);
+  return enrichLogsWithUserNames(logs);
 }
 
 /**
@@ -97,7 +155,8 @@ export async function getLogsForReviewAction(): Promise<DailyLogWithDetails[]> {
     return [];
   }
 
-  return getLogsForReview(orgId, userId);
+  const logs = await getLogsForReview(orgId, userId);
+  return enrichLogsWithUserNames(logs);
 }
 
 /**

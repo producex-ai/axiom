@@ -94,7 +94,7 @@ export const updateDailyLogTasks = async (
       SET 
         tasks = $1,
         updated_at = NOW()
-      WHERE id = $2 AND org_id = $3 AND status = 'PENDING'
+      WHERE id = $2 AND org_id = $3 AND status IN ('PENDING', 'REJECTED')
       RETURNING *
       `,
       [JSON.stringify(tasks), id, orgId]
@@ -126,7 +126,7 @@ export const submitDailyLogForApproval = async (
         assignee_comment = $2,
         submitted_at = NOW(),
         updated_at = NOW()
-      WHERE id = $3 AND org_id = $4 AND assignee_id = $5 AND status = 'PENDING'
+      WHERE id = $3 AND org_id = $4 AND assignee_id = $5 AND status IN ('PENDING', 'REJECTED')
       RETURNING *
       `,
       [tasksSignOff, assigneeComment || null, id, orgId, assigneeId]
