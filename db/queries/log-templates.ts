@@ -12,6 +12,10 @@ export type LogTemplate = {
   created_by: string | null;
 };
 
+export type LogTemplateWithSchedule = LogTemplate & {
+  schedule_id: string | null;
+};
+
 export const createLogTemplate = async (
   template: Omit<LogTemplate, "id" | "created_at" | "updated_at">,
 ): Promise<LogTemplate | null> => {
@@ -67,13 +71,19 @@ export const updateLogTemplate = async (
 
 export const getLogTemplates = async (
   orgId: string,
-): Promise<LogTemplate[]> => {
+): Promise<LogTemplateWithSchedule[]> => {
   try {
-    const result = await query<LogTemplate>(
+    const result = await query<LogTemplateWithSchedule>(
       `
-      SELECT * FROM log_templates
-      WHERE org_id = $1
-      ORDER BY created_at DESC
+      SELECT 
+        lt.*,
+        ls.id as schedule_id
+      FROM log_templates lt
+      LEFT JOIN log_schedules ls ON lt.id = ls.template_id 
+        AND ls.status = 'ACTIVE'
+        AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
+      WHERE lt.org_id = $1
+      ORDER BY lt.created_at DESC
       `,
       [orgId],
     );
@@ -87,14 +97,20 @@ export const getLogTemplates = async (
 export const getLogTemplateById = async (
   id: string,
   orgId: string,
-): Promise<LogTemplate | null> => {
+): Promise<LogTemplateWithSchedule | null> => {
   try {
-    const result = await query<LogTemplate>(
+    const result = await query<LogTemplateWithSchedule>(
       `
-            SELECT * FROM log_templates
-            WHERE id = $1 AND org_id = $2
-            LIMIT 1
-            `,
+      SELECT 
+        lt.*,
+        ls.id as schedule_id
+      FROM log_templates lt
+      LEFT JOIN log_schedules ls ON lt.id = ls.template_id 
+        AND ls.status = 'ACTIVE'
+        AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
+      WHERE lt.id = $1 AND lt.org_id = $2
+      LIMIT 1
+      `,
       [id, orgId],
     );
     return result.rows[0] || null;

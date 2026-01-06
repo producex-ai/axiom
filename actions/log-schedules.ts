@@ -9,19 +9,33 @@ import {
   getActiveLogSchedules,
   getLogSchedulesByTemplateId,
 } from "@/db/queries/log-schedules";
+import { getLogTemplateById } from "@/db/queries/log-templates";
 import { getOrgMembersAction } from "./clerk";
 
-// Define validation schema
-const CreateScheduleSchema = z.object({
-  template_id: z.string().uuid("Invalid template ID"),
-  start_date: z.string().min(1, "Start date is required"),
-  end_date: z.string().optional(),
-  assignee_id: z.string().optional(),
-  reviewer_id: z.string().optional(),
-  days_of_week: z
-    .array(z.number().min(0).max(6))
-    .min(1, "Select at least one day"),
-});
+// Define validation schema with date validation
+const CreateScheduleSchema = z
+  .object({
+    template_id: z.string().uuid("Invalid template ID"),
+    start_date: z.string().min(1, "Start date is required"),
+    end_date: z.string().optional(),
+    assignee_id: z.string().optional(),
+    reviewer_id: z.string().optional(),
+    days_of_week: z
+      .array(z.number().min(0).max(6))
+      .min(1, "Select at least one day"),
+  })
+  .refine(
+    (data) => {
+      if (!data.end_date) return true; // end_date is optional
+      const start = new Date(data.start_date);
+      const end = new Date(data.end_date);
+      return end > start;
+    },
+    {
+      message: "End date must be after start date",
+      path: ["end_date"],
+    },
+  );
 
 export type CreateScheduleState = {
   message?: string;
@@ -74,7 +88,27 @@ export async function createLogScheduleAction(
     };
   }
 
+  // Check if template is already scheduled
   try {
+    const template = await getLogTemplateById(
+      validatedFields.data.template_id,
+      orgId,
+    );
+
+    if (!template) {
+      return { message: "Template not found" };
+    }
+
+    if (template.schedule_id) {
+      return {
+        message:
+          "This template is already scheduled. Please update the existing schedule instead.",
+        errors: {
+          template_id: ["Template is already scheduled"],
+        },
+      };
+    }
+
     await createLogSchedule({
       template_id: validatedFields.data.template_id,
       org_id: orgId,

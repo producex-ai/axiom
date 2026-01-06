@@ -95,11 +95,19 @@ async function TemplateList() {
               </div>
 
               <div className="pointer-events-auto mt-4 flex gap-2">
-                <Button variant="outline" size="sm" className="z-20 flex-1" asChild>
-                  <Link href={`/logs/templates/${template.id}/schedule`}>
-                    Schedule
-                  </Link>
-                </Button>
+                {template.schedule_id ? (
+                  <Button variant="outline" size="sm" className="z-20 flex-1" asChild>
+                    <Link href={`/logs/templates/${template.id}/schedule/edit`}>
+                      Update
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" className="z-20 flex-1" asChild>
+                    <Link href={`/logs/templates/${template.id}/schedule`}>
+                      Schedule
+                    </Link>
+                  </Button>
+                )}
                 <Button
                   variant="outline"
                   size="sm"
