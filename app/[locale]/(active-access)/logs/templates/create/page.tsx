@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { CreateTemplateForm } from "./_components/create-template-form";
+import { LogTemplateForm } from "../_components/log-template-form";
 
 export default function CreateTemplatePage() {
   return (
@@ -23,7 +23,7 @@ export default function CreateTemplatePage() {
         </div>
       </div>
 
-      <CreateTemplateForm />
+      <LogTemplateForm mode="create" />
     </div>
   );
 }

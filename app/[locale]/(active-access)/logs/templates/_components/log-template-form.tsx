@@ -7,6 +7,7 @@ import { useFormStatus } from "react-dom";
 import {
   type CreateTemplateState,
   createLogTemplateAction,
+  updateLogTemplateAction
 } from "@/actions/log-templates";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-function SubmitButton() {
+function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
 
   return (
@@ -22,36 +23,62 @@ function SubmitButton() {
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Creating...
+          {isEditing ? "Updating..." : "Creating..."}
         </>
       ) : (
-        "Create Template"
+        isEditing ? "Update Template" : "Create Template"
       )}
     </Button>
   );
 }
 
-export function CreateTemplateForm() {
+// Helper to bind additional arguments to the server action
+function bindUpdateAction(id: string) {
+    return updateLogTemplateAction.bind(null, id);
+}
+
+interface LogTemplateFormProps {
+    mode?: 'create' | 'edit';
+    initialData?: {
+        id: string;
+        name: string;
+        category: string | null;
+        sop: string | null;
+        task_list: string[] | null;
+    };
+}
+
+export function LogTemplateForm({ mode = 'create', initialData }: LogTemplateFormProps) {
   const initialState: CreateTemplateState = { message: "", errors: {} };
+  
+  // Choose the action based on mode
+  const actionToUse = mode === 'edit' && initialData?.id 
+    ? bindUpdateAction(initialData.id)
+    : createLogTemplateAction;
+
   const [state, formAction] = useActionState(
-    createLogTemplateAction,
+    actionToUse,
     initialState,
   );
 
-  // State for dynamic task list visual management
-  const [taskCount, setTaskCount] = useState<number>(1);
-  const [taskIds, setTaskIds] = useState<number[]>([0]);
+  // Initialize tasks from initialData or default to one empty task
+  const initialTasks = initialData?.task_list && initialData.task_list.length > 0
+    ? initialData.task_list
+    : [''];
+  
+  const [tasks, setTasks] = useState<{id: number, defaultValue: string}[]>(
+      initialTasks.map((t, i) => ({ id: i, defaultValue: t }))
+  );
+  const [nextId, setNextId] = useState(initialTasks.length);
 
   const addTask = () => {
-    const newId = taskIds.length > 0 ? Math.max(...taskIds) + 1 : 0;
-    setTaskIds([...taskIds, newId]);
-    setTaskCount(taskCount + 1);
+    setTasks([...tasks, { id: nextId, defaultValue: '' }]);
+    setNextId(nextId + 1);
   };
 
   const removeTask = (idToRemove: number) => {
-    if (taskIds.length <= 1) return;
-    setTaskIds(taskIds.filter((id) => id !== idToRemove));
-    setTaskCount(taskCount - 1);
+    if (tasks.length <= 1) return;
+    setTasks(tasks.filter((t) => t.id !== idToRemove));
   };
 
   return (
@@ -71,6 +98,7 @@ export function CreateTemplateForm() {
               <Input
                 id="name"
                 name="name"
+                defaultValue={initialData?.name}
                 placeholder="e.g., Opening Checklist"
                 aria-describedby="name-error"
                 required
@@ -87,6 +115,7 @@ export function CreateTemplateForm() {
               <Input
                 id="category"
                 name="category"
+                defaultValue={initialData?.category || ''}
                 placeholder="e.g., Daily Operations"
                 aria-describedby="category-error"
                 required
@@ -103,6 +132,7 @@ export function CreateTemplateForm() {
               <Input
                 id="sop"
                 name="sop"
+                defaultValue={initialData?.sop || ''}
                 placeholder="Detailed instructions link or short text..."
                 aria-describedby="sop-error"
                 required
@@ -130,28 +160,29 @@ export function CreateTemplateForm() {
             </div>
 
             <div className="space-y-3">
-              {taskIds.map((id, index) => (
-                <div key={id} className="flex gap-2">
+              {tasks.map((task, index) => (
+                <div key={task.id} className="flex gap-2">
                   <div className="flex-1">
                     <Input
                       name="tasks"
+                      defaultValue={task.defaultValue}
                       placeholder={`Task ${index + 1}`}
                       aria-label={`Task ${index + 1}`}
                       required // All tasks are required to not be empty
                     />
                   </div>
-                  {taskIds.length > 1 ? (
+                  {tasks.length > 1 ? (
                     <Button
                       type="button"
                       variant="ghost"
                       size="icon"
-                      onClick={() => removeTask(id)}
+                      onClick={() => removeTask(task.id)}
                       aria-label="Remove task"
                     >
                       <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                     </Button>
                   ) : (
-                     <div className="w-10" /> // Spacer to keep alignment if needed, or just nothing.
+                     <div className="w-10" /> 
                   )}
                 </div>
               ))}
@@ -166,7 +197,7 @@ export function CreateTemplateForm() {
       </Card>
 
       <div className="flex justify-end">
-        <SubmitButton />
+        <SubmitButton isEditing={mode === 'edit'} />
       </div>
     </form>
   );
