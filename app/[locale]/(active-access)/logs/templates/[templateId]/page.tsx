@@ -55,8 +55,10 @@ export default async function TemplateDetailsPage({ params }: PageProps) {
           </div>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            Schedule
+          <Button variant="outline" size="sm" asChild>
+            <Link href={`/logs/templates/${template.id}/schedule`}>
+              Schedule
+            </Link>
           </Button>
           <Button asChild size="sm">
             <Link href={`/logs/templates/${template.id}/edit`}>
