@@ -26,14 +26,22 @@ export async function getOrgMembersAction(): Promise<OrgMember[]> {
         role: ['org:operator', 'org:manager', 'org:director', 'org:org_admin'],
       });
 
-    const members: OrgMember[] = membershipList.map((membership) => ({
-      id: membership.publicUserData.userId,
-      email: membership.publicUserData.identifier,
-      firstName: membership.publicUserData.firstName || null,
-      lastName: membership.publicUserData.lastName || null,
-      imageUrl: membership.publicUserData.imageUrl,
-      role: membership.role,
-    }));
+    const members: OrgMember[] = membershipList
+      .map((membership) => {
+        if (!membership.publicUserData) {
+          return null;
+        }
+        const userData = membership.publicUserData;
+        return {
+          id: userData.userId,
+          email: userData.identifier,
+          firstName: userData.firstName || null,
+          lastName: userData.lastName || null,
+          imageUrl: userData.imageUrl,
+          role: membership.role,
+        };
+      })
+      .filter((member): member is OrgMember => member !== null);
 
     return members;
   } catch (error) {

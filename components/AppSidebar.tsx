@@ -40,7 +40,7 @@ const mainMenuItems = [
     icon: ClipboardList,
     href: '/tasks',
   },
-];
+] as const;
 
 const logsItems = [
   {
@@ -58,14 +58,14 @@ const logsItems = [
     icon: History,
     href: '/logs/history',
   },
-];
+] as const;
 
 const complianceItems = [
   {
     title: 'Primus GFS',
     icon: ShieldCheck,
     href: '/compliance',
-    badgeKey: 'compliance',
+    badgeKey: 'compliance' as const,
   },
   {
     title: 'Company Documents',
@@ -122,14 +122,6 @@ export function AppSidebar() {
                       <span className='transition-colors group-hover:text-foreground'>
                         {item.title}
                       </span>
-                      {item.badge && (
-                        <Badge
-                          variant='secondary'
-                          className='ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs'
-                        >
-                          {item.badge}
-                        </Badge>
-                      )}
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
