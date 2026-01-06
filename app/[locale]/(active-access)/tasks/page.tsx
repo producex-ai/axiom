@@ -1,151 +1,239 @@
-import { AlertCircle, Calendar, ClipboardList, User } from "lucide-react";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { auth } from '@clerk/nextjs/server';
+import {
+  Calendar,
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  XCircle,
+} from 'lucide-react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+
+import { getDailyLogsAction } from '@/actions/daily-logs';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
-export default function TasksPage() {
-  const tasks = [
-    {
-      id: 1,
-      title: "Review FSMS Document",
-      module: "Module 1",
-      priority: "high",
-      dueDate: "2024-03-20",
-      assignedTo: "John Doe",
-      status: "pending",
+function getStatusBadge(status: string) {
+  const variants = {
+    PENDING: { variant: 'secondary' as const, icon: Clock, label: 'Pending' },
+    PENDING_APPROVAL: {
+      variant: 'default' as const,
+      icon: Clock,
+      label: 'Pending Review',
     },
-    {
-      id: 2,
-      title: "Update Pest Control Log",
-      module: "Module 5",
-      priority: "medium",
-      dueDate: "2024-03-22",
-      assignedTo: "Jane Smith",
-      status: "in-progress",
+    APPROVED: {
+      variant: 'outline' as const,
+      icon: CheckCircle2,
+      label: 'Approved',
     },
-    {
-      id: 3,
-      title: "HACCP Plan Annual Review",
-      module: "Module 6",
-      priority: "high",
-      dueDate: "2024-03-25",
-      assignedTo: "John Doe",
-      status: "pending",
+    REJECTED: {
+      variant: 'destructive' as const,
+      icon: XCircle,
+      label: 'Rejected',
     },
-  ];
+  };
+
+  const config = variants[status as keyof typeof variants] || variants.PENDING;
+  const Icon = config.icon;
 
   return (
-    <div className="space-y-6">
+    <Badge variant={config.variant} className='gap-1'>
+      <Icon className='h-3 w-3' />
+      {config.label}
+    </Badge>
+  );
+}
+
+function formatDate(date: Date): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+function EmptyState() {
+  return (
+    <Card>
+      <CardContent className='flex flex-col items-center justify-center py-16'>
+        <ClipboardList className='h-16 w-16 text-muted-foreground/40' />
+        <h3 className='mt-4 font-semibold text-lg'>No tasks assigned</h3>
+        <p className='mt-2 text-center text-muted-foreground text-sm'>
+          You don't have any daily logs assigned to you at the moment.
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default async function TasksPage() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect('/login');
+  }
+
+  // Get all tasks where user is assignee or reviewer
+  const allTasks = await getDailyLogsAction();
+
+  // Filter tasks for current user
+  const myTasks = allTasks.filter(
+    (task) => task.assignee_id === userId || task.reviewer_id === userId
+  );
+
+  // Calculate stats
+  const stats = {
+    total: myTasks.length,
+    pending: myTasks.filter((t) => t.status === 'PENDING').length,
+    pendingReview: myTasks.filter((t) => t.status === 'PENDING_APPROVAL')
+      .length,
+    approved: myTasks.filter((t) => t.status === 'APPROVED').length,
+  };
+
+  return (
+    <div className='space-y-6'>
       <div>
-        <h1 className="font-bold text-3xl tracking-tight">Tasks</h1>
-        <p className="mt-2 text-muted-foreground">
-          Manage compliance tasks and document reviews
+        <h1 className='font-bold text-3xl tracking-tight'>Tasks</h1>
+        <p className='mt-2 text-muted-foreground'>
+          Manage your daily log tasks and reviews
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="font-medium text-muted-foreground text-sm">
-              Total Tasks
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="font-bold text-3xl">3</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="font-medium text-muted-foreground text-sm">
-              High Priority
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="font-bold text-3xl text-orange-500">2</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="font-medium text-muted-foreground text-sm">
-              In Progress
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="font-bold text-3xl text-blue-500">1</div>
-          </CardContent>
-        </Card>
+      <div className='grid gap-4 md:grid-cols-4'>
+        <div className='rounded-lg border bg-card p-4'>
+          <p className='font-medium text-muted-foreground text-sm'>
+            Total Tasks
+          </p>
+          <p className='mt-2 font-bold text-2xl'>{stats.total}</p>
+        </div>
+        <div className='rounded-lg border bg-card p-4'>
+          <p className='font-medium text-muted-foreground text-sm'>Pending</p>
+          <p className='mt-2 font-bold text-2xl text-orange-500'>
+            {stats.pending}
+          </p>
+        </div>
+        <div className='rounded-lg border bg-card p-4'>
+          <p className='font-medium text-muted-foreground text-sm'>
+            For Review
+          </p>
+          <p className='mt-2 font-bold text-2xl text-blue-500'>
+            {stats.pendingReview}
+          </p>
+        </div>
+        <div className='rounded-lg border bg-card p-4'>
+          <p className='font-medium text-muted-foreground text-sm'>Approved</p>
+          <p className='mt-2 font-bold text-2xl text-green-500'>
+            {stats.approved}
+          </p>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Task List</CardTitle>
-          <CardDescription>
-            Active compliance and documentation tasks
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {tasks.map((task) => (
-              <div
-                key={task.id}
-                className="flex items-start justify-between rounded-lg border p-4 transition-colors hover:bg-accent/50"
-              >
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-center gap-3">
-                    <ClipboardList className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="font-medium">{task.title}</p>
-                      <p className="text-muted-foreground text-sm">
-                        {task.module}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 pl-8 text-muted-foreground text-sm">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{task.dueDate}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User className="h-3 w-3" />
-                      <span>{task.assignedTo}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant={
-                      task.priority === "high" ? "destructive" : "secondary"
-                    }
-                    className="capitalize"
-                  >
-                    {task.priority === "high" && (
-                      <AlertCircle className="mr-1 h-3 w-3" />
-                    )}
-                    {task.priority}
-                  </Badge>
-                  <Badge
-                    variant={
-                      task.status === "in-progress" ? "default" : "outline"
-                    }
-                  >
-                    {task.status}
-                  </Badge>
-                  <Button variant="outline" size="sm">
-                    View
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {myTasks.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <Card>
+          <CardHeader>
+            <CardTitle>My Tasks</CardTitle>
+            <CardDescription>
+              Daily logs assigned to you or awaiting your review
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Template</TableHead>
+                  <TableHead>Category</TableHead>
+                  <TableHead>Role</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className='text-right'>Tasks</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {myTasks.map((task) => {
+                  const isAssignee = task.assignee_id === userId;
+                  const totalTasks = Object.keys(task.tasks).length;
+                  const completedTasks = Object.values(task.tasks).filter(
+                    Boolean
+                  ).length;
+
+                  return (
+                    <TableRow key={task.id} className='cursor-pointer'>
+                      <TableCell className='font-medium'>
+                        <Link
+                          href={`/tasks/${task.id}`}
+                          className='flex items-center gap-2 hover:underline'
+                        >
+                          <Calendar className='h-4 w-4 text-muted-foreground' />
+                          {formatDate(task.log_date)}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          href={`/tasks/${task.id}`}
+                          className='hover:underline'
+                        >
+                          {task.template_name}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={`/tasks/${task.id}`}>
+                          {task.template_category ? (
+                            <Badge variant='outline'>
+                              {task.template_category}
+                            </Badge>
+                          ) : (
+                            <span className='text-muted-foreground text-sm'>
+                              —
+                            </span>
+                          )}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={`/tasks/${task.id}`}>
+                          <Badge variant={isAssignee ? 'secondary' : 'default'}>
+                            {isAssignee ? 'Assignee' : 'Reviewer'}
+                          </Badge>
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={`/tasks/${task.id}`}>
+                          {getStatusBadge(task.status)}
+                        </Link>
+                      </TableCell>
+                      <TableCell className='text-right'>
+                        <Link
+                          href={`/tasks/${task.id}`}
+                          className='hover:underline'
+                        >
+                          <span className='text-sm'>
+                            {completedTasks}/{totalTasks}
+                          </span>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

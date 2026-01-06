@@ -11,7 +11,7 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 // Define allowed roles
-const ALLOWED_ROLES = ['director', 'manager', 'admin', 'org_admin'];
+const ALLOWED_ROLES = ['director', 'manager', 'operator', 'admin', 'org_admin'];
 
 // Define protected routes that require authentication
 const isProtectedRoute = createRouteMatcher([
