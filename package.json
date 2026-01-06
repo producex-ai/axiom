@@ -7,8 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write",
-    "db:generate-types": "supabase gen types typescript --project-id vyktgbnjjbkmpyucmpvs > lib/supabase/types.ts"
+    "format": "biome format --write"
   },
   "dependencies": {
     "@ai-sdk/amazon-bedrock": "^3.0.52",
