@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getOrgMembersAction } from "@/actions/clerk";
 import { getLogTemplateByIdAction } from "@/actions/log-templates";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "./_components/schedule-form";
@@ -11,7 +12,10 @@ interface PageProps {
 
 export default async function ScheduleTemplatePage({ params }: PageProps) {
   const { templateId } = await params;
-  const template = await getLogTemplateByIdAction(templateId);
+  const [template, members] = await Promise.all([
+    getLogTemplateByIdAction(templateId),
+    getOrgMembersAction(),
+  ]);
 
   if (!template) {
     notFound();
@@ -35,7 +39,7 @@ export default async function ScheduleTemplatePage({ params }: PageProps) {
         </div>
       </div>
 
-      <ScheduleForm templateId={templateId} />
+      <ScheduleForm templateId={templateId} members={members} />
     </div>
   );
 }
