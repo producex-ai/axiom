@@ -1,4 +1,4 @@
-import { query } from "@/lib/db/postgres";
+import { query } from '@/lib/db/postgres';
 
 export type LogSchedule = {
   id: string;
@@ -9,7 +9,7 @@ export type LogSchedule = {
   assignee_id: string | null;
   reviewer_id: string | null;
   days_of_week: number[] | null;
-  status: "ACTIVE" | "PAUSED" | "COMPLETED";
+  status: 'ACTIVE' | 'PAUSED' | 'COMPLETED';
   created_at: Date;
   updated_at: Date;
   created_by: string | null;
@@ -21,7 +21,7 @@ export type LogScheduleWithTemplate = LogSchedule & {
 };
 
 export const createLogSchedule = async (
-  schedule: Omit<LogSchedule, "id" | "created_at" | "updated_at">,
+  schedule: Omit<LogSchedule, 'id' | 'created_at' | 'updated_at'>
 ): Promise<LogSchedule | null> => {
   const {
     template_id,
@@ -55,11 +55,11 @@ export const createLogSchedule = async (
         days_of_week,
         status,
         created_by,
-      ],
+      ]
     );
     return result.rows[0];
   } catch (error) {
-    console.error("Error creating log schedule:", error);
+    console.error('Error creating log schedule:', error);
     return null;
   }
 };
@@ -69,15 +69,15 @@ export const updateLogSchedule = async (
   schedule: Partial<
     Omit<
       LogSchedule,
-      | "id"
-      | "template_id"
-      | "org_id"
-      | "created_at"
-      | "updated_at"
-      | "created_by"
+      | 'id'
+      | 'template_id'
+      | 'org_id'
+      | 'created_at'
+      | 'updated_at'
+      | 'created_by'
     >
   >,
-  orgId: string,
+  orgId: string
 ): Promise<LogSchedule | null> => {
   const {
     start_date,
@@ -112,18 +112,18 @@ export const updateLogSchedule = async (
         status,
         id,
         orgId,
-      ],
+      ]
     );
     return result.rows[0];
   } catch (error) {
-    console.error("Error updating log schedule:", error);
+    console.error('Error updating log schedule:', error);
     return null;
   }
 };
 
 export const getLogScheduleById = async (
   id: string,
-  orgId: string,
+  orgId: string
 ): Promise<LogSchedule | null> => {
   try {
     const result = await query<LogSchedule>(
@@ -132,18 +132,18 @@ export const getLogScheduleById = async (
       WHERE id = $1 AND org_id = $2
       LIMIT 1
       `,
-      [id, orgId],
+      [id, orgId]
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error("Error fetching log schedule by id:", error);
+    console.error('Error fetching log schedule by id:', error);
     return null;
   }
 };
 
 export const getLogSchedulesByTemplateId = async (
   templateId: string,
-  orgId: string,
+  orgId: string
 ): Promise<LogSchedule[]> => {
   try {
     const result = await query<LogSchedule>(
@@ -152,17 +152,17 @@ export const getLogSchedulesByTemplateId = async (
       WHERE template_id = $1 AND org_id = $2
       ORDER BY created_at DESC
       `,
-      [templateId, orgId],
+      [templateId, orgId]
     );
     return result.rows;
   } catch (error) {
-    console.error("Error fetching log schedules:", error);
+    console.error('Error fetching log schedules:', error);
     return [];
   }
 };
 
 export const getActiveLogSchedules = async (
-  orgId: string,
+  orgId: string
 ): Promise<LogScheduleWithTemplate[]> => {
   try {
     const result = await query<LogScheduleWithTemplate>(
@@ -178,11 +178,38 @@ export const getActiveLogSchedules = async (
         AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
       ORDER BY ls.start_date DESC
       `,
-      [orgId],
+      [orgId]
     );
     return result.rows;
   } catch (error) {
-    console.error("Error fetching active log schedules:", error);
+    console.error('Error fetching active log schedules:', error);
+    return [];
+  }
+};
+
+/**
+ * Get all active schedules across all organizations (for cron jobs)
+ */
+export const getAllActiveLogSchedules = async (): Promise<
+  LogScheduleWithTemplate[]
+> => {
+  try {
+    const result = await query<LogScheduleWithTemplate>(
+      `
+      SELECT 
+        ls.*,
+        lt.name as template_name,
+        lt.category as template_category
+      FROM log_schedules ls
+      INNER JOIN log_templates lt ON ls.template_id = lt.id
+      WHERE ls.status = 'ACTIVE'
+        AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
+      ORDER BY ls.start_date DESC
+      `
+    );
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching all active log schedules:', error);
     return [];
   }
 };
