@@ -1,4 +1,4 @@
-import { query } from "../producex/postgres";
+import { query } from "@/lib/db/postgres";
 
 export type LogTemplate = {
   id: string;
