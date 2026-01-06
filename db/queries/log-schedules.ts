@@ -15,6 +15,11 @@ export type LogSchedule = {
   created_by: string | null;
 };
 
+export type LogScheduleWithTemplate = LogSchedule & {
+  template_name: string;
+  template_category: string | null;
+};
+
 export const createLogSchedule = async (
   schedule: Omit<LogSchedule, "id" | "created_at" | "updated_at">,
 ): Promise<LogSchedule | null> => {
@@ -75,6 +80,32 @@ export const getLogSchedulesByTemplateId = async (
     return result.rows;
   } catch (error) {
     console.error("Error fetching log schedules:", error);
+    return [];
+  }
+};
+
+export const getActiveLogSchedules = async (
+  orgId: string,
+): Promise<LogScheduleWithTemplate[]> => {
+  try {
+    const result = await query<LogScheduleWithTemplate>(
+      `
+      SELECT 
+        ls.*,
+        lt.name as template_name,
+        lt.category as template_category
+      FROM log_schedules ls
+      INNER JOIN log_templates lt ON ls.template_id = lt.id
+      WHERE ls.org_id = $1
+        AND ls.status = 'ACTIVE'
+        AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
+      ORDER BY ls.start_date DESC
+      `,
+      [orgId],
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching active log schedules:", error);
     return [];
   }
 };

@@ -6,8 +6,10 @@ import { z } from "zod";
 
 import {
   createLogSchedule,
+  getActiveLogSchedules,
   getLogSchedulesByTemplateId,
 } from "@/db/queries/log-schedules";
+import { getOrgMembersAction } from "./clerk";
 
 // Define validation schema
 const CreateScheduleSchema = z.object({
@@ -88,6 +90,7 @@ export async function createLogScheduleAction(
     });
 
     revalidatePath(`/logs/templates/${template_id}`);
+    revalidatePath("/logs/scheduled");
     return { success: true, message: "Schedule created successfully" };
   } catch (error) {
     console.error("Failed to create schedule:", error);
@@ -103,4 +106,61 @@ export async function getLogSchedulesByTemplateAction(templateId: string) {
 
   const result = await getLogSchedulesByTemplateId(templateId, orgId);
   return result;
+}
+
+export type ScheduleWithDetails = {
+  id: string;
+  template_id: string;
+  template_name: string;
+  template_category: string | null;
+  start_date: Date;
+  end_date: Date | null;
+  assignee_name: string | null;
+  reviewer_name: string | null;
+  days_of_week: number[] | null;
+  status: string;
+};
+
+export async function getActiveSchedulesWithDetailsAction(): Promise<
+  ScheduleWithDetails[]
+> {
+  const { orgId } = await auth();
+  if (!orgId) {
+    throw new Error("Unauthorized");
+  }
+
+  const [schedules, members] = await Promise.all([
+    getActiveLogSchedules(orgId),
+    getOrgMembersAction(),
+  ]);
+
+  // Create a map of user IDs to names for quick lookup
+  const userMap = new Map(
+    members.map((m) => [
+      m.id,
+      m.firstName && m.lastName ? `${m.firstName} ${m.lastName}` : m.email,
+    ]),
+  );
+
+  // Enrich schedules with user names
+  const enrichedSchedules: ScheduleWithDetails[] = schedules.map(
+    (schedule) => ({
+      id: schedule.id,
+      template_id: schedule.template_id,
+      template_name: schedule.template_name,
+      template_category: schedule.template_category,
+      start_date: schedule.start_date,
+      end_date: schedule.end_date,
+      assignee_name: schedule.assignee_id
+        ? userMap.get(schedule.assignee_id) || schedule.assignee_id
+        : null,
+      reviewer_name: schedule.reviewer_id
+        ? userMap.get(schedule.reviewer_id) || schedule.reviewer_id
+        : null,
+      days_of_week: schedule.days_of_week,
+      status: schedule.status,
+    }),
+  );
+
+  return enrichedSchedules;
 }
