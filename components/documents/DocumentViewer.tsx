@@ -4,10 +4,10 @@ import { AlertCircle, Download, Loader2, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useDocumentContent, useUserProfile } from "@/lib/compliance/queries";
-import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useDocumentContent, useUserProfile } from "@/lib/compliance/queries";
 
 interface DocumentViewerProps {
   documentId: string;
@@ -96,7 +96,7 @@ export function DocumentViewer({
       <div className="flex h-96 items-center justify-center">
         <div className="flex flex-col items-center gap-2">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm text-muted-foreground">Loading document...</p>
+          <p className="text-muted-foreground text-sm">Loading document...</p>
         </div>
       </div>
     );
@@ -119,8 +119,8 @@ export function DocumentViewer({
       <div className="space-y-4 border-b pb-6">
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <h1 className="font-bold text-3xl tracking-tight">{title}</h1>
+            <p className="mt-1 text-muted-foreground text-sm">
               Version {version}
             </p>
           </div>
@@ -132,13 +132,13 @@ export function DocumentViewer({
         {/* Metadata */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase text-muted-foreground">
+            <p className="font-semibold text-muted-foreground text-xs uppercase">
               Last Updated
             </p>
             <p className="text-sm">{formatDate(updatedAt)}</p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase text-muted-foreground">
+            <p className="font-semibold text-muted-foreground text-xs uppercase">
               Updated By
             </p>
             <p className="text-sm">
@@ -152,9 +152,7 @@ export function DocumentViewer({
         {/* Actions */}
         <div className="flex gap-2">
           <Button
-            onClick={() =>
-              router.push(`/dashboard/documents/${documentId}/edit`)
-            }
+            onClick={() => router.push(`/documents/${documentId}/edit`)}
             className="gap-2"
           >
             <Pencil className="h-4 w-4" />
@@ -173,7 +171,7 @@ export function DocumentViewer({
       </div>
 
       {/* Content */}
-      <div className="prose prose-sm max-w-none dark:prose-invert">
+      <div className="prose prose-sm dark:prose-invert max-w-none">
         <div
           dangerouslySetInnerHTML={{
             __html: content?.content || "",

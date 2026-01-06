@@ -86,7 +86,7 @@ export default function ComplianceContent({
   };
 
   const handleBackToModules = () => {
-    router.push(pathname || "/dashboard/compliance");
+    router.push(pathname || "/compliance");
   };
 
   // Show loading state while fetching module details

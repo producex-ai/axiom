@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { complianceKeys } from "@/lib/compliance/queries";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,52 +15,42 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-
-// Import modular components and utilities
-import { ConfirmationDialog } from "./ConfirmationDialog";
-import { ResetConfirmationSection } from "./ResetConfirmationSection";
-import { UploadZone } from "./UploadZone";
-import { UploadStepActions } from "./UploadStepActions";
+import { complianceKeys } from "@/lib/compliance/queries";
 import {
-  RelevanceBlockedAlert,
-  RelevanceIssues,
-} from "./RelevanceSection";
-import {
-  ScoreSummary,
   CoverageBreakdown,
   LowScoreWarning,
   RisksSection,
+  ScoreSummary,
 } from "./AnalysisDisplay";
 import {
+  acceptDocument,
+  analyzeCompliance,
+  deleteEvidence,
+  fetchExistingEvidence,
+  improveDocument,
+  mergeDocuments,
+  uploadFiles,
+} from "./api";
+// Import modular components and utilities
+import { ConfirmationDialog } from "./ConfirmationDialog";
+import { formatFileSize, validateFile, validateFileCount } from "./fileUtils";
+import {
+  AnalysisSuccessMessage,
   LightweightScoreSummary,
   RelevanceWarning,
-  AnalysisSuccessMessage,
 } from "./LightweightAnalysisDisplay";
+import { RelevanceBlockedAlert, RelevanceIssues } from "./RelevanceSection";
+import { ResetConfirmationSection } from "./ResetConfirmationSection";
 import { ResultsStepActions } from "./ResultsStepActions";
 import {
-  validateFile,
-  validateFileCount,
-  formatFileSize,
-} from "./fileUtils";
-import {
-  fetchExistingEvidence,
-  uploadFiles,
-  deleteEvidence,
-  analyzeCompliance,
-  mergeDocuments,
-  improveDocument,
-  acceptDocument,
-} from "./api";
-import {
-  FlowStep,
-  Evidence,
-  AnalysisResult,
+  type AnalysisResult,
+  type Evidence,
+  type FlowStep,
+  type FullAnalysisResult,
   SummaryAnalysisResult,
-  FullAnalysisResult,
 } from "./types";
+import { UploadStepActions } from "./UploadStepActions";
+import { UploadZone } from "./UploadZone";
 
 interface EvidenceUploadFlowProps {
   open: boolean;
@@ -80,7 +73,7 @@ export default function EvidenceUploadFlow({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedEvidence, setUploadedEvidence] = useState<Evidence[]>([]);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
-    null
+    null,
   );
   const [analysisId, setAnalysisId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -129,9 +122,9 @@ export default function EvidenceUploadFlow({
           method: "DELETE",
         }).catch((error) => {
           console.warn(`Failed to delete evidence ${evidence.id}:`, error);
-        })
+        }),
       );
-      
+
       await Promise.all(deletePromises);
       console.log("[Cleanup] Deleted evidence files from DB and S3");
     }
@@ -182,7 +175,7 @@ export default function EvidenceUploadFlow({
       setSelectedFiles([...selectedFiles, ...files]);
       setErrorMessage("");
     },
-    [selectedFiles]
+    [selectedFiles],
   );
 
   const handleFileClick = useCallback(() => {
@@ -211,7 +204,7 @@ export default function EvidenceUploadFlow({
       const evidence = await uploadFiles(
         selectedFiles,
         subModuleId,
-        setUploadProgress
+        setUploadProgress,
       );
 
       clearInterval(progressInterval);
@@ -230,7 +223,7 @@ export default function EvidenceUploadFlow({
       clearInterval(progressInterval);
       setUploadProgress(0);
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to upload evidence"
+        error instanceof Error ? error.message : "Failed to upload evidence",
       );
       setCurrentStep("error");
     }
@@ -247,7 +240,7 @@ export default function EvidenceUploadFlow({
     } catch (error) {
       console.error("Analysis error:", error);
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to analyze compliance"
+        error instanceof Error ? error.message : "Failed to analyze compliance",
       );
       setCurrentStep("error");
     } finally {
@@ -282,7 +275,7 @@ export default function EvidenceUploadFlow({
       const evidence = await uploadFiles(
         selectedFiles,
         subModuleId,
-        setUploadProgress
+        setUploadProgress,
       );
 
       clearInterval(progressInterval);
@@ -304,7 +297,7 @@ export default function EvidenceUploadFlow({
       clearInterval(progressInterval);
       setUploadProgress(0);
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to analyze documents"
+        error instanceof Error ? error.message : "Failed to analyze documents",
       );
       setCurrentStep("error");
     } finally {
@@ -355,7 +348,7 @@ export default function EvidenceUploadFlow({
     try {
       const result = await mergeDocuments(subModuleId);
       toast.success(
-        `Documents merged successfully! Document ID: ${result.documentId}`
+        `Documents merged successfully! Document ID: ${result.documentId}`,
       );
 
       await queryClient.invalidateQueries({
@@ -369,7 +362,7 @@ export default function EvidenceUploadFlow({
     } catch (error) {
       console.error("Merge error:", error);
       toast.error(
-        error instanceof Error ? error.message : "Failed to merge documents"
+        error instanceof Error ? error.message : "Failed to merge documents",
       );
     } finally {
       setIsMerging(false);
@@ -392,14 +385,14 @@ export default function EvidenceUploadFlow({
 
       // Show loading state
       const loadingToastId = toast.loading("Loading compliance data...");
-      
+
       // Invalidate stale queries
       queryClient.invalidateQueries({
         queryKey: complianceKeys.evidenceByModule(subModuleId),
       });
 
       // Give database a moment to ensure transaction is fully committed
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Fetch overview data and wait for it to complete before navigation
       // This ensures the document editor page has all necessary data
@@ -429,19 +422,32 @@ export default function EvidenceUploadFlow({
         toast.success("Document ready for editing");
       } else {
         // No callback - navigate directly
-        console.log("[Upload Flow] No callback, navigating to:", response.documentId);
-        router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
+        console.log(
+          "[Upload Flow] No callback, navigating to:",
+          response.documentId,
+        );
+        router.push(`/compliance/documents/${response.documentId}/edit`);
         toast.success("Document ready for editing");
       }
     } catch (error) {
       console.error("Improve error:", error);
       toast.error(
-        error instanceof Error ? error.message : "Failed to improve document"
+        error instanceof Error ? error.message : "Failed to improve document",
       );
     } finally {
       setIsImproving(false);
     }
-  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, cleanupEvidenceAndS3, uploadedEvidence, onClose, router]);
+  }, [
+    subModuleId,
+    analysisId,
+    analysisResult,
+    onAnalysisComplete,
+    queryClient,
+    cleanupEvidenceAndS3,
+    uploadedEvidence,
+    onClose,
+    router,
+  ]);
 
   const handleAcceptDocument = useCallback(async () => {
     setIsAccepting(true);
@@ -459,14 +465,14 @@ export default function EvidenceUploadFlow({
 
       // Show loading state
       const loadingToastId = toast.loading("Loading compliance data...");
-      
+
       // Invalidate stale queries
       queryClient.invalidateQueries({
         queryKey: complianceKeys.evidenceByModule(subModuleId),
       });
 
       // Give database a moment to ensure transaction is fully committed
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Fetch overview data and wait for it to complete before navigation
       // This ensures the document editor page has all necessary data
@@ -496,26 +502,39 @@ export default function EvidenceUploadFlow({
         toast.success("Document ready for editing");
       } else {
         // No callback - navigate directly
-        console.log("[Upload Flow] No callback, navigating to:", response.documentId);
-        router.push(`/dashboard/compliance/documents/${response.documentId}/edit`);
+        console.log(
+          "[Upload Flow] No callback, navigating to:",
+          response.documentId,
+        );
+        router.push(`/compliance/documents/${response.documentId}/edit`);
         toast.success("Document ready for editing");
       }
     } catch (error) {
       console.error("Accept error:", error);
       toast.error(
-        error instanceof Error ? error.message : "Failed to save document"
+        error instanceof Error ? error.message : "Failed to save document",
       );
     } finally {
       setIsAccepting(false);
     }
-  }, [subModuleId, analysisId, analysisResult, onAnalysisComplete, queryClient, cleanupEvidenceAndS3, uploadedEvidence, onClose, router]);
+  }, [
+    subModuleId,
+    analysisId,
+    analysisResult,
+    onAnalysisComplete,
+    queryClient,
+    cleanupEvidenceAndS3,
+    uploadedEvidence,
+    onClose,
+    router,
+  ]);
 
   // Step 1: Upload Evidence
   if (currentStep === "upload") {
     return (
       <>
         <Dialog open={open} onOpenChange={handleClose}>
-          <DialogContent className="w-full max-w-5xl max-h-[90vh] flex flex-col">
+          <DialogContent className="flex max-h-[90vh] w-full max-w-5xl flex-col">
             <DialogHeader className="flex-shrink-0">
               <DialogTitle>Upload Evidence Documents</DialogTitle>
               <DialogDescription>
@@ -571,7 +590,7 @@ export default function EvidenceUploadFlow({
     return (
       <>
         <Dialog open={open} onOpenChange={handleClose}>
-          <DialogContent className="w-full max-w-5xl max-h-[90vh] flex flex-col">
+          <DialogContent className="flex max-h-[90vh] w-full max-w-5xl flex-col">
             <DialogHeader className="flex-shrink-0">
               <DialogTitle>
                 {isSummary ? "Analysis Results" : "Compliance Analysis Results"}
@@ -585,10 +604,16 @@ export default function EvidenceUploadFlow({
               <div className="space-y-6">
                 {/* SCORE SUMMARY DISPLAY - Only show when all documents are relevant */}
                 <>
-                  <AnalysisSuccessMessage 
+                  <AnalysisSuccessMessage
                     documentCount={uploadedEvidence.length}
-                    hasRelevanceIssues={!analysisResult.documentRelevance?.allRelevant}
-                    relevantCount={analysisResult.documentRelevance?.issues?.filter(i => i.isRelevant).length}
+                    hasRelevanceIssues={
+                      !analysisResult.documentRelevance?.allRelevant
+                    }
+                    relevantCount={
+                      analysisResult.documentRelevance?.issues?.filter(
+                        (i) => i.isRelevant,
+                      ).length
+                    }
                   />
                   <RelevanceWarning
                     isBlocked={
@@ -596,34 +621,36 @@ export default function EvidenceUploadFlow({
                     }
                     analysisId={analysisId}
                   />
-                  
+
                   {/* Only show scores if all documents are relevant or no relevance check was performed */}
-                  {!analysisResult.documentRelevance?.analysisBlocked && 
-                   (analysisResult.documentRelevance?.allRelevant !== false) && (
-                    <LightweightScoreSummary
-                      analysis={{
-                        overallScore: analysisResult.overallScore,
-                        contentScore: analysisResult.contentScore,
-                        structureScore: analysisResult.structureScore,
-                        auditReadinessScore: analysisResult.auditReadinessScore,
-                        canImprove: analysisResult.canImprove,
-                        canMerge: analysisResult.canMerge,
-                        shouldGenerateFromScratch: analysisResult.shouldGenerateFromScratch,
-                        documentRelevance: analysisResult.documentRelevance,
-                      }}
-                    />
-                  )}
-                  
+                  {!analysisResult.documentRelevance?.analysisBlocked &&
+                    analysisResult.documentRelevance?.allRelevant !== false && (
+                      <LightweightScoreSummary
+                        analysis={{
+                          overallScore: analysisResult.overallScore,
+                          contentScore: analysisResult.contentScore,
+                          structureScore: analysisResult.structureScore,
+                          auditReadinessScore:
+                            analysisResult.auditReadinessScore,
+                          canImprove: analysisResult.canImprove,
+                          canMerge: analysisResult.canMerge,
+                          shouldGenerateFromScratch:
+                            analysisResult.shouldGenerateFromScratch,
+                          documentRelevance: analysisResult.documentRelevance,
+                        }}
+                      />
+                    )}
+
                   {/* Show relevance issues only if documents are not all relevant */}
-                  {!analysisResult.documentRelevance?.allRelevant && 
-                   hasRelevanceIssues && 
-                   analysisResult.documentRelevance?.issues && (
-                    <RelevanceIssues
-                      issues={analysisResult.documentRelevance.issues}
-                      expandedIndex={expandedRelevanceIssue}
-                      onToggleExpand={setExpandedRelevanceIssue}
-                    />
-                  )}
+                  {!analysisResult.documentRelevance?.allRelevant &&
+                    hasRelevanceIssues &&
+                    analysisResult.documentRelevance?.issues && (
+                      <RelevanceIssues
+                        issues={analysisResult.documentRelevance.issues}
+                        expandedIndex={expandedRelevanceIssue}
+                        onToggleExpand={setExpandedRelevanceIssue}
+                      />
+                    )}
                 </>
 
                 {/* FULL DETAILED ANALYSIS AVAILABLE ON OTHER SCREENS */}

@@ -11,7 +11,7 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 // Define allowed roles
-const ALLOWED_ROLES = ['director', 'manager', 'admin', 'org:admin'];
+const ALLOWED_ROLES = ['director', 'manager', 'admin', 'org_admin'];
 
 // Define protected routes that require authentication
 const isProtectedRoute = createRouteMatcher([
@@ -66,10 +66,12 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
       // Check user role first
       const userRole = sessionClaims?.o?.rol;
       console.log(userRole);
-      
+
       // If user doesn't have an allowed role, redirect to no-access
       if (userRole && !ALLOWED_ROLES.includes(userRole)) {
-        console.log(`User with role '${userRole}' redirected to no-access from home`);
+        console.log(
+          `User with role '${userRole}' redirected to no-access from home`
+        );
         const noAccessUrl = createLocalizedUrl(
           'no-access',
           locale,
@@ -79,7 +81,7 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
       }
 
       // Access org metadata from session claims
-      if (sessionClaims?.org_metadata?.org_type) {    
+      if (sessionClaims?.org_metadata?.org_type) {
         const dashboardUrl = createLocalizedUrl(
           `dashboard`,
           locale,
@@ -115,7 +117,7 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
         // Check if user has an allowed role
         const userRole = sessionClaims?.o?.rol;
-         console.log(userRole);
+        console.log(userRole);
         if (userRole && !ALLOWED_ROLES.includes(userRole)) {
           console.log(`User with role '${userRole}' denied access`);
           const noAccessUrl = createLocalizedUrl(
@@ -152,9 +154,5 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
 export const config = {
   // Match all routes including API routes for Clerk auth
-  matcher: [
-    '/((?!_next|_vercel).*)',
-    '/',
-    '/(api|trpc)(.*)',
-  ],
+  matcher: ['/((?!_next|_vercel).*)', '/', '/(api|trpc)(.*)'],
 };

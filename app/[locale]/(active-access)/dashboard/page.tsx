@@ -149,7 +149,7 @@ export default async function DashboardPage({ params }: { params: any }) {
           <CardContent>
             <div className="grid gap-3">
               <Link
-                href={`/${locale}/dashboard/compliance/module-5`}
+                href={`/${locale}/compliance?module=5`}
                 className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-accent"
               >
                 <ShieldCheck className="h-5 w-5 text-primary" />
@@ -161,7 +161,7 @@ export default async function DashboardPage({ params }: { params: any }) {
                 </div>
               </Link>
               <Link
-                href={`/${locale}/dashboard/compliance`}
+                href={`/${locale}/compliance`}
                 className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-accent"
               >
                 <FileText className="h-5 w-5 text-primary" />
@@ -173,7 +173,7 @@ export default async function DashboardPage({ params }: { params: any }) {
                 </div>
               </Link>
               <Link
-                href={`/${locale}/dashboard/tasks`}
+                href={`/${locale}/tasks`}
                 className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-accent"
               >
                 <ClipboardCheck className="h-5 w-5 text-primary" />
