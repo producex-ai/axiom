@@ -140,8 +140,8 @@ async function SchedulesTable() {
               </TableCell>
               <TableCell className="text-right">
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href={`/logs/templates/${schedule.template_id}`}>
-                    View
+                  <Link href={`/logs/templates/${schedule.template_id}/schedule/edit`}>
+                    Update
                   </Link>
                 </Button>
               </TableCell>

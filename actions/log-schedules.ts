@@ -1,28 +1,31 @@
-"use server";
+'use server';
 
-import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { z } from 'zod';
 
 import {
   createLogSchedule,
   getActiveLogSchedules,
+  getLogScheduleById,
   getLogSchedulesByTemplateId,
-} from "@/db/queries/log-schedules";
-import { getLogTemplateById } from "@/db/queries/log-templates";
-import { getOrgMembersAction } from "./clerk";
+  updateLogSchedule,
+} from '@/db/queries/log-schedules';
+import { getLogTemplateById } from '@/db/queries/log-templates';
+import { getOrgMembersAction } from './clerk';
 
 // Define validation schema with date validation
 const CreateScheduleSchema = z
   .object({
-    template_id: z.string().uuid("Invalid template ID"),
-    start_date: z.string().min(1, "Start date is required"),
+    template_id: z.string().uuid('Invalid template ID'),
+    start_date: z.string().min(1, 'Start date is required'),
     end_date: z.string().optional(),
     assignee_id: z.string().optional(),
     reviewer_id: z.string().optional(),
     days_of_week: z
       .array(z.number().min(0).max(6))
-      .min(1, "Select at least one day"),
+      .min(1, 'Select at least one day'),
   })
   .refine(
     (data) => {
@@ -32,9 +35,32 @@ const CreateScheduleSchema = z
       return end > start;
     },
     {
-      message: "End date must be after start date",
-      path: ["end_date"],
+      message: 'End date must be after start date',
+      path: ['end_date'],
+    }
+  );
+
+const UpdateScheduleSchema = z
+  .object({
+    start_date: z.string().min(1, 'Start date is required'),
+    end_date: z.string().optional(),
+    assignee_id: z.string().optional(),
+    reviewer_id: z.string().optional(),
+    days_of_week: z
+      .array(z.number().min(0).max(6))
+      .min(1, 'Select at least one day'),
+  })
+  .refine(
+    (data) => {
+      if (!data.end_date) return true;
+      const start = new Date(data.start_date);
+      const end = new Date(data.end_date);
+      return end > start;
     },
+    {
+      message: 'End date must be after start date',
+      path: ['end_date'],
+    }
   );
 
 export type CreateScheduleState = {
@@ -52,23 +78,23 @@ export type CreateScheduleState = {
 
 export async function createLogScheduleAction(
   _prevState: CreateScheduleState,
-  formData: FormData,
+  formData: FormData
 ): Promise<CreateScheduleState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: "Unauthorized" };
+    return { message: 'Unauthorized' };
   }
 
   // Extract fields
-  const template_id = formData.get("template_id") as string;
-  const start_date = formData.get("start_date") as string;
-  const end_date = formData.get("end_date") as string;
-  const assignee_id = formData.get("assignee_id") as string;
-  const reviewer_id = formData.get("reviewer_id") as string;
+  const template_id = formData.get('template_id') as string;
+  const start_date = formData.get('start_date') as string;
+  const end_date = formData.get('end_date') as string;
+  const assignee_id = formData.get('assignee_id') as string;
+  const reviewer_id = formData.get('reviewer_id') as string;
 
   // Extract days of week - handling multiple checkboxes
   const days = formData
-    .getAll("days_of_week")
+    .getAll('days_of_week')
     .map((d) => Number.parseInt(d.toString()));
 
   // Validate
@@ -84,7 +110,7 @@ export async function createLogScheduleAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Please fix the errors below",
+      message: 'Please fix the errors below',
     };
   }
 
@@ -92,19 +118,19 @@ export async function createLogScheduleAction(
   try {
     const template = await getLogTemplateById(
       validatedFields.data.template_id,
-      orgId,
+      orgId
     );
 
     if (!template) {
-      return { message: "Template not found" };
+      return { message: 'Template not found' };
     }
 
     if (template.schedule_id) {
       return {
         message:
-          "This template is already scheduled. Please update the existing schedule instead.",
+          'This template is already scheduled. Please update the existing schedule instead.',
         errors: {
-          template_id: ["Template is already scheduled"],
+          template_id: ['Template is already scheduled'],
         },
       };
     }
@@ -119,23 +145,100 @@ export async function createLogScheduleAction(
       assignee_id: validatedFields.data.assignee_id || null,
       reviewer_id: validatedFields.data.reviewer_id || null,
       days_of_week: validatedFields.data.days_of_week,
-      status: "ACTIVE",
+      status: 'ACTIVE',
       created_by: userId,
     });
 
     revalidatePath(`/logs/templates/${template_id}`);
-    revalidatePath("/logs/scheduled");
-    return { success: true, message: "Schedule created successfully" };
+    revalidatePath('/logs/scheduled');
   } catch (error) {
-    console.error("Failed to create schedule:", error);
-    return { message: "Failed to create schedule. Please try again." };
+    console.error('Failed to create schedule:', error);
+    return { message: 'Failed to create schedule. Please try again.' };
   }
+
+  redirect('/logs/scheduled');
+}
+
+export async function updateLogScheduleAction(
+  scheduleId: string,
+  _prevState: CreateScheduleState,
+  formData: FormData
+): Promise<CreateScheduleState> {
+  const { userId, orgId } = await auth();
+  if (!userId || !orgId) {
+    return { message: 'Unauthorized' };
+  }
+
+  // Extract fields
+  const start_date = formData.get('start_date') as string;
+  const end_date = formData.get('end_date') as string;
+  const assignee_id = formData.get('assignee_id') as string;
+  const reviewer_id = formData.get('reviewer_id') as string;
+
+  // Extract days of week
+  const days = formData
+    .getAll('days_of_week')
+    .map((d) => Number.parseInt(d.toString()));
+
+  // Validate
+  const validatedFields = UpdateScheduleSchema.safeParse({
+    start_date,
+    end_date: end_date || undefined,
+    assignee_id: assignee_id || undefined,
+    reviewer_id: reviewer_id || undefined,
+    days_of_week: days,
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Please fix the errors below',
+    };
+  }
+
+  try {
+    const updatedSchedule = await updateLogSchedule(
+      scheduleId,
+      {
+        start_date: new Date(validatedFields.data.start_date),
+        end_date: validatedFields.data.end_date
+          ? new Date(validatedFields.data.end_date)
+          : null,
+        assignee_id: validatedFields.data.assignee_id || null,
+        reviewer_id: validatedFields.data.reviewer_id || null,
+        days_of_week: validatedFields.data.days_of_week,
+      },
+      orgId
+    );
+
+    if (!updatedSchedule) {
+      return { message: 'Failed to update schedule' };
+    }
+
+    revalidatePath(`/logs/templates/${updatedSchedule.template_id}`);
+    revalidatePath('/logs/scheduled');
+  } catch (error) {
+    console.error('Failed to update schedule:', error);
+    return { message: 'Failed to update schedule. Please try again.' };
+  }
+
+  redirect('/logs/scheduled');
+}
+
+export async function getLogScheduleByIdAction(scheduleId: string) {
+  const { orgId } = await auth();
+  if (!orgId) {
+    throw new Error('Unauthorized');
+  }
+
+  const result = await getLogScheduleById(scheduleId, orgId);
+  return result;
 }
 
 export async function getLogSchedulesByTemplateAction(templateId: string) {
   const { orgId } = await auth();
   if (!orgId) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   const result = await getLogSchedulesByTemplateId(templateId, orgId);
@@ -160,7 +263,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
 > {
   const { orgId } = await auth();
   if (!orgId) {
-    throw new Error("Unauthorized");
+    throw new Error('Unauthorized');
   }
 
   const [schedules, members] = await Promise.all([
@@ -173,7 +276,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
     members.map((m) => [
       m.id,
       m.firstName && m.lastName ? `${m.firstName} ${m.lastName}` : m.email,
-    ]),
+    ])
   );
 
   // Enrich schedules with user names
@@ -193,7 +296,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
         : null,
       days_of_week: schedule.days_of_week,
       status: schedule.status,
-    }),
+    })
   );
 
   return enrichedSchedules;

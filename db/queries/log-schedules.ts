@@ -64,6 +64,83 @@ export const createLogSchedule = async (
   }
 };
 
+export const updateLogSchedule = async (
+  id: string,
+  schedule: Partial<
+    Omit<
+      LogSchedule,
+      | "id"
+      | "template_id"
+      | "org_id"
+      | "created_at"
+      | "updated_at"
+      | "created_by"
+    >
+  >,
+  orgId: string,
+): Promise<LogSchedule | null> => {
+  const {
+    start_date,
+    end_date,
+    assignee_id,
+    reviewer_id,
+    days_of_week,
+    status,
+  } = schedule;
+
+  try {
+    const result = await query<LogSchedule>(
+      `
+      UPDATE log_schedules
+      SET 
+        start_date = COALESCE($1, start_date),
+        end_date = $2,
+        assignee_id = $3,
+        reviewer_id = $4,
+        days_of_week = COALESCE($5, days_of_week),
+        status = COALESCE($6, status),
+        updated_at = NOW()
+      WHERE id = $7 AND org_id = $8
+      RETURNING *
+      `,
+      [
+        start_date,
+        end_date,
+        assignee_id,
+        reviewer_id,
+        days_of_week,
+        status,
+        id,
+        orgId,
+      ],
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error updating log schedule:", error);
+    return null;
+  }
+};
+
+export const getLogScheduleById = async (
+  id: string,
+  orgId: string,
+): Promise<LogSchedule | null> => {
+  try {
+    const result = await query<LogSchedule>(
+      `
+      SELECT * FROM log_schedules
+      WHERE id = $1 AND org_id = $2
+      LIMIT 1
+      `,
+      [id, orgId],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error fetching log schedule by id:", error);
+    return null;
+  }
+};
+
 export const getLogSchedulesByTemplateId = async (
   templateId: string,
   orgId: string,
