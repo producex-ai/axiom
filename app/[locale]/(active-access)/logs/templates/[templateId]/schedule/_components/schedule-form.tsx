@@ -63,6 +63,7 @@ interface ScheduleFormProps {
     assigneeId?: string;
     reviewerId?: string;
     daysOfWeek: number[];
+    timesPerDay?: number;
   };
 }
 
@@ -93,6 +94,9 @@ export function ScheduleForm({
   );
   const [reviewerId, setReviewerId] = useState<string>(
     initialData?.reviewerId || ''
+  );
+  const [timesPerDay, setTimesPerDay] = useState<string>(
+    initialData?.timesPerDay?.toString() || '1'
   );
 
   const allDaysSelected = selectedDays.length === DAYS_OF_WEEK.length;
@@ -140,11 +144,12 @@ export function ScheduleForm({
       {/* Hidden inputs for selected users */}
       <input type='hidden' name='assignee_id' value={assigneeId} />
       <input type='hidden' name='reviewer_id' value={reviewerId} />
+      <input type='hidden' name='times_per_day' value={timesPerDay} />
 
       <Card>
         <CardContent className='space-y-8 pt-6'>
-          {/* Date Range */}
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+          {/* Date Range and Times Per Day */}
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
             <div className='space-y-2'>
               <Label htmlFor='start_date'>Start Date</Label>
               <Input
@@ -177,6 +182,26 @@ export function ScheduleForm({
                 </p>
               )}
             </div>
+
+            <div className='space-y-2'>
+              <Label htmlFor='times_per_day_select'>Times Per Day</Label>
+              <Select value={timesPerDay} onValueChange={setTimesPerDay}>
+                <SelectTrigger className='w-full' id='times_per_day_select'>
+                  <SelectValue placeholder='Select times per day' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='1'>1 time</SelectItem>
+                  <SelectItem value='2'>2 times</SelectItem>
+                  <SelectItem value='3'>3 times</SelectItem>
+                  <SelectItem value='4'>4 times</SelectItem>
+                </SelectContent>
+              </Select>
+              {state.errors?.times_per_day && (
+                <p className='text-destructive text-sm'>
+                  {state.errors.times_per_day.join(', ')}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Assignee and Reviewer */}
@@ -184,7 +209,7 @@ export function ScheduleForm({
             <div className='space-y-2'>
               <Label htmlFor='assignee_select'>Assignee</Label>
               <Select value={assigneeId} onValueChange={setAssigneeId}>
-                <SelectTrigger id='assignee_select'>
+                <SelectTrigger className='w-full' id='assignee_select'>
                   <SelectValue placeholder='Select assignee' />
                 </SelectTrigger>
                 <SelectContent>
@@ -211,7 +236,7 @@ export function ScheduleForm({
             <div className='space-y-2'>
               <Label htmlFor='reviewer_select'>Reviewer</Label>
               <Select value={reviewerId} onValueChange={setReviewerId}>
-                <SelectTrigger id='reviewer_select'>
+                <SelectTrigger className='w-full' id='reviewer_select'>
                   <SelectValue placeholder='Select reviewer' />
                 </SelectTrigger>
                 <SelectContent>

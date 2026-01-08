@@ -1,4 +1,6 @@
-import { query } from "@/lib/db/postgres";
+import { query } from '@/lib/db/postgres';
+
+export type ReviewTimePeriod = '1_month' | '3_months' | '6_months' | '1_year';
 
 export type LogTemplate = {
   id: string;
@@ -10,6 +12,8 @@ export type LogTemplate = {
   created_at: Date;
   updated_at: Date;
   created_by: string | null;
+  review_time: ReviewTimePeriod | null;
+  due_date: Date | null;
 };
 
 export type LogTemplateWithSchedule = LogTemplate & {
@@ -17,21 +21,22 @@ export type LogTemplateWithSchedule = LogTemplate & {
 };
 
 export const createLogTemplate = async (
-  template: Omit<LogTemplate, "id" | "created_at" | "updated_at">,
+  template: Omit<LogTemplate, 'id' | 'created_at' | 'updated_at' | 'due_date'>
 ): Promise<LogTemplate | null> => {
-  const { name, category, sop, task_list, org_id, created_by } = template;
+  const { name, category, sop, task_list, org_id, created_by, review_time } =
+    template;
   try {
     const result = await query<LogTemplate>(
       `
-      INSERT INTO log_templates (name, category, sop, task_list, org_id, created_by)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO log_templates (name, category, sop, task_list, org_id, created_by, review_time)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
       `,
-      [name, category, sop, task_list, org_id, created_by],
+      [name, category, sop, task_list, org_id, created_by, review_time]
     );
     return result.rows[0];
   } catch (error) {
-    console.error("Error creating log template:", error);
+    console.error('Error creating log template:', error);
     return null;
   }
 };
@@ -41,12 +46,12 @@ export const updateLogTemplate = async (
   template: Partial<
     Omit<
       LogTemplate,
-      "id" | "created_at" | "updated_at" | "org_id" | "created_by"
+      'id' | 'created_at' | 'updated_at' | 'org_id' | 'created_by' | 'due_date'
     >
   >,
-  orgId: string,
+  orgId: string
 ): Promise<LogTemplate | null> => {
-  const { name, category, sop, task_list } = template;
+  const { name, category, sop, task_list, review_time } = template;
   try {
     const result = await query<LogTemplate>(
       `
@@ -56,21 +61,22 @@ export const updateLogTemplate = async (
                 category = COALESCE($2, category),
                 sop = COALESCE($3, sop),
                 task_list = COALESCE($4, task_list),
+                review_time = COALESCE($5, review_time),
                 updated_at = NOW()
-            WHERE id = $5 AND org_id = $6
+            WHERE id = $6 AND org_id = $7
             RETURNING *
             `,
-      [name, category, sop, task_list, id, orgId],
+      [name, category, sop, task_list, review_time, id, orgId]
     );
     return result.rows[0];
   } catch (error) {
-    console.error("Error updating log template:", error);
+    console.error('Error updating log template:', error);
     return null;
   }
 };
 
 export const getLogTemplates = async (
-  orgId: string,
+  orgId: string
 ): Promise<LogTemplateWithSchedule[]> => {
   try {
     const result = await query<LogTemplateWithSchedule>(
@@ -85,18 +91,18 @@ export const getLogTemplates = async (
       WHERE lt.org_id = $1
       ORDER BY lt.created_at DESC
       `,
-      [orgId],
+      [orgId]
     );
     return result.rows;
   } catch (error) {
-    console.error("Error fetching log templates:", error);
+    console.error('Error fetching log templates:', error);
     return [];
   }
 };
 
 export const getLogTemplateById = async (
   id: string,
-  orgId: string,
+  orgId: string
 ): Promise<LogTemplateWithSchedule | null> => {
   try {
     const result = await query<LogTemplateWithSchedule>(
@@ -111,11 +117,11 @@ export const getLogTemplateById = async (
       WHERE lt.id = $1 AND lt.org_id = $2
       LIMIT 1
       `,
-      [id, orgId],
+      [id, orgId]
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error("Error fetching log template by id:", error);
+    console.error('Error fetching log template by id:', error);
     return null;
   }
 };

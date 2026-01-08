@@ -82,8 +82,13 @@ async function TemplateList() {
                   <div className='flex items-center text-muted-foreground text-xs'>
                     <Calendar className='mr-2 h-3 w-3' />
                     <span>
-                      Created{' '}
-                      {new Date(template.created_at).toLocaleDateString()}
+                      {template.due_date ? (
+                        <>
+                          Due {new Date(template.due_date).toLocaleDateString()}
+                        </>
+                      ) : (
+                        <span className='italic'>No review date set</span>
+                      )}
                     </span>
                   </div>
                   <div className='text-xs'>

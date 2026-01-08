@@ -26,6 +26,7 @@ const CreateScheduleSchema = z
     days_of_week: z
       .array(z.number().min(0).max(6))
       .min(1, 'Select at least one day'),
+    times_per_day: z.coerce.number().int().min(1).max(4).default(1),
   })
   .refine(
     (data) => {
@@ -49,6 +50,7 @@ const UpdateScheduleSchema = z
     days_of_week: z
       .array(z.number().min(0).max(6))
       .min(1, 'Select at least one day'),
+    times_per_day: z.coerce.number().int().min(1).max(4).default(1),
   })
   .refine(
     (data) => {
@@ -72,6 +74,7 @@ export type CreateScheduleState = {
     assignee_id?: string[];
     reviewer_id?: string[];
     days_of_week?: string[];
+    times_per_day?: string[];
   };
   success?: boolean;
 };
@@ -91,6 +94,7 @@ export async function createLogScheduleAction(
   const end_date = formData.get('end_date') as string;
   const assignee_id = formData.get('assignee_id') as string;
   const reviewer_id = formData.get('reviewer_id') as string;
+  const times_per_day = formData.get('times_per_day') as string;
 
   // Extract days of week - handling multiple checkboxes
   const days = formData
@@ -105,6 +109,7 @@ export async function createLogScheduleAction(
     assignee_id: assignee_id || undefined,
     reviewer_id: reviewer_id || undefined,
     days_of_week: days,
+    times_per_day,
   });
 
   if (!validatedFields.success) {
@@ -147,6 +152,7 @@ export async function createLogScheduleAction(
       days_of_week: validatedFields.data.days_of_week,
       status: 'ACTIVE',
       created_by: userId,
+      times_per_day: validatedFields.data.times_per_day,
     });
 
     revalidatePath(`/logs/templates/${template_id}`);
@@ -174,6 +180,7 @@ export async function updateLogScheduleAction(
   const end_date = formData.get('end_date') as string;
   const assignee_id = formData.get('assignee_id') as string;
   const reviewer_id = formData.get('reviewer_id') as string;
+  const times_per_day = formData.get('times_per_day') as string;
 
   // Extract days of week
   const days = formData
@@ -187,6 +194,7 @@ export async function updateLogScheduleAction(
     assignee_id: assignee_id || undefined,
     reviewer_id: reviewer_id || undefined,
     days_of_week: days,
+    times_per_day,
   });
 
   if (!validatedFields.success) {
@@ -207,6 +215,7 @@ export async function updateLogScheduleAction(
         assignee_id: validatedFields.data.assignee_id || null,
         reviewer_id: validatedFields.data.reviewer_id || null,
         days_of_week: validatedFields.data.days_of_week,
+        times_per_day: validatedFields.data.times_per_day,
       },
       orgId
     );

@@ -13,6 +13,7 @@ export type LogSchedule = {
   created_at: Date;
   updated_at: Date;
   created_by: string | null;
+  times_per_day: number | null;
 };
 
 export type LogScheduleWithTemplate = LogSchedule & {
@@ -33,6 +34,7 @@ export const createLogSchedule = async (
     days_of_week,
     status,
     created_by,
+    times_per_day,
   } = schedule;
 
   try {
@@ -40,9 +42,9 @@ export const createLogSchedule = async (
       `
       INSERT INTO log_schedules (
         template_id, org_id, start_date, end_date, 
-        assignee_id, reviewer_id, days_of_week, status, created_by
+        assignee_id, reviewer_id, days_of_week, status, created_by, times_per_day
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING *
       `,
       [
@@ -55,6 +57,7 @@ export const createLogSchedule = async (
         days_of_week,
         status,
         created_by,
+        times_per_day,
       ]
     );
     return result.rows[0];
@@ -86,6 +89,7 @@ export const updateLogSchedule = async (
     reviewer_id,
     days_of_week,
     status,
+    times_per_day,
   } = schedule;
 
   try {
@@ -99,8 +103,9 @@ export const updateLogSchedule = async (
         reviewer_id = $4,
         days_of_week = COALESCE($5, days_of_week),
         status = COALESCE($6, status),
+        times_per_day = COALESCE($7, times_per_day),
         updated_at = NOW()
-      WHERE id = $7 AND org_id = $8
+      WHERE id = $8 AND org_id = $9
       RETURNING *
       `,
       [
@@ -110,6 +115,7 @@ export const updateLogSchedule = async (
         reviewer_id,
         days_of_week,
         status,
+        times_per_day,
         id,
         orgId,
       ]

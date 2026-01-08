@@ -1,32 +1,42 @@
-"use client";
+'use client';
 
-import { Loader2, Plus, Trash2 } from "lucide-react";
-import { useActionState, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { Loader2, Plus, Trash2 } from 'lucide-react';
+import { useActionState, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 import {
   type CreateTemplateState,
   createLogTemplateAction,
-  updateLogTemplateAction
-} from "@/actions/log-templates";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+  updateLogTemplateAction,
+} from '@/actions/log-templates';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import type { ReviewTimePeriod } from '@/db/queries/log-templates';
 
 function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" className="w-fit" disabled={pending}>
+    <Button type='submit' className='w-fit' disabled={pending}>
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          {isEditing ? "Updating..." : "Creating..."}
+          <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+          {isEditing ? 'Updating...' : 'Creating...'}
         </>
+      ) : isEditing ? (
+        'Update Template'
       ) : (
-        isEditing ? "Update Template" : "Create Template"
+        'Create Template'
       )}
     </Button>
   );
@@ -34,40 +44,43 @@ function SubmitButton({ isEditing }: { isEditing: boolean }) {
 
 // Helper to bind additional arguments to the server action
 function bindUpdateAction(id: string) {
-    return updateLogTemplateAction.bind(null, id);
+  return updateLogTemplateAction.bind(null, id);
 }
 
 interface LogTemplateFormProps {
-    mode?: 'create' | 'edit';
-    initialData?: {
-        id: string;
-        name: string;
-        category: string | null;
-        sop: string | null;
-        task_list: string[] | null;
-    };
+  mode?: 'create' | 'edit';
+  initialData?: {
+    id: string;
+    name: string;
+    category: string | null;
+    sop: string | null;
+    task_list: string[] | null;
+    review_time: ReviewTimePeriod | null;
+  };
 }
 
-export function LogTemplateForm({ mode = 'create', initialData }: LogTemplateFormProps) {
-  const initialState: CreateTemplateState = { message: "", errors: {} };
-  
-  // Choose the action based on mode
-  const actionToUse = mode === 'edit' && initialData?.id 
-    ? bindUpdateAction(initialData.id)
-    : createLogTemplateAction;
+export function LogTemplateForm({
+  mode = 'create',
+  initialData,
+}: LogTemplateFormProps) {
+  const initialState: CreateTemplateState = { message: '', errors: {} };
 
-  const [state, formAction] = useActionState(
-    actionToUse,
-    initialState,
-  );
+  // Choose the action based on mode
+  const actionToUse =
+    mode === 'edit' && initialData?.id
+      ? bindUpdateAction(initialData.id)
+      : createLogTemplateAction;
+
+  const [state, formAction] = useActionState(actionToUse, initialState);
 
   // Initialize tasks from initialData or default to one empty task
-  const initialTasks = initialData?.task_list && initialData.task_list.length > 0
-    ? initialData.task_list
-    : [''];
-  
-  const [tasks, setTasks] = useState<{id: number, defaultValue: string}[]>(
-      initialTasks.map((t, i) => ({ id: i, defaultValue: t }))
+  const initialTasks =
+    initialData?.task_list && initialData.task_list.length > 0
+      ? initialData.task_list
+      : [''];
+
+  const [tasks, setTasks] = useState<{ id: number; defaultValue: string }[]>(
+    initialTasks.map((t, i) => ({ id: i, defaultValue: t }))
   );
   const [nextId, setNextId] = useState(initialTasks.length);
 
@@ -82,89 +95,116 @@ export function LogTemplateForm({ mode = 'create', initialData }: LogTemplateFor
   };
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className='space-y-6'>
       {state.message && (
-        <Alert variant="destructive">
+        <Alert variant='destructive'>
           <AlertDescription>{state.message}</AlertDescription>
         </Alert>
       )}
 
       <Card>
-        <CardContent className="space-y-6 pt-6">
+        <CardContent className='space-y-6 pt-6'>
           {/* Top Row: Name, Category, SOP */}
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="space-y-2">
-              <Label htmlFor="name">Template Name</Label>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+            <div className='space-y-2'>
+              <Label htmlFor='name'>Template Name</Label>
               <Input
-                id="name"
-                name="name"
+                id='name'
+                name='name'
                 defaultValue={initialData?.name}
-                placeholder="e.g., Opening Checklist"
-                aria-describedby="name-error"
+                placeholder='e.g., Opening Checklist'
+                aria-describedby='name-error'
                 required
               />
               {state.errors?.name && (
-                <p id="name-error" className="text-destructive text-sm">
-                  {state.errors.name.join(", ")}
+                <p id='name-error' className='text-destructive text-sm'>
+                  {state.errors.name.join(', ')}
                 </p>
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="category">Category</Label>
+            <div className='space-y-2'>
+              <Label htmlFor='category'>Category</Label>
               <Input
-                id="category"
-                name="category"
+                id='category'
+                name='category'
                 defaultValue={initialData?.category || ''}
-                placeholder="e.g., Daily Operations"
-                aria-describedby="category-error"
+                placeholder='e.g., Daily Operations'
+                aria-describedby='category-error'
                 required
               />
               {state.errors?.category && (
-                <p id="category-error" className="text-destructive text-sm">
-                  {state.errors.category.join(", ")}
+                <p id='category-error' className='text-destructive text-sm'>
+                  {state.errors.category.join(', ')}
                 </p>
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="sop">Standard Operating Procedure (SOP)</Label>
+            <div className='space-y-2'>
+              <Label htmlFor='sop'>Standard Operating Procedure (SOP)</Label>
               <Input
-                id="sop"
-                name="sop"
+                id='sop'
+                name='sop'
                 defaultValue={initialData?.sop || ''}
-                placeholder="Detailed instructions link or short text..."
-                aria-describedby="sop-error"
+                placeholder='Detailed instructions link or short text...'
+                aria-describedby='sop-error'
                 required
               />
               {state.errors?.sop && (
-                <p id="sop-error" className="text-destructive text-sm">
-                  {state.errors.sop.join(", ")}
+                <p id='sop-error' className='text-destructive text-sm'>
+                  {state.errors.sop.join(', ')}
                 </p>
               )}
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="font-medium text-lg">Task List</h3>
+          {/* Review Time */}
+          <div className='space-y-2'>
+            <Label htmlFor='review_time'>Review Time</Label>
+            <Select
+              name='review_time'
+              defaultValue={initialData?.review_time || undefined}
+            >
+              <SelectTrigger id='review_time'>
+                <SelectValue placeholder='Select review period (optional)' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value='1_month'>1 Month</SelectItem>
+                <SelectItem value='3_months'>3 Months</SelectItem>
+                <SelectItem value='6_months'>6 Months</SelectItem>
+                <SelectItem value='1_year'>1 Year</SelectItem>
+              </SelectContent>
+            </Select>
+            {state.errors?.review_time && (
+              <p className='text-destructive text-sm'>
+                {state.errors.review_time.join(', ')}
+              </p>
+            )}
+            <p className='text-muted-foreground text-xs'>
+              How often this template should be reviewed
+            </p>
+          </div>
+
+          <div className='space-y-4'>
+            <div className='flex items-center justify-between'>
+              <h3 className='font-medium text-lg'>Task List</h3>
               <Button
-                type="button"
-                variant="outline"
-                size="sm"
+                type='button'
+                variant='outline'
+                size='sm'
                 onClick={addTask}
               >
-                <Plus className="mr-2 h-4 w-4" />
+                <Plus className='mr-2 h-4 w-4' />
                 Add Task
               </Button>
             </div>
 
-            <div className="space-y-3">
+            <div className='space-y-3'>
               {tasks.map((task, index) => (
-                <div key={task.id} className="flex gap-2">
-                  <div className="flex-1">
+                <div key={task.id} className='flex gap-2'>
+                  <div className='flex-1'>
                     <Input
-                      name="tasks"
+                      name='tasks'
                       defaultValue={task.defaultValue}
                       placeholder={`Task ${index + 1}`}
                       aria-label={`Task ${index + 1}`}
@@ -173,22 +213,22 @@ export function LogTemplateForm({ mode = 'create', initialData }: LogTemplateFor
                   </div>
                   {tasks.length > 1 ? (
                     <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
+                      type='button'
+                      variant='ghost'
+                      size='icon'
                       onClick={() => removeTask(task.id)}
-                      aria-label="Remove task"
+                      aria-label='Remove task'
                     >
-                      <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                      <Trash2 className='h-4 w-4 text-muted-foreground hover:text-destructive' />
                     </Button>
                   ) : (
-                     <div className="w-10" /> 
+                    <div className='w-10' />
                   )}
                 </div>
               ))}
               {state.errors?.tasks && (
-                <p className="text-destructive text-sm">
-                  {state.errors.tasks.join(", ")}
+                <p className='text-destructive text-sm'>
+                  {state.errors.tasks.join(', ')}
                 </p>
               )}
             </div>
@@ -196,7 +236,7 @@ export function LogTemplateForm({ mode = 'create', initialData }: LogTemplateFor
         </CardContent>
       </Card>
 
-      <div className="flex justify-end">
+      <div className='flex justify-end'>
         <SubmitButton isEditing={mode === 'edit'} />
       </div>
     </form>
