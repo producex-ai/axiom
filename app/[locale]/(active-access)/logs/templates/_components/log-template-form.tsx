@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import type { ReviewTimePeriod } from '@/db/queries/log-templates';
+import { CATEGORY_OPTIONS, SOP_OPTIONS } from '@/lib/constants/log-templates';
 
 function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
@@ -125,14 +126,22 @@ export function LogTemplateForm({
 
             <div className='space-y-2'>
               <Label htmlFor='category'>Category</Label>
-              <Input
-                id='category'
+              <Select
                 name='category'
-                defaultValue={initialData?.category || ''}
-                placeholder='e.g., Daily Operations'
-                aria-describedby='category-error'
+                defaultValue={initialData?.category || undefined}
                 required
-              />
+              >
+                <SelectTrigger className='w-full' id='category'>
+                  <SelectValue placeholder='Select a category' />
+                </SelectTrigger>
+                <SelectContent>
+                  {CATEGORY_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {state.errors?.category && (
                 <p id='category-error' className='text-destructive text-sm'>
                   {state.errors.category.join(', ')}
@@ -142,14 +151,22 @@ export function LogTemplateForm({
 
             <div className='space-y-2'>
               <Label htmlFor='sop'>Standard Operating Procedure (SOP)</Label>
-              <Input
-                id='sop'
+              <Select
                 name='sop'
-                defaultValue={initialData?.sop || ''}
-                placeholder='Detailed instructions link or short text...'
-                aria-describedby='sop-error'
+                defaultValue={initialData?.sop || undefined}
                 required
-              />
+              >
+                <SelectTrigger className='w-full' id='sop'>
+                  <SelectValue placeholder='Select an SOP module' />
+                </SelectTrigger>
+                <SelectContent>
+                  {SOP_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {state.errors?.sop && (
                 <p id='sop-error' className='text-destructive text-sm'>
                   {state.errors.sop.join(', ')}
@@ -163,10 +180,11 @@ export function LogTemplateForm({
             <Label htmlFor='review_time'>Review Time</Label>
             <Select
               name='review_time'
-              defaultValue={initialData?.review_time || undefined}
+              defaultValue={initialData?.review_time || '1_year'}
+              required
             >
               <SelectTrigger id='review_time'>
-                <SelectValue placeholder='Select review period (optional)' />
+                <SelectValue placeholder='Select review period' />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='1_month'>1 Month</SelectItem>
