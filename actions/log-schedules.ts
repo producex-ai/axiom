@@ -264,6 +264,7 @@ export type ScheduleWithDetails = {
   assignee_name: string | null;
   reviewer_name: string | null;
   days_of_week: number[] | null;
+  times_per_day: number;
   status: string;
 };
 
@@ -304,6 +305,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
         ? userMap.get(schedule.reviewer_id) || schedule.reviewer_id
         : null,
       days_of_week: schedule.days_of_week,
+      times_per_day: schedule.times_per_day || 1,
       status: schedule.status,
     })
   );
