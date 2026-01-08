@@ -382,6 +382,29 @@ export const checkDailyLogExists = async (
 };
 
 /**
+ * Count existing logs for a schedule and date
+ */
+export const countDailyLogs = async (
+  scheduleId: string,
+  logDate: Date
+): Promise<number> => {
+  try {
+    const result = await query<{ count: string }>(
+      `
+      SELECT COUNT(*) as count
+      FROM daily_logs
+      WHERE schedule_id = $1 AND log_date = $2
+      `,
+      [scheduleId, logDate]
+    );
+    return Number.parseInt(result.rows[0]?.count ?? '0', 10);
+  } catch (error) {
+    console.error('Error counting daily logs:', error);
+    return 0;
+  }
+};
+
+/**
  * Get task completion statistics for a date range
  */
 export const getDailyLogStats = async (

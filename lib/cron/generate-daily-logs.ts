@@ -1,4 +1,4 @@
-import { checkDailyLogExists, createDailyLog } from '@/db/queries/daily-logs';
+import { countDailyLogs, createDailyLog } from '@/db/queries/daily-logs';
 import {
   getActiveLogSchedules,
   getAllActiveLogSchedules,
@@ -87,71 +87,90 @@ export async function generateDailyLogsFromSchedules(
         }
 
         // Check if log already exists for this schedule and date
-        const exists = await checkDailyLogExists(schedule.id, targetDate);
+        const timesPerDay = schedule.times_per_day || 1;
 
-        if (exists) {
+        // Check existing logs count
+        const existingCount = await countDailyLogs(schedule.id, targetDate);
+
+        if (existingCount >= timesPerDay) {
           console.log(
-            `Log already exists for schedule ${schedule.id} on ${
-              targetDate.toISOString().split('T')[0]
-            }`
+            `All ${timesPerDay} logs already exist for schedule ${
+              schedule.id
+            } on ${targetDate.toISOString().split('T')[0]}`
           );
           results.skipped++;
           continue;
         }
 
-        // Get the template to retrieve task list
-        const template = await getLogTemplateById(
-          schedule.template_id,
-          schedule.org_id
-        );
+        // Calculate how many more logs to create
+        const logsToCreate = timesPerDay - existingCount;
 
-        if (!template) {
-          const error = `Template ${schedule.template_id} not found for schedule ${schedule.id}`;
-          console.error(error);
-          results.errors.push(error);
-          results.failed++;
-          continue;
-        }
-
-        if (!template.task_list || template.task_list.length === 0) {
-          const error = `Template ${template.id} has no tasks defined`;
-          console.error(error);
-          results.errors.push(error);
-          results.failed++;
-          continue;
-        }
-
-        // Check if assignee is set
-        if (!schedule.assignee_id) {
-          const error = `Schedule ${schedule.id} has no assignee defined`;
-          console.error(error);
-          results.errors.push(error);
-          results.failed++;
-          continue;
-        }
-
-        // Create the daily log
-        const dailyLog = await createDailyLog({
-          org_id: schedule.org_id,
-          template_id: schedule.template_id,
-          schedule_id: schedule.id,
-          assignee_id: schedule.assignee_id,
-          reviewer_id: schedule.reviewer_id,
-          tasks: initializeTasks(template.task_list),
-          log_date: targetDate,
-          created_by: 'SYSTEM', // System-generated
-        });
-
-        if (dailyLog) {
-          console.log(
-            `Successfully created daily log ${dailyLog.id} for schedule ${schedule.id}`
+        // Create remaining logs based on times_per_day
+        let logsCreated = 0;
+        for (let i = 0; i < logsToCreate; i++) {
+          // Get the template to retrieve task list
+          const template = await getLogTemplateById(
+            schedule.template_id,
+            schedule.org_id
           );
-          results.success++;
-        } else {
-          const error = `Failed to create log for schedule ${schedule.id}`;
-          console.error(error);
-          results.errors.push(error);
-          results.failed++;
+
+          if (!template) {
+            const error = `Template ${schedule.template_id} not found for schedule ${schedule.id}`;
+            console.error(error);
+            results.errors.push(error);
+            results.failed++;
+            break;
+          }
+
+          if (!template.task_list || template.task_list.length === 0) {
+            const error = `Template ${template.id} has no tasks defined`;
+            console.error(error);
+            results.errors.push(error);
+            results.failed++;
+            break;
+          }
+
+          // Check if assignee is set
+          if (!schedule.assignee_id) {
+            const error = `Schedule ${schedule.id} has no assignee defined`;
+            console.error(error);
+            results.errors.push(error);
+            results.failed++;
+            break;
+          }
+
+          // Create the daily log
+          const dailyLog = await createDailyLog({
+            org_id: schedule.org_id,
+            template_id: schedule.template_id,
+            schedule_id: schedule.id,
+            assignee_id: schedule.assignee_id,
+            reviewer_id: schedule.reviewer_id,
+            tasks: initializeTasks(template.task_list),
+            log_date: targetDate,
+            created_by: 'SYSTEM', // System-generated
+          });
+
+          if (dailyLog) {
+            console.log(
+              `Successfully created daily log ${dailyLog.id} (${
+                existingCount + i + 1
+              }/${timesPerDay}) for schedule ${schedule.id}`
+            );
+            logsCreated++;
+          } else {
+            const error = `Failed to create log (${
+              existingCount + i + 1
+            }/${timesPerDay}) for schedule ${schedule.id}`;
+            console.error(error);
+            results.errors.push(error);
+            results.failed++;
+            break;
+          }
+        }
+
+        if (logsCreated > 0) {
+          results.success += logsCreated;
         }
       } catch (error) {
         const errorMessage = `Error processing schedule ${schedule.id}: ${

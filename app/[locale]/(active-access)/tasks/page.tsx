@@ -71,9 +71,9 @@ function EmptyState() {
     <Card>
       <CardContent className='flex flex-col items-center justify-center py-16'>
         <ClipboardList className='h-16 w-16 text-muted-foreground/40' />
-        <h3 className='mt-4 font-semibold text-lg'>No tasks assigned</h3>
+        <h3 className='mt-4 font-semibold text-lg'>No tasks for today</h3>
         <p className='mt-2 text-center text-muted-foreground text-sm'>
-          You don't have any daily logs assigned to you at the moment.
+          You don't have any daily logs assigned to you for today.
         </p>
       </CardContent>
     </Card>
@@ -90,10 +90,24 @@ export default async function TasksPage() {
   // Get all tasks where user is assignee or reviewer
   const allTasks = await getDailyLogsAction();
 
-  // Filter tasks for current user
-  const myTasks = allTasks.filter(
-    (task) => task.assignee_id === userId || task.reviewer_id === userId
-  );
+  // Get today's date at midnight for comparison
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // Filter tasks for current user and today's date only
+  const myTasks = allTasks.filter((task) => {
+    const taskDate = new Date(task.log_date);
+    taskDate.setHours(0, 0, 0, 0);
+
+    return (
+      (task.assignee_id === userId || task.reviewer_id === userId) &&
+      taskDate.getTime() >= today.getTime() &&
+      taskDate.getTime() < tomorrow.getTime()
+    );
+  });
 
   // Calculate stats
   const stats = {
@@ -107,9 +121,9 @@ export default async function TasksPage() {
   return (
     <div className='space-y-6'>
       <div>
-        <h1 className='font-bold text-3xl tracking-tight'>Tasks</h1>
+        <h1 className='font-bold text-3xl tracking-tight'>Today's Tasks</h1>
         <p className='mt-2 text-muted-foreground'>
-          Manage your daily log tasks and reviews
+          Manage your daily log tasks and reviews for today
         </p>
       </div>
 
@@ -147,9 +161,9 @@ export default async function TasksPage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>My Tasks</CardTitle>
+            <CardTitle>Today's Tasks</CardTitle>
             <CardDescription>
-              Daily logs assigned to you or awaiting your review
+              Daily logs assigned to you or awaiting your review for today
             </CardDescription>
           </CardHeader>
           <CardContent>
