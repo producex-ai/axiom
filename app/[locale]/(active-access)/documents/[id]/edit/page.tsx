@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DocumentEditor } from "@/components/editor";
 import { AuditDialog } from "@/components/editor/AuditDialog";
+import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys } from "@/lib/compliance/queries";
@@ -37,6 +38,7 @@ export default function EditDocumentPage({ params }: EditParams) {
   const [auditDialogOpen, setAuditDialogOpen] = useState(false);
   const [auditResults, setAuditResults] = useState<any>(null);
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
+  const [simplePublishDialogOpen, setSimplePublishDialogOpen] = useState(false);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -108,7 +110,7 @@ export default function EditDocumentPage({ params }: EditParams) {
     }
   };
 
-  const handlePublish = async () => {
+  const handlePublish = async (skipValidation: boolean = false) => {
     if (!id) return;
 
     try {
@@ -135,27 +137,31 @@ export default function EditDocumentPage({ params }: EditParams) {
         markdown = markdown.trim();
       }
 
-      // Use the built-in publish flow which includes audit validation
-      const result = await executePublishFlow(
-        id,
-        markdown,
-        documentMetadata?.title || "Document",
-      );
+      // Check if this is a company document (non-compliance)
+      const isCompanyDoc = documentMetadata?.docType === 'company';
 
-      // Always show the audit dialog with results
-      setAuditResults(result.fullAnalysis);
-      setAuditIssues(result.highRiskIssues || []);
-      setAuditDialogOpen(true);
+      if (isCompanyDoc) {
+        // NON-COMPLIANCE FLOW: Direct publish without analysis
+        const response = await fetch(
+          `/api/compliance/documents/${id}/content`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+              content: markdown, 
+              status: "published"
+            }),
+          },
+        );
 
-      // If successful, prepare for navigation after dialog is closed
-      if (result.success) {
-        await queryClient.invalidateQueries({
-          queryKey: complianceKeys.allDocuments(),
-        });
-        await queryClient.invalidateQueries({
-          queryKey: complianceKeys.overview(),
-        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Failed to publish document");
+        }
 
+        const result = await response.json();
+
+        // Update state
         setOriginalContent(markdown);
         setHasChanges(false);
         setUserHasEdited(false);
@@ -164,6 +170,51 @@ export default function EditDocumentPage({ params }: EditParams) {
           status: "published",
           version: result.version,
         }));
+
+        // Invalidate cache
+        await queryClient.invalidateQueries({
+          queryKey: complianceKeys.allDocuments(),
+        });
+        await queryClient.invalidateQueries({
+          queryKey: complianceKeys.overview(),
+        });
+
+        toast.success("Document published successfully");
+        setTimeout(() => {
+          router.push("/documents");
+        }, 500);
+      } else {
+        // COMPLIANCE FLOW: Use the built-in publish flow with audit validation
+        const result = await executePublishFlow(
+          id,
+          markdown,
+          documentMetadata?.title || "Document",
+          { skipValidation },
+        );
+
+        // Always show the audit dialog with results
+        setAuditResults(result.fullAnalysis);
+        setAuditIssues(result.highRiskIssues || []);
+        setAuditDialogOpen(true);
+
+        // If successful, prepare for navigation after dialog is closed
+        if (result.success) {
+          await queryClient.invalidateQueries({
+            queryKey: complianceKeys.allDocuments(),
+          });
+          await queryClient.invalidateQueries({
+            queryKey: complianceKeys.overview(),
+          });
+
+          setOriginalContent(markdown);
+          setHasChanges(false);
+          setUserHasEdited(false);
+          setDocumentMetadata((prev: any) => ({
+            ...prev,
+            status: "published",
+            version: result.version,
+          }));
+        }
       }
 
       setPublishing(false);
@@ -311,7 +362,8 @@ export default function EditDocumentPage({ params }: EditParams) {
 
               {mode === "edit" && (
                 <>
-                  {auditResults && (
+                  {/* Review Issues button - only for compliance documents */}
+                  {documentMetadata?.docType !== 'company' && auditResults && (
                     <Button
                       variant="outline"
                       size="sm"
@@ -332,7 +384,15 @@ export default function EditDocumentPage({ params }: EditParams) {
                   )}
                   <Button
                     size="sm"
-                    onClick={handlePublish}
+                    onClick={() => {
+                      // For company docs, show simple confirmation dialog
+                      // For compliance docs, run full publish flow
+                      if (documentMetadata?.docType === 'company') {
+                        setSimplePublishDialogOpen(true);
+                      } else {
+                        handlePublish();
+                      }
+                    }}
                     disabled={!hasChanges || publishing || loading}
                   >
                     {publishing ? (
@@ -375,15 +435,34 @@ export default function EditDocumentPage({ params }: EditParams) {
         </div>
       </main>
 
-      {/* Audit Dialog */}
-      <AuditDialog
-        open={auditDialogOpen}
-        onClose={handleAuditDialogClose}
-        issues={auditIssues}
-        onFixClick={handleAuditDialogClose}
-        version={documentMetadata?.version || 1}
-        fullAnalysis={auditResults}
-      />
+      {/* Audit Dialog - for compliance documents */}
+      {documentMetadata?.docType !== 'company' && (
+        <AuditDialog
+          open={auditDialogOpen}
+          onClose={handleAuditDialogClose}
+          issues={auditIssues}
+          onFixClick={handleAuditDialogClose}
+          onPublishClick={() => {
+            setAuditDialogOpen(false);
+            handlePublish(true);
+          }}
+          version={documentMetadata?.version || 1}
+          fullAnalysis={auditResults}
+        />
+      )}
+
+      {/* Simple Publish Dialog - for company documents */}
+      {documentMetadata?.docType === 'company' && (
+        <SimplePublishDialog
+          open={simplePublishDialogOpen}
+          onClose={() => setSimplePublishDialogOpen(false)}
+          onConfirm={() => {
+            setSimplePublishDialogOpen(false);
+            handlePublish();
+          }}
+          isPublishing={publishing}
+        />
+      )}
     </div>
   );
 }

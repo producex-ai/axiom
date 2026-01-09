@@ -25,6 +25,9 @@ interface Document {
   created_at: string;
   updated_at: string;
   content_key: string;
+  published_at?: string | null;
+  renewal?: "quarterly" | "semi_annually" | "annually" | "2_years" | null;
+  doc_type?: string | null;
 }
 
 interface GroupedDocuments {

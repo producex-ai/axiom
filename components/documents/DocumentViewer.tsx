@@ -17,6 +17,9 @@ interface DocumentViewerProps {
   version: number;
   updatedBy?: string | null;
   updatedAt?: string;
+  publishedAt?: string | null;
+  renewal?: string | null;
+  docType?: string | null;
 }
 
 export function DocumentViewer({

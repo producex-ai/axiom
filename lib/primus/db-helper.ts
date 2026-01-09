@@ -51,6 +51,9 @@ export interface Document {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+  published_at: string | null;
+  renewal: string | null;
+  doc_type: string | null;
 }
 
 /**
@@ -261,15 +264,19 @@ export async function upsertDocument(
     const result = await query<{ id: string }>(
       `INSERT INTO document 
        (org_id, framework_id, module_id, sub_module_id, sub_sub_module_id, 
-        title, status, content_key, current_version, created_by, created_at, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW(), NOW())
+        title, status, content_key, current_version, analysis_score, renewal, doc_type, 
+        created_by, updated_by, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, NOW(), NOW())
        ON CONFLICT (org_id, framework_id, module_id, sub_module_id, sub_sub_module_id)
        DO UPDATE SET
          title = EXCLUDED.title,
          status = EXCLUDED.status,
          content_key = EXCLUDED.content_key,
          current_version = EXCLUDED.current_version,
-         updated_by = $10,
+         analysis_score = EXCLUDED.analysis_score,
+         renewal = EXCLUDED.renewal,
+         doc_type = EXCLUDED.doc_type,
+         updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
        RETURNING id`,
       [
@@ -282,7 +289,11 @@ export async function upsertDocument(
         doc.status,
         doc.content_key,
         doc.current_version,
+        doc.analysis_score || null,
+        doc.renewal || null,
+        doc.doc_type || null,
         doc.created_by || doc.updated_by,
+        doc.updated_by || doc.created_by,
       ],
     );
     return result.rows[0].id;

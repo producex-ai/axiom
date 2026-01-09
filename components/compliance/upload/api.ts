@@ -145,7 +145,8 @@ export const mergeDocuments = async (subModuleId: string) => {
  */
 export const improveDocument = async (
   subModuleId: string,
-  analysisId: string
+  analysisId: string,
+  renewal?: string
 ) => {
   if (!subModuleId || !analysisId) {
     throw new Error("SubModule ID and Analysis ID are required");
@@ -154,7 +155,7 @@ export const improveDocument = async (
   const response = await fetch("/api/compliance/improve", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ subModuleId, analysisId }),
+    body: JSON.stringify({ subModuleId, analysisId, renewal, docType: 'compliance' }),
   });
 
   const data = await response.json();
@@ -171,7 +172,8 @@ export const improveDocument = async (
  */
 export const acceptDocument = async (
   subModuleId: string,
-  analysisId: string
+  analysisId: string,
+  renewal?: string
 ) => {
   if (!subModuleId || !analysisId) {
     throw new Error("SubModule ID and Analysis ID are required");
@@ -180,7 +182,7 @@ export const acceptDocument = async (
   const response = await fetch("/api/compliance/accept", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ subModuleId, analysisId }),
+    body: JSON.stringify({ subModuleId, analysisId, renewal, docType: 'compliance' }),
   });
 
   const data = await response.json();

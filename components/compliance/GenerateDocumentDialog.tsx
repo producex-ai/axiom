@@ -9,6 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Sparkles } from "lucide-react";
 import {
   type QuestionItem,
@@ -48,6 +56,7 @@ export default function GenerateDocumentDialog({
   const [generatedDocId, setGeneratedDocId] = useState<string>("");
   const [generatedFileName, setGeneratedFileName] = useState<string>("");
   const [isCoreExpanded, setIsCoreExpanded] = useState(true);
+  const [renewalPeriod, setRenewalPeriod] = useState<string>("");
 
   // Fetch questions dynamically from specification
   const {
@@ -67,6 +76,7 @@ export default function GenerateDocumentDialog({
       setGeneratedDocKey("");
       setGeneratedDocId("");
       setGeneratedFileName("");
+      setRenewalPeriod("");
     }
   }, [open]);
 
@@ -107,6 +117,7 @@ export default function GenerateDocumentDialog({
         moduleNumber,
         subModuleCode,
         answers,
+        renewal: renewalPeriod || undefined,
       });
 
       setGeneratedDocKey(result.contentKey);
@@ -207,6 +218,22 @@ export default function GenerateDocumentDialog({
 
         {/* Questions form */}
         <div className="space-y-6">
+          {/* Renewal Period Field */}
+          <div className="space-y-2 pb-2 border-b">
+            <Label htmlFor="renewal-period-generate">Renewal Period (Optional)</Label>
+            <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
+              <SelectTrigger id="renewal-period-generate">
+                <SelectValue placeholder="Select renewal period" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="quarterly">Quarterly</SelectItem>
+                <SelectItem value="semi_annually">Semi Annually</SelectItem>
+                <SelectItem value="annually">Annually</SelectItem>
+                <SelectItem value="2_years">2 Years</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
           {/* Core document information section */}
           {coreQuestions.length > 0 && (
             <CoreQuestions

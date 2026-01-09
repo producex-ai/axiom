@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     const { orgId, userId } = authContext;
 
     const body = await request.json();
-    const { moduleNumber, subModuleCode, answers } = body;
+    const { moduleNumber, subModuleCode, answers, renewal, docType } = body;
 
     // Validate inputs
     if (!moduleNumber || !subModuleCode) {
@@ -285,6 +285,9 @@ IMPORTANT: When writing procedures, incorporate the organization's compliance re
       created_by: userId,
       updated_by: userId, // Set updated_by to track who created/updated the document
       analysis_score: null,
+      published_at: null,
+      renewal: renewal || null,
+      doc_type: docType || null,
     });
 
     console.log(`[API] Document record created with ID: ${documentId}`);

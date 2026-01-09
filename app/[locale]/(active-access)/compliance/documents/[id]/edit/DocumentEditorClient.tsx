@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DocumentEditor } from "@/components/editor";
 import { AuditDialog } from "@/components/editor/AuditDialog";
+import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys } from "@/lib/compliance/queries";
@@ -50,6 +51,7 @@ export default function DocumentEditorClient({
   const [auditIssuesOpen, setAuditIssuesOpen] = useState(false);
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
+  const [simplePublishDialogOpen, setSimplePublishDialogOpen] = useState(false);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -216,81 +218,141 @@ export default function DocumentEditorClient({
         markdown = markdown.trim();
       }
 
-      // Show loading toast while executing publish flow
-      const loadingToastId = toast.loading(
-        skipValidation
-          ? "Publishing document..."
-          : "Saving and validating document...",
-      );
+      // Check if this is a compliance document
+      // Only compliance documents should go through analysis flow
+      // Company documents should skip analysis
+      // Treat null/undefined as compliance for backward compatibility with old documents
+      const isComplianceDoc = documentMetadata?.docType !== 'company';
 
-      try {
-        // Execute the complete publish flow:
-        // 1. Persist changes (always)
-        // 2. Validate audit readiness (unless skipValidation is true)
-        // 3. Conditionally finalize publish
-        const result = await executePublishFlow(
-          documentId,
-          markdown,
-          documentMetadata?.title || "Document",
-          { skipValidation },
+      if (isComplianceDoc) {
+        // COMPLIANCE FLOW: Run full analysis and validation
+        // Show loading toast while executing publish flow
+        const loadingToastId = toast.loading(
+          skipValidation
+            ? "Publishing document..."
+            : "Saving and validating document...",
         );
 
-        // Dismiss loading toast
-        toast.dismiss(loadingToastId);
+        try {
+          // Execute the complete publish flow:
+          // 1. Persist changes (always)
+          // 2. Validate audit readiness (unless skipValidation is true)
+          // 3. Conditionally finalize publish
+          const result = await executePublishFlow(
+            documentId,
+            markdown,
+            documentMetadata?.title || "Document",
+            { skipValidation },
+          );
 
-        // Update local state after successful persistence
+          // Dismiss loading toast
+          toast.dismiss(loadingToastId);
+
+          // Update local state after successful persistence
+          setOriginalContent(markdown);
+          setHasChanges(false);
+          setUserHasEdited(false);
+
+          if (result.success) {
+            // ✅ Publish succeeded - transition to published state
+            setMode("view");
+            setDocumentMetadata((prev: any) => ({
+              ...prev,
+              status: result.status,
+              version: result.version,
+            }));
+
+            // Invalidate cache
+            await queryClient.invalidateQueries({
+              queryKey: complianceKeys.overview(),
+            });
+
+            // Show success confirmation
+            toast.success(result.message, {
+              description: `Document v${result.version} published`,
+            });
+
+            // Navigate back to module details after brief delay
+            setTimeout(() => {
+              if (backTo) {
+                router.push(backTo);
+              } else {
+                router.back();
+              }
+            }, 1000);
+          } else {
+            // ⚠️ Publish blocked - show audit issues
+            // Document is saved, but state remains draft
+            setDocumentMetadata((prev: any) => ({
+              ...prev,
+              version: result.version,
+            }));
+
+            // Show audit issues dialog with full analysis
+            setAuditIssues(result.fullAnalysis?.risks || []);
+            setAuditAnalysis(result.fullAnalysis || null);
+            setAuditIssuesOpen(true);
+
+            // Show warning toast
+            toast.error(result.message, {
+              description: `Document v${result.version} saved but blocked from publishing`,
+            });
+          }
+        } catch (publishError) {
+          toast.dismiss(loadingToastId);
+          throw publishError;
+        }
+      } else {
+        // NON-COMPLIANCE FLOW: Simple publish without analysis
+        // Directly call the publish API
+        const response = await fetch(
+          `/api/compliance/documents/${documentId}/content`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+              content: markdown, 
+              status: "published"
+            }),
+          },
+        );
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Failed to publish document");
+        }
+
+        const result = await response.json();
+
+        // Update local state after successful publish
         setOriginalContent(markdown);
         setHasChanges(false);
         setUserHasEdited(false);
+        setMode("view");
+        setDocumentMetadata((prev: any) => ({
+          ...prev,
+          status: result.status,
+          version: result.version,
+        }));
 
-        if (result.success) {
-          // ✅ Publish succeeded - transition to published state
-          setMode("view");
-          setDocumentMetadata((prev: any) => ({
-            ...prev,
-            status: result.status,
-            version: result.version,
-          }));
+        // Invalidate cache
+        await queryClient.invalidateQueries({
+          queryKey: complianceKeys.overview(),
+        });
 
-          // Invalidate cache
-          await queryClient.invalidateQueries({
-            queryKey: complianceKeys.overview(),
-          });
+        // Show success confirmation
+        toast.success(result.message, {
+          description: `Document v${result.version} published`,
+        });
 
-          // Show success confirmation
-          toast.success(result.message, {
-            description: `Document v${result.version} published`,
-          });
-
-          // Navigate back to module details after brief delay
-          setTimeout(() => {
-            if (backTo) {
-              router.push(backTo);
-            } else {
-              router.back();
-            }
-          }, 1000);
-        } else {
-          // ⚠️ Publish blocked - show audit issues
-          // Document is saved, but state remains draft
-          setDocumentMetadata((prev: any) => ({
-            ...prev,
-            version: result.version,
-          }));
-
-          // Show audit issues dialog with full analysis
-          setAuditIssues(result.fullAnalysis?.risks || []);
-          setAuditAnalysis(result.fullAnalysis || null);
-          setAuditIssuesOpen(true);
-
-          // Show warning toast
-          toast.error(result.message, {
-            description: `Document v${result.version} saved but blocked from publishing`,
-          });
-        }
-      } catch (publishError) {
-        toast.dismiss(loadingToastId);
-        throw publishError;
+        // Navigate back after brief delay
+        setTimeout(() => {
+          if (backTo) {
+            router.push(backTo);
+          } else {
+            router.back();
+          }
+        }, 1000);
       }
 
       // Invalidate cache in background
@@ -305,6 +367,7 @@ export default function DocumentEditorClient({
       toast.error(message);
     } finally {
       setPublishing(false);
+      setSimplePublishDialogOpen(false);
     }
   };
 
@@ -443,7 +506,8 @@ export default function DocumentEditorClient({
 
               {mode === "edit" && (
                 <>
-                  {auditAnalysis && (
+                  {/* Review Issues button - only for compliance documents */}
+                  {documentMetadata?.docType !== 'company' && auditAnalysis && (
                     <Button
                       variant="outline"
                       size="sm"
@@ -479,7 +543,15 @@ export default function DocumentEditorClient({
                   </Button>
                   <Button
                     size="sm"
-                    onClick={() => handlePublish()}
+                    onClick={() => {
+                      // For company docs, show simple confirmation dialog
+                      // For compliance docs (including null/undefined), run full publish flow
+                      if (documentMetadata?.docType === 'company') {
+                        setSimplePublishDialogOpen(true);
+                      } else {
+                        handlePublish();
+                      }
+                    }}
                     disabled={
                       (!hasChanges && documentStatus !== "draft") ||
                       publishing ||
@@ -506,19 +578,31 @@ export default function DocumentEditorClient({
         </div>
       </header>
 
-      {/* Audit Issues Dialog - Shown when publish is blocked by audit issues */}
-      <AuditDialog
-        open={auditIssuesOpen}
-        onClose={() => setAuditIssuesOpen(false)}
-        issues={auditIssues}
-        onFixClick={() => setAuditIssuesOpen(false)}
-        onPublishClick={() => {
-          setAuditIssuesOpen(false);
-          handlePublish(true);
-        }}
-        version={documentMetadata?.version}
-        fullAnalysis={auditAnalysis}
-      />
+      {/* Audit Issues Dialog - Shown when publish is blocked by audit issues (compliance docs only) */}
+      {documentMetadata?.docType !== 'company' && (
+        <AuditDialog
+          open={auditIssuesOpen}
+          onClose={() => setAuditIssuesOpen(false)}
+          issues={auditIssues}
+          onFixClick={() => setAuditIssuesOpen(false)}
+          onPublishClick={() => {
+            setAuditIssuesOpen(false);
+            handlePublish(true);
+          }}
+          version={documentMetadata?.version}
+          fullAnalysis={auditAnalysis}
+        />
+      )}
+
+      {/* Simple Publish Dialog - For company documents only */}
+      {documentMetadata?.docType === 'company' && (
+        <SimplePublishDialog
+          open={simplePublishDialogOpen}
+          onClose={() => setSimplePublishDialogOpen(false)}
+          onConfirm={() => handlePublish()}
+          isPublishing={publishing}
+        />
+      )}
 
       {/* Editor */}
       <main className="flex-1 overflow-hidden">

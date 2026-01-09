@@ -45,9 +45,11 @@ export async function POST(request: NextRequest) {
     }
 
     const { orgId, userId } = authContext;
-    const { subModuleId, analysisId } = (await request.json()) as {
+    const { subModuleId, analysisId, renewal, docType } = (await request.json()) as {
       subModuleId: string;
       analysisId: string;
+      renewal?: string;
+      docType?: string;
     };
 
     if (!subModuleId || !analysisId) {
@@ -200,13 +202,15 @@ export async function POST(request: NextRequest) {
     const documentResult = await query(
       `INSERT INTO document 
        (id, org_id, framework_id, module_id, sub_module_id, sub_sub_module_id, 
-        title, status, content_key, current_version, analysis_score, created_by, updated_by)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+        title, status, content_key, current_version, analysis_score, renewal, doc_type, created_by, updated_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
        ON CONFLICT (org_id, framework_id, module_id, sub_module_id, sub_sub_module_id) 
        DO UPDATE SET 
          content_key = EXCLUDED.content_key, 
          current_version = document.current_version + 1, 
          analysis_score = EXCLUDED.analysis_score,
+         renewal = EXCLUDED.renewal,
+         doc_type = EXCLUDED.doc_type,
          updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
        RETURNING id`,
@@ -222,6 +226,8 @@ export async function POST(request: NextRequest) {
         s3Key,
         1,
         JSON.stringify(analysisScore),
+        renewal || null,
+        docType || null,
         userId,
         userId,
       ],

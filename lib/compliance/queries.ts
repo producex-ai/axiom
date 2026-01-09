@@ -43,6 +43,9 @@ export interface SubModuleWithState {
     } | null;
     updatedBy?: string | null;
     updatedAt?: string;
+    publishedAt?: string | null;
+    renewal?: string | null;
+    docType?: string | null;
   };
   subSubModules?: SubModuleWithState[];
 }

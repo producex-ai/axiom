@@ -33,6 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { complianceKeys } from "@/lib/compliance/queries";
+import { formatDateWithOrdinal } from "@/lib/utils";
 
 interface Document {
   id: string;
@@ -47,6 +48,9 @@ interface Document {
   created_at: string;
   updated_at: string;
   content_key: string;
+  published_at?: string | null;
+  renewal?: "quarterly" | "semi_annually" | "annually" | "2_years" | null;
+  doc_type?: string | null;
 }
 
 export function DocumentsTable({ documents }: { documents: Document[] }) {
@@ -97,6 +101,31 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
     if (diffHours < 24) return `${diffHours}h ago`;
     if (diffDays < 7) return `${diffDays}d ago`;
     return date.toLocaleDateString();
+  };
+
+  const calculateDueDate = (publishedAt?: string | null, renewal?: string | null) => {
+    if (!publishedAt || !renewal) return "N/A";
+    
+    const date = new Date(publishedAt);
+    
+    switch (renewal) {
+      case "quarterly":
+        date.setMonth(date.getMonth() + 3);
+        break;
+      case "semi_annually":
+        date.setMonth(date.getMonth() + 6);
+        break;
+      case "annually":
+        date.setFullYear(date.getFullYear() + 1);
+        break;
+      case "2_years":
+        date.setFullYear(date.getFullYear() + 2);
+        break;
+      default:
+        return "N/A";
+    }
+    
+    return formatDateWithOrdinal(date);
   };
 
   const handleDownload = async (doc: Document) => {
@@ -169,10 +198,11 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
           <TableHeader>
             <TableRow>
               <TableHead>Title</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead className="text-center">Status</TableHead>
               <TableHead className="text-center">Version</TableHead>
-              <TableHead>Last Updated</TableHead>
-              <TableHead>Module</TableHead>
+              <TableHead className="text-center">Last Updated</TableHead>
+              <TableHead className="text-center">Due Date</TableHead>
+              <TableHead className="text-center">Module</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -183,7 +213,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                   <TableCell className="max-w-xs truncate font-medium">
                     {doc.title}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <Badge
                       variant={getStatusBadgeVariant(doc.status)}
                       className={getStatusColor(doc.status)}
@@ -194,10 +224,13 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                   <TableCell className="text-center">
                     v{doc.current_version}
                   </TableCell>
-                  <TableCell className="text-muted-foreground text-sm">
+                  <TableCell className="text-muted-foreground text-sm text-center">
                     {formatRelativeTime(doc.updated_at)}
                   </TableCell>
-                  <TableCell className="text-sm">
+                  <TableCell className="text-sm text-center">
+                    {calculateDueDate(doc.published_at, doc.renewal)}
+                  </TableCell>
+                  <TableCell className="text-sm text-center">
                     {doc.framework_id === "company_docs"
                       ? "Company Document"
                       : `${doc.module_id}.${doc.sub_module_id}`}
@@ -253,7 +286,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="h-24 text-center">
+                <TableCell colSpan={7} className="h-24 text-center">
                   No documents found
                 </TableCell>
               </TableRow>

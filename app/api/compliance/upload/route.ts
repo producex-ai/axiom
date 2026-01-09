@@ -163,6 +163,9 @@ export async function POST(request: NextRequest) {
       analysis_score: null,
       created_by: userId,
       updated_by: null,
+      published_at: null,
+      renewal: null,
+      doc_type: null,
     });
 
     console.log(`[API] Document record created with ID: ${documentId}`);

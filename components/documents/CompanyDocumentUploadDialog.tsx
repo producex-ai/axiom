@@ -40,6 +40,7 @@ export function CompanyDocumentUploadDialog({
   const [file, setFile] = useState<File | null>(null);
   const [selectedModule, setSelectedModule] = useState<string>("");
   const [selectedSubModule, setSelectedSubModule] = useState<string>("");
+  const [renewalPeriod, setRenewalPeriod] = useState<string>("");
 
   // Get available modules
   const availableModules = useMemo(() => {
@@ -95,6 +96,10 @@ export function CompanyDocumentUploadDialog({
       formData.append("title", title.trim());
       formData.append("moduleId", selectedModule);
       formData.append("subModuleId", selectedSubModule);
+      if (renewalPeriod) {
+        formData.append("renewal", renewalPeriod);
+      }
+      formData.append("docType", "company");
 
       toast.loading("Uploading document...", { id: "upload" });
 
@@ -121,6 +126,7 @@ export function CompanyDocumentUploadDialog({
       setFile(null);
       setSelectedModule("");
       setSelectedSubModule("");
+      setRenewalPeriod("");
       onOpenChange(false);
     } catch (error) {
       console.error("Upload error:", error);
@@ -208,6 +214,26 @@ export function CompanyDocumentUploadDialog({
                       {subModule.code} - {subModule.name}
                     </SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Renewal Period Selection */}
+            <div className="space-y-2">
+              <Label htmlFor="renewal">Renewal Period (Optional)</Label>
+              <Select
+                value={renewalPeriod}
+                onValueChange={setRenewalPeriod}
+                disabled={uploading}
+              >
+                <SelectTrigger id="renewal">
+                  <SelectValue placeholder="Select renewal period" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="quarterly">Quarterly</SelectItem>
+                  <SelectItem value="semi_annually">Semi Annually</SelectItem>
+                  <SelectItem value="annually">Annually</SelectItem>
+                  <SelectItem value="2_years">2 Years</SelectItem>
                 </SelectContent>
               </Select>
             </div>

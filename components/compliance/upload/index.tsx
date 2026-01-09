@@ -15,6 +15,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { complianceKeys } from "@/lib/compliance/queries";
 import {
   CoverageBreakdown,
@@ -87,6 +95,7 @@ export default function EvidenceUploadFlow({
   >(null);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
+  const [renewalPeriod, setRenewalPeriod] = useState<string>("");
 
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -111,6 +120,7 @@ export default function EvidenceUploadFlow({
       setIsAccepting(false);
       setShowResetConfirm(false);
       setIsLoadingEvidence(false); // No loading of existing evidence
+      setRenewalPeriod("");
     }
   }, [open]);
 
@@ -372,7 +382,7 @@ export default function EvidenceUploadFlow({
   const handleImproveDocument = useCallback(async () => {
     setIsImproving(true);
     try {
-      const response = await improveDocument(subModuleId, analysisId);
+      const response = await improveDocument(subModuleId, analysisId, renewalPeriod || undefined);
 
       if (!response.documentId) {
         throw new Error("No document ID returned from improve API");
@@ -440,6 +450,7 @@ export default function EvidenceUploadFlow({
   }, [
     subModuleId,
     analysisId,
+    renewalPeriod,
     analysisResult,
     onAnalysisComplete,
     queryClient,
@@ -452,7 +463,7 @@ export default function EvidenceUploadFlow({
   const handleAcceptDocument = useCallback(async () => {
     setIsAccepting(true);
     try {
-      const response = await acceptDocument(subModuleId, analysisId);
+      const response = await acceptDocument(subModuleId, analysisId, renewalPeriod || undefined);
 
       if (!response.documentId) {
         throw new Error("No document ID returned from accept API");
@@ -520,6 +531,7 @@ export default function EvidenceUploadFlow({
   }, [
     subModuleId,
     analysisId,
+    renewalPeriod,
     analysisResult,
     onAnalysisComplete,
     queryClient,
@@ -621,6 +633,26 @@ export default function EvidenceUploadFlow({
                     }
                     analysisId={analysisId}
                   />
+
+                  {/* Renewal Period Field - Show when canImprove is true */}
+                  {analysisResult.canImprove && (
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-2 dark:border-slate-700 dark:bg-slate-800/50">
+                      <Label htmlFor="renewal-period" className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                        Renewal Period (Optional)
+                      </Label>
+                      <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
+                        <SelectTrigger id="renewal-period" className="bg-white dark:bg-slate-900">
+                          <SelectValue placeholder="Select renewal period" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="quarterly">Quarterly</SelectItem>
+                          <SelectItem value="semi_annually">Semi Annually</SelectItem>
+                          <SelectItem value="annually">Annually</SelectItem>
+                          <SelectItem value="2_years">2 Years</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
 
                   {/* Only show scores if all documents are relevant or no relevance check was performed */}
                   {!analysisResult.documentRelevance?.analysisBlocked &&

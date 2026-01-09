@@ -43,6 +43,9 @@ export interface SubModuleWithState extends SubModule {
     analysisScore?: any | null;
     updatedBy?: string | null;
     updatedAt?: string;
+    publishedAt?: string | null;
+    renewal?: string | null;
+    docType?: string | null;
   };
   subSubModules?: SubSubModuleWithState[];
 }
@@ -60,6 +63,9 @@ export interface SubSubModuleWithState extends SubSubModule {
     analysisScore?: any | null;
     updatedBy?: string | null;
     updatedAt?: string;
+    publishedAt?: string | null;
+    renewal?: string | null;
+    docType?: string | null;
   };
 }
 
@@ -90,9 +96,15 @@ export function mergeFrameworkWithOrgState(
   documents: Document[],
 ): FrameworkOverview {
   // Build a map of documents by sub-module for quick lookup
+  // Only include compliance documents (exclude company/supporting documents)
   const docMap = new Map<string, Document>();
 
   for (const doc of documents) {
+    // Filter to only include compliance documents
+    if (doc.doc_type !== 'compliance') {
+      continue;
+    }
+    
     // Key format: "moduleId:subModuleId" or "moduleId:subModuleId:subSubModuleId"
     const key = doc.sub_sub_module_id
       ? `${doc.module_id}:${doc.sub_module_id}:${doc.sub_sub_module_id}`
@@ -191,6 +203,9 @@ function processSubModule(
           analysisScore: doc.analysis_score,
           updatedBy: doc.updated_by || doc.created_by,
           updatedAt: doc.updated_at,
+          publishedAt: doc.published_at,
+          renewal: doc.renewal,
+          docType: doc.doc_type,
         }
       : undefined,
   };
@@ -220,6 +235,9 @@ function processSubSubModule(
           analysisScore: doc.analysis_score,
           updatedBy: doc.updated_by || doc.created_by,
           updatedAt: doc.updated_at,
+          publishedAt: doc.published_at,
+          renewal: doc.renewal,
+          docType: doc.doc_type,
         }
       : undefined,
   };

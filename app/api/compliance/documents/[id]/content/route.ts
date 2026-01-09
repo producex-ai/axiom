@@ -97,6 +97,9 @@ export async function GET(
         createdAt: document.created_at,
         updatedAt: document.updated_at,
         analysisScore: document.analysis_score, // Include stored analysis results
+        publishedAt: document.published_at,
+        renewal: document.renewal,
+        docType: document.doc_type,
       },
     });
   } catch (error) {
@@ -196,10 +199,24 @@ export async function PUT(
              current_version = $2, 
              status = $3,
              analysis_score = $4,
+             published_at = $5,
+             updated_by = $6, 
+             updated_at = NOW()
+         WHERE id = $7 AND org_id = $8`,
+        [newS3Key, newVersion, newStatus, JSON.stringify(analysisScore), new Date().toISOString(), userId, id, orgId],
+      );
+    } else if (status === "published") {
+      // Published without analysis score (for non-compliance documents)
+      await query(
+        `UPDATE document 
+         SET content_key = $1, 
+             current_version = $2, 
+             status = $3,
+             published_at = $4,
              updated_by = $5, 
              updated_at = NOW()
          WHERE id = $6 AND org_id = $7`,
-        [newS3Key, newVersion, newStatus, JSON.stringify(analysisScore), userId, id, orgId],
+        [newS3Key, newVersion, newStatus, new Date().toISOString(), userId, id, orgId],
       );
     } else {
       await query(

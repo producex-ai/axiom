@@ -35,6 +35,8 @@ export async function POST(request: NextRequest) {
     const title = formData.get("title") as string;
     const moduleId = formData.get("moduleId") as string;
     const subModuleId = formData.get("subModuleId") as string;
+    const renewal = formData.get("renewal") as string | null;
+    const docType = formData.get("docType") as string | null;
 
     if (!file || !title || !moduleId || !subModuleId) {
       return NextResponse.json(
@@ -83,9 +85,9 @@ export async function POST(request: NextRequest) {
     const result = await query(
       `INSERT INTO document (
         id, org_id, framework_id, module_id, sub_module_id, 
-        title, status, content_key, current_version, 
-        created_by, updated_by, created_at, updated_at
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW())
+        title, status, content_key, current_version, renewal, doc_type,
+        created_by, updated_by, created_at, updated_at, published_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW(), NOW(), NOW())
       RETURNING *`,
       [
         documentId,
@@ -97,6 +99,8 @@ export async function POST(request: NextRequest) {
         "published", // Uploaded docs are published by default
         s3Key,
         1, // Version 1
+        renewal || null,
+        docType || null,
         userId,
         userId,
       ],
@@ -114,6 +118,7 @@ export async function POST(request: NextRequest) {
         status: document.status,
         contentKey: document.content_key,
         version: document.current_version,
+        publishedAt: document.published_at,
         createdAt: document.created_at,
         updatedAt: document.updated_at,
       },
