@@ -81,7 +81,7 @@ export default function DocumentEditorClient({
       setError(null);
 
       const response = await fetch(
-        `/api/compliance/documents/${documentId}/content`,
+        `/api/compliance/documents/${documentId}/content`
       );
 
       if (!response.ok) {
@@ -102,7 +102,7 @@ export default function DocumentEditorClient({
       if (data.metadata?.analysisScore) {
         console.log(
           "[DocumentEditor] Loaded existing analysis results:",
-          data.metadata.analysisScore,
+          data.metadata.analysisScore
         );
         setAuditAnalysis(data.metadata.analysisScore);
         setAuditIssues(data.metadata.analysisScore.risks || []);
@@ -135,12 +135,18 @@ export default function DocumentEditorClient({
       if (documentMetadata?.title) {
         const titlePatterns = [
           new RegExp(
-            `^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `^#{1,6}\\s*${documentMetadata.title.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&"
+            )}\\s*\\n+`,
+            "i"
           ),
           new RegExp(
-            `^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `^${documentMetadata.title.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&"
+            )}\\s*\\n+`,
+            "i"
           ),
         ];
 
@@ -157,7 +163,7 @@ export default function DocumentEditorClient({
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ content: markdown }),
-        },
+        }
       );
 
       if (!response.ok) {
@@ -171,6 +177,8 @@ export default function DocumentEditorClient({
       setOriginalContent(markdown);
       setHasChanges(false);
       setUserHasEdited(false);
+      // Set status to draft since changes haven't been published yet
+      setDocumentStatus("draft");
 
       // Show success confirmation
       toast.success(result.message, {
@@ -203,12 +211,18 @@ export default function DocumentEditorClient({
       if (documentMetadata?.title) {
         const titlePatterns = [
           new RegExp(
-            `^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `^#{1,6}\\s*${documentMetadata.title.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&"
+            )}\\s*\\n+`,
+            "i"
           ),
           new RegExp(
-            `^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `^${documentMetadata.title.replace(
+              /[.*+?^${}()|[\]\\]/g,
+              "\\$&"
+            )}\\s*\\n+`,
+            "i"
           ),
         ];
 
@@ -222,7 +236,7 @@ export default function DocumentEditorClient({
       // Only compliance documents should go through analysis flow
       // Company documents should skip analysis
       // Treat null/undefined as compliance for backward compatibility with old documents
-      const isComplianceDoc = documentMetadata?.docType !== 'company';
+      const isComplianceDoc = documentMetadata?.docType !== "company";
 
       if (isComplianceDoc) {
         // COMPLIANCE FLOW: Run full analysis and validation
@@ -230,7 +244,7 @@ export default function DocumentEditorClient({
         const loadingToastId = toast.loading(
           skipValidation
             ? "Publishing document..."
-            : "Saving and validating document...",
+            : "Saving and validating document..."
         );
 
         try {
@@ -242,7 +256,7 @@ export default function DocumentEditorClient({
             documentId,
             markdown,
             documentMetadata?.title || "Document",
-            { skipValidation },
+            { skipValidation }
           );
 
           // Dismiss loading toast
@@ -256,6 +270,7 @@ export default function DocumentEditorClient({
           if (result.success) {
             // ✅ Publish succeeded - transition to published state
             setMode("view");
+            setDocumentStatus(result.status || "published");
             setDocumentMetadata((prev: any) => ({
               ...prev,
               status: result.status,
@@ -310,11 +325,11 @@ export default function DocumentEditorClient({
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-              content: markdown, 
-              status: "published"
+            body: JSON.stringify({
+              content: markdown,
+              status: "published",
             }),
-          },
+          }
         );
 
         if (!response.ok) {
@@ -329,6 +344,7 @@ export default function DocumentEditorClient({
         setHasChanges(false);
         setUserHasEdited(false);
         setMode("view");
+        setDocumentStatus(result.status || "published");
         setDocumentMetadata((prev: any) => ({
           ...prev,
           status: result.status,
@@ -374,7 +390,7 @@ export default function DocumentEditorClient({
   const handleBack = () => {
     if (hasChanges) {
       const confirmed = confirm(
-        "You have unsaved changes. Are you sure you want to leave?",
+        "You have unsaved changes. Are you sure you want to leave?"
       );
       if (!confirmed) return;
     }
@@ -395,7 +411,7 @@ export default function DocumentEditorClient({
     } else {
       if (hasChanges) {
         const confirmed = confirm(
-          "You have unsaved changes. Switching to view mode will discard them. Continue?",
+          "You have unsaved changes. Switching to view mode will discard them. Continue?"
         );
         if (!confirmed) return;
       }
@@ -485,6 +501,25 @@ export default function DocumentEditorClient({
             </div>
 
             <div className="flex items-center gap-2">
+              {documentMetadata?.docType !== "company" && auditAnalysis && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setAuditIssuesOpen(true)}
+                >
+                  {auditIssues.length > 0 ? (
+                    <>
+                      <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
+                      Review Issues ({auditIssues.length})
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
+                      Review Analysis
+                    </>
+                  )}
+                </Button>
+              )}
               <Button
                 variant="outline"
                 size="sm"
@@ -507,25 +542,6 @@ export default function DocumentEditorClient({
               {mode === "edit" && (
                 <>
                   {/* Review Issues button - only for compliance documents */}
-                  {documentMetadata?.docType !== 'company' && auditAnalysis && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setAuditIssuesOpen(true)}
-                    >
-                      {auditIssues.length > 0 ? (
-                        <>
-                          <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
-                          Review Issues ({auditIssues.length})
-                        </>
-                      ) : (
-                        <>
-                          <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
-                          Review Analysis
-                        </>
-                      )}
-                    </Button>
-                  )}
                   <Button
                     variant="outline"
                     size="sm"
@@ -546,7 +562,7 @@ export default function DocumentEditorClient({
                     onClick={() => {
                       // For company docs, show simple confirmation dialog
                       // For compliance docs (including null/undefined), run full publish flow
-                      if (documentMetadata?.docType === 'company') {
+                      if (documentMetadata?.docType === "company") {
                         setSimplePublishDialogOpen(true);
                       } else {
                         handlePublish();
@@ -579,7 +595,7 @@ export default function DocumentEditorClient({
       </header>
 
       {/* Audit Issues Dialog - Shown when publish is blocked by audit issues (compliance docs only) */}
-      {documentMetadata?.docType !== 'company' && (
+      {documentMetadata?.docType !== "company" && (
         <AuditDialog
           open={auditIssuesOpen}
           onClose={() => setAuditIssuesOpen(false)}
@@ -595,7 +611,7 @@ export default function DocumentEditorClient({
       )}
 
       {/* Simple Publish Dialog - For company documents only */}
-      {documentMetadata?.docType === 'company' && (
+      {documentMetadata?.docType === "company" && (
         <SimplePublishDialog
           open={simplePublishDialogOpen}
           onClose={() => setSimplePublishDialogOpen(false)}

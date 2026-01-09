@@ -1,10 +1,12 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { Download, Eye, MoreVertical, Pencil, Trash2 } from "lucide-react";
+import { Download, Eye, History, MoreVertical, Pencil, Trash2, Calendar } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { RevisionHistoryDialog } from "@/components/compliance/RevisionHistoryDialog";
+import { UpdateRenewalPeriodDialog } from "@/components/documents/UpdateRenewalPeriodDialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -61,6 +63,15 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
+  const [showRevisionHistory, setShowRevisionHistory] = useState(false);
+  const [revisionHistoryDocId, setRevisionHistoryDocId] = useState<string | null>(null);
+  const [revisionHistoryDocTitle, setRevisionHistoryDocTitle] = useState<string | null>(null);
+  const [showUpdateRenewal, setShowUpdateRenewal] = useState(false);
+  const [updateRenewalDocId, setUpdateRenewalDocId] = useState<string | null>(null);
+  const [updateRenewalDocTitle, setUpdateRenewalDocTitle] = useState<string | null>(null);
+  const [updateRenewalCurrent, setUpdateRenewalCurrent] = useState<
+    "quarterly" | "semi_annually" | "annually" | "2_years" | null
+  >(null);
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
@@ -185,6 +196,19 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
     }
   };
 
+  const handleUpdateRenewalSuccess = async () => {
+    try {
+      toast.success("Renewal period updated successfully");
+      // Invalidate queries to refresh the data
+      await queryClient.invalidateQueries({
+        queryKey: complianceKeys.allDocuments(),
+      });
+    } catch (error) {
+      console.error("Error refreshing data:", error);
+      toast.error("Failed to refresh data");
+    }
+  };
+
   // Pagination
   const totalPages = Math.ceil(documents.length / itemsPerPage);
   const startIdx = currentPage * itemsPerPage;
@@ -248,25 +272,41 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuItem
-                          onClick={() =>
-                            router.push(`/documents/${doc.id}/view`)
-                          }
-                        >
-                          <Eye className="mr-2 h-4 w-4" />
-                          View
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() =>
-                            router.push(`/documents/${doc.id}/edit`)
-                          }
+                          onClick={() => {
+                            const basePath = doc.doc_type === "compliance" 
+                              ? `/compliance/documents/${doc.id}/edit`
+                              : `/documents/${doc.id}/edit`;
+                            router.push(basePath);
+                          }}
                         >
                           <Pencil className="mr-2 h-4 w-4" />
-                          Edit
+                          Manage
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => {
+                            setUpdateRenewalDocId(doc.id);
+                            setUpdateRenewalDocTitle(doc.title);
+                            setUpdateRenewalCurrent(doc.renewal || null);
+                            setShowUpdateRenewal(true);
+                          }}
+                        >
+                          <Calendar className="mr-2 h-4 w-4" />
+                          Update Renewal Period
+                        </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleDownload(doc)}>
                           <Download className="mr-2 h-4 w-4" />
                           Download
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => {
+                            setRevisionHistoryDocId(doc.id);
+                            setRevisionHistoryDocTitle(doc.title);
+                            setShowRevisionHistory(true);
+                          }}
+                        >
+                          <History className="mr-2 h-4 w-4" />
+                          View History
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
@@ -321,6 +361,41 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
           </Button>
         </div>
       </div>
+
+      {/* Revision History Dialog */}
+      {revisionHistoryDocId && (
+        <RevisionHistoryDialog
+          open={showRevisionHistory}
+          onOpenChange={(open) => {
+            setShowRevisionHistory(open);
+            if (!open) {
+              setRevisionHistoryDocId(null);
+              setRevisionHistoryDocTitle(null);
+            }
+          }}
+          documentId={revisionHistoryDocId}
+          documentTitle={revisionHistoryDocTitle || "Document"}
+        />
+      )}
+
+      {/* Update Renewal Period Dialog */}
+      {updateRenewalDocId && (
+        <UpdateRenewalPeriodDialog
+          open={showUpdateRenewal}
+          onOpenChange={(open) => {
+            setShowUpdateRenewal(open);
+            if (!open) {
+              setUpdateRenewalDocId(null);
+              setUpdateRenewalDocTitle(null);
+              setUpdateRenewalCurrent(null);
+            }
+          }}
+          documentId={updateRenewalDocId}
+          documentTitle={updateRenewalDocTitle || "Document"}
+          currentRenewal={updateRenewalCurrent}
+          onSuccess={handleUpdateRenewalSuccess}
+        />
+      )}
 
       {/* Delete Dialog */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>

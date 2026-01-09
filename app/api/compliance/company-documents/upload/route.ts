@@ -16,6 +16,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db/postgres";
 import { getAuthContext } from "@/lib/primus/auth-helper";
+import { createDocumentRevision } from "@/lib/primus/db-helper";
 
 const s3 = new S3Client({ region: process.env.AWS_REGION! });
 
@@ -109,6 +110,20 @@ export async function POST(request: NextRequest) {
     const document = result.rows[0];
 
     console.log(`[API] Created document record: ${documentId} for module ${moduleId}.${subModuleId}`);
+
+    // Create revision record for audit trail
+    await createDocumentRevision(
+      documentId,
+      orgId,
+      1, // Version 1
+      "created",
+      s3Key,
+      "published",
+      userId,
+      "Initial document upload",
+    );
+
+    console.log(`[API] ✅ Revision record created for document ${documentId} (action: created)`);
 
     return NextResponse.json({
       success: true,
