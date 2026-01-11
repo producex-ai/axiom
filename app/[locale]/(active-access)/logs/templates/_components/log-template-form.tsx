@@ -1,7 +1,7 @@
 'use client';
 
-import { Loader2, Plus, Trash2 } from 'lucide-react';
-import { useActionState, useState } from 'react';
+import { FileText, Loader2, Plus, Trash2 } from 'lucide-react';
+import { useActionState, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 
 import {
@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import type { ReviewTimePeriod } from '@/db/queries/log-templates';
+import { uploadAndExtractTasks } from '@/lib/ai/extract-tasks';
 import { CATEGORY_OPTIONS, SOP_OPTIONS } from '@/lib/constants/log-templates';
 
 function SubmitButton({ isEditing }: { isEditing: boolean }) {
@@ -88,6 +89,9 @@ export function LogTemplateForm({
     initialTasks.map((t, i) => ({ id: i, defaultValue: t }))
   );
   const [nextId, setNextId] = useState(initialTasks.length);
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [extractError, setExtractError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Filter SOP_OPTIONS to only show enabled modules
   const filteredSopOptions = SOP_OPTIONS.filter((group) =>
@@ -102,6 +106,43 @@ export function LogTemplateForm({
   const removeTask = (idToRemove: number) => {
     if (tasks.length <= 1) return;
     setTasks(tasks.filter((t) => t.id !== idToRemove));
+  };
+
+  const handleFileExtract = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsExtracting(true);
+    setExtractError(null);
+
+    try {
+      // Upload file to S3 and extract tasks using server action
+      const result = await uploadAndExtractTasks(file);
+
+      if (result.success && result.tasks && result.tasks.length > 0) {
+        // Replace current tasks with extracted tasks
+        setTasks(
+          result.tasks.map((task, i) => ({
+            id: nextId + i,
+            defaultValue: task,
+          }))
+        );
+        setNextId(nextId + result.tasks.length);
+      } else {
+        setExtractError(result.error || 'No tasks found in the document');
+      }
+    } catch (error) {
+      console.error('Extract error:', error);
+      setExtractError('Failed to extract tasks. Please try again.');
+    } finally {
+      setIsExtracting(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   };
 
   return (
@@ -219,16 +260,50 @@ export function LogTemplateForm({
           <div className='space-y-4'>
             <div className='flex items-center justify-between'>
               <h3 className='font-medium text-lg'>Task List</h3>
-              <Button
-                type='button'
-                variant='outline'
-                size='sm'
-                onClick={addTask}
-              >
-                <Plus className='mr-2 h-4 w-4' />
-                Add Task
-              </Button>
+              <div className='flex gap-2'>
+                <Button
+                  type='button'
+                  variant='outline'
+                  size='sm'
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isExtracting}
+                >
+                  {isExtracting ? (
+                    <>
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                      Extracting...
+                    </>
+                  ) : (
+                    <>
+                      <FileText className='mr-2 h-4 w-4' />
+                      Extract Tasks
+                    </>
+                  )}
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type='file'
+                  accept='.txt,.doc,.docx,.pdf,.png,.jpg'
+                  onChange={handleFileExtract}
+                  className='hidden'
+                />
+                <Button
+                  type='button'
+                  variant='outline'
+                  size='sm'
+                  onClick={addTask}
+                >
+                  <Plus className='mr-2 h-4 w-4' />
+                  Add Task
+                </Button>
+              </div>
             </div>
+
+            {extractError && (
+              <Alert variant='destructive'>
+                <AlertDescription>{extractError}</AlertDescription>
+              </Alert>
+            )}
 
             <div className='space-y-3'>
               {tasks.map((task, index) => (
