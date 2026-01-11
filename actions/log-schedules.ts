@@ -23,11 +23,57 @@ const CreateScheduleSchema = z
     end_date: z.string().optional(),
     assignee_id: z.string().optional(),
     reviewer_id: z.string().optional(),
-    days_of_week: z
-      .array(z.number().min(0).max(6))
-      .min(1, 'Select at least one day'),
+    frequency: z.enum([
+      'weekly',
+      'monthly',
+      'quarterly',
+      'half_yearly',
+      'yearly',
+    ]),
+    days_of_week: z.array(z.number().min(0).max(6)).optional(),
+    day_of_month: z.coerce.number().int().min(1).max(31).optional(),
+    month_of_year: z.coerce.number().int().min(1).max(12).optional(),
     times_per_day: z.coerce.number().int().min(1).max(4).default(1),
   })
+  .refine(
+    (data) => {
+      // Validate days_of_week is required for weekly frequency
+      if (data.frequency === 'weekly') {
+        return data.days_of_week && data.days_of_week.length > 0;
+      }
+      return true;
+    },
+    {
+      message: 'Select at least one day for weekly schedules',
+      path: ['days_of_week'],
+    }
+  )
+  .refine(
+    (data) => {
+      // Validate day_of_month is required for non-weekly frequencies
+      if (data.frequency !== 'weekly') {
+        return data.day_of_month !== undefined;
+      }
+      return true;
+    },
+    {
+      message: 'Day of month is required for non-weekly schedules',
+      path: ['day_of_month'],
+    }
+  )
+  .refine(
+    (data) => {
+      // Validate month_of_year is required for yearly frequency
+      if (data.frequency === 'yearly') {
+        return data.month_of_year !== undefined;
+      }
+      return true;
+    },
+    {
+      message: 'Month is required for yearly schedules',
+      path: ['month_of_year'],
+    }
+  )
   .refine(
     (data) => {
       if (!data.end_date) return true; // end_date is optional
@@ -47,11 +93,54 @@ const UpdateScheduleSchema = z
     end_date: z.string().optional(),
     assignee_id: z.string().optional(),
     reviewer_id: z.string().optional(),
-    days_of_week: z
-      .array(z.number().min(0).max(6))
-      .min(1, 'Select at least one day'),
+    frequency: z.enum([
+      'weekly',
+      'monthly',
+      'quarterly',
+      'half_yearly',
+      'yearly',
+    ]),
+    days_of_week: z.array(z.number().min(0).max(6)).optional(),
+    day_of_month: z.coerce.number().int().min(1).max(31).optional(),
+    month_of_year: z.coerce.number().int().min(1).max(12).optional(),
     times_per_day: z.coerce.number().int().min(1).max(4).default(1),
   })
+  .refine(
+    (data) => {
+      if (data.frequency === 'weekly') {
+        return data.days_of_week && data.days_of_week.length > 0;
+      }
+      return true;
+    },
+    {
+      message: 'Select at least one day for weekly schedules',
+      path: ['days_of_week'],
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.frequency !== 'weekly') {
+        return data.day_of_month !== undefined;
+      }
+      return true;
+    },
+    {
+      message: 'Day of month is required for non-weekly schedules',
+      path: ['day_of_month'],
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.frequency === 'yearly') {
+        return data.month_of_year !== undefined;
+      }
+      return true;
+    },
+    {
+      message: 'Month is required for yearly schedules',
+      path: ['month_of_year'],
+    }
+  )
   .refine(
     (data) => {
       if (!data.end_date) return true;
@@ -73,7 +162,10 @@ export type CreateScheduleState = {
     end_date?: string[];
     assignee_id?: string[];
     reviewer_id?: string[];
+    frequency?: string[];
     days_of_week?: string[];
+    day_of_month?: string[];
+    month_of_year?: string[];
     times_per_day?: string[];
   };
   success?: boolean;
@@ -94,9 +186,12 @@ export async function createLogScheduleAction(
   const end_date = formData.get('end_date') as string;
   const assignee_id = formData.get('assignee_id') as string;
   const reviewer_id = formData.get('reviewer_id') as string;
+  const frequency = formData.get('frequency') as string;
+  const day_of_month = formData.get('day_of_month') as string;
+  const month_of_year = formData.get('month_of_year') as string;
   const times_per_day = formData.get('times_per_day') as string;
 
-  // Extract days of week - handling multiple checkboxes
+  // Extract days of week - handling multiple checkboxes (only for weekly)
   const days = formData
     .getAll('days_of_week')
     .map((d) => Number.parseInt(d.toString()));
@@ -108,7 +203,10 @@ export async function createLogScheduleAction(
     end_date: end_date || undefined,
     assignee_id: assignee_id || undefined,
     reviewer_id: reviewer_id || undefined,
-    days_of_week: days,
+    frequency,
+    days_of_week: days.length > 0 ? days : undefined,
+    day_of_month: day_of_month || undefined,
+    month_of_year: month_of_year || undefined,
     times_per_day,
   });
 
@@ -149,7 +247,10 @@ export async function createLogScheduleAction(
         : null,
       assignee_id: validatedFields.data.assignee_id || null,
       reviewer_id: validatedFields.data.reviewer_id || null,
-      days_of_week: validatedFields.data.days_of_week,
+      frequency: validatedFields.data.frequency,
+      days_of_week: validatedFields.data.days_of_week || null,
+      day_of_month: validatedFields.data.day_of_month || null,
+      month_of_year: validatedFields.data.month_of_year || null,
       status: 'ACTIVE',
       created_by: userId,
       times_per_day: validatedFields.data.times_per_day,
@@ -180,6 +281,9 @@ export async function updateLogScheduleAction(
   const end_date = formData.get('end_date') as string;
   const assignee_id = formData.get('assignee_id') as string;
   const reviewer_id = formData.get('reviewer_id') as string;
+  const frequency = formData.get('frequency') as string;
+  const day_of_month = formData.get('day_of_month') as string;
+  const month_of_year = formData.get('month_of_year') as string;
   const times_per_day = formData.get('times_per_day') as string;
 
   // Extract days of week
@@ -193,7 +297,10 @@ export async function updateLogScheduleAction(
     end_date: end_date || undefined,
     assignee_id: assignee_id || undefined,
     reviewer_id: reviewer_id || undefined,
-    days_of_week: days,
+    frequency,
+    days_of_week: days.length > 0 ? days : undefined,
+    day_of_month: day_of_month || undefined,
+    month_of_year: month_of_year || undefined,
     times_per_day,
   });
 
@@ -214,7 +321,10 @@ export async function updateLogScheduleAction(
           : null,
         assignee_id: validatedFields.data.assignee_id || null,
         reviewer_id: validatedFields.data.reviewer_id || null,
-        days_of_week: validatedFields.data.days_of_week,
+        frequency: validatedFields.data.frequency,
+        days_of_week: validatedFields.data.days_of_week || null,
+        day_of_month: validatedFields.data.day_of_month || null,
+        month_of_year: validatedFields.data.month_of_year || null,
         times_per_day: validatedFields.data.times_per_day,
       },
       orgId
@@ -263,7 +373,10 @@ export type ScheduleWithDetails = {
   end_date: Date | null;
   assignee_name: string | null;
   reviewer_name: string | null;
+  frequency: string;
   days_of_week: number[] | null;
+  day_of_month: number | null;
+  month_of_year: number | null;
   times_per_day: number;
   status: string;
 };
@@ -304,7 +417,10 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
       reviewer_name: schedule.reviewer_id
         ? userMap.get(schedule.reviewer_id) || schedule.reviewer_id
         : null,
+      frequency: schedule.frequency,
       days_of_week: schedule.days_of_week,
+      day_of_month: schedule.day_of_month,
+      month_of_year: schedule.month_of_year,
       times_per_day: schedule.times_per_day || 1,
       status: schedule.status,
     })

@@ -3,6 +3,7 @@
 import { Loader2 } from 'lucide-react';
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
+
 import type { OrgMember } from '@/actions/clerk';
 import {
   type CreateScheduleState,
@@ -22,12 +23,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  FREQUENCY_LABELS,
+  getMonthNames,
+  getScheduleMonths,
+  type ScheduleFrequency,
+} from '@/lib/cron/cron-utils';
 
 function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
 
   return (
-    <Button type='submit' className='w-fit' disabled={pending}>
+    <Button type='submit' className='w-full md:w-fit' disabled={pending}>
       {pending ? (
         <>
           <Loader2 className='mr-2 h-4 w-4 animate-spin' />
@@ -52,6 +59,21 @@ const DAYS_OF_WEEK = [
   { value: 6, label: 'Saturday', short: 'Sat' },
 ];
 
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 interface ScheduleFormProps {
   templateId: string;
   members: OrgMember[];
@@ -62,7 +84,10 @@ interface ScheduleFormProps {
     endDate?: string;
     assigneeId?: string;
     reviewerId?: string;
-    daysOfWeek: number[];
+    frequency?: ScheduleFrequency;
+    daysOfWeek?: number[];
+    dayOfMonth?: number;
+    monthOfYear?: number;
     timesPerDay?: number;
   };
 }
@@ -86,8 +111,17 @@ export function ScheduleForm({
 
   const [state, formAction] = useActionState(actionToUse, initialState);
 
+  const [frequency, setFrequency] = useState<ScheduleFrequency>(
+    initialData?.frequency || 'weekly'
+  );
   const [selectedDays, setSelectedDays] = useState<number[]>(
     initialData?.daysOfWeek || []
+  );
+  const [dayOfMonth, setDayOfMonth] = useState<string>(
+    initialData?.dayOfMonth?.toString() || '1'
+  );
+  const [monthOfYear, setMonthOfYear] = useState<string>(
+    initialData?.monthOfYear?.toString() || '1'
   );
   const [assigneeId, setAssigneeId] = useState<string>(
     initialData?.assigneeId || ''
@@ -98,16 +132,6 @@ export function ScheduleForm({
   const [timesPerDay, setTimesPerDay] = useState<string>(
     initialData?.timesPerDay?.toString() || '1'
   );
-
-  const allDaysSelected = selectedDays.length === DAYS_OF_WEEK.length;
-
-  const handleToggleAll = () => {
-    if (allDaysSelected) {
-      setSelectedDays([]);
-    } else {
-      setSelectedDays(DAYS_OF_WEEK.map((d) => d.value));
-    }
-  };
 
   const handleDayToggle = (dayValue: number) => {
     setSelectedDays((prev) =>
@@ -136,10 +160,22 @@ export function ScheduleForm({
         <input type='hidden' name='template_id' value={templateId} />
       )}
 
-      {/* Hidden inputs for selected days */}
-      {selectedDays.map((day) => (
-        <input key={day} type='hidden' name='days_of_week' value={day} />
-      ))}
+      {/* Hidden inputs for frequency */}
+      <input type='hidden' name='frequency' value={frequency} />
+
+      {/* Hidden inputs for selected days (only for weekly) */}
+      {frequency === 'weekly' &&
+        selectedDays.map((day) => (
+          <input key={day} type='hidden' name='days_of_week' value={day} />
+        ))}
+
+      {/* Hidden inputs for non-weekly frequencies */}
+      {frequency !== 'weekly' && (
+        <input type='hidden' name='day_of_month' value={dayOfMonth} />
+      )}
+      {frequency === 'yearly' && (
+        <input type='hidden' name='month_of_year' value={monthOfYear} />
+      )}
 
       {/* Hidden inputs for selected users */}
       <input type='hidden' name='assignee_id' value={assigneeId} />
@@ -204,8 +240,8 @@ export function ScheduleForm({
             </div>
           </div>
 
-          {/* Assignee and Reviewer */}
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+          {/* Assignee, Reviewer, and Frequency */}
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
             <div className='space-y-2'>
               <Label htmlFor='assignee_select'>Assignee</Label>
               <Select value={assigneeId} onValueChange={setAssigneeId}>
@@ -259,62 +295,137 @@ export function ScheduleForm({
                 </p>
               )}
             </div>
+
+            <div className='space-y-2'>
+              <Label htmlFor='frequency_select'>Schedule Frequency</Label>
+              <Select
+                value={frequency}
+                onValueChange={(val) => setFrequency(val as ScheduleFrequency)}
+              >
+                <SelectTrigger className='w-full' id='frequency_select'>
+                  <SelectValue placeholder='Select frequency' />
+                </SelectTrigger>
+                <SelectContent>
+                  {(
+                    Object.entries(FREQUENCY_LABELS) as [
+                      ScheduleFrequency,
+                      string
+                    ][]
+                  ).map(([key, label]) => (
+                    <SelectItem key={key} value={key}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          {/* Days of Week */}
-          <div className='space-y-4'>
-            <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+          {/* Conditional fields based on frequency */}
+          {frequency === 'weekly' ? (
+            <div className='space-y-4'>
               <div>
                 <Label>Days of Week</Label>
                 <p className='mt-1 text-muted-foreground text-sm'>
                   Select the days when this log should be created
                 </p>
               </div>
-              <div className='flex items-center space-x-2'>
-                <Checkbox
-                  id='select-all-days'
-                  checked={allDaysSelected}
-                  onCheckedChange={handleToggleAll}
-                />
-                <Label
-                  htmlFor='select-all-days'
-                  className='cursor-pointer font-normal text-sm'
-                >
-                  Select All
-                </Label>
-              </div>
-            </div>
-            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-7'>
-              {DAYS_OF_WEEK.map((day) => (
-                <div
-                  key={day.value}
-                  className='flex items-center space-x-2 rounded-md p-2 hover:bg-muted/50'
-                >
-                  <Checkbox
-                    id={`day-${day.value}`}
-                    checked={selectedDays.includes(day.value)}
-                    onCheckedChange={() => handleDayToggle(day.value)}
-                  />
-                  <Label
-                    htmlFor={`day-${day.value}`}
-                    className='flex-1 cursor-pointer font-normal text-sm'
+              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-7'>
+                {DAYS_OF_WEEK.map((day) => (
+                  <div
+                    key={day.value}
+                    className='flex items-center space-x-2 rounded-md p-2 hover:bg-muted/50'
                   >
-                    <span className='sm:hidden'>{day.label}</span>
-                    <span className='hidden sm:inline'>{day.label}</span>
-                  </Label>
-                </div>
-              ))}
+                    <Checkbox
+                      id={`day-${day.value}`}
+                      checked={selectedDays.includes(day.value)}
+                      onCheckedChange={() => handleDayToggle(day.value)}
+                    />
+                    <Label
+                      htmlFor={`day-${day.value}`}
+                      className='flex-1 cursor-pointer font-normal text-sm'
+                    >
+                      <span className='sm:hidden'>{day.label}</span>
+                      <span className='hidden sm:inline'>{day.label}</span>
+                    </Label>
+                  </div>
+                ))}
+              </div>
+              {state.errors?.days_of_week && (
+                <p className='text-destructive text-sm'>
+                  {state.errors.days_of_week.join(', ')}
+                </p>
+              )}
             </div>
-            {state.errors?.days_of_week && (
-              <p className='text-destructive text-sm'>
-                {state.errors.days_of_week.join(', ')}
-              </p>
-            )}
-          </div>
+          ) : (
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+              <div className='space-y-2'>
+                <Label htmlFor='day_of_month_select'>Day of Month</Label>
+                <Select value={dayOfMonth} onValueChange={setDayOfMonth}>
+                  <SelectTrigger className='w-full' id='day_of_month_select'>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                      <SelectItem key={day} value={day.toString()}>
+                        {day}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {state.errors?.day_of_month && (
+                  <p className='text-destructive text-sm'>
+                    {state.errors.day_of_month.join(', ')}
+                  </p>
+                )}
+              </div>
+
+              {frequency === 'yearly' && (
+                <div className='space-y-2'>
+                  <Label htmlFor='month_of_year_select'>Month</Label>
+                  <Select value={monthOfYear} onValueChange={setMonthOfYear}>
+                    <SelectTrigger className='w-full' id='month_of_year_select'>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {MONTHS.map((month, idx) => (
+                        <SelectItem key={month} value={(idx + 1).toString()}>
+                          {month}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {state.errors?.month_of_year && (
+                    <p className='text-destructive text-sm'>
+                      {state.errors.month_of_year.join(', ')}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
 
-      <div className='flex justify-end'>
+      <div className='flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center'>
+        <div className='flex items-center gap-2 text-muted-foreground'>
+          <span className='font-medium'>
+            {frequency === 'weekly' && 'Runs on selected days of the week'}
+            {frequency === 'monthly' && 'Runs on the same day each month'}
+            {frequency === 'quarterly' &&
+              `Runs on day ${dayOfMonth} in ${getMonthNames(
+                getScheduleMonths('quarterly')
+              ).join(', ')}`}
+            {frequency === 'half_yearly' &&
+              `Runs on day ${dayOfMonth} in ${getMonthNames(
+                getScheduleMonths('half_yearly')
+              ).join(' and ')}`}
+            {frequency === 'yearly' &&
+              `Runs on ${
+                MONTHS[Number.parseInt(monthOfYear) - 1]
+              } ${dayOfMonth} every year`}
+          </span>
+        </div>
         <SubmitButton isEditing={mode === 'edit'} />
       </div>
     </form>
