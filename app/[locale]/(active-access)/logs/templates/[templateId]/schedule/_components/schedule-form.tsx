@@ -132,6 +132,12 @@ export function ScheduleForm({
   const [timesPerDay, setTimesPerDay] = useState<string>(
     initialData?.timesPerDay?.toString() || '1'
   );
+  const [startDate, setStartDate] = useState<string>(
+    initialData?.startDate || ''
+  );
+
+  // Get today's date in YYYY-MM-DD format for min date validation
+  const today = new Date().toISOString().split('T')[0];
 
   const handleDayToggle = (dayValue: number) => {
     setSelectedDays((prev) =>
@@ -192,7 +198,9 @@ export function ScheduleForm({
                 id='start_date'
                 name='start_date'
                 type='date'
-                defaultValue={initialData?.startDate}
+                min={today}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
                 aria-describedby='start_date-error'
                 required
               />
@@ -209,6 +217,7 @@ export function ScheduleForm({
                 id='end_date'
                 name='end_date'
                 type='date'
+                min={startDate || today}
                 defaultValue={initialData?.endDate}
                 aria-describedby='end_date-error'
               />
