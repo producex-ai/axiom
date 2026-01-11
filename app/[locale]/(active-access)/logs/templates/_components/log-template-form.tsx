@@ -17,7 +17,9 @@ import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -50,6 +52,7 @@ function bindUpdateAction(id: string) {
 
 interface LogTemplateFormProps {
   mode?: 'create' | 'edit';
+  enabledModules?: string[];
   initialData?: {
     id: string;
     name: string;
@@ -62,6 +65,7 @@ interface LogTemplateFormProps {
 
 export function LogTemplateForm({
   mode = 'create',
+  enabledModules = [],
   initialData,
 }: LogTemplateFormProps) {
   const initialState: CreateTemplateState = { message: '', errors: {} };
@@ -85,6 +89,11 @@ export function LogTemplateForm({
   );
   const [nextId, setNextId] = useState(initialTasks.length);
 
+  // Filter SOP_OPTIONS to only show enabled modules
+  const filteredSopOptions = SOP_OPTIONS.filter((group) =>
+    enabledModules.includes(group.module)
+  );
+
   const addTask = () => {
     setTasks([...tasks, { id: nextId, defaultValue: '' }]);
     setNextId(nextId + 1);
@@ -105,8 +114,8 @@ export function LogTemplateForm({
 
       <Card>
         <CardContent className='space-y-6 pt-6'>
-          {/* Top Row: Name, Category, SOP */}
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+          {/* Form Fields */}
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
             <div className='space-y-2'>
               <Label htmlFor='name'>Template Name</Label>
               <Input
@@ -160,10 +169,15 @@ export function LogTemplateForm({
                   <SelectValue placeholder='Select an SOP module' />
                 </SelectTrigger>
                 <SelectContent>
-                  {SOP_OPTIONS.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
+                  {filteredSopOptions.map((group) => (
+                    <SelectGroup key={group.label}>
+                      <SelectLabel>{group.label}</SelectLabel>
+                      {group.options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
                   ))}
                 </SelectContent>
               </Select>
@@ -173,34 +187,33 @@ export function LogTemplateForm({
                 </p>
               )}
             </div>
-          </div>
 
-          {/* Review Time */}
-          <div className='space-y-2'>
-            <Label htmlFor='review_time'>Review Time</Label>
-            <Select
-              name='review_time'
-              defaultValue={initialData?.review_time || '1_year'}
-              required
-            >
-              <SelectTrigger id='review_time'>
-                <SelectValue placeholder='Select review period' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='1_month'>1 Month</SelectItem>
-                <SelectItem value='3_months'>3 Months</SelectItem>
-                <SelectItem value='6_months'>6 Months</SelectItem>
-                <SelectItem value='1_year'>1 Year</SelectItem>
-              </SelectContent>
-            </Select>
-            {state.errors?.review_time && (
-              <p className='text-destructive text-sm'>
-                {state.errors.review_time.join(', ')}
+            <div className='space-y-2'>
+              <Label htmlFor='review_time'>Review Time</Label>
+              <Select
+                name='review_time'
+                defaultValue={initialData?.review_time || '1_year'}
+                required
+              >
+                <SelectTrigger className='w-full' id='review_time'>
+                  <SelectValue placeholder='Select review period' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='1_month'>1 Month</SelectItem>
+                  <SelectItem value='3_months'>3 Months</SelectItem>
+                  <SelectItem value='6_months'>6 Months</SelectItem>
+                  <SelectItem value='1_year'>1 Year</SelectItem>
+                </SelectContent>
+              </Select>
+              {state.errors?.review_time && (
+                <p className='text-destructive text-sm'>
+                  {state.errors.review_time.join(', ')}
+                </p>
+              )}
+              <p className='text-muted-foreground text-xs'>
+                How often this template should be reviewed
               </p>
-            )}
-            <p className='text-muted-foreground text-xs'>
-              How often this template should be reviewed
-            </p>
+            </div>
           </div>
 
           <div className='space-y-4'>
