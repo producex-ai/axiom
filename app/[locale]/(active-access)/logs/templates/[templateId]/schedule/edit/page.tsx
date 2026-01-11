@@ -62,7 +62,10 @@ export default async function EditSchedulePage({ params }: PageProps) {
             : undefined,
           assigneeId: schedule.assignee_id || undefined,
           reviewerId: schedule.reviewer_id || undefined,
-          daysOfWeek: schedule.days_of_week || [],
+          frequency: schedule.frequency,
+          daysOfWeek: schedule.days_of_week || undefined,
+          dayOfMonth: schedule.day_of_month || undefined,
+          monthOfYear: schedule.month_of_year || undefined,
           timesPerDay: schedule.times_per_day || 1,
         }}
       />

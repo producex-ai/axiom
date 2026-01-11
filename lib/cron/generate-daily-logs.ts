@@ -4,16 +4,72 @@ import {
   getAllActiveLogSchedules,
 } from '@/db/queries/log-schedules';
 import { getLogTemplateById } from '@/db/queries/log-templates';
+import type { ScheduleFrequency } from '@/lib/cron/cron-utils';
 
 /**
- * Check if today matches any of the scheduled days
+ * Check if a log should be created today based on schedule frequency
  */
-function shouldCreateLogToday(daysOfWeek: number[] | null): boolean {
-  if (!daysOfWeek || daysOfWeek.length === 0) {
-    return false;
+function shouldCreateLogToday(
+  frequency: ScheduleFrequency,
+  daysOfWeek: number[] | null,
+  dayOfMonth: number | null,
+  monthOfYear: number | null,
+  targetDate: Date = new Date()
+): boolean {
+  const today = targetDate.getDay(); // 0=Sunday, 6=Saturday
+  const currentDayOfMonth = targetDate.getDate(); // 1-31
+  const currentMonth = targetDate.getMonth() + 1; // 1=January, 12=December
+
+  switch (frequency) {
+    case 'weekly':
+      // Check if today is in the selected days of week
+      if (!daysOfWeek || daysOfWeek.length === 0) {
+        return false;
+      }
+      return daysOfWeek.includes(today);
+
+    case 'monthly':
+      // Check if today matches the day of month
+      if (!dayOfMonth) {
+        return false;
+      }
+      return currentDayOfMonth === dayOfMonth;
+
+    case 'quarterly': {
+      // Check if today matches the day of month AND current month is Jan, Apr, Jul, or Oct
+      if (!dayOfMonth) {
+        return false;
+      }
+      const quarterlyMonths = [1, 4, 7, 10];
+      return (
+        currentDayOfMonth === dayOfMonth &&
+        quarterlyMonths.includes(currentMonth)
+      );
+    }
+
+    case 'half_yearly': {
+      // Check if today matches the day of month AND current month is Jan or Jul
+      if (!dayOfMonth) {
+        return false;
+      }
+      const halfYearlyMonths = [1, 7];
+      return (
+        currentDayOfMonth === dayOfMonth &&
+        halfYearlyMonths.includes(currentMonth)
+      );
+    }
+
+    case 'yearly':
+      // Check if today matches both the day of month and month of year
+      if (!dayOfMonth || !monthOfYear) {
+        return false;
+      }
+      return currentDayOfMonth === dayOfMonth && currentMonth === monthOfYear;
+
+    default:
+      console.warn(`Unknown frequency type: ${frequency}`);
+      return false;
   }
-  const today = new Date().getDay(); // 0=Sunday, 6=Saturday
-  return daysOfWeek.includes(today);
 }
 
 /**
@@ -60,10 +116,20 @@ export async function generateDailyLogsFromSchedules(
 
     for (const schedule of schedules) {
       try {
-        // Check if log should be created today based on days_of_week
-        if (!shouldCreateLogToday(schedule.days_of_week)) {
+        // Check if log should be created today based on frequency
+        if (
+          !shouldCreateLogToday(
+            schedule.frequency,
+            schedule.days_of_week,
+            schedule.day_of_month,
+            schedule.month_of_year,
+            targetDate
+          )
+        ) {
           console.log(
-            `Skipping schedule ${schedule.id} - not scheduled for today`
+            `Skipping schedule ${schedule.id} - not scheduled for ${
+              targetDate.toISOString().split('T')[0]
+            } (frequency: ${schedule.frequency})`
           );
           results.skipped++;
           continue;
