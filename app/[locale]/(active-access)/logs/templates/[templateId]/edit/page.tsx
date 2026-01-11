@@ -1,8 +1,10 @@
+import { auth } from '@clerk/nextjs/server';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getLogTemplateByIdAction } from '@/actions/log-templates';
 import { Button } from '@/components/ui/button';
+import { getEnabledModules } from '@/lib/primus/db-helper';
 import { LogTemplateForm } from '../../_components/log-template-form';
 
 interface PageProps {
@@ -16,6 +18,11 @@ export default async function EditTemplatePage({ params }: PageProps) {
   if (!template) {
     notFound();
   }
+
+  const { orgId } = await auth();
+  const enabledModules = orgId
+    ? await getEnabledModules(orgId, 'primus_gfs')
+    : [];
 
   return (
     <div className='space-y-6'>
@@ -46,6 +53,7 @@ export default async function EditTemplatePage({ params }: PageProps) {
 
       <LogTemplateForm
         mode='edit'
+        enabledModules={enabledModules}
         initialData={{
           id: template.id,
           name: template.name,

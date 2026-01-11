@@ -1,7 +1,7 @@
 'use client';
 
-import { Loader2, Plus, Trash2 } from 'lucide-react';
-import { useActionState, useState } from 'react';
+import { FileText, Loader2, Plus, Trash2 } from 'lucide-react';
+import { useActionState, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 
 import {
@@ -17,11 +17,14 @@ import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
 import type { ReviewTimePeriod } from '@/db/queries/log-templates';
+import { uploadAndExtractTasks } from '@/lib/ai/extract-tasks';
 import { CATEGORY_OPTIONS, SOP_OPTIONS } from '@/lib/constants/log-templates';
 
 function SubmitButton({ isEditing }: { isEditing: boolean }) {
@@ -50,6 +53,7 @@ function bindUpdateAction(id: string) {
 
 interface LogTemplateFormProps {
   mode?: 'create' | 'edit';
+  enabledModules?: string[];
   initialData?: {
     id: string;
     name: string;
@@ -62,6 +66,7 @@ interface LogTemplateFormProps {
 
 export function LogTemplateForm({
   mode = 'create',
+  enabledModules = [],
   initialData,
 }: LogTemplateFormProps) {
   const initialState: CreateTemplateState = { message: '', errors: {} };
@@ -84,6 +89,14 @@ export function LogTemplateForm({
     initialTasks.map((t, i) => ({ id: i, defaultValue: t }))
   );
   const [nextId, setNextId] = useState(initialTasks.length);
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [extractError, setExtractError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Filter SOP_OPTIONS to only show enabled modules
+  const filteredSopOptions = SOP_OPTIONS.filter((group) =>
+    enabledModules.includes(group.module)
+  );
 
   const addTask = () => {
     setTasks([...tasks, { id: nextId, defaultValue: '' }]);
@@ -93,6 +106,43 @@ export function LogTemplateForm({
   const removeTask = (idToRemove: number) => {
     if (tasks.length <= 1) return;
     setTasks(tasks.filter((t) => t.id !== idToRemove));
+  };
+
+  const handleFileExtract = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsExtracting(true);
+    setExtractError(null);
+
+    try {
+      // Upload file to S3 and extract tasks using server action
+      const result = await uploadAndExtractTasks(file);
+
+      if (result.success && result.tasks && result.tasks.length > 0) {
+        // Replace current tasks with extracted tasks
+        setTasks(
+          result.tasks.map((task, i) => ({
+            id: nextId + i,
+            defaultValue: task,
+          }))
+        );
+        setNextId(nextId + result.tasks.length);
+      } else {
+        setExtractError(result.error || 'No tasks found in the document');
+      }
+    } catch (error) {
+      console.error('Extract error:', error);
+      setExtractError('Failed to extract tasks. Please try again.');
+    } finally {
+      setIsExtracting(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   };
 
   return (
@@ -105,8 +155,8 @@ export function LogTemplateForm({
 
       <Card>
         <CardContent className='space-y-6 pt-6'>
-          {/* Top Row: Name, Category, SOP */}
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+          {/* Form Fields */}
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
             <div className='space-y-2'>
               <Label htmlFor='name'>Template Name</Label>
               <Input
@@ -160,10 +210,15 @@ export function LogTemplateForm({
                   <SelectValue placeholder='Select an SOP module' />
                 </SelectTrigger>
                 <SelectContent>
-                  {SOP_OPTIONS.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
+                  {filteredSopOptions.map((group) => (
+                    <SelectGroup key={group.label}>
+                      <SelectLabel>{group.label}</SelectLabel>
+                      {group.options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
                   ))}
                 </SelectContent>
               </Select>
@@ -173,49 +228,82 @@ export function LogTemplateForm({
                 </p>
               )}
             </div>
-          </div>
 
-          {/* Review Time */}
-          <div className='space-y-2'>
-            <Label htmlFor='review_time'>Review Time</Label>
-            <Select
-              name='review_time'
-              defaultValue={initialData?.review_time || '1_year'}
-              required
-            >
-              <SelectTrigger id='review_time'>
-                <SelectValue placeholder='Select review period' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='1_month'>1 Month</SelectItem>
-                <SelectItem value='3_months'>3 Months</SelectItem>
-                <SelectItem value='6_months'>6 Months</SelectItem>
-                <SelectItem value='1_year'>1 Year</SelectItem>
-              </SelectContent>
-            </Select>
-            {state.errors?.review_time && (
-              <p className='text-destructive text-sm'>
-                {state.errors.review_time.join(', ')}
+            <div className='space-y-2'>
+              <Label htmlFor='review_time'>Review Time</Label>
+              <Select
+                name='review_time'
+                defaultValue={initialData?.review_time || '1_year'}
+                required
+              >
+                <SelectTrigger className='w-full' id='review_time'>
+                  <SelectValue placeholder='Select review period' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='1_month'>1 Month</SelectItem>
+                  <SelectItem value='3_months'>3 Months</SelectItem>
+                  <SelectItem value='6_months'>6 Months</SelectItem>
+                  <SelectItem value='1_year'>1 Year</SelectItem>
+                </SelectContent>
+              </Select>
+              {state.errors?.review_time && (
+                <p className='text-destructive text-sm'>
+                  {state.errors.review_time.join(', ')}
+                </p>
+              )}
+              <p className='text-muted-foreground text-xs'>
+                How often this template should be reviewed
               </p>
-            )}
-            <p className='text-muted-foreground text-xs'>
-              How often this template should be reviewed
-            </p>
+            </div>
           </div>
 
           <div className='space-y-4'>
             <div className='flex items-center justify-between'>
               <h3 className='font-medium text-lg'>Task List</h3>
-              <Button
-                type='button'
-                variant='outline'
-                size='sm'
-                onClick={addTask}
-              >
-                <Plus className='mr-2 h-4 w-4' />
-                Add Task
-              </Button>
+              <div className='flex gap-2'>
+                <Button
+                  type='button'
+                  variant='outline'
+                  size='sm'
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isExtracting}
+                >
+                  {isExtracting ? (
+                    <>
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                      Extracting...
+                    </>
+                  ) : (
+                    <>
+                      <FileText className='mr-2 h-4 w-4' />
+                      Extract Tasks
+                    </>
+                  )}
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type='file'
+                  accept='.txt,.doc,.docx,.pdf,.png,.jpg'
+                  onChange={handleFileExtract}
+                  className='hidden'
+                />
+                <Button
+                  type='button'
+                  variant='outline'
+                  size='sm'
+                  onClick={addTask}
+                >
+                  <Plus className='mr-2 h-4 w-4' />
+                  Add Task
+                </Button>
+              </div>
             </div>
+
+            {extractError && (
+              <Alert variant='destructive'>
+                <AlertDescription>{extractError}</AlertDescription>
+              </Alert>
+            )}
 
             <div className='space-y-3'>
               {tasks.map((task, index) => (

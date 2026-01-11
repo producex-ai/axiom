@@ -1,3 +1,4 @@
+import type { ScheduleFrequency } from '@/lib/cron/cron-utils';
 import { query } from '@/lib/db/postgres';
 
 export type LogSchedule = {
@@ -8,7 +9,10 @@ export type LogSchedule = {
   end_date: Date | null;
   assignee_id: string | null;
   reviewer_id: string | null;
+  frequency: ScheduleFrequency;
   days_of_week: number[] | null;
+  day_of_month: number | null;
+  month_of_year: number | null;
   status: 'ACTIVE' | 'PAUSED' | 'COMPLETED';
   created_at: Date;
   updated_at: Date;
@@ -31,7 +35,10 @@ export const createLogSchedule = async (
     end_date,
     assignee_id,
     reviewer_id,
+    frequency,
     days_of_week,
+    day_of_month,
+    month_of_year,
     status,
     created_by,
     times_per_day,
@@ -42,9 +49,10 @@ export const createLogSchedule = async (
       `
       INSERT INTO log_schedules (
         template_id, org_id, start_date, end_date, 
-        assignee_id, reviewer_id, days_of_week, status, created_by, times_per_day
+        assignee_id, reviewer_id, frequency, days_of_week, 
+        day_of_month, month_of_year, status, created_by, times_per_day
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
       RETURNING *
       `,
       [
@@ -54,7 +62,10 @@ export const createLogSchedule = async (
         end_date,
         assignee_id,
         reviewer_id,
+        frequency,
         days_of_week,
+        day_of_month,
+        month_of_year,
         status,
         created_by,
         times_per_day,
@@ -87,7 +98,10 @@ export const updateLogSchedule = async (
     end_date,
     assignee_id,
     reviewer_id,
+    frequency,
     days_of_week,
+    day_of_month,
+    month_of_year,
     status,
     times_per_day,
   } = schedule;
@@ -101,11 +115,14 @@ export const updateLogSchedule = async (
         end_date = $2,
         assignee_id = $3,
         reviewer_id = $4,
-        days_of_week = COALESCE($5, days_of_week),
-        status = COALESCE($6, status),
-        times_per_day = COALESCE($7, times_per_day),
+        frequency = COALESCE($5, frequency),
+        days_of_week = $6,
+        day_of_month = $7,
+        month_of_year = $8,
+        status = COALESCE($9, status),
+        times_per_day = COALESCE($10, times_per_day),
         updated_at = NOW()
-      WHERE id = $8 AND org_id = $9
+      WHERE id = $11 AND org_id = $12
       RETURNING *
       `,
       [
@@ -113,7 +130,10 @@ export const updateLogSchedule = async (
         end_date,
         assignee_id,
         reviewer_id,
+        frequency,
         days_of_week,
+        day_of_month,
+        month_of_year,
         status,
         times_per_day,
         id,
