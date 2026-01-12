@@ -27,6 +27,7 @@ import { query } from "@/lib/db/postgres";
 import { getFromS3, uploadToS3 } from "@/lib/s3-utils";
 import { createDocxBufferFromText } from "@/server/docgen";
 import { createDocumentRevision } from "@/lib/primus/db-helper";
+import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -61,6 +62,25 @@ export async function POST(request: NextRequest) {
       subModuleId,
       analysisId,
     });
+
+    // Parse subModuleId to get moduleNumber and code
+    const [moduleNumber] = subModuleId.split(".");
+    const subModuleCode = subModuleId;
+
+    // Load submodule spec to get title
+    let submoduleTitle: string;
+    try {
+      const spec = loadSubmoduleSpec(moduleNumber, subModuleCode);
+      submoduleTitle = spec.title;
+    } catch (error) {
+      console.error("[API] Error loading submodule spec:", error);
+      return NextResponse.json(
+        {
+          error: "Failed to load submodule specification",
+        },
+        { status: 500 },
+      );
+    }
 
     // Fetch the compliance analysis result to store with document
     const analysisResult = await query(
@@ -159,7 +179,7 @@ export async function POST(request: NextRequest) {
          doc_type = EXCLUDED.doc_type,
          updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
-       RETURNING id`,
+       RETURNING id, current_version`,
       [
         documentId,
         orgId,
@@ -167,7 +187,7 @@ export async function POST(request: NextRequest) {
         moduleId,
         subModuleId,
         subSubModuleId,
-        `Evidence Document - ${subModuleId}`,
+        submoduleTitle,
         "draft",
         s3Key,
         1,
@@ -180,6 +200,7 @@ export async function POST(request: NextRequest) {
     );
 
     const finalDocId = documentResult.rows[0].id;
+    const currentVersion = documentResult.rows[0].current_version;
 
     // Create document_source entry for audit trail
     await query(
@@ -199,7 +220,7 @@ export async function POST(request: NextRequest) {
     await createDocumentRevision(
       finalDocId,
       orgId,
-      1, // Start with version 1 for new documents, increment for updates
+      currentVersion,
       "created",
       s3Key,
       "draft",

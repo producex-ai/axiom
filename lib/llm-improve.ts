@@ -112,6 +112,116 @@ const COMPLIANCE_SECTIONS: ComplianceSection[] = [
 ];
 
 /**
+ * Helper: Sleep function for retry delays
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Generate a section with retry logic and timeout protection
+ */
+async function generateSectionWithRetry(
+  params: Parameters<typeof generateSection>[0],
+  maxRetries = 2,
+  timeout = 45000,
+): Promise<string> {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const result = await Promise.race([
+        generateSection(params),
+        new Promise<string>((_, reject) =>
+          setTimeout(
+            () => reject(new Error(`Section ${params.section.id} generation timeout`)),
+            timeout,
+          ),
+        ),
+      ]);
+      return result;
+    } catch (error) {
+      console.error(
+        `[LLM-IMPROVE] ⚠️ Section ${params.section.id} attempt ${attempt + 1} failed:`,
+        error instanceof Error ? error.message : error,
+      );
+
+      if (attempt === maxRetries - 1) {
+        console.error(
+          `[LLM-IMPROVE] ❌ Section ${params.section.id} failed after ${maxRetries} attempts`,
+        );
+        throw error;
+      }
+
+      // Exponential backoff: 1s, 2s, 4s, etc.
+      const delay = Math.pow(2, attempt) * 1000;
+      console.log(
+        `[LLM-IMPROVE] 🔄 Retrying section ${params.section.id} in ${delay}ms...`,
+      );
+      await sleep(delay);
+    }
+  }
+  throw new Error(`Section ${params.section.id} generation failed`);
+}
+
+/**
+ * Validate generated section content
+ */
+function validateSection(section: {
+  id: number;
+  name: string;
+  content: string;
+}): { valid: boolean; issues: string[] } {
+  const issues: string[] = [];
+
+  // Check minimum length (at least 100 characters)
+  if (section.content.length < 100) {
+    issues.push(`Section ${section.id} is too short (${section.content.length} chars)`);
+  }
+
+  // Check for placeholder text
+  const placeholders = [
+    "[TO BE COMPLETED]",
+    "[TBD]",
+    "[INSERT]",
+    "[Content not available]",
+  ];
+  for (const placeholder of placeholders) {
+    if (section.content.includes(placeholder)) {
+      issues.push(`Section ${section.id} contains placeholder: ${placeholder}`);
+    }
+  }
+
+  // Check if section starts with proper number
+  if (!section.content.trim().startsWith(`${section.id}.`)) {
+    issues.push(`Section ${section.id} missing proper section number`);
+  }
+
+  return {
+    valid: issues.length === 0,
+    issues,
+  };
+}
+
+/**
+ * Pre-compute evidence cache for all sections to avoid redundant processing
+ */
+function precomputeEvidenceCache(
+  sections: ComplianceSection[],
+  documents: { fileName: string; text: string }[],
+  checklist: any,
+): Map<number, string> {
+  console.log("[LLM-IMPROVE] Pre-computing evidence cache for all sections...");
+  const cache = new Map<number, string>();
+
+  for (const section of sections) {
+    const evidence = extractRelevantEvidence(section, documents, checklist);
+    cache.set(section.id, evidence);
+  }
+
+  console.log(`[LLM-IMPROVE] ✅ Evidence cache ready (${cache.size} sections)`);
+  return cache;
+}
+
+/**
  * Generate a complete, professional compliance document section-by-section
  * Each section is generated in a separate LLM call to avoid token limits
  * @param existingDocuments - Original uploaded documents for context
@@ -142,115 +252,116 @@ export async function improveDocument({
     checklist,
   });
 
-  // Step 2: Generate sections (individual for high-priority, batched for low-priority)
+  // Step 2: Pre-compute evidence cache to avoid redundant processing
+  const evidenceCache = precomputeEvidenceCache(
+    COMPLIANCE_SECTIONS,
+    existingDocuments,
+    checklist,
+  );
+
   const sections: Array<{ id: number; name: string; content: string }> = [];
   
-  // Separate batchable and individual sections
-  const batchableSections = COMPLIANCE_SECTIONS.filter(s => s.isBatchable);
-  const individualSections = COMPLIANCE_SECTIONS.filter(s => !s.isBatchable);
+  // Separate sections by priority for optimal batching
+  const highPrioritySections = COMPLIANCE_SECTIONS.filter(s => s.priority === "high");
+  const mediumLowSections = COMPLIANCE_SECTIONS.filter(s => s.priority !== "high");
 
-  // Generate individual high/medium priority sections
-  for (const section of individualSections) {
+  // Generate high-priority sections IN PARALLEL for maximum speed
+  console.log(
+    `[LLM-IMPROVE] Generating ${highPrioritySections.length} high-priority sections in parallel...`,
+  );
+  
+  const highPriorityPromises = highPrioritySections.map((section) =>
+    generateSectionWithRetry({
+      section,
+      existingDocuments,
+      checklist,
+      missingRequirements,
+      coverageMap,
+      evidenceCache,
+    }).then((content) => ({
+      id: section.id,
+      name: section.name,
+      content,
+    })),
+  );
+
+  const highPriorityResults = await Promise.all(highPriorityPromises);
+  sections.push(...highPriorityResults);
+
+  console.log(
+    `[LLM-IMPROVE] ✅ ${highPriorityResults.length} high-priority sections completed in parallel`,
+  );
+
+  // Generate medium/low priority sections in optimized batch
+  if (mediumLowSections.length > 0) {
     console.log(
-      `[LLM-IMPROVE] Generating Section ${section.id}: ${section.name}...`,
+      `[LLM-IMPROVE] Generating ${mediumLowSections.length} medium/low priority sections in batch...`,
     );
-
     try {
-      const sectionContent = await generateSection({
-        section,
+      const batchedContents = await generateBatchedSections({
+        sections: mediumLowSections,
         existingDocuments,
         checklist,
         missingRequirements,
         coverageMap,
+        evidenceCache,
       });
 
-      sections.push({
-        id: section.id,
-        name: section.name,
-        content: sectionContent,
-      });
-
+      sections.push(...batchedContents);
       console.log(
-        `[LLM-IMPROVE] ✅ Section ${section.id} completed (${sectionContent.length} chars)`,
+        `[LLM-IMPROVE] ✅ ${mediumLowSections.length} batched sections completed`,
       );
     } catch (error) {
       console.error(
-        `[LLM-IMPROVE] ❌ Error generating section ${section.id}, retrying...`,
+        `[LLM-IMPROVE] ❌ Error generating batched sections, falling back to parallel generation...`,
         error,
       );
-
-      // Retry once on failure
-      try {
-        const retryContent = await generateSection({
+      
+      // Fallback: generate in parallel if batch fails
+      const fallbackPromises = mediumLowSections.map((section) =>
+        generateSectionWithRetry({
           section,
           existingDocuments,
           checklist,
           missingRequirements,
           coverageMap,
-        });
-
-        sections.push({
+          evidenceCache,
+        }).then((content) => ({
           id: section.id,
           name: section.name,
-          content: retryContent,
-        });
-
-        console.log(
-          `[LLM-IMPROVE] ✅ Section ${section.id} completed on retry`,
-        );
-      } catch (retryError) {
-        console.error(
-          `[LLM-IMPROVE] ❌ Section ${section.id} failed after retry:`,
-          retryError,
-        );
-        throw retryError;
-      }
-    }
-  }
-
-  // Generate batched low-priority sections in one call
-  if (batchableSections.length > 0) {
-    console.log(
-      `[LLM-IMPROVE] Generating ${batchableSections.length} batched sections...`,
-    );
-    try {
-      const batchedContents = await generateBatchedSections({
-        sections: batchableSections,
-        existingDocuments,
-        checklist,
-        missingRequirements,
-        coverageMap,
-      });
-
-      sections.push(...batchedContents);
-      console.log(
-        `[LLM-IMPROVE] ✅ ${batchableSections.length} batched sections completed`,
-      );
-    } catch (error) {
-      console.error(
-        `[LLM-IMPROVE] ❌ Error generating batched sections, retrying individually...`,
-        error,
+          content,
+        })).catch((e) => {
+          console.error(`[LLM-IMPROVE] ❌ Failed to generate section ${section.id}:`, e);
+          return {
+            id: section.id,
+            name: section.name,
+            content: `${section.id}. ${section.name}\n\n[Section generation failed - please review manually]`,
+          };
+        }),
       );
       
-      // Fallback: generate individually if batch fails
-      for (const section of batchableSections) {
-        try {
-          const content = await generateSection({
-            section,
-            existingDocuments,
-            checklist,
-            missingRequirements,
-            coverageMap,
-          });
-          sections.push({ id: section.id, name: section.name, content });
-        } catch (e) {
-          console.error(`[LLM-IMPROVE] Failed to generate section ${section.id}`);
-        }
-      }
+      const fallbackResults = await Promise.all(fallbackPromises);
+      sections.push(...fallbackResults);
     }
   }
 
-  // Step 3: Assemble final document
+  // Step 3: Validate all sections
+  console.log("[LLM-IMPROVE] Validating generated sections...");
+  const validationResults = sections.map(validateSection);
+  const invalidSections = validationResults.filter((r) => !r.valid);
+
+  if (invalidSections.length > 0) {
+    console.warn(
+      `[LLM-IMPROVE] ⚠️ ${invalidSections.length} sections have validation issues:`,
+    );
+    invalidSections.forEach((result) => {
+      console.warn(`  - ${result.issues.join(", ")}`);
+    });
+  } else {
+    console.log("[LLM-IMPROVE] ✅ All sections validated successfully");
+  }
+
+  // Step 4: Assemble final document
   console.log("[LLM-IMPROVE] Assembling final document...");
   const finalDocument = assembleFinalDocument({
     metadata,
@@ -342,27 +453,30 @@ async function generateSection({
   checklist,
   missingRequirements,
   coverageMap,
+  evidenceCache,
 }: {
   section: ComplianceSection;
   existingDocuments: { fileName: string; text: string }[];
   checklist: any;
   missingRequirements: any[];
   coverageMap: Record<string, "covered" | "partial" | "missing">;
+  evidenceCache?: Map<number, string>;
 }): Promise<string> {
-  // Determine token limit based on section priority
+  // Determine token limit based on section priority (balanced for completeness and speed)
   const tokenLimits: Record<string, number> = {
     high: 2000,
-    medium: 1200,
+    medium: 1000,
     low: 600,
   };
-  const maxTokens = tokenLimits[section.priority] || 1200;
+  const maxTokens = tokenLimits[section.priority] || 1000;
 
-  // Extract relevant content from evidence documents for this section
-  const relevantEvidence = extractRelevantEvidence(
-    section,
-    existingDocuments,
-    checklist,
-  );
+  // Use cached evidence if available, otherwise extract
+  const relevantEvidence = evidenceCache?.get(section.id) ??
+    extractRelevantEvidence(
+      section,
+      existingDocuments,
+      checklist,
+    );
 
   // Filter relevant checklist items for this section
   const relevantRequirements = filterRequirementsForSection(
@@ -403,12 +517,14 @@ async function generateBatchedSections({
   checklist,
   missingRequirements,
   coverageMap,
+  evidenceCache,
 }: {
   sections: ComplianceSection[];
   existingDocuments: { fileName: string; text: string }[];
   checklist: any;
   missingRequirements: any[];
   coverageMap: Record<string, "covered" | "partial" | "missing">;
+  evidenceCache?: Map<number, string>;
 }): Promise<Array<{ id: number; name: string; content: string }>> {
   // Build batch prompt for all sections
   const sectionPrompts = sections
@@ -430,14 +546,15 @@ CRITICAL INSTRUCTIONS:
 1. Write CONCISE, PROFESSIONAL sections - NO document headers or titles
 2. DO NOT use markdown bold syntax (**) - write plain text only
 3. For field labels use plain text: "Document Number:" not "Document Number: **"
-4. Use bullet points and tables where appropriate to reduce verbosity
-5. Focus on essential information only
-6. Each section should be standalone
+4. Use bullet points and tables to reduce verbosity
+5. Focus on essential information only - eliminate fluff
+6. Each section should be standalone and audit-ready
 7. Include specific procedures, frequencies, responsibilities
 8. Use formal compliance language
-9. Keep each section to 1 page or less
+9. Keep medium priority to 0.5-1 page, low priority to 0.25-0.5 page
 10. Do NOT include template placeholders or [TO BE COMPLETED]
 11. DO NOT create full document titles within sections
+12. Be direct and actionable - avoid unnecessary explanations
 
 FORMAT YOUR RESPONSE EXACTLY AS:
 --- SECTION_START: [id] ---
@@ -509,9 +626,21 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
     new TextDecoder().decode(response.body),
   );
 
-  // Check for truncation
+  // Check for truncation and warn with more details
   if (responseBody.stop_reason === "max_tokens") {
-    console.warn("[LLM-IMPROVE] ⚠️ Response truncated due to token limit");
+    console.warn(
+      `[LLM-IMPROVE] ⚠️ Response truncated at ${maxTokens} tokens. Consider reducing prompt size or increasing token limit.`,
+    );
+    
+    // Return what we have - the content is still usable
+    const truncatedContent = responseBody.content[0].text;
+    
+    // Add ellipsis if content doesn't end with punctuation
+    if (!/[.!?]\s*$/.test(truncatedContent.trim())) {
+      return truncatedContent + "...";
+    }
+    
+    return truncatedContent;
   }
 
   return responseBody.content[0].text;
@@ -546,8 +675,9 @@ function extractRelevantEvidence(
     }
   }
 
+  // Truncate to 1000 chars for faster LLM processing
   return evidence.length > 0
-    ? evidence.join("\n\n").substring(0, 2000)
+    ? evidence.join("\n\n").substring(0, 1000)
     : "No specific evidence found for this section.";
 }
 

@@ -48,9 +48,12 @@ export function getPool(): Pool {
         rejectUnauthorized: false, // For development; in production, use proper CA certificate
       },
       max: 20, // Maximum number of clients in the pool
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 10000, // Increased to 10 seconds
-      query_timeout: 10000, // 10 second query timeout
+      idleTimeoutMillis: 30000, // 30 seconds - keep idle connections for reuse
+      connectionTimeoutMillis: 20000, // Increased to 20 seconds for intermittent network issues
+      query_timeout: 30000, // Increased to 30 seconds for complex queries
+      // Connection keep-alive settings for better stability
+      keepAlive: true,
+      keepAliveInitialDelayMillis: 10000,
     });
 
     pool.on("error", (err: Error) => {
@@ -59,6 +62,22 @@ export function getPool(): Pool {
 
     pool.on("connect", () => {
       console.log("PostgreSQL client connected successfully");
+    });
+
+    // Monitor connection pool health
+    pool.on("acquire", () => {
+      if (!pool) return;
+      const totalCount = pool.totalCount;
+      const idleCount = pool.idleCount;
+      const waitingCount = pool.waitingCount;
+      if (waitingCount > 0) {
+        console.warn(`[Pool] Connection acquired. Total: ${totalCount}, Idle: ${idleCount}, Waiting: ${waitingCount}`);
+      }
+    });
+
+    pool.on("remove", () => {
+      if (!pool) return;
+      console.log(`[Pool] Connection removed. Total: ${pool.totalCount}, Idle: ${pool.idleCount}`);
     });
 
     // Test connection immediately
@@ -86,21 +105,40 @@ export async function query<T extends QueryResultRow = any>(
   text: string,
   params?: any[],
 ): Promise<QueryResult<T>> {
+  const startTime = Date.now();
   try {
     const pool = getPool();
+    const poolStats = {
+      total: pool.totalCount,
+      idle: pool.idleCount,
+      waiting: pool.waitingCount,
+    };
+    
     console.log(
       "Executing query:",
       text.substring(0, 100),
       "with params:",
       params,
+      "Pool stats:",
+      poolStats,
     );
+    
     const result = await pool.query<T>(text, params);
-    console.log("Query completed successfully, rows:", result.rowCount);
+    const duration = Date.now() - startTime;
+    console.log(`Query completed successfully in ${duration}ms, rows:`, result.rowCount);
     return result;
   } catch (error) {
+    const duration = Date.now() - startTime;
+    const pool = getPool();
     console.error("Query failed:", {
       query: text.substring(0, 100),
       params,
+      duration: `${duration}ms`,
+      poolStats: {
+        total: pool.totalCount,
+        idle: pool.idleCount,
+        waiting: pool.waitingCount,
+      },
       error: error instanceof Error ? error.message : String(error),
     });
     throw error;

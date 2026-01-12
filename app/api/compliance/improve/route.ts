@@ -33,6 +33,7 @@ import { getFromS3, uploadToS3 } from "@/lib/s3-utils";
 import { improveDocument } from "@/lib/llm-improve";
 import { createDocxBufferFromText } from "@/server/docgen";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
+import { createDocumentRevision } from "@/lib/primus/db-helper";
 
 export const runtime = "nodejs";
 export const maxDuration = 300; // 5 minutes - Vercel hobby plan max
@@ -144,11 +145,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Load submodule spec to get requirements
+    // Load submodule spec to get requirements and title
     let checklist: any;
+    let submoduleTitle: string;
     try {
       const spec = loadSubmoduleSpec(moduleNumber, subModuleCode);
       checklist = spec.requirements || [];
+      submoduleTitle = spec.title;
     } catch (error) {
       console.error("[API] Error loading submodule spec:", error);
       return NextResponse.json(
@@ -213,7 +216,7 @@ export async function POST(request: NextRequest) {
          doc_type = EXCLUDED.doc_type,
          updated_by = EXCLUDED.updated_by,
          updated_at = NOW()
-       RETURNING id`,
+       RETURNING id, current_version`,
       [
         documentId,
         orgId,
@@ -221,7 +224,7 @@ export async function POST(request: NextRequest) {
         moduleId,
         subModuleCode,
         subSubModuleId,
-        `Improved Evidence - ${subModuleId}`,
+        submoduleTitle,
         "draft",
         s3Key,
         1,
@@ -234,6 +237,7 @@ export async function POST(request: NextRequest) {
     );
 
     const finalDocId = documentResult.rows[0].id;
+    const currentVersion = documentResult.rows[0].current_version;
 
     // Create document_source entry for audit trail
     await query(
@@ -249,7 +253,20 @@ export async function POST(request: NextRequest) {
       ],
     );
 
+    // Create revision record for improve
+    await createDocumentRevision(
+      finalDocId,
+      orgId,
+      currentVersion,
+      "created",
+      s3Key,
+      "draft",
+      userId,
+      `Document improved with AI-generated sections from ${evidenceFiles.length} evidence file(s)`,
+    );
+
     console.log(`[API] ✅ Created document record: ${finalDocId}`);
+    console.log(`[API] ✅ Revision record created for document ${finalDocId} (version ${currentVersion})`);
 
     return NextResponse.json({
       success: true,
