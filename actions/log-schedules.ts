@@ -13,6 +13,7 @@ import {
   updateLogSchedule,
 } from "@/db/queries/log-schedules";
 import { getLogTemplateById } from "@/db/queries/log-templates";
+import { generateLogsForSchedule } from "@/lib/cron/generate-daily-logs";
 import { getOrgMembersAction } from "./clerk";
 
 // Define validation schema with date validation
@@ -235,7 +236,7 @@ export async function createLogScheduleAction(
       };
     }
 
-    await createLogSchedule({
+    const createdSchedule = await createLogSchedule({
       template_id: validatedFields.data.template_id,
       org_id: orgId,
       start_date: new Date(validatedFields.data.start_date),
@@ -252,6 +253,10 @@ export async function createLogScheduleAction(
       created_by: userId,
       times_per_day: validatedFields.data.times_per_day,
     });
+
+    if (createdSchedule && formData.get("generate_today") === "on") {
+      await generateLogsForSchedule(createdSchedule);
+    }
 
     revalidatePath(`/logs/templates/${template_id}`);
     revalidatePath("/logs/scheduled");
@@ -325,6 +330,10 @@ export async function updateLogScheduleAction(
       },
       orgId,
     );
+
+    if (updatedSchedule && formData.get("generate_today") === "on") {
+      await generateLogsForSchedule(updatedSchedule);
+    }
 
     if (!updatedSchedule) {
       return { message: "Failed to update schedule" };
