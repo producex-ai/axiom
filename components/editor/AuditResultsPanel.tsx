@@ -1,6 +1,6 @@
 /**
  * Audit Results Panel Component
- * 
+ *
  * Collapsible panel displaying audit validation results.
  * - Persistent visibility while editing
  * - Users can reference risks in real-time
@@ -20,7 +20,11 @@ interface AuditResultsPanelProps {
   onClose: () => void;
 }
 
-export function AuditResultsPanel({ risks, isOpen, onClose }: AuditResultsPanelProps) {
+export function AuditResultsPanel({
+  risks,
+  isOpen,
+  onClose,
+}: AuditResultsPanelProps) {
   const [expanded, setExpanded] = useState(isOpen);
 
   // Auto-expand when there are risks
@@ -35,7 +39,9 @@ export function AuditResultsPanel({ risks, isOpen, onClose }: AuditResultsPanelP
   }
 
   const highRisksCount = risks.filter((r: any) => r.severity === "high").length;
-  const mediumRisksCount = risks.filter((r: any) => r.severity === "medium").length;
+  const mediumRisksCount = risks.filter(
+    (r: any) => r.severity === "medium",
+  ).length;
   const lowRisksCount = risks.filter((r: any) => r.severity === "low").length;
 
   return (
@@ -49,7 +55,9 @@ export function AuditResultsPanel({ risks, isOpen, onClose }: AuditResultsPanelP
           <div className="flex items-center gap-3">
             <AlertTriangle className="h-5 w-5 text-orange-600 flex-shrink-0" />
             <div className="text-left">
-              <p className="font-semibold text-gray-900">Identified Risks ({risks.length})</p>
+              <p className="font-semibold text-gray-900">
+                Identified Risks ({risks.length})
+              </p>
               <p className="text-xs text-gray-600 mt-0.5">
                 {highRisksCount > 0 && `${highRisksCount} high, `}
                 {mediumRisksCount > 0 && `${mediumRisksCount} medium, `}
@@ -73,12 +81,18 @@ export function AuditResultsPanel({ risks, isOpen, onClose }: AuditResultsPanelP
                   key={idx}
                   className="rounded-lg p-4 border border-orange-200 bg-gradient-to-r from-orange-50 to-orange-50/50 hover:border-orange-300 transition-colors"
                 >
-                  <p className="font-semibold text-sm text-gray-900">{risk.description}</p>
-                  <Badge className={`mt-3 capitalize text-xs ${
-                    risk.severity === "high" ? "bg-red-600 hover:bg-red-700" :
-                    risk.severity === "medium" ? "bg-orange-600 hover:bg-orange-700" :
-                    "bg-yellow-600 hover:bg-yellow-700"
-                  }`}>
+                  <p className="font-semibold text-sm text-gray-900">
+                    {risk.description}
+                  </p>
+                  <Badge
+                    className={`mt-3 capitalize text-xs ${
+                      risk.severity === "high"
+                        ? "bg-red-600 hover:bg-red-700"
+                        : risk.severity === "medium"
+                          ? "bg-orange-600 hover:bg-orange-700"
+                          : "bg-yellow-600 hover:bg-yellow-700"
+                    }`}
+                  >
                     {risk.severity}
                   </Badge>
                 </div>

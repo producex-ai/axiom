@@ -47,17 +47,21 @@ export async function GET(request: NextRequest) {
     }
     const buffer = Buffer.concat(chunks);
 
-    console.log(`[API] ✅ Document downloaded successfully (${buffer.length} bytes)`);
+    console.log(
+      `[API] ✅ Document downloaded successfully (${buffer.length} bytes)`,
+    );
 
     // Extract filename from key (last part of the path)
-    const filename = key.split('/').pop() || 'document.docx';
+    const filename = key.split("/").pop() || "document.docx";
 
     // Return the file as a downloadable response
     return new NextResponse(buffer, {
       headers: {
-        'Content-Type': response.ContentType || 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Length': buffer.length.toString(),
+        "Content-Type":
+          response.ContentType ||
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Length": buffer.length.toString(),
       },
     });
   } catch (error) {

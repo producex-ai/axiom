@@ -29,7 +29,8 @@ export function DocumentEditor({
   const [showBubbleAI, setShowBubbleAI] = React.useState(false);
 
   // Use a ref to store the AI command handler so it can be used in the extension
-  const handleAICommandRef = React.useRef<(instruction: string) => Promise<void> | null>(null);
+  const handleAICommandRef =
+    React.useRef<(instruction: string) => Promise<void> | null>(null);
 
   const editor = useEditor({
     extensions: [
@@ -204,7 +205,12 @@ export function DocumentEditor({
     const { from, to } = editor.state.selection;
     if (from !== to) {
       // Replace selected text
-      editor.chain().focus().deleteSelection().insertContent(aiSuggestion.suggestion).run();
+      editor
+        .chain()
+        .focus()
+        .deleteSelection()
+        .insertContent(aiSuggestion.suggestion)
+        .run();
     } else {
       // Replace entire content if no selection
       editor.chain().focus().setContent(aiSuggestion.suggestion).run();
@@ -274,7 +280,6 @@ export function DocumentEditor({
 
   return (
     <div className="flex h-full flex-col border rounded-lg shadow-sm bg-background overflow-hidden">
-
       {/* Editor Content - Full width */}
       <div className="flex-1 overflow-y-auto">
         {/* TipTap Editor */}
@@ -302,10 +307,7 @@ export function DocumentEditor({
 
       {/* Floating Bubble Menu */}
       {showAI && !readOnly && (
-        <EditorBubbleMenu
-          editor={editor}
-          onAICommand={handleAICommand}
-        />
+        <EditorBubbleMenu editor={editor} onAICommand={handleAICommand} />
       )}
 
       {/* Command Palette (Cmd+K) */}

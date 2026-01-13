@@ -1,4 +1,4 @@
-import type { UUID } from 'crypto';
+import type { UUID } from "crypto";
 
 export type Organization = {
   id: UUID;
@@ -6,7 +6,7 @@ export type Organization = {
   slug: string;
   description: string | null;
   image_url: string;
-  type: 'DISTRIBUTOR' | 'SUPPLIER' | 'CUSTOMER';
+  type: "DISTRIBUTOR" | "SUPPLIER" | "CUSTOMER";
   metadata: { [key: string]: any };
   onboarding_complete: boolean;
 };

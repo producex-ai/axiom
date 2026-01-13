@@ -1,22 +1,22 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { type NextRequest, NextResponse } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { type NextRequest, NextResponse } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
 
-import { createLocalizedUrl, parseLocalePath } from '@/lib/locale-utils';
+import { createLocalizedUrl, parseLocalePath } from "@/lib/locale-utils";
 
 // Create the internationalization middleware
 const intlMiddleware = createIntlMiddleware({
-  locales: ['en', 'es'],
-  defaultLocale: 'en',
+  locales: ["en", "es"],
+  defaultLocale: "en",
 });
 
 // Define allowed roles
-const ALLOWED_ROLES = ['director', 'manager', 'operator', 'admin', 'org_admin'];
+const ALLOWED_ROLES = ["director", "manager", "operator", "admin", "org_admin"];
 
 // Define protected routes that require authentication
 const isProtectedRoute = createRouteMatcher([
-  '/:locale/dashboard(.*)',
-  '/:locale/documents(.*)',
+  "/:locale/dashboard(.*)",
+  "/:locale/documents(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, request: NextRequest) => {
@@ -24,15 +24,15 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
   // Skip middleware for static files and Next.js internals (but NOT API routes)
   if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/_vercel') ||
-    (pathname.includes('.') && !pathname.startsWith('/api'))
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/_vercel") ||
+    (pathname.includes(".") && !pathname.startsWith("/api"))
   ) {
     return NextResponse.next();
   }
 
   // For API routes, just let Clerk process auth but don't apply intl middleware
-  if (pathname.startsWith('/api')) {
+  if (pathname.startsWith("/api")) {
     // Clerk will still process auth, but we return early to skip intl middleware
     // This allows auth() to work in API routes
     return NextResponse.next();
@@ -47,8 +47,8 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
   const userIsAuthenticated = !!userId;
 
   // Handle home page access - redirect authenticated users to their dashboard
-  if (pathWithoutLocale === '/' && userIsAuthenticated && orgId) {
-    console.log('Authenticated user accessing home page, redirecting');
+  if (pathWithoutLocale === "/" && userIsAuthenticated && orgId) {
+    console.log("Authenticated user accessing home page, redirecting");
     try {
       // Get organization info to determine user type
       const authData = await auth();
@@ -70,12 +70,12 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
       // If user doesn't have an allowed role, redirect to no-access
       if (userRole && !ALLOWED_ROLES.includes(userRole)) {
         console.log(
-          `User with role '${userRole}' redirected to no-access from home`
+          `User with role '${userRole}' redirected to no-access from home`,
         );
         const noAccessUrl = createLocalizedUrl(
-          'no-access',
+          "no-access",
           locale,
-          request.url
+          request.url,
         );
         return NextResponse.redirect(noAccessUrl);
       }
@@ -85,13 +85,13 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
         const dashboardUrl = createLocalizedUrl(
           `dashboard`,
           locale,
-          request.url
+          request.url,
         );
         return NextResponse.redirect(dashboardUrl);
       }
     } catch (error) {
       // If profile fetch fails, continue to home page
-      console.error('Error fetching user organization in middleware', error);
+      console.error("Error fetching user organization in middleware", error);
     }
   }
 
@@ -121,9 +121,9 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
         if (userRole && !ALLOWED_ROLES.includes(userRole)) {
           console.log(`User with role '${userRole}' denied access`);
           const noAccessUrl = createLocalizedUrl(
-            'no-access',
+            "no-access",
             locale,
-            request.url
+            request.url,
           );
           return NextResponse.redirect(noAccessUrl);
         }
@@ -131,19 +131,19 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
         // If organization fetch fails for role check, log error but allow access
         // This prevents blocking legitimate users if API is temporarily unavailable
         console.error(
-          'Error fetching organization for role verification',
-          error
+          "Error fetching organization for role verification",
+          error,
         );
       }
     }
   }
 
   // Handle paths without locale prefix - redirect to include locale
-  if (!hasLocalePrefix && pathWithoutLocale !== '/') {
+  if (!hasLocalePrefix && pathWithoutLocale !== "/") {
     const localizedUrl = createLocalizedUrl(
       pathWithoutLocale,
       locale,
-      request.url
+      request.url,
     );
     return NextResponse.redirect(localizedUrl);
   }
@@ -154,5 +154,5 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
 export const config = {
   // Match all routes including API routes for Clerk auth
-  matcher: ['/((?!_next|_vercel).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ["/((?!_next|_vercel).*)", "/", "/(api|trpc)(.*)"],
 };

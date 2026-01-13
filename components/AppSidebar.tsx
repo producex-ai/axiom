@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   CalendarDays,
@@ -8,11 +8,11 @@ import {
   LayoutDashboard,
   LayoutTemplate,
   ShieldCheck,
-} from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Badge } from '@/components/ui/badge';
+import { Badge } from "@/components/ui/badge";
 
 import {
   Sidebar,
@@ -26,64 +26,64 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from '@/components/ui/sidebar';
-import { useComplianceOverview } from '@/lib/compliance/queries';
+} from "@/components/ui/sidebar";
+import { useComplianceOverview } from "@/lib/compliance/queries";
 
 const mainMenuItems = [
   {
-    title: 'Dashboard',
+    title: "Dashboard",
     icon: LayoutDashboard,
-    href: '/dashboard',
+    href: "/dashboard",
   },
 ] as const;
 
 const taskItems = [
   {
-    title: 'My Tasks',
+    title: "My Tasks",
     icon: ClipboardList,
-    href: '/tasks',
+    href: "/tasks",
   },
   {
-    title: 'History',
+    title: "History",
     icon: History,
-    href: '/tasks/history',
+    href: "/tasks/history",
   },
 ] as const;
 
 const logsItems = [
   {
-    title: 'Templates',
+    title: "Templates",
     icon: LayoutTemplate,
-    href: '/logs/templates',
+    href: "/logs/templates",
   },
   {
-    title: 'Scheduled',
+    title: "Scheduled",
     icon: CalendarDays,
-    href: '/logs/scheduled',
+    href: "/logs/scheduled",
   },
   {
-    title: 'Tasks',
+    title: "Tasks",
     icon: ClipboardList,
-    href: '/logs/tasks',
+    href: "/logs/tasks",
   },
   {
-    title: 'History',
+    title: "History",
     icon: History,
-    href: '/logs/history',
+    href: "/logs/history",
   },
 ] as const;
 
 const complianceItems = [
   {
-    title: 'Primus GFS',
+    title: "Primus GFS",
     icon: ShieldCheck,
-    href: '/compliance',
-    badgeKey: 'compliance' as const,
+    href: "/compliance",
+    badgeKey: "compliance" as const,
   },
   {
-    title: 'Company Documents',
+    title: "Company Documents",
     icon: FileText,
-    href: '/documents',
+    href: "/documents",
   },
 ];
 
@@ -95,18 +95,18 @@ export function AppSidebar() {
     overview?.modules?.filter((m) => m.enabled).length || null;
 
   return (
-    <Sidebar collapsible='icon'>
-      <SidebarHeader className='border-sidebar-border border-b'>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="border-sidebar-border border-b">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size='lg' asChild>
-              <Link href='/dashboard'>
-                <div className='flex aspect-square size-8 items-center justify-center rounded-md bg-primary text-primary-foreground'>
-                  <ShieldCheck className='size-4' />
+            <SidebarMenuButton size="lg" asChild>
+              <Link href="/dashboard">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                  <ShieldCheck className="size-4" />
                 </div>
-                <div className='flex flex-col gap-0.5 leading-none'>
-                  <span className='font-semibold'>Primus GFS</span>
-                  <span className='text-muted-foreground text-xs'>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-semibold">Primus GFS</span>
+                  <span className="text-muted-foreground text-xs">
                     Compliance
                   </span>
                 </div>
@@ -116,9 +116,9 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
 
-      <SidebarContent className='gap-0'>
+      <SidebarContent className="gap-0">
         <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
             Menu
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -128,11 +128,11 @@ export function AppSidebar() {
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
-                    className='group relative px-3'
+                    className="group relative px-3"
                   >
                     <Link href={item.href}>
-                      <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                      <span className='transition-colors group-hover:text-foreground'>
+                      <item.icon className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                      <span className="transition-colors group-hover:text-foreground">
                         {item.title}
                       </span>
                     </Link>
@@ -144,7 +144,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
             Tasks
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -152,17 +152,17 @@ export function AppSidebar() {
               {taskItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
-                  pathname.startsWith(item.href + '/');
+                  pathname.startsWith(item.href + "/");
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
                       asChild
                       isActive={isActive}
-                      className='group relative px-3'
+                      className="group relative px-3"
                     >
                       <Link href={item.href}>
-                        <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                        <span className='transition-colors group-hover:text-foreground'>
+                        <item.icon className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                        <span className="transition-colors group-hover:text-foreground">
                           {item.title}
                         </span>
                       </Link>
@@ -175,7 +175,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
             Logs
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -183,17 +183,17 @@ export function AppSidebar() {
               {logsItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
-                  pathname.startsWith(item.href + '/');
+                  pathname.startsWith(item.href + "/");
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
                       asChild
                       isActive={isActive}
-                      className='group relative px-3'
+                      className="group relative px-3"
                     >
                       <Link href={item.href}>
-                        <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                        <span className='transition-colors group-hover:text-foreground'>
+                        <item.icon className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                        <span className="transition-colors group-hover:text-foreground">
                           {item.title}
                         </span>
                       </Link>
@@ -206,34 +206,34 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
             Compliance
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {complianceItems.map((item) => {
                 const badgeValue =
-                  item.badgeKey === 'compliance' ? moduleCount : null;
+                  item.badgeKey === "compliance" ? moduleCount : null;
                 const isActive =
                   pathname === item.href ||
-                  pathname.startsWith(item.href + '/');
+                  pathname.startsWith(item.href + "/");
 
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton
                       asChild
                       isActive={isActive}
-                      className='group relative px-3'
+                      className="group relative px-3"
                     >
                       <Link href={item.href}>
-                        <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                        <span className='transition-colors group-hover:text-foreground'>
+                        <item.icon className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                        <span className="transition-colors group-hover:text-foreground">
                           {item.title}
                         </span>
                         {badgeValue && (
                           <Badge
-                            variant='secondary'
-                            className='ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs'
+                            variant="secondary"
+                            className="ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs"
                           >
                             {badgeValue}
                           </Badge>
@@ -248,8 +248,8 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className='border-sidebar-border border-t'>
-        <div className='px-2 py-1 text-center text-muted-foreground text-xs'>
+      <SidebarFooter className="border-sidebar-border border-t">
+        <div className="px-2 py-1 text-center text-muted-foreground text-xs">
           v4.0
         </div>
       </SidebarFooter>

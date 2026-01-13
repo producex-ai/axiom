@@ -32,7 +32,8 @@ export const UploadStepActions: React.FC<UploadStepActionsProps> = ({
 }) => {
   // Only show one primary CTA: "Analyze Compliance"
   // This combines upload + analysis in a single action
-  const canAnalyze = selectedFiles.length > 0 && !isAnalyzing && uploadProgress === 0;
+  const canAnalyze =
+    selectedFiles.length > 0 && !isAnalyzing && uploadProgress === 0;
 
   return (
     <div className="flex-shrink-0 space-y-3 pt-4 border-t border-slate-200 dark:border-slate-700">

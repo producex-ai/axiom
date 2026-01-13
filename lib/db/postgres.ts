@@ -5,7 +5,12 @@
  * Provides a connection pool for efficient database access.
  */
 
-import { Pool, type PoolClient, type QueryResult, type QueryResultRow } from "pg";
+import {
+  Pool,
+  type PoolClient,
+  type QueryResult,
+  type QueryResultRow,
+} from "pg";
 
 // Singleton pool instance
 let pool: Pool | null = null;
@@ -71,13 +76,17 @@ export function getPool(): Pool {
       const idleCount = pool.idleCount;
       const waitingCount = pool.waitingCount;
       if (waitingCount > 0) {
-        console.warn(`[Pool] Connection acquired. Total: ${totalCount}, Idle: ${idleCount}, Waiting: ${waitingCount}`);
+        console.warn(
+          `[Pool] Connection acquired. Total: ${totalCount}, Idle: ${idleCount}, Waiting: ${waitingCount}`,
+        );
       }
     });
 
     pool.on("remove", () => {
       if (!pool) return;
-      console.log(`[Pool] Connection removed. Total: ${pool.totalCount}, Idle: ${pool.idleCount}`);
+      console.log(
+        `[Pool] Connection removed. Total: ${pool.totalCount}, Idle: ${pool.idleCount}`,
+      );
     });
 
     // Test connection immediately
@@ -113,7 +122,7 @@ export async function query<T extends QueryResultRow = any>(
       idle: pool.idleCount,
       waiting: pool.waitingCount,
     };
-    
+
     console.log(
       "Executing query:",
       text.substring(0, 100),
@@ -122,10 +131,13 @@ export async function query<T extends QueryResultRow = any>(
       "Pool stats:",
       poolStats,
     );
-    
+
     const result = await pool.query<T>(text, params);
     const duration = Date.now() - startTime;
-    console.log(`Query completed successfully in ${duration}ms, rows:`, result.rowCount);
+    console.log(
+      `Query completed successfully in ${duration}ms, rows:`,
+      result.rowCount,
+    );
     return result;
   } catch (error) {
     const duration = Date.now() - startTime;

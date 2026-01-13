@@ -21,8 +21,8 @@ export const ScoreSummary: React.FC<ScoreSummaryProps> = ({ analysis }) => {
             analysis.overallScore > 85
               ? "text-emerald-600 dark:text-emerald-400"
               : analysis.overallScore >= 75
-              ? "text-amber-600 dark:text-amber-400"
-              : "text-red-600 dark:text-red-400"
+                ? "text-amber-600 dark:text-amber-400"
+                : "text-red-600 dark:text-red-400"
           }`}
         >
           {analysis.overallScore}%
@@ -84,9 +84,7 @@ export const CoverageBreakdown: React.FC<CoverageBreakdownProps> = ({
         <p className="text-2xl font-bold text-red-600 dark:text-red-400">
           {analysis.missing.count}
         </p>
-        <p className="text-xs text-red-700 dark:text-red-200 mt-1">
-          Missing
-        </p>
+        <p className="text-xs text-red-700 dark:text-red-200 mt-1">Missing</p>
       </div>
     </div>
   );
@@ -121,15 +119,30 @@ export const RisksSection: React.FC<RisksProps> = ({ risks }) => {
 
   return (
     <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/30">
-      <p className="font-medium text-sm mb-3">Identified Risks ({risks.length})</p>
+      <p className="font-medium text-sm mb-3">
+        Identified Risks ({risks.length})
+      </p>
       <div className="space-y-2">
         {risks.slice(0, 3).map((risk: any, index: number) => {
           const severityConfig = {
-            high: { bg: "bg-red-100 dark:bg-red-900/40", text: "text-red-900 dark:text-red-200", border: "border-red-300 dark:border-red-800" },
-            medium: { bg: "bg-amber-100 dark:bg-amber-900/40", text: "text-amber-900 dark:text-amber-200", border: "border-amber-300 dark:border-amber-800" },
-            low: { bg: "bg-blue-100 dark:bg-blue-900/40", text: "text-blue-900 dark:text-blue-200", border: "border-blue-300 dark:border-blue-800" },
+            high: {
+              bg: "bg-red-100 dark:bg-red-900/40",
+              text: "text-red-900 dark:text-red-200",
+              border: "border-red-300 dark:border-red-800",
+            },
+            medium: {
+              bg: "bg-amber-100 dark:bg-amber-900/40",
+              text: "text-amber-900 dark:text-amber-200",
+              border: "border-amber-300 dark:border-amber-800",
+            },
+            low: {
+              bg: "bg-blue-100 dark:bg-blue-900/40",
+              text: "text-blue-900 dark:text-blue-200",
+              border: "border-blue-300 dark:border-blue-800",
+            },
           };
-          const config = severityConfig[risk.severity as keyof typeof severityConfig];
+          const config =
+            severityConfig[risk.severity as keyof typeof severityConfig];
 
           return (
             <div
@@ -137,14 +150,20 @@ export const RisksSection: React.FC<RisksProps> = ({ risks }) => {
               className={`rounded-lg border ${config.border} ${config.bg} p-3`}
             >
               <div className="flex items-start gap-3">
-                <div className={`mt-0.5 flex-shrink-0 w-8 h-8 rounded-full ${config.bg} border ${config.border} flex items-center justify-center`}>
+                <div
+                  className={`mt-0.5 flex-shrink-0 w-8 h-8 rounded-full ${config.bg} border ${config.border} flex items-center justify-center`}
+                >
                   <span className={`text-xs font-bold ${config.text}`}>!</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium leading-snug ${config.text}`}>
+                  <p
+                    className={`text-sm font-medium leading-snug ${config.text}`}
+                  >
                     {risk.description}
                   </p>
-                  <p className={`mt-1 text-xs leading-snug ${config.text} opacity-75`}>
+                  <p
+                    className={`mt-1 text-xs leading-snug ${config.text} opacity-75`}
+                  >
                     {risk.recommendation}
                   </p>
                 </div>

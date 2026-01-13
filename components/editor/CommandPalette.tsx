@@ -49,7 +49,7 @@ export function CommandPalette({ editor, onAICommand }: CommandPaletteProps) {
         e.preventDefault();
         setOpen((open) => !open);
       }
-      
+
       // AI shortcut
       if (e.key === "/" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -82,9 +82,7 @@ export function CommandPalette({ editor, onAICommand }: CommandPaletteProps) {
       icon: <TrendingDown className="h-4 w-4" />,
       category: "AI Assistant",
       action: () => {
-        onAICommand?.(
-          "Make the selected text shorter and more concise.",
-        );
+        onAICommand?.("Make the selected text shorter and more concise.");
         setOpen(false);
       },
     },
@@ -140,9 +138,7 @@ export function CommandPalette({ editor, onAICommand }: CommandPaletteProps) {
       icon: <ListTodo className="h-4 w-4" />,
       category: "AI Assistant",
       action: () => {
-        onAICommand?.(
-          "Extract and list action items from the selected text.",
-        );
+        onAICommand?.("Extract and list action items from the selected text.");
         setOpen(false);
       },
     },

@@ -107,7 +107,6 @@ export function MinimalTopBar({
             </Tooltip>
           </TooltipProvider>
         )}
-
       </div>
     </div>
   );

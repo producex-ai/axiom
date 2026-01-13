@@ -68,10 +68,7 @@ export function CoreQuestions({
               );
             return (
               <div key={question.id} className="space-y-2">
-                <Label
-                  htmlFor={question.id}
-                  className="font-medium text-sm"
-                >
+                <Label htmlFor={question.id} className="font-medium text-sm">
                   {question.question}
                   <span className="ml-1 text-red-500">*</span>
                 </Label>
@@ -82,9 +79,7 @@ export function CoreQuestions({
                   onChange={(value) => onAnswerChange(question.id, value)}
                 />
                 {question.hint && (
-                  <p className="text-slate-500 text-xs">
-                    {question.hint}
-                  </p>
+                  <p className="text-slate-500 text-xs">{question.hint}</p>
                 )}
               </div>
             );
@@ -173,9 +168,7 @@ export function RequirementQuestions({
                     />
                     {question.hint && (
                       <p className="flex items-start gap-1 text-slate-500 text-xs">
-                        <span className="font-medium text-violet-600">
-                          →
-                        </span>
+                        <span className="font-medium text-violet-600">→</span>
                         {question.hint}
                       </p>
                     )}

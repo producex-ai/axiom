@@ -80,17 +80,19 @@ export default function ProblemSection() {
                   {t(`painPoints.${painPoint.id}.description`)}
                 </p>
                 <div className="space-y-2">
-                  {(Object.values(t.raw(`painPoints.${painPoint.id}.issues`)) as string[]).map(
-                    (issue: string, index: number) => (
-                      <div
-                        key={index}
-                        className={`flex items-center text-sm ${colors.text}`}
-                      >
-                        <AlertTriangle className="mr-2 h-4 w-4" />
-                        <span>{issue}</span>
-                      </div>
-                    ),
-                  )}
+                  {(
+                    Object.values(
+                      t.raw(`painPoints.${painPoint.id}.issues`),
+                    ) as string[]
+                  ).map((issue: string, index: number) => (
+                    <div
+                      key={index}
+                      className={`flex items-center text-sm ${colors.text}`}
+                    >
+                      <AlertTriangle className="mr-2 h-4 w-4" />
+                      <span>{issue}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
@@ -106,24 +108,26 @@ export default function ProblemSection() {
             <p className="text-gray-600">{t("impact.subtitle")}</p>
           </div>
           <div className="grid gap-6 text-center md:grid-cols-4">
-            {Object.keys(t.raw("impact.statistics")).map((statKey: string, index: number) => {
-              const stat = t.raw(`impact.statistics.${statKey}`);
-              const colors = ["red", "orange", "purple", "gray"];
-              const colorClasses = getColorClasses(colors[index]);
-              return (
-                <div
-                  key={statKey}
-                  className="rounded-lg bg-white p-6 shadow-sm"
-                >
-                  <div className={`font-bold text-3xl ${colorClasses.text} mb-2`}>
-                    {stat.value}
+            {Object.keys(t.raw("impact.statistics")).map(
+              (statKey: string, index: number) => {
+                const stat = t.raw(`impact.statistics.${statKey}`);
+                const colors = ["red", "orange", "purple", "gray"];
+                const colorClasses = getColorClasses(colors[index]);
+                return (
+                  <div
+                    key={statKey}
+                    className="rounded-lg bg-white p-6 shadow-sm"
+                  >
+                    <div
+                      className={`font-bold text-3xl ${colorClasses.text} mb-2`}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="text-gray-600 text-sm">{stat.label}</div>
                   </div>
-                  <div className="text-gray-600 text-sm">
-                    {stat.label}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              },
+            )}
           </div>
         </div>
       </div>

@@ -5,17 +5,15 @@
  * Creates revision record for audit trail
  */
 
-import {
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db/postgres";
-import {
-  convertMarkdownToDocx,
-} from "@/lib/document-converters";
+import { convertMarkdownToDocx } from "@/lib/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
-import { createDocumentRevision, getDocumentById } from "@/lib/primus/db-helper";
+import {
+  createDocumentRevision,
+  getDocumentById,
+} from "@/lib/primus/db-helper";
 
 const s3 = new S3Client({ region: process.env.AWS_REGION! });
 
@@ -104,9 +102,7 @@ export async function PATCH(
       );
     }
 
-    console.log(
-      `[API] ✅ Document saved (version ${currentVersion})`,
-    );
+    console.log(`[API] ✅ Document saved (version ${currentVersion})`);
 
     // Note: We do NOT create a revision record here because the version hasn't changed.
     // Revision records are only created when version increments (on publish).

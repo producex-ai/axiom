@@ -26,7 +26,7 @@ export const validateFile = (file: File): string | null => {
 
 export const validateFileCount = (
   selectedCount: number,
-  newCount: number
+  newCount: number,
 ): string | null => {
   if (selectedCount + newCount > MAX_FILES) {
     return `Maximum ${MAX_FILES} files allowed. You selected ${
@@ -45,7 +45,7 @@ export const formatFileSize = (bytes: number): string => {
 };
 
 export const simulateUploadProgress = (
-  onProgress: (progress: number) => void
+  onProgress: (progress: number) => void,
 ): NodeJS.Timer => {
   let progress = 0;
   const timer = setInterval(() => {

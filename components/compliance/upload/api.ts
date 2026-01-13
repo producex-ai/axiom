@@ -15,7 +15,7 @@ const handleApiError = (error: unknown): string => {
  * Fetch existing evidence for a submodule
  */
 export const fetchExistingEvidence = async (
-  subModuleId: string
+  subModuleId: string,
 ): Promise<Evidence[]> => {
   try {
     const response = await fetch(`/api/evidence?subModuleId=${subModuleId}`);
@@ -47,7 +47,7 @@ export const fetchExistingEvidence = async (
 export const uploadFiles = async (
   files: File[],
   subModuleId: string,
-  onProgress: (progress: number) => void
+  onProgress: (progress: number) => void,
 ): Promise<Evidence[]> => {
   if (!files || files.length === 0) {
     throw new Error("No files provided for upload");
@@ -146,7 +146,7 @@ export const mergeDocuments = async (subModuleId: string) => {
 export const improveDocument = async (
   subModuleId: string,
   analysisId: string,
-  renewal?: string
+  renewal?: string,
 ) => {
   if (!subModuleId || !analysisId) {
     throw new Error("SubModule ID and Analysis ID are required");
@@ -155,7 +155,12 @@ export const improveDocument = async (
   const response = await fetch("/api/compliance/improve", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ subModuleId, analysisId, renewal, docType: 'compliance' }),
+    body: JSON.stringify({
+      subModuleId,
+      analysisId,
+      renewal,
+      docType: "compliance",
+    }),
   });
 
   const data = await response.json();
@@ -173,7 +178,7 @@ export const improveDocument = async (
 export const acceptDocument = async (
   subModuleId: string,
   analysisId: string,
-  renewal?: string
+  renewal?: string,
 ) => {
   if (!subModuleId || !analysisId) {
     throw new Error("SubModule ID and Analysis ID are required");
@@ -182,7 +187,12 @@ export const acceptDocument = async (
   const response = await fetch("/api/compliance/accept", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ subModuleId, analysisId, renewal, docType: 'compliance' }),
+    body: JSON.stringify({
+      subModuleId,
+      analysisId,
+      renewal,
+      docType: "compliance",
+    }),
   });
 
   const data = await response.json();
@@ -193,4 +203,3 @@ export const acceptDocument = async (
 
   return data;
 };
-

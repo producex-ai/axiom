@@ -1,10 +1,10 @@
-import { auth } from '@clerk/nextjs/server';
-import { Calendar, CheckCircle2, Clock, History, XCircle } from 'lucide-react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { auth } from "@clerk/nextjs/server";
+import { Calendar, CheckCircle2, Clock, History, XCircle } from "lucide-react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import { getDailyLogsAction } from '@/actions/daily-logs';
-import { Badge } from '@/components/ui/badge';
+import { getDailyLogsAction } from "@/actions/daily-logs";
+import { Badge } from "@/components/ui/badge";
 import {
   Pagination,
   PaginationContent,
@@ -13,7 +13,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from "@/components/ui/pagination";
 import {
   Table,
   TableBody,
@@ -21,29 +21,29 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
 function getStatusBadge(status: string) {
   const variants = {
     PENDING: {
-      variant: 'secondary' as const,
+      variant: "secondary" as const,
       icon: Clock,
-      label: 'Pending',
+      label: "Pending",
     },
     PENDING_APPROVAL: {
-      variant: 'default' as const,
+      variant: "default" as const,
       icon: Clock,
-      label: 'Pending Review',
+      label: "Pending Review",
     },
     APPROVED: {
-      variant: 'outline' as const,
+      variant: "outline" as const,
       icon: CheckCircle2,
-      label: 'Approved',
+      label: "Approved",
     },
     REJECTED: {
-      variant: 'destructive' as const,
+      variant: "destructive" as const,
       icon: XCircle,
-      label: 'Rejected',
+      label: "Rejected",
     },
   };
 
@@ -51,27 +51,27 @@ function getStatusBadge(status: string) {
   const Icon = config.icon;
 
   return (
-    <Badge variant={config.variant} className='gap-1'>
-      <Icon className='h-3 w-3' />
+    <Badge variant={config.variant} className="gap-1">
+      <Icon className="h-3 w-3" />
       {config.label}
     </Badge>
   );
 }
 
 function formatDate(date: Date): string {
-  return new Date(date).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 }
 
 function EmptyState() {
   return (
-    <div className='flex flex-col items-center justify-center rounded-lg border bg-card py-16'>
-      <History className='h-16 w-16 text-muted-foreground/40' />
-      <h3 className='mt-4 font-semibold text-lg'>No history found</h3>
-      <p className='mt-2 text-center text-muted-foreground text-sm'>
+    <div className="flex flex-col items-center justify-center rounded-lg border bg-card py-16">
+      <History className="h-16 w-16 text-muted-foreground/40" />
+      <h3 className="mt-4 font-semibold text-lg">No history found</h3>
+      <p className="mt-2 text-center text-muted-foreground text-sm">
         There are no completed daily logs in the history yet.
       </p>
     </div>
@@ -88,7 +88,7 @@ export default async function HistoryPage({
   const { orgId } = await auth();
 
   if (!orgId) {
-    redirect('/login');
+    redirect("/login");
   }
 
   const params = await searchParams;
@@ -102,13 +102,13 @@ export default async function HistoryPage({
   endDate.setDate(endDate.getDate() - 1); // Yesterday and before
 
   const allLogs = await getDailyLogsAction({
-    endDate: endDate.toISOString().split('T')[0],
-    status: 'APPROVED',
+    endDate: endDate.toISOString().split("T")[0],
+    status: "APPROVED",
   });
 
   // Sort by date descending (most recent first)
   const sortedLogs = allLogs.sort(
-    (a, b) => new Date(b.log_date).getTime() - new Date(a.log_date).getTime()
+    (a, b) => new Date(b.log_date).getTime() - new Date(a.log_date).getTime(),
   );
 
   // Pagination
@@ -118,10 +118,10 @@ export default async function HistoryPage({
   const paginatedLogs = sortedLogs.slice(startIndex, endIndex_);
 
   return (
-    <div className='space-y-6'>
+    <div className="space-y-6">
       <div>
-        <h1 className='font-bold text-3xl tracking-tight'>Logs History</h1>
-        <p className='mt-2 text-muted-foreground'>
+        <h1 className="font-bold text-3xl tracking-tight">Logs History</h1>
+        <p className="mt-2 text-muted-foreground">
           View all approved daily logs from the past
         </p>
       </div>
@@ -130,7 +130,7 @@ export default async function HistoryPage({
         <EmptyState />
       ) : (
         <>
-          <div className='rounded-lg border bg-card'>
+          <div className="rounded-lg border bg-card">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -139,31 +139,31 @@ export default async function HistoryPage({
                   <TableHead>Category</TableHead>
                   <TableHead>Assignee</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead className='text-right'>Tasks</TableHead>
+                  <TableHead className="text-right">Tasks</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {paginatedLogs.map((log) => {
                   const totalTasks = Object.keys(log.tasks).length;
                   const completedTasks = Object.values(log.tasks).filter(
-                    Boolean
+                    Boolean,
                   ).length;
 
                   return (
-                    <TableRow key={log.id} className='cursor-pointer'>
-                      <TableCell className='font-medium'>
+                    <TableRow key={log.id} className="cursor-pointer">
+                      <TableCell className="font-medium">
                         <Link
                           href={`/tasks/${log.id}`}
-                          className='flex items-center gap-2 hover:underline'
+                          className="flex items-center gap-2 hover:underline"
                         >
-                          <Calendar className='h-4 w-4 text-muted-foreground' />
+                          <Calendar className="h-4 w-4 text-muted-foreground" />
                           {formatDate(log.log_date)}
                         </Link>
                       </TableCell>
                       <TableCell>
                         <Link
                           href={`/tasks/${log.id}`}
-                          className='hover:underline'
+                          className="hover:underline"
                         >
                           {log.template_name}
                         </Link>
@@ -171,11 +171,11 @@ export default async function HistoryPage({
                       <TableCell>
                         <Link href={`/tasks/${log.id}`}>
                           {log.template_category ? (
-                            <Badge variant='outline'>
+                            <Badge variant="outline">
                               {log.template_category}
                             </Badge>
                           ) : (
-                            <span className='text-muted-foreground text-sm'>
+                            <span className="text-muted-foreground text-sm">
                               —
                             </span>
                           )}
@@ -183,8 +183,8 @@ export default async function HistoryPage({
                       </TableCell>
                       <TableCell>
                         <Link href={`/tasks/${log.id}`}>
-                          <span className='text-muted-foreground text-sm'>
-                            {log.assignee_name || 'Unassigned'}
+                          <span className="text-muted-foreground text-sm">
+                            {log.assignee_name || "Unassigned"}
                           </span>
                         </Link>
                       </TableCell>
@@ -193,12 +193,12 @@ export default async function HistoryPage({
                           {getStatusBadge(log.status)}
                         </Link>
                       </TableCell>
-                      <TableCell className='text-right'>
+                      <TableCell className="text-right">
                         <Link
                           href={`/tasks/${log.id}`}
-                          className='hover:underline'
+                          className="hover:underline"
                         >
-                          <span className='text-sm'>
+                          <span className="text-sm">
                             {completedTasks}/{totalTasks}
                           </span>
                         </Link>
@@ -218,11 +218,11 @@ export default async function HistoryPage({
                     href={
                       currentPage > 1
                         ? `/logs/history?page=${currentPage - 1}`
-                        : '#'
+                        : "#"
                     }
                     aria-disabled={currentPage === 1}
                     className={
-                      currentPage === 1 ? 'pointer-events-none opacity-50' : ''
+                      currentPage === 1 ? "pointer-events-none opacity-50" : ""
                     }
                   />
                 </PaginationItem>
@@ -256,7 +256,7 @@ export default async function HistoryPage({
                       );
                     }
                     return null;
-                  }
+                  },
                 )}
 
                 <PaginationItem>
@@ -264,13 +264,13 @@ export default async function HistoryPage({
                     href={
                       currentPage < totalPages
                         ? `/logs/history?page=${currentPage + 1}`
-                        : '#'
+                        : "#"
                     }
                     aria-disabled={currentPage === totalPages}
                     className={
                       currentPage === totalPages
-                        ? 'pointer-events-none opacity-50'
-                        : ''
+                        ? "pointer-events-none opacity-50"
+                        : ""
                     }
                   />
                 </PaginationItem>

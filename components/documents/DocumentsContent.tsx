@@ -51,7 +51,10 @@ export default function DocumentsContent() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Tabs value={viewMode} onValueChange={(v: string) => setViewMode(v as "grouped" | "list")}>
+          <Tabs
+            value={viewMode}
+            onValueChange={(v: string) => setViewMode(v as "grouped" | "list")}
+          >
             <TabsList>
               <TabsTrigger value="grouped" className="gap-2">
                 <Folder className="h-4 w-4" />

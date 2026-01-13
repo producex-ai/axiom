@@ -1,7 +1,7 @@
 /**
  * POST /api/compliance/merge
  * Merge uploaded documents WITHOUT AI generation
- * 
+ *
  * Creates/updates a document in the main "document" table with merged content.
  * This is the final destination - merged documents become regular documents.
  *
@@ -85,7 +85,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log(`[API] Found ${evidenceFiles.length} evidence file(s) to merge`);
+    console.log(
+      `[API] Found ${evidenceFiles.length} evidence file(s) to merge`,
+    );
 
     // Download extracted texts from S3
     const documents: { fileName: string; text: string }[] = [];
@@ -103,9 +105,7 @@ export async function POST(request: NextRequest) {
           text,
         });
 
-        console.log(
-          `[API] Retrieved text for merge: ${evidence.filename}`,
-        );
+        console.log(`[API] Retrieved text for merge: ${evidence.filename}`);
       } catch (error) {
         console.error(
           `[API] Error retrieving text for ${evidence.filename}:`,
@@ -144,7 +144,8 @@ export async function POST(request: NextRequest) {
     // subModuleId format can be: "5" (module), "5.12" (submodule), "5.12.01" (sub-submodule)
     const parts = subModuleId.split(".");
     const moduleId = parts[0]; // First part is always module
-    const subModuleCode = parts.length >= 2 ? `${parts[0]}.${parts[1]}` : subModuleId; // Full code if submodule
+    const subModuleCode =
+      parts.length >= 2 ? `${parts[0]}.${parts[1]}` : subModuleId; // Full code if submodule
     const subSubModuleId = parts.length > 2 ? subModuleId : null; // Only if 3+ parts
 
     // Create or update document record

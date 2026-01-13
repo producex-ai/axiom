@@ -44,7 +44,9 @@ export const ResultsStepActions: React.FC<ResultsStepActionsProps> = ({
         disabled={isResetting || isImproving}
         className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/20 disabled:opacity-50"
       >
-        <RotateCw className={`mr-2 h-4 w-4 ${isResetting ? "animate-spin" : ""}`} />
+        <RotateCw
+          className={`mr-2 h-4 w-4 ${isResetting ? "animate-spin" : ""}`}
+        />
         {isResetting ? "Resetting..." : "Reset & Upload New"}
       </Button>
 
@@ -59,11 +61,7 @@ export const ResultsStepActions: React.FC<ResultsStepActionsProps> = ({
           </Button>
         ) : shouldGenerateFromScratch ? (
           <>
-            <Button
-              variant="outline"
-              onClick={onResetClick}
-              className="flex-1"
-            >
+            <Button variant="outline" onClick={onResetClick} className="flex-1">
               Upload More Documents
             </Button>
             <Button

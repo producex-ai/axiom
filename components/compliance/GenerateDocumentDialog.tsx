@@ -26,7 +26,10 @@ import {
 import { ErrorState, LoadingState } from "./generate/StepStates";
 import { GeneratingStep, CompleteStep } from "./generate/GenerationSteps";
 import { ProgressBar } from "./generate/ProgressBar";
-import { CoreQuestions, RequirementQuestions } from "./generate/QuestionsSections";
+import {
+  CoreQuestions,
+  RequirementQuestions,
+} from "./generate/QuestionsSections";
 import { QuestionsFormActions } from "./generate/QuestionsFormActions";
 
 interface GenerateDocumentDialogProps {
@@ -125,7 +128,7 @@ export default function GenerateDocumentDialog({
       setGeneratedFileName(result.fileName);
 
       toast.success(`${subModuleName} document created successfully.`);
-      
+
       // Immediately call onSuccess and close dialog without showing complete step
       if (onSuccess) {
         onSuccess(result.documentId);
@@ -220,7 +223,9 @@ export default function GenerateDocumentDialog({
         <div className="space-y-6">
           {/* Renewal Period Field */}
           <div className="space-y-2 pb-2 border-b">
-            <Label htmlFor="renewal-period-generate">Renewal Period (Optional)</Label>
+            <Label htmlFor="renewal-period-generate">
+              Renewal Period (Optional)
+            </Label>
             <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
               <SelectTrigger id="renewal-period-generate">
                 <SelectValue placeholder="Select renewal period" />

@@ -22,9 +22,7 @@ export interface DocumentRevisionInfo {
 /**
  * Fetch document revision history
  */
-export async function fetchDocumentHistory(
-  documentId: string,
-): Promise<{
+export async function fetchDocumentHistory(documentId: string): Promise<{
   success: boolean;
   documentId: string;
   documentTitle: string;
@@ -66,7 +64,8 @@ export function getActionColor(
     edited: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200",
     published:
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    restored: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+    restored:
+      "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
   };
   return colorMap[action];
 }

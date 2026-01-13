@@ -73,7 +73,10 @@ function ToolbarButton({
   );
 }
 
-export function EditorBubbleMenu({ editor, onAICommand }: EditorBubbleMenuProps) {
+export function EditorBubbleMenu({
+  editor,
+  onAICommand,
+}: EditorBubbleMenuProps) {
   const [isVisible, setIsVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
   const [showAIMenu, setShowAIMenu] = React.useState(false);
@@ -209,7 +212,7 @@ export function EditorBubbleMenu({ editor, onAICommand }: EditorBubbleMenuProps)
                 className={cn(
                   "absolute top-full mt-2 left-1/2 -translate-x-1/2 z-50",
                   "w-64 rounded-lg border bg-background p-2 shadow-lg",
-                  "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2"
+                  "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
                 )}
                 onMouseDown={(e) => e.stopPropagation()}
               >
@@ -217,52 +220,72 @@ export function EditorBubbleMenu({ editor, onAICommand }: EditorBubbleMenuProps)
                   <button
                     className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                     onClick={() => {
-                      onAICommand("Improve the clarity, grammar, and style of the selected text.");
+                      onAICommand(
+                        "Improve the clarity, grammar, and style of the selected text.",
+                      );
                       setShowAIMenu(false);
                     }}
                   >
                     <div className="font-medium">✨ Improve Writing</div>
-                    <div className="text-xs text-muted-foreground">Enhance clarity & grammar</div>
+                    <div className="text-xs text-muted-foreground">
+                      Enhance clarity & grammar
+                    </div>
                   </button>
                   <button
                     className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                     onClick={() => {
-                      onAICommand("Make the selected text shorter and more concise.");
+                      onAICommand(
+                        "Make the selected text shorter and more concise.",
+                      );
                       setShowAIMenu(false);
                     }}
                   >
                     <div className="font-medium">📉 Make Shorter</div>
-                    <div className="text-xs text-muted-foreground">Condense the text</div>
+                    <div className="text-xs text-muted-foreground">
+                      Condense the text
+                    </div>
                   </button>
                   <button
                     className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                     onClick={() => {
-                      onAICommand("Expand the selected text while keeping the meaning intact.");
+                      onAICommand(
+                        "Expand the selected text while keeping the meaning intact.",
+                      );
                       setShowAIMenu(false);
                     }}
                   >
                     <div className="font-medium">📈 Make Longer</div>
-                    <div className="text-xs text-muted-foreground">Expand the content</div>
+                    <div className="text-xs text-muted-foreground">
+                      Expand the content
+                    </div>
                   </button>
                   <button
                     className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                     onClick={() => {
-                      onAICommand("Simplify the language of the selected text for easier understanding.");
+                      onAICommand(
+                        "Simplify the language of the selected text for easier understanding.",
+                      );
                       setShowAIMenu(false);
                     }}
                   >
                     <div className="font-medium">💡 Simplify</div>
-                    <div className="text-xs text-muted-foreground">Easier to understand</div>
+                    <div className="text-xs text-muted-foreground">
+                      Easier to understand
+                    </div>
                   </button>
                   <button
                     className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
                     onClick={() => {
-                      onAICommand("Fix all spelling and grammar errors in the selected text.");
+                      onAICommand(
+                        "Fix all spelling and grammar errors in the selected text.",
+                      );
                       setShowAIMenu(false);
                     }}
                   >
                     <div className="font-medium">✓ Fix Grammar</div>
-                    <div className="text-xs text-muted-foreground">Correct all errors</div>
+                    <div className="text-xs text-muted-foreground">
+                      Correct all errors
+                    </div>
                   </button>
                 </div>
               </div>

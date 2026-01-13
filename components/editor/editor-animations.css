@@ -24,7 +24,8 @@
 
 /* Pulse animation for AI sparkles */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -90,7 +91,9 @@
 
 /* Smooth height transitions for collapsible sections */
 .collapsible {
-  transition: height 0.3s ease, opacity 0.3s ease;
+  transition:
+    height 0.3s ease,
+    opacity 0.3s ease;
 }
 
 /* Selection highlight */
@@ -105,7 +108,7 @@
 
 /* Floating elements shadow */
 .floating-element {
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.05),
     0 10px 20px rgba(0, 0, 0, 0.1),
     0 20px 40px rgba(0, 0, 0, 0.05);
@@ -147,7 +150,7 @@
 /* Kbd (keyboard shortcut) styling */
 kbd {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  box-shadow: 
+  box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.05),
     0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -197,7 +200,9 @@ kbd {
 
 /* Link hover effect */
 .ProseMirror a {
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .ProseMirror a:hover {
@@ -206,12 +211,16 @@ kbd {
 
 /* Code block smooth appearance */
 .ProseMirror pre {
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 /* Image zoom effect */
 .ProseMirror img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   cursor: zoom-in;
 }
 
@@ -244,7 +253,9 @@ kbd {
 /* Selection menu positioning */
 .selection-menu {
   will-change: transform, opacity;
-  transition: opacity 0.1s ease, transform 0.1s ease;
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease;
 }
 
 /* Staggered list animations */
@@ -252,16 +263,29 @@ kbd {
   animation: slideInFromBottom 0.3s ease backwards;
 }
 
-.staggered-item:nth-child(1) { animation-delay: 0.05s; }
-.staggered-item:nth-child(2) { animation-delay: 0.1s; }
-.staggered-item:nth-child(3) { animation-delay: 0.15s; }
-.staggered-item:nth-child(4) { animation-delay: 0.2s; }
-.staggered-item:nth-child(5) { animation-delay: 0.25s; }
+.staggered-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.staggered-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.staggered-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.staggered-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.staggered-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
 
 /* Dark mode smooth transitions */
 @media (prefers-color-scheme: dark) {
   * {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
 }
 

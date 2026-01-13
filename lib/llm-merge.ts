@@ -1,4 +1,7 @@
-import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
+import {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 
 const bedrock = new BedrockRuntimeClient({ region: process.env.AWS_REGION! });
 
@@ -46,11 +49,15 @@ export async function mergeDocuments(
 
   const validDocuments = documents.filter((doc) => {
     if (!doc.fileName || !doc.text) {
-      console.warn("[MERGE] ⚠️ Skipping invalid document (missing fileName or text)");
+      console.warn(
+        "[MERGE] ⚠️ Skipping invalid document (missing fileName or text)",
+      );
       return false;
     }
     if (doc.text.trim().length < 100) {
-      console.warn(`[MERGE] ⚠️ Document "${doc.fileName}" too short (${doc.text.length} chars)`);
+      console.warn(
+        `[MERGE] ⚠️ Document "${doc.fileName}" too short (${doc.text.length} chars)`,
+      );
       return false;
     }
     return true;
@@ -61,14 +68,21 @@ export async function mergeDocuments(
     throw new Error("No valid documents to merge");
   }
 
-  console.log(`[MERGE] 🚀 Starting merge of ${validDocuments.length} documents`);
-  const totalSize = validDocuments.reduce((sum, doc) => sum + doc.text.length, 0);
-  console.log(`[MERGE] 📊 Total content: ${totalSize.toLocaleString()} characters`);
+  console.log(
+    `[MERGE] 🚀 Starting merge of ${validDocuments.length} documents`,
+  );
+  const totalSize = validDocuments.reduce(
+    (sum, doc) => sum + doc.text.length,
+    0,
+  );
+  console.log(
+    `[MERGE] 📊 Total content: ${totalSize.toLocaleString()} characters`,
+  );
 
   // ===== STEP 1: DETECT SECTIONS =====
   console.log("\n[MERGE] 📋 STEP 1: Analyzing document structure...");
   const detectedSections = await analyzeDocumentStructure(validDocuments);
-  
+
   if (!detectedSections || detectedSections.length === 0) {
     console.error("[MERGE] ❌ No sections detected");
     throw new Error("Could not detect document structure");
@@ -78,16 +92,23 @@ export async function mergeDocuments(
 
   // ===== STEP 2: MERGE SECTIONS =====
   console.log("\n[MERGE] 🔄 STEP 2: Merging sections...");
-  const mergedSections = await mergeSectionBySection(validDocuments, detectedSections);
-  
-  console.log(`[MERGE] ✅ Successfully merged ${mergedSections.length} sections`);
+  const mergedSections = await mergeSectionBySection(
+    validDocuments,
+    detectedSections,
+  );
+
+  console.log(
+    `[MERGE] ✅ Successfully merged ${mergedSections.length} sections`,
+  );
 
   // ===== STEP 3: ASSEMBLE FINAL DOCUMENT =====
   console.log("\n[MERGE] 📝 STEP 3: Assembling final document...");
   const finalDocument = assembleMergedDocument(mergedSections);
 
   console.log(`\n[MERGE] 🎉 MERGE COMPLETE!`);
-  console.log(`[MERGE] 📄 Final document: ${finalDocument.length.toLocaleString()} characters`);
+  console.log(
+    `[MERGE] 📄 Final document: ${finalDocument.length.toLocaleString()} characters`,
+  );
   console.log(`[MERGE] 📑 Sections included: ${mergedSections.length}`);
 
   return finalDocument;
@@ -97,23 +118,25 @@ export async function mergeDocuments(
  * STEP 1: Analyze document structure and detect sections
  * Uses intelligent multi-strategy approach
  */
-async function analyzeDocumentStructure(documents: Document[]): Promise<string[]> {
+async function analyzeDocumentStructure(
+  documents: Document[],
+): Promise<string[]> {
   const detectedSections = new Set<string>();
 
   // STRATEGY 1: Look for numbered sections (MOST RELIABLE)
   // Format: "1. TITLE & DOCUMENT CONTROL"
   console.log("[MERGE] 🔍 Strategy 1: Scanning for numbered sections...");
-  
+
   for (const doc of documents) {
     const lines = doc.text.split("\n");
-    
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       const match = line.match(/^(\d+)\.\s+(.+)$/);
-      
+
       if (match) {
         const sectionName = match[2].trim();
-        
+
         // Validate it's a real section header
         if (isValidSectionHeader(sectionName, lines, i)) {
           detectedSections.add(sectionName);
@@ -124,27 +147,29 @@ async function analyzeDocumentStructure(documents: Document[]): Promise<string[]
   }
 
   if (detectedSections.size > 0) {
-    console.log(`[MERGE] ✅ Strategy 1 SUCCESS: ${detectedSections.size} sections`);
+    console.log(
+      `[MERGE] ✅ Strategy 1 SUCCESS: ${detectedSections.size} sections`,
+    );
     return sortSectionsByStandardOrder(Array.from(detectedSections));
   }
 
   // STRATEGY 2: Look for standard Primus sections (case-insensitive)
   console.log("[MERGE] 🔍 Strategy 2: Looking for standard Primus sections...");
-  
+
   for (const doc of documents) {
     const textLower = doc.text.toLowerCase();
-    
+
     for (const standardSection of PRIMUS_STANDARD_SECTIONS) {
       const sectionLower = standardSection.toLowerCase();
-      
+
       // Look for the section with various formats
       const patterns = [
         new RegExp(`^\\d+\\.\\s*${escapeRegex(standardSection)}`, "im"),
         new RegExp(`^${escapeRegex(standardSection)}\\s*$`, "im"),
         new RegExp(`^${escapeRegex(standardSection)}\\s*\n[-=]{3,}`, "im"),
       ];
-      
-      if (patterns.some(pattern => pattern.test(doc.text))) {
+
+      if (patterns.some((pattern) => pattern.test(doc.text))) {
         detectedSections.add(standardSection);
         console.log(`[MERGE] ✓ Found: "${standardSection}"`);
       }
@@ -152,18 +177,22 @@ async function analyzeDocumentStructure(documents: Document[]): Promise<string[]
   }
 
   if (detectedSections.size > 0) {
-    console.log(`[MERGE] ✅ Strategy 2 SUCCESS: ${detectedSections.size} sections`);
+    console.log(
+      `[MERGE] ✅ Strategy 2 SUCCESS: ${detectedSections.size} sections`,
+    );
     return sortSectionsByStandardOrder(Array.from(detectedSections));
   }
 
   // STRATEGY 3: Use LLM to intelligently detect sections
   console.log("[MERGE] 🤖 Strategy 3: Using AI to analyze structure...");
-  
+
   try {
     const llmSections = await detectSectionsWithLLM(documents);
-    
+
     if (llmSections.length > 0) {
-      console.log(`[MERGE] ✅ Strategy 3 SUCCESS: ${llmSections.length} sections`);
+      console.log(
+        `[MERGE] ✅ Strategy 3 SUCCESS: ${llmSections.length} sections`,
+      );
       return sortSectionsByStandardOrder(llmSections);
     }
   } catch (error) {
@@ -172,11 +201,12 @@ async function analyzeDocumentStructure(documents: Document[]): Promise<string[]
 
   // STRATEGY 4: Handle completely unstructured documents
   console.log("[MERGE] 🔍 Strategy 4: Checking for unstructured documents...");
-  
-  const hasAnyStructure = documents.some(doc => 
-    doc.text.match(/^\d+\.\s+[A-Z]/m) || // Numbered headers
-    doc.text.match(/^[A-Z\s&/(),-]{15,}$/m) || // All-caps headers
-    doc.text.match(/^#{1,3}\s+/m) // Markdown headers
+
+  const hasAnyStructure = documents.some(
+    (doc) =>
+      doc.text.match(/^\d+\.\s+[A-Z]/m) || // Numbered headers
+      doc.text.match(/^[A-Z\s&/(),-]{15,}$/m) || // All-caps headers
+      doc.text.match(/^#{1,3}\s+/m), // Markdown headers
   );
 
   if (!hasAnyStructure) {
@@ -203,22 +233,33 @@ async function analyzeDocumentStructure(documents: Document[]): Promise<string[]
 /**
  * Validate if a line is truly a section header (not a procedural step)
  */
-function isValidSectionHeader(sectionName: string, lines: string[], currentIndex: number): boolean {
+function isValidSectionHeader(
+  sectionName: string,
+  lines: string[],
+  currentIndex: number,
+): boolean {
   // Must be substantial length
   if (sectionName.length < 10 || sectionName.length > 100) {
     return false;
   }
 
   // Must be mostly uppercase (section headers are typically all caps)
-  const upperCaseRatio = (sectionName.match(/[A-Z]/g) || []).length / sectionName.replace(/\s/g, '').length;
+  const upperCaseRatio =
+    (sectionName.match(/[A-Z]/g) || []).length /
+    sectionName.replace(/\s/g, "").length;
   if (upperCaseRatio < 0.5) {
     return false;
   }
 
   // Check if it matches a known Primus section (fuzzy match)
-  const isKnownSection = PRIMUS_STANDARD_SECTIONS.some(standard => 
-    sectionName.toUpperCase().includes(standard.toUpperCase().substring(0, 10)) ||
-    standard.toUpperCase().includes(sectionName.toUpperCase().substring(0, 10))
+  const isKnownSection = PRIMUS_STANDARD_SECTIONS.some(
+    (standard) =>
+      sectionName
+        .toUpperCase()
+        .includes(standard.toUpperCase().substring(0, 10)) ||
+      standard
+        .toUpperCase()
+        .includes(sectionName.toUpperCase().substring(0, 10)),
   );
 
   // Must have content following it (not just another header immediately)
@@ -230,32 +271,36 @@ function isValidSectionHeader(sectionName: string, lines: string[], currentIndex
 /**
  * Check if there's actual content after a potential header
  */
-function hasSubstantialContentAfter(lines: string[], startIndex: number, minLines: number): boolean {
+function hasSubstantialContentAfter(
+  lines: string[],
+  startIndex: number,
+  minLines: number,
+): boolean {
   let contentLines = 0;
-  
+
   for (let i = startIndex; i < Math.min(startIndex + 10, lines.length); i++) {
     const line = lines[i].trim();
-    
+
     // Skip blank lines and separators
     if (line === "" || line.match(/^[-=]{3,}$/)) {
       continue;
     }
-    
+
     // Stop if we hit another numbered section
     if (line.match(/^\d+\.\s+[A-Z]/)) {
       break;
     }
-    
+
     // Count substantial content lines (not just single words)
     if (line.length > 10) {
       contentLines++;
     }
-    
+
     if (contentLines >= minLines) {
       return true;
     }
   }
-  
+
   return false;
 }
 
@@ -263,7 +308,9 @@ function hasSubstantialContentAfter(lines: string[], startIndex: number, minLine
  * Handle documents with NO structure (no headers at all)
  * Uses LLM to intelligently organize content into sections
  */
-async function handleUnstructuredDocuments(documents: Document[]): Promise<string[]> {
+async function handleUnstructuredDocuments(
+  documents: Document[],
+): Promise<string[]> {
   console.log("[MERGE] 🤖 Using AI to organize unstructured content...");
 
   // For unstructured documents, we'll create a special "FULL CONTENT" section
@@ -276,7 +323,10 @@ async function handleUnstructuredDocuments(documents: Document[]): Promise<strin
  */
 async function detectSectionsWithLLM(documents: Document[]): Promise<string[]> {
   const docPreviews = documents
-    .map((doc, i) => `DOCUMENT ${i + 1}: ${doc.fileName}\n${doc.text.substring(0, 1500)}\n...`)
+    .map(
+      (doc, i) =>
+        `DOCUMENT ${i + 1}: ${doc.fileName}\n${doc.text.substring(0, 1500)}\n...`,
+    )
     .join("\n\n" + "=".repeat(80) + "\n\n");
 
   const prompt = `Analyze these Primus GFS compliance documents and identify the MAIN section headers.
@@ -304,7 +354,7 @@ Detected sections:`;
   if (jsonMatch) {
     const sections = JSON.parse(jsonMatch[0]);
     if (Array.isArray(sections) && sections.length > 0) {
-      return sections.filter(s => typeof s === "string" && s.length > 0);
+      return sections.filter((s) => typeof s === "string" && s.length > 0);
     }
   }
 
@@ -333,15 +383,16 @@ async function mergeSectionBySection(
       // Validate merged content
       if (mergedContent && mergedContent.trim().length >= 30) {
         mergedSections.push({ section, content: mergedContent });
-        console.log(`[MERGE] ✅ ${progress} Success (${mergedContent.length} chars)`);
+        console.log(
+          `[MERGE] ✅ ${progress} Success (${mergedContent.length} chars)`,
+        );
       } else {
         skippedSections.push(section);
         console.log(`[MERGE] ⚠️ ${progress} Skipped (insufficient content)`);
       }
 
       // Rate limiting delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-
+      await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
       console.error(`[MERGE] ❌ ${progress} Error:`, error);
       skippedSections.push(section);
@@ -349,7 +400,9 @@ async function mergeSectionBySection(
   }
 
   if (skippedSections.length > 0) {
-    console.log(`\n[MERGE] ⚠️ Skipped ${skippedSections.length} sections with no content`);
+    console.log(
+      `\n[MERGE] ⚠️ Skipped ${skippedSections.length} sections with no content`,
+    );
   }
 
   return mergedSections;
@@ -358,14 +411,17 @@ async function mergeSectionBySection(
 /**
  * Merge a single section from all documents
  */
-async function mergeSingleSection(documents: Document[], sectionName: string): Promise<string> {
+async function mergeSingleSection(
+  documents: Document[],
+  sectionName: string,
+): Promise<string> {
   // Extract content for this section from each document
   const sectionContents = documents
-    .map(doc => ({
+    .map((doc) => ({
       fileName: doc.fileName,
       content: extractSectionContent(doc.text, sectionName),
     }))
-    .filter(item => item.content && item.content.length >= 30);
+    .filter((item) => item.content && item.content.length >= 30);
 
   // No content found
   if (sectionContents.length === 0) {
@@ -380,7 +436,9 @@ async function mergeSingleSection(documents: Document[], sectionName: string): P
   }
 
   // Multiple sources - need intelligent merging
-  console.log(`[MERGE] 🔄 Merging "${sectionName}" from ${sectionContents.length} sources...`);
+  console.log(
+    `[MERGE] 🔄 Merging "${sectionName}" from ${sectionContents.length} sources...`,
+  );
 
   const prompt = buildMergePrompt(sectionName, sectionContents);
   const mergedContent = await callBedrock(prompt, 2500);
@@ -422,7 +480,7 @@ function extractSectionContent(text: string, sectionName: string): string {
       (line.match(/^\d+\.\s+/) && lower.includes(normalizedSection)) ||
       // Direct match (with or without number)
       lower === normalizedSection ||
-      lower.replace(/^\d+\.\s*/, '') === normalizedSection;
+      lower.replace(/^\d+\.\s*/, "") === normalizedSection;
 
     if (isTargetSection && !inSection) {
       inSection = true;
@@ -437,10 +495,10 @@ function extractSectionContent(text: string, sectionName: string): string {
       // Stop at next section (numbered header or major all-caps header)
       const isNextSection =
         line.match(/^\d+\.\s+[A-Z]/) ||
-        (trimmed.match(/^[A-Z\s&/(),-]{15,}$/) && 
-         contentLineCount > 5 &&
-         i + 1 < lines.length && 
-         (lines[i + 1].trim() === "" || lines[i + 1].match(/^[-=]{3,}$/)));
+        (trimmed.match(/^[A-Z\s&/(),-]{15,}$/) &&
+          contentLineCount > 5 &&
+          i + 1 < lines.length &&
+          (lines[i + 1].trim() === "" || lines[i + 1].match(/^[-=]{3,}$/)));
 
       if (isNextSection) {
         break;
@@ -450,7 +508,9 @@ function extractSectionContent(text: string, sectionName: string): string {
       contentLineCount++;
 
       if (contentLineCount > MAX_LINES) {
-        console.log(`[MERGE] ⚠️ Section "${sectionName}" truncated at ${MAX_LINES} lines`);
+        console.log(
+          `[MERGE] ⚠️ Section "${sectionName}" truncated at ${MAX_LINES} lines`,
+        );
         break;
       }
     }
@@ -480,13 +540,15 @@ function buildMergePrompt(
   }
 
   const sourceText = contents
-    .map((item, i) => `
+    .map(
+      (item, i) => `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SOURCE ${i + 1}: ${item.fileName}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${item.content}
-`)
+`,
+    )
     .join("\n");
 
   return `You are an expert in merging Primus GFS compliance documentation. Your task is to merge the "${section}" section from multiple source documents into ONE comprehensive, audit-ready section.
@@ -528,13 +590,15 @@ function buildUnstructuredMergePrompt(
   contents: Array<{ fileName: string; content: string }>,
 ): string {
   const sourceText = contents
-    .map((item, i) => `
+    .map(
+      (item, i) => `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SOURCE ${i + 1}: ${item.fileName}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${item.content}
-`)
+`,
+    )
     .join("\n");
 
   return `You are merging multiple compliance documents that lack clear section headers. Your task is to create ONE well-organized, comprehensive document.
@@ -596,7 +660,7 @@ function cleanMergedContent(content: string): string {
     /would you like.*$/gim,
   ];
 
-  metaPatterns.forEach(pattern => {
+  metaPatterns.forEach((pattern) => {
     cleaned = cleaned.replace(pattern, "");
   });
 
@@ -615,7 +679,9 @@ function detectConflicts(content: string, section: string): void {
   const matches = content.match(conflictPattern);
 
   if (matches && matches.length > 0) {
-    console.log(`[MERGE] ⚠️ CONFLICTS DETECTED in "${section}": ${matches.length} conflict(s)`);
+    console.log(
+      `[MERGE] ⚠️ CONFLICTS DETECTED in "${section}": ${matches.length} conflict(s)`,
+    );
     matches.forEach((conflict, i) => {
       console.log(`[MERGE]    ${i + 1}. ${conflict}`);
     });
@@ -627,17 +693,20 @@ function detectConflicts(content: string, section: string): void {
  */
 function assembleMergedDocument(sections: MergedSection[]): string {
   // Filter out any sections that ended up empty
-  const validSections = sections.filter(s => s.content && s.content.trim().length > 20);
+  const validSections = sections.filter(
+    (s) => s.content && s.content.trim().length > 20,
+  );
 
   // Special case: Unstructured document (single merged content section)
-  if (validSections.length === 1 && validSections[0].section === "MERGED DOCUMENT CONTENT") {
+  if (
+    validSections.length === 1 &&
+    validSections[0].section === "MERGED DOCUMENT CONTENT"
+  ) {
     return assembleUnstructuredDocument(validSections[0].content);
   }
 
   // Build table of contents
-  const toc = validSections
-    .map((s, i) => `${i + 1}. ${s.section}`)
-    .join("\n");
+  const toc = validSections.map((s, i) => `${i + 1}. ${s.section}`).join("\n");
 
   const header = `${"=".repeat(70)}
 PRIMUS GFS COMPLIANCE DOCUMENT - MERGED
@@ -765,7 +834,7 @@ const rateLimiter = {
     const elapsed = now - this.lastCallTime;
     if (elapsed < this.minDelayMs) {
       const delay = this.minDelayMs - elapsed;
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
     this.lastCallTime = Date.now();
   },
@@ -801,15 +870,18 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
 
       return responseBody.content[0].text;
     } catch (error) {
-      const isThrottling = error instanceof Error && 
-        (error.message.includes("ThrottlingException") || 
-         error.message.includes("Too many requests") ||
-         error.message.includes("429"));
+      const isThrottling =
+        error instanceof Error &&
+        (error.message.includes("ThrottlingException") ||
+          error.message.includes("Too many requests") ||
+          error.message.includes("429"));
 
       if (isThrottling && attempt < maxRetries) {
         const backoffMs = Math.pow(2, attempt) * 1000;
-        console.warn(`[MERGE] ⚠️ Throttled, retrying in ${backoffMs}ms... (attempt ${attempt + 1}/${maxRetries})`);
-        await new Promise(resolve => setTimeout(resolve, backoffMs));
+        console.warn(
+          `[MERGE] ⚠️ Throttled, retrying in ${backoffMs}ms... (attempt ${attempt + 1}/${maxRetries})`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, backoffMs));
         continue;
       }
 
