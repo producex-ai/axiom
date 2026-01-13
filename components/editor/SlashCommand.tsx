@@ -96,47 +96,49 @@ const SlashCommandMenu = React.forwardRef<
       )}
     >
       <div className="p-2">
-        {Object.entries(groupedItems).map(([category, items], categoryIndex) => (
-          <div key={category}>
-            {categoryIndex > 0 && <div className="h-px bg-border my-2" />}
-            <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
-              {category}
-            </div>
-            {items.map((item, index) => {
-              const globalIndex = props.items.indexOf(item);
-              const isSelected = globalIndex === selectedIndex;
-              return (
-                <button
-                  key={index}
-                  onClick={() => props.command(item)}
-                  onMouseEnter={() => setSelectedIndex(globalIndex)}
-                  className={cn(
-                    "w-full flex items-start gap-3 rounded-md px-3 py-2.5 text-left transition-colors",
-                    "hover:bg-accent hover:text-accent-foreground",
-                    isSelected && "bg-accent text-accent-foreground",
-                  )}
-                >
-                  <div
+        {Object.entries(groupedItems).map(
+          ([category, items], categoryIndex) => (
+            <div key={category}>
+              {categoryIndex > 0 && <div className="h-px bg-border my-2" />}
+              <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
+                {category}
+              </div>
+              {items.map((item, index) => {
+                const globalIndex = props.items.indexOf(item);
+                const isSelected = globalIndex === selectedIndex;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => props.command(item)}
+                    onMouseEnter={() => setSelectedIndex(globalIndex)}
                     className={cn(
-                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-md border",
-                      isSelected
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "bg-muted",
+                      "w-full flex items-start gap-3 rounded-md px-3 py-2.5 text-left transition-colors",
+                      "hover:bg-accent hover:text-accent-foreground",
+                      isSelected && "bg-accent text-accent-foreground",
                     )}
                   >
-                    {item.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm">{item.title}</div>
-                    <div className="text-xs text-muted-foreground truncate">
-                      {item.description}
+                    <div
+                      className={cn(
+                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-md border",
+                        isSelected
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "bg-muted",
+                      )}
+                    >
+                      {item.icon}
                     </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        ))}
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-sm">{item.title}</div>
+                      <div className="text-xs text-muted-foreground truncate">
+                        {item.description}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          ),
+        )}
       </div>
     </div>
   );

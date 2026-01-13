@@ -1,15 +1,15 @@
 /**
  * POST /api/compliance/documents/[id]/validate-audit
- * 
+ *
  * Validates document audit readiness using comprehensive LLM analysis.
  * Reuses the analyzeCompliance() logic from upload flow.
- * 
+ *
  * Request Body:
  * {
  *   "content": "markdown content...",
  *   "title": "document title"
  * }
- * 
+ *
  * Returns:
  * {
  *   "highRiskIssues": [...],
@@ -29,7 +29,7 @@ export const maxDuration = 300; // 5 minutes - Vercel hobby plan max
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     // Authenticate
@@ -46,14 +46,14 @@ export async function POST(
     if (!content || typeof content !== "string") {
       return NextResponse.json(
         { error: "Content is required and must be a string" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!title || typeof title !== "string") {
       return NextResponse.json(
         { error: "Title is required and must be a string" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -63,7 +63,7 @@ export async function POST(
     if (!document) {
       return NextResponse.json(
         { error: "Document not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -83,20 +83,21 @@ export async function POST(
         subModuleDescription = spec.description || spec.title || title;
       } catch (error) {
         return NextResponse.json(
-          { 
+          {
             error: "Cannot validate audit readiness",
             details: `Submodule specification not found for ${document.module_id}.${document.sub_module_id}. Audit validation requires the module spec to validate against requirements.`,
           },
-          { status: 400 }
+          { status: 400 },
         );
       }
     } else {
       return NextResponse.json(
-        { 
+        {
           error: "Cannot validate audit readiness",
-          details: "Document is not linked to a compliance module. Audit validation requires a module assignment to validate against requirements.",
+          details:
+            "Document is not linked to a compliance module. Audit validation requires a module assignment to validate against requirements.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -121,14 +122,20 @@ export async function POST(
     // Check audit readiness status
     if (analysis.auditReadiness?.overallAuditReadiness === "not-ready") {
       highRiskIssues.push({
-        description: "Document audit readiness: NOT READY. Critical issues must be resolved.",
+        description:
+          "Document audit readiness: NOT READY. Critical issues must be resolved.",
         severity: "HIGH",
-        remediation: analysis.auditReadiness.auditRisks?.[0] || "Address critical compliance gaps",
+        remediation:
+          analysis.auditReadiness.auditRisks?.[0] ||
+          "Address critical compliance gaps",
         category: "audit-readiness",
       });
-    } else if (analysis.auditReadiness?.overallAuditReadiness === "major-revisions") {
+    } else if (
+      analysis.auditReadiness?.overallAuditReadiness === "major-revisions"
+    ) {
       highRiskIssues.push({
-        description: "Document requires major revisions to meet audit standards.",
+        description:
+          "Document requires major revisions to meet audit standards.",
         severity: "HIGH",
         remediation: "Review and implement recommended major revisions.",
         category: "audit-readiness",
@@ -136,36 +143,49 @@ export async function POST(
     }
 
     // Add critical missing requirements
-    if (analysis.missing && "requirements" in analysis.missing && Array.isArray(analysis.missing.requirements)) {
-      const criticalMissing = analysis.missing.requirements.slice(0, 3).map((r: any) => r.title); // Top 3 missing
+    if (
+      analysis.missing &&
+      "requirements" in analysis.missing &&
+      Array.isArray(analysis.missing.requirements)
+    ) {
+      const criticalMissing = analysis.missing.requirements
+        .slice(0, 3)
+        .map((r: any) => r.title); // Top 3 missing
       highRiskIssues.push({
         description: `Missing critical requirements: ${criticalMissing.join(", ")}`,
         severity: "HIGH",
-        remediation: "Include all required elements: " + criticalMissing.join(", "),
+        remediation:
+          "Include all required elements: " + criticalMissing.join(", "),
         category: "missing-requirements",
       });
     }
 
     // Add structural issues if present
-    if (analysis.structuralAnalysis?.overallStructureQuality === "needs-improvement") {
-      const missingElements = analysis.structuralAnalysis.missingStructuralElements || [];
+    if (
+      analysis.structuralAnalysis?.overallStructureQuality ===
+      "needs-improvement"
+    ) {
+      const missingElements =
+        analysis.structuralAnalysis.missingStructuralElements || [];
       if (missingElements.length > 0) {
         highRiskIssues.push({
           description: `Structural issues: ${missingElements.slice(0, 2).join(", ")}`,
           severity: "HIGH",
-          remediation: "Ensure proper document structure with all required sections.",
+          remediation:
+            "Ensure proper document structure with all required sections.",
           category: "document-structure",
         });
       }
     }
 
     // Determine if audit ready
-    const isAuditReady = highRiskIssues.length === 0 && 
+    const isAuditReady =
+      highRiskIssues.length === 0 &&
       analysis.auditReadiness?.overallAuditReadiness !== "not-ready" &&
       analysis.auditReadiness?.overallAuditReadiness !== "major-revisions";
 
-    const auditReadinessScore = analysis.auditReadiness?.score || 
-      Math.round(analysis.overallScore * 0.8); // Fallback to 80% of overall score
+    const auditReadinessScore =
+      analysis.auditReadiness?.score || Math.round(analysis.overallScore * 0.8); // Fallback to 80% of overall score
 
     console.log(`[API] Audit validation result:`, {
       isAuditReady,
@@ -184,15 +204,16 @@ export async function POST(
         // Return full detailed analysis for advanced features
         fullAnalysis: analysis,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("[API] Error validating audit readiness:", error);
     return NextResponse.json(
-      { error: "Failed to validate audit readiness", 
-        details: error instanceof Error ? error.message : "Unknown error"
+      {
+        error: "Failed to validate audit readiness",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

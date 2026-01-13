@@ -1,7 +1,7 @@
 /**
  * POST /api/compliance/accept
  * Accept and attach a single uploaded document without modifications
- * 
+ *
  * Creates/updates a document in the main "document" table with the uploaded content as-is.
  *
  * Request Body:
@@ -40,12 +40,13 @@ export async function POST(request: NextRequest) {
     }
 
     const { orgId, userId } = authContext;
-    const { subModuleId, analysisId, renewal, docType } = (await request.json()) as {
-      subModuleId: string;
-      analysisId: string;
-      renewal?: string;
-      docType?: string;
-    };
+    const { subModuleId, analysisId, renewal, docType } =
+      (await request.json()) as {
+        subModuleId: string;
+        analysisId: string;
+        renewal?: string;
+        docType?: string;
+      };
 
     if (!subModuleId || !analysisId) {
       return NextResponse.json(
@@ -92,7 +93,10 @@ export async function POST(request: NextRequest) {
     let analysisScore = null;
     if (analysisResult.rows.length > 0) {
       const analysisData = analysisResult.rows[0].analysis_result;
-      analysisScore = typeof analysisData === 'string' ? JSON.parse(analysisData) : analysisData;
+      analysisScore =
+        typeof analysisData === "string"
+          ? JSON.parse(analysisData)
+          : analysisData;
       console.log("[API] Retrieved compliance analysis for document");
     }
 
@@ -136,9 +140,7 @@ export async function POST(request: NextRequest) {
         `[API] Error retrieving text for ${evidenceFile.filename}:`,
         error,
       );
-      throw new Error(
-        `Failed to retrieve text for ${evidenceFile.filename}`,
-      );
+      throw new Error(`Failed to retrieve text for ${evidenceFile.filename}`);
     }
 
     // Convert to DOCX

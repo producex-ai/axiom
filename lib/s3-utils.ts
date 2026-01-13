@@ -3,9 +3,9 @@ import {
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
-} from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import * as mammoth from 'mammoth';
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import * as mammoth from "mammoth";
 
 const s3Client = new S3Client({ region: process.env.AWS_REGION! });
 
@@ -17,7 +17,7 @@ const s3Client = new S3Client({ region: process.env.AWS_REGION! });
  */
 export async function uploadToS3(
   file: File | Blob,
-  path: string
+  path: string,
 ): Promise<string> {
   const buffer = Buffer.from(await file.arrayBuffer());
 
@@ -29,7 +29,7 @@ export async function uploadToS3(
       Key: s3Key,
       Body: buffer,
       ContentType: file.type,
-    })
+    }),
   );
 
   return s3Key;
@@ -75,7 +75,7 @@ export async function deleteFromS3(s3Key: string): Promise<void> {
     new DeleteObjectCommand({
       Bucket: process.env.S3_BUCKET!,
       Key: s3Key,
-    })
+    }),
   );
 }
 
@@ -87,7 +87,7 @@ export async function deleteFromS3(s3Key: string): Promise<void> {
  */
 export async function getPresignedUrl(
   s3Key: string,
-  expiresIn: number = 3600
+  expiresIn: number = 3600,
 ): Promise<string> {
   const command = new GetObjectCommand({
     Bucket: process.env.S3_BUCKET!,

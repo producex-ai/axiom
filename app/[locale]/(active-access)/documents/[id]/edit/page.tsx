@@ -138,7 +138,7 @@ export default function EditDocumentPage({ params }: EditParams) {
       }
 
       // Check if this is a company document (non-compliance)
-      const isCompanyDoc = documentMetadata?.docType === 'company';
+      const isCompanyDoc = documentMetadata?.docType === "company";
 
       if (isCompanyDoc) {
         // NON-COMPLIANCE FLOW: Direct publish without analysis
@@ -364,7 +364,7 @@ export default function EditDocumentPage({ params }: EditParams) {
               {mode === "edit" && (
                 <>
                   {/* Review Issues button - only for compliance documents */}
-                  {documentMetadata?.docType !== 'company' && auditResults && (
+                  {documentMetadata?.docType !== "company" && auditResults && (
                     <Button
                       variant="outline"
                       size="sm"
@@ -388,7 +388,7 @@ export default function EditDocumentPage({ params }: EditParams) {
                     onClick={() => {
                       // For company docs, show simple confirmation dialog
                       // For compliance docs, run full publish flow
-                      if (documentMetadata?.docType === 'company') {
+                      if (documentMetadata?.docType === "company") {
                         setSimplePublishDialogOpen(true);
                       } else {
                         handlePublish();
@@ -437,7 +437,7 @@ export default function EditDocumentPage({ params }: EditParams) {
       </main>
 
       {/* Audit Dialog - for compliance documents */}
-      {documentMetadata?.docType !== 'company' && (
+      {documentMetadata?.docType !== "company" && (
         <AuditDialog
           open={auditDialogOpen}
           onClose={handleAuditDialogClose}

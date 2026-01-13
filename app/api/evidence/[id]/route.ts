@@ -68,7 +68,9 @@ export async function DELETE(
 
       if (evidence.extracted_text_key) {
         await deleteFromS3(evidence.extracted_text_key);
-        console.log(`[API] Deleted extracted text: ${evidence.extracted_text_key}`);
+        console.log(
+          `[API] Deleted extracted text: ${evidence.extracted_text_key}`,
+        );
       }
     } catch (s3Error) {
       console.error("[API] S3 deletion error:", s3Error);
@@ -76,10 +78,10 @@ export async function DELETE(
     }
 
     // Soft delete from database
-    await query(
-      `UPDATE uploaded_evidence SET deleted_at = $1 WHERE id = $2`,
-      [new Date().toISOString(), id],
-    );
+    await query(`UPDATE uploaded_evidence SET deleted_at = $1 WHERE id = $2`, [
+      new Date().toISOString(),
+      id,
+    ]);
 
     console.log(`[API] ✅ Evidence deleted successfully: ${id}`);
 

@@ -31,11 +31,11 @@ export default function ComplianceContent({
   const modules = modulesProp || overviewData?.modules || [];
   const frameworkName =
     frameworkNameProp || overviewData?.frameworkName || "Primus GFS";
-  
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
+
   const [moduleData, setModuleData] = useState<ModuleData | null>(null);
   const [loadingModule, setLoadingModule] = useState(false);
 
@@ -45,7 +45,9 @@ export default function ComplianceContent({
   // Update module data when overviewData changes (e.g., after cache invalidation)
   useEffect(() => {
     if (selectedModule && moduleData && modules.length > 0) {
-      const updatedModule = modules.find((m: ModuleData) => m.module === selectedModule);
+      const updatedModule = modules.find(
+        (m: ModuleData) => m.module === selectedModule,
+      );
       if (updatedModule) {
         setModuleData({
           ...updatedModule,

@@ -24,7 +24,12 @@ interface UpdateRenewalPeriodDialogProps {
   onOpenChange: (open: boolean) => void;
   documentId: string;
   documentTitle: string;
-  currentRenewal?: "quarterly" | "semi_annually" | "annually" | "2_years" | null;
+  currentRenewal?:
+    | "quarterly"
+    | "semi_annually"
+    | "annually"
+    | "2_years"
+    | null;
   onSuccess?: () => void;
 }
 

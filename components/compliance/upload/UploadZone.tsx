@@ -115,7 +115,9 @@ export const UploadZone: React.FC<UploadZoneProps> = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">Uploading...</p>
-            <p className="text-sm text-slate-500">{Math.round(uploadProgress)}%</p>
+            <p className="text-sm text-slate-500">
+              {Math.round(uploadProgress)}%
+            </p>
           </div>
           <div className="h-2 rounded-full bg-slate-200 overflow-hidden dark:bg-slate-700">
             <div

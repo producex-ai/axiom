@@ -7,19 +7,19 @@ import { Document, HeadingLevel, Packer, Paragraph, TextRun } from "docx";
 function parseMarkdownInline(text: string): TextRun[] {
   const runs: TextRun[] = [];
   let remaining = text;
-  
+
   // Pattern to match **bold** and *italic* (non-greedy)
   const pattern = /(\*\*(.+?)\*\*)|(\*(.+?)\*)/g;
   let lastIndex = 0;
   let match;
-  
+
   while ((match = pattern.exec(remaining)) !== null) {
     // Add plain text before match
     if (match.index > lastIndex) {
       const plainText = remaining.slice(lastIndex, match.index);
       if (plainText) runs.push(new TextRun(plainText));
     }
-    
+
     // Add formatted text
     if (match[1]) {
       // Bold: **text**
@@ -28,15 +28,15 @@ function parseMarkdownInline(text: string): TextRun[] {
       // Italic: *text*
       runs.push(new TextRun({ text: match[4], italics: true }));
     }
-    
+
     lastIndex = pattern.lastIndex;
   }
-  
+
   // Add remaining plain text
   if (lastIndex < remaining.length) {
     runs.push(new TextRun(remaining.slice(lastIndex)));
   }
-  
+
   return runs.length > 0 ? runs : [new TextRun(text)];
 }
 
@@ -62,7 +62,7 @@ export async function createDocxBufferFromText(text: string): Promise<Buffer> {
     if (markdownHeader) {
       const level = markdownHeader[1].length; // Number of # characters
       textContent = markdownHeader[2]; // Text after ###
-      
+
       if (level === 1) heading = HeadingLevel.HEADING_1;
       else if (level === 2) heading = HeadingLevel.HEADING_2;
       else if (level === 3) heading = HeadingLevel.HEADING_3;

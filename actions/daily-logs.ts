@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { auth, clerkClient } from '@clerk/nextjs/server';
-import { revalidatePath } from 'next/cache';
-import { z } from 'zod';
+import { auth, clerkClient } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
 import {
   approveDailyLog,
@@ -15,13 +15,42 @@ import {
   reopenDailyLog,
   submitDailyLogForApproval,
   updateDailyLogTasks,
-} from '@/db/queries/daily-logs';
+} from "@/db/queries/daily-logs";
 
 /**
- * Enrich daily logs with user names from Clerk
+ * Sort tasks in a log based on the original template task list order
+ */
+function sortLogTasks(
+  tasks: Record<string, boolean>,
+  templateTasks: string[] | null,
+): Record<string, boolean> {
+  if (!templateTasks || templateTasks.length === 0) return tasks;
+
+  const sortedTasks: Record<string, boolean> = {};
+  const taskNames = Object.keys(tasks);
+
+  // First add tasks from template in their defined order
+  for (const taskName of templateTasks) {
+    if (taskName in tasks) {
+      sortedTasks[taskName] = tasks[taskName];
+    }
+  }
+
+  // Then add any remaining tasks that might have been added manually or existed before
+  for (const taskName of taskNames) {
+    if (!(taskName in sortedTasks)) {
+      sortedTasks[taskName] = tasks[taskName];
+    }
+  }
+
+  return sortedTasks;
+}
+
+/**
+ * Enrich daily logs with user names and process task ordering
  */
 async function enrichLogsWithUserNames(
-  logs: DailyLogWithDetails[]
+  logs: DailyLogWithDetails[],
 ): Promise<DailyLogWithDetails[]> {
   if (logs.length === 0) return logs;
 
@@ -42,20 +71,21 @@ async function enrichLogsWithUserNames(
         try {
           const user = await client.users.getUser(userId);
           const name =
-            [user.firstName, user.lastName].filter(Boolean).join(' ') ||
+            [user.firstName, user.lastName].filter(Boolean).join(" ") ||
             user.emailAddresses[0]?.emailAddress ||
-            'Unknown User';
+            "Unknown User";
           userMap.set(userId, name);
         } catch (error) {
           console.error(`Error fetching user ${userId}:`, error);
-          userMap.set(userId, 'Unknown User');
+          userMap.set(userId, "Unknown User");
         }
-      })
+      }),
     );
 
-    // Enrich logs with names
+    // Enrich logs with names and sort tasks
     return logs.map((log) => ({
       ...log,
+      tasks: sortLogTasks(log.tasks, log.template_tasks),
       assignee_name: log.assignee_id
         ? userMap.get(log.assignee_id) || null
         : null,
@@ -64,7 +94,7 @@ async function enrichLogsWithUserNames(
         : null,
     }));
   } catch (error) {
-    console.error('Error enriching logs with user names:', error);
+    console.error("Error enriching logs:", error);
     return logs;
   }
 }
@@ -75,12 +105,12 @@ const UpdateTasksSchema = z.object({
 });
 
 const SubmitForApprovalSchema = z.object({
-  tasks_sign_off: z.enum(['ALL_GOOD', 'ACTION_REQUIRED']),
+  tasks_sign_off: z.enum(["ALL_GOOD", "ACTION_REQUIRED"]),
   assignee_comment: z.string().optional(),
 });
 
 const ReviewSchema = z.object({
-  reviewer_comment: z.string().min(1, 'Comment is required'),
+  reviewer_comment: z.string().min(1, "Comment is required"),
 });
 
 export type ActionState = {
@@ -93,7 +123,7 @@ export type ActionState = {
  * Get daily logs for the current user's organization
  */
 export async function getDailyLogsAction(filters?: {
-  status?: 'PENDING' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED';
+  status?: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
   assigneeId?: string;
   reviewerId?: string;
   startDate?: string;
@@ -119,7 +149,7 @@ export async function getDailyLogsAction(filters?: {
  * Get a single daily log by ID
  */
 export async function getDailyLogByIdAction(
-  id: string
+  id: string,
 ): Promise<DailyLogWithDetails | null> {
   const { orgId } = await auth();
   if (!orgId) {
@@ -165,19 +195,19 @@ export async function getLogsForReviewAction(): Promise<DailyLogWithDetails[]> {
 export async function updateDailyLogTasksAction(
   id: string,
   _prevState: ActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
   // Parse tasks from form data
   const tasks: Record<string, boolean> = {};
   for (const [key, value] of formData.entries()) {
-    if (key.startsWith('task_')) {
-      const taskName = key.replace('task_', '');
-      tasks[taskName] = value === 'true' || value === 'on';
+    if (key.startsWith("task_")) {
+      const taskName = key.replace("task_", "");
+      tasks[taskName] = value === "true" || value === "on";
     }
   }
 
@@ -187,7 +217,7 @@ export async function updateDailyLogTasksAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Invalid task data',
+      message: "Invalid task data",
     };
   }
 
@@ -196,17 +226,17 @@ export async function updateDailyLogTasksAction(
 
     if (!result) {
       return {
-        message: 'Failed to update tasks. Log may not be in PENDING status.',
+        message: "Failed to update tasks. Log may not be in PENDING status.",
       };
     }
 
-    revalidatePath('/logs/daily');
+    revalidatePath("/logs/daily");
     revalidatePath(`/logs/daily/${id}`);
 
-    return { success: true, message: 'Tasks updated successfully' };
+    return { success: true, message: "Tasks updated successfully" };
   } catch (error) {
-    console.error('Failed to update tasks:', error);
-    return { message: 'Failed to update tasks. Please try again.' };
+    console.error("Failed to update tasks:", error);
+    return { message: "Failed to update tasks. Please try again." };
   }
 }
 
@@ -216,15 +246,15 @@ export async function updateDailyLogTasksAction(
 export async function submitForApprovalAction(
   id: string,
   _prevState: ActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
-  const tasks_sign_off = formData.get('tasks_sign_off') as string;
-  const assignee_comment = formData.get('assignee_comment') as string;
+  const tasks_sign_off = formData.get("tasks_sign_off") as string;
+  const assignee_comment = formData.get("assignee_comment") as string;
 
   // Validate
   const validatedFields = SubmitForApprovalSchema.safeParse({
@@ -235,7 +265,7 @@ export async function submitForApprovalAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Please fix the errors below',
+      message: "Please fix the errors below",
     };
   }
 
@@ -244,27 +274,27 @@ export async function submitForApprovalAction(
       id,
       orgId,
       userId,
-      validatedFields.data.tasks_sign_off as 'ALL_GOOD' | 'ACTION_REQUIRED',
-      validatedFields.data.assignee_comment
+      validatedFields.data.tasks_sign_off as "ALL_GOOD" | "ACTION_REQUIRED",
+      validatedFields.data.assignee_comment,
     );
 
     if (!result) {
       return {
         message:
-          'Failed to submit log. Make sure all tasks are completed and you are the assignee.',
+          "Failed to submit log. Make sure all tasks are completed and you are the assignee.",
       };
     }
 
-    revalidatePath('/logs/daily');
+    revalidatePath("/logs/daily");
     revalidatePath(`/logs/daily/${id}`);
 
     return {
       success: true,
-      message: 'Log submitted for approval successfully',
+      message: "Log submitted for approval successfully",
     };
   } catch (error) {
-    console.error('Failed to submit log:', error);
-    return { message: 'Failed to submit log. Please try again.' };
+    console.error("Failed to submit log:", error);
+    return { message: "Failed to submit log. Please try again." };
   }
 }
 
@@ -274,14 +304,14 @@ export async function submitForApprovalAction(
 export async function approveDailyLogAction(
   id: string,
   _prevState: ActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
-  const reviewer_comment = formData.get('reviewer_comment') as string;
+  const reviewer_comment = formData.get("reviewer_comment") as string;
 
   try {
     const result = await approveDailyLog(id, orgId, userId, reviewer_comment);
@@ -289,18 +319,18 @@ export async function approveDailyLogAction(
     if (!result) {
       return {
         message:
-          'Failed to approve log. Make sure you are the assigned reviewer and the log is pending approval.',
+          "Failed to approve log. Make sure you are the assigned reviewer and the log is pending approval.",
       };
     }
 
-    revalidatePath('/logs/daily');
+    revalidatePath("/logs/daily");
     revalidatePath(`/logs/daily/${id}`);
-    revalidatePath('/logs/review');
+    revalidatePath("/logs/review");
 
-    return { success: true, message: 'Log approved successfully' };
+    return { success: true, message: "Log approved successfully" };
   } catch (error) {
-    console.error('Failed to approve log:', error);
-    return { message: 'Failed to approve log. Please try again.' };
+    console.error("Failed to approve log:", error);
+    return { message: "Failed to approve log. Please try again." };
   }
 }
 
@@ -310,14 +340,14 @@ export async function approveDailyLogAction(
 export async function rejectDailyLogAction(
   id: string,
   _prevState: ActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
-  const reviewer_comment = formData.get('reviewer_comment') as string;
+  const reviewer_comment = formData.get("reviewer_comment") as string;
 
   // Validate
   const validatedFields = ReviewSchema.safeParse({ reviewer_comment });
@@ -325,7 +355,7 @@ export async function rejectDailyLogAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Please provide a reason for rejection',
+      message: "Please provide a reason for rejection",
     };
   }
 
@@ -334,24 +364,24 @@ export async function rejectDailyLogAction(
       id,
       orgId,
       userId,
-      validatedFields.data.reviewer_comment
+      validatedFields.data.reviewer_comment,
     );
 
     if (!result) {
       return {
         message:
-          'Failed to reject log. Make sure you are the assigned reviewer and the log is pending approval.',
+          "Failed to reject log. Make sure you are the assigned reviewer and the log is pending approval.",
       };
     }
 
-    revalidatePath('/logs/daily');
+    revalidatePath("/logs/daily");
     revalidatePath(`/logs/daily/${id}`);
-    revalidatePath('/logs/review');
+    revalidatePath("/logs/review");
 
-    return { success: true, message: 'Log rejected successfully' };
+    return { success: true, message: "Log rejected successfully" };
   } catch (error) {
-    console.error('Failed to reject log:', error);
-    return { message: 'Failed to reject log. Please try again.' };
+    console.error("Failed to reject log:", error);
+    return { message: "Failed to reject log. Please try again." };
   }
 }
 
@@ -361,7 +391,7 @@ export async function rejectDailyLogAction(
 export async function reopenDailyLogAction(id: string): Promise<ActionState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
   try {
@@ -370,16 +400,16 @@ export async function reopenDailyLogAction(id: string): Promise<ActionState> {
     if (!result) {
       return {
         message:
-          'Failed to reopen log. Make sure you are the assignee and the log is rejected.',
+          "Failed to reopen log. Make sure you are the assignee and the log is rejected.",
       };
     }
 
-    revalidatePath('/logs/daily');
+    revalidatePath("/logs/daily");
     revalidatePath(`/logs/daily/${id}`);
 
-    return { success: true, message: 'Log reopened successfully' };
+    return { success: true, message: "Log reopened successfully" };
   } catch (error) {
-    console.error('Failed to reopen log:', error);
-    return { message: 'Failed to reopen log. Please try again.' };
+    console.error("Failed to reopen log:", error);
+    return { message: "Failed to reopen log. Please try again." };
   }
 }

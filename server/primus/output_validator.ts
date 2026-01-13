@@ -924,13 +924,17 @@ export function validateProceduralQuality(output: string): {
   const formPattern = /Form\s+[A-Z]{2,}-[A-Z]{2,}-\d{2}/gi;
   const formMatches = output.match(formPattern);
   const formCount = formMatches?.length || 0;
-  
+
   if (formCount === 0) {
     warnings.push("No form references found (e.g., 'Form FSM-TR-01')");
-    suggestions.push("Add specific form numbers for procedures, monitoring, and records");
+    suggestions.push(
+      "Add specific form numbers for procedures, monitoring, and records",
+    );
     score -= 20;
   } else if (formCount < 3) {
-    warnings.push(`Only ${formCount} form reference(s) found - may need more for audit readiness`);
+    warnings.push(
+      `Only ${formCount} form reference(s) found - may need more for audit readiness`,
+    );
     score -= 10;
   }
 
@@ -944,21 +948,26 @@ export function validateProceduralQuality(output: string): {
     /every\s+\w+\s+at/gi, // "every Monday at"
     /within\s+\d+\s+(hour|day|week)/gi, // "within 24 hours"
   ];
-  
-  const hasSpecificFrequencies = frequencyPatterns.some(p => p.test(output));
+
+  const hasSpecificFrequencies = frequencyPatterns.some((p) => p.test(output));
   if (!hasSpecificFrequencies) {
     warnings.push("Missing specific frequencies for monitoring/verification");
-    suggestions.push("Add specific frequencies: 'Every Monday at 9 AM', 'Within 24 hours', etc.");
+    suggestions.push(
+      "Add specific frequencies: 'Every Monday at 9 AM', 'Within 24 hours', etc.",
+    );
     score -= 15;
   }
 
   // Check for responsible parties (job titles)
-  const responsiblePattern = /(Food Safety Manager|QA Manager|QA Supervisor|Production Manager|Line Supervisor)/gi;
+  const responsiblePattern =
+    /(Food Safety Manager|QA Manager|QA Supervisor|Production Manager|Line Supervisor)/gi;
   const responsibleMatches = output.match(responsiblePattern);
   const responsibleCount = responsibleMatches?.length || 0;
-  
+
   if (responsibleCount < 3) {
-    warnings.push("Few specific job titles found - procedures should specify who does what");
+    warnings.push(
+      "Few specific job titles found - procedures should specify who does what",
+    );
     suggestions.push("Add specific job titles for each procedure step");
     score -= 10;
   }
@@ -971,45 +980,64 @@ export function validateProceduralQuality(output: string): {
     /within\s+limits/gi,
     /compliance\s+rate/gi,
   ];
-  
-  const hasCriteria = criteriaPatterns.some(p => p.test(output));
+
+  const hasCriteria = criteriaPatterns.some((p) => p.test(output));
   if (!hasCriteria) {
     warnings.push("Missing acceptance criteria for monitoring/verification");
-    suggestions.push("Add specific criteria: '≥95% completion', 'Temperature must be ≥40°F'");
+    suggestions.push(
+      "Add specific criteria: '≥95% completion', 'Temperature must be ≥40°F'",
+    );
     score -= 15;
   }
 
   // Check Section 9 (Monitoring) has substantial content
-  const monitoringMatch = output.match(/9\.\s+MONITORING[\s\S]{0,2000}?(?=\n\d+\.|$)/i);
+  const monitoringMatch = output.match(
+    /9\.\s+MONITORING[\s\S]{0,2000}?(?=\n\d+\.|$)/i,
+  );
   if (monitoringMatch) {
     const monitoringContent = monitoringMatch[0];
     if (monitoringContent.length < 300) {
-      warnings.push("Section 9 (Monitoring) appears too brief for audit readiness");
-      suggestions.push("Expand monitoring section with specific procedures, forms, and frequencies");
+      warnings.push(
+        "Section 9 (Monitoring) appears too brief for audit readiness",
+      );
+      suggestions.push(
+        "Expand monitoring section with specific procedures, forms, and frequencies",
+      );
       score -= 10;
     }
   }
 
   // Check Section 11 (CAPA) has step-by-step procedures
-  const capaMatch = output.match(/11\.\s+CORRECTIVE[\s\S]{0,2000}?(?=\n\d+\.|$)/i);
+  const capaMatch = output.match(
+    /11\.\s+CORRECTIVE[\s\S]{0,2000}?(?=\n\d+\.|$)/i,
+  );
   if (capaMatch) {
     const capaContent = capaMatch[0];
-    const hasSteps = /1\.\s+[A-Z]/i.test(capaContent) || /Step\s+1/i.test(capaContent);
+    const hasSteps =
+      /1\.\s+[A-Z]/i.test(capaContent) || /Step\s+1/i.test(capaContent);
     if (!hasSteps) {
-      warnings.push("Section 11 (CAPA) should have numbered step-by-step procedures");
-      suggestions.push("Format CAPA as numbered steps: 1. Initiation, 2. Investigation, 3. Correction, etc.");
+      warnings.push(
+        "Section 11 (CAPA) should have numbered step-by-step procedures",
+      );
+      suggestions.push(
+        "Format CAPA as numbered steps: 1. Initiation, 2. Investigation, 3. Correction, etc.",
+      );
       score -= 10;
     }
   }
 
   // Check Section 13 (Records) has retention periods
-  const recordsMatch = output.match(/13\.\s+RECORD[\s\S]{0,2000}?(?=\n\d+\.|$)/i);
+  const recordsMatch = output.match(
+    /13\.\s+RECORD[\s\S]{0,2000}?(?=\n\d+\.|$)/i,
+  );
   if (recordsMatch) {
     const recordsContent = recordsMatch[0];
     const hasRetention = /\d+\s+years?/gi.test(recordsContent);
     if (!hasRetention) {
       warnings.push("Section 13 (Records) should specify retention periods");
-      suggestions.push("Add retention periods for each record type: '2 years', '3 years', etc.");
+      suggestions.push(
+        "Add retention periods for each record type: '2 years', '3 years', etc.",
+      );
       score -= 10;
     }
   }

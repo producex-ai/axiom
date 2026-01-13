@@ -72,18 +72,18 @@ export default function CustomerSection() {
                 </p>
 
                 <div className="mb-6 space-y-3">
-                  {(Object.values(t.raw(`roles.${role.key}.benefits`)) as string[]).map(
-                    (benefit: string, index: number) => (
-                      <div key={index} className="flex items-start">
-                        <CheckCircle
-                          className={`h-5 w-5 ${colors.text} mt-0.5 mr-3 flex-shrink-0`}
-                        />
-                        <span className="text-gray-700 text-sm">
-                          {benefit}
-                        </span>
-                      </div>
-                    ),
-                  )}
+                  {(
+                    Object.values(
+                      t.raw(`roles.${role.key}.benefits`),
+                    ) as string[]
+                  ).map((benefit: string, index: number) => (
+                    <div key={index} className="flex items-start">
+                      <CheckCircle
+                        className={`h-5 w-5 ${colors.text} mt-0.5 mr-3 flex-shrink-0`}
+                      />
+                      <span className="text-gray-700 text-sm">{benefit}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
@@ -97,32 +97,33 @@ export default function CustomerSection() {
               (testimonialKey: string, index: number) => {
                 const testimonial = t.raw(`testimonials.${testimonialKey}`);
                 return (
-                <div
-                  key={testimonialKey}
-                  className="rounded-xl border border-gray-100 bg-gray-50 p-6"
-                >
-                  <div className="mb-4 flex items-center">
-                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 font-semibold text-white">
-                      {testimonial.avatar}
+                  <div
+                    key={testimonialKey}
+                    className="rounded-xl border border-gray-100 bg-gray-50 p-6"
+                  >
+                    <div className="mb-4 flex items-center">
+                      <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 font-semibold text-white">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-gray-900">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-gray-600 text-sm">
+                          {testimonial.title}
+                        </div>
+                        <div className="text-emerald-600 text-sm">
+                          {testimonial.company}
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {testimonial.author}
-                      </div>
-                      <div className="text-gray-600 text-sm">
-                        {testimonial.title}
-                      </div>
-                      <div className="text-emerald-600 text-sm">
-                        {testimonial.company}
-                      </div>
-                    </div>
+                    <blockquote className="text-gray-700 italic">
+                      "{testimonial.quote}"
+                    </blockquote>
                   </div>
-                  <blockquote className="text-gray-700 italic">
-                    "{testimonial.quote}"
-                  </blockquote>
-                </div>
-              );
-            })}
+                );
+              },
+            )}
           </div>
         </div>
       </div>

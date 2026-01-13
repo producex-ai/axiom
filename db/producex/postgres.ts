@@ -1,9 +1,9 @@
-import { Pool, type QueryResult, type QueryResultRow } from 'pg';
+import { Pool, type QueryResult, type QueryResultRow } from "pg";
 
 const connectionString = process.env.PRODUCEX_DB_URL;
 
 if (!connectionString) {
-  console.warn('PRODUCEX_DB_URL is not defined');
+  console.warn("PRODUCEX_DB_URL is not defined");
 }
 
 let pool: Pool | null = null;
@@ -13,7 +13,7 @@ function getPool(): Pool {
     pool = new Pool({
       connectionString,
       ssl:
-        process.env.NODE_ENV === 'production'
+        process.env.NODE_ENV === "production"
           ? { rejectUnauthorized: false }
           : undefined,
       max: 10, // Maximum number of clients in the pool
@@ -27,7 +27,7 @@ function getPool(): Pool {
 export async function query<T extends QueryResultRow = any>(
   text: string,
   // biome-ignore lint/suspicious/noExplicitAny: PG params can be any type
-  params?: any[]
+  params?: any[],
 ): Promise<QueryResult<T>> {
   const client = await getPool().connect();
   try {

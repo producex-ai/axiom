@@ -11,7 +11,7 @@ export default async function AuthCheckLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { orgId } = await auth();
+  const { orgId, has } = await auth();
   if (!orgId) {
     redirect('/sign-in');
   }
@@ -23,10 +23,13 @@ export default async function AuthCheckLayout({
     redirect('/no-access');
   }
 
+  // Check if user is an operator (server-side)
+  const isOperator = has?.({ role: 'org:operator' }) ?? false;
+
   return (
     <SidebarProvider>
       <div className='flex min-h-screen w-full'>
-        <AppSidebar />
+        <AppSidebar isOperator={isOperator} />
         <div className='flex flex-1 flex-col'>
           <AppHeader />
           <main className='flex-1 overflow-auto bg-muted/30'>

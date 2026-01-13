@@ -10,9 +10,12 @@ interface DocumentEditorPageProps {
   }>;
 }
 
-export default async function DocumentEditorPage({ params, searchParams }: DocumentEditorPageProps) {
+export default async function DocumentEditorPage({
+  params,
+  searchParams,
+}: DocumentEditorPageProps) {
   const { id } = await params;
   const { mode } = await searchParams;
-  
+
   return <DocumentEditorClient documentId={id} initialMode={mode || "view"} />;
 }

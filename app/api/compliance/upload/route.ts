@@ -43,10 +43,7 @@ export async function POST(request: NextRequest) {
 
     // Validate inputs
     if (!file) {
-      return NextResponse.json(
-        { error: "File is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
     if (!moduleNumber || !subModuleCode) {
@@ -109,10 +106,7 @@ export async function POST(request: NextRequest) {
 
     // Upload to S3 with proper naming convention
     const timestamp = Date.now();
-    const sanitizedTitle = submoduleSpec.title.replace(
-      /[^a-zA-Z0-9.-]/g,
-      "_",
-    );
+    const sanitizedTitle = submoduleSpec.title.replace(/[^a-zA-Z0-9.-]/g, "_");
     const uploadFileName = `${subModuleCode}_${sanitizedTitle}_v1.docx`;
 
     // S3 key following pattern: primus_gfs/{moduleNumber}/{subModuleCode}/v{version}_{timestamp}.docx

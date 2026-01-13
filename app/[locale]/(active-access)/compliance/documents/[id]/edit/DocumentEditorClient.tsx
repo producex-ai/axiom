@@ -82,7 +82,7 @@ export default function DocumentEditorClient({
       setError(null);
 
       const response = await fetch(
-        `/api/compliance/documents/${documentId}/content`
+        `/api/compliance/documents/${documentId}/content`,
       );
 
       if (!response.ok) {
@@ -103,7 +103,7 @@ export default function DocumentEditorClient({
       if (data.metadata?.analysisScore) {
         console.log(
           "[DocumentEditor] Loaded existing analysis results:",
-          data.metadata.analysisScore
+          data.metadata.analysisScore,
         );
         setAuditAnalysis(data.metadata.analysisScore);
         setAuditIssues(data.metadata.analysisScore.risks || []);
@@ -138,16 +138,16 @@ export default function DocumentEditorClient({
           new RegExp(
             `^#{1,6}\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
-              "\\$&"
+              "\\$&",
             )}\\s*\\n+`,
-            "i"
+            "i",
           ),
           new RegExp(
             `^${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
-              "\\$&"
+              "\\$&",
             )}\\s*\\n+`,
-            "i"
+            "i",
           ),
         ];
 
@@ -164,7 +164,7 @@ export default function DocumentEditorClient({
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ content: markdown }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -214,16 +214,16 @@ export default function DocumentEditorClient({
           new RegExp(
             `^#{1,6}\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
-              "\\$&"
+              "\\$&",
             )}\\s*\\n+`,
-            "i"
+            "i",
           ),
           new RegExp(
             `^${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
-              "\\$&"
+              "\\$&",
             )}\\s*\\n+`,
-            "i"
+            "i",
           ),
         ];
 
@@ -245,7 +245,7 @@ export default function DocumentEditorClient({
         const loadingToastId = toast.loading(
           skipValidation
             ? "Publishing document..."
-            : "Saving and validating document..."
+            : "Saving and validating document...",
         );
 
         try {
@@ -331,7 +331,7 @@ export default function DocumentEditorClient({
               status: "published",
               comment: comment // Pass comment to backend
             }),
-          }
+          },
         );
 
         if (!response.ok) {
@@ -392,7 +392,7 @@ export default function DocumentEditorClient({
   const handleBack = () => {
     if (hasChanges) {
       const confirmed = confirm(
-        "You have unsaved changes. Are you sure you want to leave?"
+        "You have unsaved changes. Are you sure you want to leave?",
       );
       if (!confirmed) return;
     }
@@ -413,7 +413,7 @@ export default function DocumentEditorClient({
     } else {
       if (hasChanges) {
         const confirmed = confirm(
-          "You have unsaved changes. Switching to view mode will discard them. Continue?"
+          "You have unsaved changes. Switching to view mode will discard them. Continue?",
         );
         if (!confirmed) return;
       }

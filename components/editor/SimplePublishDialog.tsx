@@ -83,11 +83,7 @@ export function SimplePublishDialog({
         </div>
 
         <DialogFooter className="gap-2">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            disabled={isPublishing}
-          >
+          <Button variant="outline" onClick={onClose} disabled={isPublishing}>
             Cancel
           </Button>
           <Button

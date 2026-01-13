@@ -106,9 +106,7 @@ export default function HeroSection() {
                       key={metric.label}
                       className={`rounded-lg p-4 ${getColorClasses(metric.color)}`}
                     >
-                      <div className="font-bold text-2xl">
-                        {metric.value}
-                      </div>
+                      <div className="font-bold text-2xl">{metric.value}</div>
                       <div className="text-gray-600 text-sm">
                         {metric.label}
                       </div>
@@ -119,8 +117,16 @@ export default function HeroSection() {
                 {/* Progress Bars */}
                 <div className="space-y-3">
                   {[
-                    { label: "Framework Coverage", value: "15/15", percentage: 100 },
-                    { label: "Document Generation", value: "Active", percentage: 85 },
+                    {
+                      label: "Framework Coverage",
+                      value: "15/15",
+                      percentage: 100,
+                    },
+                    {
+                      label: "Document Generation",
+                      value: "Active",
+                      percentage: 85,
+                    },
                   ].map((item) => (
                     <div key={item.label}>
                       <div className="mb-1 flex justify-between text-gray-600 text-sm">

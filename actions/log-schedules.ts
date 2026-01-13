@@ -1,9 +1,9 @@
-'use server';
+"use server";
 
-import { auth } from '@clerk/nextjs/server';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { z } from 'zod';
+import { auth } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { z } from "zod";
 
 import {
   createLogSchedule,
@@ -11,24 +11,25 @@ import {
   getLogScheduleById,
   getLogSchedulesByTemplateId,
   updateLogSchedule,
-} from '@/db/queries/log-schedules';
-import { getLogTemplateById } from '@/db/queries/log-templates';
-import { getOrgMembersAction } from './clerk';
+} from "@/db/queries/log-schedules";
+import { getLogTemplateById } from "@/db/queries/log-templates";
+import { generateLogsForSchedule } from "@/lib/cron/generate-daily-logs";
+import { getOrgMembersAction } from "./clerk";
 
 // Define validation schema with date validation
 const CreateScheduleSchema = z
   .object({
-    template_id: z.string().uuid('Invalid template ID'),
-    start_date: z.string().min(1, 'Start date is required'),
-    end_date: z.string().optional(),
-    assignee_id: z.string().optional(),
-    reviewer_id: z.string().optional(),
+    template_id: z.string().uuid("Invalid template ID"),
+    start_date: z.string().min(1, "Start date is required"),
+    end_date: z.string().min(1, "End date is required"),
+    assignee_id: z.string().min(1, "Assignee is required"),
+    reviewer_id: z.string().min(1, "Reviewer is required"),
     frequency: z.enum([
-      'weekly',
-      'monthly',
-      'quarterly',
-      'half_yearly',
-      'yearly',
+      "weekly",
+      "monthly",
+      "quarterly",
+      "half_yearly",
+      "yearly",
     ]),
     days_of_week: z.array(z.number().min(0).max(6)).optional(),
     day_of_month: z.coerce.number().int().min(1).max(31).optional(),
@@ -38,67 +39,66 @@ const CreateScheduleSchema = z
   .refine(
     (data) => {
       // Validate days_of_week is required for weekly frequency
-      if (data.frequency === 'weekly') {
+      if (data.frequency === "weekly") {
         return data.days_of_week && data.days_of_week.length > 0;
       }
       return true;
     },
     {
-      message: 'Select at least one day for weekly schedules',
-      path: ['days_of_week'],
-    }
+      message: "Select at least one day for weekly schedules",
+      path: ["days_of_week"],
+    },
   )
   .refine(
     (data) => {
       // Validate day_of_month is required for non-weekly frequencies
-      if (data.frequency !== 'weekly') {
+      if (data.frequency !== "weekly") {
         return data.day_of_month !== undefined;
       }
       return true;
     },
     {
-      message: 'Day of month is required for non-weekly schedules',
-      path: ['day_of_month'],
-    }
+      message: "Day of month is required for non-weekly schedules",
+      path: ["day_of_month"],
+    },
   )
   .refine(
     (data) => {
       // Validate month_of_year is required for yearly frequency
-      if (data.frequency === 'yearly') {
+      if (data.frequency === "yearly") {
         return data.month_of_year !== undefined;
       }
       return true;
     },
     {
-      message: 'Month is required for yearly schedules',
-      path: ['month_of_year'],
-    }
+      message: "Month is required for yearly schedules",
+      path: ["month_of_year"],
+    },
   )
   .refine(
     (data) => {
-      if (!data.end_date) return true; // end_date is optional
       const start = new Date(data.start_date);
       const end = new Date(data.end_date);
       return end > start;
     },
     {
-      message: 'End date must be after start date',
-      path: ['end_date'],
-    }
+      message: "End date must be after start date",
+      path: ["end_date"],
+    },
   );
 
 const UpdateScheduleSchema = z
   .object({
-    start_date: z.string().min(1, 'Start date is required'),
-    end_date: z.string().optional(),
-    assignee_id: z.string().optional(),
-    reviewer_id: z.string().optional(),
+    start_date: z.string().min(1, "Start date is required"),
+    end_date: z.string().min(1, "End date is required"),
+    assignee_id: z.string().min(1, "Assignee is required"),
+    reviewer_id: z.string().min(1, "Reviewer is required"),
     frequency: z.enum([
-      'weekly',
-      'monthly',
-      'quarterly',
-      'half_yearly',
-      'yearly',
+      "weekly",
+      "monthly",
+      "quarterly",
+      "half_yearly",
+      "yearly",
     ]),
     days_of_week: z.array(z.number().min(0).max(6)).optional(),
     day_of_month: z.coerce.number().int().min(1).max(31).optional(),
@@ -107,51 +107,50 @@ const UpdateScheduleSchema = z
   })
   .refine(
     (data) => {
-      if (data.frequency === 'weekly') {
+      if (data.frequency === "weekly") {
         return data.days_of_week && data.days_of_week.length > 0;
       }
       return true;
     },
     {
-      message: 'Select at least one day for weekly schedules',
-      path: ['days_of_week'],
-    }
+      message: "Select at least one day for weekly schedules",
+      path: ["days_of_week"],
+    },
   )
   .refine(
     (data) => {
-      if (data.frequency !== 'weekly') {
+      if (data.frequency !== "weekly") {
         return data.day_of_month !== undefined;
       }
       return true;
     },
     {
-      message: 'Day of month is required for non-weekly schedules',
-      path: ['day_of_month'],
-    }
+      message: "Day of month is required for non-weekly schedules",
+      path: ["day_of_month"],
+    },
   )
   .refine(
     (data) => {
-      if (data.frequency === 'yearly') {
+      if (data.frequency === "yearly") {
         return data.month_of_year !== undefined;
       }
       return true;
     },
     {
-      message: 'Month is required for yearly schedules',
-      path: ['month_of_year'],
-    }
+      message: "Month is required for yearly schedules",
+      path: ["month_of_year"],
+    },
   )
   .refine(
     (data) => {
-      if (!data.end_date) return true;
       const start = new Date(data.start_date);
       const end = new Date(data.end_date);
       return end > start;
     },
     {
-      message: 'End date must be after start date',
-      path: ['end_date'],
-    }
+      message: "End date must be after start date",
+      path: ["end_date"],
+    },
   );
 
 export type CreateScheduleState = {
@@ -173,36 +172,36 @@ export type CreateScheduleState = {
 
 export async function createLogScheduleAction(
   _prevState: CreateScheduleState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CreateScheduleState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
   // Extract fields
-  const template_id = formData.get('template_id') as string;
-  const start_date = formData.get('start_date') as string;
-  const end_date = formData.get('end_date') as string;
-  const assignee_id = formData.get('assignee_id') as string;
-  const reviewer_id = formData.get('reviewer_id') as string;
-  const frequency = formData.get('frequency') as string;
-  const day_of_month = formData.get('day_of_month') as string;
-  const month_of_year = formData.get('month_of_year') as string;
-  const times_per_day = formData.get('times_per_day') as string;
+  const template_id = formData.get("template_id") as string;
+  const start_date = formData.get("start_date") as string;
+  const end_date = formData.get("end_date") as string;
+  const assignee_id = formData.get("assignee_id") as string;
+  const reviewer_id = formData.get("reviewer_id") as string;
+  const frequency = formData.get("frequency") as string;
+  const day_of_month = formData.get("day_of_month") as string;
+  const month_of_year = formData.get("month_of_year") as string;
+  const times_per_day = formData.get("times_per_day") as string;
 
   // Extract days of week - handling multiple checkboxes (only for weekly)
   const days = formData
-    .getAll('days_of_week')
+    .getAll("days_of_week")
     .map((d) => Number.parseInt(d.toString()));
 
   // Validate
   const validatedFields = CreateScheduleSchema.safeParse({
     template_id,
     start_date,
-    end_date: end_date || undefined,
-    assignee_id: assignee_id || undefined,
-    reviewer_id: reviewer_id || undefined,
+    end_date,
+    assignee_id,
+    reviewer_id,
     frequency,
     days_of_week: days.length > 0 ? days : undefined,
     day_of_month: day_of_month || undefined,
@@ -213,7 +212,6 @@ export async function createLogScheduleAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Please fix the errors below',
     };
   }
 
@@ -221,24 +219,24 @@ export async function createLogScheduleAction(
   try {
     const template = await getLogTemplateById(
       validatedFields.data.template_id,
-      orgId
+      orgId,
     );
 
     if (!template) {
-      return { message: 'Template not found' };
+      return { message: "Template not found" };
     }
 
     if (template.schedule_id) {
       return {
         message:
-          'This template is already scheduled. Please update the existing schedule instead.',
+          "This template is already scheduled. Please update the existing schedule instead.",
         errors: {
-          template_id: ['Template is already scheduled'],
+          template_id: ["Template is already scheduled"],
         },
       };
     }
 
-    await createLogSchedule({
+    const createdSchedule = await createLogSchedule({
       template_id: validatedFields.data.template_id,
       org_id: orgId,
       start_date: new Date(validatedFields.data.start_date),
@@ -251,52 +249,56 @@ export async function createLogScheduleAction(
       days_of_week: validatedFields.data.days_of_week || null,
       day_of_month: validatedFields.data.day_of_month || null,
       month_of_year: validatedFields.data.month_of_year || null,
-      status: 'ACTIVE',
+      status: "ACTIVE",
       created_by: userId,
       times_per_day: validatedFields.data.times_per_day,
     });
 
+    if (createdSchedule && formData.get("generate_today") === "on") {
+      await generateLogsForSchedule(createdSchedule);
+    }
+
     revalidatePath(`/logs/templates/${template_id}`);
-    revalidatePath('/logs/scheduled');
+    revalidatePath("/logs/scheduled");
   } catch (error) {
-    console.error('Failed to create schedule:', error);
-    return { message: 'Failed to create schedule. Please try again.' };
+    console.error("Failed to create schedule:", error);
+    return { message: "Failed to create schedule. Please try again." };
   }
 
-  redirect('/logs/scheduled');
+  redirect("/logs/scheduled");
 }
 
 export async function updateLogScheduleAction(
   scheduleId: string,
   _prevState: CreateScheduleState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CreateScheduleState> {
   const { userId, orgId } = await auth();
   if (!userId || !orgId) {
-    return { message: 'Unauthorized' };
+    return { message: "Unauthorized" };
   }
 
   // Extract fields
-  const start_date = formData.get('start_date') as string;
-  const end_date = formData.get('end_date') as string;
-  const assignee_id = formData.get('assignee_id') as string;
-  const reviewer_id = formData.get('reviewer_id') as string;
-  const frequency = formData.get('frequency') as string;
-  const day_of_month = formData.get('day_of_month') as string;
-  const month_of_year = formData.get('month_of_year') as string;
-  const times_per_day = formData.get('times_per_day') as string;
+  const start_date = formData.get("start_date") as string;
+  const end_date = formData.get("end_date") as string;
+  const assignee_id = formData.get("assignee_id") as string;
+  const reviewer_id = formData.get("reviewer_id") as string;
+  const frequency = formData.get("frequency") as string;
+  const day_of_month = formData.get("day_of_month") as string;
+  const month_of_year = formData.get("month_of_year") as string;
+  const times_per_day = formData.get("times_per_day") as string;
 
   // Extract days of week
   const days = formData
-    .getAll('days_of_week')
+    .getAll("days_of_week")
     .map((d) => Number.parseInt(d.toString()));
 
   // Validate
   const validatedFields = UpdateScheduleSchema.safeParse({
     start_date,
-    end_date: end_date || undefined,
-    assignee_id: assignee_id || undefined,
-    reviewer_id: reviewer_id || undefined,
+    end_date,
+    assignee_id,
+    reviewer_id,
     frequency,
     days_of_week: days.length > 0 ? days : undefined,
     day_of_month: day_of_month || undefined,
@@ -307,7 +309,6 @@ export async function updateLogScheduleAction(
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Please fix the errors below',
     };
   }
 
@@ -327,27 +328,31 @@ export async function updateLogScheduleAction(
         month_of_year: validatedFields.data.month_of_year || null,
         times_per_day: validatedFields.data.times_per_day,
       },
-      orgId
+      orgId,
     );
 
+    if (updatedSchedule && formData.get("generate_today") === "on") {
+      await generateLogsForSchedule(updatedSchedule);
+    }
+
     if (!updatedSchedule) {
-      return { message: 'Failed to update schedule' };
+      return { message: "Failed to update schedule" };
     }
 
     revalidatePath(`/logs/templates/${updatedSchedule.template_id}`);
-    revalidatePath('/logs/scheduled');
+    revalidatePath("/logs/scheduled");
   } catch (error) {
-    console.error('Failed to update schedule:', error);
-    return { message: 'Failed to update schedule. Please try again.' };
+    console.error("Failed to update schedule:", error);
+    return { message: "Failed to update schedule. Please try again." };
   }
 
-  redirect('/logs/scheduled');
+  redirect("/logs/scheduled");
 }
 
 export async function getLogScheduleByIdAction(scheduleId: string) {
   const { orgId } = await auth();
   if (!orgId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   const result = await getLogScheduleById(scheduleId, orgId);
@@ -357,7 +362,7 @@ export async function getLogScheduleByIdAction(scheduleId: string) {
 export async function getLogSchedulesByTemplateAction(templateId: string) {
   const { orgId } = await auth();
   if (!orgId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   const result = await getLogSchedulesByTemplateId(templateId, orgId);
@@ -386,7 +391,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
 > {
   const { orgId } = await auth();
   if (!orgId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   const [schedules, members] = await Promise.all([
@@ -399,7 +404,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
     members.map((m) => [
       m.id,
       m.firstName && m.lastName ? `${m.firstName} ${m.lastName}` : m.email,
-    ])
+    ]),
   );
 
   // Enrich schedules with user names
@@ -423,7 +428,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
       month_of_year: schedule.month_of_year,
       times_per_day: schedule.times_per_day || 1,
       status: schedule.status,
-    })
+    }),
   );
 
   return enrichedSchedules;

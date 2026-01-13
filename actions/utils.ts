@@ -1,6 +1,6 @@
 /**
  * Server Action Utilities - Shared Errors and Responses
- * 
+ *
  * Standardized error handling and response types for all server actions
  */
 
@@ -9,7 +9,7 @@ export class ServerActionError extends Error {
     public code: string,
     message: string,
     public statusCode: number = 400,
-    public details?: unknown
+    public details?: unknown,
   ) {
     super(message);
     this.name = "ServerActionError";

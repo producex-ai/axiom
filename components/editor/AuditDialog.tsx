@@ -62,7 +62,10 @@ export function AuditDialog({
     : null;
 
   // Check if audit readiness score is >90%
-  const canPublishWithWarning = analysisScores && analysisScores.audit >= 85 && analysisScores.overall >= 85;
+  const canPublishWithWarning =
+    analysisScores &&
+    analysisScores.audit >= 85 &&
+    analysisScores.overall >= 85;
 
   // Debug logging
   React.useEffect(() => {
@@ -81,7 +84,7 @@ export function AuditDialog({
       acc[rec.category].push(rec);
       return acc;
     },
-    {}
+    {},
   );
 
   const categoryLabels: Record<string, string> = {
@@ -106,7 +109,8 @@ export function AuditDialog({
             <span>Document analysis</span>
           </DialogTitle>
           <DialogDescription className="text-sm">
-            Document v{version} saved. Take a look at the analysis results below before publishing.
+            Document v{version} saved. Take a look at the analysis results below
+            before publishing.
           </DialogDescription>
         </DialogHeader>
 
@@ -121,8 +125,9 @@ export function AuditDialog({
                   Audit Score: {analysisScores?.audit}% - Ready to Publish
                 </p>
                 <p className="text-amber-800 text-sm mt-1">
-                  Some flagged items may be good to have, Not a mandatory audit requirement. If you've verified
-                  the data, you can safely publish.
+                  Some flagged items may be good to have, Not a mandatory audit
+                  requirement. If you've verified the data, you can safely
+                  publish.
                 </p>
               </div>
             </div>
@@ -161,8 +166,8 @@ export function AuditDialog({
                                   rec.priority === "high"
                                     ? "bg-red-600"
                                     : rec.priority === "medium"
-                                    ? "bg-orange-600"
-                                    : "bg-yellow-600"
+                                      ? "bg-orange-600"
+                                      : "bg-yellow-600"
                                 }`}
                               >
                                 {rec.priority}
@@ -229,7 +234,7 @@ export function AuditDialog({
                         ))}
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>

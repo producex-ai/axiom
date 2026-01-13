@@ -93,9 +93,7 @@ function groupDocuments(documents: Document[]): GroupedDocuments {
       };
     }
 
-    if (
-      !grouped[framework_id].modules[module_id].subModules[sub_module_id]
-    ) {
+    if (!grouped[framework_id].modules[module_id].subModules[sub_module_id]) {
       grouped[framework_id].modules[module_id].subModules[sub_module_id] = {
         name: getSubModuleName(framework_id, module_id, sub_module_id),
         documents: [],
@@ -189,7 +187,9 @@ function ModuleSection({
         <CollapsibleContent>
           <div className="border-t">
             {Object.entries(subModules)
-              .sort(([codeA], [codeB]) => codeA.localeCompare(codeB, undefined, { numeric: true }))
+              .sort(([codeA], [codeB]) =>
+                codeA.localeCompare(codeB, undefined, { numeric: true }),
+              )
               .map(([subModuleId, subModule]) => (
                 <div
                   key={subModuleId}
@@ -234,7 +234,11 @@ function FrameworkSection({
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-center gap-3 mb-3">
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary/10 hover:text-primary transition-colors">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 w-8 p-0 hover:bg-primary/10 hover:text-primary transition-colors"
+            >
               {isOpen ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
@@ -253,7 +257,9 @@ function FrameworkSection({
         </div>
         <CollapsibleContent className="space-y-3">
           {Object.entries(modules)
-            .sort(([idA], [idB]) => idA.localeCompare(idB, undefined, { numeric: true }))
+            .sort(([idA], [idB]) =>
+              idA.localeCompare(idB, undefined, { numeric: true }),
+            )
             .map(([moduleId, module]) => (
               <ModuleSection
                 key={moduleId}

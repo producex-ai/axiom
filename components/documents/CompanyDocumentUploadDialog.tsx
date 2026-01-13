@@ -21,7 +21,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { complianceKeys, useComplianceOverview } from "@/lib/compliance/queries";
+import {
+  complianceKeys,
+  useComplianceOverview,
+} from "@/lib/compliance/queries";
 
 interface CompanyDocumentUploadDialogProps {
   open: boolean;
@@ -33,8 +36,9 @@ export function CompanyDocumentUploadDialog({
   onOpenChange,
 }: CompanyDocumentUploadDialogProps) {
   const queryClient = useQueryClient();
-  const { data: overview, isLoading: loadingOverview } = useComplianceOverview();
-  
+  const { data: overview, isLoading: loadingOverview } =
+    useComplianceOverview();
+
   const [uploading, setUploading] = useState(false);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -145,14 +149,17 @@ export function CompanyDocumentUploadDialog({
         <DialogHeader>
           <DialogTitle>Upload Document</DialogTitle>
           <DialogDescription>
-            Upload a DOCX file and assign it to a specific module and sub-module for compliance tracking.
+            Upload a DOCX file and assign it to a specific module and sub-module
+            for compliance tracking.
           </DialogDescription>
         </DialogHeader>
 
         {loadingOverview ? (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-6 w-6 animate-spin text-primary" />
-            <span className="ml-2 text-sm text-muted-foreground">Loading modules...</span>
+            <span className="ml-2 text-sm text-muted-foreground">
+              Loading modules...
+            </span>
           </div>
         ) : (
           <div className="space-y-4">
@@ -201,11 +208,17 @@ export function CompanyDocumentUploadDialog({
               <Select
                 value={selectedSubModule}
                 onValueChange={setSelectedSubModule}
-                disabled={uploading || !selectedModule || !availableSubModules.length}
+                disabled={
+                  uploading || !selectedModule || !availableSubModules.length
+                }
               >
                 <SelectTrigger id="submodule">
                   <SelectValue
-                    placeholder={selectedModule ? "Select a sub-module" : "Select module first"}
+                    placeholder={
+                      selectedModule
+                        ? "Select a sub-module"
+                        : "Select module first"
+                    }
                   />
                 </SelectTrigger>
                 <SelectContent>

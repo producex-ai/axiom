@@ -1,4 +1,4 @@
-import { query } from '@/lib/db/postgres';
+import { query } from "@/lib/db/postgres";
 
 export type DailyLog = {
   id: string;
@@ -8,10 +8,10 @@ export type DailyLog = {
   assignee_id: string;
   reviewer_id: string | null;
   tasks: Record<string, boolean>; // Task name -> completion status
-  tasks_sign_off: 'ALL_GOOD' | 'ACTION_REQUIRED' | null;
+  tasks_sign_off: "ALL_GOOD" | "ACTION_REQUIRED" | null;
   assignee_comment: string | null;
   reviewer_comment: string | null;
-  status: 'PENDING' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED';
+  status: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
   log_date: Date;
   submitted_at: Date | null;
   reviewed_at: Date | null;
@@ -24,6 +24,7 @@ export type DailyLogWithDetails = DailyLog & {
   template_name: string;
   template_category: string | null;
   template_sop: string | null;
+  template_tasks: string[] | null;
   assignee_name: string | null;
   reviewer_name: string | null;
 };
@@ -43,7 +44,7 @@ export type CreateDailyLogInput = {
  * Create a new daily log from a schedule
  */
 export const createDailyLog = async (
-  input: CreateDailyLogInput
+  input: CreateDailyLogInput,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -70,11 +71,11 @@ export const createDailyLog = async (
         JSON.stringify(input.tasks),
         input.log_date,
         input.created_by,
-      ]
+      ],
     );
     return result.rows[0];
   } catch (error) {
-    console.error('Error creating daily log:', error);
+    console.error("Error creating daily log:", error);
     return null;
   }
 };
@@ -85,7 +86,7 @@ export const createDailyLog = async (
 export const updateDailyLogTasks = async (
   id: string,
   orgId: string,
-  tasks: Record<string, boolean>
+  tasks: Record<string, boolean>,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -97,11 +98,11 @@ export const updateDailyLogTasks = async (
       WHERE id = $2 AND org_id = $3 AND status IN ('PENDING', 'REJECTED')
       RETURNING *
       `,
-      [JSON.stringify(tasks), id, orgId]
+      [JSON.stringify(tasks), id, orgId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error updating daily log tasks:', error);
+    console.error("Error updating daily log tasks:", error);
     return null;
   }
 };
@@ -113,8 +114,8 @@ export const submitDailyLogForApproval = async (
   id: string,
   orgId: string,
   assigneeId: string,
-  tasksSignOff: 'ALL_GOOD' | 'ACTION_REQUIRED',
-  assigneeComment?: string
+  tasksSignOff: "ALL_GOOD" | "ACTION_REQUIRED",
+  assigneeComment?: string,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -129,11 +130,11 @@ export const submitDailyLogForApproval = async (
       WHERE id = $3 AND org_id = $4 AND assignee_id = $5 AND status IN ('PENDING', 'REJECTED')
       RETURNING *
       `,
-      [tasksSignOff, assigneeComment || null, id, orgId, assigneeId]
+      [tasksSignOff, assigneeComment || null, id, orgId, assigneeId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error submitting daily log for approval:', error);
+    console.error("Error submitting daily log for approval:", error);
     return null;
   }
 };
@@ -145,7 +146,7 @@ export const approveDailyLog = async (
   id: string,
   orgId: string,
   reviewerId: string,
-  reviewerComment?: string
+  reviewerComment?: string,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -159,11 +160,11 @@ export const approveDailyLog = async (
       WHERE id = $2 AND org_id = $3 AND reviewer_id = $4 AND status = 'PENDING_APPROVAL'
       RETURNING *
       `,
-      [reviewerComment || null, id, orgId, reviewerId]
+      [reviewerComment || null, id, orgId, reviewerId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error approving daily log:', error);
+    console.error("Error approving daily log:", error);
     return null;
   }
 };
@@ -175,7 +176,7 @@ export const rejectDailyLog = async (
   id: string,
   orgId: string,
   reviewerId: string,
-  reviewerComment: string
+  reviewerComment: string,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -189,11 +190,11 @@ export const rejectDailyLog = async (
       WHERE id = $2 AND org_id = $3 AND reviewer_id = $4 AND status = 'PENDING_APPROVAL'
       RETURNING *
       `,
-      [reviewerComment, id, orgId, reviewerId]
+      [reviewerComment, id, orgId, reviewerId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error rejecting daily log:', error);
+    console.error("Error rejecting daily log:", error);
     return null;
   }
 };
@@ -204,7 +205,7 @@ export const rejectDailyLog = async (
 export const reopenDailyLog = async (
   id: string,
   orgId: string,
-  assigneeId: string
+  assigneeId: string,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -219,11 +220,11 @@ export const reopenDailyLog = async (
       WHERE id = $1 AND org_id = $2 AND assignee_id = $3 AND status = 'REJECTED'
       RETURNING *
       `,
-      [id, orgId, assigneeId]
+      [id, orgId, assigneeId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error reopening daily log:', error);
+    console.error("Error reopening daily log:", error);
     return null;
   }
 };
@@ -234,13 +235,13 @@ export const reopenDailyLog = async (
 export const getDailyLogs = async (
   orgId: string,
   filters?: {
-    status?: DailyLog['status'];
+    status?: DailyLog["status"];
     assigneeId?: string;
     reviewerId?: string;
     startDate?: Date;
     endDate?: Date;
     templateId?: string;
-  }
+  },
 ): Promise<DailyLogWithDetails[]> => {
   try {
     let queryText = `
@@ -248,7 +249,8 @@ export const getDailyLogs = async (
         dl.*,
         lt.name as template_name,
         lt.category as template_category,
-        lt.sop as template_sop
+        lt.sop as template_sop,
+        lt.task_list as template_tasks
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.org_id = $1
@@ -298,7 +300,7 @@ export const getDailyLogs = async (
     const result = await query<DailyLogWithDetails>(queryText, params);
     return result.rows;
   } catch (error) {
-    console.error('Error fetching daily logs:', error);
+    console.error("Error fetching daily logs:", error);
     return [];
   }
 };
@@ -308,7 +310,7 @@ export const getDailyLogs = async (
  */
 export const getDailyLogById = async (
   id: string,
-  orgId: string
+  orgId: string,
 ): Promise<DailyLogWithDetails | null> => {
   try {
     const result = await query<DailyLogWithDetails>(
@@ -317,16 +319,17 @@ export const getDailyLogById = async (
         dl.*,
         lt.name as template_name,
         lt.category as template_category,
-        lt.sop as template_sop
+        lt.sop as template_sop,
+        lt.task_list as template_tasks
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.id = $1 AND dl.org_id = $2
       `,
-      [id, orgId]
+      [id, orgId],
     );
     return result.rows[0] || null;
   } catch (error) {
-    console.error('Error fetching daily log:', error);
+    console.error("Error fetching daily log:", error);
     return null;
   }
 };
@@ -336,11 +339,11 @@ export const getDailyLogById = async (
  */
 export const getMyPendingLogs = async (
   orgId: string,
-  assigneeId: string
+  assigneeId: string,
 ): Promise<DailyLogWithDetails[]> => {
   return getDailyLogs(orgId, {
     assigneeId,
-    status: 'PENDING',
+    status: "PENDING",
   });
 };
 
@@ -349,11 +352,11 @@ export const getMyPendingLogs = async (
  */
 export const getLogsForReview = async (
   orgId: string,
-  reviewerId: string
+  reviewerId: string,
 ): Promise<DailyLogWithDetails[]> => {
   return getDailyLogs(orgId, {
     reviewerId,
-    status: 'PENDING_APPROVAL',
+    status: "PENDING_APPROVAL",
   });
 };
 
@@ -362,7 +365,7 @@ export const getLogsForReview = async (
  */
 export const checkDailyLogExists = async (
   scheduleId: string,
-  logDate: Date
+  logDate: Date,
 ): Promise<boolean> => {
   try {
     const result = await query(
@@ -372,11 +375,11 @@ export const checkDailyLogExists = async (
       WHERE schedule_id = $1 AND log_date = $2
       LIMIT 1
       `,
-      [scheduleId, logDate]
+      [scheduleId, logDate],
     );
     return (result.rowCount ?? 0) > 0;
   } catch (error) {
-    console.error('Error checking daily log existence:', error);
+    console.error("Error checking daily log existence:", error);
     return false;
   }
 };
@@ -386,7 +389,7 @@ export const checkDailyLogExists = async (
  */
 export const countDailyLogs = async (
   scheduleId: string,
-  logDate: Date
+  logDate: Date,
 ): Promise<number> => {
   try {
     const result = await query<{ count: string }>(
@@ -395,11 +398,11 @@ export const countDailyLogs = async (
       FROM daily_logs
       WHERE schedule_id = $1 AND log_date = $2
       `,
-      [scheduleId, logDate]
+      [scheduleId, logDate],
     );
-    return Number.parseInt(result.rows[0]?.count ?? '0', 10);
+    return Number.parseInt(result.rows[0]?.count ?? "0", 10);
   } catch (error) {
-    console.error('Error counting daily logs:', error);
+    console.error("Error counting daily logs:", error);
     return 0;
   }
 };
@@ -410,7 +413,7 @@ export const countDailyLogs = async (
 export const getDailyLogStats = async (
   orgId: string,
   startDate: Date,
-  endDate: Date
+  endDate: Date,
 ): Promise<{
   total: number;
   pending: number;
@@ -437,24 +440,24 @@ export const getDailyLogStats = async (
       FROM daily_logs
       WHERE org_id = $1 AND log_date BETWEEN $2 AND $3
       `,
-      [orgId, startDate, endDate]
+      [orgId, startDate, endDate],
     );
 
     const row = result.rows[0];
-    const total = parseInt(row?.total || '0');
-    const approved = parseInt(row?.approved || '0');
+    const total = parseInt(row?.total || "0");
+    const approved = parseInt(row?.approved || "0");
     const completion_rate = total > 0 ? (approved / total) * 100 : 0;
 
     return {
       total,
-      pending: parseInt(row?.pending || '0'),
-      pending_approval: parseInt(row?.pending_approval || '0'),
+      pending: parseInt(row?.pending || "0"),
+      pending_approval: parseInt(row?.pending_approval || "0"),
       approved,
-      rejected: parseInt(row?.rejected || '0'),
+      rejected: parseInt(row?.rejected || "0"),
       completion_rate,
     };
   } catch (error) {
-    console.error('Error fetching daily log stats:', error);
+    console.error("Error fetching daily log stats:", error);
     return {
       total: 0,
       pending: 0,

@@ -2,7 +2,7 @@
 
 /**
  * Evidence Management Server Actions
- * 
+ *
  * Handles all evidence-related operations:
  * - Upload files
  * - Delete evidence
@@ -12,8 +12,20 @@
 import { randomUUID } from "crypto";
 import { auth } from "@clerk/nextjs/server";
 import { query } from "@/lib/db/postgres";
-import { uploadToS3, extractTextFromDOCX, deleteFromS3, getFromS3 } from "@/lib/s3-utils";
-import { ActionResponse, ValidationError, AuthenticationError, ServerError, createErrorResponse, createSuccessResponse } from "./utils";
+import {
+  uploadToS3,
+  extractTextFromDOCX,
+  deleteFromS3,
+  getFromS3,
+} from "@/lib/s3-utils";
+import {
+  ActionResponse,
+  ValidationError,
+  AuthenticationError,
+  ServerError,
+  createErrorResponse,
+  createSuccessResponse,
+} from "./utils";
 
 const MAX_FILES = 3;
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -28,7 +40,7 @@ const ALLOWED_MIME_TYPES = [
 async function getAuthContext(): Promise<{ orgId: string; userId: string }> {
   try {
     const { userId, orgId } = await auth();
-    
+
     if (!userId) {
       throw new AuthenticationError();
     }
@@ -49,14 +61,14 @@ async function getAuthContext(): Promise<{ orgId: string; userId: string }> {
 
 /**
  * Upload evidence files for a submodule
- * 
+ *
  * @param files - Files to upload
  * @param subModuleId - SubModule ID
  * @returns Array of uploaded evidence
  */
 export async function uploadEvidenceAction(
   files: File[],
-  subModuleId: string
+  subModuleId: string,
 ): Promise<ActionResponse> {
   try {
     // Authenticate
@@ -91,15 +103,15 @@ export async function uploadEvidenceAction(
       if (file.size > MAX_FILE_SIZE) {
         throw new ValidationError(
           `File size exceeds maximum limit (${MAX_FILE_SIZE / (1024 * 1024)}MB)`,
-          { fileName: file.name, size: file.size }
+          { fileName: file.name, size: file.size },
         );
       }
 
       if (!ALLOWED_MIME_TYPES.includes(file.type)) {
-        throw new ValidationError(
-          "Only DOCX files are allowed",
-          { fileName: file.name, mimeType: file.type }
-        );
+        throw new ValidationError("Only DOCX files are allowed", {
+          fileName: file.name,
+          mimeType: file.type,
+        });
       }
     }
 
@@ -147,7 +159,7 @@ export async function uploadEvidenceAction(
             textKey,
             file.size,
             userId,
-          ]
+          ],
         );
 
         uploadedEvidence.push({
@@ -181,12 +193,12 @@ export async function uploadEvidenceAction(
 
 /**
  * Delete evidence by ID
- * 
+ *
  * @param evidenceId - Evidence ID to delete
  * @returns Success response
  */
 export async function deleteEvidenceAction(
-  evidenceId: string
+  evidenceId: string,
 ): Promise<ActionResponse> {
   try {
     // Authenticate
@@ -202,7 +214,7 @@ export async function deleteEvidenceAction(
     const result = await query(
       `SELECT id, file_key, extracted_text_key FROM uploaded_evidence 
        WHERE id = $1 AND org_id = $2 AND deleted_at IS NULL`,
-      [evidenceId, orgId]
+      [evidenceId, orgId],
     );
 
     if (result.rows.length === 0) {
@@ -227,7 +239,7 @@ export async function deleteEvidenceAction(
     // Soft delete from database
     await query(
       `UPDATE uploaded_evidence SET deleted_at = NOW() WHERE id = $1`,
-      [evidenceId]
+      [evidenceId],
     );
 
     console.log("[SERVER ACTION] Evidence deleted:", evidenceId);
@@ -243,12 +255,12 @@ export async function deleteEvidenceAction(
 
 /**
  * Fetch evidence for a submodule
- * 
+ *
  * @param subModuleId - SubModule ID
  * @returns Array of evidence files
  */
 export async function fetchEvidenceAction(
-  subModuleId: string
+  subModuleId: string,
 ): Promise<ActionResponse> {
   try {
     // Authenticate
@@ -263,7 +275,7 @@ export async function fetchEvidenceAction(
        FROM uploaded_evidence
        WHERE org_id = $1 AND sub_module_id = $2 AND deleted_at IS NULL
        ORDER BY uploaded_at DESC`,
-      [orgId, subModuleId]
+      [orgId, subModuleId],
     );
 
     const evidence = result.rows.map((row: any) => ({

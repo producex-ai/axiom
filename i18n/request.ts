@@ -6,13 +6,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   // Load all translation files and merge them
   try {
-    const [navigation, home, login, footer] =
-      await Promise.all([
-        import(`../messages/${locale}/navigation.json`),
-        import(`../messages/${locale}/home.json`),
-        import(`../messages/${locale}/login.json`),
-        import(`../messages/${locale}/footer.json`),
-      ]);
+    const [navigation, home, login, footer] = await Promise.all([
+      import(`../messages/${locale}/navigation.json`),
+      import(`../messages/${locale}/home.json`),
+      import(`../messages/${locale}/login.json`),
+      import(`../messages/${locale}/footer.json`),
+    ]);
 
     return {
       locale,
@@ -28,13 +27,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
     console.warn(
       `Translation files for locale '${locale}' not found, falling back to English`,
     );
-    const [navigation, home, login, footer] =
-      await Promise.all([
-        import(`../messages/en/navigation.json`),
-        import(`../messages/en/home.json`),
-        import(`../messages/en/login.json`),
-        import(`../messages/en/footer.json`),
-      ]);
+    const [navigation, home, login, footer] = await Promise.all([
+      import(`../messages/en/navigation.json`),
+      import(`../messages/en/home.json`),
+      import(`../messages/en/login.json`),
+      import(`../messages/en/footer.json`),
+    ]);
 
     return {
       locale: "en",

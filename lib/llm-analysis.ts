@@ -26,124 +26,124 @@ const bedrock = new BedrockRuntimeClient({ region: process.env.AWS_REGION! });
 /**
  * Production-validated scoring thresholds for deterministic compliance assessment.
  * These values ensure consistent, auditable decisions with minimal false positives.
- * 
+ *
  * VALIDATION: Tested against 50+ sample documents across GFS/GFSI frameworks
  * PRECISION: 95% (rarely marks incomplete as covered)
  * RECALL: 87% (may mark some covered items as partial)
- * 
+ *
  * PHILOSOPHY: Conservative scoring - false negatives acceptable, false positives catastrophic
  */
 const SCORING_CONFIG = {
   // ========== CONFIDENCE THRESHOLDS ==========
   // Confidence combines: keyword matches, text length, context relevance
-  
+
   /** Minimum confidence for "covered" status (0.75 = 75%)
    * Requires strong evidence: 3+ specific keywords, 300+ chars, good context
    * Rationale: High bar prevents false positives in audit scenarios */
   CONFIDENCE_COVERED: 0.75,
-  
+
   /** Minimum confidence for "partial" status (0.50 = 50%)
    * Allows weaker evidence: 1+ specific keyword or 150+ chars
    * Rationale: Flags items for human review rather than missing entirely */
-  CONFIDENCE_PARTIAL: 0.50,
-  
+  CONFIDENCE_PARTIAL: 0.5,
+
   /** Confidence below this is always "missing" (0.45)
    * Rationale: Below 45% indicates insufficient evidence to claim any coverage */
   CONFIDENCE_THRESHOLD_MISSING: 0.45,
-  
+
   // ========== KEYWORD MATCH THRESHOLDS ==========
   // Specific = domain terms ("training schedule", "HACCP", etc.)
   // Generic = common terms ("procedure", "monitoring", etc.)
-  
+
   /** Minimum specific keyword matches for "covered" (3)
    * Rationale: 3+ specific terms indicate deep, relevant content
    * Example: "training", "competency assessment", "quarterly schedule" */
   SPECIFIC_MATCHES_COVERED: 3,
-  
+
   /** Minimum specific keyword matches for "partial" (1)
    * Rationale: Even 1 specific match suggests some relevance
    * Example: Document mentions "training" but no details */
   SPECIFIC_MATCHES_PARTIAL: 1,
-  
+
   /** Weight multiplier for specific vs generic matches
    * Rationale: Specific terms are 2x more valuable for scoring */
   SPECIFIC_TERM_WEIGHT: 2,
-  
+
   // ========== TEXT LENGTH THRESHOLDS ==========
   // Length indicates depth of coverage (not just keyword stuffing)
-  
+
   /** Minimum text length for "covered" status (300 chars)
    * Rationale: ~50 words ensures substantial, detailed coverage
    * Example: 2-3 sentences of specific procedures */
   TEXT_LENGTH_COVERED: 300,
-  
+
   /** Minimum text length for "partial" status (150 chars)
    * Rationale: ~25 words shows topic is addressed, even if briefly
    * Example: 1 sentence mentioning the requirement */
   TEXT_LENGTH_PARTIAL: 150,
-  
+
   /** Maximum text to analyze per section (1000 chars)
    * Rationale: Prevents noise from overly long sections */
   MAX_SECTION_LENGTH: 1000,
-  
+
   // ========== COVERAGE THRESHOLDS ==========
   // Coverage = percentage of required elements found
-  
+
   /** Minimum element coverage for "covered" (0.80 = 80%)
    * Rationale: Must address most required elements
    * Example: 4 out of 5 mandatory items present */
-  ELEMENT_COVERAGE_COVERED: 0.80,
-  
+  ELEMENT_COVERAGE_COVERED: 0.8,
+
   /** Minimum element coverage for "partial" (0.40 = 40%)
    * Rationale: At least some elements present
    * Example: 2 out of 5 mandatory items present */
-  ELEMENT_COVERAGE_PARTIAL: 0.40,
-  
+  ELEMENT_COVERAGE_PARTIAL: 0.4,
+
   // ========== SCORING CALIBRATION ==========
   // Final score adjustments and caps
-  
+
   /** Maximum possible score (95)
    * Rationale: Even perfect documents have room for improvement
    * No document should score 100 - prevents complacency */
   MAX_SCORE: 95,
-  
+
   /** Base score for "covered" items (82)
    * Rationale: Starting point before quality adjustments */
   BASE_SCORE_COVERED: 82,
-  
+
   /** Score boost for excellent evidence (98-95-92-87 scale)
    * Applied based on confidence + coverage + match quality */
-  SCORE_EXCELLENT: 98,  // confidence >= 0.95, coverage >= 0.8, specific >= 5
-  SCORE_GOOD: 92,       // confidence >= 0.90, coverage >= 0.7, specific >= 3
-  SCORE_ADEQUATE: 87,   // confidence >= 0.85, coverage >= 0.6, specific >= 2
-  SCORE_BASIC: 82,      // confidence >= 0.75, coverage >= 0.5, specific >= 1
-  
+  SCORE_EXCELLENT: 98, // confidence >= 0.95, coverage >= 0.8, specific >= 5
+  SCORE_GOOD: 92, // confidence >= 0.90, coverage >= 0.7, specific >= 3
+  SCORE_ADEQUATE: 87, // confidence >= 0.85, coverage >= 0.6, specific >= 2
+  SCORE_BASIC: 82, // confidence >= 0.75, coverage >= 0.5, specific >= 1
+
   /** Scores for partial/missing items */
-  SCORE_PARTIAL_STRONG: 75,  // confidence >= 0.70
-  SCORE_PARTIAL_WEAK: 60,    // confidence >= 0.50
+  SCORE_PARTIAL_STRONG: 75, // confidence >= 0.70
+  SCORE_PARTIAL_WEAK: 60, // confidence >= 0.50
   SCORE_PARTIAL_MINIMAL: 40, // confidence < 0.50 but some evidence
-  SCORE_MISSING: 0,          // no evidence found
-  
+  SCORE_MISSING: 0, // no evidence found
+
   // ========== MATCH QUALITY SCORING ==========
   // Used in findRelevantSectionsWithQuality
-  
+
   /** Points per specific keyword match in a section (2)
    * Rationale: Specific terms are strong relevance signals */
   POINTS_PER_SPECIFIC_MATCH: 2,
-  
+
   /** Points per generic keyword match in a section (1)
    * Rationale: Generic terms provide supporting context */
   POINTS_PER_GENERIC_MATCH: 1,
-  
+
   /** Minimum section score to be considered relevant (2)
    * Rationale: Lowered from 3 to catch more potential matches
    * Trade-off: Slight increase in noise for better recall */
   SECTION_RELEVANCE_THRESHOLD: 2,
-  
+
   /** Minimum section length to analyze (50 chars)
    * Rationale: Skip very short fragments */
   MIN_SECTION_LENGTH: 50,
-  
+
   /** Maximum sections to extract per requirement (5)
    * Rationale: Prevents overwhelming evidence, keeps focus */
   MAX_SECTIONS_PER_REQUIREMENT: 5,
@@ -354,16 +354,16 @@ interface ComplianceMatch {
 
 /**
  * Fast compliance analysis without detailed breakdowns
- * 
+ *
  * DETERMINISTIC: Same inputs always produce same scores
  * PERFORMANCE: ~50% faster than full analysis
  * USE CASE: Quick preview, UI progress indicators
- * 
+ *
  * @param checklist - Requirements checklist
  * @param documents - Documents to analyze
  * @param subModuleDescription - Optional module context
  * @returns Lightweight result with scores only
- * 
+ *
  * @example
  * // Typical usage
  * const result = await analyzeLightweight({
@@ -372,7 +372,7 @@ interface ComplianceMatch {
  * });
  * // result.overallScore: 85
  * // result.canImprove: true
- * 
+ *
  * @example
  * // Blocked by irrelevant documents
  * const result = await analyzeLightweight({
@@ -382,7 +382,7 @@ interface ComplianceMatch {
  * // result.overallScore: 0
  * // result.shouldGenerateFromScratch: true
  * // result.documentRelevance.analysisBlocked: true
- * 
+ *
  * TEST CASES:
  * - Empty documents → score 0, blocked
  * - Irrelevant documents → score 0, blocked
@@ -399,7 +399,7 @@ export async function analyzeLightweight({
   subModuleDescription?: string;
 }): Promise<LightweightAnalysisResult> {
   console.log("[LLM-ANALYSIS-V3] Starting fast compliance analysis...");
-  
+
   // Edge case validation
   if (!checklist || !documents) {
     console.error("[LLM-ANALYSIS-V3] Missing required parameters");
@@ -427,7 +427,7 @@ export async function analyzeLightweight({
 
   if (relevanceCheck.shouldBlockAnalysis) {
     console.warn(
-      "[LLM-ANALYSIS-V3] ⚠️ Analysis blocked due to relevance issues"
+      "[LLM-ANALYSIS-V3] ⚠️ Analysis blocked due to relevance issues",
     );
     return {
       overallScore: 0,
@@ -444,7 +444,7 @@ export async function analyzeLightweight({
   const compliance = await assessComplianceFromFacts(
     facts,
     checklist,
-    documents
+    documents,
   );
   const contentScore = calibrateContentScore(compliance, checklist);
   const structureScore = 100;
@@ -464,16 +464,16 @@ export async function analyzeLightweight({
 
 /**
  * Full compliance analysis with detailed breakdowns and recommendations
- * 
+ *
  * DETERMINISTIC: Same inputs always produce same coverage/scores
  * NON-DETERMINISTIC: Recommendations may vary (LLM-generated)
  * PERFORMANCE: ~30 seconds for 50-requirement checklist
- * 
+ *
  * @param checklist - Requirements checklist (with keywords preferred)
  * @param documents - Documents to analyze against checklist
  * @param subModuleDescription - Optional module context for relevance checking
  * @returns Complete analysis with coverage, scores, and recommendations
- * 
+ *
  * @example
  * // Typical usage with good coverage
  * const result = await analyzeCompliance({
@@ -485,7 +485,7 @@ export async function analyzeLightweight({
  * // result.partial.count: 6
  * // result.missing.count: 2
  * // result.recommendations.length: 3-5
- * 
+ *
  * @example
  * // Perfect coverage scenario
  * const result = await analyzeCompliance({
@@ -495,7 +495,7 @@ export async function analyzeLightweight({
  * // result.overallScore: 95 (capped at MAX_SCORE)
  * // result.covered.count: 50 (all requirements)
  * // result.recommendations: [minor polish suggestions]
- * 
+ *
  * @example
  * // Blocked by irrelevant documents
  * const result = await analyzeCompliance({
@@ -506,7 +506,7 @@ export async function analyzeLightweight({
  * // result.documentRelevance.analysisBlocked: true
  * // result.shouldGenerateFromScratch: true
  * // result.missing.count: 50 (all requirements)
- * 
+ *
  * TEST CASES:
  * - Empty documents → all missing, score 0
  * - Wrong module documents → blocked analysis
@@ -523,11 +523,13 @@ export async function analyzeCompliance({
   subModuleDescription?: string;
 }): Promise<EnhancedAnalysisResult> {
   console.log("[LLM-ANALYSIS-V3] Starting enhanced compliance analysis...");
-  
+
   // Edge case validation
   if (!checklist || !documents) {
     console.error("[LLM-ANALYSIS-V3] Missing required parameters");
-    throw new Error("checklist and documents are required for compliance analysis");
+    throw new Error(
+      "checklist and documents are required for compliance analysis",
+    );
   }
 
   const relevanceCheck = await validateDocumentRelevance({
@@ -538,9 +540,11 @@ export async function analyzeCompliance({
 
   // ✅ CRITICAL FIX: Block analysis if documents are not relevant
   if (relevanceCheck.shouldBlockAnalysis) {
-    console.log("[LLM-ANALYSIS-V3] ❌ Analysis blocked: Documents not relevant to this submodule");
+    console.log(
+      "[LLM-ANALYSIS-V3] ❌ Analysis blocked: Documents not relevant to this submodule",
+    );
     console.log("[LLM-ANALYSIS-V3] Issues:", relevanceCheck.issues);
-    
+
     return createBlockedAnalysisResult(relevanceCheck, checklist);
   }
 
@@ -548,12 +552,12 @@ export async function analyzeCompliance({
   const facts = await extractDocumentFacts({ checklist, documents });
 
   console.log(
-    "[LLM-ANALYSIS-V3] Phase 2: Assessing compliance with validation..."
+    "[LLM-ANALYSIS-V3] Phase 2: Assessing compliance with validation...",
   );
   const compliance = await assessComplianceFromFacts(
     facts,
     checklist,
-    documents
+    documents,
   );
 
   console.log("[LLM-ANALYSIS-V3] Phase 3: Calibrating scores...");
@@ -574,28 +578,28 @@ export async function analyzeCompliance({
   if (gaps.length > 0) {
     // Priority 1: Generate recommendations for missing/partial items
     console.log(
-      `[LLM-ANALYSIS-V3] Generating recommendations for ${gaps.length} gaps...`
+      `[LLM-ANALYSIS-V3] Generating recommendations for ${gaps.length} gaps...`,
     );
     recommendations = await generateFocusedRecommendations(gaps, checklist);
   } else if (partialOrLowScore.length > 0) {
     // Priority 2: Generate improvement suggestions for items scoring < 95
     console.log(
-      `[LLM-ANALYSIS-V3] Generating improvement suggestions for ${partialOrLowScore.length} items...`
+      `[LLM-ANALYSIS-V3] Generating improvement suggestions for ${partialOrLowScore.length} items...`,
     );
     recommendations = await generateImprovementSuggestions(
       partialOrLowScore,
-      checklist
+      checklist,
     );
   } else {
     // Priority 3: Perfect coverage - generate minor polish suggestions
     console.log(
-      `[LLM-ANALYSIS-V3] Generating minor improvement suggestions...`
+      `[LLM-ANALYSIS-V3] Generating minor improvement suggestions...`,
     );
     recommendations = generateMinorImprovements(compliance, checklist);
   }
 
   console.log(
-    `[LLM-ANALYSIS-V3] ✅ Generated ${recommendations.length} recommendations`
+    `[LLM-ANALYSIS-V3] ✅ Generated ${recommendations.length} recommendations`,
   );
 
   const contentCoverage = compliance.map((m) => ({
@@ -671,38 +675,38 @@ export async function analyzeCompliance({
       auditScore >= 90
         ? ("excellent" as const)
         : auditScore >= 75
-        ? ("good" as const)
-        : ("needs-improvement" as const),
+          ? ("good" as const)
+          : ("needs-improvement" as const),
     procedureImplementability:
       auditScore >= 90
         ? ("excellent" as const)
         : auditScore >= 75
-        ? ("good" as const)
-        : ("needs-improvement" as const),
+          ? ("good" as const)
+          : ("needs-improvement" as const),
     monitoringAdequacy:
       auditScore >= 90
         ? ("excellent" as const)
         : auditScore >= 75
-        ? ("good" as const)
-        : ("needs-improvement" as const),
+          ? ("good" as const)
+          : ("needs-improvement" as const),
     verificationMechanisms:
       auditScore >= 90
         ? ("excellent" as const)
         : auditScore >= 75
-        ? ("good" as const)
-        : ("needs-improvement" as const),
+          ? ("good" as const)
+          : ("needs-improvement" as const),
     recordKeepingClarity:
       auditScore >= 90
         ? ("excellent" as const)
         : auditScore >= 75
-        ? ("good" as const)
-        : ("needs-improvement" as const),
+          ? ("good" as const)
+          : ("needs-improvement" as const),
     overallAuditReadiness:
       auditScore >= 90
         ? ("ready" as const)
         : auditScore >= 75
-        ? ("minor-revisions" as const)
-        : ("major-revisions" as const),
+          ? ("minor-revisions" as const)
+          : ("major-revisions" as const),
     auditRisks: recommendations.slice(0, 3).map((r) => ({
       issue: r.recommendation,
       textAnchor: r.textAnchor || "",
@@ -770,7 +774,7 @@ async function extractDocumentFacts({
   console.log(
     "[LLM-ANALYSIS-V3] Processing",
     requirementsList.length,
-    "requirements..."
+    "requirements...",
   );
 
   // Edge case: no documents provided
@@ -778,7 +782,7 @@ async function extractDocumentFacts({
     console.error("[LLM-ANALYSIS-V3] ⚠️ No documents provided!");
     return { findings: [] };
   }
-  
+
   const fullText = documents.map((d) => d.text || "").join("\n\n");
   const firstDoc = documents[0]?.fileName || "Document";
 
@@ -787,21 +791,28 @@ async function extractDocumentFacts({
     console.error("[LLM-ANALYSIS-V3] ⚠️ All documents are empty!");
     return { findings: [] };
   }
-  
+
   // Edge case: very short document (likely incomplete upload)
   if (fullText.length < 100) {
-    console.warn(`[LLM-ANALYSIS-V3] ⚠️ Very short document (${fullText.length} chars) - results may be unreliable`);
+    console.warn(
+      `[LLM-ANALYSIS-V3] ⚠️ Very short document (${fullText.length} chars) - results may be unreliable`,
+    );
   }
 
   const findings: ExtractedFact[] = [];
-  
+
   // PERFORMANCE: Pre-lowercase text once for all requirements
   // Avoids re-lowercasing for every keyword match (n * m operations → n + m)
   const lowerText = fullText.toLowerCase();
 
   for (const req of requirementsList) {
     try {
-      const fact = extractRequirementWithQuality(req, fullText, firstDoc, lowerText);
+      const fact = extractRequirementWithQuality(
+        req,
+        fullText,
+        firstDoc,
+        lowerText,
+      );
       findings.push(fact);
     } catch (error) {
       console.warn(`[LLM-ANALYSIS-V3] Failed to extract ${req.id}:`, error);
@@ -820,7 +831,7 @@ async function extractDocumentFacts({
           totalMatchLength: 0,
           contextualRelevance: 0,
           specificMatches: 0,
-          genericMatches: 0
+          genericMatches: 0,
         },
       });
     }
@@ -830,17 +841,22 @@ async function extractDocumentFacts({
   const highConfidence = findings.filter((f) => f.confidence >= 0.7).length;
 
   console.log(
-    `[LLM-ANALYSIS-V3] ✅ Extraction complete: ${foundCount}/${findings.length} found (${highConfidence} high confidence)`
+    `[LLM-ANALYSIS-V3] ✅ Extraction complete: ${foundCount}/${findings.length} found (${highConfidence} high confidence)`,
   );
 
   return { findings };
 }
 
 function extractRequirementWithQuality(
-  requirement: { id: string; title: string; description?: string; keywords?: string[] },
+  requirement: {
+    id: string;
+    title: string;
+    description?: string;
+    keywords?: string[];
+  },
   documentText: string,
   sourceFile: string,
-  lowerDocumentText?: string // PERFORMANCE: Optional pre-lowercased text
+  lowerDocumentText?: string, // PERFORMANCE: Optional pre-lowercased text
 ): ExtractedFact {
   console.log(`[LLM-ANALYSIS-V3] Extracting ${requirement.id}...`);
 
@@ -849,7 +865,7 @@ function extractRequirementWithQuality(
   const genericTerms = extractGenericKeywords(requirement);
 
   console.log(
-    `[LLM-ANALYSIS-V3] ${requirement.id}: ${specificTerms.length} specific, ${genericTerms.length} generic terms`
+    `[LLM-ANALYSIS-V3] ${requirement.id}: ${specificTerms.length} specific, ${genericTerms.length} generic terms`,
   );
 
   // Find relevant sections with quality metrics
@@ -858,7 +874,7 @@ function extractRequirementWithQuality(
     documentText,
     specificTerms,
     genericTerms,
-    lowerDocumentText
+    lowerDocumentText,
   );
 
   if (relevantSections.sections.length === 0) {
@@ -892,7 +908,7 @@ function extractRequirementWithQuality(
     specificTerms,
     genericTerms,
     relevantSections,
-    details
+    details,
   );
 
   const quotes = relevantSections.sections
@@ -902,7 +918,7 @@ function extractRequirementWithQuality(
   console.log(
     `[LLM-ANALYSIS-V3] ✅ ${requirement.id} - FOUND (confidence: ${(
       confidence * 100
-    ).toFixed(0)}%, ${relevantSections.sections.length} sections)`
+    ).toFixed(0)}%, ${relevantSections.sections.length} sections)`,
   );
 
   // ✅ CRITICAL FIX: Add specificMatches and genericMatches
@@ -928,13 +944,13 @@ function extractRequirementWithQuality(
 
 /**
  * Extract specific, domain-relevant keywords from requirement
- * 
+ *
  * DETERMINISTIC: Same requirement always returns same keywords
  * PRIORITY: Uses requirement.keywords first (highest confidence)
- * 
+ *
  * @param requirement - Requirement with title, description, keywords
  * @returns Array of specific domain terms (deduplicated)
- * 
+ *
  * @example
  * // High-value keywords from JSON
  * extractSpecificKeywords({
@@ -943,7 +959,7 @@ function extractRequirementWithQuality(
  *   keywords: ["training program", "competency assessment"]
  * })
  * // Returns: ["training program", "competency assessment", "training", "procedures", ...]
- * 
+ *
  * @example
  * // Quoted phrases extracted
  * extractSpecificKeywords({
@@ -952,7 +968,7 @@ function extractRequirementWithQuality(
  *   keywords: []
  * })
  * // Returns: ["hazard analysis", "implement", "procedures"]
- * 
+ *
  * @example
  * // Empty requirement handling
  * extractSpecificKeywords({ id: "1.03.01", title: "" })
@@ -966,17 +982,24 @@ function extractSpecificKeywords(requirement: {
 }): string[] {
   const text = requirement.title + " " + (requirement.description || "");
   const specificTerms: string[] = [];
-  
+
   // Edge case: empty requirement
-  if (!text.trim() && (!requirement.keywords || requirement.keywords.length === 0)) {
-    console.warn(`[EXTRACT-KEYWORDS] ${requirement.id}: Empty requirement, no keywords`);
+  if (
+    !text.trim() &&
+    (!requirement.keywords || requirement.keywords.length === 0)
+  ) {
+    console.warn(
+      `[EXTRACT-KEYWORDS] ${requirement.id}: Empty requirement, no keywords`,
+    );
     return [];
   }
 
   // Use keywords from the submodule JSON if available
   if (requirement.keywords && requirement.keywords.length > 0) {
     specificTerms.push(...requirement.keywords);
-    console.log(`[KEYWORD-JSON] ${requirement.id} -> ${requirement.keywords.join(", ")}`);
+    console.log(
+      `[KEYWORD-JSON] ${requirement.id} -> ${requirement.keywords.join(", ")}`,
+    );
   }
 
   // Extract quoted phrases (high priority)
@@ -1002,8 +1025,8 @@ function extractSpecificKeywords(requirement: {
       .filter(
         (p) =>
           !p.match(
-            /\b(have|been|used|were|from|with|this|that|should|would|could|there|where)\b/i
-          )
+            /\b(have|been|used|were|from|with|this|that|should|would|could|there|where)\b/i,
+          ),
       )
       .map((p) => p.toLowerCase());
     specificTerms.push(...filtered.slice(0, 3));
@@ -1057,20 +1080,20 @@ function extractGenericKeywords(requirement: {
 
 /**
  * Find relevant sections in document using keyword matching
- * 
+ *
  * DETERMINISTIC: Same text + keywords always returns same sections
  * PERFORMANCE: Caches seen content to avoid duplicates
- * 
+ *
  * ALGORITHM:
  * 1. Detect document structure (headers vs paragraphs)
  * 2. Score each section by keyword matches
  * 3. Return top sections above threshold
- * 
+ *
  * @param text - Document text to search
  * @param specificTerms - Domain-specific keywords (weighted 2x)
  * @param genericTerms - Generic compliance keywords (weighted 1x)
  * @returns Matched sections with quality metrics
- * 
+ *
  * @example
  * // Strong match: multiple specific terms
  * findRelevantSectionsWithQuality(
@@ -1079,7 +1102,7 @@ function extractGenericKeywords(requirement: {
  *   ["assessment"]
  * )
  * // Returns: { sections: ["Training..."], specificMatches: 2, genericMatches: 1 }
- * 
+ *
  * @example
  * // Weak match: only generic terms
  * findRelevantSectionsWithQuality(
@@ -1088,7 +1111,7 @@ function extractGenericKeywords(requirement: {
  *   ["procedure", "documented"]
  * )
  * // Returns: { sections: ["The procedure..."], specificMatches: 0, genericMatches: 2 }
- * 
+ *
  * @example
  * // No match: insufficient score
  * findRelevantSectionsWithQuality(
@@ -1097,7 +1120,7 @@ function extractGenericKeywords(requirement: {
  *   ["procedure"]
  * )
  * // Returns: { sections: [], specificMatches: 0, genericMatches: 0 }
- * 
+ *
  * TEST CASES:
  * - Empty text → empty sections
  * - No keyword matches → empty sections
@@ -1108,7 +1131,7 @@ function findRelevantSectionsWithQuality(
   text: string,
   specificTerms: string[],
   genericTerms: string[],
-  lowerText?: string // PERFORMANCE: Optional pre-lowercased text
+  lowerText?: string, // PERFORMANCE: Optional pre-lowercased text
 ): {
   sections: string[];
   specificMatches: number;
@@ -1127,7 +1150,7 @@ function findRelevantSectionsWithQuality(
       contextScore: 0,
     };
   }
-  
+
   // Edge case: no keywords to search
   if (specificTerms.length === 0 && genericTerms.length === 0) {
     console.warn("[SECTION-SEARCH] No keywords provided for matching");
@@ -1145,7 +1168,7 @@ function findRelevantSectionsWithQuality(
   let specificMatches = 0;
   let genericMatches = 0;
   let totalLength = 0;
-  
+
   // PERFORMANCE: Use pre-lowercased text if available, otherwise lowercase once
   const searchText = lowerText || text.toLowerCase();
 
@@ -1164,7 +1187,7 @@ function findRelevantSectionsWithQuality(
     for (let i = 0; i < headerPositions.length - 1; i++) {
       const sectionText = text.substring(
         headerPositions[i],
-        headerPositions[i + 1]
+        headerPositions[i + 1],
       );
       chunks.push(sectionText);
     }
@@ -1182,23 +1205,24 @@ function findRelevantSectionsWithQuality(
     // PERFORMANCE: Use pre-lowercased text instead of lowercasing each chunk
     const lowerChunk = searchText.substring(
       text.indexOf(chunk),
-      text.indexOf(chunk) + chunk.length
+      text.indexOf(chunk) + chunk.length,
     );
 
     // Count specific matches
     const chunkSpecificMatches = specificTerms.filter((term) =>
-      lowerChunk.includes(term.toLowerCase())
+      lowerChunk.includes(term.toLowerCase()),
     ).length;
 
     // Count generic matches
     const chunkGenericMatches = genericTerms.filter((term) =>
-      lowerChunk.includes(term.toLowerCase())
+      lowerChunk.includes(term.toLowerCase()),
     ).length;
 
     // SCORING: Weight specific matches higher than generic
     // Uses SCORING_CONFIG constants for deterministic, auditable decisions
-    const chunkScore = chunkSpecificMatches * SCORING_CONFIG.POINTS_PER_SPECIFIC_MATCH + 
-                       chunkGenericMatches * SCORING_CONFIG.POINTS_PER_GENERIC_MATCH;
+    const chunkScore =
+      chunkSpecificMatches * SCORING_CONFIG.POINTS_PER_SPECIFIC_MATCH +
+      chunkGenericMatches * SCORING_CONFIG.POINTS_PER_GENERIC_MATCH;
 
     // Apply threshold from SCORING_CONFIG
     if (chunkScore >= SCORING_CONFIG.SECTION_RELEVANCE_THRESHOLD) {
@@ -1213,7 +1237,7 @@ function findRelevantSectionsWithQuality(
         totalLength += chunk.length;
 
         console.log(
-          `[MATCH] Found section: score=${chunkScore}, specific=${chunkSpecificMatches}, generic=${chunkGenericMatches}`
+          `[MATCH] Found section: score=${chunkScore}, specific=${chunkSpecificMatches}, generic=${chunkGenericMatches}`,
         );
 
         if (sections.length >= 5) break;
@@ -1231,7 +1255,7 @@ function findRelevantSectionsWithQuality(
 
       // Check if line contains ANY specific term
       const hasSpecific = specificTerms.some((term) =>
-        lowerLine.includes(term.toLowerCase())
+        lowerLine.includes(term.toLowerCase()),
       );
 
       if (hasSpecific) {
@@ -1262,7 +1286,7 @@ function findRelevantSectionsWithQuality(
     specificMatches > 0 ? 0.85 : genericMatches >= 2 ? 0.6 : 0.4;
 
   console.log(
-    `[SECTION-RESULT] sections=${sections.length}, specific=${specificMatches}, generic=${genericMatches}`
+    `[SECTION-RESULT] sections=${sections.length}, specific=${specificMatches}, generic=${genericMatches}`,
   );
 
   return {
@@ -1277,7 +1301,7 @@ function findRelevantSectionsWithQuality(
 // Analyze key elements with contextual validation
 function analyzeKeyElementsInContext(
   combinedText: string,
-  requirement: { title: string; description?: string }
+  requirement: { title: string; description?: string },
 ): Record<string, any> {
   const details: Record<string, any> = {};
   const reqText = (
@@ -1346,12 +1370,12 @@ function analyzeKeyElementsInContext(
 // Calculate confidence based on evidence quality - IMPROVED
 /**
  * Calculate evidence confidence score using deterministic rules
- * 
+ *
  * DETERMINISTIC: Same inputs always produce same confidence score
  * RANGE: 0.4 to 0.98 (never 0 or 1.0 to indicate uncertainty)
- * 
+ *
  * FORMULA: Base (0.4) + specific matches + generic matches + length + context + elements
- * 
+ *
  * @param specificTerms - Domain-specific keywords being searched
  * @param genericTerms - Generic compliance terms being searched
  * @param matchQuality - Match counts and quality metrics
@@ -1367,7 +1391,7 @@ function calculateEvidenceConfidence(
     totalLength: number;
     contextScore: number;
   },
-  details: Record<string, any>
+  details: Record<string, any>,
 ): number {
   // Start with base confidence of 0.4 (40%)
   // Rationale: Any text we're analyzing has SOME relevance, never truly 0%
@@ -1394,7 +1418,7 @@ function calculateEvidenceConfidence(
 
   // Key elements found
   const foundElements = Object.values(details).filter(
-    (v) => v === "yes"
+    (v) => v === "yes",
   ).length;
   const totalElements = Object.keys(details).length;
   if (totalElements > 0) {
@@ -1411,22 +1435,22 @@ function calculateEvidenceConfidence(
 
 /**
  * Assess compliance using DETERMINISTIC rules only (NO LLM)
- * 
+ *
  * DETERMINISTIC: Same facts always produce same assessment
  * PARALLEL-SAFE: All findings processed independently
  * ERROR-SAFE: Defaults to "missing" on any uncertainty
- * 
+ *
  * PROCESS:
  * 1. Classify findings by confidence level
  * 2. Apply deterministic rules to ALL findings
  * 3. Never use LLM for coverage decisions (only for recommendations)
  * 4. Sort results for consistent output
- * 
+ *
  * @param facts - Extracted facts from documents
  * @param checklist - Requirements to assess
  * @param documents - Original documents (unused now, kept for compatibility)
  * @returns Array of compliance matches with deterministic status
- * 
+ *
  * BACKWARD COMPATIBILITY:
  * - Function signature: UNCHANGED
  * - Return type: UNCHANGED (ComplianceMatch[])
@@ -1436,23 +1460,26 @@ function calculateEvidenceConfidence(
 async function assessComplianceFromFacts(
   facts: ExtractedFacts,
   checklist: any,
-  documents: { fileName: string; text: string }[]
+  documents: { fileName: string; text: string }[],
 ): Promise<ComplianceMatch[]> {
   const requirementsList = extractRequirementList(checklist);
 
   console.log(
     "[LLM-ANALYSIS-V3] Starting DETERMINISTIC compliance assessment for",
     requirementsList.length,
-    "requirements..."
+    "requirements...",
   );
 
   // PERFORMANCE: Pre-allocate array with known size
   const results: ComplianceMatch[] = [];
   results.length = 0; // Ensure clean start
-  
+
   // PERFORMANCE: Build requirement lookup map for O(1) access
-  const requirementMap = new Map<string, { id: string; title: string; description?: string; keywords?: string[] }>();
-  requirementsList.forEach(req => requirementMap.set(req.id, req));
+  const requirementMap = new Map<
+    string,
+    { id: string; title: string; description?: string; keywords?: string[] }
+  >();
+  requirementsList.forEach((req) => requirementMap.set(req.id, req));
 
   // Classify findings by confidence level (for logging/monitoring only)
   const highConfidence: ExtractedFact[] = [];
@@ -1473,20 +1500,24 @@ async function assessComplianceFromFacts(
   });
 
   console.log(
-    `[CLASSIFICATION] High=${highConfidence.length}, Medium=${mediumConfidence.length}, Low=${lowConfidence.length}, NotFound=${notFound.length}`
+    `[CLASSIFICATION] High=${highConfidence.length}, Medium=${mediumConfidence.length}, Low=${lowConfidence.length}, NotFound=${notFound.length}`,
   );
 
   // ========== PROCESS ALL FINDINGS WITH DETERMINISTIC RULES ==========
   // NO LLM VALIDATION - all decisions use fixed thresholds
-  
+
   // Process high confidence findings
   // These are most likely to be "covered" but still need validation
-  console.log(`[ASSESSMENT] Processing ${highConfidence.length} high-confidence findings...`);
+  console.log(
+    `[ASSESSMENT] Processing ${highConfidence.length} high-confidence findings...`,
+  );
   highConfidence.forEach((finding) => {
     // PERFORMANCE: O(1) lookup instead of O(n) find
     const req = requirementMap.get(finding.requirementId);
     if (!req) {
-      console.warn(`[WARNING] Requirement ${finding.requirementId} not found in checklist`);
+      console.warn(
+        `[WARNING] Requirement ${finding.requirementId} not found in checklist`,
+      );
       return;
     }
     const match = assessHighConfidenceMatch(finding, req);
@@ -1495,44 +1526,58 @@ async function assessComplianceFromFacts(
 
   // Process medium confidence findings (DETERMINISTIC RULES, NO LLM)
   // These will likely be "partial" but could be "covered" if they meet all thresholds
-  console.log(`[ASSESSMENT] Processing ${mediumConfidence.length} medium-confidence findings (DETERMINISTIC)...`);
+  console.log(
+    `[ASSESSMENT] Processing ${mediumConfidence.length} medium-confidence findings (DETERMINISTIC)...`,
+  );
   mediumConfidence.forEach((finding) => {
     // PERFORMANCE: O(1) lookup
     const req = requirementMap.get(finding.requirementId);
     if (!req) {
-      console.warn(`[WARNING] Requirement ${finding.requirementId} not found in checklist`);
+      console.warn(
+        `[WARNING] Requirement ${finding.requirementId} not found in checklist`,
+      );
       return;
     }
-    
+
     // Use same deterministic function - it will handle medium confidence appropriately
     const match = assessHighConfidenceMatch(finding, req);
     results.push(match);
-    
+
     console.log(
-      `[MEDIUM-CONFIDENCE] ${finding.requirementId}: ${match.status.toUpperCase()} (conf=${(finding.confidence*100).toFixed(0)}%, score=${match.score})`
+      `[MEDIUM-CONFIDENCE] ${finding.requirementId}: ${match.status.toUpperCase()} (conf=${(finding.confidence * 100).toFixed(0)}%, score=${match.score})`,
     );
   });
 
   // Process low confidence findings
   // These will almost always be "partial" or "missing"
-  console.log(`[ASSESSMENT] Processing ${lowConfidence.length} low-confidence findings...`);
+  console.log(
+    `[ASSESSMENT] Processing ${lowConfidence.length} low-confidence findings...`,
+  );
   lowConfidence.forEach((finding) => {
     // PERFORMANCE: O(1) lookup
     const req = requirementMap.get(finding.requirementId);
     if (!req) {
-      console.warn(`[WARNING] Requirement ${finding.requirementId} not found in checklist`);
+      console.warn(
+        `[WARNING] Requirement ${finding.requirementId} not found in checklist`,
+      );
       return;
     }
-    
+
     // Check if there's ANY evidence (even weak)
-    if (finding.topicMentioned && (finding.matchQuality.specificMatches >= 1 || finding.matchQuality.totalMatchLength >= 100)) {
+    if (
+      finding.topicMentioned &&
+      (finding.matchQuality.specificMatches >= 1 ||
+        finding.matchQuality.totalMatchLength >= 100)
+    ) {
       // Some evidence exists - mark as partial-minimal
       results.push({
         requirementId: finding.requirementId,
         status: "partial" as const,
         score: SCORING_CONFIG.SCORE_PARTIAL_MINIMAL,
         coverage: 0.25,
-        missingElements: ["Insufficient evidence - needs more specific details"],
+        missingElements: [
+          "Insufficient evidence - needs more specific details",
+        ],
         evidence: finding.quotes[0] || "Weak mention found",
         textAnchor: finding.quotes[0]?.substring(0, 50) || "",
         sourceFile: finding.sourceFile,
@@ -1541,7 +1586,7 @@ async function assessComplianceFromFacts(
       console.log(
         `[LOW-CONFIDENCE] ${finding.requirementId}: PARTIAL-MINIMAL (conf=${(
           finding.confidence * 100
-        ).toFixed(0)}%, weak evidence)`
+        ).toFixed(0)}%, weak evidence)`,
       );
     } else {
       // No meaningful evidence - mark as missing
@@ -1559,21 +1604,23 @@ async function assessComplianceFromFacts(
       console.log(
         `[LOW-CONFIDENCE] ${finding.requirementId}: MISSING (conf=${(
           finding.confidence * 100
-        ).toFixed(0)}%)`
+        ).toFixed(0)}%)`,
       );
     }
   });
-  
+
   // Process not found items
   console.log(`[ASSESSMENT] Processing ${notFound.length} not-found items...`);
   notFound.forEach((finding) => {
     // PERFORMANCE: O(1) lookup
     const req = requirementMap.get(finding.requirementId);
     if (!req) {
-      console.warn(`[WARNING] Requirement ${finding.requirementId} not found in checklist`);
+      console.warn(
+        `[WARNING] Requirement ${finding.requirementId} not found in checklist`,
+      );
       return;
     }
-    
+
     results.push({
       requirementId: finding.requirementId,
       status: "missing" as const,
@@ -1585,7 +1632,9 @@ async function assessComplianceFromFacts(
       sourceFile: "N/A",
       confidence: 0,
     });
-    console.log(`[NOT-FOUND] ${finding.requirementId}: MISSING (not mentioned)`);
+    console.log(
+      `[NOT-FOUND] ${finding.requirementId}: MISSING (not mentioned)`,
+    );
   });
 
   // Final summary
@@ -1594,10 +1643,10 @@ async function assessComplianceFromFacts(
   const missing = results.filter((r) => r.status === "missing").length;
 
   console.log(
-    `[ASSESSMENT-COMPLETE] ✅ DETERMINISTIC results: ${covered} covered, ${partial} partial, ${missing} missing`
+    `[ASSESSMENT-COMPLETE] ✅ DETERMINISTIC results: ${covered} covered, ${partial} partial, ${missing} missing`,
   );
   console.log(
-    `[COVERAGE-RATE] ${((covered / results.length) * 100).toFixed(1)}% covered, ${((partial / results.length) * 100).toFixed(1)}% partial, ${((missing / results.length) * 100).toFixed(1)}% missing`
+    `[COVERAGE-RATE] ${((covered / results.length) * 100).toFixed(1)}% covered, ${((partial / results.length) * 100).toFixed(1)}% partial, ${((missing / results.length) * 100).toFixed(1)}% missing`,
   );
 
   // Sort for consistent output (deterministic ordering)
@@ -1606,21 +1655,21 @@ async function assessComplianceFromFacts(
 
 /**
  * Assess requirement coverage using DETERMINISTIC rules (no LLM)
- * 
+ *
  * DETERMINISTIC: Same finding always produces same result
  * CONSERVATIVE: When in doubt, mark as partial/missing, never covered
  * EVIDENCE-BASED: Every "covered" status has extractable text anchor
- * 
+ *
  * DECISION LOGIC:
  * 1. Check confidence threshold (>= 0.75 for covered)
  * 2. Verify specific keyword matches (>= 3 for covered)
  * 3. Validate text length (>= 300 chars for covered)
  * 4. Calculate final score based on quality tier
- * 
+ *
  * @param finding - Extracted facts with confidence and match quality
  * @param requirement - Requirement being assessed
  * @returns ComplianceMatch with deterministic status and score
- * 
+ *
  * BACKWARD COMPATIBILITY:
  * - Return type: UNCHANGED (ComplianceMatch)
  * - Field meanings: UNCHANGED (status, score, coverage, etc.)
@@ -1629,7 +1678,12 @@ async function assessComplianceFromFacts(
  */
 function assessHighConfidenceMatch(
   finding: ExtractedFact,
-  requirement: { id: string; title: string; description?: string; keywords?: string[] }
+  requirement: {
+    id: string;
+    title: string;
+    description?: string;
+    keywords?: string[];
+  },
 ): ComplianceMatch {
   // Extract evidence quality metrics
   const specificMatches = finding.matchQuality.specificMatches;
@@ -1637,37 +1691,43 @@ function assessHighConfidenceMatch(
   const totalLength = finding.matchQuality.totalMatchLength;
   const sectionCount = finding.matchQuality.sectionCount;
   const confidence = finding.confidence;
-  
+
   // Calculate element coverage (if requirement has structured elements)
   const foundElements = Object.entries(finding.details).filter(
-    ([_, value]) => value === "yes"
+    ([_, value]) => value === "yes",
   );
   const totalElements = Object.keys(finding.details).length;
-  const elementCoverage = totalElements > 0 ? foundElements.length / totalElements : 0;
-  
+  const elementCoverage =
+    totalElements > 0 ? foundElements.length / totalElements : 0;
+
   // Calculate evidence-based coverage (primary metric)
-  const evidenceCoverage = Math.min(1.0,
-    (specificMatches / 5) * 0.5 +      // 50% weight: specific term matches
-    (Math.min(totalLength, SCORING_CONFIG.MAX_SECTION_LENGTH) / SCORING_CONFIG.MAX_SECTION_LENGTH) * 0.3 +  // 30% weight: content depth
-    (Math.min(sectionCount, SCORING_CONFIG.MAX_SECTIONS_PER_REQUIREMENT) / SCORING_CONFIG.MAX_SECTIONS_PER_REQUIREMENT) * 0.2      // 20% weight: section breadth
+  const evidenceCoverage = Math.min(
+    1.0,
+    (specificMatches / 5) * 0.5 + // 50% weight: specific term matches
+      (Math.min(totalLength, SCORING_CONFIG.MAX_SECTION_LENGTH) /
+        SCORING_CONFIG.MAX_SECTION_LENGTH) *
+        0.3 + // 30% weight: content depth
+      (Math.min(sectionCount, SCORING_CONFIG.MAX_SECTIONS_PER_REQUIREMENT) /
+        SCORING_CONFIG.MAX_SECTIONS_PER_REQUIREMENT) *
+        0.2, // 20% weight: section breadth
   );
-  
+
   // Use higher of evidence-based or element-based coverage
   const finalCoverage = Math.max(evidenceCoverage, elementCoverage);
-  
+
   // Identify missing elements for feedback
   const missingElements = Object.entries(finding.details)
     .filter(([_, value]) => value === "not_found")
     .map(([key, _]) => key);
 
   console.log(
-    `[EVIDENCE-METRICS] ${requirement.id}: confidence=${(confidence * 100).toFixed(0)}%, specific=${specificMatches}, generic=${genericMatches}, length=${totalLength}, coverage=${(finalCoverage * 100).toFixed(0)}%`
+    `[EVIDENCE-METRICS] ${requirement.id}: confidence=${(confidence * 100).toFixed(0)}%, specific=${specificMatches}, generic=${genericMatches}, length=${totalLength}, coverage=${(finalCoverage * 100).toFixed(0)}%`,
   );
 
   // ========== DETERMINISTIC DECISION LOGIC ==========
   // Apply strict thresholds from SCORING_CONFIG
   // Each tier checks ALL required conditions (AND logic)
-  
+
   let status: "covered" | "partial" | "missing";
   let score: number;
   let decisionReason: string;
@@ -1682,35 +1742,35 @@ function assessHighConfidenceMatch(
   ) {
     status = "covered";
     score = SCORING_CONFIG.SCORE_EXCELLENT;
-    decisionReason = `EXCELLENT: conf=${(confidence*100).toFixed(0)}% ✓, cov=${(finalCoverage*100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
-    
-  // TIER 2: GOOD - Strong evidence across all metrics
-  // Requires: High confidence + good coverage + multiple specific matches + substantial text
+    decisionReason = `EXCELLENT: conf=${(confidence * 100).toFixed(0)}% ✓, cov=${(finalCoverage * 100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
+
+    // TIER 2: GOOD - Strong evidence across all metrics
+    // Requires: High confidence + good coverage + multiple specific matches + substantial text
   } else if (
-    confidence >= 0.90 &&
-    finalCoverage >= 0.70 &&
+    confidence >= 0.9 &&
+    finalCoverage >= 0.7 &&
     specificMatches >= SCORING_CONFIG.SPECIFIC_MATCHES_COVERED &&
     totalLength >= 500
   ) {
     status = "covered";
     score = SCORING_CONFIG.SCORE_GOOD;
-    decisionReason = `GOOD: conf=${(confidence*100).toFixed(0)}% ✓, cov=${(finalCoverage*100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
-    
-  // TIER 3: ADEQUATE - Solid evidence meeting minimum bar
-  // Requires: Above-minimum confidence + adequate coverage + some specific matches + decent text
+    decisionReason = `GOOD: conf=${(confidence * 100).toFixed(0)}% ✓, cov=${(finalCoverage * 100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
+
+    // TIER 3: ADEQUATE - Solid evidence meeting minimum bar
+    // Requires: Above-minimum confidence + adequate coverage + some specific matches + decent text
   } else if (
     confidence >= 0.85 &&
-    finalCoverage >= 0.60 &&
+    finalCoverage >= 0.6 &&
     specificMatches >= 2 &&
     totalLength >= SCORING_CONFIG.TEXT_LENGTH_COVERED
   ) {
     status = "covered";
     score = SCORING_CONFIG.SCORE_ADEQUATE;
-    decisionReason = `ADEQUATE: conf=${(confidence*100).toFixed(0)}% ✓, cov=${(finalCoverage*100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
-    
-  // TIER 4: BASIC COVERED - Minimum acceptable evidence
-  // Requires: ALL three critical thresholds must be met
-  // This is the MINIMUM for "covered" status
+    decisionReason = `ADEQUATE: conf=${(confidence * 100).toFixed(0)}% ✓, cov=${(finalCoverage * 100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
+
+    // TIER 4: BASIC COVERED - Minimum acceptable evidence
+    // Requires: ALL three critical thresholds must be met
+    // This is the MINIMUM for "covered" status
   } else if (
     confidence >= SCORING_CONFIG.CONFIDENCE_COVERED &&
     specificMatches >= SCORING_CONFIG.SPECIFIC_MATCHES_COVERED &&
@@ -1718,49 +1778,57 @@ function assessHighConfidenceMatch(
   ) {
     status = "covered";
     score = SCORING_CONFIG.BASE_SCORE_COVERED;
-    decisionReason = `BASIC-COVERED: conf=${(confidence*100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
-    
-  // TIER 5: PARTIAL-STRONG - Good evidence but fails one critical threshold
-  // Example: High confidence but only 2 specific matches, or 250 chars
+    decisionReason = `BASIC-COVERED: conf=${(confidence * 100).toFixed(0)}% ✓, spec=${specificMatches} ✓, len=${totalLength} ✓`;
+
+    // TIER 5: PARTIAL-STRONG - Good evidence but fails one critical threshold
+    // Example: High confidence but only 2 specific matches, or 250 chars
   } else if (
-    confidence >= 0.70 &&
+    confidence >= 0.7 &&
     (specificMatches >= 2 || (specificMatches >= 1 && totalLength >= 200)) &&
     totalLength >= SCORING_CONFIG.TEXT_LENGTH_PARTIAL
   ) {
     status = "partial";
     score = SCORING_CONFIG.SCORE_PARTIAL_STRONG;
-    decisionReason = `PARTIAL-STRONG: conf=${(confidence*100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (failed covered threshold)`;
-    
-  // TIER 6: PARTIAL-WEAK - Some evidence but significant gaps
-  // Requires: Either decent confidence OR some specific match + minimum text
+    decisionReason = `PARTIAL-STRONG: conf=${(confidence * 100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (failed covered threshold)`;
+
+    // TIER 6: PARTIAL-WEAK - Some evidence but significant gaps
+    // Requires: Either decent confidence OR some specific match + minimum text
   } else if (
     confidence >= SCORING_CONFIG.CONFIDENCE_PARTIAL ||
-    (specificMatches >= SCORING_CONFIG.SPECIFIC_MATCHES_PARTIAL && totalLength >= SCORING_CONFIG.TEXT_LENGTH_PARTIAL)
+    (specificMatches >= SCORING_CONFIG.SPECIFIC_MATCHES_PARTIAL &&
+      totalLength >= SCORING_CONFIG.TEXT_LENGTH_PARTIAL)
   ) {
     status = "partial";
     score = SCORING_CONFIG.SCORE_PARTIAL_WEAK;
-    decisionReason = `PARTIAL-WEAK: conf=${(confidence*100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (insufficient evidence)`;
-    
-  // TIER 7: PARTIAL-MINIMAL - Barely mentioned
-  // Has some evidence but below all thresholds
-  } else if (finding.topicMentioned && (specificMatches >= 1 || totalLength >= 100)) {
+    decisionReason = `PARTIAL-WEAK: conf=${(confidence * 100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (insufficient evidence)`;
+
+    // TIER 7: PARTIAL-MINIMAL - Barely mentioned
+    // Has some evidence but below all thresholds
+  } else if (
+    finding.topicMentioned &&
+    (specificMatches >= 1 || totalLength >= 100)
+  ) {
     status = "partial";
     score = SCORING_CONFIG.SCORE_PARTIAL_MINIMAL;
-    decisionReason = `PARTIAL-MINIMAL: conf=${(confidence*100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (very weak evidence)`;
-    
-  // TIER 8: MISSING - No meaningful evidence found
+    decisionReason = `PARTIAL-MINIMAL: conf=${(confidence * 100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (very weak evidence)`;
+
+    // TIER 8: MISSING - No meaningful evidence found
   } else {
     status = "missing";
     score = SCORING_CONFIG.SCORE_MISSING;
-    decisionReason = `MISSING: conf=${(confidence*100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (no evidence)`;
+    decisionReason = `MISSING: conf=${(confidence * 100).toFixed(0)}%, spec=${specificMatches}, len=${totalLength} (no evidence)`;
   }
 
   // Log decision with full evidence trail for auditability
-  console.log(`[DECISION] ${requirement.id}: ${status.toUpperCase()} (score=${score}) - ${decisionReason}`);
-  
+  console.log(
+    `[DECISION] ${requirement.id}: ${status.toUpperCase()} (score=${score}) - ${decisionReason}`,
+  );
+
   // Log evidence location for traceability
   if (status === "covered" && finding.quotes.length > 0) {
-    console.log(`[EVIDENCE] ${requirement.id}: "${finding.quotes[0].substring(0, 100)}..." (${finding.sourceFile})`);
+    console.log(
+      `[EVIDENCE] ${requirement.id}: "${finding.quotes[0].substring(0, 100)}..." (${finding.sourceFile})`,
+    );
   }
 
   return {
@@ -1772,8 +1840,8 @@ function assessHighConfidenceMatch(
       missingElements.length > 0
         ? missingElements
         : status === "partial"
-        ? ["Additional details recommended"]
-        : [],
+          ? ["Additional details recommended"]
+          : [],
     evidence: finding.quotes.slice(0, 2).join("; "),
     textAnchor: finding.quotes[0]?.substring(0, 80) || "",
     sourceFile: finding.sourceFile,
@@ -1787,12 +1855,12 @@ function assessHighConfidenceMatch(
 // Previously used LLM to validate borderline cases.
 // NOW: All scoring is deterministic using assessHighConfidenceMatch() with
 // strict thresholds from SCORING_CONFIG.
-// 
+//
 // This function was removed because:
 // 1. Non-deterministic (same input could produce different outputs)
 // 2. Expensive (LLM calls for every medium-confidence finding)
 // 3. Risky (LLM could incorrectly mark items as "covered")
-// 
+//
 // Replacement: assessHighConfidenceMatch() now handles ALL confidence levels
 // with deterministic rules.
 // ============================================================================
@@ -1803,19 +1871,19 @@ function assessHighConfidenceMatch(
 
 /**
  * Calibrate final content score using DETERMINISTIC rules
- * 
+ *
  * DETERMINISTIC: Same compliance array always produces same score
  * CONSERVATIVE: Caps at 95 (no document is perfect)
- * 
+ *
  * ALGORITHM:
  * 1. Calculate average score across all requirements
  * 2. Apply bonus for complete coverage (but never reach 100)
  * 3. Cap at SCORING_CONFIG.MAX_SCORE (95)
- * 
+ *
  * @param compliance - Array of assessed requirements
  * @param checklist - Original checklist (unused, kept for compatibility)
  * @returns Calibrated score 0-95
- * 
+ *
  * BACKWARD COMPATIBILITY:
  * - Function signature: UNCHANGED
  * - Return type: UNCHANGED (number)
@@ -1824,7 +1892,7 @@ function assessHighConfidenceMatch(
  */
 function calibrateContentScore(
   compliance: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): number {
   const total = compliance.length;
   if (total === 0) {
@@ -1836,7 +1904,9 @@ function calibrateContentScore(
   const totalScore = compliance.reduce((sum, m) => sum + m.score, 0);
   const rawScore = totalScore / total; // Already 0-100 scale
 
-  console.log(`[CALIBRATION] Raw score: ${rawScore.toFixed(1)} (from ${total} requirements)`);
+  console.log(
+    `[CALIBRATION] Raw score: ${rawScore.toFixed(1)} (from ${total} requirements)`,
+  );
 
   let calibratedScore = rawScore;
 
@@ -1845,16 +1915,23 @@ function calibrateContentScore(
   const partial = compliance.filter((m) => m.status === "partial").length;
   const missing = compliance.filter((m) => m.status === "missing").length;
 
-  console.log(`[CALIBRATION] Distribution: ${covered} covered, ${partial} partial, ${missing} missing`);
+  console.log(
+    `[CALIBRATION] Distribution: ${covered} covered, ${partial} partial, ${missing} missing`,
+  );
 
   // Apply modest bonuses for exceptional coverage
   // Rationale: Small bonuses recognize completeness without inflating scores
-  
+
   // BONUS 1: Perfect coverage with excellent scores (+3 points, cap at 95)
   if (covered === total && rawScore >= SCORING_CONFIG.MAX_SCORE - 3) {
     const bonus = 3;
-    calibratedScore = Math.min(calibratedScore + bonus, SCORING_CONFIG.MAX_SCORE);
-    console.log(`[CALIBRATION] Applied perfect coverage bonus: +${bonus} points`);
+    calibratedScore = Math.min(
+      calibratedScore + bonus,
+      SCORING_CONFIG.MAX_SCORE,
+    );
+    console.log(
+      `[CALIBRATION] Applied perfect coverage bonus: +${bonus} points`,
+    );
   }
   // BONUS 2: No missing items with strong scores (+2 points, cap at 92)
   else if (partial > 0 && covered + partial === total && rawScore >= 85) {
@@ -1870,29 +1947,33 @@ function calibrateContentScore(
   }
 
   // Final cap using SCORING_CONFIG constant
-  const finalScore = Math.round(Math.min(calibratedScore, SCORING_CONFIG.MAX_SCORE));
-  
-  console.log(`[CALIBRATION] Final score: ${finalScore} (capped at ${SCORING_CONFIG.MAX_SCORE})`);
+  const finalScore = Math.round(
+    Math.min(calibratedScore, SCORING_CONFIG.MAX_SCORE),
+  );
+
+  console.log(
+    `[CALIBRATION] Final score: ${finalScore} (capped at ${SCORING_CONFIG.MAX_SCORE})`,
+  );
 
   return finalScore;
 }
 
 /**
  * Calibrate audit readiness score using DETERMINISTIC rules
- * 
+ *
  * DETERMINISTIC: Same inputs always produce same score
  * HEURISTIC: Checks for audit-critical elements in text
- * 
+ *
  * ALGORITHM:
  * 1. Start with base score (70 points)
  * 2. Add points for presence of audit-critical terms
  * 3. Add bonus based on coverage percentage
  * 4. Cap at SCORING_CONFIG.MAX_SCORE (95)
- * 
+ *
  * @param compliance - Array of assessed requirements
  * @param documents - Original documents to scan for audit terms
  * @returns Audit readiness score 0-95
- * 
+ *
  * BACKWARD COMPATIBILITY:
  * - Function signature: UNCHANGED
  * - Return type: UNCHANGED (number)
@@ -1901,7 +1982,7 @@ function calibrateContentScore(
  */
 function calibrateAuditScore(
   compliance: ComplianceMatch[],
-  documents: { fileName: string; text: string }[]
+  documents: { fileName: string; text: string }[],
 ): number {
   const allText = documents.map((d) => d.text.toLowerCase()).join(" ");
 
@@ -1916,7 +1997,11 @@ function calibrateAuditScore(
     { terms: ["procedure", "protocol"], points: 5, name: "Procedures" },
     { terms: ["monitoring", "verification"], points: 5, name: "Monitoring" },
     { terms: ["record", "documentation"], points: 5, name: "Records" },
-    { terms: ["responsibility", "responsible"], points: 4, name: "Responsibilities" },
+    {
+      terms: ["responsibility", "responsible"],
+      points: 4,
+      name: "Responsibilities",
+    },
     { terms: ["frequency", "schedule"], points: 4, name: "Frequency" },
     { terms: ["criteria", "specification"], points: 3, name: "Criteria" },
     { terms: ["training", "competence"], points: 3, name: "Training" },
@@ -1932,7 +2017,9 @@ function calibrateAuditScore(
     }
   });
 
-  console.log(`[AUDIT-CALIBRATION] Found ${foundElements}/${auditElements.length} audit elements`);
+  console.log(
+    `[AUDIT-CALIBRATION] Found ${foundElements}/${auditElements.length} audit elements`,
+  );
 
   // Bonus based on requirement coverage
   const coveragePercent =
@@ -1940,19 +2027,27 @@ function calibrateAuditScore(
 
   if (coveragePercent >= 0.95) {
     score += 5;
-    console.log(`[AUDIT-BONUS] Excellent coverage (${(coveragePercent*100).toFixed(0)}%): +5 points`);
+    console.log(
+      `[AUDIT-BONUS] Excellent coverage (${(coveragePercent * 100).toFixed(0)}%): +5 points`,
+    );
   } else if (coveragePercent >= 0.85) {
     score += 3;
-    console.log(`[AUDIT-BONUS] Good coverage (${(coveragePercent*100).toFixed(0)}%): +3 points`);
+    console.log(
+      `[AUDIT-BONUS] Good coverage (${(coveragePercent * 100).toFixed(0)}%): +3 points`,
+    );
   } else if (coveragePercent >= 0.75) {
     score += 2;
-    console.log(`[AUDIT-BONUS] Adequate coverage (${(coveragePercent*100).toFixed(0)}%): +2 points`);
+    console.log(
+      `[AUDIT-BONUS] Adequate coverage (${(coveragePercent * 100).toFixed(0)}%): +2 points`,
+    );
   }
 
   // Cap at maximum score using SCORING_CONFIG
   const finalScore = Math.min(score, SCORING_CONFIG.MAX_SCORE);
-  
-  console.log(`[AUDIT-CALIBRATION] Final audit score: ${finalScore} (capped at ${SCORING_CONFIG.MAX_SCORE})`);
+
+  console.log(
+    `[AUDIT-CALIBRATION] Final audit score: ${finalScore} (capped at ${SCORING_CONFIG.MAX_SCORE})`,
+  );
 
   return finalScore;
 }
@@ -1963,7 +2058,7 @@ function calibrateAuditScore(
 
 async function generateFocusedRecommendations(
   gaps: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): Promise<EnhancedAnalysisResult["recommendations"]> {
   const topGaps = gaps.slice(0, 6);
 
@@ -1986,7 +2081,7 @@ ${idx + 1}. ID: ${g.requirementId}
    SOURCE FILE: ${g.sourceFile}
    
    IDENTIFIED GAPS: ${g.missingElements.join(", ")}
-`
+`,
   )
   .join("\n")}
 
@@ -2037,7 +2132,7 @@ Respond with JSON only:`;
       .replace(/\s+/g, " "); // Collapse multiple spaces
 
     console.log(
-      `[LLM-CLEANED-JSON] First 200 chars: ${jsonStr.substring(0, 200)}`
+      `[LLM-CLEANED-JSON] First 200 chars: ${jsonStr.substring(0, 200)}`,
     );
 
     // Step 4: Try to parse
@@ -2050,12 +2145,12 @@ Respond with JSON only:`;
       }
 
       console.log(
-        `[LLM-ANALYSIS-V3] ✅ Successfully parsed ${result.recommendations.length} recommendations`
+        `[LLM-ANALYSIS-V3] ✅ Successfully parsed ${result.recommendations.length} recommendations`,
       );
       return result.recommendations;
     } catch (parseError) {
       console.warn(
-        "[LLM-ANALYSIS-V3] JSON parse failed, trying aggressive repair..."
+        "[LLM-ANALYSIS-V3] JSON parse failed, trying aggressive repair...",
       );
 
       // Step 5: Aggressive repair - try to extract valid recommendations
@@ -2066,7 +2161,7 @@ Respond with JSON only:`;
           const recsArrayStr = `{${recsMatch[0]}}`;
           const repaired = JSON.parse(recsArrayStr);
           console.log(
-            `[LLM-ANALYSIS-V3] ✅ Repaired and parsed ${repaired.recommendations.length} recommendations`
+            `[LLM-ANALYSIS-V3] ✅ Repaired and parsed ${repaired.recommendations.length} recommendations`,
           );
           return repaired.recommendations;
         }
@@ -2086,7 +2181,7 @@ Respond with JSON only:`;
 // Fallback: Generate structured recommendations without LLM
 function generateFallbackRecommendations(
   gaps: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): EnhancedAnalysisResult["recommendations"] {
   console.log("[LLM-ANALYSIS-V3] Using fallback recommendations");
 
@@ -2103,7 +2198,7 @@ function generateFallbackRecommendations(
           ? `Address the following gaps: ${gap.missingElements.join(", ")}`
           : "Add more specific details, examples, and measurable criteria",
       exampleText: `Review requirement ${gap.requirementId} and ensure all mandatory elements are documented with specific procedures, responsibilities, and frequencies`,
-      suggestedLocation: gap.textAnchor 
+      suggestedLocation: gap.textAnchor
         ? `Near section containing: "${gap.textAnchor.substring(0, 60)}..."`
         : `Section covering ${gap.requirementId}`,
       textAnchor: gap.textAnchor || "",
@@ -2131,7 +2226,7 @@ async function validateDocumentRelevance({
   const documentTexts = documents
     .map(
       (doc, i) =>
-        `DOCUMENT ${i + 1}: ${doc.fileName}\n${doc.text.substring(0, 1200)}`
+        `DOCUMENT ${i + 1}: ${doc.fileName}\n${doc.text.substring(0, 1200)}`,
     )
     .join("\n\n---\n\n");
 
@@ -2185,11 +2280,11 @@ OUTPUT JSON (no markdown):
         requirementsMissing: doc.requirementsMissing || [],
         suggestedTopic: doc.suggestedTopic || "",
         recommendation: doc.recommendation || "",
-      })
+      }),
     );
 
     const irrelevantCount = issues.filter(
-      (doc) => doc.relevanceScore < 60
+      (doc) => doc.relevanceScore < 60,
     ).length;
     const irrelevantPercentage = (irrelevantCount / documents.length) * 100;
     const shouldBlockAnalysis = irrelevantPercentage > 50;
@@ -2202,7 +2297,7 @@ OUTPUT JSON (no markdown):
   } catch (error) {
     console.warn(
       "[LLM-ANALYSIS-V3] Relevance check failed, proceeding:",
-      error
+      error,
     );
     return { allRelevant: true, issues: [], shouldBlockAnalysis: false };
   }
@@ -2221,10 +2316,10 @@ function createBlockedAnalysisResult(
     issues: DocumentRelevanceIssue[];
     shouldBlockAnalysis: boolean;
   },
-  checklist: any
+  checklist: any,
 ): EnhancedAnalysisResult {
   const requirementsList = extractRequirementList(checklist);
-  
+
   // All requirements are missing since document is not relevant
   const missing = {
     count: requirementsList.length,
@@ -2232,7 +2327,8 @@ function createBlockedAnalysisResult(
       id: req.id,
       title: req.title,
       severity: "high" as const,
-      impact: "Document not relevant to this submodule - requirements cannot be assessed",
+      impact:
+        "Document not relevant to this submodule - requirements cannot be assessed",
     })),
   };
 
@@ -2250,12 +2346,13 @@ function createBlockedAnalysisResult(
   });
 
   // Generate recommendations based on relevance issues
-  const recommendations: EnhancedAnalysisResult["recommendations"] = relevanceCheck.issues.map((issue) => ({
-    priority: "high" as const,
-    category: "content" as const,
-    recommendation: `Document "${issue.documentName}" is not relevant to this submodule. ${issue.recommendation}`,
-    specificGuidance: `This document addresses: ${issue.identifiedTopic}. Expected topics: ${issue.suggestedTopic}. Missing: ${issue.requirementsMissing.join(", ")}`,
-  }));
+  const recommendations: EnhancedAnalysisResult["recommendations"] =
+    relevanceCheck.issues.map((issue) => ({
+      priority: "high" as const,
+      category: "content" as const,
+      recommendation: `Document "${issue.documentName}" is not relevant to this submodule. ${issue.recommendation}`,
+      specificGuidance: `This document addresses: ${issue.identifiedTopic}. Expected topics: ${issue.suggestedTopic}. Missing: ${issue.requirementsMissing.join(", ")}`,
+    }));
 
   return {
     overallScore: 0,
@@ -2309,15 +2406,21 @@ function createBlockedAnalysisResult(
       riskId: `RISK-${i + 1}`,
       description: r.recommendation,
       severity: "high" as const,
-      recommendation: r.specificGuidance || "Upload relevant documents for this submodule",
+      recommendation:
+        r.specificGuidance || "Upload relevant documents for this submodule",
     })),
     coverageMap,
   };
 }
 
 function extractRequirementList(
-  checklist: any
-): Array<{ id: string; title: string; description?: string; keywords?: string[] }> {
+  checklist: any,
+): Array<{
+  id: string;
+  title: string;
+  description?: string;
+  keywords?: string[];
+}> {
   const requirements: Array<{
     id: string;
     title: string;
@@ -2404,26 +2507,26 @@ function extractRequirementList(
 
 function getRequirementTitle(requirementId: string, checklist: any): string {
   const req = extractRequirementList(checklist).find(
-    (r) => r.id === requirementId
+    (r) => r.id === requirementId,
   );
   return req?.title || requirementId;
 }
 
 /**
  * Call AWS Bedrock LLM for text generation
- * 
+ *
  * NON-DETERMINISTIC: temperature=0 reduces but doesn't eliminate variance
  * USE CASE: Only for human-facing recommendations, NEVER for scoring
  * ERROR HANDLING: Throws on failure (caller must handle)
- * 
+ *
  * @param prompt - Instruction prompt for LLM
  * @param maxTokens - Maximum response length
  * @returns Generated text response
- * 
+ *
  * @throws Error if AWS credentials invalid
  * @throws Error if model not accessible
  * @throws Error if response malformed
- * 
+ *
  * TEST CASES:
  * - Invalid credentials → throw error
  * - Empty prompt → valid but useless response
@@ -2435,12 +2538,12 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
     console.warn("[BEDROCK] Empty prompt provided");
     throw new Error("Prompt cannot be empty");
   }
-  
+
   // Edge case: unreasonable token limit
   if (maxTokens < 50 || maxTokens > 10000) {
     console.warn(`[BEDROCK] Unusual token limit: ${maxTokens}`);
   }
-  
+
   try {
     const response = await bedrock.send(
       new InvokeModelCommand({
@@ -2451,17 +2554,21 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
           temperature: 0, // As deterministic as possible
           messages: [{ role: "user", content: prompt }],
         }),
-      })
+      }),
     );
 
     const responseBody = JSON.parse(new TextDecoder().decode(response.body));
-    
+
     // Edge case: unexpected response structure
-    if (!responseBody.content || !responseBody.content[0] || !responseBody.content[0].text) {
+    if (
+      !responseBody.content ||
+      !responseBody.content[0] ||
+      !responseBody.content[0].text
+    ) {
       console.error("[BEDROCK] Unexpected response structure:", responseBody);
       throw new Error("Malformed LLM response");
     }
-    
+
     return responseBody.content[0].text;
   } catch (error) {
     console.error("[BEDROCK] LLM call failed:", error);
@@ -2471,7 +2578,7 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
 
 async function generateImprovementSuggestions(
   items: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): Promise<EnhancedAnalysisResult["recommendations"]> {
   const topItems = items.slice(0, 5);
 
@@ -2489,7 +2596,7 @@ ${topItems
    "${item.evidence.substring(0, 300)}"
    
    TEXT ANCHOR: "${item.textAnchor}"
-   SOURCE: ${item.sourceFile}`
+   SOURCE: ${item.sourceFile}`,
   )
   .join("\n")}
 
@@ -2533,7 +2640,7 @@ Respond with JSON only (no markdown):
 // Fallback: Generate basic improvement suggestions without LLM
 function generateFallbackImprovements(
   items: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): EnhancedAnalysisResult["recommendations"] {
   console.log("[LLM-ANALYSIS-V3] Using fallback improvement suggestions");
 
@@ -2548,7 +2655,7 @@ function generateFallbackImprovements(
     if (item.coverage < 0.7) {
       recommendation = `Add missing elements for: ${reqTitle}`;
       specificGuidance = `Current coverage is ${(item.coverage * 100).toFixed(
-        0
+        0,
       )}%. Add details for: ${item.missingElements.join(", ")}`;
       exampleText = `Include specific procedures, frequencies, and responsibilities for each element`;
     } else if (item.score < 85) {
@@ -2579,7 +2686,7 @@ function generateFallbackImprovements(
 // Generate minor polish suggestions for perfect coverage
 function generateMinorImprovements(
   compliance: ComplianceMatch[],
-  checklist: any
+  checklist: any,
 ): EnhancedAnalysisResult["recommendations"] {
   return [
     {

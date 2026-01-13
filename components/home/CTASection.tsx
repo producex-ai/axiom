@@ -54,12 +54,14 @@ export default function CTASection() {
 
           {/* Trust Signals */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-gray-600">
-            {Object.values(t.raw("trustSignals")).map((signal: unknown, index: number) => (
-              <div key={index} className="flex items-center text-sm">
-                <Shield className="mr-2 h-4 w-4 text-emerald-600" />
-                <span>{String(signal)}</span>
-              </div>
-            ))}
+            {Object.values(t.raw("trustSignals")).map(
+              (signal: unknown, index: number) => (
+                <div key={index} className="flex items-center text-sm">
+                  <Shield className="mr-2 h-4 w-4 text-emerald-600" />
+                  <span>{String(signal)}</span>
+                </div>
+              ),
+            )}
           </div>
         </div>
       </div>

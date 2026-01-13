@@ -324,7 +324,9 @@ export default function UploadDocumentDialog({
         <DialogContent className="max-w-md" showCloseButton={false}>
           <DialogHeader>
             <DialogTitle>Upload Successful</DialogTitle>
-            <DialogDescription>Your document has been uploaded</DialogDescription>
+            <DialogDescription>
+              Your document has been uploaded
+            </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">

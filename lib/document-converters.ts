@@ -56,18 +56,27 @@ export async function convertDocxToMarkdown(
       // Try multiple patterns to catch different conversion formats
       const patterns = [
         // As H1 heading with #
-        new RegExp(`^#\\s*${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+        new RegExp(
+          `^#\\s*${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+          "i",
+        ),
         // As plain text at the beginning
-        new RegExp(`^${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+        new RegExp(
+          `^${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+          "i",
+        ),
         // With any heading level (# to ######)
-        new RegExp(`^#{1,6}\\s*${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\n+`, 'i'),
+        new RegExp(
+          `^#{1,6}\\s*${documentTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
+          "i",
+        ),
       ];
-      
+
       let cleanMarkdown = markdown;
       for (const pattern of patterns) {
-        cleanMarkdown = cleanMarkdown.replace(pattern, '');
+        cleanMarkdown = cleanMarkdown.replace(pattern, "");
       }
-      
+
       return cleanMarkdown.trim();
     }
 
@@ -266,14 +275,16 @@ export function convertHtmlToMarkdown(html: string): string {
     .replace(/<p>\s*<\/p>/g, "");
 
   const markdown = turndownService.turndown(cleanHtml);
-  
+
   // Clean up the markdown output
-  return markdown
-    .trim()
-    // Remove excessive newlines
-    .replace(/\n{3,}/g, "\n\n")
-    // Ensure consistent spacing
-    .replace(/\n\s+\n/g, "\n\n");
+  return (
+    markdown
+      .trim()
+      // Remove excessive newlines
+      .replace(/\n{3,}/g, "\n\n")
+      // Ensure consistent spacing
+      .replace(/\n\s+\n/g, "\n\n")
+  );
 }
 
 /**
@@ -286,7 +297,7 @@ export function convertMarkdownToHtml(markdown: string): string {
     breaks: true,
     linkify: true,
   });
-  
+
   // Clean markdown before conversion
   const cleanMarkdown = markdown
     .trim()
@@ -294,6 +305,6 @@ export function convertMarkdownToHtml(markdown: string): string {
     .replace(/\r\n/g, "\n")
     // Remove excessive newlines
     .replace(/\n{3,}/g, "\n\n");
-  
+
   return md.render(cleanMarkdown);
 }

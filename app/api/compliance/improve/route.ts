@@ -1,7 +1,7 @@
 /**
  * POST /api/compliance/improve
  * Generate improved document with missing sections filled by LLM
- * 
+ *
  * Creates/updates a document in the main "document" table with improved content.
  * This is the final destination - improved documents become regular documents.
  *
@@ -46,12 +46,13 @@ export async function POST(request: NextRequest) {
     }
 
     const { orgId, userId } = authContext;
-    const { subModuleId, analysisId, renewal, docType } = (await request.json()) as {
-      subModuleId: string;
-      analysisId: string;
-      renewal?: string;
-      docType?: string;
-    };
+    const { subModuleId, analysisId, renewal, docType } =
+      (await request.json()) as {
+        subModuleId: string;
+        analysisId: string;
+        renewal?: string;
+        docType?: string;
+      };
 
     if (!subModuleId || !analysisId) {
       return NextResponse.json(
@@ -91,7 +92,10 @@ export async function POST(request: NextRequest) {
 
     // Handle both JSON object and stringified JSON from database
     const analysisData = analysisResult.rows[0].analysis_result;
-    const analysis = typeof analysisData === 'string' ? JSON.parse(analysisData) : analysisData;
+    const analysis =
+      typeof analysisData === "string"
+        ? JSON.parse(analysisData)
+        : analysisData;
 
     console.log("[API] Retrieved compliance analysis");
 
@@ -162,7 +166,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("[API] Calling LLM to improve document with missing sections...");
+    console.log(
+      "[API] Calling LLM to improve document with missing sections...",
+    );
 
     // Call LLM improve function
     const improvedText = await improveDocument({
@@ -194,12 +200,16 @@ export async function POST(request: NextRequest) {
 
     // Parse module and submodule IDs
     const [moduleId] = subModuleId.split(".");
-    const subSubModuleId = subModuleId.includes(".") && subModuleId.split(".").length > 2 
-      ? subModuleId 
-      : null;
+    const subSubModuleId =
+      subModuleId.includes(".") && subModuleId.split(".").length > 2
+        ? subModuleId
+        : null;
 
     // Store analysis score from compliance_analysis table
-    const analysisScore = typeof analysisData === 'string' ? JSON.parse(analysisData) : analysisData;
+    const analysisScore =
+      typeof analysisData === "string"
+        ? JSON.parse(analysisData)
+        : analysisData;
 
     // Create or update document record
     const documentResult = await query(
@@ -266,7 +276,9 @@ export async function POST(request: NextRequest) {
     );
 
     console.log(`[API] ✅ Created document record: ${finalDocId}`);
-    console.log(`[API] ✅ Revision record created for document ${finalDocId} (version ${currentVersion})`);
+    console.log(
+      `[API] ✅ Revision record created for document ${finalDocId} (version ${currentVersion})`,
+    );
 
     return NextResponse.json({
       success: true,
@@ -276,7 +288,8 @@ export async function POST(request: NextRequest) {
       fileSize: docxBuffer.length,
       evidenceCount: evidenceFiles.length,
       analysisId,
-      message: "Document improved with AI-generated sections and attached to document table",
+      message:
+        "Document improved with AI-generated sections and attached to document table",
     });
   } catch (error) {
     console.error("[API] Error improving document:", error);

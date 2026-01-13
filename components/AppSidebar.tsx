@@ -1,5 +1,4 @@
 'use client';
-
 import {
   CalendarDays,
   ClipboardList,
@@ -35,23 +34,36 @@ const mainMenuItems = [
     icon: LayoutDashboard,
     href: '/dashboard',
   },
+] as const;
+
+const taskItems = [
   {
-    title: 'Tasks',
+    title: 'My Tasks',
     icon: ClipboardList,
     href: '/tasks',
+  },
+  {
+    title: 'History',
+    icon: History,
+    href: '/tasks/history',
   },
 ] as const;
 
 const logsItems = [
+  {
+    title: 'Templates',
+    icon: LayoutTemplate,
+    href: '/logs/templates',
+  },
   {
     title: 'Scheduled',
     icon: CalendarDays,
     href: '/logs/scheduled',
   },
   {
-    title: 'Templates',
-    icon: LayoutTemplate,
-    href: '/logs/templates',
+    title: 'Tasks',
+    icon: ClipboardList,
+    href: '/logs/tasks',
   },
   {
     title: 'History',
@@ -74,7 +86,11 @@ const complianceItems = [
   },
 ];
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  isOperator?: boolean;
+}
+
+export function AppSidebar({ isOperator = false }: AppSidebarProps) {
   const pathname = usePathname();
   const { data: overview } = useComplianceOverview();
 
@@ -104,39 +120,41 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className='gap-0'>
-        <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
-            Menu
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {mainMenuItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    className='group relative px-3'
-                  >
-                    <Link href={item.href}>
-                      <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                      <span className='transition-colors group-hover:text-foreground'>
-                        {item.title}
-                      </span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {!isOperator && (
+          <SidebarGroup>
+            <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+              Menu
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {mainMenuItems.map((item) => (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === item.href}
+                      className='group relative px-3'
+                    >
+                      <Link href={item.href}>
+                        <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
+                        <span className='transition-colors group-hover:text-foreground'>
+                          {item.title}
+                        </span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
 
         <SidebarGroup>
           <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
-            Logs
+            Tasks
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {logsItems.map((item) => {
+              {taskItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
                   pathname.startsWith(item.href + '/');
@@ -161,47 +179,82 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
-            Compliance
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {complianceItems.map((item) => {
-                const badgeValue =
-                  item.badgeKey === 'compliance' ? moduleCount : null;
-                const isActive =
-                  pathname === item.href ||
-                  pathname.startsWith(item.href + '/');
+        {!isOperator && (
+          <SidebarGroup>
+            <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+              Logs
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {logsItems.map((item) => {
+                  const isActive =
+                    pathname === item.href ||
+                    pathname.startsWith(item.href + '/');
+                  return (
+                    <SidebarMenuItem key={item.href}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className='group relative px-3'
+                      >
+                        <Link href={item.href}>
+                          <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
+                          <span className='transition-colors group-hover:text-foreground'>
+                            {item.title}
+                          </span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
 
-                return (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      className='group relative px-3'
-                    >
-                      <Link href={item.href}>
-                        <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
-                        <span className='transition-colors group-hover:text-foreground'>
-                          {item.title}
-                        </span>
-                        {badgeValue && (
-                          <Badge
-                            variant='secondary'
-                            className='ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs'
-                          >
-                            {badgeValue}
-                          </Badge>
-                        )}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {!isOperator && (
+          <SidebarGroup>
+            <SidebarGroupLabel className='font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider'>
+              Compliance
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {complianceItems.map((item) => {
+                  const badgeValue =
+                    item.badgeKey === 'compliance' ? moduleCount : null;
+                  const isActive =
+                    pathname === item.href ||
+                    pathname.startsWith(item.href + '/');
+
+                  return (
+                    <SidebarMenuItem key={item.href}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className='group relative px-3'
+                      >
+                        <Link href={item.href}>
+                          <item.icon className='size-4 text-muted-foreground transition-colors group-hover:text-foreground' />
+                          <span className='transition-colors group-hover:text-foreground'>
+                            {item.title}
+                          </span>
+                          {badgeValue && (
+                            <Badge
+                              variant='secondary'
+                              className='ml-auto flex h-5 w-5 items-center justify-center p-0 font-semibold text-xs'
+                            >
+                              {badgeValue}
+                            </Badge>
+                          )}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
 
       <SidebarFooter className='border-sidebar-border border-t'>

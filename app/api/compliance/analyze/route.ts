@@ -99,9 +99,7 @@ export async function POST(request: NextRequest) {
           text,
         });
 
-        console.log(
-          `[API] Retrieved extracted text for ${evidence.filename}`,
-        );
+        console.log(`[API] Retrieved extracted text for ${evidence.filename}`);
       } catch (error) {
         console.error(
           `[API] Error retrieving text for ${evidence.filename}:`,
@@ -121,10 +119,7 @@ export async function POST(request: NextRequest) {
       // Extract requirements from spec
       checklist = spec.requirements || [];
       // Extract description for relevance checking
-      subModuleDescription =
-        spec.description ||
-        spec.title ||
-        subModuleCode;
+      subModuleDescription = spec.description || spec.title || subModuleCode;
     } catch (error) {
       console.error("[API] Error loading submodule spec:", error);
       return NextResponse.json(
