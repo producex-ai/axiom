@@ -72,7 +72,7 @@ function EmptyState() {
       <History className='h-16 w-16 text-muted-foreground/40' />
       <h3 className='mt-4 font-semibold text-lg'>No history found</h3>
       <p className='mt-2 text-center text-muted-foreground text-sm'>
-        There are no completed daily logs in the history yet.
+        You don't have any completed or past tasks in your history yet.
       </p>
     </div>
   );
@@ -80,14 +80,14 @@ function EmptyState() {
 
 const ITEMS_PER_PAGE = 20;
 
-export default async function HistoryPage({
+export default async function TaskHistoryPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
-  const { orgId } = await auth();
+  const { userId, orgId } = await auth();
 
-  if (!orgId) {
+  if (!userId || !orgId) {
     redirect('/login');
   }
 
@@ -98,35 +98,37 @@ export default async function HistoryPage({
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const endDate = new Date(today);
-  endDate.setDate(endDate.getDate() - 1); // Yesterday and before
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
 
   const allLogs = await getDailyLogsAction({
-    endDate: endDate.toISOString().split('T')[0],
+    endDate: yesterday.toISOString().split('T')[0],
     status: 'APPROVED',
   });
 
-  // Sort by date descending (most recent first)
-  const sortedLogs = allLogs.sort(
-    (a, b) => new Date(b.log_date).getTime() - new Date(a.log_date).getTime()
-  );
+  // Filter for current user and sort by date descending
+  const userLogs = allLogs
+    .filter((log) => log.assignee_id === userId || log.reviewer_id === userId)
+    .sort(
+      (a, b) => new Date(b.log_date).getTime() - new Date(a.log_date).getTime()
+    );
 
   // Pagination
-  const totalPages = Math.ceil(sortedLogs.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(userLogs.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex_ = startIndex + ITEMS_PER_PAGE;
-  const paginatedLogs = sortedLogs.slice(startIndex, endIndex_);
+  const paginatedLogs = userLogs.slice(startIndex, endIndex_);
 
   return (
     <div className='space-y-6'>
       <div>
-        <h1 className='font-bold text-3xl tracking-tight'>Logs History</h1>
+        <h1 className='font-bold text-3xl tracking-tight'>My Task History</h1>
         <p className='mt-2 text-muted-foreground'>
-          View all approved daily logs from the past
+          View your approved past daily log tasks
         </p>
       </div>
 
-      {sortedLogs.length === 0 ? (
+      {userLogs.length === 0 ? (
         <EmptyState />
       ) : (
         <>
@@ -137,13 +139,14 @@ export default async function HistoryPage({
                   <TableHead>Date</TableHead>
                   <TableHead>Template</TableHead>
                   <TableHead>Category</TableHead>
-                  <TableHead>Assignee</TableHead>
+                  <TableHead>Role</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className='text-right'>Tasks</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {paginatedLogs.map((log) => {
+                  const isAssignee = log.assignee_id === userId;
                   const totalTasks = Object.keys(log.tasks).length;
                   const completedTasks = Object.values(log.tasks).filter(
                     Boolean
@@ -183,9 +186,9 @@ export default async function HistoryPage({
                       </TableCell>
                       <TableCell>
                         <Link href={`/tasks/${log.id}`}>
-                          <span className='text-muted-foreground text-sm'>
-                            {log.assignee_name || 'Unassigned'}
-                          </span>
+                          <Badge variant={isAssignee ? 'secondary' : 'default'}>
+                            {isAssignee ? 'Assignee' : 'Reviewer'}
+                          </Badge>
                         </Link>
                       </TableCell>
                       <TableCell>
@@ -217,7 +220,7 @@ export default async function HistoryPage({
                   <PaginationPrevious
                     href={
                       currentPage > 1
-                        ? `/logs/history?page=${currentPage - 1}`
+                        ? `/tasks/history?page=${currentPage - 1}`
                         : '#'
                     }
                     aria-disabled={currentPage === 1}
@@ -229,7 +232,6 @@ export default async function HistoryPage({
 
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                   (page) => {
-                    // Show first page, last page, current page, and pages around current
                     if (
                       page === 1 ||
                       page === totalPages ||
@@ -238,7 +240,7 @@ export default async function HistoryPage({
                       return (
                         <PaginationItem key={page}>
                           <PaginationLink
-                            href={`/logs/history?page=${page}`}
+                            href={`/tasks/history?page=${page}`}
                             isActive={page === currentPage}
                           >
                             {page}
@@ -263,7 +265,7 @@ export default async function HistoryPage({
                   <PaginationNext
                     href={
                       currentPage < totalPages
-                        ? `/logs/history?page=${currentPage + 1}`
+                        ? `/tasks/history?page=${currentPage + 1}`
                         : '#'
                     }
                     aria-disabled={currentPage === totalPages}

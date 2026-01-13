@@ -97,16 +97,20 @@ export default async function TasksPage() {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  // Filter tasks for current user and today's date only
+  // Filter tasks for current user: Today's tasks + Past Due tasks (non-approved past tasks)
   const myTasks = allTasks.filter((task) => {
     const taskDate = new Date(task.log_date);
     taskDate.setHours(0, 0, 0, 0);
 
-    return (
-      (task.assignee_id === userId || task.reviewer_id === userId) &&
+    const isUserInvolved =
+      task.assignee_id === userId || task.reviewer_id === userId;
+    const isToday =
       taskDate.getTime() >= today.getTime() &&
-      taskDate.getTime() < tomorrow.getTime()
-    );
+      taskDate.getTime() < tomorrow.getTime();
+    const isPastDue =
+      taskDate.getTime() < today.getTime() && task.status !== 'APPROVED';
+
+    return isUserInvolved && (isToday || isPastDue);
   });
 
   // Calculate stats
@@ -121,9 +125,9 @@ export default async function TasksPage() {
   return (
     <div className='space-y-6'>
       <div>
-        <h1 className='font-bold text-3xl tracking-tight'>Today's Tasks</h1>
+        <h1 className='font-bold text-3xl tracking-tight'>My Tasks</h1>
         <p className='mt-2 text-muted-foreground'>
-          Manage your daily log tasks and reviews for today
+          Manage your daily log tasks and reviews for today and past due items
         </p>
       </div>
 
