@@ -135,6 +135,7 @@ export function ScheduleForm({
   const [startDate, setStartDate] = useState<string>(
     initialData?.startDate || ''
   );
+  const [endDate, setEndDate] = useState<string>(initialData?.endDate || '');
 
   // Get today's date in YYYY-MM-DD format for min date validation
   const today = new Date().toISOString().split('T')[0];
@@ -193,7 +194,9 @@ export function ScheduleForm({
           {/* Date Range and Times Per Day */}
           <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
             <div className='space-y-2'>
-              <Label htmlFor='start_date'>Start Date</Label>
+              <Label htmlFor='start_date'>
+                Start Date <span className='text-destructive'>*</span>
+              </Label>
               <Input
                 id='start_date'
                 name='start_date'
@@ -212,14 +215,18 @@ export function ScheduleForm({
             </div>
 
             <div className='space-y-2'>
-              <Label htmlFor='end_date'>End Date (Optional)</Label>
+              <Label htmlFor='end_date'>
+                End Date <span className='text-destructive'>*</span>
+              </Label>
               <Input
                 id='end_date'
                 name='end_date'
                 type='date'
                 min={startDate || today}
-                defaultValue={initialData?.endDate}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
                 aria-describedby='end_date-error'
+                required
               />
               {state.errors?.end_date && (
                 <p id='end_date-error' className='text-destructive text-sm'>
@@ -229,8 +236,14 @@ export function ScheduleForm({
             </div>
 
             <div className='space-y-2'>
-              <Label htmlFor='times_per_day_select'>Times Per Day</Label>
-              <Select value={timesPerDay} onValueChange={setTimesPerDay}>
+              <Label htmlFor='times_per_day_select'>
+                Times Per Day <span className='text-destructive'>*</span>
+              </Label>
+              <Select
+                value={timesPerDay}
+                onValueChange={setTimesPerDay}
+                required
+              >
                 <SelectTrigger className='w-full' id='times_per_day_select'>
                   <SelectValue placeholder='Select times per day' />
                 </SelectTrigger>
@@ -252,8 +265,10 @@ export function ScheduleForm({
           {/* Assignee, Reviewer, and Frequency */}
           <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
             <div className='space-y-2'>
-              <Label htmlFor='assignee_select'>Assignee</Label>
-              <Select value={assigneeId} onValueChange={setAssigneeId}>
+              <Label htmlFor='assignee_select'>
+                Assignee <span className='text-destructive'>*</span>
+              </Label>
+              <Select value={assigneeId} onValueChange={setAssigneeId} required>
                 <SelectTrigger className='w-full' id='assignee_select'>
                   <SelectValue placeholder='Select assignee' />
                 </SelectTrigger>
@@ -279,8 +294,10 @@ export function ScheduleForm({
             </div>
 
             <div className='space-y-2'>
-              <Label htmlFor='reviewer_select'>Reviewer</Label>
-              <Select value={reviewerId} onValueChange={setReviewerId}>
+              <Label htmlFor='reviewer_select'>
+                Reviewer <span className='text-destructive'>*</span>
+              </Label>
+              <Select value={reviewerId} onValueChange={setReviewerId} required>
                 <SelectTrigger className='w-full' id='reviewer_select'>
                   <SelectValue placeholder='Select reviewer' />
                 </SelectTrigger>
@@ -306,10 +323,13 @@ export function ScheduleForm({
             </div>
 
             <div className='space-y-2'>
-              <Label htmlFor='frequency_select'>Schedule Frequency</Label>
+              <Label htmlFor='frequency_select'>
+                Schedule Frequency <span className='text-destructive'>*</span>
+              </Label>
               <Select
                 value={frequency}
                 onValueChange={(val) => setFrequency(val as ScheduleFrequency)}
+                required
               >
                 <SelectTrigger className='w-full' id='frequency_select'>
                   <SelectValue placeholder='Select frequency' />
