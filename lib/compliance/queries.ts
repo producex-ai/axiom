@@ -69,11 +69,14 @@ export const complianceKeys = {
   overview: () => [...complianceKeys.all, "overview"] as const,
   modules: () => [...complianceKeys.all, "modules"] as const,
   allDocuments: () => [...complianceKeys.all, "all-documents"] as const,
-  userProfile: (userId: string) => [...complianceKeys.all, "user", userId] as const,
+  userProfile: (userId: string) =>
+    [...complianceKeys.all, "user", userId] as const,
   evidence: () => [...complianceKeys.all, "evidence"] as const,
-  evidenceByModule: (subModuleId: string) => [...complianceKeys.evidence(), subModuleId] as const,
+  evidenceByModule: (subModuleId: string) =>
+    [...complianceKeys.evidence(), subModuleId] as const,
   analyses: () => [...complianceKeys.all, "analyses"] as const,
-  analysesByModule: (subModuleId: string) => [...complianceKeys.analyses(), subModuleId] as const,
+  analysesByModule: (subModuleId: string) =>
+    [...complianceKeys.analyses(), subModuleId] as const,
 };
 
 /**
@@ -234,8 +237,12 @@ export function useUserProfile(userId: string | null | undefined) {
 /**
  * Fetch evidence files for a submodule
  */
-async function fetchEvidence(subModuleId: string): Promise<{ evidence: any[]; maxAllowed: number }> {
-  const res = await fetch(`/api/evidence?subModuleId=${encodeURIComponent(subModuleId)}`);
+async function fetchEvidence(
+  subModuleId: string,
+): Promise<{ evidence: any[]; maxAllowed: number }> {
+  const res = await fetch(
+    `/api/evidence?subModuleId=${encodeURIComponent(subModuleId)}`,
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch evidence");
   }
@@ -247,7 +254,9 @@ async function fetchEvidence(subModuleId: string): Promise<{ evidence: any[]; ma
  */
 export function useEvidence(subModuleId: string | null) {
   return useQuery({
-    queryKey: subModuleId ? complianceKeys.evidenceByModule(subModuleId) : ["evidence", "none"],
+    queryKey: subModuleId
+      ? complianceKeys.evidenceByModule(subModuleId)
+      : ["evidence", "none"],
     queryFn: () => fetchEvidence(subModuleId!),
     enabled: !!subModuleId,
     staleTime: 2 * 60 * 1000, // 2 minutes
@@ -257,8 +266,12 @@ export function useEvidence(subModuleId: string | null) {
 /**
  * Fetch compliance analysis history for a submodule
  */
-async function fetchComplianceHistory(subModuleId: string): Promise<{ analyses: any[] }> {
-  const res = await fetch(`/api/compliance/history?subModuleId=${encodeURIComponent(subModuleId)}`);
+async function fetchComplianceHistory(
+  subModuleId: string,
+): Promise<{ analyses: any[] }> {
+  const res = await fetch(
+    `/api/compliance/history?subModuleId=${encodeURIComponent(subModuleId)}`,
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch compliance history");
   }
@@ -270,7 +283,9 @@ async function fetchComplianceHistory(subModuleId: string): Promise<{ analyses: 
  */
 export function useComplianceHistory(subModuleId: string | null) {
   return useQuery({
-    queryKey: subModuleId ? complianceKeys.analysesByModule(subModuleId) : ["analyses", "none"],
+    queryKey: subModuleId
+      ? complianceKeys.analysesByModule(subModuleId)
+      : ["analyses", "none"],
     queryFn: () => fetchComplianceHistory(subModuleId!),
     enabled: !!subModuleId,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -280,7 +295,10 @@ export function useComplianceHistory(subModuleId: string | null) {
 /**
  * Fetch all documents for an organization
  */
-async function fetchAllDocuments(): Promise<{ documents: any[]; count: number }> {
+async function fetchAllDocuments(): Promise<{
+  documents: any[];
+  count: number;
+}> {
   const res = await fetch("/api/compliance/all-documents");
   if (!res.ok) {
     throw new Error("Failed to fetch documents");

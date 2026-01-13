@@ -101,10 +101,10 @@ export function mergeFrameworkWithOrgState(
 
   for (const doc of documents) {
     // Filter to only include compliance documents
-    if (doc.doc_type !== 'compliance') {
+    if (doc.doc_type !== "compliance") {
       continue;
     }
-    
+
     // Key format: "moduleId:subModuleId" or "moduleId:subModuleId:subSubModuleId"
     const key = doc.sub_sub_module_id
       ? `${doc.module_id}:${doc.sub_module_id}:${doc.sub_sub_module_id}`

@@ -1,4 +1,7 @@
-import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
+import {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 
 const bedrock = new BedrockRuntimeClient({ region: process.env.AWS_REGION! });
 
@@ -24,13 +27,15 @@ const COMPLIANCE_SECTIONS: ComplianceSection[] = [
     id: 2,
     name: "Purpose / Objective",
     priority: "high",
-    description: "Clear statement of the document's purpose and business objectives",
+    description:
+      "Clear statement of the document's purpose and business objectives",
   },
   {
     id: 3,
     name: "Scope",
     priority: "high",
-    description: "Define what is covered and what is excluded from this procedure",
+    description:
+      "Define what is covered and what is excluded from this procedure",
   },
   {
     id: 4,
@@ -62,7 +67,8 @@ const COMPLIANCE_SECTIONS: ComplianceSection[] = [
     id: 8,
     name: "Procedures (Detailed Step-by-Step)",
     priority: "high",
-    description: "Detailed, implementable procedures with clear steps and instructions",
+    description:
+      "Detailed, implementable procedures with clear steps and instructions",
   },
   {
     id: 9,
@@ -132,7 +138,10 @@ async function generateSectionWithRetry(
         generateSection(params),
         new Promise<string>((_, reject) =>
           setTimeout(
-            () => reject(new Error(`Section ${params.section.id} generation timeout`)),
+            () =>
+              reject(
+                new Error(`Section ${params.section.id} generation timeout`),
+              ),
             timeout,
           ),
         ),
@@ -174,7 +183,9 @@ function validateSection(section: {
 
   // Check minimum length (at least 100 characters)
   if (section.content.length < 100) {
-    issues.push(`Section ${section.id} is too short (${section.content.length} chars)`);
+    issues.push(
+      `Section ${section.id} is too short (${section.content.length} chars)`,
+    );
   }
 
   // Check for placeholder text
@@ -260,16 +271,20 @@ export async function improveDocument({
   );
 
   const sections: Array<{ id: number; name: string; content: string }> = [];
-  
+
   // Separate sections by priority for optimal batching
-  const highPrioritySections = COMPLIANCE_SECTIONS.filter(s => s.priority === "high");
-  const mediumLowSections = COMPLIANCE_SECTIONS.filter(s => s.priority !== "high");
+  const highPrioritySections = COMPLIANCE_SECTIONS.filter(
+    (s) => s.priority === "high",
+  );
+  const mediumLowSections = COMPLIANCE_SECTIONS.filter(
+    (s) => s.priority !== "high",
+  );
 
   // Generate high-priority sections IN PARALLEL for maximum speed
   console.log(
     `[LLM-IMPROVE] Generating ${highPrioritySections.length} high-priority sections in parallel...`,
   );
-  
+
   const highPriorityPromises = highPrioritySections.map((section) =>
     generateSectionWithRetry({
       section,
@@ -316,7 +331,7 @@ export async function improveDocument({
         `[LLM-IMPROVE] ❌ Error generating batched sections, falling back to parallel generation...`,
         error,
       );
-      
+
       // Fallback: generate in parallel if batch fails
       const fallbackPromises = mediumLowSections.map((section) =>
         generateSectionWithRetry({
@@ -326,20 +341,25 @@ export async function improveDocument({
           missingRequirements,
           coverageMap,
           evidenceCache,
-        }).then((content) => ({
-          id: section.id,
-          name: section.name,
-          content,
-        })).catch((e) => {
-          console.error(`[LLM-IMPROVE] ❌ Failed to generate section ${section.id}:`, e);
-          return {
+        })
+          .then((content) => ({
             id: section.id,
             name: section.name,
-            content: `${section.id}. ${section.name}\n\n[Section generation failed - please review manually]`,
-          };
-        }),
+            content,
+          }))
+          .catch((e) => {
+            console.error(
+              `[LLM-IMPROVE] ❌ Failed to generate section ${section.id}:`,
+              e,
+            );
+            return {
+              id: section.id,
+              name: section.name,
+              content: `${section.id}. ${section.name}\n\n[Section generation failed - please review manually]`,
+            };
+          }),
       );
-      
+
       const fallbackResults = await Promise.all(fallbackPromises);
       sections.push(...fallbackResults);
     }
@@ -471,12 +491,9 @@ async function generateSection({
   const maxTokens = tokenLimits[section.priority] || 1000;
 
   // Use cached evidence if available, otherwise extract
-  const relevantEvidence = evidenceCache?.get(section.id) ??
-    extractRelevantEvidence(
-      section,
-      existingDocuments,
-      checklist,
-    );
+  const relevantEvidence =
+    evidenceCache?.get(section.id) ??
+    extractRelevantEvidence(section, existingDocuments, checklist);
 
   // Filter relevant checklist items for this section
   const relevantRequirements = filterRequirementsForSection(
@@ -622,24 +639,22 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
     }),
   );
 
-  const responseBody = JSON.parse(
-    new TextDecoder().decode(response.body),
-  );
+  const responseBody = JSON.parse(new TextDecoder().decode(response.body));
 
   // Check for truncation and warn with more details
   if (responseBody.stop_reason === "max_tokens") {
     console.warn(
       `[LLM-IMPROVE] ⚠️ Response truncated at ${maxTokens} tokens. Consider reducing prompt size or increasing token limit.`,
     );
-    
+
     // Return what we have - the content is still usable
     const truncatedContent = responseBody.content[0].text;
-    
+
     // Add ellipsis if content doesn't end with punctuation
     if (!/[.!?]\s*$/.test(truncatedContent.trim())) {
       return truncatedContent + "...";
     }
-    
+
     return truncatedContent;
   }
 
@@ -668,9 +683,7 @@ function extractRelevantEvidence(
     if (relevantLines.length > 0) {
       const excerpt = relevantLines.slice(0, 5).join("\n");
       if (excerpt.length > 0) {
-        evidence.push(
-          `From ${doc.fileName}:\n${excerpt}\n---`,
-        );
+        evidence.push(`From ${doc.fileName}:\n${excerpt}\n---`);
       }
     }
   }
@@ -799,9 +812,7 @@ function getKeywordsForSection(
     ],
   };
 
-  return keywordMap[section.name] || [
-    section.name.toLowerCase().split(" ")[0],
-  ];
+  return keywordMap[section.name] || [section.name.toLowerCase().split(" ")[0]];
 }
 
 /**
@@ -818,12 +829,11 @@ function filterRequirementsForSection(
 
   if (Array.isArray(checklist)) {
     relevantReqs = checklist.filter((req: any) =>
-      sectionKeywords.some(
-        (kw) =>
-          (typeof req === "string"
-            ? req.toLowerCase()
-            : JSON.stringify(req).toLowerCase()
-          ).includes(kw.toLowerCase()),
+      sectionKeywords.some((kw) =>
+        (typeof req === "string"
+          ? req.toLowerCase()
+          : JSON.stringify(req).toLowerCase()
+        ).includes(kw.toLowerCase()),
       ),
     );
   } else if (typeof checklist === "string") {
@@ -833,7 +843,10 @@ function filterRequirementsForSection(
   }
 
   return relevantReqs.length > 0
-    ? relevantReqs.slice(0, 5).map((r) => `- ${JSON.stringify(r)}`).join("\n")
+    ? relevantReqs
+        .slice(0, 5)
+        .map((r) => `- ${JSON.stringify(r)}`)
+        .join("\n")
     : "General compliance requirements for this section.";
 }
 
@@ -1026,16 +1039,16 @@ function cleanSectionContent(content: string): string {
   // Clean up ALL double asterisks (markdown bold syntax)
   // Remove ** before field names: "**Field Name:" -> "Field Name:"
   cleaned = cleaned.replace(/^\*\*([^*]+):\s*/gm, "$1: ");
-  
+
   // Remove ** after colons: "Field: **" -> "Field:"
   cleaned = cleaned.replace(/:\s*\*\*\s*/g, ": ");
-  
+
   // Remove ** in list items: "- **Item:**" -> "- Item:"
   cleaned = cleaned.replace(/^- \*\*([^*]+):\*\*\s*/gm, "- $1: ");
-  
+
   // Remove ** around words: "**text**" -> "text"
   cleaned = cleaned.replace(/\*\*([^*]+)\*\*/g, "$1");
-  
+
   // Remove standalone ** or multiple asterisks
   cleaned = cleaned.replace(/\*\*+/g, "");
 
@@ -1050,4 +1063,3 @@ function cleanSectionContent(content: string): string {
 
   return cleaned;
 }
-

@@ -25,10 +25,7 @@ import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { query } from "@/lib/db/postgres";
-import {
-  uploadToS3,
-  extractTextFromDOCX,
-} from "@/lib/s3-utils";
+import { uploadToS3, extractTextFromDOCX } from "@/lib/s3-utils";
 
 export const runtime = "nodejs";
 export const maxDuration = 300; // 5 minutes for upload and processing
@@ -61,10 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!filesFormData || filesFormData.length === 0) {
-      return NextResponse.json(
-        { error: "No files provided" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "No files provided" }, { status: 400 });
     }
 
     // Check number of new files
@@ -161,7 +155,10 @@ export async function POST(request: NextRequest) {
         try {
           extractedText = await extractTextFromDOCX(fileBuffer);
         } catch (extractError) {
-          console.error(`[API] Text extraction error for ${file.name}:`, extractError);
+          console.error(
+            `[API] Text extraction error for ${file.name}:`,
+            extractError,
+          );
           throw new Error(
             `Failed to extract text from ${file.name}: ${extractError instanceof Error ? extractError.message : "Unknown error"}`,
           );
@@ -212,7 +209,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log(`[API] ✅ Successfully uploaded ${uploadedEvidence.length} evidence file(s)`);
+    console.log(
+      `[API] ✅ Successfully uploaded ${uploadedEvidence.length} evidence file(s)`,
+    );
 
     return NextResponse.json(
       {

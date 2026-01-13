@@ -97,19 +97,21 @@ export default function SolutionSection() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  {(Object.values(t.raw(`features.${feature.id}.details`)) as string[]).map(
-                    (detail: string, index: number) => (
+                  {(
+                    Object.values(
+                      t.raw(`features.${feature.id}.details`),
+                    ) as string[]
+                  ).map((detail: string, index: number) => (
+                    <div
+                      key={index}
+                      className="flex items-center text-gray-700 text-sm"
+                    >
                       <div
-                        key={index}
-                        className="flex items-center text-gray-700 text-sm"
-                      >
-                        <div
-                          className={`h-2 w-2 ${colors.bg} mr-3 rounded-full border ${colors.accent}`}
-                        ></div>
-                        <span>{detail}</span>
-                      </div>
-                    ),
-                  )}
+                        className={`h-2 w-2 ${colors.bg} mr-3 rounded-full border ${colors.accent}`}
+                      ></div>
+                      <span>{detail}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
@@ -125,30 +127,32 @@ export default function SolutionSection() {
           </div>
           <div className="relative">
             <div className="grid gap-6 md:grid-cols-4">
-              {Object.keys(t.raw("workflow.steps")).map((stepKey: string, index: number) => {
-                const step = t.raw(`workflow.steps.${stepKey}`);
-                const icons = ["Upload", "Brain", "FileCheck", "Sparkles"];
-                const Icon = getIcon(icons[index]);
+              {Object.keys(t.raw("workflow.steps")).map(
+                (stepKey: string, index: number) => {
+                  const step = t.raw(`workflow.steps.${stepKey}`);
+                  const icons = ["Upload", "Brain", "FileCheck", "Sparkles"];
+                  const Icon = getIcon(icons[index]);
 
-                return (
-                  <div key={stepKey} className="relative z-10">
-                    <div className="text-center">
-                      <div className="relative z-10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-4 border-emerald-200 bg-emerald-100">
-                        <Icon className="h-8 w-8 text-emerald-600" />
+                  return (
+                    <div key={stepKey} className="relative z-10">
+                      <div className="text-center">
+                        <div className="relative z-10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-4 border-emerald-200 bg-emerald-100">
+                          <Icon className="h-8 w-8 text-emerald-600" />
+                        </div>
+                        <div className="mb-2 font-bold text-emerald-600 text-sm">
+                          {step.number}
+                        </div>
+                        <h4 className="mb-2 font-semibold text-gray-900 text-lg">
+                          {step.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          {step.description}
+                        </p>
                       </div>
-                      <div className="mb-2 font-bold text-emerald-600 text-sm">
-                        {step.number}
-                      </div>
-                      <h4 className="mb-2 font-semibold text-gray-900 text-lg">
-                        {step.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        {step.description}
-                      </p>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                },
+              )}
             </div>
             {/* Connecting Line */}
             <div className="absolute inset-x-0 top-8 z-0 hidden md:block">

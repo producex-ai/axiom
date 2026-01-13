@@ -397,7 +397,16 @@ export async function createDocumentRevision(
        (document_id, org_id, version, action, content_key, status, user_id, notes, created_at)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
        RETURNING id`,
-      [documentId, orgId, version, action, contentKey, status, userId, notes || null],
+      [
+        documentId,
+        orgId,
+        version,
+        action,
+        contentKey,
+        status,
+        userId,
+        notes || null,
+      ],
     );
     return result.rows[0].id;
   } catch (error) {

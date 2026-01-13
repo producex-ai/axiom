@@ -1,6 +1,6 @@
 /**
  * GET /api/users/[id]
- * 
+ *
  * Fetch user profile information for display purposes
  * Used to show user names in document metadata (created by, updated by)
  */
@@ -14,12 +14,9 @@ export async function GET(
 ) {
   try {
     const { userId: currentUserId } = await auth();
-    
+
     if (!currentUserId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { id: targetUserId } = await params;
@@ -29,10 +26,7 @@ export async function GET(
     const user = await client.users.getUser(targetUserId);
 
     if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     // Return simplified profile for display
@@ -50,7 +44,7 @@ export async function GET(
         error: "Failed to fetch user profile",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,9 +1,9 @@
-import type { Organization } from '../../lib/types/producex';
-import { query } from './postgres';
+import type { Organization } from "../../lib/types/producex";
+import { query } from "./postgres";
 
 export const checkProductActive = async (
   orgId: string,
-  productKey: string = 'VISIO'
+  productKey: string = "VISIO",
 ): Promise<boolean> => {
   try {
     const result = await query(
@@ -15,18 +15,18 @@ export const checkProductActive = async (
       AND status IN ('ACTIVE', 'TRIAL')
       LIMIT 1
       `,
-      [orgId, productKey]
+      [orgId, productKey],
     );
 
     return (result.rowCount ?? 0) > 0;
   } catch (error) {
-    console.error('Error checking organization product:', error);
+    console.error("Error checking organization product:", error);
     return false;
   }
 };
 
 export const getOrgsDistributors = async (
-  orgId: string
+  orgId: string,
 ): Promise<Organization[]> => {
   try {
     const result = await query<Organization>(
@@ -44,18 +44,18 @@ export const getOrgsDistributors = async (
         r.status = 'ACTIVE'
         AND o.type = $2
       `,
-      [orgId, 'DISTRIBUTOR']
+      [orgId, "DISTRIBUTOR"],
     );
 
     return result.rows;
   } catch (error) {
-    console.error('Error fetching related organizations :', error);
+    console.error("Error fetching related organizations :", error);
     return [];
   }
 };
 
 export const getOrgDetails = async (
-  orgId: string
+  orgId: string,
 ): Promise<Organization | null> => {
   try {
     const result = await query<Organization>(
@@ -65,12 +65,12 @@ export const getOrgDetails = async (
       WHERE id = $1
       LIMIT 1
       `,
-      [orgId]
+      [orgId],
     );
 
     return result.rows[0];
   } catch (error) {
-    console.error('Error fetching organization details :', error);
+    console.error("Error fetching organization details :", error);
     return null;
   }
 };

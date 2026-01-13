@@ -99,7 +99,7 @@ async function generateDocument(
   const res = await fetch("/api/compliance/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...request, docType: 'compliance' }),
+    body: JSON.stringify({ ...request, docType: "compliance" }),
   });
 
   if (!res.ok) {

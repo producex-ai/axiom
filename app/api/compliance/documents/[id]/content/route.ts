@@ -18,7 +18,10 @@ import {
   convertMarkdownToDocx,
 } from "@/lib/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
-import { createDocumentRevision, getDocumentById } from "@/lib/primus/db-helper";
+import {
+  createDocumentRevision,
+  getDocumentById,
+} from "@/lib/primus/db-helper";
 
 const s3 = new S3Client({ region: process.env.AWS_REGION! });
 
@@ -135,7 +138,11 @@ export async function PUT(
     const { id } = await params;
 
     // Parse request body
-    const { content, status = "published", analysisScore = null } = await request.json();
+    const {
+      content,
+      status = "published",
+      analysisScore = null,
+    } = await request.json();
 
     if (!content || typeof content !== "string") {
       return NextResponse.json(
@@ -162,7 +169,9 @@ export async function PUT(
       );
     }
 
-    console.log(`[API] ${status === "published" ? "Publishing" : "Saving draft for"} document ${id}`);
+    console.log(
+      `[API] ${status === "published" ? "Publishing" : "Saving draft for"} document ${id}`,
+    );
 
     // Convert Markdown to DOCX
     const docxBuffer = await convertMarkdownToDocx(content, document.title);
@@ -203,7 +212,16 @@ export async function PUT(
              updated_by = $6, 
              updated_at = NOW()
          WHERE id = $7 AND org_id = $8`,
-        [newS3Key, newVersion, newStatus, JSON.stringify(analysisScore), new Date().toISOString(), userId, id, orgId],
+        [
+          newS3Key,
+          newVersion,
+          newStatus,
+          JSON.stringify(analysisScore),
+          new Date().toISOString(),
+          userId,
+          id,
+          orgId,
+        ],
       );
     } else if (status === "published") {
       // Published without analysis score (for non-compliance documents)
@@ -216,7 +234,15 @@ export async function PUT(
              updated_by = $5, 
              updated_at = NOW()
          WHERE id = $6 AND org_id = $7`,
-        [newS3Key, newVersion, newStatus, new Date().toISOString(), userId, id, orgId],
+        [
+          newS3Key,
+          newVersion,
+          newStatus,
+          new Date().toISOString(),
+          userId,
+          id,
+          orgId,
+        ],
       );
     } else {
       await query(
@@ -231,9 +257,7 @@ export async function PUT(
       );
     }
 
-    console.log(
-      `[API] ✅ Document ${newStatus} (version ${newVersion})`,
-    );
+    console.log(`[API] ✅ Document ${newStatus} (version ${newVersion})`);
 
     // Determine action based on status
     const action = status === "published" ? "published" : "edited";
@@ -256,7 +280,10 @@ export async function PUT(
 
     return NextResponse.json({
       success: true,
-      message: status === "published" ? "Document published successfully" : "Draft saved successfully",
+      message:
+        status === "published"
+          ? "Document published successfully"
+          : "Draft saved successfully",
       version: newVersion,
       status: newStatus,
       contentKey: newS3Key,

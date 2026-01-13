@@ -33,7 +33,9 @@ function RevisionItem({ revision, isLast, index }: RevisionItemProps) {
   return (
     <div className="relative pb-4 last:pb-0">
       {/* Timeline line */}
-      {!isLast && <div className="absolute left-4 top-8 w-0.5 h-12 bg-border" />}
+      {!isLast && (
+        <div className="absolute left-4 top-8 w-0.5 h-12 bg-border" />
+      )}
 
       {/* Timeline dot */}
       <div className="absolute left-0 top-0 w-9 h-9 rounded-full bg-background border-2 border-primary flex items-center justify-center">
@@ -75,14 +77,10 @@ function RevisionItem({ revision, isLast, index }: RevisionItemProps) {
         <p className="text-sm text-muted-foreground">
           {date} at {time}
         </p>
-        <p className="text-sm text-muted-foreground">
-          {relativeTime}
-        </p>
+        <p className="text-sm text-muted-foreground">{relativeTime}</p>
 
         {revision.notes && (
-          <p className="text-sm mt-2 text-foreground">
-            {revision.notes}
-          </p>
+          <p className="text-sm mt-2 text-foreground">{revision.notes}</p>
         )}
       </div>
     </div>
@@ -125,9 +123,7 @@ export function RevisionHistoryDialog({
         const data = await response.json();
         setRevisions(data.revisions);
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to load history",
-        );
+        setError(err instanceof Error ? err.message : "Failed to load history");
       } finally {
         setLoading(false);
       }
@@ -144,9 +140,7 @@ export function RevisionHistoryDialog({
             <History className="h-5 w-5" />
             Revision History
           </DialogTitle>
-          <p className="text-sm text-muted-foreground mt-2">
-            {documentTitle}
-          </p>
+          <p className="text-sm text-muted-foreground mt-2">{documentTitle}</p>
         </DialogHeader>
 
         {error && (

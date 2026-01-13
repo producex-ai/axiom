@@ -382,7 +382,11 @@ export default function EvidenceUploadFlow({
   const handleImproveDocument = useCallback(async () => {
     setIsImproving(true);
     try {
-      const response = await improveDocument(subModuleId, analysisId, renewalPeriod || undefined);
+      const response = await improveDocument(
+        subModuleId,
+        analysisId,
+        renewalPeriod || undefined,
+      );
 
       if (!response.documentId) {
         throw new Error("No document ID returned from improve API");
@@ -463,7 +467,11 @@ export default function EvidenceUploadFlow({
   const handleAcceptDocument = useCallback(async () => {
     setIsAccepting(true);
     try {
-      const response = await acceptDocument(subModuleId, analysisId, renewalPeriod || undefined);
+      const response = await acceptDocument(
+        subModuleId,
+        analysisId,
+        renewalPeriod || undefined,
+      );
 
       if (!response.documentId) {
         throw new Error("No document ID returned from accept API");
@@ -637,16 +645,27 @@ export default function EvidenceUploadFlow({
                   {/* Renewal Period Field - Show when canImprove is true */}
                   {analysisResult.canImprove && (
                     <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-2 dark:border-slate-700 dark:bg-slate-800/50">
-                      <Label htmlFor="renewal-period" className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                      <Label
+                        htmlFor="renewal-period"
+                        className="text-sm font-semibold text-slate-900 dark:text-slate-100"
+                      >
                         Renewal Period (Optional)
                       </Label>
-                      <Select value={renewalPeriod} onValueChange={setRenewalPeriod}>
-                        <SelectTrigger id="renewal-period" className="bg-white dark:bg-slate-900">
+                      <Select
+                        value={renewalPeriod}
+                        onValueChange={setRenewalPeriod}
+                      >
+                        <SelectTrigger
+                          id="renewal-period"
+                          className="bg-white dark:bg-slate-900"
+                        >
                           <SelectValue placeholder="Select renewal period" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="quarterly">Quarterly</SelectItem>
-                          <SelectItem value="semi_annually">Semi Annually</SelectItem>
+                          <SelectItem value="semi_annually">
+                            Semi Annually
+                          </SelectItem>
                           <SelectItem value="annually">Annually</SelectItem>
                           <SelectItem value="2_years">2 Years</SelectItem>
                         </SelectContent>

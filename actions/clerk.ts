@@ -1,6 +1,6 @@
-'use server';
+"use server";
 
-import { auth, clerkClient } from '@clerk/nextjs/server';
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 export type OrgMember = {
   id: string;
@@ -15,7 +15,7 @@ export async function getOrgMembersAction(): Promise<OrgMember[]> {
   const { orgId } = await auth();
 
   if (!orgId) {
-    throw new Error('Unauthorized - No organization');
+    throw new Error("Unauthorized - No organization");
   }
 
   try {
@@ -23,7 +23,7 @@ export async function getOrgMembersAction(): Promise<OrgMember[]> {
     const { data: membershipList } =
       await client.organizations.getOrganizationMembershipList({
         organizationId: orgId,
-        role: ['org:operator', 'org:manager', 'org:director', 'org:org_admin'],
+        role: ["org:operator", "org:manager", "org:director", "org:org_admin"],
       });
 
     const members: OrgMember[] = membershipList
@@ -45,7 +45,7 @@ export async function getOrgMembersAction(): Promise<OrgMember[]> {
 
     return members;
   } catch (error) {
-    console.error('Error fetching organization members:', error);
+    console.error("Error fetching organization members:", error);
     return [];
   }
 }

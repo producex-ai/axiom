@@ -38,17 +38,10 @@ export function SimplePublishDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            disabled={isPublishing}
-          >
+          <Button variant="outline" onClick={onClose} disabled={isPublishing}>
             Cancel
           </Button>
-          <Button
-            onClick={onConfirm}
-            disabled={isPublishing}
-          >
+          <Button onClick={onConfirm} disabled={isPublishing}>
             {isPublishing ? "Publishing..." : "Publish"}
           </Button>
         </DialogFooter>

@@ -73,7 +73,7 @@ const CORE_FIELD_ORDER: string[] = [
 /**
  * Extract requirement code from question ID in deterministic format
  * Pattern: requirement_X_XX_XX → X.XX.XX or requirement_X_XX_XXa → X.XX.XXa
- * 
+ *
  * @example
  * extractRequirementCode("requirement_1_01_01") → "1.01.01"
  * extractRequirementCode("requirement_5_02_03") → "5.02.03"
@@ -85,14 +85,14 @@ function extractRequirementCode(questionId: string): string | null {
   // Pattern: requirement_X_XX_XX[a-z] (letter suffix is optional)
   const match = questionId.match(/requirement_(\d+)_(\d+)_(\d+)([a-z]?)/i);
   if (!match) return null;
-  const suffix = match[4] ? match[4].toLowerCase() : '';
-  return `${match[1]}.${match[2].padStart(2, '0')}.${match[3].padStart(2, '0')}${suffix}`;
+  const suffix = match[4] ? match[4].toLowerCase() : "";
+  return `${match[1]}.${match[2].padStart(2, "0")}.${match[3].padStart(2, "0")}${suffix}`;
 }
 
 /**
  * Determine target section number for a requirement based on deterministic rules
  * Uses keyword matching to assign requirements to appropriate sections
- * 
+ *
  * @param requirementText - The requirement description or question text
  * @param requirementCode - The requirement code (e.g., "1.01.01")
  * @returns Section number (1-15) where this requirement should appear
@@ -102,93 +102,93 @@ function determineTargetSection(
   requirementCode: string,
 ): number {
   const text = requirementText.toLowerCase();
-  
+
   // Deterministic rules based on keywords (sorted by priority)
-  
+
   // Section 2: Purpose/Policy (policy statements, objectives)
   if (
-    (text.includes('policy') && text.includes('document')) ||
-    (text.includes('policy') && text.includes('establish')) ||
-    text.includes('purpose') ||
-    text.includes('objective')
+    (text.includes("policy") && text.includes("document")) ||
+    (text.includes("policy") && text.includes("establish")) ||
+    text.includes("purpose") ||
+    text.includes("objective")
   ) {
     return 2;
   }
-  
+
   // Section 9: Monitoring (monitoring, frequency, inspection)
   if (
-    text.includes('monitor') ||
-    text.includes('frequency') ||
-    text.includes('inspection') ||
-    text.includes('check') ||
-    text.includes('observe')
+    text.includes("monitor") ||
+    text.includes("frequency") ||
+    text.includes("inspection") ||
+    text.includes("check") ||
+    text.includes("observe")
   ) {
     return 9;
   }
-  
+
   // Section 13: Records (record keeping, retention, documentation storage)
   if (
-    text.includes('record') ||
-    text.includes('retention') ||
-    text.includes('document control') ||
-    text.includes('filing') ||
-    text.includes('archive')
+    text.includes("record") ||
+    text.includes("retention") ||
+    text.includes("document control") ||
+    text.includes("filing") ||
+    text.includes("archive")
   ) {
     return 13;
   }
-  
+
   // Section 10: Verification (verification, validation, testing)
   if (
-    text.includes('verify') ||
-    text.includes('validation') ||
-    text.includes('test') ||
-    text.includes('confirm') ||
-    text.includes('audit')
+    text.includes("verify") ||
+    text.includes("validation") ||
+    text.includes("test") ||
+    text.includes("confirm") ||
+    text.includes("audit")
   ) {
     return 10;
   }
-  
+
   // Section 11: CAPA (corrective, preventive, non-conformance)
   if (
-    text.includes('corrective') ||
-    text.includes('preventive') ||
-    text.includes('capa') ||
-    text.includes('non-conformance') ||
-    text.includes('deviation')
+    text.includes("corrective") ||
+    text.includes("preventive") ||
+    text.includes("capa") ||
+    text.includes("non-conformance") ||
+    text.includes("deviation")
   ) {
     return 11;
   }
-  
+
   // Section 7: Hazard Analysis (hazard, risk, analysis)
   if (
-    text.includes('hazard') ||
-    text.includes('risk') ||
-    text.includes('analysis') ||
-    text.includes('assess')
+    text.includes("hazard") ||
+    text.includes("risk") ||
+    text.includes("analysis") ||
+    text.includes("assess")
   ) {
     return 7;
   }
-  
+
   // Section 5: Roles & Responsibilities (role, responsibility, responsible)
   if (
-    text.includes('role') ||
-    text.includes('responsibility') ||
-    text.includes('responsible') ||
-    text.includes('accountable')
+    text.includes("role") ||
+    text.includes("responsibility") ||
+    text.includes("responsible") ||
+    text.includes("accountable")
   ) {
     return 5;
   }
-  
+
   // Section 12: Traceability (traceability, recall, lot)
   if (
-    text.includes('traceability') ||
-    text.includes('recall') ||
-    text.includes('lot') ||
-    text.includes('batch')
+    text.includes("traceability") ||
+    text.includes("recall") ||
+    text.includes("lot") ||
+    text.includes("batch")
   ) {
     return 12;
   }
-  
+
   // Default to Section 8: Procedures (most requirements are procedural)
   return 8;
 }
@@ -196,15 +196,15 @@ function determineTargetSection(
 /**
  * Format answer value for display in documents (deterministic output)
  * Ensures consistent formatting across all document generations
- * 
+ *
  * @param answer - The answer value (can be any type)
  * @returns Formatted string for display
  */
 function formatAnswerForDisplay(answer: unknown): string {
-  if (typeof answer === 'boolean') return answer ? 'Yes' : 'No';
-  if (answer instanceof Date) return answer.toISOString().split('T')[0]; // YYYY-MM-DD
-  if (typeof answer === 'number') return String(answer);
-  if (answer === null || answer === undefined) return 'To be determined';
+  if (typeof answer === "boolean") return answer ? "Yes" : "No";
+  if (answer instanceof Date) return answer.toISOString().split("T")[0]; // YYYY-MM-DD
+  if (typeof answer === "number") return String(answer);
+  if (answer === null || answer === undefined) return "To be determined";
   return String(answer);
 }
 
@@ -250,28 +250,28 @@ interface RequirementMapping {
 /**
  * Maps answers to their Primus GFS requirement codes with deterministic ordering
  * Returns stable mapping for document generation with requirement headers
- * 
+ *
  * @param answers - User-provided answers keyed by question ID
  * @param questions - Question items from buildQuestionsFromSpec()
  * @param moduleNumber - Module number for loading specs
  * @param documentName - Document name for submodule identification
  * @param subModuleName - Optional submodule name
  * @returns Array of requirement mappings sorted by code (ascending)
- * 
+ *
  * @example
  * Input: { requirement_1_01_01: "Yes", requirement_1_01_02: "Quarterly" }
  * Output: [
- *   { 
- *     code: "1.01.01", 
- *     questionId: "requirement_1_01_01", 
+ *   {
+ *     code: "1.01.01",
+ *     questionId: "requirement_1_01_01",
  *     answer: "Yes",
  *     question: "Is food safety policy documented?",
  *     requirementText: "Food safety policy must be documented",
  *     sectionNumber: 2
  *   },
- *   { 
- *     code: "1.01.02", 
- *     questionId: "requirement_1_01_02", 
+ *   {
+ *     code: "1.01.02",
+ *     questionId: "requirement_1_01_02",
  *     answer: "Quarterly",
  *     question: "How often is policy reviewed?",
  *     requirementText: "Policy must be reviewed at defined intervals",
@@ -287,16 +287,20 @@ function mapAnswersToRequirements(
   subModuleName?: string,
 ): RequirementMapping[] {
   const mappings: RequirementMapping[] = [];
-  
+
   // Load submodule spec to get requirement details
   let submoduleSpec: any = null;
   try {
-    submoduleSpec = findSubmoduleSpecByName(moduleNumber, documentName, subModuleName);
+    submoduleSpec = findSubmoduleSpecByName(
+      moduleNumber,
+      documentName,
+      subModuleName,
+    );
   } catch (error) {
-    console.warn('[MAPPING] Could not load submodule spec:', error);
+    console.warn("[MAPPING] Could not load submodule spec:", error);
     // Continue without spec - will use question text as requirement text
   }
-  
+
   // Build lookup map for requirements by code
   const requirementsByCode = new Map<string, any>();
   if (submoduleSpec?.requirements) {
@@ -304,34 +308,32 @@ function mapAnswersToRequirements(
       requirementsByCode.set(req.code, req);
     }
   }
-  
+
   // Process each question with a checklistRef
   for (const question of questions) {
     // Skip core fields (not requirement-based)
     if (CORE_FIELD_ORDER.includes(question.id)) continue;
-    
+
     // Extract requirement code from question ID
     const code = extractRequirementCode(question.id);
     if (!code) continue; // Not a requirement question
-    
+
     // Check if this question has an answer
     if (!(question.id in answers)) {
       console.warn(`[MAPPING] No answer provided for ${question.id} (${code})`);
       continue;
     }
-    
+
     const answer = answers[question.id];
-    
+
     // Get requirement details from spec
     const requirement = requirementsByCode.get(code);
-    const requirementText = requirement?.text || requirement?.required || question.question;
-    
+    const requirementText =
+      requirement?.text || requirement?.required || question.question;
+
     // Determine target section using deterministic rules
-    const sectionNumber = determineTargetSection(
-      requirementText,
-      code,
-    );
-    
+    const sectionNumber = determineTargetSection(requirementText, code);
+
     mappings.push({
       code,
       questionId: question.id,
@@ -341,14 +343,14 @@ function mapAnswersToRequirements(
       sectionNumber,
     });
   }
-  
+
   // Sort deterministically by requirement code (numerical sort)
   mappings.sort((a, b) => {
-    const [aMaj, aMin, aSub] = a.code.split('.').map(Number);
-    const [bMaj, bMin, bSub] = b.code.split('.').map(Number);
-    return (aMaj - bMaj) || (aMin - bMin) || (aSub - bSub);
+    const [aMaj, aMin, aSub] = a.code.split(".").map(Number);
+    const [bMaj, bMin, bSub] = b.code.split(".").map(Number);
+    return aMaj - bMaj || aMin - bMin || aSub - bSub;
   });
-  
+
   console.log(`[MAPPING] Generated ${mappings.length} requirement mappings`);
   return mappings;
 }
@@ -356,13 +358,13 @@ function mapAnswersToRequirements(
 /**
  * Validates that core answers AND requirement headers appear in generated document
  * Checks both raw answer presence and requirement code header formatting
- * 
+ *
  * @param document - Generated document text
  * @param answers - Original answers provided by user
  * @param questions - Questions with checklistRefs for requirement validation
  * @param coreFieldsOnly - If true, only validate core fields (skip requirement headers)
  * @returns Validation results with missing/found fields and requirement headers
- * 
+ *
  * @example Header pattern to match: "### 1.01.01 - Food Safety Policy"
  */
 function validateAnswersPresent(
@@ -380,30 +382,38 @@ function validateAnswersPresent(
   const found: string[] = [];
   const missingRequirementHeaders: string[] = [];
   const foundRequirementHeaders: string[] = [];
-  
+
   const docLower = document.toLowerCase();
-  
+
   // Validate core fields
   for (const fieldId of CORE_FIELD_ORDER) {
     if (!(fieldId in answers)) continue; // Skip if not provided
-    
+
     const answer = answers[fieldId];
     const answerStr = formatAnswerForDisplay(answer).toLowerCase();
-    
+
     // Special handling for approved_by - must be in Section 15
-    if (fieldId === 'approved_by') {
+    if (fieldId === "approved_by") {
       // Match Section 15 to end of document (use multiline mode only)
       const section15Match = document.match(/15\.\s*REVISION HISTORY[\s\S]*$/i);
-      
+
       if (section15Match) {
         const section15Text = section15Match[0].toLowerCase();
         // Accept if actual name OR signature line exists
-        if (section15Text.includes(answerStr) || section15Text.includes('approved by:')) {
+        if (
+          section15Text.includes(answerStr) ||
+          section15Text.includes("approved by:")
+        ) {
           found.push(fieldId);
           console.log(`[VALIDATION] ✅ approved_by found in Section 15`);
         } else {
-          console.warn(`[VALIDATION] ❌ approved_by "${answerStr}" not found in Section 15`);
-          console.warn(`[VALIDATION] Section 15 contains:`, section15Text.slice(0, 200));
+          console.warn(
+            `[VALIDATION] ❌ approved_by "${answerStr}" not found in Section 15`,
+          );
+          console.warn(
+            `[VALIDATION] Section 15 contains:`,
+            section15Text.slice(0, 200),
+          );
           missing.push(fieldId);
         }
       } else {
@@ -419,47 +429,49 @@ function validateAnswersPresent(
       }
     }
   }
-  
+
   // Validate requirement headers (unless core fields only)
   if (!coreFieldsOnly) {
     for (const question of questions) {
       // Skip core fields
       if (CORE_FIELD_ORDER.includes(question.id)) continue;
-      
+
       // Extract requirement code
       const code = extractRequirementCode(question.id);
       if (!code) continue; // Not a requirement question
-      
+
       // Check if answer exists
       if (!(question.id in answers)) continue;
-      
+
       // Build header pattern: ### {code} - (case insensitive)
       // Pattern: ###\s+{code}\s+-
       // Escape dots in code (1.01.01 -> 1\.01\.01)
-      const escapedCode = code.replace(/\./g, '\\.');
-      
+      const escapedCode = code.replace(/\./g, "\\.");
+
       // Build regex pattern with single backslashes for RegExp constructor
-      const headerPattern = new RegExp(`###\\s+${escapedCode}\\s+-`, 'i');
-      
+      const headerPattern = new RegExp(`###\\s+${escapedCode}\\s+-`, "i");
+
       // Debug first code only
-      if (code === '1.01.01') {
+      if (code === "1.01.01") {
         console.log(`[VALIDATION] Looking for code: ${code}`);
         console.log(`[VALIDATION] Escaped code: ${escapedCode}`);
         console.log(`[VALIDATION] Pattern: ${headerPattern}`);
-        console.log(`[VALIDATION] Document contains "### 1.01.01 -": ${document.includes('### 1.01.01 -')}`);
+        console.log(
+          `[VALIDATION] Document contains "### 1.01.01 -": ${document.includes("### 1.01.01 -")}`,
+        );
       }
-      
+
       const headerMatch = document.match(headerPattern);
-      
+
       if (headerMatch) {
         foundRequirementHeaders.push(code);
-        
+
         // Verify answer appears within 500 characters after header
         const headerIndex = headerMatch.index || 0;
         const sectionText = document.slice(headerIndex, headerIndex + 500);
         const answer = answers[question.id];
         const answerStr = formatAnswerForDisplay(answer);
-        
+
         if (!sectionText.toLowerCase().includes(answerStr.toLowerCase())) {
           console.warn(
             `[VALIDATION] Header found for ${code} but answer "${answerStr}" not nearby`,
@@ -470,17 +482,17 @@ function validateAnswersPresent(
       }
     }
   }
-  
+
   return { missing, found, missingRequirementHeaders, foundRequirementHeaders };
 }
 
 /**
  * Build requirement-to-section mapping table for LLM prompt
  * Shows exactly which requirements go in which sections (deterministic)
- * 
+ *
  * @param mappings - Requirement mappings from mapAnswersToRequirements()
  * @returns Formatted string showing section assignments
- * 
+ *
  * @example Output:
  * Section 2:
  *   - 1.01.01: Is food safety policy documented?
@@ -488,20 +500,24 @@ function validateAnswersPresent(
  * Section 8:
  *   - 1.01.03: What are the documented procedures?
  */
-function buildRequirementSectionMapping(mappings: RequirementMapping[]): string {
+function buildRequirementSectionMapping(
+  mappings: RequirementMapping[],
+): string {
   // Group by section number
   const grouped = new Map<number, RequirementMapping[]>();
-  
+
   for (const mapping of mappings) {
     if (!grouped.has(mapping.sectionNumber)) {
       grouped.set(mapping.sectionNumber, []);
     }
     grouped.get(mapping.sectionNumber)!.push(mapping);
   }
-  
+
   // Sort sections numerically
-  const sortedSections = Array.from(grouped.entries()).sort(([a], [b]) => a - b);
-  
+  const sortedSections = Array.from(grouped.entries()).sort(
+    ([a], [b]) => a - b,
+  );
+
   // Build output string
   const lines: string[] = [];
   for (const [sectionNum, reqs] of sortedSections) {
@@ -510,22 +526,24 @@ function buildRequirementSectionMapping(mappings: RequirementMapping[]): string 
       lines.push(`  - ${req.code}: ${req.question}`);
     }
   }
-  
-  return lines.join('\\n');
+
+  return lines.join("\\n");
 }
 
 /**
  * Build requirement structure guidance for LLM prompt
  * Provides deterministic rules for generating requirement headers
- * 
+ *
  * @param mappings - Requirement mappings from mapAnswersToRequirements()
  * @returns Formatted instruction block for prompt
  */
-function buildRequirementStructureGuidance(mappings: RequirementMapping[]): string {
-  if (mappings.length === 0) return '';
-  
+function buildRequirementStructureGuidance(
+  mappings: RequirementMapping[],
+): string {
+  if (mappings.length === 0) return "";
+
   const sectionMapping = buildRequirementSectionMapping(mappings);
-  
+
   return `
 REQUIREMENT-SPECIFIC CONTENT STRUCTURE (MANDATORY):
 ===================================================
@@ -564,7 +582,7 @@ by {approved_by} and updated as needed to reflect regulatory changes...
 The Food Safety Manager conducts formal policy reviews on a quarterly basis...
 
 DETERMINISTIC RULES:
-1. Requirement codes MUST match exactly: ${mappings.map(m => m.code).join(', ')}
+1. Requirement codes MUST match exactly: ${mappings.map((m) => m.code).join(", ")}
 2. Sort requirements numerically within each section (ascending order)
 3. Every requirement answer MUST appear under its corresponding code header
 4. Use exact format: "### {code} - {title}" (3 hashes, space, code, space, hyphen, space, title)
@@ -581,10 +599,10 @@ CRITICAL - MANDATORY REQUIREMENT CHECKLIST:
 YOU MUST GENERATE HEADERS FOR EVERY SINGLE REQUIREMENT BELOW.
 Before finishing your response, verify that ALL of these headers appear in your output:
 
-${mappings.map((m, idx) => `${idx + 1}. ### ${m.code} - (${m.question.slice(0, 50)}...)`).join('\n')}
+${mappings.map((m, idx) => `${idx + 1}. ### ${m.code} - (${m.question.slice(0, 50)}...)`).join("\n")}
 
 VERIFICATION CHECKLIST (verify each before responding):
-${mappings.map(m => `☐ ### ${m.code} - header present with content`).join('\n')}
+${mappings.map((m) => `☐ ### ${m.code} - header present with content`).join("\n")}
 
 DO NOT SKIP ANY REQUIREMENT. All ${mappings.length} headers listed above are MANDATORY.
 If you cannot find a natural place for a requirement, add it to Section 8 (Procedures) with appropriate content.
@@ -594,7 +612,7 @@ If you cannot find a natural place for a requirement, add it to Section 8 (Proce
 /**
  * Build explicit answer placement map showing where each value must appear
  * Ensures LLM knows exactly where to inject each answer
- * 
+ *
  * @param answers - User-provided answers
  * @param mappings - Requirement mappings with section assignments
  * @returns Formatted instruction block for prompt
@@ -604,7 +622,7 @@ function buildAnswerPlacementMap(
   mappings: RequirementMapping[],
 ): string {
   const coreFieldInstructions: string[] = [];
-  
+
   // Build core field placement instructions
   const coreFieldMap: Record<string, string> = {
     company_name: 'Section 1: "Organization: {value}"',
@@ -617,28 +635,29 @@ function buildAnswerPlacementMap(
     revision_number: 'Section 1: "Revision: {value}"',
     position: 'Section 15: "Position: {value}"',
   };
-  
+
   for (const fieldId of CORE_FIELD_ORDER) {
     if (fieldId in answers) {
       const value = formatAnswerForDisplay(answers[fieldId]);
-      const location = coreFieldMap[fieldId] || 'Section 1';
+      const location = coreFieldMap[fieldId] || "Section 1";
       coreFieldInstructions.push(`- ${fieldId}: "${value}" → ${location}`);
     }
   }
-  
+
   // Build requirement answer placement instructions
-  const requirementInstructions = mappings.map(m => 
-    `- ${m.code}: "${formatAnswerForDisplay(m.answer)}" → Under "### ${m.code} - ..." in Section ${m.sectionNumber}`
+  const requirementInstructions = mappings.map(
+    (m) =>
+      `- ${m.code}: "${formatAnswerForDisplay(m.answer)}" → Under "### ${m.code} - ..." in Section ${m.sectionNumber}`,
   );
-  
+
   return `
 MANDATORY ANSWER PLACEMENT (inject exact values shown):
 ========================================================
 CORE FIELDS (must appear in Sections 1 and 15):
-${coreFieldInstructions.join('\\n')}
+${coreFieldInstructions.join("\\n")}
 
 REQUIREMENT ANSWERS (must appear under their ### headers):
-${requirementInstructions.join('\\n')}
+${requirementInstructions.join("\\n")}
 
 CRITICAL: Every answer listed above MUST appear in the document at its specified location.
 Use the EXACT values shown (do not paraphrase or summarize).
@@ -969,7 +988,7 @@ export function buildQuestionsFromSpec(
           // Old Module 1-3 format with required/text/keywords
           // Include ALL requirements (both required and optional) as questions
           // Users decide which ones to answer, and we only include answered requirements in the document
-          
+
           // Determine question type based on keywords
           const questionType = determineQuestionType(
             reqAny.text,
@@ -983,7 +1002,7 @@ export function buildQuestionsFromSpec(
           const questionId = `requirement_${reqAny.code.replace(/\./g, "_").toLowerCase()}`;
 
           // Log with required/optional indicator
-          const requiredLabel = reqAny.required ? 'REQUIRED' : 'OPTIONAL';
+          const requiredLabel = reqAny.required ? "REQUIRED" : "OPTIONAL";
           console.log(
             `[SPEC] Adding ${requiredLabel} question: ${questionId} (${questionType})`,
           );
@@ -992,7 +1011,7 @@ export function buildQuestionsFromSpec(
             id: questionId,
             question: questionText,
             type: questionType,
-            hint: `${reqAny.required ? 'REQUIRED - ' : 'OPTIONAL - '}${reqAny.code}: ${reqAny.text.slice(0, 60)}...`,
+            hint: `${reqAny.required ? "REQUIRED - " : "OPTIONAL - "}${reqAny.code}: ${reqAny.text.slice(0, 60)}...`,
             checklistRefs: [reqAny.code],
           });
         } else if (isNewFormat) {
@@ -1132,7 +1151,7 @@ function buildEnhancedSpecDrivenPrompt(
     documentName,
     subModuleName,
   );
-  
+
   // Build requirement mappings
   const mappings = mapAnswersToRequirements(
     answers,
@@ -1141,34 +1160,36 @@ function buildEnhancedSpecDrivenPrompt(
     documentName,
     subModuleName,
   );
-  
+
   if (mappings.length === 0) {
-    console.log('[ENHANCED] No requirement mappings found, using base prompt');
+    console.log("[ENHANCED] No requirement mappings found, using base prompt");
     return basePrompt;
   }
-  
+
   // Build answer placement map
   const answerPlacementMap = buildAnswerPlacementMap(answers, mappings);
-  
+
   // Build requirement structure guidance
   const structureGuidance = buildRequirementStructureGuidance(mappings);
-  
-  console.log(`[ENHANCED] Adding answer placement map and requirement structure guidance for ${mappings.length} requirements`);
-  
+
+  console.log(
+    `[ENHANCED] Adding answer placement map and requirement structure guidance for ${mappings.length} requirements`,
+  );
+
   // Inject answer placement map AND requirement structure guidance before the main structure section
   // Try multiple possible structure markers from buildSpecDrivenPrompt
   const possibleMarkers = [
-    'MANDATORY DOCUMENT STRUCTURE (15 SECTIONS):',
-    'DOCUMENT STRUCTURE:',
-    '## Document Structure',
-    'STRUCTURE:',
-    '## Structure',
-    'You must generate a document with the following structure',
+    "MANDATORY DOCUMENT STRUCTURE (15 SECTIONS):",
+    "DOCUMENT STRUCTURE:",
+    "## Document Structure",
+    "STRUCTURE:",
+    "## Structure",
+    "You must generate a document with the following structure",
   ];
-  
+
   let markerIndex = -1;
-  let foundMarker = '';
-  
+  let foundMarker = "";
+
   for (const marker of possibleMarkers) {
     markerIndex = basePrompt.indexOf(marker);
     if (markerIndex !== -1) {
@@ -1176,27 +1197,31 @@ function buildEnhancedSpecDrivenPrompt(
       break;
     }
   }
-  
+
   if (markerIndex === -1) {
-    console.warn('[ENHANCED] Could not find structure marker in base prompt');
-    console.warn('[ENHANCED] Base prompt length:', basePrompt.length);
-    console.warn('[ENHANCED] First 500 chars:', basePrompt.slice(0, 500));
-    console.warn('[ENHANCED] Appending requirement guidance at end');
-    return basePrompt + '\\n\\n' + structureGuidance;
+    console.warn("[ENHANCED] Could not find structure marker in base prompt");
+    console.warn("[ENHANCED] Base prompt length:", basePrompt.length);
+    console.warn("[ENHANCED] First 500 chars:", basePrompt.slice(0, 500));
+    console.warn("[ENHANCED] Appending requirement guidance at end");
+    return basePrompt + "\\n\\n" + structureGuidance;
   }
-  
-  console.log(`[ENHANCED] Found structure marker "${foundMarker}" at position ${markerIndex}`);
-  console.log(`[ENHANCED] Injecting answer placement map and requirement guidance`);
-  
+
+  console.log(
+    `[ENHANCED] Found structure marker "${foundMarker}" at position ${markerIndex}`,
+  );
+  console.log(
+    `[ENHANCED] Injecting answer placement map and requirement guidance`,
+  );
+
   // Inject BOTH answer placement map AND requirement guidance before the structure marker
-  const enhancedPrompt = 
+  const enhancedPrompt =
     basePrompt.slice(0, markerIndex) +
     answerPlacementMap +
-    '\\n\\n' +
+    "\\n\\n" +
     structureGuidance +
-    '\\n\\n' +
+    "\\n\\n" +
     basePrompt.slice(markerIndex);
-  
+
   return enhancedPrompt;
 }
 
@@ -1330,12 +1355,14 @@ async function invokeClaude(
   });
   const response = await bedrock.send(command);
   const json = JSON.parse(new TextDecoder().decode(response.body));
-  
+
   // Log token usage for monitoring
   if (json.usage) {
-    console.log(`[BEDROCK] Token usage: input=${json.usage.input_tokens}, output=${json.usage.output_tokens}`);
+    console.log(
+      `[BEDROCK] Token usage: input=${json.usage.input_tokens}, output=${json.usage.output_tokens}`,
+    );
   }
-  
+
   return json.content[0].text;
 }
 
@@ -1489,8 +1516,8 @@ export async function callLLM_fillTemplate(
     // Fail fast if specs not available
     throw new Error(
       `Spec-driven generation failed: insufficient questions (${questions.length}). ` +
-      `Module ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || 'N/A'}, ` +
-      `Document: ${documentName || 'N/A'}. Spec files may be missing or incomplete.`,
+        `Module ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}, ` +
+        `Document: ${documentName || "N/A"}. Spec files may be missing or incomplete.`,
     );
   }
 
@@ -1508,16 +1535,21 @@ export async function callLLM_fillTemplate(
   );
 
   // Detect relevant micro-rule groups for compliance linting
-  const relevantGroups = detectRelevantMicroRuleGroups(moduleContext, documentName);
+  const relevantGroups = detectRelevantMicroRuleGroups(
+    moduleContext,
+    documentName,
+  );
 
   // Retry loop with enhanced validation
   let lastError: string | undefined;
-  
+
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     // Determine token limit based on requirement count (more requirements = more tokens needed)
-    const requirementCount = questions.filter(q => extractRequirementCode(q.id)).length;
+    const requirementCount = questions.filter((q) =>
+      extractRequirementCode(q.id),
+    ).length;
     let tokenLimit = 25000; // Base token limit
-    
+
     if (requirementCount >= 20) {
       tokenLimit = 35000; // Very large submodules
     } else if (requirementCount >= 15) {
@@ -1525,7 +1557,7 @@ export async function callLLM_fillTemplate(
     } else if (requirementCount >= 10) {
       tokenLimit = 28000; // Medium submodules
     }
-    
+
     // Log generation metrics
     console.log(`[LLM] Generation metrics:`, {
       attempt,
@@ -1576,91 +1608,112 @@ export async function callLLM_fillTemplate(
 
       // STEP 8: Validate answer presence AND requirement headers
       // Debug: Log snippet of generated document
-      console.log('[DEBUG] First 1500 chars of generated doc:');
+      console.log("[DEBUG] First 1500 chars of generated doc:");
       console.log(finalDoc.slice(0, 1500));
-      console.log('[DEBUG] ---');
-      
-      const answerValidation = validateAnswersPresent(finalDoc, answers, questions);
-      
+      console.log("[DEBUG] ---");
+
+      const answerValidation = validateAnswersPresent(
+        finalDoc,
+        answers,
+        questions,
+      );
+
       // Debug: Log first 2000 chars to see what was generated
-      console.log('[DEBUG] First 2000 chars of generated doc:');
+      console.log("[DEBUG] First 2000 chars of generated doc:");
       console.log(finalDoc.slice(0, 2000));
-      console.log('[DEBUG] Searching for headers like: ### 1.01.01 -');
+      console.log("[DEBUG] Searching for headers like: ### 1.01.01 -");
 
       // STEP 9: Validate structure
       const structureValidation = validateLLMOutput(finalDoc);
 
       // STEP 10: Check procedural quality (soft check for audit readiness)
       const qualityCheck = validateProceduralQuality(finalDoc);
-      
+
       // Log validation results
       console.log(`[LLM] Validation results:`, {
         answersFound: answerValidation.found.length,
         answersMissing: answerValidation.missing,
-        requirementHeadersFound: answerValidation.foundRequirementHeaders.length,
+        requirementHeadersFound:
+          answerValidation.foundRequirementHeaders.length,
         requirementHeadersMissing: answerValidation.missingRequirementHeaders,
         forbiddenPatterns: forbiddenCheck.hasForbiddenPatterns,
         structureValid: structureValidation.valid,
         proceduralQualityScore: qualityCheck.score,
       });
-      
+
       // Log quality warnings if score is below threshold
       if (qualityCheck.score < 80) {
-        console.warn(`[LLM] ⚠️ Procedural quality score: ${qualityCheck.score}/100`);
+        console.warn(
+          `[LLM] ⚠️ Procedural quality score: ${qualityCheck.score}/100`,
+        );
         console.warn(`[LLM] Quality warnings:`, qualityCheck.warnings);
         console.warn(`[LLM] Suggestions:`, qualityCheck.suggestions);
       } else {
-        console.log(`[LLM] ✅ Procedural quality score: ${qualityCheck.score}/100`);
+        console.log(
+          `[LLM] ✅ Procedural quality score: ${qualityCheck.score}/100`,
+        );
       }
 
       // Check if critical answers or requirement headers are missing
       const hasMissingCore = answerValidation.missing.length > 0;
-      const hasMissingHeaders = answerValidation.missingRequirementHeaders.length > 0;
+      const hasMissingHeaders =
+        answerValidation.missingRequirementHeaders.length > 0;
 
       if (hasMissingCore || hasMissingHeaders) {
         // Build feedback for retry
         const feedback: string[] = [
-          '',
-          '❌ PREVIOUS ATTEMPT FAILED - REGENERATE WITH ALL REQUIREMENTS:',
-          '',
+          "",
+          "❌ PREVIOUS ATTEMPT FAILED - REGENERATE WITH ALL REQUIREMENTS:",
+          "",
         ];
 
         if (hasMissingCore) {
-          feedback.push('MISSING CORE FIELDS (must appear in document):');
+          feedback.push("MISSING CORE FIELDS (must appear in document):");
           for (const fieldId of answerValidation.missing) {
             const value = formatAnswerForDisplay(answers[fieldId]);
-            const section = fieldId === 'approved_by' ? 'Section 15' : 'Section 1';
-            feedback.push(`- ${fieldId}: "${value}" (MUST appear in ${section})`);
+            const section =
+              fieldId === "approved_by" ? "Section 15" : "Section 1";
+            feedback.push(
+              `- ${fieldId}: "${value}" (MUST appear in ${section})`,
+            );
           }
-          feedback.push('');
+          feedback.push("");
         }
 
         if (hasMissingHeaders) {
-          feedback.push('MISSING REQUIREMENT HEADERS (must use exact format):');
+          feedback.push("MISSING REQUIREMENT HEADERS (must use exact format):");
           for (const code of answerValidation.missingRequirementHeaders) {
-            const question = questions.find(q => extractRequirementCode(q.id) === code);
-            const answer = question ? formatAnswerForDisplay(answers[question.id]) : 'N/A';
-            feedback.push(`- Missing header "### ${code} - {title}" with answer "${answer}"`);
+            const question = questions.find(
+              (q) => extractRequirementCode(q.id) === code,
+            );
+            const answer = question
+              ? formatAnswerForDisplay(answers[question.id])
+              : "N/A";
+            feedback.push(
+              `- Missing header "### ${code} - {title}" with answer "${answer}"`,
+            );
           }
-          feedback.push('');
-          feedback.push('REMEMBER: Header format is "### {code} - {title}" (3 hashes, space, code, space, hyphen, space, title)');
-          feedback.push('');
+          feedback.push("");
+          feedback.push(
+            'REMEMBER: Header format is "### {code} - {title}" (3 hashes, space, code, space, hyphen, space, title)',
+          );
+          feedback.push("");
         }
 
-        lastError = feedback.join('\\n');
+        lastError = feedback.join("\\n");
 
         if (attempt < MAX_RETRIES) {
           console.log(`[LLM] 🔄 Retrying with feedback about missing items...`);
-          prompt = prompt + '\\n\\n' + lastError;
+          prompt = prompt + "\\n\\n" + lastError;
           continue; // Retry with enhanced prompt
         } else {
           // Max retries reached - throw detailed error
           throw new Error(
             `Document generation failed after ${MAX_RETRIES} attempts.\\n` +
-            `Missing core answers: ${answerValidation.missing.join(', ')}\\n` +
-            `Missing requirement headers: ${answerValidation.missingRequirementHeaders.join(', ')}\\n` +
-            `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || 'N/A'}\\n` +
-            `Document: ${documentName || 'N/A'}`,
+              `Missing core answers: ${answerValidation.missing.join(", ")}\\n` +
+              `Missing requirement headers: ${answerValidation.missingRequirementHeaders.join(", ")}\\n` +
+              `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}\\n` +
+              `Document: ${documentName || "N/A"}`,
           );
         }
       }
@@ -1669,11 +1722,13 @@ export async function callLLM_fillTemplate(
       const sectionPattern = /^\d{1,2}\.\s+[A-Z]/gm;
       const sectionMatches = finalDoc.match(sectionPattern);
       const sectionCount = sectionMatches?.length || 0;
-      
+
       if (sectionCount < 15) {
-        console.error(`[LLM] ❌ Document incomplete: only ${sectionCount}/15 sections found`);
+        console.error(
+          `[LLM] ❌ Document incomplete: only ${sectionCount}/15 sections found`,
+        );
         lastError = `Document incomplete: only ${sectionCount}/15 sections. Missing sections after Section ${sectionCount}.`;
-        
+
         if (attempt < MAX_RETRIES) {
           console.log(`[LLM] 🔄 Retrying with section completion feedback...`);
           const sectionFeedback = `\n\n❌ PREVIOUS ATTEMPT INCOMPLETE - ONLY ${sectionCount}/15 SECTIONS GENERATED\n\nYou MUST generate ALL 15 sections:\n1. Title & Document Control\n2. Purpose/Objective\n3. Scope\n4. Definitions & Abbreviations\n5. Roles & Responsibilities\n6. Prerequisites & Reference Documents\n7. Hazard/Risk Analysis\n8. Procedures\n9. Monitoring Plan\n10. Verification & Validation Activities\n11. Corrective & Preventive Action (CAPA) Protocol\n12. Traceability & Recall Elements\n13. Record Retention & Document Control\n14. Compliance Crosswalk\n15. Revision History & Approval Signatures\n\nBUDGET YOUR TOKENS: Make sections 9-15 more concise if needed, but DO NOT SKIP ANY.\n`;
@@ -1682,9 +1737,9 @@ export async function callLLM_fillTemplate(
         } else {
           throw new Error(
             `Document generation failed after ${MAX_RETRIES} attempts.\n` +
-            `Only ${sectionCount}/15 sections generated.\n` +
-            `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || 'N/A'}\n` +
-            `Document: ${documentName || 'N/A'}`,
+              `Only ${sectionCount}/15 sections generated.\n` +
+              `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}\n` +
+              `Document: ${documentName || "N/A"}`,
           );
         }
       }
@@ -1735,8 +1790,8 @@ export async function callLLM_fillTemplate(
         // Max retries reached - throw error
         throw new Error(
           `Document generation failed after ${MAX_RETRIES} attempts.\\n` +
-          `Forbidden patterns: ${errorSummary}\\n` +
-          `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || 'N/A'}`,
+            `Forbidden patterns: ${errorSummary}\\n` +
+            `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}`,
         );
       }
     }

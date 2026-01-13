@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  CheckCircle,
-  BookOpen,
-  Shield,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, BookOpen, Shield, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function PositioningSection() {
@@ -67,25 +61,31 @@ export default function PositioningSection() {
 
         {/* Frameworks Grid */}
         <div className="mb-20 grid gap-6 md:grid-cols-3 lg:grid-cols-3">
-          {Object.keys(t.raw("frameworks.list")).map((frameworkKey: string, index: number) => {
-            const framework = t.raw(`frameworks.list.${frameworkKey}`);
-            const colors = ["emerald", "blue", "purple", "orange", "emerald"];
-            const colorClasses = getColorClasses(colors[index % colors.length]);
+          {Object.keys(t.raw("frameworks.list")).map(
+            (frameworkKey: string, index: number) => {
+              const framework = t.raw(`frameworks.list.${frameworkKey}`);
+              const colors = ["emerald", "blue", "purple", "orange", "emerald"];
+              const colorClasses = getColorClasses(
+                colors[index % colors.length],
+              );
 
-            return (
-              <div
-                key={frameworkKey}
-                className="hover:-translate-y-1 rounded-xl border border-gray-100 bg-white p-6 text-center shadow-lg transition-all duration-300 hover:shadow-xl"
-              >
-                <div className={`mb-4 font-bold text-2xl ${colorClasses.text}`}>
-                  {framework.name}
+              return (
+                <div
+                  key={frameworkKey}
+                  className="hover:-translate-y-1 rounded-xl border border-gray-100 bg-white p-6 text-center shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <div
+                    className={`mb-4 font-bold text-2xl ${colorClasses.text}`}
+                  >
+                    {framework.name}
+                  </div>
+                  <div className="text-gray-600 text-sm">
+                    {framework.description}
+                  </div>
                 </div>
-                <div className="text-gray-600 text-sm">
-                  {framework.description}
-                </div>
-              </div>
-            );
-          })}
+              );
+            },
+          )}
         </div>
 
         {/* Key Differentiators */}
@@ -115,18 +115,18 @@ export default function PositioningSection() {
                   {t(`differentiators.${diff.key}.description`)}
                 </p>
                 <div className="space-y-3">
-                  {(Object.values(t.raw(`differentiators.${diff.key}.details`)) as string[]).map(
-                    (point: string, index: number) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 ${colors.text} mr-3 flex-shrink-0`}
-                        />
-                        <span className="text-gray-700 text-sm">
-                          {point}
-                        </span>
-                      </div>
-                    )
-                  )}
+                  {(
+                    Object.values(
+                      t.raw(`differentiators.${diff.key}.details`),
+                    ) as string[]
+                  ).map((point: string, index: number) => (
+                    <div key={index} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 ${colors.text} mr-3 flex-shrink-0`}
+                      />
+                      <span className="text-gray-700 text-sm">{point}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
@@ -142,28 +142,32 @@ export default function PositioningSection() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {Object.keys(t.raw("competitiveAdvantages")).map((advKey: string, index: number) => {
-              const advantage = t.raw(`competitiveAdvantages.${advKey}`);
-              const colors = ["emerald", "blue", "purple", "orange"];
-              const colorClasses = getColorClasses(colors[index]);
+            {Object.keys(t.raw("competitiveAdvantages")).map(
+              (advKey: string, index: number) => {
+                const advantage = t.raw(`competitiveAdvantages.${advKey}`);
+                const colors = ["emerald", "blue", "purple", "orange"];
+                const colorClasses = getColorClasses(colors[index]);
 
-              return (
-                <div
-                  key={advKey}
-                  className="rounded-xl border border-gray-100 bg-white p-6 text-center shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <div className={`mb-4 font-bold text-3xl ${colorClasses.text}`}>
-                    {advantage.metric}
+                return (
+                  <div
+                    key={advKey}
+                    className="rounded-xl border border-gray-100 bg-white p-6 text-center shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    <div
+                      className={`mb-4 font-bold text-3xl ${colorClasses.text}`}
+                    >
+                      {advantage.metric}
+                    </div>
+                    <h4 className="mb-2 font-semibold text-gray-900 text-lg">
+                      {advantage.title}
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {advantage.description}
+                    </p>
                   </div>
-                  <h4 className="mb-2 font-semibold text-gray-900 text-lg">
-                    {advantage.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm">
-                    {advantage.description}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              },
+            )}
           </div>
         </div>
       </div>

@@ -73,9 +73,7 @@ export async function POST(
       );
     }
 
-    console.log(
-      `[API] Validated generated document: ${generatedDocId}`,
-    );
+    console.log(`[API] Validated generated document: ${generatedDocId}`);
 
     // Start transaction: Get current final doc (if any) to archive
     const currentResult = await query(
@@ -98,14 +96,7 @@ export async function POST(
         `UPDATE submodule_state 
          SET final_doc_id = $1, document_status = $2, updated_at = $3, updated_by = $4
          WHERE org_id = $5 AND sub_module_id = $6`,
-        [
-          generatedDocId,
-          "ready",
-          now,
-          userId,
-          orgId,
-          subModuleId,
-        ],
+        [generatedDocId, "ready", now, userId, orgId, subModuleId],
       );
     } else {
       // Create new record
@@ -113,14 +104,7 @@ export async function POST(
         `INSERT INTO submodule_state 
          (org_id, sub_module_id, final_doc_id, document_status, updated_at, updated_by)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [
-          orgId,
-          subModuleId,
-          generatedDocId,
-          "ready",
-          now,
-          userId,
-        ],
+        [orgId, subModuleId, generatedDocId, "ready", now, userId],
       );
     }
 
@@ -136,9 +120,7 @@ export async function POST(
           [now, previousFinalDocId, orgId],
         );
 
-        console.log(
-          `[API] Archived previous document: ${previousFinalDocId}`,
-        );
+        console.log(`[API] Archived previous document: ${previousFinalDocId}`);
       } catch (error) {
         console.error("[API] Error archiving previous document:", error);
         // Continue even if archiving fails

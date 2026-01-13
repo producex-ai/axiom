@@ -34,9 +34,7 @@ export const RelevanceIssues: React.FC<RelevanceIssuesProps> = ({
           className="rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20"
         >
           <button
-            onClick={() =>
-              onToggleExpand(expandedIndex === idx ? null : idx)
-            }
+            onClick={() => onToggleExpand(expandedIndex === idx ? null : idx)}
             className="w-full px-4 py-3 flex items-start justify-between gap-3 hover:bg-amber-100/50 dark:hover:bg-amber-900/30 transition-colors"
           >
             <div className="flex items-start gap-3 min-w-0 flex-1 text-left">

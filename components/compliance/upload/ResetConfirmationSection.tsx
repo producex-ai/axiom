@@ -36,9 +36,7 @@ export const ResetConfirmationSection: React.FC<
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="flex justify-end gap-2">
-          <AlertDialogCancel disabled={isResetting}>
-            Cancel
-          </AlertDialogCancel>
+          <AlertDialogCancel disabled={isResetting}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             disabled={isResetting}

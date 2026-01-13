@@ -1,7 +1,15 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { Download, Eye, History, MoreVertical, Pencil, Trash2, Calendar } from "lucide-react";
+import {
+  Download,
+  Eye,
+  History,
+  MoreVertical,
+  Pencil,
+  Trash2,
+  Calendar,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -64,11 +72,19 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
   const [showRevisionHistory, setShowRevisionHistory] = useState(false);
-  const [revisionHistoryDocId, setRevisionHistoryDocId] = useState<string | null>(null);
-  const [revisionHistoryDocTitle, setRevisionHistoryDocTitle] = useState<string | null>(null);
+  const [revisionHistoryDocId, setRevisionHistoryDocId] = useState<
+    string | null
+  >(null);
+  const [revisionHistoryDocTitle, setRevisionHistoryDocTitle] = useState<
+    string | null
+  >(null);
   const [showUpdateRenewal, setShowUpdateRenewal] = useState(false);
-  const [updateRenewalDocId, setUpdateRenewalDocId] = useState<string | null>(null);
-  const [updateRenewalDocTitle, setUpdateRenewalDocTitle] = useState<string | null>(null);
+  const [updateRenewalDocId, setUpdateRenewalDocId] = useState<string | null>(
+    null,
+  );
+  const [updateRenewalDocTitle, setUpdateRenewalDocTitle] = useState<
+    string | null
+  >(null);
   const [updateRenewalCurrent, setUpdateRenewalCurrent] = useState<
     "quarterly" | "semi_annually" | "annually" | "2_years" | null
   >(null);
@@ -114,11 +130,14 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
     return date.toLocaleDateString();
   };
 
-  const calculateDueDate = (publishedAt?: string | null, renewal?: string | null) => {
+  const calculateDueDate = (
+    publishedAt?: string | null,
+    renewal?: string | null,
+  ) => {
     if (!publishedAt || !renewal) return "N/A";
-    
+
     const date = new Date(publishedAt);
-    
+
     switch (renewal) {
       case "quarterly":
         date.setMonth(date.getMonth() + 3);
@@ -135,7 +154,7 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
       default:
         return "N/A";
     }
-    
+
     return formatDateWithOrdinal(date);
   };
 
@@ -273,9 +292,10 @@ export function DocumentsTable({ documents }: { documents: Document[] }) {
                       <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuItem
                           onClick={() => {
-                            const basePath = doc.doc_type === "compliance" 
-                              ? `/compliance/documents/${doc.id}/edit`
-                              : `/documents/${doc.id}/edit`;
+                            const basePath =
+                              doc.doc_type === "compliance"
+                                ? `/compliance/documents/${doc.id}/edit`
+                                : `/documents/${doc.id}/edit`;
                             router.push(basePath);
                           }}
                         >
