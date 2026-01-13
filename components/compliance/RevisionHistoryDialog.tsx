@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Clock, History, User } from "lucide-react";
+import { Clock, Download, History, User } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -18,17 +18,59 @@ import {
 } from "@/lib/compliance/revision-history";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUserProfile } from "@/lib/compliance/queries";
+import { Button } from "@/components/ui/button";
 
 interface RevisionItemProps {
   revision: DocumentRevisionInfo;
   isLast: boolean;
   index: number;
+  documentId: string;
 }
 
-function RevisionItem({ revision, isLast, index }: RevisionItemProps) {
+function RevisionItem({ revision, isLast, index, documentId }: RevisionItemProps) {
   const { data: revisionUser } = useUserProfile(revision.userId);
   const { date, time } = formatRevisionDate(revision.createdAt);
   const relativeTime = formatRelativeTime(revision.createdAt);
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setDownloading(true);
+    try {
+      const response = await fetch(
+        `/api/compliance/documents/${documentId}/revisions/${revision.id}/download`,
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to download document");
+      }
+
+      // Get filename from Content-Disposition header or create one
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = `document_v${revision.version}.docx`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      // Download the file
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Error downloading document:", error);
+      alert("Failed to download document. Please try again.");
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <div className="relative pb-4 last:pb-0">
@@ -60,6 +102,16 @@ function RevisionItem({ revision, isLast, index }: RevisionItemProps) {
               </Badge>
             )}
           </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownload}
+            disabled={downloading}
+            className="ml-auto"
+          >
+            <Download className="h-3.5 w-3.5 mr-1.5" />
+            {downloading ? "Downloading..." : "Download"}
+          </Button>
         </div>
 
         <div className="flex items-center gap-1.5 mb-1 text-sm text-muted-foreground">
@@ -176,6 +228,7 @@ export function RevisionHistoryDialog({
                 revision={revision}
                 isLast={index === revisions.length - 1}
                 index={index}
+                documentId={documentId}
               />
             ))}
           </div>

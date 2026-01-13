@@ -135,7 +135,7 @@ export async function PUT(
     const { id } = await params;
 
     // Parse request body
-    const { content, status = "published", analysisScore = null } = await request.json();
+    const { content, status = "published", analysisScore = null, comment } = await request.json();
 
     if (!content || typeof content !== "string") {
       return NextResponse.json(
@@ -238,6 +238,18 @@ export async function PUT(
     // Determine action based on status
     const action = status === "published" ? "published" : "edited";
 
+    // Determine revision history note
+    // For publish action with comment, use the comment
+    // Otherwise use default messages
+    let revisionNote: string;
+    if (status === "published" && comment) {
+      revisionNote = comment;
+    } else if (status === "published") {
+      revisionNote = "Document published";
+    } else {
+      revisionNote = "Draft saved";
+    }
+
     // Create revision record
     await createDocumentRevision(
       id,
@@ -247,7 +259,7 @@ export async function PUT(
       newS3Key,
       newStatus,
       userId,
-      status === "published" ? "Document published" : "Draft saved",
+      revisionNote,
     );
 
     console.log(

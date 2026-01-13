@@ -52,6 +52,7 @@ export default function DocumentEditorClient({
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
   const [simplePublishDialogOpen, setSimplePublishDialogOpen] = useState(false);
+  const [skipValidationOnPublish, setSkipValidationOnPublish] = useState(false);
   const editorStabilizedRef = React.useRef(false);
 
   useEffect(() => {
@@ -200,7 +201,7 @@ export default function DocumentEditorClient({
     }
   };
 
-  const handlePublish = async (skipValidation: boolean = false) => {
+  const handlePublish = async (skipValidation: boolean = false, comment?: string) => {
     try {
       setPublishing(true);
       setError(null);
@@ -256,7 +257,7 @@ export default function DocumentEditorClient({
             documentId,
             markdown,
             documentMetadata?.title || "Document",
-            { skipValidation }
+            { skipValidation, comment } // Pass comment to publish flow
           );
 
           // Dismiss loading toast
@@ -328,6 +329,7 @@ export default function DocumentEditorClient({
             body: JSON.stringify({
               content: markdown,
               status: "published",
+              comment: comment // Pass comment to backend
             }),
           }
         );
@@ -563,6 +565,7 @@ export default function DocumentEditorClient({
                       // For company docs, show simple confirmation dialog
                       // For compliance docs (including null/undefined), run full publish flow
                       if (documentMetadata?.docType === "company") {
+                        setSkipValidationOnPublish(false);
                         setSimplePublishDialogOpen(true);
                       } else {
                         handlePublish();
@@ -603,22 +606,26 @@ export default function DocumentEditorClient({
           onFixClick={() => setAuditIssuesOpen(false)}
           onPublishClick={() => {
             setAuditIssuesOpen(false);
-            handlePublish(true);
+            setSkipValidationOnPublish(true);
+            setSimplePublishDialogOpen(true);
           }}
           version={documentMetadata?.version}
           fullAnalysis={auditAnalysis}
         />
       )}
 
-      {/* Simple Publish Dialog - For company documents only */}
-      {documentMetadata?.docType === "company" && (
-        <SimplePublishDialog
-          open={simplePublishDialogOpen}
-          onClose={() => setSimplePublishDialogOpen(false)}
-          onConfirm={() => handlePublish()}
-          isPublishing={publishing}
-        />
-      )}
+      {/* Simple Publish Dialog - For all documents */}
+      <SimplePublishDialog
+        open={simplePublishDialogOpen}
+        onClose={() => {
+          setSimplePublishDialogOpen(false);
+          setSkipValidationOnPublish(false);
+        }}
+        onConfirm={(comment) => {
+          handlePublish(skipValidationOnPublish, comment);
+        }}
+        isPublishing={publishing}
+      />
 
       {/* Editor */}
       <main className="flex-1 overflow-hidden">

@@ -110,7 +110,7 @@ export default function EditDocumentPage({ params }: EditParams) {
     }
   };
 
-  const handlePublish = async (skipValidation: boolean = false) => {
+  const handlePublish = async (skipValidation: boolean = false, comment?: string) => {
     if (!id) return;
 
     try {
@@ -149,7 +149,8 @@ export default function EditDocumentPage({ params }: EditParams) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
               content: markdown, 
-              status: "published"
+              status: "published",
+              comment: comment // Pass comment to backend
             }),
           },
         );
@@ -189,7 +190,7 @@ export default function EditDocumentPage({ params }: EditParams) {
           id,
           markdown,
           documentMetadata?.title || "Document",
-          { skipValidation },
+          { skipValidation, comment }, // Pass comment to publish flow
         );
 
         // Always show the audit dialog with results
@@ -444,25 +445,23 @@ export default function EditDocumentPage({ params }: EditParams) {
           onFixClick={handleAuditDialogClose}
           onPublishClick={() => {
             setAuditDialogOpen(false);
-            handlePublish(true);
+            setSimplePublishDialogOpen(true);
           }}
           version={documentMetadata?.version || 1}
           fullAnalysis={auditResults}
         />
       )}
 
-      {/* Simple Publish Dialog - for company documents */}
-      {documentMetadata?.docType === 'company' && (
-        <SimplePublishDialog
-          open={simplePublishDialogOpen}
-          onClose={() => setSimplePublishDialogOpen(false)}
-          onConfirm={() => {
-            setSimplePublishDialogOpen(false);
-            handlePublish();
-          }}
-          isPublishing={publishing}
-        />
-      )}
+      {/* Simple Publish Dialog - for all documents (company and compliance) */}
+      <SimplePublishDialog
+        open={simplePublishDialogOpen}
+        onClose={() => setSimplePublishDialogOpen(false)}
+        onConfirm={(comment) => {
+          setSimplePublishDialogOpen(false);
+          handlePublish(documentMetadata?.docType !== 'company' && auditDialogOpen === false, comment);
+        }}
+        isPublishing={publishing}
+      />
     </div>
   );
 }

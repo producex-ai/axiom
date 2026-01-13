@@ -262,7 +262,7 @@ export async function POST(request: NextRequest) {
       s3Key,
       "draft",
       userId,
-      `Document improved with AI-generated sections from ${evidenceFiles.length} evidence file(s)`,
+      `Document improved with AI-generated sections from ${evidenceFiles.length} uploaded document(s)`,
     );
 
     console.log(`[API] ✅ Created document record: ${finalDocId}`);

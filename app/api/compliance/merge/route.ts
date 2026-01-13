@@ -201,7 +201,7 @@ export async function POST(request: NextRequest) {
       s3Key,
       "draft",
       userId,
-      `Document merged from ${evidenceFiles.length} evidence file(s)`,
+      `Document merged from ${evidenceFiles.length} uploaded document(s)`,
     );
 
     console.log(`[API] ✅ Created document record: ${finalDocId}`);

@@ -101,12 +101,13 @@ export async function finalizePublishState(
   documentId: string,
   content: string,
   version: number,
-  analysisScore?: any
+  analysisScore?: any,
+  comment?: string
 ): Promise<{ status: string; version: number }> {
   const response = await fetch(`/api/compliance/documents/${documentId}/content`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content, status: "published", analysisScore }),
+    body: JSON.stringify({ content, status: "published", analysisScore, comment }),
   });
 
   if (!response.ok) {
@@ -135,7 +136,7 @@ export async function executePublishFlow(
   documentId: string,
   content: string,
   title: string,
-  options?: { skipValidation?: boolean }
+  options?: { skipValidation?: boolean; comment?: string }
 ): Promise<PublishResult> {
   try {
     // Step 1: ALWAYS persist changes
@@ -180,9 +181,15 @@ export async function executePublishFlow(
         };
       }
 
-      // No issues - finalize publish with updated analysis score
+      // No issues - finalize publish with updated analysis score and comment
       console.log("[PublishFlow] Step 3: Finalizing publish state with analysis score...");
-      const { status, version: publishedVersion } = await finalizePublishState(documentId, content, version, fullAnalysis);
+      const { status, version: publishedVersion } = await finalizePublishState(
+        documentId, 
+        content, 
+        version, 
+        fullAnalysis,
+        options?.comment
+      );
       console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
 
       return {
@@ -196,9 +203,15 @@ export async function executePublishFlow(
     } else {
       console.log("[PublishFlow] Step 2: Skipping audit validation (user override)");
       
-      // Validation skipped - finalize publish without new analysis
+      // Validation skipped - finalize publish without new analysis but with comment
       console.log("[PublishFlow] Step 3: Finalizing publish state...");
-      const { status, version: publishedVersion } = await finalizePublishState(documentId, content, version);
+      const { status, version: publishedVersion } = await finalizePublishState(
+        documentId, 
+        content, 
+        version, 
+        undefined,
+        options?.comment
+      );
       console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
 
       return {
@@ -210,7 +223,7 @@ export async function executePublishFlow(
       };
     }
   } catch (error) {
-    console.error("[PublishFlow] Error:", error);
+    console.error("[PublishFlow] Error in publish flow:", error);
     throw error;
   }
 }
