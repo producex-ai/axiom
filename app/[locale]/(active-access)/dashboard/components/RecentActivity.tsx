@@ -1,6 +1,4 @@
-import { AlertCircle, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { StatusBadge } from "@/components/ui/status-badge";
 import type { Document } from "../types";
 import { getTimeAgo } from "../utils";
 
@@ -30,30 +29,22 @@ export function RecentActivity({ documents, locale }: RecentActivityProps) {
               <Link
                 key={doc.id}
                 href={`/${locale}/compliance/documents/${doc.id}/edit`}
-                className="flex items-start justify-between hover:bg-accent rounded-lg p-2 -m-2 transition-colors"
+                className="-m-2 flex items-start justify-between rounded-lg p-2 transition-colors hover:bg-accent"
               >
-                <div className="space-y-1 flex-1">
-                  <p className="font-medium text-sm leading-none">{doc.title}</p>
+                <div className="flex-1 space-y-1">
+                  <p className="font-medium text-sm leading-none">
+                    {doc.title}
+                  </p>
                   <p className="text-muted-foreground text-xs">
                     Module {doc.module_id}.{doc.sub_module_id} • v
                     {doc.current_version} • {getTimeAgo(doc.updated_at)}
                   </p>
                 </div>
-                <Badge
-                  variant={doc.status === "published" ? "default" : "secondary"}
-                  className="ml-2 shrink-0"
-                >
-                  {doc.status === "published" ? (
-                    <CheckCircle2 className="mr-1 h-3 w-3" />
-                  ) : (
-                    <AlertCircle className="mr-1 h-3 w-3" />
-                  )}
-                  {doc.status}
-                </Badge>
+                <StatusBadge status={doc.status} className="ml-2 shrink-0" />
               </Link>
             ))
           ) : (
-            <p className="text-center text-muted-foreground text-sm py-4">
+            <p className="py-4 text-center text-muted-foreground text-sm">
               No documents yet
             </p>
           )}

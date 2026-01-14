@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { Calendar, CheckCircle2, Clock, History, XCircle } from "lucide-react";
+import { Calendar, History } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -14,6 +14,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { StatusBadge } from "@/components/ui/status-badge";
 import {
   Table,
   TableBody,
@@ -22,41 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-function getStatusBadge(status: string) {
-  const variants = {
-    PENDING: {
-      variant: "secondary" as const,
-      icon: Clock,
-      label: "Pending",
-    },
-    PENDING_APPROVAL: {
-      variant: "default" as const,
-      icon: Clock,
-      label: "Pending Review",
-    },
-    APPROVED: {
-      variant: "outline" as const,
-      icon: CheckCircle2,
-      label: "Approved",
-    },
-    REJECTED: {
-      variant: "destructive" as const,
-      icon: XCircle,
-      label: "Rejected",
-    },
-  };
-
-  const config = variants[status as keyof typeof variants] || variants.PENDING;
-  const Icon = config.icon;
-
-  return (
-    <Badge variant={config.variant} className="gap-1">
-      <Icon className="h-3 w-3" />
-      {config.label}
-    </Badge>
-  );
-}
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString("en-US", {
@@ -193,7 +159,7 @@ export default async function TaskHistoryPage({
                       </TableCell>
                       <TableCell>
                         <Link href={`/tasks/${log.id}`}>
-                          {getStatusBadge(log.status)}
+                          <StatusBadge status={log.status} />
                         </Link>
                       </TableCell>
                       <TableCell className="text-right">

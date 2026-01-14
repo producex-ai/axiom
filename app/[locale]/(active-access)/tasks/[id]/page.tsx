@@ -3,55 +3,15 @@ import {
   AlertCircle,
   Calendar,
   CheckCircle2,
-  Clock,
   FileText,
   User,
-  XCircle,
 } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 import { getDailyLogByIdAction } from "@/actions/daily-logs";
 import { AssigneeView } from "@/components/tasks/AssigneeView";
 import { ReviewerView } from "@/components/tasks/ReviewerView";
 import { Badge } from "@/components/ui/badge";
-
-function getStatusBadge(status: string) {
-  const variants = {
-    PENDING: {
-      variant: "secondary" as const,
-      icon: Clock,
-      label: "Pending",
-      color: "text-orange-500",
-    },
-    PENDING_APPROVAL: {
-      variant: "default" as const,
-      icon: Clock,
-      label: "Pending Review",
-      color: "text-blue-500",
-    },
-    APPROVED: {
-      variant: "outline" as const,
-      icon: CheckCircle2,
-      label: "Approved",
-      color: "text-green-500",
-    },
-    REJECTED: {
-      variant: "destructive" as const,
-      icon: XCircle,
-      label: "Rejected",
-      color: "text-red-500",
-    },
-  };
-
-  const config = variants[status as keyof typeof variants] || variants.PENDING;
-  const Icon = config.icon;
-
-  return (
-    <Badge variant={config.variant} className="gap-1">
-      <Icon className="h-3 w-3" />
-      {config.label}
-    </Badge>
-  );
-}
+import { StatusBadge } from "@/components/ui/status-badge";
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString("en-US", {
@@ -97,7 +57,7 @@ export default async function TaskDetailPage({
       <div>
         <div className="flex items-center justify-between">
           <h1 className="font-bold text-3xl tracking-tight">Daily Log</h1>
-          {getStatusBadge(log.status)}
+          <StatusBadge status={log.status} />
         </div>
         <p className="mt-2 text-muted-foreground">
           {isAssignee ? "Complete your tasks" : "Review and approve"}
