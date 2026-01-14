@@ -61,20 +61,13 @@ export default async function TasksPage() {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  // Filter tasks for current user: Today's tasks + Past Due tasks (non-approved past tasks)
+  // Filter tasks for current user: All non-approved tasks
   const myTasks = allTasks.filter((task) => {
-    const taskDate = new Date(task.log_date);
-    taskDate.setHours(0, 0, 0, 0);
-
     const isUserInvolved =
       task.assignee_id === userId || task.reviewer_id === userId;
-    const isToday =
-      taskDate.getTime() >= today.getTime() &&
-      taskDate.getTime() < tomorrow.getTime();
-    const isPastDue =
-      taskDate.getTime() < today.getTime() && task.status !== "APPROVED";
+    const isNotApproved = task.status !== "APPROVED";
 
-    return isUserInvolved && (isToday || isPastDue);
+    return isUserInvolved && isNotApproved;
   });
 
   // Calculate stats
@@ -83,7 +76,7 @@ export default async function TasksPage() {
     pending: myTasks.filter((t) => t.status === "PENDING").length,
     pendingReview: myTasks.filter((t) => t.status === "PENDING_APPROVAL")
       .length,
-    approved: myTasks.filter((t) => t.status === "APPROVED").length,
+    rejected: myTasks.filter((t) => t.status === "REJECTED").length,
   };
 
   return (
@@ -91,7 +84,7 @@ export default async function TasksPage() {
       <div>
         <h1 className="font-bold text-3xl tracking-tight">My Tasks</h1>
         <p className="mt-2 text-muted-foreground">
-          Manage your daily log tasks and reviews for today and past due items
+          Manage your active daily log tasks and reviews
         </p>
       </div>
 
@@ -117,9 +110,9 @@ export default async function TasksPage() {
           </p>
         </div>
         <div className="rounded-lg border bg-card p-4">
-          <p className="font-medium text-muted-foreground text-sm">Approved</p>
-          <p className="mt-2 font-bold text-2xl text-green-500">
-            {stats.approved}
+          <p className="font-medium text-muted-foreground text-sm">Rejected</p>
+          <p className="mt-2 font-bold text-2xl text-red-500">
+            {stats.rejected}
           </p>
         </div>
       </div>
@@ -129,9 +122,9 @@ export default async function TasksPage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>Today's Tasks</CardTitle>
+            <CardTitle>Active Tasks</CardTitle>
             <CardDescription>
-              Daily logs assigned to you or awaiting your review for today
+              Daily logs assigned to you or awaiting your review
             </CardDescription>
           </CardHeader>
           <CardContent>

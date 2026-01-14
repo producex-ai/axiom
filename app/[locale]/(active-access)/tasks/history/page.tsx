@@ -60,15 +60,7 @@ export default async function TaskHistoryPage({
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
 
-  // Get all logs before today
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-
   const allLogs = await getDailyLogsAction({
-    endDate: yesterday.toISOString().split("T")[0],
     status: "APPROVED",
   });
 
@@ -90,7 +82,7 @@ export default async function TaskHistoryPage({
       <div>
         <h1 className="font-bold text-3xl tracking-tight">My Task History</h1>
         <p className="mt-2 text-muted-foreground">
-          View your approved past daily log tasks
+          View your approved daily log tasks
         </p>
       </div>
 

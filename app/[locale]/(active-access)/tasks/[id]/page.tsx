@@ -197,15 +197,49 @@ export default async function TaskDetailPage({
             )}
           </div>
 
-          {/* Show comments if they exist */}
-          {log.assignee_comment && (
-            <div className="mt-4 rounded-md bg-muted p-3">
-              <p className="font-medium text-sm">Assignee Comment</p>
-              <p className="mt-1 text-muted-foreground text-sm">
-                {log.assignee_comment}
-              </p>
+          <div className="mt-6 space-y-4 border-t pt-6">
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <h4 className="font-semibold text-sm">Submission Summary</h4>
+                <p className="text-muted-foreground text-xs">
+                  {completedTasks} of {totalTasks} tasks completed
+                </p>
+              </div>
+              {log.tasks_sign_off && (
+                <Badge
+                  variant={
+                    log.tasks_sign_off === "ALL_GOOD"
+                      ? "success"
+                      : "destructive"
+                  }
+                  className="px-2"
+                >
+                  {log.tasks_sign_off === "ALL_GOOD" ? (
+                    <>
+                      <CheckCircle2 className="mr-1 h-3 w-3" />
+                      All Good
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="mr-1 h-3 w-3" />
+                      Action Required
+                    </>
+                  )}
+                </Badge>
+              )}
             </div>
-          )}
+
+            {log.assignee_comment && (
+              <div className="rounded-md border bg-muted/30 p-3">
+                <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                  Assignee Comment
+                </p>
+                <p className="text-foreground text-sm italic leading-relaxed">
+                  "{log.assignee_comment}"
+                </p>
+              </div>
+            )}
+          </div>
 
           {log.reviewer_comment && (
             <div className="mt-4 rounded-md bg-muted p-3">

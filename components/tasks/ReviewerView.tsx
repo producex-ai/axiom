@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import { useActionState } from "react";
 import {
   type ActionState,
@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
 
@@ -92,27 +93,45 @@ export function ReviewerView({ log }: ReviewerViewProps) {
           )}
         </div>
 
-        <div className="mt-4 rounded-md bg-muted p-3">
-          <p className="font-medium text-sm">
-            Progress: {completedTasks} / {totalTasks} tasks completed
-          </p>
-          {log.tasks_sign_off && (
-            <p className="mt-1 text-sm">
-              Sign Off:{" "}
-              <span className="font-medium">
-                {log.tasks_sign_off === "ALL_GOOD"
-                  ? "All Good"
-                  : "Action Required"}
-              </span>
-            </p>
-          )}
-          {log.assignee_comment && (
-            <>
-              <p className="mt-2 font-medium text-sm">Assignee Comment:</p>
-              <p className="mt-1 text-muted-foreground text-sm">
-                {log.assignee_comment}
+        <div className="mt-6 space-y-4 border-t pt-6">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h4 className="font-semibold text-sm">Submission Summary</h4>
+              <p className="text-muted-foreground text-xs">
+                {completedTasks} of {totalTasks} tasks completed
               </p>
-            </>
+            </div>
+            {log.tasks_sign_off && (
+              <Badge
+                variant={
+                  log.tasks_sign_off === "ALL_GOOD" ? "success" : "destructive"
+                }
+                className="px-2"
+              >
+                {log.tasks_sign_off === "ALL_GOOD" ? (
+                  <>
+                    <CheckCircle2 className="mr-1 h-3 w-3" />
+                    All Good
+                  </>
+                ) : (
+                  <>
+                    <AlertCircle className="mr-1 h-3 w-3" />
+                    Action Required
+                  </>
+                )}
+              </Badge>
+            )}
+          </div>
+
+          {log.assignee_comment && (
+            <div className="rounded-md border bg-muted/30 p-3">
+              <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                Assignee Comment
+              </p>
+              <p className="text-foreground text-sm italic leading-relaxed">
+                "{log.assignee_comment}"
+              </p>
+            </div>
           )}
         </div>
       </div>

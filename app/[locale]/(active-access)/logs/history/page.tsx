@@ -60,15 +60,7 @@ export default async function HistoryPage({
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
 
-  // Get all logs before today
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const endDate = new Date(today);
-  endDate.setDate(endDate.getDate() - 1); // Yesterday and before
-
   const allLogs = await getDailyLogsAction({
-    endDate: endDate.toISOString().split("T")[0],
     status: "APPROVED",
   });
 
@@ -90,7 +82,7 @@ export default async function HistoryPage({
           Organisation Logs History
         </h1>
         <p className="mt-2 text-muted-foreground">
-          View all approved daily logs from the past
+          View all approved daily logs
         </p>
       </div>
 
