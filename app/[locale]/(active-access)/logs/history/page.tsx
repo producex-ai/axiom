@@ -86,7 +86,9 @@ export default async function HistoryPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-bold text-3xl tracking-tight">Logs History</h1>
+        <h1 className="font-bold text-3xl tracking-tight">
+          Organisation Logs History
+        </h1>
         <p className="mt-2 text-muted-foreground">
           View all approved daily logs from the past
         </p>
@@ -101,9 +103,10 @@ export default async function HistoryPage({
               <TableHeader>
                 <TableRow>
                   <TableHead>Date</TableHead>
-                  <TableHead>Template</TableHead>
+                  <TableHead>Log Name</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Assignee</TableHead>
+                  <TableHead>Reviewer</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Tasks</TableHead>
                 </TableRow>
@@ -151,6 +154,13 @@ export default async function HistoryPage({
                         <Link href={`/tasks/${log.id}`}>
                           <span className="text-muted-foreground text-sm">
                             {log.assignee_name || "Unassigned"}
+                          </span>
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={`/tasks/${log.id}`}>
+                          <span className="text-muted-foreground text-sm">
+                            {log.reviewer_name || "No Reviewer"}
                           </span>
                         </Link>
                       </TableCell>

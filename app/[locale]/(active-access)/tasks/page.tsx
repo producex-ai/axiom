@@ -139,9 +139,9 @@ export default async function TasksPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Date</TableHead>
-                  <TableHead>Template</TableHead>
+                  <TableHead>Log Name</TableHead>
                   <TableHead>Category</TableHead>
-                  <TableHead>Role</TableHead>
+                  <TableHead>My Role</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Tasks</TableHead>
                 </TableRow>
@@ -188,9 +188,9 @@ export default async function TasksPage() {
                       </TableCell>
                       <TableCell>
                         <Link href={`/tasks/${task.id}`}>
-                          <Badge variant={isAssignee ? "secondary" : "default"}>
+                          <span className="text-sm">
                             {isAssignee ? "Assignee" : "Reviewer"}
-                          </Badge>
+                          </span>
                         </Link>
                       </TableCell>
                       <TableCell>

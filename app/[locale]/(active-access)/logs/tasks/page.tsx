@@ -59,9 +59,7 @@ export default async function OrgTasksPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-bold text-3xl tracking-tight">
-          Organization Tasks
-        </h1>
+        <h1 className="font-bold text-3xl tracking-tight">Organization Logs</h1>
         <p className="mt-2 text-muted-foreground">
           View all daily logs for the entire organization
         </p>
@@ -104,9 +102,10 @@ export default async function OrgTasksPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
-                <TableHead>Template</TableHead>
+                <TableHead>Log Name</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Assignee</TableHead>
+                <TableHead>Reviewer</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Tasks</TableHead>
               </TableRow>
@@ -154,6 +153,13 @@ export default async function OrgTasksPage() {
                       <Link href={`/tasks/${log.id}`}>
                         <span className="text-muted-foreground text-sm">
                           {log.assignee_name || "Unassigned"}
+                        </span>
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/tasks/${log.id}`}>
+                        <span className="text-muted-foreground text-sm">
+                          {log.reviewer_name || "No Reviewer"}
                         </span>
                       </Link>
                     </TableCell>
