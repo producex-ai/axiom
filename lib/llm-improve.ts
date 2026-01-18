@@ -136,7 +136,7 @@ const rateLimiter = {
     const elapsed = now - this.lastCallTime;
     if (elapsed < this.minDelayMs) {
       const delay = this.minDelayMs - elapsed;
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
     this.lastCallTime = Date.now();
   },
@@ -151,20 +151,22 @@ async function processBatch<T, R>(
   batchSize: number,
 ): Promise<R[]> {
   const results: R[] = [];
-  
+
   for (let i = 0; i < items.length; i += batchSize) {
     const batch = items.slice(i, i + batchSize);
-    console.log(`[LLM-IMPROVE] Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(items.length / batchSize)} (${batch.length} items)`);
-    
+    console.log(
+      `[LLM-IMPROVE] Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(items.length / batchSize)} (${batch.length} items)`,
+    );
+
     const batchResults = await Promise.all(batch.map(processor));
     results.push(...batchResults);
-    
+
     // Small delay between batches to avoid rate limits
     if (i + batchSize < items.length) {
       await sleep(500);
     }
   }
-  
+
   return results;
 }
 
@@ -329,7 +331,7 @@ export async function improveDocument({
   console.log(
     `[LLM-IMPROVE] Generating ${highPrioritySections.length} high-priority sections (max 3 concurrent)...`,
   );
-  
+
   const highPriorityResults = await processBatch(
     highPrioritySections,
     async (section) => {
@@ -349,7 +351,7 @@ export async function improveDocument({
     },
     3, // Max 3 concurrent requests
   );
-  
+
   sections.push(...highPriorityResults);
 
   console.log(
@@ -695,35 +697,34 @@ async function callBedrock(prompt: string, maxTokens: number): Promise<string> {
         }),
       );
 
-      const responseBody = JSON.parse(
-        new TextDecoder().decode(response.body),
-      );
+      const responseBody = JSON.parse(new TextDecoder().decode(response.body));
 
       // Check for truncation and warn with more details
       if (responseBody.stop_reason === "max_tokens") {
         console.warn(
           `[LLM-IMPROVE] ⚠️ Response truncated at ${maxTokens} tokens. Consider reducing prompt size or increasing token limit.`,
         );
-        
+
         // Return what we have - the content is still usable
         const truncatedContent = responseBody.content[0].text;
-        
+
         // Add ellipsis if content doesn't end with punctuation
         if (!/[.!?]\s*$/.test(truncatedContent.trim())) {
           return truncatedContent + "...";
         }
-        
+
         return truncatedContent;
       }
 
       return responseBody.content[0].text;
     } catch (error) {
       // Detect throttling/rate limit errors
-      const isThrottling = error instanceof Error && 
-        (error.message.includes("ThrottlingException") || 
-         error.message.includes("TooManyRequestsException") ||
-         error.message.includes("Too many requests") ||
-         error.message.includes("429"));
+      const isThrottling =
+        error instanceof Error &&
+        (error.message.includes("ThrottlingException") ||
+          error.message.includes("TooManyRequestsException") ||
+          error.message.includes("Too many requests") ||
+          error.message.includes("429"));
 
       if (isThrottling && attempt < maxRetries) {
         const backoffMs = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s

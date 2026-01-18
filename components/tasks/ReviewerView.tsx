@@ -10,7 +10,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
 

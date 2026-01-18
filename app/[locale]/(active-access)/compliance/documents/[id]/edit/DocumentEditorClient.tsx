@@ -201,7 +201,10 @@ export default function DocumentEditorClient({
     }
   };
 
-  const handlePublish = async (skipValidation: boolean = false, comment?: string) => {
+  const handlePublish = async (
+    skipValidation: boolean = false,
+    comment?: string,
+  ) => {
     try {
       setPublishing(true);
       setError(null);
@@ -257,7 +260,7 @@ export default function DocumentEditorClient({
             documentId,
             markdown,
             documentMetadata?.title || "Document",
-            { skipValidation, comment } // Pass comment to publish flow
+            { skipValidation, comment }, // Pass comment to publish flow
           );
 
           // Dismiss loading toast
@@ -329,7 +332,7 @@ export default function DocumentEditorClient({
             body: JSON.stringify({
               content: markdown,
               status: "published",
-              comment: comment // Pass comment to backend
+              comment: comment, // Pass comment to backend
             }),
           },
         );

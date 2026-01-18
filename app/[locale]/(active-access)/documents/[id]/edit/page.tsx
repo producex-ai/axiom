@@ -110,7 +110,10 @@ export default function EditDocumentPage({ params }: EditParams) {
     }
   };
 
-  const handlePublish = async (skipValidation: boolean = false, comment?: string) => {
+  const handlePublish = async (
+    skipValidation: boolean = false,
+    comment?: string,
+  ) => {
     if (!id) return;
 
     try {
@@ -147,10 +150,10 @@ export default function EditDocumentPage({ params }: EditParams) {
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-              content: markdown, 
+            body: JSON.stringify({
+              content: markdown,
               status: "published",
-              comment: comment // Pass comment to backend
+              comment: comment, // Pass comment to backend
             }),
           },
         );
@@ -458,7 +461,11 @@ export default function EditDocumentPage({ params }: EditParams) {
         onClose={() => setSimplePublishDialogOpen(false)}
         onConfirm={(comment) => {
           setSimplePublishDialogOpen(false);
-          handlePublish(documentMetadata?.docType !== 'company' && auditDialogOpen === false, comment);
+          handlePublish(
+            documentMetadata?.docType !== "company" &&
+              auditDialogOpen === false,
+            comment,
+          );
         }}
         isPublishing={publishing}
       />

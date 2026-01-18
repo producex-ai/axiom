@@ -138,7 +138,12 @@ export async function PUT(
     const { id } = await params;
 
     // Parse request body
-    const { content, status = "published", analysisScore = null, comment } = await request.json();
+    const {
+      content,
+      status = "published",
+      analysisScore = null,
+      comment,
+    } = await request.json();
 
     if (!content || typeof content !== "string") {
       return NextResponse.json(

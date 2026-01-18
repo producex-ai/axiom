@@ -106,13 +106,21 @@ export async function finalizePublishState(
   content: string,
   version: number,
   analysisScore?: any,
-  comment?: string
+  comment?: string,
 ): Promise<{ status: string; version: number }> {
-  const response = await fetch(`/api/compliance/documents/${documentId}/content`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content, status: "published", analysisScore, comment }),
-  });
+  const response = await fetch(
+    `/api/compliance/documents/${documentId}/content`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content,
+        status: "published",
+        analysisScore,
+        comment,
+      }),
+    },
+  );
 
   if (!response.ok) {
     const error = await response.json();
@@ -140,7 +148,7 @@ export async function executePublishFlow(
   documentId: string,
   content: string,
   title: string,
-  options?: { skipValidation?: boolean; comment?: string }
+  options?: { skipValidation?: boolean; comment?: string },
 ): Promise<PublishResult> {
   try {
     // Step 1: ALWAYS persist changes
@@ -196,15 +204,19 @@ export async function executePublishFlow(
       }
 
       // No issues - finalize publish with updated analysis score and comment
-      console.log("[PublishFlow] Step 3: Finalizing publish state with analysis score...");
-      const { status, version: publishedVersion } = await finalizePublishState(
-        documentId, 
-        content, 
-        version, 
-        fullAnalysis,
-        options?.comment
+      console.log(
+        "[PublishFlow] Step 3: Finalizing publish state with analysis score...",
       );
-      console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
+      const { status, version: publishedVersion } = await finalizePublishState(
+        documentId,
+        content,
+        version,
+        fullAnalysis,
+        options?.comment,
+      );
+      console.log(
+        `[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`,
+      );
 
       return {
         success: true,
@@ -215,18 +227,22 @@ export async function executePublishFlow(
         message: "Document published successfully",
       };
     } else {
-      console.log("[PublishFlow] Step 2: Skipping audit validation (user override)");
-      
+      console.log(
+        "[PublishFlow] Step 2: Skipping audit validation (user override)",
+      );
+
       // Validation skipped - finalize publish without new analysis but with comment
       console.log("[PublishFlow] Step 3: Finalizing publish state...");
       const { status, version: publishedVersion } = await finalizePublishState(
-        documentId, 
-        content, 
-        version, 
+        documentId,
+        content,
+        version,
         undefined,
-        options?.comment
+        options?.comment,
       );
-      console.log(`[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`);
+      console.log(
+        `[PublishFlow] ✅ Document published successfully (status: ${status}, version: ${publishedVersion})`,
+      );
 
       return {
         success: true,

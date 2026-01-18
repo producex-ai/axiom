@@ -30,7 +30,7 @@ export function ModuleProgress({ modules }: ModuleProgressProps) {
             const progress =
               module.totalSubModules > 0
                 ? Math.round(
-                    (module.documentsReady / module.totalSubModules) * 100
+                    (module.documentsReady / module.totalSubModules) * 100,
                   )
                 : 0;
             return (

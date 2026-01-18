@@ -27,7 +27,12 @@ interface RevisionItemProps {
   documentId: string;
 }
 
-function RevisionItem({ revision, isLast, index, documentId }: RevisionItemProps) {
+function RevisionItem({
+  revision,
+  isLast,
+  index,
+  documentId,
+}: RevisionItemProps) {
   const { data: revisionUser } = useUserProfile(revision.userId);
   const { date, time } = formatRevisionDate(revision.createdAt);
   const relativeTime = formatRelativeTime(revision.createdAt);

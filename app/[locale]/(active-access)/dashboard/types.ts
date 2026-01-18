@@ -1,4 +1,8 @@
-export type RenewalPeriod = "monthly" | "quarterly" | "semi_annually" | "annually";
+export type RenewalPeriod =
+  | "monthly"
+  | "quarterly"
+  | "semi_annually"
+  | "annually";
 export type DocumentStatus = "draft" | "published";
 export type DocumentType = "compliance" | "company";
 

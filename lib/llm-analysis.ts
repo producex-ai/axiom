@@ -2413,9 +2413,7 @@ function createBlockedAnalysisResult(
   };
 }
 
-function extractRequirementList(
-  checklist: any,
-): Array<{
+function extractRequirementList(checklist: any): Array<{
   id: string;
   title: string;
   description?: string;

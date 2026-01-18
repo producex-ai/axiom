@@ -2,7 +2,7 @@ import type { RenewalPeriod } from "./types";
 
 export function calculateExpirationDate(
   publishedAt: string | null,
-  renewal: RenewalPeriod | null
+  renewal: RenewalPeriod | null,
 ): Date | null {
   if (!publishedAt || !renewal) return null;
 

@@ -230,10 +230,11 @@ export async function updateDailyLogTasksAction(
       };
     }
 
-    revalidatePath("/logs/daily");
+    // Only revalidate the specific log page, not the entire list
+    // This reduces unnecessary data fetching
     revalidatePath(`/logs/daily/${id}`);
 
-    return { success: true, message: "Tasks updated successfully" };
+    return { success: true };
   } catch (error) {
     console.error("Failed to update tasks:", error);
     return { message: "Failed to update tasks. Please try again." };

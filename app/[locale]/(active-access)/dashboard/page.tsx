@@ -24,10 +24,10 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 
   // Filter compliance documents only
   const complianceDocuments = documents.filter(
-    (doc) => doc.doc_type === "compliance"
+    (doc) => doc.doc_type === "compliance",
   );
   const publishedDocuments = complianceDocuments.filter(
-    (doc) => doc.status === "published"
+    (doc) => doc.status === "published",
   );
 
   // Calculate expiring and overdue documents
@@ -38,7 +38,10 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   };
 
   publishedDocuments.forEach((doc) => {
-    const expirationDate = calculateExpirationDate(doc.published_at, doc.renewal);
+    const expirationDate = calculateExpirationDate(
+      doc.published_at,
+      doc.renewal,
+    );
     if (!expirationDate) return;
 
     if (expirationDate < today) {
@@ -56,13 +59,14 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
       totalRequired: acc.totalRequired + (module.totalSubModules || 0),
       totalReady: acc.totalReady + (module.documentsReady || 0),
     }),
-    { totalRequired: 0, totalReady: 0 }
+    { totalRequired: 0, totalReady: 0 },
   ) || { totalRequired: 0, totalReady: 0 };
 
   const complianceScore =
     complianceMetrics.totalRequired > 0
       ? Math.round(
-          (complianceMetrics.totalReady / complianceMetrics.totalRequired) * 100
+          (complianceMetrics.totalReady / complianceMetrics.totalRequired) *
+            100,
         )
       : 0;
 
@@ -70,7 +74,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
   const recentDocs = [...documents]
     .sort(
       (a, b) =>
-        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
     )
     .slice(0, 5);
 
@@ -102,7 +106,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
       icon: Clock,
       description: `${documentsByExpiry.expiring30Days} in 30 days, ${documentsByExpiry.expiring90Days} in 90 days`,
       color:
-        documentsByExpiry.expiring30Days > 0 ? "text-orange-500" : "text-gray-500",
+        documentsByExpiry.expiring30Days > 0
+          ? "text-orange-500"
+          : "text-gray-500",
     },
     {
       title: "Overdue Documents",

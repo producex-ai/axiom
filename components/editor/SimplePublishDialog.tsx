@@ -60,7 +60,7 @@ export function SimplePublishDialog({
             Add a comment describing the changes you&apos;re publishing.
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-2">
           <Label htmlFor="publish-comment">
             Comment <span className="text-destructive">*</span>
@@ -77,19 +77,14 @@ export function SimplePublishDialog({
             rows={4}
             className={error ? "border-destructive" : ""}
           />
-          {error && (
-            <p className="text-sm text-destructive">{error}</p>
-          )}
+          {error && <p className="text-sm text-destructive">{error}</p>}
         </div>
 
         <DialogFooter className="gap-2">
           <Button variant="outline" onClick={onClose} disabled={isPublishing}>
             Cancel
           </Button>
-          <Button
-            onClick={handleConfirm}
-            disabled={isPublishing}
-          >
+          <Button onClick={handleConfirm} disabled={isPublishing}>
             {isPublishing ? "Publishing..." : "Publish"}
           </Button>
         </DialogFooter>
