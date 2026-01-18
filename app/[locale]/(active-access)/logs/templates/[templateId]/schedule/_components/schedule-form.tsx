@@ -8,6 +8,7 @@ import type { OrgMember } from "@/actions/clerk";
 import {
   type CreateScheduleState,
   createLogScheduleAction,
+  toggleScheduleStatusAction,
   updateLogScheduleAction,
 } from "@/actions/log-schedules";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -44,6 +45,52 @@ function SubmitButton({ isEditing }: { isEditing: boolean }) {
         "Update Schedule"
       ) : (
         "Create Schedule"
+      )}
+    </Button>
+  );
+}
+
+function PauseResumeButton({
+  scheduleId,
+  isPaused,
+}: {
+  scheduleId: string;
+  isPaused: boolean;
+}) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleToggle = async () => {
+    setIsLoading(true);
+    try {
+      const result = await toggleScheduleStatusAction(scheduleId);
+      if (!result.success) {
+        console.error(result.message);
+      }
+      // Page will auto-refresh due to revalidatePath in the action
+    } catch (error) {
+      console.error("Failed to toggle schedule status:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      className="w-full md:w-fit"
+      disabled={isLoading}
+      onClick={handleToggle}
+    >
+      {isLoading ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          {isPaused ? "Resuming..." : "Pausing..."}
+        </>
+      ) : isPaused ? (
+        "Resume Schedule"
+      ) : (
+        "Pause Schedule"
       )}
     </Button>
   );
@@ -89,6 +136,7 @@ interface ScheduleFormProps {
     dayOfMonth?: number;
     monthOfYear?: number;
     timesPerDay?: number;
+    status?: "ACTIVE" | "PAUSED";
   };
 }
 
@@ -137,6 +185,7 @@ export function ScheduleForm({
   );
   const [endDate, setEndDate] = useState<string>(initialData?.endDate || "");
   const [generateToday, setGenerateToday] = useState<boolean>(true);
+  const isPaused = initialData?.status === "PAUSED";
 
   // Get today's date in YYYY-MM-DD format for min date validation
   const today = new Date().toISOString().split("T")[0];
@@ -189,6 +238,11 @@ export function ScheduleForm({
       <input type="hidden" name="assignee_id" value={assigneeId} />
       <input type="hidden" name="reviewer_id" value={reviewerId} />
       <input type="hidden" name="times_per_day" value={timesPerDay} />
+      <input
+        type="hidden"
+        name="status"
+        value={isPaused ? "PAUSED" : "ACTIVE"}
+      />
 
       <Card>
         <CardContent className="space-y-8 pt-6">
@@ -473,7 +527,15 @@ export function ScheduleForm({
               </Label>
             </div>
           )}
-          <SubmitButton isEditing={mode === "edit"} />
+          <div className="flex gap-2">
+            {mode === "edit" && initialData?.scheduleId && (
+              <PauseResumeButton
+                scheduleId={initialData.scheduleId}
+                isPaused={isPaused}
+              />
+            )}
+            <SubmitButton isEditing={mode === "edit"} />
+          </div>
         </div>
       </div>
     </form>

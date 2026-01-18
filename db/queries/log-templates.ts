@@ -86,7 +86,6 @@ export const getLogTemplates = async (
         ls.id as schedule_id
       FROM log_templates lt
       LEFT JOIN log_schedules ls ON lt.id = ls.template_id 
-        AND ls.status = 'ACTIVE'
         AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
       WHERE lt.org_id = $1
       ORDER BY lt.created_at DESC
@@ -112,7 +111,6 @@ export const getLogTemplateById = async (
         ls.id as schedule_id
       FROM log_templates lt
       LEFT JOIN log_schedules ls ON lt.id = ls.template_id 
-        AND ls.status = 'ACTIVE'
         AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
       WHERE lt.id = $1 AND lt.org_id = $2
       LIMIT 1

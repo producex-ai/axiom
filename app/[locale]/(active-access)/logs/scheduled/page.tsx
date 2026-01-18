@@ -15,16 +15,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const DAYS_MAP: Record<number, string> = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thu",
-  5: "Fri",
-  6: "Sat",
-};
-
 function SchedulesTableSkeleton() {
   return (
     <div className="space-y-3">
@@ -47,7 +37,7 @@ async function SchedulesTable() {
     return (
       <div className="flex h-40 items-center justify-center rounded-lg border border-dashed bg-muted/50">
         <p className="text-muted-foreground">
-          No active schedules found. Create one to get started.
+          No schedules found. Create one to get started.
         </p>
       </div>
     );
@@ -59,8 +49,8 @@ async function SchedulesTable() {
         <TableHeader>
           <TableRow>
             <TableHead>Template</TableHead>
+            <TableHead>Status</TableHead>
             <TableHead>Schedule Period</TableHead>
-            <TableHead>Days</TableHead>
             <TableHead>Times/Day</TableHead>
             <TableHead>Assignee</TableHead>
             <TableHead>Reviewer</TableHead>
@@ -79,6 +69,15 @@ async function SchedulesTable() {
                     {schedule.template_name}
                   </Link>
                 </div>
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant={
+                    schedule.status === "ACTIVE" ? "default" : "secondary"
+                  }
+                >
+                  {schedule.status}
+                </Badge>
               </TableCell>
               <TableCell>
                 <div className="flex flex-col gap-1 text-sm">
@@ -100,17 +99,6 @@ async function SchedulesTable() {
                     <span className="text-muted-foreground text-xs">
                       Ongoing
                     </span>
-                  )}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex flex-wrap gap-1">
-                  {schedule.days_of_week?.map((day) => (
-                    <Badge key={day} variant="outline" className="text-xs">
-                      {DAYS_MAP[day]}
-                    </Badge>
-                  )) || (
-                    <span className="text-muted-foreground text-sm">-</span>
                   )}
                 </div>
               </TableCell>
@@ -165,7 +153,7 @@ export default function ScheduledLogsPage() {
         <div>
           <h1 className="font-bold text-3xl tracking-tight">Scheduled Logs</h1>
           <p className="mt-2 text-muted-foreground">
-            View all active log schedules for your organization.
+            View all log schedules for your organization.
           </p>
         </div>
       </div>

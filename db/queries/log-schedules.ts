@@ -112,13 +112,13 @@ export const updateLogSchedule = async (
       UPDATE log_schedules
       SET 
         start_date = COALESCE($1, start_date),
-        end_date = $2,
-        assignee_id = $3,
-        reviewer_id = $4,
+        end_date = COALESCE($2, end_date),
+        assignee_id = COALESCE($3, assignee_id),
+        reviewer_id = COALESCE($4, reviewer_id),
         frequency = COALESCE($5, frequency),
-        days_of_week = $6,
-        day_of_month = $7,
-        month_of_year = $8,
+        days_of_week = COALESCE($6, days_of_week),
+        day_of_month = COALESCE($7, day_of_month),
+        month_of_year = COALESCE($8, month_of_year),
         status = COALESCE($9, status),
         times_per_day = COALESCE($10, times_per_day),
         updated_at = NOW()
@@ -179,6 +179,31 @@ export const getLogSchedulesByTemplateId = async (
       ORDER BY created_at DESC
       `,
       [templateId, orgId],
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching log schedules:", error);
+    return [];
+  }
+};
+
+export const getAllLogSchedules = async (
+  orgId: string,
+): Promise<LogScheduleWithTemplate[]> => {
+  try {
+    const result = await query<LogScheduleWithTemplate>(
+      `
+      SELECT 
+        ls.*,
+        lt.name as template_name,
+        lt.category as template_category
+      FROM log_schedules ls
+      INNER JOIN log_templates lt ON ls.template_id = lt.id
+      WHERE ls.org_id = $1
+        AND (ls.end_date IS NULL OR ls.end_date >= CURRENT_DATE)
+      ORDER BY ls.start_date DESC
+      `,
+      [orgId],
     );
     return result.rows;
   } catch (error) {

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getOrgMembersAction } from "@/actions/clerk";
 import { getLogScheduleByIdAction } from "@/actions/log-schedules";
 import { getLogTemplateByIdAction } from "@/actions/log-templates";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "../_components/schedule-form";
 
@@ -41,9 +42,16 @@ export default async function EditSchedulePage({ params }: PageProps) {
           </Link>
         </Button>
         <div>
-          <h1 className="font-bold text-2xl tracking-tight">
-            Update Schedule: {template.name}
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="font-bold text-2xl tracking-tight">
+              Update Schedule: {template.name}
+            </h1>
+            <Badge
+              variant={schedule.status === "ACTIVE" ? "default" : "secondary"}
+            >
+              {schedule.status}
+            </Badge>
+          </div>
           <p className="text-muted-foreground">
             Modify the schedule for this log template.
           </p>
@@ -67,6 +75,7 @@ export default async function EditSchedulePage({ params }: PageProps) {
           dayOfMonth: schedule.day_of_month || undefined,
           monthOfYear: schedule.month_of_year || undefined,
           timesPerDay: schedule.times_per_day || 1,
+          status: schedule.status,
         }}
       />
     </div>

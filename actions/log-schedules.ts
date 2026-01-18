@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import {
   createLogSchedule,
-  getActiveLogSchedules,
+  getAllLogSchedules,
   getLogScheduleById,
   getLogSchedulesByTemplateId,
   updateLogSchedule,
@@ -35,6 +35,7 @@ const CreateScheduleSchema = z
     day_of_month: z.coerce.number().int().min(1).max(31).optional(),
     month_of_year: z.coerce.number().int().min(1).max(12).optional(),
     times_per_day: z.coerce.number().int().min(1).max(4).default(1),
+    status: z.enum(["ACTIVE", "PAUSED"]).optional().default("ACTIVE"),
   })
   .refine(
     (data) => {
@@ -104,6 +105,7 @@ const UpdateScheduleSchema = z
     day_of_month: z.coerce.number().int().min(1).max(31).optional(),
     month_of_year: z.coerce.number().int().min(1).max(12).optional(),
     times_per_day: z.coerce.number().int().min(1).max(4).default(1),
+    status: z.enum(["ACTIVE", "PAUSED"]).optional(),
   })
   .refine(
     (data) => {
@@ -189,6 +191,7 @@ export async function createLogScheduleAction(
   const day_of_month = formData.get("day_of_month") as string;
   const month_of_year = formData.get("month_of_year") as string;
   const times_per_day = formData.get("times_per_day") as string;
+  const status = formData.get("status") as string;
 
   // Extract days of week - handling multiple checkboxes (only for weekly)
   const days = formData
@@ -207,6 +210,7 @@ export async function createLogScheduleAction(
     day_of_month: day_of_month || undefined,
     month_of_year: month_of_year || undefined,
     times_per_day,
+    status,
   });
 
   if (!validatedFields.success) {
@@ -249,7 +253,7 @@ export async function createLogScheduleAction(
       days_of_week: validatedFields.data.days_of_week || null,
       day_of_month: validatedFields.data.day_of_month || null,
       month_of_year: validatedFields.data.month_of_year || null,
-      status: "ACTIVE",
+      status: validatedFields.data.status || "ACTIVE",
       created_by: userId,
       times_per_day: validatedFields.data.times_per_day,
     });
@@ -287,6 +291,7 @@ export async function updateLogScheduleAction(
   const day_of_month = formData.get("day_of_month") as string;
   const month_of_year = formData.get("month_of_year") as string;
   const times_per_day = formData.get("times_per_day") as string;
+  const status = formData.get("status") as string;
 
   // Extract days of week
   const days = formData
@@ -304,6 +309,7 @@ export async function updateLogScheduleAction(
     day_of_month: day_of_month || undefined,
     month_of_year: month_of_year || undefined,
     times_per_day,
+    status,
   });
 
   if (!validatedFields.success) {
@@ -327,6 +333,7 @@ export async function updateLogScheduleAction(
         day_of_month: validatedFields.data.day_of_month || null,
         month_of_year: validatedFields.data.month_of_year || null,
         times_per_day: validatedFields.data.times_per_day,
+        status: validatedFields.data.status,
       },
       orgId,
     );
@@ -395,7 +402,7 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
   }
 
   const [schedules, members] = await Promise.all([
-    getActiveLogSchedules(orgId),
+    getAllLogSchedules(orgId),
     getOrgMembersAction(),
   ]);
 
@@ -432,4 +439,58 @@ export async function getActiveSchedulesWithDetailsAction(): Promise<
   );
 
   return enrichedSchedules;
+}
+
+export async function toggleScheduleStatusAction(scheduleId: string): Promise<{
+  success: boolean;
+  message: string;
+  newStatus?: "ACTIVE" | "PAUSED";
+}> {
+  const { userId, orgId } = await auth();
+  if (!userId || !orgId) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  try {
+    // Get current schedule
+    const currentSchedule = await getLogScheduleById(scheduleId, orgId);
+
+    if (!currentSchedule) {
+      return { success: false, message: "Schedule not found" };
+    }
+
+    // Toggle status
+    const newStatus: "ACTIVE" | "PAUSED" =
+      currentSchedule.status === "ACTIVE" ? "PAUSED" : "ACTIVE";
+
+    // Update schedule with new status
+    const updatedSchedule = await updateLogSchedule(
+      scheduleId,
+      { status: newStatus },
+      orgId,
+    );
+
+    if (!updatedSchedule) {
+      return { success: false, message: "Failed to update schedule status" };
+    }
+
+    // Revalidate paths
+    revalidatePath(
+      `/logs/templates/${updatedSchedule.template_id}/schedule/edit`,
+    );
+    revalidatePath(`/logs/templates/${updatedSchedule.template_id}`);
+    revalidatePath("/logs/scheduled");
+
+    return {
+      success: true,
+      message:
+        newStatus === "PAUSED"
+          ? "Schedule paused successfully"
+          : "Schedule resumed successfully",
+      newStatus,
+    };
+  } catch (error) {
+    console.error("Failed to toggle schedule status:", error);
+    return { success: false, message: "Failed to update schedule status" };
+  }
 }
