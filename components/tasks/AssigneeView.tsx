@@ -209,7 +209,7 @@ export function AssigneeView({ log }: AssigneeViewProps) {
                   size="sm"
                   disabled={isPending}
                 >
-                  Action Required
+                  {isPending ? "Saving.." : "Action Required"}
                 </Button>
                 <Button
                   type="submit"
@@ -219,7 +219,7 @@ export function AssigneeView({ log }: AssigneeViewProps) {
                   size="sm"
                   disabled={isPending}
                 >
-                  All Good
+                  {isPending ? "Saving.." : "All Good"}
                 </Button>
               </div>
             </div>

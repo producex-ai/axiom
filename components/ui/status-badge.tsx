@@ -18,13 +18,13 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
   const variants: Record<
     string,
     {
-      variant: "warning" | "success" | "destructive" | "secondary";
+      variant: "default" | "warning" | "success" | "destructive" | "secondary";
       icon: LucideIcon;
       label: string;
     }
   > = {
     PENDING: {
-      variant: "warning",
+      variant: "default",
       icon: Clock,
       label: "Pending",
     },
