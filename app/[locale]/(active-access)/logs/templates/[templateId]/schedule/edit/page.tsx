@@ -75,7 +75,7 @@ export default async function EditSchedulePage({ params }: PageProps) {
           dayOfMonth: schedule.day_of_month || undefined,
           monthOfYear: schedule.month_of_year || undefined,
           timesPerDay: schedule.times_per_day || 1,
-          status: schedule.status,
+          status: schedule.status === "COMPLETED" ? "PAUSED" : schedule.status,
         }}
       />
     </div>
