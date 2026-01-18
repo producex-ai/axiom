@@ -65,7 +65,6 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
 
       // Check user role first
       const userRole = sessionClaims?.o?.rol;
-      console.log(userRole);
 
       // If user doesn't have an allowed role, redirect to no-access
       if (userRole && !ALLOWED_ROLES.includes(userRole)) {

@@ -1,5 +1,6 @@
+import { auth } from "@clerk/nextjs/server";
 import { AlertTriangle, Clock, FileText, ShieldCheck } from "lucide-react";
-import React from "react";
+import { redirect } from "next/navigation";
 import { fetchDashboardData } from "./data";
 import { calculateExpirationDate } from "./utils";
 import { StatCard } from "./components/StatCard";
@@ -13,6 +14,14 @@ interface DashboardPageProps {
 
 export default async function DashboardPage({ params }: DashboardPageProps) {
   const { locale } = await params;
+  
+  // Check if user is an operator and redirect to tasks
+  const { has } = await auth();
+  const isOperator = has?.({ role: "org:operator" }) ?? false;
+  
+  if (isOperator) {
+    redirect(`/${locale}/tasks`);
+  }
   const { overview, documents } = await fetchDashboardData();
 
   // Calculate metrics
