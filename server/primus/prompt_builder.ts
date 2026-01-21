@@ -56,7 +56,7 @@ export function buildSpecDrivenPrompt(
   );
 
   // Determine micro-rule categories
-  const microCategories = forceMicroCategories || submoduleSpec.micro_inject;
+  const microCategories = forceMicroCategories || submoduleSpec.micro_inject || [];
   const microRules = getRelevantMicroRules(microCategories);
 
   // Build prompt sections

@@ -47,5 +47,26 @@
       "totalPoints": 5,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when product temperatures exceed specified limits including evaluation for disposition or destruction",
+    "Establish procedures for addressing refrigerated storage area temperature deviations including equipment service and product safety assessment",
+    "Develop action plans when truck trailers arrive without proper pre-cooling including rejection criteria and carrier notification",
+    "Create preventive measures for temperature monitoring equipment including calibration schedules and alarm system verification testing",
+    "Implement verification procedures to ensure truck sanitation issues are corrected before loading and carriers maintain hygiene standards"
+  ],
+  "traceabilityInject": [
+    "Maintain final product temperature check records for all temperature-sensitive products with time stamps and corrective actions when out of range",
+    "Keep refrigerated production area temperature logs documenting continuous monitoring or periodic checks with alarm event records",
+    "Retain storage room temperature logs showing compliance with specified ranges including automated system data and manual verification",
+    "Document truck trailer temperature verification procedures including pre-cooling confirmation, set point verification, and loading protocols",
+    "Archive truck sanitary condition inspection logs noting cleanliness, odors, structural integrity, and rejection documentation when applicable"
+  ],
+  "micro_inject": [
+    "Temperature abuse above 41°F allows rapid multiplication of Listeria monocytogenes in ready-to-eat refrigerated products during storage",
+    "Inadequate refrigeration permits growth of psychrotrophic pathogens including Yersinia enterocolitica and non-proteolytic Clostridium botulinum",
+    "Warm truck trailers allow mesophilic pathogens like Salmonella and E. coli to proliferate rapidly during transportation to distribution",
+    "Temperature fluctuations during storage create condensation promoting microbial growth and cross-contamination from environmental sources",
+    "Unsanitary truck conditions introduce extraneous contamination including fecal material harboring enteric pathogens onto packaged products"
   ]
 }

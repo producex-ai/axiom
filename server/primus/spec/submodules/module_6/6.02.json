@@ -77,5 +77,26 @@
       "totalPoints": 15,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when hazard analysis identifies uncontrolled biological hazards requiring CCP establishment or control reassessment",
+    "Establish procedures for revising CCP decisions when validation data demonstrates controls are insufficient to eliminate identified hazards",
+    "Develop action plans when critical limits are exceeded at CCPs including product disposition, process adjustment, and enhanced monitoring",
+    "Create preventive measures when monitoring frequencies prove inadequate to detect CCP deviations before loss of control occurs",
+    "Implement verification procedures to ensure HACCP system reviews occur on schedule and address all significant process changes"
+  ],
+  "traceabilityInject": [
+    "Maintain documented hazard analysis showing biological, chemical, and physical hazards with likelihood, severity, and control measure justification",
+    "Keep CCP determination records including decision tree application, scientific justification, and approval by HACCP team leader",
+    "Retain critical limit validation documentation including scientific studies, regulatory guidance, and expert consultation supporting established limits",
+    "Document monitoring procedures for each CCP specifying what is monitored, how, when, frequency, and responsible personnel",
+    "Archive HACCP system review records conducted at least annually and when significant changes occur, including modifications made and approval signatures"
+  ],
+  "micro_inject": [
+    "Hazard analysis that fails to identify pathogenic E. coli O157:H7 in raw produce results in inadequate CCPs for microbial reduction",
+    "Incorrectly determined CCPs allow Salmonella survival in cooking processes due to insufficient time-temperature combinations",
+    "Critical limits not validated by scientific data may permit Listeria monocytogenes growth in refrigerated products during shelf life",
+    "Inadequate CCP monitoring frequencies miss temperature abuse events allowing rapid multiplication of Bacillus cereus and Clostridium perfringens",
+    "Failure to review HACCP system after process changes allows introduction of new pathogen hazards including cross-contamination from environmental sources"
   ]
 }

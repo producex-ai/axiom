@@ -41,5 +41,26 @@
       "totalPoints": 5,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Establish corrective actions when HACCP team composition lacks necessary expertise requiring additional training or consultant engagement",
+    "Implement procedures for updating HACCP training when team members change or new food safety hazards are identified",
+    "Develop action plans when product descriptions are incomplete or inaccurate requiring comprehensive review and revision",
+    "Create preventive measures to ensure process flow diagrams are verified on-site whenever process changes occur",
+    "Implement verification procedures to confirm hazard analysis preparation includes all biological, chemical, and physical hazards relevant to products"
+  ],
+  "traceabilityInject": [
+    "Maintain HACCP team documentation including member qualifications, assigned roles, and leadership responsibilities for plan development and maintenance",
+    "Keep HACCP training records for all team members documenting course content, completion dates, and certificates from recognized training programs",
+    "Retain comprehensive product descriptions including ingredients, processing methods, packaging, storage conditions, and intended use",
+    "Document process flow diagrams showing all steps from receiving through distribution with decision points and process parameters identified",
+    "Archive flow diagram verification records including on-site walkthrough dates, observations, modifications made, and approval signatures"
+  ],
+  "micro_inject": [
+    "Inadequate HACCP team training results in failure to identify critical biological hazards including pathogenic E. coli and Salmonella in raw materials",
+    "Incomplete product descriptions omit critical information about pH, water activity, or preservatives that control Clostridium botulinum and other pathogens",
+    "Unverified process flow diagrams miss cross-contamination opportunities where Listeria monocytogenes can transfer from raw to ready-to-eat products",
+    "Poor hazard analysis preparation fails to recognize spore-forming pathogens like Bacillus cereus in temperature abuse scenarios",
+    "Insufficient understanding of intended use overlooks vulnerable populations requiring stricter controls for pathogens like Listeria in ready-to-eat foods"
   ]
 }

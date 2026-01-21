@@ -95,5 +95,26 @@
       "totalPoints": 5,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate spill response protocols with designated spill kits located throughout the facility and trained personnel available at all times during operations.",
+    "Establish waste removal schedules with documented frequency requirements and corrective actions when waste accumulates beyond acceptable limits.",
+    "Create drain and waste trap cleaning procedures with scheduled deep cleaning, inspection protocols, and corrective actions for odors or backup situations.",
+    "Develop overhead area cleaning schedules using designated high-reach equipment and document findings of dust, debris, or pest evidence with corrective actions.",
+    "Implement PPE segregation and storage systems to prevent cross-contamination between sanitation, production, maintenance, and restroom areas with color-coding or labeling."
+  ],
+  "traceabilityInject": [
+    "Maintain spill incident logs showing date, time, location, material spilled, quantity, cleanup actions taken, verification of complete cleanup, and person responsible.",
+    "Keep waste removal logs documenting dates, times, areas serviced, waste quantities, disposal destinations, and personnel performing removals.",
+    "Document drain cleaning activities showing dates cleaned, methods used, findings of blockages or damage, corrective actions taken, and verification of proper function.",
+    "Maintain high-level cleaning logs showing dates, areas cleaned, findings of accumulated dust or debris, corrective actions, and verification signatures.",
+    "Keep cleaning equipment usage logs tracking which equipment is used in which areas, cleaning schedules for equipment, findings of damage or contamination, and replacement dates."
+  ],
+  "micro_inject": [
+    "Spills create immediate microbial growth opportunities as product residues provide nutrients for rapid bacterial multiplication; delays in cleanup allow pathogen establishment.",
+    "Accumulated waste and garbage serve as attractants for pests while providing harborage and breeding sites for flies, rodents, and other vectors that spread pathogens throughout facilities.",
+    "Dirty drains harbor biofilm communities including Listeria monocytogenes that persist despite routine sanitation; drain aerosols and splashing spread these pathogens to nearby surfaces.",
+    "Dust accumulation on overhead structures provides nutrients supporting bacterial and mold growth; gravity settling and air currents deposit these contaminants onto products and food contact surfaces below.",
+    "Cross-contaminated cleaning equipment transfers pathogens from high-risk areas (restrooms, drains, floors) to food contact surfaces; improper equipment storage allows bacterial growth on moist cleaning tools."
   ]
 }

@@ -35,5 +35,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Establish corrective actions when Food Safety Plan team lacks Preventive Controls Qualified Individual requiring certification training or consultant engagement",
+    "Implement procedures for updating team member training when new preventive controls are implemented or regulatory requirements change",
+    "Develop action plans when product descriptions omit critical food safety information requiring comprehensive review and hazard reassessment",
+    "Create preventive measures to ensure process flow diagrams are maintained current and verified whenever processing changes occur",
+    "Implement verification procedures confirming leadership assignment and ongoing responsibilities for Food Safety Plan maintenance and effectiveness"
+  ],
+  "traceabilityInject": [
+    "Maintain Food Safety Plan team documentation including qualifications, PCQI certification, assigned responsibilities, and leadership structure",
+    "Keep training records for all team members documenting preventive controls coursework, completion dates, and continuing education",
+    "Retain comprehensive product descriptions including formulations, processing parameters, packaging specifications, and intended consumer use",
+    "Document detailed process flow diagrams showing all handling and processing steps with decision points and control measure locations identified",
+    "Archive flow diagram verification records including on-site confirmation dates, process observations, necessary modifications, and approval signatures"
+  ],
+  "micro_inject": [
+    "Inadequate Food Safety Plan team training results in failure to identify Listeria monocytogenes environmental contamination risks in ready-to-eat operations",
+    "Missing PCQI oversight allows insufficient preventive controls for pathogenic E. coli in raw agricultural commodities destined for fresh consumption",
+    "Incomplete product descriptions fail to recognize pH and water activity factors that control Clostridium botulinum growth in packaged products",
+    "Insufficient process flow detail misses cross-contamination points where Salmonella transfers from raw to cooked products through shared equipment",
+    "Lack of designated leadership for Food Safety Plan maintenance results in outdated controls that fail to address emerging pathogen risks"
   ]
 }

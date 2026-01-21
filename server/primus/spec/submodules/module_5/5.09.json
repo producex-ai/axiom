@@ -125,5 +125,26 @@
       "totalPoints": 5,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement shatter-resistant light protection program with inspection schedules, documentation of protective measures (sleeves, coatings, shields), and replacement protocols for damaged protections.",
+    "Establish ventilation system maintenance program with filter replacement schedules, airflow direction verification, condensation management procedures, and microbial monitoring for high-risk areas.",
+    "Create drain maintenance program with cleaning schedules, trap inspection protocols, backflow prevention verification, and slope assessments to ensure proper drainage.",
+    "Develop wall, ceiling, and floor integrity inspection program with documentation of cracks, holes, or damage findings and prioritized repair schedules based on contamination risk.",
+    "Implement door and window maintenance program with pest exclusion inspections, seal integrity verification, automatic door function testing, and screen condition assessments."
+  ],
+  "traceabilityInject": [
+    "Maintain light fixture inspection logs showing dates, locations, protective measure status, findings of broken or missing protection, corrective actions, and verification of repairs.",
+    "Document ventilation system maintenance records including filter replacement dates, airflow measurements, condensation observations, cleaning activities, and microbial test results for air quality.",
+    "Keep drain system inspection and maintenance logs showing cleaning dates, trap inspections, findings of blockages or backflow, repairs performed, and verification of proper function.",
+    "Maintain building integrity inspection records documenting dates, areas inspected, findings of structural damage, pest entry points identified, repair work orders, and completion verification.",
+    "Keep pest exclusion maintenance logs for doors and windows showing inspection dates, findings of gaps or damage, seal replacements, screen repairs, and verification of pest exclusion effectiveness."
+  ],
+  "micro_inject": [
+    "Broken lights can shatter and contaminate products with glass fragments; lack of protective measures creates unacceptable physical hazard risks and potential for product recalls.",
+    "Poor ventilation creates condensation that promotes Listeria growth on ceilings and walls; condensate dripping onto product or food contact surfaces directly introduces environmental pathogens.",
+    "Drains with standing water or backflow issues become Listeria reservoirs; aerosols from drain systems spread pathogens throughout production areas via air currents and splash.",
+    "Cracks in walls, ceilings, and floors provide harborage for pests and protect bacteria from cleaning chemicals; these niches allow pathogen populations to persist and recontaminate cleaned areas.",
+    "Gaps around doors and windows allow pest entry including flies, rodents, and birds that introduce pathogens; inadequate pest exclusion compromises all other sanitation efforts."
   ]
 }

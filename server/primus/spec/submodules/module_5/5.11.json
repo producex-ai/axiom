@@ -29,5 +29,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement procedures to immediately obtain missing or outdated Safety Data Sheets when gaps are identified during chemical inventory audits",
+    "Establish corrective actions for chemical storage violations including proper labeling and segregation of incompatible substances",
+    "Develop procedures for addressing out-of-specification antimicrobial concentrations in water treatment systems",
+    "Create action plans for recalibrating monitoring equipment when pH or temperature readings fall outside acceptable ranges",
+    "Implement preventive controls to ensure chemical inventory logs are maintained accurately and reviewed for unauthorized usage patterns"
+  ],
+  "traceabilityInject": [
+    "Maintain current Safety Data Sheets for all chemicals used in operations with version dates and accessibility records",
+    "Keep chemical inventory logs documenting receipt, usage, and disposal of all pesticides, fertilizers, cleaning and sanitizing agents",
+    "Retain specimen labels and dilution instructions for all chemicals where full labels are not immediately accessible",
+    "Document antimicrobial monitoring results including concentration levels, pH readings, water temperature, and adjustment actions taken",
+    "Archive Standard Operating Procedures for water system monitoring with revision dates and training acknowledgment records"
+  ],
+  "micro_inject": [
+    "Inadequate antimicrobial concentrations in product contact water allow survival and proliferation of pathogenic bacteria including Listeria and Salmonella",
+    "Recirculated water systems with insufficient antimicrobial levels create biofilm formation supporting persistent Listeria monocytogenes contamination",
+    "Failure to monitor and control pH in wash water reduces effectiveness of antimicrobial agents against E. coli O157:H7 and other pathogens",
+    "Organic material buildup in batch water systems depletes antimicrobial efficacy allowing microbial load accumulation and cross-contamination",
+    "Incorrect water temperature combined with low antimicrobial levels promotes rapid bacterial growth in flumes, dump tanks, and hydro coolers"
   ]
 }

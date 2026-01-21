@@ -29,5 +29,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when pest activity is detected including targeted treatment and structural repairs to eliminate entry points",
+    "Establish procedures for addressing gaps in pest control operator licensing, insurance documentation, or contract compliance",
+    "Develop action plans for updating pest monitoring device locations when facility layout changes or new risk areas are identified",
+    "Create preventive measures for high-risk areas identified through pest monitoring trends including enhanced sanitation protocols",
+    "Implement verification procedures to ensure pest control service reports document all required inspection findings and corrective actions"
+  ],
+  "traceabilityInject": [
+    "Maintain pest control program documentation including scope, target pests, monitoring frequencies, and copies of extermination contracts",
+    "Keep current Pest Control Operator licenses, training certifications, and insurance documents with expiration date tracking",
+    "Retain schematic drawings showing numbered locations of all pest monitoring devices both inside and outside the facility",
+    "Archive pest control service reports documenting inspection records, application records, and corrective actions with dates and signatures",
+    "Document pest activity trends over time including trap catches, bait consumption, and efficacy of control measures implemented"
+  ],
+  "micro_inject": [
+    "Rodent activity introduces Salmonella, Leptospira, and other pathogens through fecal contamination of food contact surfaces and ingredients",
+    "Insect infestations including flies and cockroaches mechanically transfer pathogenic bacteria from waste areas to food processing zones",
+    "Birds nesting in or near facilities shed Salmonella, Campylobacter, and E. coli through droppings contaminating ventilation systems and outdoor processing areas",
+    "Inadequate pest control allows pests to damage packaging and protective barriers exposing products to microbial contamination",
+    "Pest harborage areas with poor sanitation create reservoirs of pathogenic microorganisms that continuously recontaminate cleaned food processing environments"
   ]
 }

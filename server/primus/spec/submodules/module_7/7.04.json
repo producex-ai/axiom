@@ -17,5 +17,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when triennial re-analysis deadlines are missed requiring accelerated review and documentation",
+    "Establish procedures for triggering Food Safety Plan re-analysis when significant process, equipment, or ingredient changes occur",
+    "Develop action plans when re-analysis identifies new hazards or inadequate existing controls requiring preventive control modifications",
+    "Create preventive measures including change management systems to ensure all significant changes prompt timely Food Safety Plan re-analysis",
+    "Implement verification procedures confirming PCQI conducts comprehensive re-analysis addressing all elements of the Food Safety Plan"
+  ],
+  "traceabilityInject": [
+    "Maintain re-analysis schedule documentation showing triennial review dates, responsible PCQI, and completion status tracking",
+    "Keep change management records documenting significant changes that trigger Food Safety Plan re-analysis requirements",
+    "Retain re-analysis reports showing comprehensive review of hazard analysis, preventive controls, monitoring, and verification procedures",
+    "Document modifications made to Food Safety Plan following re-analysis including rationale, PCQI approval, and implementation dates",
+    "Archive continuous improvement records showing how re-analysis findings drive enhanced food safety controls and system effectiveness"
+  ],
+  "micro_inject": [
+    "Failure to conduct triennial re-analysis allows outdated preventive controls that no longer address current Listeria monocytogenes contamination patterns",
+    "Missing re-analysis after significant changes permits introduction of new cross-contamination pathways for Salmonella from modified equipment",
+    "Inadequate re-analysis fails to recognize emerging pathogen threats including antibiotic-resistant bacteria requiring enhanced control measures",
+    "Delayed re-analysis after ingredient changes misses new hazards such as Clostridium botulinum risk in reformulated low-acid products",
+    "Lack of systematic change management results in preventive controls that fail to control E. coli O157:H7 introduced through new raw material sources"
   ]
 }

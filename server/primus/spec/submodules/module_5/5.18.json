@@ -59,5 +59,26 @@
       "totalPoints": 5,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when allergen cross-contact is detected including product hold, recall evaluation, and enhanced cleaning verification",
+    "Establish procedures for addressing inadequate allergen segregation in storage including physical barriers and clear identification systems",
+    "Develop action plans when allergen cleaning validation fails including equipment redesign and enhanced sanitation procedures",
+    "Create preventive measures for production scheduling to minimize allergen changeovers and reduce cross-contact opportunities",
+    "Implement verification procedures to ensure allergen training effectiveness through competency testing and observation of worker practices"
+  ],
+  "traceabilityInject": [
+    "Maintain allergen inventory documentation showing all allergenic ingredients received, stored, and used in production with lot identification",
+    "Keep records of allergen storage controls including segregation methods, identification systems, and inspection verification logs",
+    "Retain allergen production line cleaning logs documenting procedures, verification testing results, and supervisor approval before non-allergen runs",
+    "Document allergen training records for all workers including cross-contact prevention, cleaning procedures, and emergency response protocols",
+    "Archive product label verification records ensuring accurate allergen declarations and precautionary statements meet regulatory requirements"
+  ],
+  "micro_inject": [
+    "While allergen control primarily addresses allergenic proteins, inadequate cleaning between allergen runs creates organic residues supporting microbial growth",
+    "Equipment surfaces with allergenic material buildup provide nutrients supporting biofilm formation that can harbor Listeria monocytogenes",
+    "Shared production lines without proper sanitation between allergen and non-allergen products may allow cross-contamination of both allergens and pathogens",
+    "Rework handling procedures that fail to address allergen segregation also increase risk of microbial contamination through extended holding times",
+    "Inadequate hand washing between allergen production runs allows transfer of both allergenic proteins and pathogenic microorganisms including Staphylococcus aureus"
   ]
 }

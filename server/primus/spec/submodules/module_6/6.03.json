@@ -47,5 +47,26 @@
       "totalPoints": 15,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement retraining procedures for CCP operators who fail to demonstrate understanding of their monitoring responsibilities or HACCP principles",
+    "Establish corrective actions when CCP monitoring activities deviate from documented frequencies or procedures requiring immediate compliance restoration",
+    "Develop action plans when CCP records are incomplete, unsigned, or contain data inconsistencies requiring enhanced oversight and training",
+    "Create preventive measures when supervisory review signatures are missing from CCP records including documented review procedures and accountability",
+    "Implement verification procedures to ensure corrective actions for CCP deviations address root causes and prevent recurrence"
+  ],
+  "traceabilityInject": [
+    "Maintain HACCP training records for all plant workers including CCP-specific training for operators with topics, dates, and competency verification",
+    "Keep CCP monitoring logs with complete data entries signed by operators performing checks showing compliance with monitoring frequencies",
+    "Retain supervisory review records with second signatory verification of CCP monitoring data and timely identification of deviations",
+    "Document deviation records for all CCP critical limit exceedances including corrective actions taken, product disposition decisions, and approval signatures",
+    "Archive competency assessment records demonstrating CCP operators understand HACCP principles and can correctly execute monitoring procedures"
+  ],
+  "micro_inject": [
+    "Inadequately trained CCP operators fail to recognize critical limit deviations allowing Salmonella survival in cooking processes",
+    "Poor understanding of HACCP principles results in CCP operators not responding appropriately when Listeria control measures fail",
+    "Monitoring compliance failures miss temperature deviations that permit pathogenic Bacillus cereus spore germination and toxin production",
+    "Incomplete or falsified CCP records mask control failures allowing products contaminated with E. coli O157:H7 to reach consumers",
+    "Lack of supervisory oversight allows repeated CCP deviations creating persistent conditions favorable for pathogen survival and cross-contamination"
   ]
 }

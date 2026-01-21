@@ -83,5 +83,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when environmental monitoring detects pathogenic organisms including enhanced cleaning and retesting verification",
+    "Establish procedures for investigating root causes when microbiological test results exceed acceptable limits including environmental assessments",
+    "Develop action plans when water quality testing reveals coliforms or other indicators requiring system sanitization and source investigation",
+    "Create preventive measures for areas with persistent positive environmental monitoring results including equipment redesign or enhanced sanitation",
+    "Implement verification procedures to ensure testing laboratories maintain ISO 17025 accreditation and use validated testing methods"
+  ],
+  "traceabilityInject": [
+    "Maintain environmental monitoring program documentation including sampling locations, frequencies, target organisms, and scientifically validated rationale",
+    "Keep complete records of environmental microbiological test results with sampling dates, locations, organisms tested, and result interpretation",
+    "Retain corrective action records for unacceptable test results including investigation findings, remediation actions, and verification testing",
+    "Document water quality testing results including microbiological and chemical parameters, sampling points, and frequency compliance",
+    "Archive laboratory qualifications including ISO 17025 accreditation certificates, method validation reports, and proficiency testing results"
+  ],
+  "micro_inject": [
+    "Inadequate environmental monitoring fails to detect Listeria monocytogenes harborage sites allowing persistent contamination of ready-to-eat products",
+    "Water sources contaminated with E. coli or coliforms introduce pathogenic bacteria directly into product wash and cooling systems",
+    "Insufficient product testing frequency fails to identify pathogen contamination events including Salmonella outbreaks before distribution",
+    "Poor laboratory practices including contaminated media or improper sterile technique generate false negative results masking pathogen presence",
+    "Failure to test for indicator organisms misses early warning signs of sanitation failures that precede pathogenic contamination events"
   ]
 }

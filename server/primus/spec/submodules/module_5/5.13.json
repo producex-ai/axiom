@@ -59,5 +59,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Establish corrective action procedures when incoming goods fail inspection criteria including rejection protocols and supplier notification",
+    "Implement immediate actions when trailer inspections reveal pest activity, temperature violations, or sanitation deficiencies",
+    "Develop procedures for addressing process monitoring deviations including pH, temperature, metal detection, and kill step failures",
+    "Create action plans for restoring antimicrobial concentrations when testing reveals out-of-specification results in water systems",
+    "Establish preventive measures to address organic material buildup trends in recirculated water requiring more frequent change-out schedules"
+  ],
+  "traceabilityInject": [
+    "Maintain inspection records for all incoming raw materials, ingredients, and packaging materials with acceptance criteria and lot identification",
+    "Keep trailer inspection logs documenting cleanliness, pest evidence, structural integrity, and temperature control verification",
+    "Retain process monitoring records showing pH, temperature, antimicrobial levels, metal detection results, and heating process parameters with monitoring frequencies",
+    "Document antimicrobial concentration testing results for product contact water and ice solutions throughout production runs with corrective actions",
+    "Archive pre-operation inspection logs verifying facility readiness including equipment cleanliness, sanitation verification, and environmental conditions"
+  ],
+  "micro_inject": [
+    "Incoming raw materials contaminated with Salmonella, E. coli, or Listeria can introduce pathogens throughout the processing environment",
+    "Temperature abuse during transportation allows rapid multiplication of pathogenic bacteria including Bacillus cereus and Clostridium perfringens",
+    "Inadequate antimicrobial concentrations in wash water fail to achieve required log reductions of E. coli O157:H7 and Salmonella on produce",
+    "Organic material accumulation in recirculated water systems depletes antimicrobial efficacy allowing cross-contamination between product batches",
+    "Insufficient process controls during kill steps fail to eliminate vegetative cells and spores of Listeria monocytogenes and other pathogens"
   ]
 }

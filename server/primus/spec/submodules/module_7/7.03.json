@@ -47,5 +47,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement retraining procedures for workers who fail to demonstrate competency in preventive control operations or monitoring techniques",
+    "Establish corrective actions when preventive control monitoring deviates from Food Safety Plan specifications requiring immediate compliance restoration",
+    "Develop action plans when worker understanding of preventive controls is inadequate requiring enhanced training and competency verification",
+    "Create preventive measures when preventive control records show incomplete data, missing signatures, or data inconsistencies requiring oversight improvements",
+    "Implement verification procedures to ensure PCQI or designate review occurs timely and effectively identifies all control deviations"
+  ],
+  "traceabilityInject": [
+    "Maintain preventive control training records for all workers including specific training for those directly involved with control operations",
+    "Keep preventive control monitoring logs showing compliance with documented frequencies and procedures with operator signatures",
+    "Retain competency assessment records demonstrating workers understand preventive control principles and their monitoring responsibilities",
+    "Document deviation records for all preventive control failures including corrective actions, product safety evaluations, and approval signatures",
+    "Archive PCQI or trained designate verification records showing timely review of preventive control monitoring data with second signatures"
+  ],
+  "micro_inject": [
+    "Inadequately trained workers fail to properly monitor sanitizer concentrations allowing Listeria monocytogenes survival on food contact surfaces",
+    "Poor understanding of preventive controls results in operators not recognizing when allergen segregation failures create cross-contamination opportunities",
+    "Monitoring compliance failures miss temperature control deviations that permit rapid Salmonella multiplication in temperature-sensitive ingredients",
+    "Incomplete preventive control records mask sanitation failures allowing persistent environmental contamination with pathogenic bacteria",
+    "Lack of PCQI oversight allows repeated control deviations creating conditions favorable for Bacillus cereus spore germination and toxin production"
   ]
 }

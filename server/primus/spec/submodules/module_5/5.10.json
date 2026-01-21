@@ -41,5 +41,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Establish corrective action procedures for addressing facility location risks identified through documented risk assessments",
+    "Implement preventive measures to control environmental hazards from adjacent land use that could affect food safety",
+    "Develop procedures for immediate remediation when backflow prevention devices fail certification inspections",
+    "Create action plans for updating site plans and facility layouts when changes occur to production areas or traffic flow",
+    "Establish verification procedures to ensure food safety program responsibilities are properly assigned and maintained"
+  ],
+  "traceabilityInject": [
+    "Maintain current site plans showing facility location, adjacent sites, roads, water sources, and environmental features with revision dates",
+    "Keep updated facility floor plans documenting production areas, storage locations, equipment layout, and traffic flow patterns",
+    "Retain documented risk assessments for facility location and adjacent land use with dates and approval signatures",
+    "Archive certificates of inspection for backflow prevention assemblies with testing dates and expiration tracking",
+    "Document assignment of food safety responsibilities including training records and competency verification for designated personnel"
+  ],
+  "micro_inject": [
+    "Uncontrolled water sources near the facility may introduce pathogenic microorganisms through cross-contamination or flooding events",
+    "Adjacent agricultural operations or waste management sites can harbor Salmonella, E. coli, and Listeria that may migrate to processing areas",
+    "Inadequate site drainage and storm water management creates conditions favorable for microbial growth and pest harborage",
+    "Backflow events in water systems can introduce fecal coliforms and other pathogenic bacteria into food processing water supplies",
+    "Poor facility layout with inadequate separation of raw and processed areas increases cross-contamination risks from environmental pathogens"
   ]
 }

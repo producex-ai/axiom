@@ -47,5 +47,26 @@
       "totalPoints": 3,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement retraining procedures for workers who demonstrate food safety violations or fail to follow Good Manufacturing Practices",
+    "Establish corrective actions when workers fail to report illnesses or injuries that could contaminate products including immediate removal from production",
+    "Develop procedures for addressing gaps in worker food safety training records including immediate training and competency verification",
+    "Create preventive measures when sanitation worker practices deviate from documented procedures including supervision and skill assessment",
+    "Implement verification procedures to ensure visitor and contractor hygiene compliance logs are properly maintained and violations are addressed"
+  ],
+  "traceabilityInject": [
+    "Maintain new worker orientation training records documenting Good Manufacturing Practices, food safety hygiene topics, and signed policy acknowledgments",
+    "Keep ongoing food safety education training logs including dates, topics covered, attendee lists, and trainer signatures",
+    "Retain sanitation worker training documentation covering best practices, chemical handling procedures, and competency assessments",
+    "Document illness and injury reporting procedures including communication protocols and return-to-work requirements per privacy regulations",
+    "Archive worker non-conformance records with corrective actions taken, retraining completion, and follow-up verification results"
+  ],
+  "micro_inject": [
+    "Inadequately trained workers may fail to recognize cross-contamination risks allowing transfer of Salmonella from raw to processed products",
+    "Workers with unreported gastrointestinal illnesses can shed norovirus, Hepatitis A, or pathogenic E. coli contaminating food contact surfaces",
+    "Poor hand hygiene practices by food handlers introduce fecal coliforms and Staphylococcus aureus onto ready-to-eat products",
+    "Insufficient understanding of allergen controls leads to cross-contact allowing allergenic proteins to contaminate non-allergen products",
+    "Failure to follow sanitation procedures allows persistence of Listeria monocytogenes in processing environments through inadequate cleaning"
   ]
 }

@@ -83,5 +83,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement immediate corrective actions when hazard analysis identifies uncontrolled biological hazards requiring new preventive control implementation",
+    "Establish procedures for revising preventive controls when validation data demonstrates current measures are insufficient to control identified hazards",
+    "Develop action plans when critical limits or parameters are not supported by adequate scientific validation requiring expert consultation or testing",
+    "Create preventive measures when monitoring procedures prove inadequate to detect control deviations before food safety is compromised",
+    "Implement verification procedures to ensure PCQI oversight of all preventive control validation activities and documentation"
+  ],
+  "traceabilityInject": [
+    "Maintain documented hazard analysis for each product showing biological, chemical, and physical hazards with likelihood, severity, and preventive controls",
+    "Keep preventive control documentation showing procedures, practices, and processes developed to control each identified hazard",
+    "Retain validation records for process preventive controls including scientific studies, challenge studies, and PCQI review documentation",
+    "Document monitoring procedures specifying parameters measured, frequencies, methods, and assigned responsibilities for each preventive control",
+    "Archive on-site verification records confirming Food Safety Plan documents accurately reflect actual processes and control implementation"
+  ],
+  "micro_inject": [
+    "Inadequate hazard analysis fails to identify Listeria monocytogenes environmental contamination as preventive control requiring environmental monitoring programs",
+    "Preventive controls not validated for their specific application may be insufficient to eliminate pathogenic Salmonella in low-moisture foods",
+    "Critical limits unsupported by science allow Bacillus cereus and Clostridium perfringens survival in cooling processes due to inadequate time-temperature control",
+    "Insufficient monitoring frequencies miss rapid microbial growth periods allowing pathogen multiplication to dangerous levels between checks",
+    "Lack of PCQI validation oversight results in preventive controls that fail to achieve required log reductions for E. coli O157:H7 in produce"
   ]
 }

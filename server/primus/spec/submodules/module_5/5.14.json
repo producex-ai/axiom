@@ -89,5 +89,26 @@
       "totalPoints": 10,
       "isAutomaticFailure": false
     }
+  ],
+  "capaInject": [
+    "Implement corrective actions when preventive maintenance schedules are not followed including immediate equipment inspection and catch-up scheduling",
+    "Establish procedures for verifying proper cleaning and sanitization of equipment after maintenance work before returning to food production",
+    "Develop action plans when Master Sanitation Schedule compliance audits reveal missed cleaning tasks or inadequate frequency",
+    "Create verification procedures to ensure Sanitation Standard Operating Procedures are followed correctly and updated when processes change",
+    "Implement preventive measures when sanitation verification testing reveals persistent contamination requiring enhanced cleaning protocols"
+  ],
+  "traceabilityInject": [
+    "Maintain preventive maintenance program documentation including schedules, completion records, and sign-offs for all food processing equipment",
+    "Keep maintenance work logs documenting repairs, parts replaced, and approval signatures when work is completed",
+    "Retain records of equipment cleaning and sanitization verification performed after maintenance activities before production resumption",
+    "Archive Master Sanitation Schedules showing what areas and equipment are cleaned, cleaning frequencies, and responsible personnel",
+    "Document Sanitation Standard Operating Procedures with cleaning chemicals used, concentrations, contact times, and verification methods"
+  ],
+  "micro_inject": [
+    "Inadequate equipment cleaning allows biofilm formation providing protected environments for Listeria monocytogenes persistence",
+    "Maintenance activities that disturb equipment surfaces can release biofilm fragments containing high concentrations of pathogenic bacteria",
+    "Failure to properly sanitize equipment after repairs introduces environmental contaminants including Salmonella and E. coli into food contact zones",
+    "Poor sanitation of hard-to-clean areas creates harborage sites for Listeria monocytogenes that continuously recontaminate processed products",
+    "Insufficient contact time or concentration of sanitizers fails to eliminate vegetative cells and allows rapid recolonization of cleaned surfaces"
   ]
 }
