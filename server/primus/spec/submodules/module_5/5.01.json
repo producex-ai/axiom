@@ -1,6 +1,14 @@
 {
   "code": "5.01",
   "title": "General",
+  "appliesTo": [
+    "chemical storage",
+    "chemical labeling",
+    "food grade chemicals",
+    "GMP signage",
+    "food defense"
+  ],
+  "description": "General packinghouse requirements including chemical storage and labeling, proper use of food-grade chemicals, Good Manufacturing Practice (GMP) signage, and food defense controls",
   "requirements": [
     {
       "code": "5.01.01",

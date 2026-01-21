@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.03",
   "title": "Chemical Storage and Handling in Harvest Areas",
+  "appliesTo": [
+    "chemical storage",
+    "chemical labeling",
+    "spill prevention",
+    "safe handling",
+    "segregation"
+  ],
+  "description": "Requirements for secure chemical storage, proper labeling, separation from product areas, spill prevention, and safe handling procedures in harvest operations",
   "requirements": [
     {
       "code": "4.05.03a",

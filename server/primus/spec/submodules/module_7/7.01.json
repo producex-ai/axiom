@@ -2,6 +2,14 @@
   "code": "7.01",
   "parentCode": "7",
   "title": "General",
+  "appliesTo": [
+    "food safety team",
+    "preventive control training",
+    "product descriptions",
+    "process flow diagrams",
+    "plan development"
+  ],
+  "description": "General requirements for Food Safety Plan including team formation, leadership assignment, training documentation, product descriptions, and process flow diagrams",
   "requirements": [
     {
       "code": "7.01.01",

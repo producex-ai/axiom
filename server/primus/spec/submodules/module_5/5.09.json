@@ -2,6 +2,14 @@
   "code": "5.09",
   "parentCode": "5",
   "title": "Buildings and Grounds",
+  "appliesTo": [
+    "building maintenance",
+    "structural integrity",
+    "lighting",
+    "ventilation",
+    "facility infrastructure"
+  ],
+  "description": "Requirements for building and grounds maintenance including structural integrity, lighting, ventilation, drains, walls and ceilings, doors and windows, and prevention of facility-related contamination",
   "requirements": [
     {
       "code": "5.09.01",

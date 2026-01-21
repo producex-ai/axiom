@@ -2,6 +2,14 @@
   "parentCode": "4.04",
   "code": "4.04.03",
   "title": "Worker Hygiene Practices",
+  "appliesTo": [
+    "worker hygiene",
+    "handwashing procedures",
+    "personal practices",
+    "glove use",
+    "clean clothing"
+  ],
+  "description": "Mandatory hygiene practices for harvest workers including handwashing requirements, prohibited activities in product handling areas, clean clothing requirements, and glove use protocols",
   "requirements": [
     {
       "code": "4.04.03a",

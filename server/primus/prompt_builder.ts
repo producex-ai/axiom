@@ -436,11 +436,11 @@ function buildSectionGuidance(
   );
   blocks.push("");
   blocks.push(
-    `SECTION 2: Purpose: ${submoduleSpec.description.slice(0, 100)}...`,
+    `SECTION 2: Purpose: ${submoduleSpec.description?.slice(0, 100)}...`,
   );
   blocks.push("");
   blocks.push(
-    `SECTION 3: Scope: ${submoduleSpec.appliesTo.slice(0, 3).join(", ")}${submoduleSpec.appliesTo.length > 3 ? ", etc." : ""}`,
+    `SECTION 3: Scope: ${submoduleSpec.appliesTo?.slice(0, 3).join(", ")}${submoduleSpec.appliesTo.length > 3 ? ", etc." : ""}`,
   );
   blocks.push("");
   blocks.push(

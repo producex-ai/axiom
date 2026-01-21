@@ -2,6 +2,14 @@
   "parentCode": "4.04",
   "code": "4.04.02",
   "title": "Handwashing Stations",
+  "appliesTo": [
+    "handwashing stations",
+    "worker hygiene",
+    "potable water",
+    "sanitation facilities",
+    "hygiene supplies"
+  ],
+  "description": "Requirements for handwashing station availability, accessibility, proper equipment including potable water, soap, single-use towels, and waste receptacles for harvest workers",
   "requirements": [
     {
       "code": "4.04.02a",

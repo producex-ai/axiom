@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.06",
   "title": "Field Sanitation Practices",
+  "appliesTo": [
+    "field sanitation",
+    "cleaning schedules",
+    "sanitizer use",
+    "water quality",
+    "waste management"
+  ],
+  "description": "Requirements for field sanitation including cleaning schedules, sanitizer use and monitoring, water quality for cleaning, waste management, and documentation of sanitation activities",
   "requirements": [
     {
       "code": "4.05.06a",

@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.01",
   "title": "Animal and Fecal Contamination Control",
+  "appliesTo": [
+    "animal intrusion",
+    "fecal contamination",
+    "monitoring procedures",
+    "risk assessment",
+    "corrective actions"
+  ],
+  "description": "Requirements for preventing and managing animal and fecal contamination in harvest areas including monitoring procedures, risk assessments, and response protocols when contamination is detected",
   "requirements": [
     {
       "code": "4.05.01a",

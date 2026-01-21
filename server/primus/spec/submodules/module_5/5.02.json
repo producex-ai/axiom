@@ -1,6 +1,14 @@
 {
   "code": "5.02",
   "title": "Pest Control",
+  "appliesTo": [
+    "pest control",
+    "pest monitoring",
+    "exclusion measures",
+    "pest management",
+    "pest documentation"
+  ],
+  "description": "Comprehensive pest control requirements including pest-free products and packaging, facility pest management, monitoring devices, exclusion measures, and professional pest control program documentation",
   "requirements": [
     {
       "code": "5.02.01",

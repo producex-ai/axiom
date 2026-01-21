@@ -2,6 +2,14 @@
   "code": "5.18",
   "parentCode": "5",
   "title": "Allergen Control",
+  "appliesTo": [
+    "allergen management",
+    "allergen identification",
+    "allergen segregation",
+    "cross-contact prevention",
+    "labeling accuracy"
+  ],
+  "description": "Comprehensive allergen management requirements including allergen identification, segregation, cleaning procedures, labeling accuracy, cross-contact prevention, and allergen control program documentation",
   "requirements": [
     {
       "code": "5.18.01",

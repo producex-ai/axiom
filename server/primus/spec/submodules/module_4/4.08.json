@@ -1,6 +1,14 @@
 {
   "code": "4.08",
   "title": "On-site Storage",
+  "appliesTo": [
+    "storage areas",
+    "packaging materials",
+    "harvest equipment",
+    "contamination prevention",
+    "cleaning procedures"
+  ],
+  "description": "Requirements for on-site storage of harvest materials, equipment, and packaging including cleanliness, security, contamination prevention, and cleaning documentation",
   "requirements": [
     {
       "code": "4.08.01",

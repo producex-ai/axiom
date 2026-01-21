@@ -2,6 +2,14 @@
   "code": "5.15",
   "parentCode": "5",
   "title": "Worker Documentation",
+  "appliesTo": [
+    "worker documentation",
+    "training records",
+    "hygiene training",
+    "competency assessments",
+    "personnel files"
+  ],
+  "description": "Requirements for worker-related documentation including training records, hygiene training, illness reporting procedures, competency assessments, and personnel file management",
   "requirements": [
     {
       "code": "5.15.01",

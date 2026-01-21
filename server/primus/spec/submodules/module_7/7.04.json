@@ -2,6 +2,14 @@
   "code": "7.04",
   "parentCode": "7",
   "title": "Re-analysis of the Food Safety Plan",
+  "appliesTo": [
+    "plan re-analysis",
+    "triennial review",
+    "change management",
+    "documentation",
+    "continuous improvement"
+  ],
+  "description": "Requirements for periodic re-analysis of the Food Safety Plan including triennial review schedule, change management triggers, and documentation of re-analysis activities",
   "requirements": [
     {
       "code": "7.04.01",

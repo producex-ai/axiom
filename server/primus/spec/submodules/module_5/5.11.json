@@ -2,6 +2,14 @@
   "code": "5.11",
   "parentCode": "5",
   "title": "Chemical Files",
+  "appliesTo": [
+    "chemical documentation",
+    "SDS",
+    "chemical labels",
+    "chemical inventory",
+    "information accessibility"
+  ],
+  "description": "Documentation requirements for chemical management including Safety Data Sheets (SDS), specimen labels, chemical inventory, and accessibility of chemical information",
   "requirements": [
     {
       "code": "5.11.01",

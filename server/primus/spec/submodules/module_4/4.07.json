@@ -1,6 +1,14 @@
 {
   "code": "4.07",
   "title": "Transportation and Tracking",
+  "appliesTo": [
+    "transportation",
+    "vehicle sanitation",
+    "product protection",
+    "traceability",
+    "tracking systems"
+  ],
+  "description": "Requirements for transport vehicle cleanliness, product protection during transportation, sanitation documentation, and traceability systems from growing area to facility",
   "requirements": [
     {
       "code": "4.07.01",

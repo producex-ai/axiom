@@ -1,6 +1,14 @@
 {
   "code": "5.03",
   "title": "Storage Areas & Packaging Materials",
+  "appliesTo": [
+    "storage areas",
+    "packaging materials",
+    "contamination prevention",
+    "product separation",
+    "hold procedures"
+  ],
+  "description": "Requirements for storage area management including contamination prevention, proper separation of materials, identification of rejected items, product quality standards, and packaging material controls",
   "requirements": [
     {
       "code": "5.03.01",

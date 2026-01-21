@@ -2,6 +2,14 @@
   "code": "5.13",
   "parentCode": "5",
   "title": "Operation Monitoring Records",
+  "appliesTo": [
+    "monitoring records",
+    "temperature logs",
+    "water quality testing",
+    "sanitation verification",
+    "traceability"
+  ],
+  "description": "Requirements for operational monitoring and record-keeping including process monitoring, temperature logs, water quality testing, sanitation verification, and traceability documentation",
   "requirements": [
     {
       "code": "5.13.01",

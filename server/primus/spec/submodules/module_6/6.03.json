@@ -2,6 +2,14 @@
   "code": "6.03",
   "parentCode": "6",
   "title": "Execution of the HACCP Plan on the Plant Floor",
+  "appliesTo": [
+    "HACCP training",
+    "CCP monitoring",
+    "operator competency",
+    "record-keeping",
+    "verification"
+  ],
+  "description": "Requirements for HACCP plan implementation including worker training, CCP operator competency, monitoring compliance, record-keeping, corrective action execution, and verification of plan effectiveness",
   "requirements": [
     {
       "code": "6.03.01",

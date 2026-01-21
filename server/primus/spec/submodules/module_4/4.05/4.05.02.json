@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.02",
   "title": "Worker Access and Security Controls",
+  "appliesTo": [
+    "access control",
+    "visitor management",
+    "security procedures",
+    "unauthorized entry",
+    "harvest area protection"
+  ],
+  "description": "Requirements for controlling worker access to harvest areas, visitor management, security procedures, and preventing unauthorized entry to ensure product safety",
   "requirements": [
     {
       "code": "4.05.02a",

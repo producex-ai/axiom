@@ -2,6 +2,14 @@
   "code": "5.08",
   "parentCode": "5",
   "title": "General Cleaning",
+  "appliesTo": [
+    "facility cleaning",
+    "waste management",
+    "housekeeping",
+    "cleaning tools",
+    "cross-contamination prevention"
+  ],
+  "description": "General facility cleaning requirements including waste management, debris control, cleaning tool management, housekeeping standards, and prevention of cross-contamination during cleaning activities",
   "requirements": [
     {
       "code": "5.08.01",

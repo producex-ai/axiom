@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.07",
   "title": "Harvest Timing and Environmental Conditions",
+  "appliesTo": [
+    "harvest timing",
+    "environmental conditions",
+    "weather assessments",
+    "field evaluations",
+    "harvest delays"
+  ],
+  "description": "Requirements for harvest timing decisions based on environmental conditions, weather assessments, field evaluations, and procedures for delaying harvest when contamination risks are present",
   "requirements": [
     {
       "code": "4.05.07a",

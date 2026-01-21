@@ -2,6 +2,14 @@
   "code": "6.02",
   "parentCode": "6",
   "title": "HACCP Plan Requirements",
+  "appliesTo": [
+    "hazard analysis",
+    "CCP determination",
+    "critical limits",
+    "monitoring procedures",
+    "corrective actions"
+  ],
+  "description": "Core HACCP plan requirements including documented hazard analysis, Critical Control Point (CCP) determination, critical limits, monitoring procedures, corrective actions, verification activities, and annual review",
   "requirements": [
     {
       "code": "6.02.01",

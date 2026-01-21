@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.05",
   "title": "Product Handling Procedures",
+  "appliesTo": [
+    "product handling",
+    "dropped product",
+    "ground contact prevention",
+    "contamination protection",
+    "handling practices"
+  ],
+  "description": "Requirements for safe product handling during harvest including dropped product protocols, ground contact prevention, product protection from contamination, and proper handling practices",
   "requirements": [
     {
       "code": "4.05.05a",

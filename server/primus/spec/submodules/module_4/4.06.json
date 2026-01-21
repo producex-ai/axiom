@@ -1,6 +1,14 @@
 {
   "code": "4.06",
   "title": "Post-harvest Treatments",
+  "appliesTo": [
+    "post-harvest treatments",
+    "pesticide applications",
+    "chemical records",
+    "worker safety",
+    "MRL compliance"
+  ],
+  "description": "Requirements for post-harvest pesticide applications including records, authorization verification, application procedures, worker safety, and residue compliance",
   "requirements": [
     {
       "code": "4.06.01",

@@ -2,6 +2,14 @@
   "code": "5.16",
   "parentCode": "5",
   "title": "Testing",
+  "appliesTo": [
+    "product testing",
+    "microbiological testing",
+    "water quality testing",
+    "allergen testing",
+    "laboratory qualifications"
+  ],
+  "description": "Requirements for product and environmental testing programs including microbiological testing, water quality testing, allergen testing, laboratory qualifications, and test result documentation",
   "requirements": [
     {
       "code": "5.16.01",

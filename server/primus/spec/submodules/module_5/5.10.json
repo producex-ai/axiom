@@ -2,6 +2,14 @@
   "code": "5.10",
   "parentCode": "5",
   "title": "Site",
+  "appliesTo": [
+    "site planning",
+    "facility layout",
+    "site maps",
+    "adjacent land use",
+    "environmental factors"
+  ],
+  "description": "Requirements for site planning and documentation including site maps, facility layout, adjacent land use considerations, and environmental factors affecting food safety",
   "requirements": [
     {
       "code": "5.10.01",

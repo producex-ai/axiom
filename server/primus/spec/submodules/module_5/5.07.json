@@ -1,6 +1,14 @@
 {
   "code": "5.07",
   "title": "Equipment Cleaning",
+  "appliesTo": [
+    "equipment cleaning",
+    "sanitation procedures",
+    "cleaning schedules",
+    "water quality",
+    "cleaning chemicals"
+  ],
+  "description": "Requirements for equipment cleaning and sanitation including documented procedures, cleaning schedules, sanitation verification, water quality for cleaning, and cleaning chemical management",
   "requirements": [
     {
       "code": "5.07.01",

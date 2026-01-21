@@ -2,6 +2,14 @@
   "parentCode": "4.04",
   "code": "4.04.04",
   "title": "Worker Safety and Hygiene Supplies",
+  "appliesTo": [
+    "hygiene supplies",
+    "first aid",
+    "bandages",
+    "cut-resistant gloves",
+    "supply management"
+  ],
+  "description": "Requirements for provision and management of hygiene supplies including bandages, first aid kits, cut-resistant gloves, and documentation of supply availability for harvest workers",
   "requirements": [
     {
       "code": "4.04.04a",

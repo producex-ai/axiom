@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.04",
   "title": "Harvest Equipment and Container Safety",
+  "appliesTo": [
+    "harvest equipment",
+    "containers",
+    "equipment cleanliness",
+    "maintenance",
+    "contamination prevention"
+  ],
+  "description": "Requirements for harvest equipment and container cleanliness, maintenance, inspection procedures, and prevention of contamination from equipment and packaging materials",
   "requirements": [
     {
       "code": "4.05.04a",

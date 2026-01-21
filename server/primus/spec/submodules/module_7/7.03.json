@@ -2,6 +2,14 @@
   "code": "7.03",
   "parentCode": "7",
   "title": "Execution of the Food Safety Plan",
+  "appliesTo": [
+    "preventive control training",
+    "monitoring compliance",
+    "worker competency",
+    "record-keeping",
+    "corrective actions"
+  ],
+  "description": "Requirements for Food Safety Plan implementation including preventive control training, monitoring compliance, worker competency, record-keeping, corrective action execution, and verification of control effectiveness",
   "requirements": [
     {
       "code": "7.03.01",

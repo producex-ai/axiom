@@ -2,6 +2,14 @@
   "code": "5.14",
   "parentCode": "5",
   "title": "Maintenance & Sanitation Files",
+  "appliesTo": [
+    "maintenance documentation",
+    "preventive maintenance",
+    "equipment calibration",
+    "cleaning schedules",
+    "sanitation records"
+  ],
+  "description": "Documentation requirements for maintenance and sanitation programs including preventive maintenance schedules, equipment calibration records, cleaning schedules, and sanitation verification records",
   "requirements": [
     {
       "code": "5.14.01",

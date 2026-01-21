@@ -1,6 +1,14 @@
 {
   "code": "5.06",
   "title": "Equipment",
+  "appliesTo": [
+    "equipment",
+    "food-contact surfaces",
+    "equipment cleanliness",
+    "maintenance",
+    "calibration"
+  ],
+  "description": "Equipment requirements including food-contact surface standards, equipment cleanliness, proper construction and maintenance, calibration of measuring devices, and prevention of contamination from equipment",
   "requirements": [
     {
       "code": "5.06.01",

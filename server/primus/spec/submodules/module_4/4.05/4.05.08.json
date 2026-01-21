@@ -2,6 +2,14 @@
   "parentCode": "4.05",
   "code": "4.05.08",
   "title": "Post-Harvest Handling and Transport",
+  "appliesTo": [
+    "post-harvest handling",
+    "temperature control",
+    "vehicle sanitation",
+    "product protection",
+    "time management"
+  ],
+  "description": "Requirements for post-harvest product handling, temperature control, transport vehicle sanitation, product protection during transport, and time management from field to storage",
   "requirements": [
     {
       "code": "4.05.08a",

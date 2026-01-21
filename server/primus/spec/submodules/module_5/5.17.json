@@ -2,6 +2,14 @@
   "code": "5.17",
   "parentCode": "5",
   "title": "Temperature Controlled Storage & Distribution Logs",
+  "appliesTo": [
+    "temperature control",
+    "cold chain management",
+    "temperature monitoring",
+    "alarm systems",
+    "temperature deviations"
+  ],
+  "description": "Requirements for temperature control documentation including temperature monitoring logs, cold chain management, equipment calibration, alarm systems, and corrective action records for temperature deviations",
   "requirements": [
     {
       "code": "5.17.01",

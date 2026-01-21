@@ -2,6 +2,14 @@
   "code": "7.02",
   "parentCode": "7",
   "title": "Development of the Food Safety Plan",
+  "appliesTo": [
+    "hazard analysis",
+    "preventive controls",
+    "critical limits",
+    "monitoring procedures",
+    "validation"
+  ],
+  "description": "Requirements for Food Safety Plan development including hazard analysis, preventive controls identification, critical limits establishment, monitoring procedures, corrective actions, verification activities, and validation documentation",
   "requirements": [
     {
       "code": "7.02.01",

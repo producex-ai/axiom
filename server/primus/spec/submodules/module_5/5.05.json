@@ -1,6 +1,14 @@
 {
   "code": "5.05",
   "title": "Worker Practices",
+  "appliesTo": [
+    "worker hygiene",
+    "handwashing",
+    "jewelry restrictions",
+    "illness reporting",
+    "visitor controls"
+  ],
+  "description": "Worker hygiene and practices requirements including handwashing compliance, prohibited activities in production areas, jewelry restrictions, illness reporting, visitor controls, and personal hygiene standards",
   "requirements": [
     {
       "code": "5.05.01",

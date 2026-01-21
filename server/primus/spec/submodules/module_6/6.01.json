@@ -2,6 +2,14 @@
   "code": "6.01",
   "parentCode": "6",
   "title": "Development of the HACCP Plan",
+  "appliesTo": [
+    "HACCP team",
+    "HACCP training",
+    "product descriptions",
+    "process flow diagrams",
+    "hazard analysis preparation"
+  ],
+  "description": "Requirements for HACCP plan development including team formation, training documentation, product descriptions, process flow diagrams, and hazard analysis preparation",
   "requirements": [
     {
       "code": "6.01.01",

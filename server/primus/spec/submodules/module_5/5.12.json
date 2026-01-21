@@ -2,6 +2,14 @@
   "code": "5.12",
   "parentCode": "5",
   "title": "Pest Control Documentation",
+  "appliesTo": [
+    "pest control documentation",
+    "pest control contracts",
+    "operator licenses",
+    "monitoring records",
+    "corrective actions"
+  ],
+  "description": "Comprehensive documentation requirements for pest control programs including program scope, contracts, operator licenses, insurance, monitoring records, and corrective action documentation",
   "requirements": [
     {
       "code": "5.12.01",

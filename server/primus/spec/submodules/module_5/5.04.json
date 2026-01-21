@@ -1,6 +1,14 @@
 {
   "code": "5.04",
   "title": "Operational Practices",
+  "appliesTo": [
+    "operational practices",
+    "dropped product",
+    "product protection",
+    "contamination prevention",
+    "handling procedures"
+  ],
+  "description": "Requirements for operational practices including dropped product protocols, product protection procedures, contamination prevention during operations, and proper handling of damaged or defective products",
   "requirements": [
     {
       "code": "5.04.01",
