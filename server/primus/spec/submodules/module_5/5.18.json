@@ -12,52 +12,148 @@
   "description": "Comprehensive allergen management requirements including allergen identification, segregation, cleaning procedures, labeling accuracy, cross-contact prevention, and allergen control program documentation",
   "requirements": [
     {
+      "id": "5.18.01",
       "code": "5.18.01",
+      "text": "Does the operation handle or store any food allergens? Information gathering question",
       "question": "Does the operation handle or store any food allergens? Information gathering question",
+      "points": 0,
       "totalPoints": 0,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["allergens", "information gathering", "allergen presence", "allergen handling", "allergen storage"],
+      "mandatoryStatements": [
+        "Operation must identify whether any food allergens are handled or stored in the facility",
+        "This information gathering question determines applicability of subsequent allergen control requirements",
+        "If allergens are present, comprehensive allergen management program must be implemented"
+      ],
+      "verificationExpectations": "Auditors will determine whether the operation handles or stores any of the major food allergens including milk, eggs, fish, crustacean shellfish, tree nuts, peanuts, wheat, soybeans, and sesame. This information gathering question establishes context for evaluating allergen control requirements in subsequent questions.",
+      "monitoringExpectations": "Operations should maintain current awareness of all allergenic ingredients used or stored in the facility including raw materials, ingredients, and finished products. Changes in product formulations or ingredients should be evaluated for introduction of new allergens requiring program updates."
     },
     {
+      "id": "5.18.02",
       "code": "5.18.02",
+      "text": "Are there adequate storage controls (e.g., separation, identification, etc.) that ensure that allergens are not contaminating other raw materials?",
       "question": "Are there adequate storage controls (e.g., separation, identification, etc.) that ensure that allergens are not contaminating other raw materials?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["storage controls", "allergen separation", "allergen identification", "raw material storage", "cross-contact prevention", "allergen segregation"],
+      "mandatoryStatements": [
+        "Allergen storage controls must prevent cross-contact between allergenic and non-allergenic materials",
+        "Allergens must be clearly identified and physically separated from non-allergen ingredients",
+        "Storage practices must include barriers, dedicated areas, or other controls to prevent allergen cross-contamination"
+      ],
+      "verificationExpectations": "Auditors will observe allergen storage areas to verify allergenic ingredients are separated from non-allergen materials through physical barriers, dedicated storage locations, or other effective methods. Allergen containers should be clearly labeled and stored to prevent spillage or dust contamination of non-allergen ingredients. Storage practices should prevent cross-contact during material handling.",
+      "monitoringExpectations": "Operations should maintain allergen storage controls with regular inspection to ensure separation is maintained and identification is clear. Storage areas should be organized to minimize allergen cross-contact risk with procedures for cleaning up allergen spills or preventing dust generation from allergenic materials."
     },
     {
+      "id": "5.18.03",
       "code": "5.18.03",
+      "text": "Is there a dedicated allergen production line or adequate clean down and production procedures that prevent allergen cross contamination?",
       "question": "Is there a dedicated allergen production line or adequate clean down and production procedures that prevent allergen cross contamination?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["dedicated line", "allergen cleandown", "production procedures", "cross-contact prevention", "line changeover", "allergen cleaning"],
+      "mandatoryStatements": [
+        "Either dedicated production lines must be used for allergen products or validated cleaning procedures must prevent cross-contact",
+        "Cleaning procedures must be documented, validated, and verified effective in removing allergen residues",
+        "Production scheduling must minimize allergen changeovers or sequence production to reduce cross-contact risk"
+      ],
+      "verificationExpectations": "Auditors will verify the operation uses dedicated allergen production lines or has documented cleaning procedures for allergen changeovers. If shared lines are used, cleaning procedures should be validated through testing (allergen swabs, rinse testing) to demonstrate effective allergen removal. Production scheduling should minimize changeovers or sequence non-allergen products before allergen products when possible.",
+      "monitoringExpectations": "Operations should implement allergen line management through dedication or validated cleaning with documentation showing cleaning effectiveness is verified before non-allergen production. Production schedules should be reviewed to optimize sequencing and minimize allergen cross-contact opportunities through thoughtful planning."
     },
     {
+      "id": "5.18.04",
       "code": "5.18.04",
+      "text": "Are utensils and work in progress storage containers identified in order to prevent allergen cross contamination?",
       "question": "Are utensils and work in progress storage containers identified in order to prevent allergen cross contamination?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["utensil identification", "container identification", "work in progress", "allergen tools", "color coding", "dedicated equipment"],
+      "mandatoryStatements": [
+        "Utensils and containers used for allergen products must be clearly identified to prevent cross-contact",
+        "Identification systems such as color coding, labels, or dedicated equipment must prevent mix-ups",
+        "Work in progress containers must be labeled to indicate allergen content and prevent misuse"
+      ],
+      "verificationExpectations": "Auditors will observe utensils, tools, and work in progress containers to verify those used with allergen products are clearly identified through color coding, labels, or dedication to prevent use with non-allergen products. Identification should be durable and clearly visible to prevent inadvertent cross-contact during production activities.",
+      "monitoringExpectations": "Operations should maintain utensil and container identification systems with regular inspection to ensure markings are intact and clear. Personnel should be trained on the identification system and required to use properly identified equipment. Damaged or unclear markings should be replaced immediately to maintain system integrity."
     },
     {
+      "id": "5.18.05",
       "code": "5.18.05",
+      "text": "Does re-work handling take into account the issues associated with allergen containing products?",
       "question": "Does re-work handling take into account the issues associated with allergen containing products?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["rework", "allergen rework", "rework handling", "allergen control", "product returns", "work in progress"],
+      "mandatoryStatements": [
+        "Rework handling procedures must address allergen considerations to prevent cross-contact",
+        "Allergen-containing rework must only be added back to products that declare those allergens",
+        "Rework must be clearly identified with allergen content and controlled to prevent cross-contact"
+      ],
+      "verificationExpectations": "Auditors will review rework handling procedures to confirm they address allergen control including clear identification of rework allergen content, storage segregation, and controls ensuring allergen rework is only added to products that declare those allergens on labels. Procedures should prevent unlabeled allergen addition through rework incorporation.",
+      "monitoringExpectations": "Operations should implement rework handling procedures that maintain allergen control with documentation showing rework is properly identified and only incorporated into compatible products. Rework incorporation should be recorded to enable traceability and verification that allergen controls were maintained."
     },
     {
+      "id": "5.18.06",
       "code": "5.18.06",
+      "text": "Are workers trained with respect to allergen risks and the facility allergen cross contamination controls (including hand washing between production runs) and are there records of this allergen training?",
       "question": "Are workers trained with respect to allergen risks and the facility allergen cross contamination controls (including hand washing between production runs) and are there records of this allergen training?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["allergen training", "worker training", "cross-contact prevention", "hand washing", "allergen awareness", "training records"],
+      "mandatoryStatements": [
+        "Workers must be trained on allergen risks including health impacts and cross-contact prevention",
+        "Training must cover facility allergen controls including hand washing between production runs, equipment identification, and cleaning procedures",
+        "Training records must document allergen training for all workers who handle food or food contact surfaces"
+      ],
+      "verificationExpectations": "Auditors will review allergen training records to confirm workers receive training on allergen risks, severe allergic reaction consequences, facility allergen control procedures including hand washing between allergen and non-allergen runs, proper use of identified equipment, and cleaning procedures. Records should document training topics, dates, attendees, and trainer qualifications.",
+      "monitoringExpectations": "Operations should provide allergen training to all food handlers before beginning work with refresher training periodically and when procedures change. Training effectiveness should be verified through observation, testing, or supervisor assessment to ensure workers understand and follow allergen control requirements consistently."
     },
     {
+      "id": "5.18.07",
       "code": "5.18.07",
+      "text": "Are worker practices adequate and being followed to protect against allergen cross-contact and against contamination of food?",
       "question": "Are worker practices adequate and being followed to protect against allergen cross-contact and against contamination of food?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["worker practices", "allergen procedures", "cross-contact prevention", "procedure compliance", "hand hygiene", "equipment use"],
+      "mandatoryStatements": [
+        "Worker practices must be adequate to prevent allergen cross-contact during all production activities",
+        "Workers must follow established allergen control procedures including hand washing, equipment use, and cleaning protocols",
+        "Supervision and monitoring must ensure worker practices consistently protect against cross-contact"
+      ],
+      "verificationExpectations": "Auditors will observe worker practices during production to verify workers follow allergen control procedures including hand washing between allergen and non-allergen product handling, proper use of identified equipment, compliance with production sequencing, and adherence to cleaning procedures. Practices should demonstrate understanding of allergen risks and commitment to preventing cross-contact.",
+      "monitoringExpectations": "Operations should monitor worker practices through supervision and observation with corrective action including retraining when workers fail to follow allergen control procedures. Performance monitoring should identify practices that increase cross-contact risk with procedure or training improvements implemented when gaps are identified."
     },
     {
+      "id": "5.18.08",
       "code": "5.18.08",
+      "text": "Are all products manufactured on site labeled correctly with respect to allergens?",
       "question": "Are all products manufactured on site labeled correctly with respect to allergens?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["allergen labeling", "label accuracy", "allergen declaration", "product labels", "label verification", "allergen statements"],
+      "mandatoryStatements": [
+        "All products must be labeled correctly with accurate allergen declarations in compliance with regulations",
+        "Labels must include all allergens present in the product intentionally or through cross-contact risk",
+        "Label verification procedures must ensure allergen declarations match product formulations and production conditions"
+      ],
+      "verificationExpectations": "Auditors will review product labels to verify all products manufactured on site have accurate allergen declarations including intentional allergen ingredients and appropriate precautionary statements when cross-contact risk exists. Labels should comply with regulatory requirements for allergen declaration format and completeness. Label verification procedures should ensure labels match current formulations.",
+      "monitoringExpectations": "Operations should implement label verification procedures ensuring allergen declarations are accurate for all products with review when formulations change or new allergens are introduced. Precautionary allergen statements should be based on risk assessments of cross-contact potential with validation that labeling accurately reflects manufacturing conditions."
     }
   ],
   "capaInject": [

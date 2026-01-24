@@ -12,6 +12,8 @@ import { EditorBubbleMenu } from "./EditorBubbleMenu";
 import { SlashCommandExtension } from "./SlashCommand";
 import { AIDiffView, AIProcessingIndicator } from "./AIDiffView";
 import { CommandPalette } from "./CommandPalette";
+import { FindReplaceExtension } from "./extensions/FindReplaceExtension";
+import { FindReplaceDialog } from "./FindReplaceDialog";
 
 export function DocumentEditor({
   initialContent = "",
@@ -27,6 +29,7 @@ export function DocumentEditor({
   } | null>(null);
   const [isAIProcessing, setIsAIProcessing] = React.useState(false);
   const [showBubbleAI, setShowBubbleAI] = React.useState(false);
+  const [showFindReplace, setShowFindReplace] = React.useState(false);
 
   // Use a ref to store the AI command handler so it can be used in the extension
   const handleAICommandRef =
@@ -106,6 +109,8 @@ export function DocumentEditor({
             }),
           ]
         : []),
+      // Add Find & Replace extension
+      FindReplaceExtension,
     ],
     immediatelyRender: false,
     editable: !readOnly,
@@ -254,6 +259,12 @@ export function DocumentEditor({
         onSave?.(editor.getHTML());
       }
 
+      // Find & Replace shortcut (Cmd/Ctrl + F)
+      if ((e.metaKey || e.ctrlKey) && e.key === "f") {
+        e.preventDefault();
+        setShowFindReplace(true);
+      }
+
       // AI Assistant shortcut (Cmd/Ctrl + /)
       if ((e.metaKey || e.ctrlKey) && e.key === "/") {
         e.preventDefault();
@@ -305,6 +316,13 @@ export function DocumentEditor({
         )}
       </div>
 
+
+      {/* Find & Replace Dialog (Cmd+F) */}
+      <FindReplaceDialog
+        editor={editor}
+        open={showFindReplace}
+        onOpenChange={setShowFindReplace}
+      />
       {/* Floating Bubble Menu */}
       {showAI && !readOnly && (
         <EditorBubbleMenu editor={editor} onAICommand={handleAICommand} />

@@ -61,9 +61,9 @@ export function generateCrosswalk(
       // Convert SubmoduleRequirement to ChecklistRequirement format
       requirements = submoduleSpec.requirements.map((req) => ({
         code: req.code,
-        description: req.text,
+        description: req.text || (req as any).question || req.code,
         mandatory: req.required,
-        keywords: req.keywords,
+        keywords: req.keywords || [],
       }));
     }
   } catch {

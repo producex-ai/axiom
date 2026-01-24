@@ -11,28 +11,108 @@
   "description": "General packinghouse requirements including chemical storage and labeling, proper use of food-grade chemicals, Good Manufacturing Practice (GMP) signage, and food defense controls",
   "requirements": [
     {
+      "id": "5.01.01",
       "code": "5.01.01",
-      "question": "Are all chemicals (pesticides, sanitizers, detergents, lubricants, etc.) stored securely, safely and are they labeled correctly?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are all chemicals (pesticides, sanitizers, detergents, lubricants, etc.) stored securely, safely and are they labeled correctly?",
+      "keywords": [
+        "chemical storage",
+        "chemical labeling",
+        "pesticides",
+        "sanitizers",
+        "detergents",
+        "lubricants",
+        "secure storage",
+        "SDS"
+      ],
+      "mandatoryStatements": [
+        "All chemicals including pesticides, sanitizers, detergents, and lubricants must be stored securely in designated areas",
+        "Chemical storage areas must be designed to contain spills and leaks with adequate ventilation",
+        "All chemical containers must maintain original labels or have equivalent labeling",
+        "Safety Data Sheets (SDS) must be available for all chemicals",
+        "Emergency response equipment must be readily available near chemical storage areas",
+        "Regular inspections of chemical storage areas must be conducted",
+        "Chemicals must be stored away from food products, ingredients, and packaging materials"
+      ],
+      "verificationExpectations": "Monthly inspection of chemical storage areas verifying secure storage, proper labeling, SDS availability, and compliance with safety requirements",
+      "monitoringExpectations": "Daily visual verification that chemical storage areas are secure and chemicals are properly labeled, immediate action for any unlabeled or improperly stored chemicals"
     },
     {
+      "id": "5.01.02",
       "code": "5.01.02",
-      "question": "Are \"food grade\" and \"non-food grade\" chemicals used appropriately, according to the label and not commingled?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are \"food grade\" and \"non-food grade\" chemicals used appropriately, according to the label and not commingled?",
+      "keywords": [
+        "food grade chemicals",
+        "non-food grade chemicals",
+        "chemical segregation",
+        "chemical commingling",
+        "label compliance",
+        "chemical separation"
+      ],
+      "mandatoryStatements": [
+        "Food grade chemicals must be clearly separated from non-food grade chemicals",
+        "Chemicals must be used only according to manufacturer label instructions",
+        "Physical barriers must separate food grade and non-food grade chemical storage",
+        "Chemical application must follow approved procedures and concentrations",
+        "Only approved food-grade chemicals may be used on food contact surfaces",
+        "Chemical segregation must be maintained during storage and use"
+      ],
+      "verificationExpectations": "Quarterly audit of chemical segregation practices, verification that only food-grade chemicals are used in food contact applications",
+      "monitoringExpectations": "Weekly verification of chemical segregation, daily monitoring of chemical application procedures and concentrations"
     },
     {
+      "id": "5.01.03",
       "code": "5.01.03",
-      "question": "Are signs supporting GMPs posted appropriately?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are signs supporting GMPs posted appropriately?",
+      "keywords": [
+        "GMP signage",
+        "good manufacturing practices",
+        "signage",
+        "visual reminders",
+        "hygiene signs",
+        "handwashing signs"
+      ],
+      "mandatoryStatements": [
+        "GMP signage must be prominently displayed in appropriate areas throughout the facility",
+        "Signs must be posted at entry areas, handwashing stations, and toilet facilities",
+        "Signage must include multilingual content as needed for workforce",
+        "Signs must be visible, legible, and maintained in good condition",
+        "GMP reminders must address hygiene and safety requirements",
+        "Signage must be replaced when faded, damaged, or illegible"
+      ],
+      "verificationExpectations": "Semi-annual inspection of GMP signage for completeness, visibility, and condition with replacement of damaged signs",
+      "monitoringExpectations": "Quarterly verification that GMP signage is present in all required locations and remains visible and legible"
     },
     {
+      "id": "5.01.04",
       "code": "5.01.04",
-      "question": "Are the necessary food defense controls implemented in the operation?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are the necessary food defense controls implemented in the operation?",
+      "keywords": [
+        "food defense",
+        "security controls",
+        "access control",
+        "visitor management",
+        "intentional contamination",
+        "vulnerability assessment"
+      ],
+      "mandatoryStatements": [
+        "Food defense controls must be implemented to prevent intentional contamination",
+        "Access control procedures must restrict unauthorized entry to production areas",
+        "Visitor management system must include sign-in requirements and escorts",
+        "Food defense vulnerability assessments must be conducted and documented",
+        "Security measures must address identified vulnerabilities",
+        "Employee background checks or screening must be appropriate to risk level",
+        "Corrective actions must be implemented for identified food defense weaknesses"
+      ],
+      "verificationExpectations": "Annual food defense vulnerability assessment and review of security measures, quarterly verification of access control compliance",
+      "monitoringExpectations": "Daily monitoring of visitor logs and access control compliance, immediate response to security incidents or unauthorized access"
     }
   ],
   "mandatoryStatements": [

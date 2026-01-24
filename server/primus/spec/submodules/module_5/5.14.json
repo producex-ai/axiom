@@ -12,82 +12,238 @@
   "description": "Documentation requirements for maintenance and sanitation programs including preventive maintenance schedules, equipment calibration records, cleaning schedules, and sanitation verification records",
   "requirements": [
     {
+      "id": "5.14.01",
       "code": "5.14.01",
+      "text": "Does the facility have a preventative maintenance program that includes a schedule and completion records?",
       "question": "Does the facility have a preventative maintenance program that includes a schedule and completion records?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["preventative maintenance", "maintenance program", "maintenance schedule", "completion records", "equipment maintenance", "PM program"],
+      "mandatoryStatements": [
+        "A preventative maintenance program must be implemented including schedules for all critical equipment",
+        "Completion records must document when maintenance activities are performed and by whom",
+        "Program must cover all food processing and food safety critical equipment to prevent breakdowns"
+      ],
+      "verificationExpectations": "Auditors will review the preventative maintenance program to confirm it includes schedules for all critical equipment with frequencies based on manufacturer recommendations or operational experience. Completion records should show scheduled maintenance is performed on time with documentation of work completed, parts replaced, and technician sign-off.",
+      "monitoringExpectations": "Operations should maintain the preventative maintenance program with tracking to ensure scheduled activities are completed on time. Records should demonstrate equipment is maintained according to the schedule with analysis of breakdown trends to adjust maintenance frequencies when needed."
     },
     {
+      "id": "5.14.02",
       "code": "5.14.02",
+      "text": "Are there logs of maintenance work and repairs and are they signed off when work is completed?",
       "question": "Are there logs of maintenance work and repairs and are they signed off when work is completed?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["maintenance logs", "repair records", "work orders", "sign-off procedures", "maintenance documentation", "repair completion"],
+      "mandatoryStatements": [
+        "Maintenance work logs must document all maintenance activities and repairs performed on equipment",
+        "Logs must be signed off by qualified personnel when work is completed to verify proper execution",
+        "Documentation must include dates, equipment identification, work performed, and parts used"
+      ],
+      "verificationExpectations": "Auditors will review maintenance logs to confirm all maintenance work and repairs are documented with details of work performed, equipment affected, parts replaced, and technician identification. Sign-off should demonstrate work was completed properly and equipment was returned to service in acceptable condition.",
+      "monitoringExpectations": "Operations should maintain maintenance logs for all work performed whether scheduled or unscheduled with supervisor review and sign-off before equipment returns to production. Logs should enable tracking of recurring problems and inform decisions about equipment replacement or modification."
     },
     {
+      "id": "5.14.03",
       "code": "5.14.03",
+      "text": "Are there logs showing that equipment is properly cleaned and sanitized after maintenance and repair work has been completed?",
       "question": "Are there logs showing that equipment is properly cleaned and sanitized after maintenance and repair work has been completed?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["post-maintenance cleaning", "equipment sanitization", "cleaning verification", "maintenance sanitation", "equipment hygiene"],
+      "mandatoryStatements": [
+        "Equipment must be cleaned and sanitized after all maintenance and repair work before returning to production",
+        "Logs must document cleaning and sanitization verification was performed by qualified personnel",
+        "Procedures must ensure maintenance activities do not introduce contamination to food contact surfaces"
+      ],
+      "verificationExpectations": "Auditors will review logs showing equipment is cleaned and sanitized after maintenance work with verification by sanitation or quality assurance personnel before production resumes. Documentation should show the cleaning method used, sanitizer applied, contact time achieved, and sign-off that equipment is ready for production use.",
+      "monitoringExpectations": "Operations should implement procedures requiring post-maintenance cleaning and sanitization with verification before equipment returns to service. Sanitation personnel should inspect equipment after maintenance to ensure all tools, debris, and contaminants are removed and proper sanitization was achieved."
     },
     {
+      "id": "5.14.04",
       "code": "5.14.04",
+      "text": "Is there a written cleaning schedule (Master Sanitation Schedule) that shows what and where is to be cleaned and how often?",
       "question": "Is there a written cleaning schedule (Master Sanitation Schedule) that shows what and where is to be cleaned and how often?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["Master Sanitation Schedule", "MSS", "cleaning schedule", "cleaning frequency", "sanitation planning", "cleaning program"],
+      "mandatoryStatements": [
+        "A written Master Sanitation Schedule must define what areas and equipment are cleaned and cleaning frequencies",
+        "Schedule must cover all areas of the facility including production, storage, and non-production areas",
+        "MSS must specify responsible personnel and provide a framework for verifying cleaning completion"
+      ],
+      "verificationExpectations": "Auditors will review the Master Sanitation Schedule to confirm it comprehensively lists all areas and equipment requiring cleaning with specified frequencies (daily, weekly, monthly, etc.), cleaning responsibilities assigned, and methods referenced. The MSS should be complete enough to ensure nothing is missed in the cleaning program.",
+      "monitoringExpectations": "Operations should maintain the MSS as a working document that guides daily, weekly, and periodic cleaning activities with tracking to verify scheduled cleaning is completed. The MSS should be reviewed and updated when facility changes occur or when sanitation audits identify gaps in cleaning coverage."
     },
     {
+      "id": "5.14.05",
       "code": "5.14.05",
+      "text": "Are there written cleaning and sanitation procedures (Sanitation Standard Operating Procedures) for the facility and all equipment?",
       "question": "Are there written cleaning and sanitation procedures (Sanitation Standard Operating Procedures) for the facility and all equipment?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["Sanitation SOPs", "SSOPs", "cleaning procedures", "sanitation procedures", "cleaning methods", "sanitizing instructions"],
+      "mandatoryStatements": [
+        "Written Sanitation Standard Operating Procedures must exist for cleaning the facility and all equipment",
+        "SSOPs must specify cleaning chemicals, concentrations, application methods, contact times, and rinse procedures",
+        "Procedures must be detailed enough to enable consistent and effective cleaning by sanitation personnel"
+      ],
+      "verificationExpectations": "Auditors will review SSOPs to confirm written procedures exist for cleaning all areas and equipment specifying pre-rinse steps, cleaning chemical application, concentrations and contact times, scrubbing or mechanical action required, rinse procedures, and sanitizer application. Procedures should be clear, current, and accessible to sanitation workers.",
+      "monitoringExpectations": "Operations should maintain SSOPs for all cleaning activities with procedures followed consistently by trained sanitation personnel. SSOPs should be reviewed periodically and updated when equipment changes, new chemicals are adopted, or validation shows modifications are needed to achieve effective cleaning."
     },
     {
+      "id": "5.14.06",
       "code": "5.14.06",
+      "text": "Are cleaning and sanitation logs on file that show what was done, when and by who?",
       "question": "Are cleaning and sanitation logs on file that show what was done, when and by who?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["cleaning logs", "sanitation logs", "cleaning records", "sanitation documentation", "cleaning verification", "accountability"],
+      "mandatoryStatements": [
+        "Cleaning and sanitation logs must document what was cleaned, when cleaning occurred, and who performed the work",
+        "Logs must provide sufficient detail to verify Master Sanitation Schedule compliance",
+        "Documentation must enable traceability and accountability for sanitation activities"
+      ],
+      "verificationExpectations": "Auditors will review cleaning and sanitation logs to confirm they document specific areas and equipment cleaned, date and time of cleaning, chemicals used, and identification of personnel who performed and verified the cleaning. Logs should demonstrate the Master Sanitation Schedule is being followed with all required cleaning completed.",
+      "monitoringExpectations": "Operations should maintain cleaning logs that are completed by sanitation personnel as work is performed with supervisor review to verify completion. Logs should be reviewed regularly to identify missed cleaning tasks, training needs, or schedule adjustments required to achieve consistent sanitation."
     },
     {
+      "id": "5.14.07",
       "code": "5.14.07",
+      "text": "Are there records showing verification of cleaning and sanitizing chemical concentrations?",
       "question": "Are there records showing verification of cleaning and sanitizing chemical concentrations?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["chemical concentration", "sanitizer verification", "chemical testing", "concentration monitoring", "chemical efficacy"],
+      "mandatoryStatements": [
+        "Records must document verification that cleaning and sanitizing chemicals are prepared at correct concentrations",
+        "Concentration testing must be performed using appropriate test methods (test strips, titration, meters)",
+        "Out-of-specification concentrations must be corrected before chemicals are used for sanitation"
+      ],
+      "verificationExpectations": "Auditors will review records showing cleaning and sanitizing chemical concentrations are verified using test strips, titration, or electronic meters to confirm proper dilution. Records should show testing frequency, target concentrations, actual test results, and corrective actions when concentrations are incorrect.",
+      "monitoringExpectations": "Operations should verify chemical concentrations before use and periodically during sanitation activities to ensure proper dilution is maintained. Personnel should be trained on concentration testing methods with immediate corrective action when concentrations are too low or too high."
     },
     {
+      "id": "5.14.08",
       "code": "5.14.08",
+      "text": "Are there documented procedures and completion records for clean-in-place (CIP) activities (e.g., cleaning re-circulating water systems such as washing flumes, ice injectors, hydrocoolers, chilled water systems, ice makers, etc.), where applicable?",
       "question": "Are there documented procedures and completion records for clean-in-place (CIP) activities (e.g., cleaning re-circulating water systems such as washing flumes, ice injectors, hydrocoolers, chilled water systems, ice makers, etc.), where applicable?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["CIP", "clean-in-place", "recirculating water systems", "flumes", "hydrocoolers", "ice makers", "system cleaning"],
+      "mandatoryStatements": [
+        "Documented CIP procedures must exist for all recirculating water systems and enclosed equipment",
+        "Procedures must specify chemical concentrations, temperatures, contact times, and flow rates for effective cleaning",
+        "Completion records must verify CIP cycles are performed according to procedures with validation of effectiveness"
+      ],
+      "verificationExpectations": "Auditors will review CIP procedures and completion records for recirculating water systems including flumes, ice injectors, hydrocoolers, chilled water systems, and ice makers. Procedures should specify cleaning sequence, chemicals used, concentrations, temperatures, circulation times, and verification methods. Records should show CIP cycles are completed as scheduled with parameters achieved.",
+      "monitoringExpectations": "Operations should perform CIP activities according to documented procedures with automated or manual records confirming cycle parameters were achieved. CIP effectiveness should be validated through microbiological testing, ATP monitoring, or visual inspection with procedures adjusted when validation shows inadequate cleaning."
     },
     {
+      "id": "5.14.09",
       "code": "5.14.09",
+      "text": "Are there sanitation logs on file indicating that floor drains are cleaned on a regular basis (minimum daily in wet and fresh-cut production areas)?",
       "question": "Are there sanitation logs on file indicating that floor drains are cleaned on a regular basis (minimum daily in wet and fresh-cut production areas)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["floor drains", "drain cleaning", "drain sanitation", "daily cleaning", "wet areas", "fresh-cut areas"],
+      "mandatoryStatements": [
+        "Floor drains must be cleaned at minimum daily in wet processing and fresh-cut production areas",
+        "Sanitation logs must document drain cleaning frequency, method, and personnel responsible",
+        "Drain cleaning must include removal of debris, biofilm, and organic material to prevent pathogen harborage"
+      ],
+      "verificationExpectations": "Auditors will review sanitation logs to confirm floor drains in wet processing and fresh-cut areas are cleaned daily with documentation showing drain identification, cleaning completion, and responsible personnel. Cleaning procedures should address drain covers, traps, and adjacent floor areas to eliminate biofilm and organic buildup.",
+      "monitoringExpectations": "Operations should implement daily drain cleaning in high-risk areas with verification that cleaning is thorough and includes removal of biofilm. Environmental monitoring programs should include drain sampling to verify cleaning effectiveness with enhanced procedures when persistent contamination is detected."
     },
     {
+      "id": "5.14.10",
       "code": "5.14.10",
+      "text": "Are there records showing filters in air conditioning, evaporative coolers, ventilation and air filtration units are regularly cleaned and replaced?",
       "question": "Are there records showing filters in air conditioning, evaporative coolers, ventilation and air filtration units are regularly cleaned and replaced?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["air filters", "filter maintenance", "HVAC filters", "ventilation filters", "filter replacement", "air quality"],
+      "mandatoryStatements": [
+        "Records must document regular cleaning and replacement of filters in all air handling systems",
+        "Filter maintenance must occur at frequencies sufficient to maintain air quality and system efficiency",
+        "Procedures must prevent contamination of production areas from dirty filters or maintenance activities"
+      ],
+      "verificationExpectations": "Auditors will review records showing filters in air conditioning, evaporative coolers, ventilation, and air filtration units are cleaned or replaced according to schedules based on manufacturer recommendations or operational experience. Records should identify filter locations, maintenance dates, and whether filters were cleaned or replaced.",
+      "monitoringExpectations": "Operations should maintain filter cleaning and replacement schedules with tracking to ensure maintenance occurs on time. Filter condition should be assessed during maintenance to adjust frequencies if filters are excessively dirty or maintenance intervals are inadequate to maintain air quality."
     },
     {
+      "id": "5.14.11",
       "code": "5.14.11",
+      "text": "Are there records showing cooling units are maintenance serviced and cleaned at least every 12 months or more frequently as required?",
       "question": "Are there records showing cooling units are maintenance serviced and cleaned at least every 12 months or more frequently as required?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["cooling units", "refrigeration maintenance", "annual service", "cooling system cleaning", "HVAC maintenance"],
+      "mandatoryStatements": [
+        "Cooling units must be maintenance serviced and cleaned at least annually or more frequently as needed",
+        "Service records must document maintenance activities performed, parts replaced, and system performance verification",
+        "Cleaning must address coils, condensate drains, and other areas where microbial growth can occur"
+      ],
+      "verificationExpectations": "Auditors will review maintenance records to confirm cooling units receive annual service including cleaning of coils, condensate pans and drains, and inspection of refrigerant levels, electrical components, and overall system operation. Records should show service dates, work performed, and any deficiencies corrected.",
+      "monitoringExpectations": "Operations should schedule annual cooling unit maintenance with more frequent service if systems operate in harsh conditions or show performance degradation. Maintenance should address both mechanical components and cleaning to prevent microbial growth and ensure efficient operation."
     },
     {
+      "id": "5.14.12",
       "code": "5.14.12",
+      "text": "Is there a routine program and written procedure to verify cleaning effectiveness using rapid surface monitoring checks (e.g., ATP, allergen specific proteins, general proteins)?",
       "question": "Is there a routine program and written procedure to verify cleaning effectiveness using rapid surface monitoring checks (e.g., ATP, allergen specific proteins, general proteins)?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["cleaning verification", "ATP testing", "surface monitoring", "protein testing", "allergen testing", "sanitation validation"],
+      "mandatoryStatements": [
+        "A routine program must verify cleaning effectiveness using rapid surface monitoring methods",
+        "Written procedures must define sampling locations, frequencies, testing methods, and acceptance criteria",
+        "Results must trigger corrective actions when cleaning effectiveness is inadequate"
+      ],
+      "verificationExpectations": "Auditors will review the cleaning verification program including written procedures for rapid surface monitoring using ATP, allergen-specific protein tests, or general protein tests. Program should define testing locations, frequencies, acceptance criteria, and corrective action procedures. Records should demonstrate testing is performed routinely with investigations when results exceed limits.",
+      "monitoringExpectations": "Operations should implement the cleaning verification program consistently with testing performed at specified frequencies on food contact surfaces and environmental monitoring locations. Trends should be analyzed to identify areas with persistent problems requiring enhanced cleaning procedures or equipment modifications."
     },
     {
+      "id": "5.14.13",
       "code": "5.14.13",
+      "text": "Is there a documented glass and brittle plastic management procedure (including company glass and brittle plastic policy, glass breakage procedure and where necessary a glass register)?",
       "question": "Is there a documented glass and brittle plastic management procedure (including company glass and brittle plastic policy, glass breakage procedure and where necessary a glass register)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["glass management", "brittle plastic", "glass policy", "breakage procedure", "glass register", "foreign material control"],
+      "mandatoryStatements": [
+        "A documented glass and brittle plastic management procedure must be implemented",
+        "Procedure must include a facility policy on glass and brittle plastic, breakage response procedures, and a register where necessary",
+        "Glass breakage procedure must ensure contaminated products are identified and controlled"
+      ],
+      "verificationExpectations": "Auditors will review the glass and brittle plastic management procedure to confirm it includes a facility policy restricting glass and brittle plastic in production areas, a glass register or inventory where items must be present, breakage response procedures detailing containment and cleanup, and product hold/disposition protocols. Procedures should minimize glass and brittle plastic presence while ensuring effective control when breakage occurs.",
+      "monitoringExpectations": "Operations should maintain the glass register with regular verification that all items are accounted for and in acceptable condition. Glass breakage incidents should be investigated with documentation showing affected products were identified, held, inspected, and properly dispositioned based on contamination risk assessment."
     }
   ],
   "capaInject": [

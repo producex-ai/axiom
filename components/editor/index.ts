@@ -9,3 +9,5 @@ export { CommandPalette } from "./CommandPalette";
 export { MinimalTopBar } from "./MinimalTopBar";
 export { AuditDialog } from "./AuditDialog";
 export { SimplePublishDialog } from "./SimplePublishDialog";
+export { FindReplaceExtension } from "./extensions/FindReplaceExtension";
+export { FindReplaceDialog } from "./FindReplaceDialog";

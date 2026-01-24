@@ -12,28 +12,109 @@
   "description": "General requirements for Food Safety Plan including team formation, leadership assignment, training documentation, product descriptions, and process flow diagrams",
   "requirements": [
     {
+      "id": "7.01.01",
       "code": "7.01.01",
+      "text": "Is there a team responsible for the Food Safety Plan at the operation, with a leader assigned for the development, implementation and on-going maintenance of the Food Safety Plan?",
       "question": "Is there a team responsible for the Food Safety Plan at the operation, with a leader assigned for the development, implementation and on-going maintenance of the Food Safety Plan?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "Food Safety Plan team",
+        "team leader",
+        "PCQI",
+        "preventive controls",
+        "plan development",
+        "implementation",
+        "maintenance",
+        "food safety management"
+      ],
+      "mandatoryStatements": [
+        "A designated Food Safety Plan team must be established with clearly defined roles, responsibilities, and leadership structure",
+        "A qualified team leader must be appointed with authority and responsibility for plan development, implementation, and ongoing maintenance",
+        "The team must include or have access to a Preventive Controls Qualified Individual (PCQI) to oversee preventive controls aspects"
+      ],
+      "verificationExpectations": "Auditors will review organizational documentation to verify a formal Food Safety Plan team exists with designated members and a team leader. They will confirm the team leader has clear responsibility for developing, implementing, and maintaining the Food Safety Plan. Documentation showing team member appointments, roles, qualifications, and meeting minutes will be examined. The auditor will verify at least one team member is a Preventive Controls Qualified Individual (PCQI) with current certification. Interviews with the team leader will assess understanding of responsibilities including plan oversight, team coordination, regulatory compliance, and continuous improvement activities.",
+      "monitoringExpectations": "Management must maintain a current Food Safety Plan team roster identifying the team leader, PCQI, and all team members with their roles and contact information. The team leader must schedule and conduct regular team meetings to review plan effectiveness, discuss process changes, evaluate preventive control performance, and identify improvement opportunities. Meeting minutes must document discussions, decisions, and action items with follow-up tracking. The team leader must ensure team members have necessary training, resources, and authority to fulfill their responsibilities. When personnel changes occur, team composition must be updated with new members receiving orientation on their roles. The team leader must report to management on Food Safety Plan performance and resource needs."
     },
     {
+      "id": "7.01.02",
       "code": "7.01.02",
+      "text": "Is there documented evidence that the food safety team members have been trained on Food Safety Plan development?",
       "question": "Is there documented evidence that the food safety team members have been trained on Food Safety Plan development?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "team training",
+        "PCQI training",
+        "preventive controls training",
+        "plan development training",
+        "training documentation",
+        "competency verification",
+        "FSPCA training"
+      ],
+      "mandatoryStatements": [
+        "All Food Safety Plan team members must receive training appropriate to their roles in plan development and implementation",
+        "At least one team member must complete standardized PCQI training from an accredited curriculum covering all preventive controls requirements",
+        "Training records must document course completion, dates, training providers, and certificates for PCQI and team member training"
+      ],
+      "verificationExpectations": "Auditors will examine training records to verify all Food Safety Plan team members have received appropriate training on plan development. They will verify at least one team member has completed PCQI training from a standardized curriculum such as FSPCA (Food Safety Preventive Controls Alliance) or equivalent accredited program. PCQI certificates will be reviewed for validity, course content coverage, and expiration dates. Training documentation for other team members will be examined to ensure they received education appropriate to their specific roles. The auditor will verify training covered hazard analysis, preventive controls, monitoring, corrective actions, verification, and record-keeping. Team member interviews may assess training comprehension and application.",
+      "monitoringExpectations": "Human resources and food safety management must maintain comprehensive training files documenting all team member training related to Food Safety Plan development. The PCQI must maintain current certification with training certificates readily available. New team members must complete required training before assuming Food Safety Plan responsibilities. Refresher training should be provided when regulatory requirements change, new preventive controls are implemented, or emerging food safety issues are identified. The team leader must verify all members maintain current training and competencies appropriate to their roles. Continuing education opportunities should be provided to keep team members informed of evolving food safety science and regulatory expectations. Training effectiveness should be assessed through team performance in plan development and implementation activities."
     },
     {
+      "id": "7.01.03",
       "code": "7.01.03",
+      "text": "Does a product description exist for the products produced?",
       "question": "Does a product description exist for the products produced?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "product description",
+        "product specifications",
+        "formulation details",
+        "processing parameters",
+        "intended use",
+        "consumer information",
+        "allergen declaration"
+      ],
+      "mandatoryStatements": [
+        "Comprehensive product descriptions must document all products including ingredients, formulations, processing methods, and packaging specifications",
+        "Descriptions must include food safety critical parameters such as pH, water activity, preservatives, and storage requirements",
+        "Intended use and target consumers must be identified including special considerations for vulnerable populations"
+      ],
+      "verificationExpectations": "Auditors will review product description documents for completeness and accuracy. Descriptions must include detailed ingredient lists with potential allergens identified, formulation specifications, critical processing parameters (pH, water activity, thermal process, etc.), packaging materials and methods, storage and distribution conditions, shelf life, intended use, and target consumer groups. The auditor will verify descriptions contain information necessary for conducting hazard analysis and determining preventive controls. Product descriptions will be compared to actual labels, formulation records, and products being manufactured to ensure accuracy. Special attention will be given to identification of allergens, vulnerable populations, and food safety critical factors.",
+      "monitoringExpectations": "The Food Safety Plan team must develop and maintain current product descriptions for all manufactured products. When product formulations change, new ingredients are introduced, processing methods are modified, or packaging is altered, descriptions must be updated immediately. Product descriptions must be reviewed during hazard analysis to ensure all food safety relevant information is captured. Critical parameters such as pH and water activity must be verified through periodic testing to confirm description accuracy. When new products are developed, complete descriptions must be prepared before commercial production begins. Product descriptions must be version-controlled with effective dates and approval signatures. Management must ensure descriptions are accessible to team members responsible for hazard analysis and preventive control determination."
     },
     {
+      "id": "7.01.04",
       "code": "7.01.04",
+      "text": "Has the process(es) been flow diagrammed in sufficient detail to completely describe the process or product handling/processing steps?",
       "question": "Has the process(es) been flow diagrammed in sufficient detail to completely describe the process or product handling/processing steps?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "flow diagram",
+        "process flow chart",
+        "processing steps",
+        "handling procedures",
+        "sequential operations",
+        "process mapping",
+        "control point identification"
+      ],
+      "mandatoryStatements": [
+        "Detailed process flow diagrams must illustrate all steps from receiving raw materials through product distribution and storage",
+        "Diagrams must show all handling and processing steps, decision points, rework loops, and potential contamination pathways",
+        "Sufficient detail must be provided to identify where hazards may occur and where preventive controls should be applied"
+      ],
+      "verificationExpectations": "Auditors will examine process flow diagrams to verify they completely and accurately represent all product handling and processing operations. Diagrams must show sequential steps including receiving, storage, preparation, processing, cooling, packaging, finished product storage, and distribution. All inputs (ingredients, packaging materials, water, air) and process parameters (time, temperature, pressure) should be indicated. Decision points, rework or reprocessing loops, waste streams, and potential cross-contamination points must be identified. The auditor will verify diagrams provide sufficient detail to conduct comprehensive hazard analysis and identify where preventive controls are needed. Flow diagrams will be compared to actual operations during facility walk-through to ensure accuracy.",
+      "monitoringExpectations": "The Food Safety Plan team must create detailed process flow diagrams for all product lines showing complete operations from receiving through distribution. Diagrams must be maintained in current condition with updates made whenever process changes occur including new equipment installation, process sequence modifications, or facility layout changes. Flow diagrams should be used as working documents during hazard analysis to systematically identify where hazards may be introduced, increased, or controlled. The team must verify flow diagram accuracy through on-site walk-throughs during active production to observe actual product and personnel movement. When multiple products are manufactured, flow diagrams may be product-specific or cover product families with similar processing. Diagrams must be reviewed at least annually during Food Safety Plan reanalysis and updated as needed."
     }
   ],
   "capaInject": [

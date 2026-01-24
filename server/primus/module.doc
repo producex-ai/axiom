@@ -1,0 +1,731 @@
+Here are detailed Sections 1-7 for the Operational Practices SOP
+
+1. TITLE & DOCUMENT CONTROL
+
+OPERATIONAL PRACTICES
+
+Document Code: SOP-OPS-5.04
+
+Version: 1.0
+
+Effective Date: January 25, 2026
+
+Next Review Date: January 25, 2027
+
+Document Owner: Food Safety Manager
+
+Approved By: Gaurav Singh, Director of Quality Assurance
+
+Electronic Signature: [Gaurav Singh - Digital Signature]
+
+DISTRIBUTION LIST
+
+- Food Safety Manager (Master Copy Holder)
+
+- QA Manager
+
+- Production Manager
+
+- Warehouse Manager
+
+- Maintenance Manager
+
+- Sanitation Manager
+
+- Human Resources Manager
+
+- Operations Director
+
+- Plant Manager
+
+- Training Coordinator
+
+DOCUMENT CONTROL
+
+Master Copy Location: Food Safety Department Electronic Database
+
+Path: Q:\Food Safety\SOPs\Operational\SOP-OPS-5.04
+
+Controlled Copy Locations
+
+- Production Floor QA Office (Hard Copy #1)
+
+- Warehouse Manager's Office (Hard Copy #2)
+
+- Training Room (Hard Copy #3)
+
+REVISION HISTORY
+
+Version 1.0 - Initial Release - 2026-01-25
+
+CONTROLLED COPY STATEMENT
+
+This document is a controlled document. Unauthorized reproduction or distribution is prohibited. All controlled copies must be printed on blue paper and stamped with a red "Controlled Copy" watermark. Electronic copies are valid only when accessed from the approved document control system. Printed copies are valid for 24 hours from printing.
+
+2. PURPOSE / OBJECTIVE
+
+This Standard Operating Procedure (SOP) establishes comprehensive requirements for operational practices to ensure food safety compliance and meet Primus GFS certification requirements. The procedure addresses critical food safety risks associated with daily operational activities in food handling, processing, and storage environments.
+
+Food Safety Risk Management
+
+This SOP specifically addresses risks of cross-contamination, temperature abuse, personnel practices, and operational sanitation that could compromise product safety. It provides systematic controls to prevent, eliminate, or reduce these risks to acceptable levels through standardized operational practices.
+
+Primus GFS Compliance
+
+This document directly supports compliance with Primus GFS v4.0 Module 5 (Facility Operations) requirements, specifically sections 5.02 through 5.12. It establishes verifiable controls for operational prerequisites and creates documented evidence of compliance for third-party audits.
+
+Regulatory Alignment
+
+The procedures outlined align with FDA Current Good Manufacturing Practices (21 CFR 117), FSMA Preventive Controls requirements, and applicable state/local regulations. It provides a framework for demonstrating due diligence in food safety management during routine operations.
+
+Expected Outcomes
+
+- Consistent implementation of operational food safety practices
+
+- Prevention of product contamination during handling and processing
+
+- Maintained compliance with regulatory and certification requirements
+
+- Clear documentation of operational controls
+
+- Verifiable evidence for internal/external audits
+
+- Reduced food safety incidents and non-conformances
+
+3. SCOPE
+
+Facility Coverage
+
+This SOP applies to all operational areas within the facility including
+
+- Receiving docks and staging areas
+
+- Raw material storage (ambient, refrigerated, frozen)
+
+- Processing areas and production lines
+
+- Packaging material storage
+
+- Finished product storage
+
+- Shipping docks
+
+- Support areas (maintenance shops, chemical storage)
+
+- Quality control laboratory
+
+- Waste collection/storage areas
+
+Personnel Coverage
+
+This procedure applies to all personnel who work in or enter production and storage areas
+
+- Production operators and line workers
+
+- Quality assurance staff
+
+- Maintenance technicians
+
+- Sanitation workers
+
+- Warehouse personnel
+
+- Management and supervisors
+
+- Visitors and contractors
+
+- Third-party service providers
+
+- Temporary workers
+
+- Training personnel
+
+Products/Materials
+
+Covers all raw materials, work-in-progress, finished products, packaging materials, and processing aids handled within the facility.
+
+Exclusions
+
+- Office areas not directly connected to production
+
+- Employee break rooms and cafeteria
+
+- External grounds maintenance
+
+- Non-food contact maintenance activities
+
+- Administrative procedures
+
+Related Procedures
+
+This SOP interfaces with
+
+- Personnel Hygiene SOP
+
+- Sanitation Standard Operating Procedures
+
+- Environmental Monitoring Program
+
+- Allergen Control Program
+
+- Preventive Maintenance Program
+
+4. DEFINITIONS & ABBREVIATIONS
+
+GMP (Good Manufacturing Practices): FDA-mandated requirements for ensuring proper design, monitoring, and control of manufacturing processes and facilities. Includes personnel practices, facility maintenance, and operational controls.
+
+HACCP (Hazard Analysis Critical Control Point): A systematic preventive approach to food safety that identifies, evaluates, and controls biological, chemical, and physical hazards.
+
+CCP (Critical Control Point): A step in the process where control can be applied and is essential to prevent, eliminate, or reduce a food safety hazard to an acceptable level.
+
+SSOP (Sanitation Standard Operating Procedure): Written procedures that establish the methods, frequency, and responsibility for cleaning and sanitizing food contact surfaces and production environments.
+
+CAPA (Corrective Action/Preventive Action): Systematic process for addressing non-conformances, including immediate corrections and long-term preventive measures.
+
+Operational Zone: Designated area within the facility with specific hygiene and operational requirements based on product exposure risk.
+
+Cross-contamination: Transfer of harmful substances or disease-causing microorganisms from one surface/product to another through direct or indirect contact.
+
+Monitoring: Planned sequence of observations or measurements to assess whether control measures are operating as intended.
+
+Verification: Application of methods, procedures, tests, or evaluations to determine compliance with specified requirements.
+
+Validation: Obtaining evidence that a control measure or combination of control measures is capable of effectively controlling the identified hazard.
+
+Non-conformance: Deviation from specified requirements that requires correction and investigation.
+
+Prerequisite Program: Basic operational and environmental conditions required for safe food production.
+
+Critical Limit: Maximum or minimum value to which a biological, chemical, or physical parameter must be controlled to prevent, eliminate, or reduce to an acceptable level the occurrence of a food safety hazard.
+
+Traceability: Ability to follow the movement of food through specified stages of production, processing, and distribution.
+
+Food Contact Surface: Surfaces that directly contact food or surfaces from which drainage or droplets may contaminate food or surfaces that contact food.
+
+5. ROLES & RESPONSIBILITIES
+
+Food Safety Manager
+
+- Overall responsibility for SOP implementation and maintenance
+
+- Conducts monthly verification of operational practices compliance
+
+- Reviews monitoring records weekly
+
+- Leads annual SOP review and updates
+
+- Coordinates with third-party auditors
+
+- Provides technical support for operational issues
+
+QA Manager
+
+- Daily oversight of operational practices implementation
+
+- Reviews daily monitoring records
+
+- Investigates non-conformances
+
+- Validates corrective actions
+
+- Maintains documentation and records
+
+- Conducts internal audits quarterly
+
+Production Manager
+
+- Ensures compliance during production activities
+
+- Coordinates with maintenance for equipment issues
+
+- Manages production schedules to maintain food safety
+
+- Provides resources for implementation
+
+- Reports non-conformances to QA
+
+Production Supervisors
+
+- Direct oversight of operational practices
+
+- Conducts hourly monitoring of compliance
+
+- Initiates corrective actions
+
+- Maintains shift records
+
+- Documents deviations
+
+QA Technicians
+
+- Performs scheduled monitoring activities
+
+- Documents observations and measurements
+
+- Collects samples for testing
+
+- Reports non-conformances
+
+- Verifies corrective actions
+
+Operators/Line Workers
+
+- Follows operational practices consistently
+
+- Reports deviations to supervisors
+
+- Maintains cleanliness of work areas
+
+- Completes required documentation
+
+- Participates in training
+
+Maintenance Staff
+
+- Maintains equipment per food safety requirements
+
+- Documents maintenance activities
+
+- Reports potential food safety issues
+
+- Follows hygiene requirements during repairs
+
+6. PREREQUISITES & REFERENCE DOCUMENTS
+
+Primus GFS v4.0 Standard
+
+- Module 5: Facility Operations
+
+- Section 5.02: Operational Practices
+
+Document #: PGFS-R-064
+
+Company Food Safety Manual
+
+Document #: FSM-001
+
+Establishes overall food safety management system framework
+
+HACCP Plan
+
+Document #: HACCP-001
+
+Identifies critical control points and operational prerequisites
+
+Sanitation SOPs
+
+Document #: SAN-001
+
+Details cleaning and sanitization procedures
+
+Personnel Hygiene SOP
+
+Document #: HYG-001
+
+Specifies personal hygiene requirements
+
+Pest Control SOP
+
+Document #: PCT-001
+
+Outlines integrated pest management program
+
+Allergen Control Plan
+
+Document #: ALL-001
+
+Defines allergen handling and control measures
+
+Traceability Procedures
+
+Document #: TRC-001
+
+Establishes product tracking requirements
+
+Chemical Control Procedures
+
+Document #: CHM-001
+
+Specifies chemical handling and storage requirements
+
+Training Program
+
+Document #: TRN-001
+
+Defines operational training requirements
+
+Environmental Monitoring Program
+
+Document #: EMP-001
+
+Details environmental testing procedures
+
+Preventive Maintenance Program
+
+Document #: MNT-001
+
+Schedules equipment maintenance activities
+
+Master Cleaning Schedule
+
+Document #: CLN-001
+
+Defines cleaning frequencies and responsibilities
+
+7. HAZARD / RISK ANALYSIS
+
+Biological Hazards
+
+Pathogenic Bacteria
+
+- Listeria monocytogenes: Environmental contamination risk
+
+- Salmonella spp.: Raw material contamination risk
+
+- E. coli O157:H7: Cross-contamination risk
+
+- Clostridium botulinum: Temperature abuse risk
+
+Control Measures
+
+- Temperature control monitoring
+
+- Environmental monitoring program
+
+- Sanitation procedures
+
+- Employee hygiene practices
+
+Chemical Hazards
+
+Contamination Sources
+
+- Cleaning chemicals
+
+- Maintenance compounds
+
+- Process chemicals
+
+- Allergen cross-contact
+
+Prevention Measures
+
+- Chemical control procedures
+
+- Proper storage and labeling
+
+- Allergen separation
+
+- Validated cleaning procedures
+
+Physical Hazards
+
+Foreign Material Risks
+
+- Metal fragments from equipment
+
+- Glass from facility/equipment
+
+- Hard plastic from packaging/tools
+
+- Personal items from employees
+
+Control Measures
+
+- Metal detection
+
+- Glass control policy
+
+- Regular equipment inspection
+
+- Personal items policy
+
+Risk Assessment
+
+Likelihood Ratings
+
+High: Without controls, likely to occur monthly
+
+Medium: May occur 1-2 times annually
+
+Low: Unlikely to occur annually
+
+Severity Ratings
+
+Critical: Life-threatening or severe injury
+
+Major: Serious illness or injury
+
+Minor: Minor illness or injury
+
+Control Measure Effectiveness
+
+- Preventive measures: 90-99% effective
+
+- Detective measures: 95-99% effective
+
+- Verification activities: 99% confidence level
+
+Monitoring Requirements
+
+- Daily operational inspections
+
+- Hourly process checks
+
+- Weekly verification activities
+
+- Monthly validation reviews
+
+8. PROCEDURES
+
+I'll start generating the detailed SOP procedures for Section 8 Part A. Here are the first few requirements:
+
+5.04.01 - Product Flow and Segregation Controls
+
+Requirement Description:
+
+Primus GFS requires facilities to maintain proper product flow to prevent cross-contamination. Product handling areas must be designed and operated to ensure separation between raw and finished products, with clear segregation protocols in place.
+
+Implementation Procedure:
+
+The facility maintains strict product flow controls through physical barriers and operational procedures. Production areas are divided into zones (raw material, processing, and finished product) with designated pathways marked by yellow floor lines. Staff must follow one-way traffic patterns and use separate equipment for raw and finished product areas. Required materials include zone signage, color-coded equipment, and physical barriers where needed.
+
+The Production Supervisor conducts flow pattern monitoring every 2 hours during operational shifts. Inspections occur facility-wide with focus on transition points between zones. The supervisor spends approximately 15 minutes per inspection round, documenting observations and any corrective actions needed. Additional checks occur during shift changes and when production lines are modified.
+
+All observations are recorded on Form OPS-101 (Product Flow Monitoring Log). Required data points include: time of inspection, zones checked, employee compliance with flow patterns, equipment placement verification, and any violations observed. Records are maintained in the QA office for 2 years and reviewed weekly by the QA Manager.
+
+Monitoring criteria includes: 100% compliance with designated flow patterns, zero instances of cross-zone equipment usage, and proper maintenance of physical barriers. Verification occurs through direct observation, review of security camera footage, and monthly facility flow audits. Any deviation requires immediate correction and documentation.
+
+Corrective Actions:
+
+- Immediate stop of affected operations if cross-contamination risk identified
+
+- Incident documentation on Form CAPA-101
+
+- Root cause analysis within 24 hours
+
+- Staff retraining as needed
+
+- Follow-up audit within 48 hours
+
+5.04.02 - Hand Washing Facilities and Procedures
+
+Requirement Description:
+
+Adequate hand washing facilities must be provided and properly maintained. Facilities must be easily accessible with appropriate supplies and clear instructions for proper hand washing procedures.
+
+Implementation Procedure:
+
+Hand washing stations are equipped with hot and cold running water, liquid soap dispensers, paper towels, and hands-free waste containers. Each station displays bilingual hand washing instructions with pictorials. Required supplies include: antibacterial soap, paper towels, sanitizer (minimum 60% alcohol), and maintenance supplies. Stations include hands-free faucets and foot-operated doors where possible.
+
+The Sanitation Lead inspects all hand washing stations three times daily (pre-shift, mid-shift, and end-of-shift) at all facility entry points and within production areas. Each inspection takes approximately 10 minutes per station. Temperature checks of water supply must be conducted (minimum 100°F required), and supply levels monitored.
+
+Documentation occurs on Form SAN-102 (Hand Wash Station Monitoring Log). Required recording includes: inspection time, water temperature, supply levels, cleanliness status, and any maintenance needs. Records are maintained electronically in the Sanitation Department database and reviewed daily by the Sanitation Manager.
+
+Acceptance criteria includes: water temperature 100-120°F, fully stocked supplies, functional equipment, and clean/sanitary conditions. Verification through visual inspection, temperature monitoring, and weekly ATP testing of surfaces. Compliance must be ≥98% at all times.
+
+Corrective Actions:
+
+- Immediate restocking of supplies if depleted
+
+- Equipment repair within 2 hours if malfunction detected
+
+- Documentation on Form CAPA-102
+
+- Investigation of repeated issues
+
+- Weekly verification of corrective actions
+
+I'll start generating detailed procedures for Section 8 Part B. Here are the first few requirements:
+
+5.04.10 - Protection of Exposed Product During Storage and Transportation
+
+Requirement Description:
+
+All exposed product must be protected during storage and transportation to prevent contamination. Products must be covered, protected from condensation, and stored off the floor to prevent contact with moisture or contaminants.
+
+Implementation Procedure:
+
+Step-by-step procedures include inspecting all storage areas daily for proper product protection, ensuring products are covered with food-grade materials, maintaining proper storage heights (minimum 6 inches off floor), and verifying protection from overhead condensation. Required materials include plastic pallet covers, food-grade tarps, dunnage, pallets, and moisture-resistant coverings.
+
+The Warehouse Supervisor conducts inspections twice daily (6:00 AM and 2:00 PM) in all storage areas and loading docks. Additional checks occur during product movement or staging. Each inspection should take approximately 15 minutes per area. The supervisor must verify proper coverage, height requirements, and absence of condensation risks.
+
+Documentation is recorded on Form WH-201 (Product Protection Checklist). Records must include date, time, inspector name, areas checked, conditions observed, and any corrective actions taken. Forms are maintained in the QA office for minimum 2 years. The QA Manager reviews records weekly and conducts monthly verification audits.
+
+Monitoring criteria includes: 100% product coverage when required, minimum 6-inch floor clearance, zero evidence of water/condensation contact, intact protective materials. Visual inspections verify compliance. Temperature and humidity monitoring in storage areas ensures conditions don't promote condensation.
+
+Corrective Actions:
+
+- Immediately cover exposed product
+
+- Move product to compliant storage location
+
+- Inspect product for damage/contamination
+
+- Document incident on Form CAPA-110
+
+- Investigate root cause
+
+- Retrain staff if procedural gaps identified
+
+- Follow-up inspection within 24 hours
+
+5.04.11 - Cleaning Equipment Storage
+
+Requirement Description:
+
+All cleaning equipment must be stored in designated areas separate from production and storage areas. Equipment must be organized, maintained clean, and stored in a manner that prevents contamination.
+
+Implementation Procedure:
+
+Cleaning equipment storage requires dedicated rooms or areas with proper ventilation, drainage, and organization systems. Equipment includes color-coded tools, cleaning chemicals, brushes, mops, buckets, and PPE. Storage areas must have appropriate shelving, hooks, and containment systems. All items must be labeled and stored off the floor.
+
+The Sanitation Supervisor inspects storage areas daily at start of shift (5:00 AM) and end of shift (6:00 PM). Weekly deep cleaning occurs every Sunday. Storage areas are locked with restricted access. Each inspection includes checking organization, cleanliness, proper storage, and inventory of supplies.
+
+Form SAN-301 (Cleaning Equipment Storage Log) documents daily inspections. Required information includes equipment condition, chemical inventory, storage compliance, cleanliness rating, and inspector verification. Records maintained in Sanitation office for 2 years. Monthly audits by QA Manager verify compliance.
+
+Storage requirements include: All equipment clean and dry before storage, chemicals in secondary containment, proper separation of tools by zone/area, no signs of pest activity, proper ventilation maintained. Weekly ATP testing of cleaned equipment, monthly environmental monitoring of storage areas.
+
+Corrective Actions:
+
+- Remove/clean any soiled equipment
+
+- Reorganize storage area
+
+- Document non-compliance on Form CAPA-111
+
+- Review sanitation procedures
+
+- Conduct staff retraining
+
+- Follow-up inspection required within 12 hours
+
+I'll help generate detailed Sections 9-15 for your Primus GFS SOP. Let's start with Section 9
+
+9. MONITORING PLAN
+
+Daily Monitoring Activities
+
+1. Temperature Monitoring
+
+- Production Supervisor conducts hourly checks using Form TEMP-101
+
+- Critical limits: Processing areas 35-40°F (±2°F)
+
+- Storage areas 34-38°F (±2°F)
+
+- Calibrated thermometers required (CAL-series equipment)
+
+- Immediate notification to QA if outside limits
+
+- Electronic logging system with time stamps
+
+2. Visual Inspections
+
+- Pre-op inspection by Supervisor (Form VIS-201)
+
+- Hourly GMP compliance checks (Form GMP-101)
+
+- End-of-shift facility inspection (Form FAC-301)
+
+- Product handling practices verification
+
+- Equipment condition assessment
+
+- Areas: Processing, packaging, storage, shipping/receiving
+
+3. Equipment Condition
+
+- Pre-startup checks by operators (Form EQP-101)
+
+- Preventive maintenance verification
+
+- Sanitation effectiveness verification
+
+- Critical control point monitoring
+
+- Equipment calibration checks
+
+4. Hygiene Compliance
+
+- Handwashing station monitoring (hourly)
+
+- PPE compliance checks (every 2 hours)
+
+- Employee practices observation
+
+- Visitor compliance verification
+
+- Documentation on Form HYG-201
+
+Weekly Monitoring Activities
+
+1. Sanitation Verification
+
+- ATP testing of 10 random points
+
+- Environmental sampling per program
+
+- Visual inspection with UV light
+
+- Allergen control verification
+
+- Documentation on Form SAN-301
+
+2. Calibration Program
+
+- Temperature devices verification
+
+- Scale certification checks
+
+- pH meter calibration
+
+- Metal detector validation
+
+- Documentation on Form CAL-201
+
+Monthly Monitoring Activities
+
+1. Internal Audits
+
+- GMP audit (Form GMP-301)
+
+- Documentation review
+
+- Employee interviews
+
+- Corrective action review
+
+- Trend analysis presentation
+
+2. Environmental Monitoring
+
+- Pathogen testing (Form ENV-101)
+
+- Air quality assessment
+
+- Water testing verification
+
+- Pest control program review
+
+Quarterly Monitoring
+
+1. Comprehensive Facility Audits
+
+- Third-party assessment
+
+- Regulatory compliance review
+
+- Program effectiveness evaluation
+
+- Management system review
+
+2. Management Review
+
+- Key performance indicators
+
+- Corrective action effectiveness
+
+- Program improvements
+
+- Resource allocation review

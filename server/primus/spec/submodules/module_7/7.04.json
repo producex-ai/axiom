@@ -12,10 +12,31 @@
   "description": "Requirements for periodic re-analysis of the Food Safety Plan including triennial review schedule, change management triggers, and documentation of re-analysis activities",
   "requirements": [
     {
+      "id": "7.04.01",
       "code": "7.04.01",
+      "text": "Is there documented evidence that there is a re-analysis of the Food Safety Plan at least once every 3 years and when significant changes are made?",
       "question": "Is there documented evidence that there is a re-analysis of the Food Safety Plan at least once every 3 years and when significant changes are made?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "triennial reanalysis",
+        "Food Safety Plan review",
+        "periodic reassessment",
+        "change management",
+        "plan update",
+        "continuous improvement",
+        "regulatory compliance",
+        "system evaluation"
+      ],
+      "mandatoryStatements": [
+        "The complete Food Safety Plan must be reanalyzed at least once every three years to ensure continued adequacy and effectiveness",
+        "Reanalysis must be conducted whenever significant changes occur including new products, process modifications, new hazards, or regulatory changes",
+        "Reanalysis must be performed by or overseen by the PCQI with comprehensive evaluation of all plan elements and documentation of findings"
+      ],
+      "verificationExpectations": "Auditors will examine reanalysis documentation to verify comprehensive Food Safety Plan reviews are conducted at least every three years. Records must show reanalysis dates, PCQI involvement, scope of review, findings, and any modifications made to the plan. The auditor will verify reanalysis occurred following significant changes such as new product introductions, process modifications, equipment changes, facility expansions, new scientific information about hazards, changes in intended use or consumer populations, or new regulations. Reanalysis documentation should demonstrate systematic evaluation of hazard analysis, preventive controls, monitoring procedures, corrective actions, verification activities, and record-keeping. The auditor will verify reanalysis was conducted by or under oversight of a PCQI with signatures confirming their involvement. Any plan modifications resulting from reanalysis should be documented with implementation dates and training records for affected personnel.",
+      "monitoringExpectations": "Management must establish a schedule tracking triennial reanalysis due dates to ensure reviews are completed on time without lapses exceeding three years. The PCQI must lead or oversee all reanalysis activities with documented involvement. Reanalysis must be comprehensive covering all Food Safety Plan elements: hazard analysis for all products, preventive control adequacy, critical limits and parameters, monitoring procedures and frequencies, corrective action procedures, verification activities, supply chain program, recall plan, and record-keeping systems. When significant changes occur, change management procedures must trigger reanalysis requirements before changes are implemented. The PCQI must evaluate whether changes introduce new hazards, affect existing preventive controls, or require plan modifications. Reanalysis findings must be documented in detail showing what was reviewed, issues identified, decisions made, and plan modifications required. When plan modifications are made, affected documentation must be updated, personnel retrained as needed, and changes verified for effectiveness. Reanalysis provides an opportunity for continuous improvement by incorporating lessons learned, new technologies, improved procedures, and enhanced controls. Management must ensure adequate resources and time are allocated for thorough reanalysis."
     }
   ],
   "capaInject": [

@@ -11,34 +11,59 @@
   "description": "Equipment requirements including food-contact surface standards, equipment cleanliness, proper construction and maintenance, calibration of measuring devices, and prevention of contamination from equipment",
   "requirements": [
     {
+      "id": "5.06.01",
       "code": "5.06.01",
-      "question": "Are food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "keywords": ["food contact surfaces", "equipment condition", "flaking paint", "corrosion", "rust", "unhygienic repairs"],
+      "mandatoryStatements": ["Food contact equipment surfaces must be free of flaking paint, corrosion, and rust", "Unhygienic repair materials such as tape, string, or cardboard are prohibited", "Regular inspections must detect surface deterioration", "Damaged surfaces must be repaired with food-grade materials", "Equipment must be removed from service until properly repaired"],
+      "verificationExpectations": "Monthly food contact surface condition inspections, quarterly preventive maintenance assessments",
+      "monitoringExpectations": "Daily pre-operational equipment inspections, immediate removal from service if deterioration detected"
     },
     {
+      "id": "5.06.02",
       "code": "5.06.02",
-      "question": "Are non-food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are non-food contact equipment surfaces free of flaking paint, corrosion, rust and other unhygienic materials (e.g., tape, string, cardboard, etc.)?",
+      "keywords": ["non-food contact surfaces", "equipment maintenance", "structural integrity", "preventive maintenance"],
+      "mandatoryStatements": ["Non-food contact equipment surfaces must be maintained free of flaking paint, corrosion, and rust", "Unhygienic repairs on non-food contact surfaces must be corrected", "Maintenance must prevent contamination transfer to food contact areas", "Regular inspections must include non-food contact surfaces", "Repairs must use appropriate permanent materials"],
+      "verificationExpectations": "Quarterly non-food contact surface inspections, annual comprehensive equipment condition assessment",
+      "monitoringExpectations": "Monthly visual inspections, immediate repair of deteriorating surfaces"
     },
     {
+      "id": "5.06.03",
       "code": "5.06.03",
-      "question": "Does food contact equipment design, placement, and condition (e.g., smooth surfaces, smooth weld seams, non-toxic materials, corrosion-resistant, non-porous, non-absorbent) facilitate effective cleaning and maintenance?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Does food contact equipment design, placement, and condition (e.g., smooth surfaces, smooth weld seams, non-toxic materials, corrosion-resistant, non-porous, non-absorbent) facilitate effective cleaning and maintenance?",
+      "keywords": ["sanitary design", "equipment design", "cleanability", "smooth surfaces", "non-porous materials", "sanitary construction"],
+      "mandatoryStatements": ["Food contact equipment must be designed with smooth, non-porous, non-absorbent surfaces", "Weld seams must be smooth and polished", "Equipment must be constructed of non-toxic, corrosion-resistant materials", "Design must facilitate effective cleaning and maintenance", "Equipment placement must allow access for cleaning", "Sanitary design principles must be evaluated for new equipment purchases"],
+      "verificationExpectations": "Annual equipment design and cleanability assessment, evaluation of new equipment against sanitary design criteria",
+      "monitoringExpectations": "Cleaning effectiveness verification through ATP testing or environmental monitoring, immediate design modifications if cleaning proves inadequate"
     },
     {
+      "id": "5.06.04",
       "code": "5.06.04",
-      "question": "Are thermometers (independent of thermostat probes) present in all coolers and freezers?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are thermometers (independent of thermostat probes) present in all coolers and freezers?",
+      "keywords": ["thermometers", "temperature monitoring", "independent thermometers", "coolers", "freezers", "temperature verification"],
+      "mandatoryStatements": ["Independent thermometers separate from thermostat controls must be in all coolers and freezers", "Thermometers must be calibrated and accurate", "Thermometers must be positioned in warmest spots for representative readings", "Thermometers must be easily readable without opening doors", "Temperature monitoring logs must be maintained"],
+      "verificationExpectations": "Quarterly thermometer calibration verification, annual review of thermometer placement adequacy",
+      "monitoringExpectations": "Daily temperature readings from independent thermometers, immediate response to out-of-range temperatures"
     },
     {
+      "id": "5.06.05",
       "code": "5.06.05",
-      "question": "Are all thermometers non-glass and non-mercury?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are all thermometers non-glass and non-mercury?",
+      "keywords": ["thermometer type", "glass prohibition", "mercury prohibition", "physical hazard prevention", "chemical hazard prevention"],
+      "mandatoryStatements": ["All thermometers must be non-glass and non-mercury types", "Digital or spirit-filled (alcohol-based) thermometers required", "Glass and mercury thermometers must be removed from facility", "Purchasing specifications must prohibit glass and mercury thermometers", "Regular audits must verify no prohibited thermometers present"],
+      "verificationExpectations": "Annual facility audit for glass and mercury thermometers, verification during equipment purchases",
+      "monitoringExpectations": "Immediate removal and replacement if glass or mercury thermometers discovered"
     }
   ],
   "mandatoryStatements": [

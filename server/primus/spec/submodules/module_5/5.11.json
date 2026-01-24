@@ -12,22 +12,58 @@
   "description": "Documentation requirements for chemical management including Safety Data Sheets (SDS), specimen labels, chemical inventory, and accessibility of chemical information",
   "requirements": [
     {
+      "id": "5.11.01",
       "code": "5.11.01",
+      "text": "Are there current Safety Data Sheets (SDS), and copies of specimen labels for chemicals used, where the full label is not immediately accessible (e.g., rodent chemicals, product sanitizers)?",
       "question": "Are there current Safety Data Sheets (SDS), and copies of specimen labels for chemicals used, where the full label is not immediately accessible (e.g., rodent chemicals, product sanitizers)?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["SDS", "safety data sheets", "specimen labels", "chemical documentation", "rodent chemicals", "product sanitizers", "chemical accessibility"],
+      "mandatoryStatements": [
+        "Current Safety Data Sheets must be maintained for all chemicals used in the facility",
+        "Specimen labels must be available for chemicals where full labels are not immediately accessible",
+        "SDS and labels must be current and readily accessible to workers using the chemicals"
+      ],
+      "verificationExpectations": "Auditors will verify current SDS are on file for all chemicals including rodenticides, product sanitizers, and other chemicals where full labels may not be immediately accessible at point of use. Specimen labels or label copies should be available to provide critical safety and use information when original containers are not present.",
+      "monitoringExpectations": "Operations should maintain SDS files that are reviewed and updated when new chemicals are introduced or formulations change. Specimen labels should be kept for reference when chemicals are transferred to secondary containers or used in applications where original packaging is not accessible."
     },
     {
+      "id": "5.11.02",
       "code": "5.11.02",
+      "text": "Are there chemical inventory logs for chemicals, including pesticides, fertilizers and cleaning and sanitizing chemicals?",
       "question": "Are there chemical inventory logs for chemicals, including pesticides, fertilizers and cleaning and sanitizing chemicals?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["chemical inventory", "inventory logs", "pesticides", "fertilizers", "cleaning chemicals", "sanitizing chemicals", "chemical tracking"],
+      "mandatoryStatements": [
+        "Chemical inventory logs must be maintained for all pesticides, fertilizers, cleaning and sanitizing chemicals",
+        "Logs must document receipt, storage locations, usage, and disposal of chemicals",
+        "Inventory system must enable tracking of all chemicals from receipt to final use or disposal"
+      ],
+      "verificationExpectations": "Auditors will review chemical inventory logs to confirm they document all pesticides, fertilizers, cleaning chemicals, and sanitizing chemicals used in the operation. Logs should show quantities received, storage locations, usage records, and remaining inventory with sufficient detail to enable traceability and control.",
+      "monitoringExpectations": "Operations should maintain chemical inventory logs that are updated when chemicals are received or used. Regular inventory reconciliation should be performed to verify physical inventory matches records and identify any discrepancies requiring investigation or corrective action."
     },
     {
+      "id": "5.11.03",
       "code": "5.11.03",
+      "text": "Are there specific Standard Operating Procedures (SOPs) for the monitoring of anti-microbial parameters in single pass and/or recirculated/batch water systems, changing of recirculated/batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.) and for monitoring pH and water temperature (if applicable)?",
       "question": "Are there specific Standard Operating Procedures (SOPs) for the monitoring of anti-microbial parameters in single pass and/or recirculated/batch water systems, changing of recirculated/batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.) and for monitoring pH and water temperature (if applicable)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["SOPs", "antimicrobial monitoring", "water systems", "recirculated water", "batch water", "dump tanks", "flumes", "pH monitoring", "water temperature"],
+      "mandatoryStatements": [
+        "Written SOPs must exist for monitoring antimicrobial parameters in all water treatment systems",
+        "Procedures must specify monitoring frequencies, target levels, and corrective actions for single pass and recirculated systems",
+        "SOPs must address water change-out frequencies for recirculated/batch systems and monitoring of pH and temperature"
+      ],
+      "verificationExpectations": "Auditors will review SOPs for antimicrobial monitoring in water systems including single pass and recirculated/batch systems such as dump tanks, flumes, hydro vacuums, and hydro coolers. Procedures should specify target antimicrobial levels, testing frequencies, pH and temperature monitoring where applicable, water change-out frequencies, and corrective actions when parameters are out of specification.",
+      "monitoringExpectations": "Operations should implement the SOPs with documentation showing antimicrobial concentrations, pH, and temperature are monitored at specified frequencies. Water change-out schedules for recirculated systems should be followed with records confirming compliance and corrective actions when monitoring reveals out-of-specification conditions."
     }
   ],
   "capaInject": [

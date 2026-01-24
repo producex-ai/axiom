@@ -11,67 +11,234 @@
   "description": "Comprehensive pest control requirements including pest-free products and packaging, facility pest management, monitoring devices, exclusion measures, and professional pest control program documentation",
   "requirements": [
     {
+      "id": "5.02.01",
       "code": "5.02.01",
-      "question": "Are products or ingredients free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
-      "totalPoints": 15,
+      "required": true,
+      "points": 15,
+      "text": "Are products or ingredients free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
       "isAutomaticFailure": true,
-      "automaticFailureReason": "Presence of pests or pest evidence in products or ingredients represents an immediate and critical food safety hazard that can result in contamination with pathogens, allergens, filth, or toxins. This poses unacceptable public health risks and violates fundamental food safety requirements."
+      "automaticFailureReason": "Presence of pests or pest evidence in products or ingredients represents an immediate and critical food safety hazard that can result in contamination with pathogens, allergens, filth, or toxins. This poses unacceptable public health risks and violates fundamental food safety requirements.",
+      "keywords": [
+        "pests",
+        "pest evidence",
+        "insects",
+        "rodents",
+        "birds",
+        "product contamination",
+        "automatic failure"
+      ],
+      "mandatoryStatements": [
+        "All products and ingredients must be completely free of pests including insects, rodents, birds, reptiles, and mammals",
+        "Products must be free of any evidence of pest activity including droppings, gnaw marks, or nesting materials",
+        "Any pest presence in products results in automatic audit failure",
+        "Immediate quarantine and investigation required for any pest detection in products"
+      ],
+      "verificationExpectations": "Daily visual inspection of all products and ingredients for pest presence or evidence, immediate response to any findings",
+      "monitoringExpectations": "Continuous monitoring during production, receiving inspection for pest evidence, immediate halt of operations if pests detected in products"
     },
     {
+      "id": "5.02.02",
       "code": "5.02.02",
-      "question": "Are packaging supplies free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
-      "totalPoints": 15,
+      "required": true,
+      "points": 15,
+      "text": "Are packaging supplies free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
       "isAutomaticFailure": true,
-      "automaticFailureReason": "Pest contamination of packaging materials can directly transfer to food products during packaging operations. This represents a critical breakdown in food safety controls and creates unacceptable contamination risks throughout the production chain."
+      "automaticFailureReason": "Pest contamination of packaging materials can directly transfer to food products during packaging operations. This represents a critical breakdown in food safety controls and creates unacceptable contamination risks throughout the production chain.",
+      "keywords": [
+        "packaging",
+        "packaging supplies",
+        "pests",
+        "pest evidence",
+        "contamination",
+        "automatic failure"
+      ],
+      "mandatoryStatements": [
+        "All packaging supplies must be completely free of pests and pest evidence",
+        "Packaging storage areas must prevent pest access and contamination",
+        "Any pest contamination of packaging results in automatic audit failure",
+        "Packaging must be inspected before use for pest evidence"
+      ],
+      "verificationExpectations": "Daily inspection of packaging storage areas and supplies for pest activity, immediate quarantine of contaminated materials",
+      "monitoringExpectations": "Visual inspection of packaging materials before use, continuous monitoring of packaging storage conditions"
     },
     {
+      "id": "5.02.03",
       "code": "5.02.03",
-      "question": "Are plant and storage areas free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are plant and storage areas free of pests (e.g., insects, rodents, birds, reptiles, mammals) or any evidence of them?",
+      "keywords": [
+        "plant areas",
+        "storage areas",
+        "pest-free",
+        "pest evidence",
+        "facility cleanliness"
+      ],
+      "mandatoryStatements": [
+        "Plant and storage areas must be maintained free of pests and pest evidence",
+        "Regular inspections must be conducted to detect pest presence",
+        "Evidence of pest activity must be addressed immediately with corrective actions",
+        "Sanitation practices must support pest-free environment"
+      ],
+      "verificationExpectations": "Weekly comprehensive facility inspection for pest presence or evidence, monthly third-party pest control service verification",
+      "monitoringExpectations": "Daily visual monitoring during operations, immediate response to any pest sightings or evidence"
     },
     {
+      "id": "5.02.04",
       "code": "5.02.04",
-      "question": "Is the area outside the facility free of evidence of pest activity?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is the area outside the facility free of evidence of pest activity?",
+      "keywords": [
+        "exterior areas",
+        "outside facility",
+        "pest activity",
+        "pest harborage",
+        "grounds maintenance"
+      ],
+      "mandatoryStatements": [
+        "Exterior areas must be maintained to minimize pest harborage and activity",
+        "Evidence of pest activity outside must be monitored and controlled",
+        "Exterior pest control measures must prevent pest entry to facility",
+        "Vegetation, debris, and conditions supporting pest activity must be managed"
+      ],
+      "verificationExpectations": "Monthly exterior grounds inspection for pest harborage conditions and activity evidence",
+      "monitoringExpectations": "Weekly visual monitoring of exterior perimeter, immediate action for pest activity near facility"
     },
     {
+      "id": "5.02.05",
       "code": "5.02.05",
-      "question": "Is there an effective pest control program in place? A ZERO (NON-CONFORMANCE) SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
-      "totalPoints": 15,
+      "required": true,
+      "points": 15,
+      "text": "Is there an effective pest control program in place? A ZERO (NON-CONFORMANCE) SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
       "isAutomaticFailure": true,
-      "automaticFailureReason": "The complete absence of an effective pest control program represents a fundamental failure to implement preventive food safety controls. Without a documented pest control system, the facility cannot demonstrate adequate protection of food products from pest contamination and associated microbiological hazards."
+      "automaticFailureReason": "The complete absence of an effective pest control program represents a fundamental failure to implement preventive food safety controls. Without a documented pest control system, the facility cannot demonstrate adequate protection of food products from pest contamination and associated microbiological hazards.",
+      "keywords": [
+        "pest control program",
+        "IPM",
+        "integrated pest management",
+        "pest documentation",
+        "pest prevention",
+        "automatic failure"
+      ],
+      "mandatoryStatements": [
+        "A documented and effective pest control program must be implemented and maintained",
+        "Program must include monitoring, prevention, and corrective action procedures",
+        "Pest control service provider must be licensed and qualified",
+        "Pest control records must be maintained and reviewed regularly",
+        "Absence of pest control program results in automatic audit failure"
+      ],
+      "verificationExpectations": "Annual review of pest control program effectiveness, quarterly verification of pest control service records and trend analysis",
+      "monitoringExpectations": "Weekly or monthly pest control device monitoring per program requirements, documented verification of all service visits"
     },
     {
+      "id": "5.02.06",
       "code": "5.02.06",
-      "question": "Are pest control devices located away from exposed raw materials, work-in-progress, ingredients (including water and ice), finished goods and packaging, and poisonous bait stations are not used within the facility?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are pest control devices located away from exposed raw materials, work-in-progress, ingredients (including water and ice), finished goods and packaging, and poisonous bait stations are not used within the facility?",
+      "keywords": [
+        "pest control devices",
+        "device location",
+        "poisonous baits",
+        "mechanical traps",
+        "device placement"
+      ],
+      "mandatoryStatements": [
+        "Pest control devices must be located away from exposed food products and materials",
+        "Minimum safe distance (6 feet) must be maintained from exposed products",
+        "Poisonous bait stations must not be used inside the facility",
+        "Only mechanical traps or non-toxic monitoring devices permitted in production areas"
+      ],
+      "verificationExpectations": "Semi-annual audit of pest control device locations against facility map, verification no poisonous baits inside facility",
+      "monitoringExpectations": "Monthly verification during pest control monitoring that devices maintain proper distance from products"
     },
     {
+      "id": "5.02.07",
       "code": "5.02.07",
-      "question": "Are pest control devices maintained in a clean and intact condition and marked as monitored (or bar code scanned) on a regular basis?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are pest control devices maintained in a clean and intact condition and marked as monitored (or bar code scanned) on a regular basis?",
+      "keywords": [
+        "device maintenance",
+        "device condition",
+        "monitoring marks",
+        "barcode scanning",
+        "device cleanliness"
+      ],
+      "mandatoryStatements": [
+        "All pest control devices must be maintained in clean and intact condition",
+        "Devices must be marked or electronically scanned to document monitoring",
+        "Regular monitoring schedule must be established and followed",
+        "Damaged devices must be repaired or replaced immediately"
+      ],
+      "verificationExpectations": "Quarterly audit of device condition and monitoring documentation completeness",
+      "monitoringExpectations": "Weekly or monthly device inspection and monitoring per program schedule, immediate repair of damaged devices"
     },
     {
+      "id": "5.02.08",
       "code": "5.02.08",
-      "question": "Are interior and exterior building perimeter pest control devices adequate in number and location?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are interior and exterior building perimeter pest control devices adequate in number and location?",
+      "keywords": [
+        "device coverage",
+        "device adequacy",
+        "interior devices",
+        "exterior devices",
+        "perimeter protection"
+      ],
+      "mandatoryStatements": [
+        "Pest control device coverage must be adequate for facility size and pest pressure",
+        "Devices must be strategically located at entry points and vulnerable areas",
+        "Interior and exterior perimeter must have continuous device coverage",
+        "Device placement must be based on pest risk assessment"
+      ],
+      "verificationExpectations": "Annual pest control device coverage assessment, verification against facility pest control map",
+      "monitoringExpectations": "Monthly verification that all devices are present and functional, immediate placement of additional devices if gaps identified"
     },
     {
+      "id": "5.02.09",
       "code": "5.02.09",
-      "question": "Are all pest control devices identified by a number or other code (e.g. barcode)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are all pest control devices identified by a number or other code (e.g. barcode)?",
+      "keywords": [
+        "device identification",
+        "device numbering",
+        "barcode",
+        "traceability",
+        "device tracking"
+      ],
+      "mandatoryStatements": [
+        "All pest control devices must have unique identification numbers or barcodes",
+        "Device identification must enable traceability in monitoring records",
+        "Facility pest control map must show all device locations and identifiers",
+        "Identification must be durable and legible"
+      ],
+      "verificationExpectations": "Annual verification that all devices are properly identified and mapped, quarterly audit of identification legibility",
+      "monitoringExpectations": "Verification of device identification during each monitoring event, immediate re-labeling if identification is missing or illegible"
     },
     {
+      "id": "5.02.10",
       "code": "5.02.10",
-      "question": "Are all pest control devices effective and bait stations secured?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are all pest control devices effective and bait stations secured?",
+      "keywords": [
+        "device effectiveness",
+        "secured bait stations",
+        "device function",
+        "trap effectiveness"
+      ],
+      "mandatoryStatements": [
+        "All pest control devices must be effective in capturing or monitoring target pests",
+        "Bait stations must be securely anchored or positioned",
+        "Devices must be maintained in functional condition",
+        "Ineffective devices must be replaced or repositioned"
+      ],
+      "verificationExpectations": "Quarterly assessment of device effectiveness based on capture data and pest control operator recommendations",
+      "monitoringExpectations": "Weekly or monthly verification of device function and security during monitoring activities"
     }
   ],
   "mandatoryStatements": [

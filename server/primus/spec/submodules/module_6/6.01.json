@@ -12,34 +12,134 @@
   "description": "Requirements for HACCP plan development including team formation, training documentation, product descriptions, process flow diagrams, and hazard analysis preparation",
   "requirements": [
     {
+      "id": "6.01.01",
       "code": "6.01.01",
+      "text": "Is there a team responsible for the HACCP system at the operation, with an assigned leader for the development, implementation and on-going maintenance of the HACCP system?",
       "question": "Is there a team responsible for the HACCP system at the operation, with an assigned leader for the development, implementation and on-going maintenance of the HACCP system?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "HACCP team",
+        "team leader",
+        "system development",
+        "implementation",
+        "maintenance",
+        "responsibility assignment",
+        "food safety management"
+      ],
+      "mandatoryStatements": [
+        "A designated HACCP team must be established with clearly assigned roles and responsibilities",
+        "A team leader must be appointed with authority for HACCP system development, implementation, and maintenance",
+        "The team structure must ensure ongoing oversight and continuous improvement of the HACCP system"
+      ],
+      "verificationExpectations": "Auditors will review organizational charts, team member appointment letters, and role descriptions to verify a formal HACCP team exists with a designated leader. They will interview the team leader to confirm understanding of responsibilities for developing, implementing, and maintaining the HACCP system. Documentation showing team meeting minutes, decision-making authority, and reporting structure will be examined to ensure the team is actively engaged in HACCP management.",
+      "monitoringExpectations": "Management must maintain current HACCP team roster with designated leader identified and contact information readily available. Regular team meetings must be scheduled to review system effectiveness, process changes, and improvement opportunities. The team leader must provide oversight of all HACCP activities, approve system modifications, and ensure team member participation in development and maintenance activities. Team composition and leadership assignments must be reviewed annually and updated when personnel changes occur."
     },
     {
+      "id": "6.01.02",
       "code": "6.01.02",
+      "text": "Is there documented evidence that the HACCP team members have been trained on HACCP principles?",
       "question": "Is there documented evidence that the HACCP team members have been trained on HACCP principles?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "HACCP training",
+        "team training",
+        "HACCP principles",
+        "training documentation",
+        "competency",
+        "knowledge verification",
+        "food safety education"
+      ],
+      "mandatoryStatements": [
+        "All HACCP team members must receive formal training on HACCP principles from qualified instructors or recognized programs",
+        "Training records must document course content, completion dates, and certificates for each team member",
+        "Team members must demonstrate understanding of the seven HACCP principles and their application to operations"
+      ],
+      "verificationExpectations": "Auditors will examine training certificates, course completion records, and training program curricula to verify all HACCP team members have received formal HACCP principles training. They will verify training was provided by recognized institutions, qualified consultants, or accredited programs covering the seven HACCP principles. Interviews with team members will assess comprehension of HACCP concepts including hazard analysis, CCP determination, critical limits, monitoring, corrective actions, verification, and record-keeping.",
+      "monitoringExpectations": "Human resources or food safety management must maintain complete training files for all HACCP team members including certificates, training agendas, and attendance records. New team members must complete HACCP training within specified timeframes before assuming HACCP responsibilities. Refresher training must be provided when significant process changes occur, new hazards are identified, or regulatory requirements are updated. Annual competency assessments should be conducted to ensure team members maintain current knowledge of HACCP principles."
     },
     {
+      "id": "6.01.03",
       "code": "6.01.03",
+      "text": "Does a product description exist for the products produced?",
       "question": "Does a product description exist for the products produced?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "product description",
+        "product specifications",
+        "ingredients",
+        "processing methods",
+        "packaging details",
+        "intended use",
+        "consumer information"
+      ],
+      "mandatoryStatements": [
+        "Comprehensive product descriptions must be documented for all products including ingredients, processing methods, and intended use",
+        "Product descriptions must include food safety critical information such as pH, water activity, and preservation methods",
+        "Descriptions must identify target consumers including vulnerable populations requiring special consideration"
+      ],
+      "verificationExpectations": "Auditors will review product description documents for completeness including ingredient lists, formulations, processing parameters, packaging specifications, storage requirements, shelf life, and intended use. They will verify descriptions contain food safety critical information such as pH levels, water activity, allergen declarations, and preservation factors. The auditor will confirm product descriptions accurately reflect actual products being manufactured and match label declarations.",
+      "monitoringExpectations": "The HACCP team must maintain current product description documents for all manufactured products with revisions dated and approved. When product formulations change, processing methods are modified, or new products are introduced, descriptions must be updated immediately. Product descriptions must be reviewed annually to ensure accuracy and completeness. Critical parameters such as pH and water activity must be verified periodically through testing to confirm description accuracy."
     },
     {
+      "id": "6.01.04",
       "code": "6.01.04",
+      "text": "Has the process(es) been flow charted in sufficient detail to completely describe the process or product handling/processing steps?",
       "question": "Has the process(es) been flow charted in sufficient detail to completely describe the process or product handling/processing steps?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "flow chart",
+        "process flow diagram",
+        "processing steps",
+        "product handling",
+        "process description",
+        "sequential operations",
+        "decision points"
+      ],
+      "mandatoryStatements": [
+        "Detailed process flow diagrams must illustrate all steps from receiving raw materials through final product distribution",
+        "Flow charts must include all handling steps, decision points, rework loops, and potential cross-contamination pathways",
+        "Diagrams must be sufficiently detailed to identify where hazards may be introduced, controlled, or eliminated"
+      ],
+      "verificationExpectations": "Auditors will review process flow diagrams to confirm they show all sequential steps including receiving, storage, preparation, processing, packaging, and distribution. They will verify flow charts include decision points, rework procedures, and potential cross-contamination pathways. The auditor will compare flow diagrams against actual operations to ensure accuracy and completeness. Sufficient detail must be present to understand where raw materials enter, how products move through the facility, and where critical control measures are applied.",
+      "monitoringExpectations": "The HACCP team must maintain current process flow diagrams for all product lines with updates made whenever process changes occur. Flow charts must be reviewed during facility walk-throughs to ensure they accurately represent actual operations. When new equipment is installed, processes are modified, or product flows change, diagrams must be updated and reverified on-site. Annual review of all flow diagrams should be conducted to confirm continued accuracy and identify necessary revisions."
     },
     {
+      "id": "6.01.05",
       "code": "6.01.05",
+      "text": "Is there documented evidence that the flow chart(s) has been verified on-site?",
       "question": "Is there documented evidence that the flow chart(s) has been verified on-site?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "on-site verification",
+        "flow chart validation",
+        "process confirmation",
+        "facility walkthrough",
+        "accuracy verification",
+        "documentation",
+        "practical validation"
+      ],
+      "mandatoryStatements": [
+        "Process flow diagrams must be verified on-site through physical walk-throughs comparing diagrams to actual operations",
+        "Verification activities must be documented with dates, participants, observations, and any modifications identified",
+        "On-site verification must be conducted by the HACCP team during facility operations to observe actual product and personnel flows"
+      ],
+      "verificationExpectations": "Auditors will examine verification records documenting on-site confirmation of process flow diagrams including dates conducted, team members participating, and findings. They will verify that walk-throughs occurred during actual production to observe product movement, personnel traffic patterns, and potential cross-contamination points. Documentation should show any discrepancies identified between flow diagrams and actual operations, with corrections made to diagrams or processes. Signatures of team members conducting verification must be present confirming accuracy.",
+      "monitoringExpectations": "The HACCP team must conduct on-site verification of all process flow diagrams during active production periods, documenting the verification process with detailed records. Verification walk-throughs must follow products through all processing steps from receiving through shipping, noting any deviations from documented flows. When discrepancies are found between flow diagrams and actual operations, immediate investigation must determine whether diagrams need updating or processes need correction. On-site verification must be repeated whenever significant process changes occur or at minimum annually to maintain accuracy."
     }
   ],
   "capaInject": [

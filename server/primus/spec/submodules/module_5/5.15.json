@@ -12,40 +12,112 @@
   "description": "Requirements for worker-related documentation including training records, hygiene training, illness reporting procedures, competency assessments, and personnel file management",
   "requirements": [
     {
+      "id": "5.15.01",
       "code": "5.15.01",
+      "text": "Are there records of new worker food safety (GMP) orientation training (with topics covered and attendees) and are all workers required to sign the company's food safety hygiene and health policy?",
       "question": "Are there records of new worker food safety (GMP) orientation training (with topics covered and attendees) and are all workers required to sign the company's food safety hygiene and health policy?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["orientation training", "GMP training", "new worker training", "food safety hygiene", "health policy", "training records", "policy acknowledgment"],
+      "mandatoryStatements": [
+        "New worker orientation training records must document Good Manufacturing Practices and food safety topics covered",
+        "All workers must sign acknowledgment of the company's food safety hygiene and health policy",
+        "Training must occur before workers begin production activities and be documented with attendee signatures"
+      ],
+      "verificationExpectations": "Auditors will review new worker training records to confirm orientation includes food safety and GMP topics such as personal hygiene, handwashing, illness reporting, proper attire, and contamination prevention. Records should list topics covered, training date, trainer identification, and attendee signatures. Signed policy acknowledgments should be on file for all workers demonstrating understanding of hygiene and health requirements.",
+      "monitoringExpectations": "Operations should conduct new worker orientation before production activities begin with documentation showing training completion and policy acknowledgment. Training effectiveness should be assessed through observation, testing, or supervisor verification that workers understand and follow food safety requirements."
     },
     {
+      "id": "5.15.02",
       "code": "5.15.02",
+      "text": "Are there logs of ongoing worker food safety education training, including topics covered, attendees, etc.?",
       "question": "Are there logs of ongoing worker food safety education training, including topics covered, attendees, etc.?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["ongoing training", "food safety education", "refresher training", "training logs", "continuous training", "worker education"],
+      "mandatoryStatements": [
+        "Ongoing food safety education training must be provided to workers beyond initial orientation",
+        "Training logs must document topics covered, training dates, trainers, and attendees",
+        "Refresher training must reinforce food safety principles and address new or recurring issues"
+      ],
+      "verificationExpectations": "Auditors will review ongoing training logs to confirm workers receive regular food safety education beyond initial orientation. Logs should document training topics, dates, duration, trainer qualifications, and attendee lists with signatures. Topics should address relevant food safety issues, seasonal risks, incident learnings, and regulatory updates.",
+      "monitoringExpectations": "Operations should provide ongoing food safety training at regular intervals (monthly, quarterly, annually) with documentation showing all workers participate. Training topics should be selected based on observations, non-conformance trends, seasonal changes, and continuous improvement opportunities."
     },
     {
+      "id": "5.15.03",
       "code": "5.15.03",
+      "text": "Are there training logs for the sanitation workers, including best practices and chemical use details?",
       "question": "Are there training logs for the sanitation workers, including best practices and chemical use details?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["sanitation training", "sanitation workers", "best practices", "chemical training", "cleaning procedures", "sanitation competency"],
+      "mandatoryStatements": [
+        "Sanitation workers must receive specialized training on cleaning best practices and chemical use",
+        "Training logs must document topics including Sanitation SOPs, chemical safety, and proper cleaning techniques",
+        "Training must ensure sanitation workers are competent in effective cleaning and safe chemical handling"
+      ],
+      "verificationExpectations": "Auditors will review sanitation worker training logs to confirm specialized training is provided covering best practices for effective cleaning, proper chemical selection and dilution, contact times, personal protective equipment use, and safety precautions. Training should address specific SSOPs, equipment disassembly/reassembly, and verification methods.",
+      "monitoringExpectations": "Operations should provide comprehensive sanitation training to all cleaning personnel before they perform sanitation duties with refresher training when procedures change or performance issues are identified. Competency should be verified through testing, observation, or supervisor assessment."
     },
     {
+      "id": "5.15.04",
       "code": "5.15.04",
+      "text": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering any illnesses that might be a contamination risk to the products being produced, and include return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors should check procedure/policy but not the actual records).",
       "question": "Are there written and communicated procedures in place that require food handlers to report any cuts or grazes and/or if they are suffering any illnesses that might be a contamination risk to the products being produced, and include return to work requirements? (In countries with health privacy/confidentiality laws, e.g., USA, auditors should check procedure/policy but not the actual records).",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["illness reporting", "injury reporting", "cuts and grazes", "return to work", "health procedures", "contamination prevention", "worker health policy"],
+      "mandatoryStatements": [
+        "Written procedures must require food handlers to report cuts, grazes, and illnesses that pose contamination risks",
+        "Procedures must specify which symptoms and illnesses require reporting and removal from food handling",
+        "Return to work requirements must be defined to ensure food handlers are no longer a contamination risk"
+      ],
+      "verificationExpectations": "Auditors will review written procedures for illness and injury reporting to confirm they require food handlers to report gastrointestinal illnesses, respiratory infections, skin infections, cuts, grazes, and other conditions that could contaminate products. Procedures should specify symptoms requiring reporting (vomiting, diarrhea, jaundice, sore throat with fever), exclusion criteria, and return to work requirements based on symptom resolution or medical clearance. In countries with health privacy laws, auditors verify procedures exist but do not review individual medical records.",
+      "monitoringExpectations": "Operations should communicate illness and injury reporting procedures to all food handlers through training and posted policies. Supervisors should monitor worker health and enforce reporting requirements with emphasis that reporting is expected and consequences are not punitive. Procedures should be implemented to protect worker privacy while ensuring food safety."
     },
     {
+      "id": "5.15.05",
       "code": "5.15.05",
+      "text": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
       "question": "Are there worker food safety non-conformance records and associated corrective actions (including retraining records)?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["non-conformance", "corrective actions", "retraining", "worker violations", "food safety infractions", "disciplinary actions"],
+      "mandatoryStatements": [
+        "Non-conformance records must document worker food safety violations with sufficient detail to identify the issue",
+        "Corrective actions must be documented including immediate correction and measures to prevent recurrence",
+        "Retraining must be provided and documented when workers violate food safety requirements"
+      ],
+      "verificationExpectations": "Auditors will review worker non-conformance records to confirm food safety violations are documented including description of the infraction, date, location, and individuals involved. Corrective actions should include immediate correction (proper attire restored, handwashing performed), retraining provided, and any disciplinary measures taken. Records should demonstrate violations are addressed promptly and preventive measures implemented.",
+      "monitoringExpectations": "Operations should document food safety non-conformances when observed with corrective action including retraining provided to involved workers. Trends in non-conformances should be analyzed to identify systemic issues requiring enhanced training, supervision, or procedural changes. Documentation should show retraining is effective in preventing repeated violations."
     },
     {
+      "id": "5.15.06",
       "code": "5.15.06",
+      "text": "Are visitors and contractors required to sign a log stating that they will comply with the operations' personal hygiene and health requirements?",
       "question": "Are visitors and contractors required to sign a log stating that they will comply with the operations' personal hygiene and health requirements?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["visitor log", "contractor compliance", "hygiene requirements", "visitor acknowledgment", "contractor log", "hygiene compliance"],
+      "mandatoryStatements": [
+        "Visitors and contractors must sign a log acknowledging they will comply with facility hygiene and health requirements",
+        "Log must be completed before visitors or contractors enter production or food handling areas",
+        "Acknowledgment must confirm understanding of personal hygiene, illness reporting, and facility policies"
+      ],
+      "verificationExpectations": "Auditors will review visitor and contractor logs to confirm all individuals entering production areas sign acknowledgment of hygiene and health requirements including proper attire, handwashing, jewelry restrictions, illness reporting, and behavior expectations. Logs should include date, visitor/contractor name, company represented, areas visited, and signature confirming compliance commitment.",
+      "monitoringExpectations": "Operations should require visitors and contractors to review and sign hygiene compliance acknowledgments before facility entry with verification that proper attire and hygiene practices are followed during their visit. Non-compliant visitors should be corrected or removed from production areas with documentation of the incident."
     }
   ],
   "capaInject": [

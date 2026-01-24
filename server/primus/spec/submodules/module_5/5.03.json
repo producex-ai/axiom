@@ -11,59 +11,214 @@
   "description": "Requirements for storage area management including contamination prevention, proper separation of materials, identification of rejected items, product quality standards, and packaging material controls",
   "requirements": [
     {
+      "id": "5.03.01",
       "code": "5.03.01",
-      "question": "Does the facility layout ensure separation of ingredients (including ice), products, and packaging stored to prevent cross contamination (this includes iced product pallets stored above pallets of product without adequate protection as well as any allergen cross contamination issues)?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Does the facility layout ensure separation of ingredients (including ice), products, and packaging stored to prevent cross contamination (this includes iced product pallets stored above pallets of product without adequate protection as well as any allergen cross contamination issues)?",
+      "keywords": [
+        "facility layout",
+        "physical separation",
+        "cross contamination prevention",
+        "allergen separation",
+        "product segregation",
+        "storage organization"
+      ],
+      "mandatoryStatements": [
+        "Facility layout must ensure physical separation of raw materials, ingredients, work-in-progress, finished products, and packaging",
+        "Iced product pallets must not be stored above other products without adequate protection",
+        "Allergen-containing materials must be segregated to prevent cross-contact",
+        "Storage zones must be clearly defined and marked",
+        "Physical barriers or designated areas must separate incompatible materials"
+      ],
+      "verificationExpectations": "Quarterly facility layout assessment for cross-contamination risks, annual review of storage zone effectiveness",
+      "monitoringExpectations": "Weekly verification of proper product segregation, daily supervision of storage practices"
     },
     {
+      "id": "5.03.02",
       "code": "5.03.02",
-      "question": "Is the facility's use restricted to the storage of food products?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is the facility's use restricted to the storage of food products?",
+      "keywords": [
+        "facility use",
+        "dedicated facility",
+        "food products only",
+        "non-food items",
+        "storage restriction"
+      ],
+      "mandatoryStatements": [
+        "Storage facilities must be dedicated exclusively to food products and food-grade materials",
+        "Non-food items must not be stored in food storage areas",
+        "Facility use must be restricted and controlled",
+        "Any exceptions must be documented and risk-assessed"
+      ],
+      "verificationExpectations": "Semi-annual audit verifying facility is restricted to food product storage only",
+      "monitoringExpectations": "Monthly inspection for presence of non-food items, immediate removal if found"
     },
     {
+      "id": "5.03.03",
       "code": "5.03.03",
-      "question": "Are rejected or on hold materials clearly identified and separated from other materials?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are rejected or on hold materials clearly identified and separated from other materials?",
+      "keywords": [
+        "rejected materials",
+        "on hold materials",
+        "quarantine",
+        "material identification",
+        "segregation",
+        "hold tags"
+      ],
+      "mandatoryStatements": [
+        "Rejected and on-hold materials must be clearly identified with labels or tags",
+        "Quarantined materials must be physically separated from approved materials",
+        "Hold/release procedures must be documented and followed",
+        "Access to quarantine areas must be restricted",
+        "Disposition of held materials must be documented"
+      ],
+      "verificationExpectations": "Monthly audit of quarantine area for proper identification and separation, quarterly review of hold/release records",
+      "monitoringExpectations": "Daily verification that on-hold materials are properly tagged and segregated, immediate response to any mixing with approved materials"
     },
     {
+      "id": "5.03.04",
       "code": "5.03.04",
-      "question": "Are raw products, work in progress, ingredients (including water and ice), finished goods and food contact packaging within accepted tolerances for spoilage and without evidence of adulteration? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
-      "totalPoints": 15,
+      "required": true,
+      "points": 15,
+      "text": "Are raw products, work in progress, ingredients (including water and ice), finished goods and food contact packaging within accepted tolerances for spoilage and without evidence of adulteration? ANY DOWN SCORE IN THIS QUESTION RESULTS IN AN AUTOMATIC FAILURE OF THE AUDIT.",
       "isAutomaticFailure": true,
-      "automaticFailureReason": "Spoilage or adulteration of products, ingredients, or packaging represents a fundamental breakdown in food safety controls and quality management. Spoiled products can harbor dangerous levels of pathogenic bacteria and toxins, while adulterated materials pose immediate public health hazards that cannot be tolerated under any food safety program."
+      "automaticFailureReason": "Spoilage or adulteration of products, ingredients, or packaging represents a fundamental breakdown in food safety controls and quality management. Spoiled products can harbor dangerous levels of pathogenic bacteria and toxins, while adulterated materials pose immediate public health hazards that cannot be tolerated under any food safety program.",
+      "keywords": [
+        "product quality",
+        "spoilage",
+        "adulteration",
+        "quality standards",
+        "product integrity",
+        "automatic failure"
+      ],
+      "mandatoryStatements": [
+        "All stored materials must be free from spoilage, adulteration, and contamination",
+        "Products must be within accepted quality tolerances",
+        "Regular quality inspections must be conducted",
+        "Spoiled or adulterated materials result in automatic audit failure",
+        "Immediate quarantine and investigation required for any spoilage or adulteration"
+      ],
+      "verificationExpectations": "Daily quality inspection of stored materials for spoilage or defects, immediate action for any findings",
+      "monitoringExpectations": "Continuous monitoring of product quality during storage, immediate quarantine of any spoiled or adulterated materials"
     },
     {
+      "id": "5.03.05",
       "code": "5.03.05",
-      "question": "Are all storage areas clean, especially the racking structures, lights, ceilings, floor areas by the walls and other hard-to-reach areas?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are all storage areas clean, especially the racking structures, lights, ceilings, floor areas by the walls and other hard-to-reach areas?",
+      "keywords": [
+        "storage cleanliness",
+        "sanitation",
+        "hard-to-reach areas",
+        "racking structures",
+        "overhead cleanliness"
+      ],
+      "mandatoryStatements": [
+        "All storage areas must be maintained in clean and sanitary condition",
+        "Hard-to-reach areas including racking structures, overhead lights, ceilings, and floor perimeters must be included in cleaning schedules",
+        "Regular cleaning schedules must address all storage areas",
+        "Cleaning verification must be documented"
+      ],
+      "verificationExpectations": "Monthly inspection of storage area cleanliness including hard-to-reach areas, quarterly deep cleaning verification",
+      "monitoringExpectations": "Weekly visual inspection of storage area cleanliness, immediate cleaning if deficiencies identified"
     },
     {
+      "id": "5.03.06",
       "code": "5.03.06",
-      "question": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) properly marked with rotation codes (receipt dates, manufacture dates, etc.)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) properly marked with rotation codes (receipt dates, manufacture dates, etc.)?",
+      "keywords": [
+        "rotation codes",
+        "date marking",
+        "lot codes",
+        "traceability",
+        "inventory management"
+      ],
+      "mandatoryStatements": [
+        "All materials must be clearly marked with rotation codes",
+        "Receipt dates or manufacture dates must be visible on all materials",
+        "Lot codes must enable traceability",
+        "Durable labels must be used for date marking",
+        "Receiving procedures must require date marking"
+      ],
+      "verificationExpectations": "Monthly inventory audit verifying all materials are properly marked with rotation codes",
+      "monitoringExpectations": "Daily receiving inspection ensuring date marking is applied, weekly spot checks of stored materials"
     },
     {
+      "id": "5.03.07",
       "code": "5.03.07",
-      "question": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) rotated using FIFO policy?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are materials (commodities, packaging, ingredients, processing aids, work in progress, etc.) rotated using FIFO policy?",
+      "keywords": [
+        "FIFO",
+        "first in first out",
+        "stock rotation",
+        "inventory rotation",
+        "material handling"
+      ],
+      "mandatoryStatements": [
+        "Materials must be rotated using First-In-First-Out (FIFO) principles",
+        "Oldest stock must be accessible and used first",
+        "FIFO procedures must be documented and followed",
+        "Warehouse personnel must be trained on FIFO requirements",
+        "Regular audits must verify FIFO compliance"
+      ],
+      "verificationExpectations": "Monthly FIFO compliance audit, quarterly training verification for warehouse personnel",
+      "monitoringExpectations": "Weekly verification of stock rotation practices, daily supervision of material handling"
     },
     {
+      "id": "5.03.08",
       "code": "5.03.08",
-      "question": "Are storage areas at the appropriate temperatures for the specific products being stored?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are storage areas at the appropriate temperatures for the specific products being stored?",
+      "keywords": [
+        "storage temperature",
+        "temperature control",
+        "cold chain",
+        "refrigeration",
+        "temperature monitoring"
+      ],
+      "mandatoryStatements": [
+        "Storage areas must be maintained at appropriate temperatures for specific products",
+        "Temperature monitoring systems must be in place",
+        "Temperature deviations must be documented and addressed",
+        "Alarm systems must alert personnel to temperature excursions",
+        "Temperature logs must be maintained and reviewed"
+      ],
+      "verificationExpectations": "Daily review of temperature logs, monthly calibration verification of temperature monitoring devices",
+      "monitoringExpectations": "Continuous temperature monitoring with automated recording, immediate response to temperature alarms"
     },
     {
+      "id": "5.03.09",
       "code": "5.03.09",
-      "question": "Where packaging is stored outside, is it being stored protected?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Where packaging is stored outside, is it being stored protected?",
+      "keywords": [
+        "outdoor storage",
+        "packaging protection",
+        "weather protection",
+        "external storage",
+        "packaging integrity"
+      ],
+      "mandatoryStatements": [
+        "Packaging materials stored outdoors must be adequately protected",
+        "Protection from weather, pests, dust, and contamination must be provided",
+        "Covers, enclosures, or weather-resistant structures must be used",
+        "Regular inspections must verify protection integrity",
+        "Damaged or contaminated packaging must be removed from use"
+      ],
+      "verificationExpectations": "Weekly inspection of outdoor packaging storage protection, monthly assessment of packaging condition",
+      "monitoringExpectations": "Daily visual verification of protective covers and packaging condition, immediate repair of damaged protection"
     }
   ],
   "mandatoryStatements": [

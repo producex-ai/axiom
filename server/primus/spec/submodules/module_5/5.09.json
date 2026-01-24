@@ -12,118 +12,213 @@
   "description": "Requirements for building and grounds maintenance including structural integrity, lighting, ventilation, drains, walls and ceilings, doors and windows, and prevention of facility-related contamination",
   "requirements": [
     {
+      "id": "5.09.01",
       "code": "5.09.01",
-      "question": "Are all lights in the facility that could potentially contaminate raw materials, work in progress, ingredients (including ice), finished goods, equipment or packaging shielded, coated or otherwise shatter resistant to protect product from contamination in the event of breakage?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are all lights in the facility that could potentially contaminate raw materials, work in progress, ingredients (including ice), finished goods, equipment or packaging shielded, coated or otherwise shatter resistant to protect product from contamination in the event of breakage?",
+      "keywords": ["light protection", "shatter-resistant lights", "light shields", "physical hazard prevention", "light sleeves"],
+      "mandatoryStatements": ["All lights over exposed products must be shielded, coated, or shatter-resistant", "Light protection must prevent glass contamination if breakage occurs", "Regular inspections must verify protective measures are intact", "Broken or missing protection must be replaced immediately", "Light protection program must be documented"],
+      "verificationExpectations": "Quarterly light fixture protection inspection, annual comprehensive facility light audit",
+      "monitoringExpectations": "Monthly visual verification of light protection, immediate replacement of damaged shields or sleeves"
     },
     {
+      "id": "5.09.02",
       "code": "5.09.02",
-      "question": "Has the operation eliminated or adequately controlled any potential metal, glass or brittle plastic contamination issues?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Has the operation eliminated or adequately controlled any potential metal, glass or brittle plastic contamination issues?",
+      "keywords": ["metal control", "glass control", "brittle plastic control", "physical hazard prevention", "contamination prevention"],
+      "mandatoryStatements": ["Metal, glass, and brittle plastic sources must be eliminated or controlled", "Glass and brittle plastic prohibited in production areas where possible", "Foreign material control program must address physical hazards", "Regular audits must identify and eliminate potential sources", "Incident investigation required for any physical contamination"],
+      "verificationExpectations": "Annual facility assessment for glass, metal, and brittle plastic hazards, quarterly control verification",
+      "monitoringExpectations": "Monthly inspection for unauthorized glass or brittle plastic, immediate removal if found"
     },
     {
+      "id": "5.09.03",
       "code": "5.09.03",
-      "question": "Has the facility eliminated or adequately controlled the use of wooden items or surfaces?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Has the facility eliminated or adequately controlled the use of wooden items or surfaces?",
+      "keywords": ["wood control", "wood elimination", "porous surfaces", "wood pallets", "wood equipment"],
+      "mandatoryStatements": ["Wood items and surfaces should be eliminated or adequately controlled", "Wood pallets and equipment must be in good condition without splinters", "Porous wood surfaces difficult to sanitize should be replaced with non-porous alternatives", "Regular inspection must verify wood item condition", "Damaged wood items must be removed from service"],
+      "verificationExpectations": "Semi-annual wood item inspection and condition assessment, annual evaluation of wood elimination opportunities",
+      "monitoringExpectations": "Monthly inspection of wood pallets and items, immediate removal of damaged wood"
     },
     {
+      "id": "5.09.04",
       "code": "5.09.04",
-      "question": "Is there adequate lighting in the production and storage areas?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is there adequate lighting in the production and storage areas?",
+      "keywords": ["lighting adequacy", "illumination levels", "light intensity", "visibility", "workplace lighting"],
+      "mandatoryStatements": ["Production and storage areas must have adequate lighting for tasks performed", "Lighting intensity must meet or exceed regulatory requirements", "Lighting must enable proper inspection and cleaning", "Non-functional lights must be replaced promptly", "Lighting adequacy must be assessed and documented"],
+      "verificationExpectations": "Annual lighting intensity measurements and adequacy assessment, quarterly verification of light functionality",
+      "monitoringExpectations": "Daily identification of non-functional lights, immediate replacement or repair"
     },
     {
+      "id": "5.09.05",
       "code": "5.09.05",
-      "question": "Is ventilation adequate to control dust, condensation, odors and vapors?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is ventilation adequate to control dust, condensation, odors and vapors?",
+      "keywords": ["ventilation", "airflow", "condensation control", "dust control", "odor control", "vapor control"],
+      "mandatoryStatements": ["Ventilation must be adequate to control dust, condensation, odors, and vapors", "Air exchange rates must be appropriate for operations", "Airflow direction must be from clean to less-clean areas", "Condensation must be controlled and directed away from products", "Regular maintenance and filter replacement required"],
+      "verificationExpectations": "Semi-annual airflow pattern assessment and ventilation effectiveness evaluation, quarterly filter maintenance",
+      "monitoringExpectations": "Daily observation of condensation and ventilation effectiveness, immediate response to inadequate ventilation"
     },
     {
+      "id": "5.09.06",
       "code": "5.09.06",
-      "question": "Are floor surfaces in good condition, with no standing water, no debris trapping cracks and are they easy to clean?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are floor surfaces in good condition, with no standing water, no debris trapping cracks and are they easy to clean?",
+      "keywords": ["floor condition", "floor surfaces", "standing water", "floor cracks", "floor maintenance", "drainage"],
+      "mandatoryStatements": ["Floor surfaces must be maintained in good condition", "Standing water must be prevented through proper drainage and floor slope", "Cracks and crevices that trap debris must be repaired", "Floors must be constructed of materials that facilitate cleaning", "Regular floor maintenance and repair program required"],
+      "verificationExpectations": "Quarterly floor condition inspection identifying cracks, drainage issues, and repair needs",
+      "monitoringExpectations": "Daily observation for standing water, immediate cleanup and drainage correction"
     },
     {
+      "id": "5.09.07",
       "code": "5.09.07",
-      "question": "Are there floor drains and waste trap systems located where they are needed for drainage?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are there floor drains and waste trap systems located where they are needed for drainage?",
+      "keywords": ["floor drains", "drainage system", "waste traps", "drain location", "drainage adequacy"],
+      "mandatoryStatements": ["Floor drains must be located where needed for effective drainage", "Drain coverage must be adequate for facility operations", "Drains must be properly sized for drainage volumes", "Waste trap systems must be installed and functional", "Additional drains should be installed if inadequate drainage observed"],
+      "verificationExpectations": "Annual drainage system adequacy assessment, quarterly drain function verification",
+      "monitoringExpectations": "Daily observation of drainage effectiveness, immediate drain installation or repair if standing water occurs"
     },
     {
+      "id": "5.09.08",
       "code": "5.09.08",
-      "question": "Are exterior doors kept closed and are closed doors and windows to the outside pest-proof?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are exterior doors kept closed and are closed doors and windows to the outside pest-proof?",
+      "keywords": ["door closure", "pest exclusion", "door seals", "window screens", "entry control"],
+      "mandatoryStatements": ["Exterior doors must be kept closed when not in active use", "Doors and windows must be pest-proof with proper seals and screens", "Self-closing mechanisms should be installed where appropriate", "Door and window integrity must be maintained", "Regular inspection and maintenance of seals and screens required"],
+      "verificationExpectations": "Quarterly door and window seal inspection, annual pest exclusion effectiveness assessment",
+      "monitoringExpectations": "Daily verification that doors remain closed, immediate repair of damaged seals or screens"
     },
     {
+      "id": "5.09.09",
       "code": "5.09.09",
-      "question": "Are dock load levelers and buffers/shelters maintained in good condition, pest proof and debris free?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Are dock load levelers and buffers/shelters maintained in good condition, pest proof and debris free?",
+      "keywords": ["dock doors", "load levelers", "dock shelters", "dock seals", "pest exclusion", "dock maintenance"],
+      "mandatoryStatements": ["Dock load levelers and shelters must be maintained in good condition", "Dock areas must be pest-proof with properly functioning seals", "Debris must be removed regularly from dock areas", "Dock door seals must be inspected and repaired as needed", "Regular dock area cleaning and maintenance required"],
+      "verificationExpectations": "Monthly dock area condition inspection including load levelers and seals, quarterly maintenance verification",
+      "monitoringExpectations": "Weekly dock area cleanliness check, immediate repair of damaged seals or equipment"
     },
     {
+      "id": "5.09.10",
       "code": "5.09.10",
-      "question": "Are exterior walls free of holes to exclude pests, and are pipes, vents, and air ducts designed and protected in order to prevent pest entry (e.g., by using fine mesh)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are exterior walls free of holes to exclude pests, and are pipes, vents, and air ducts designed and protected in order to prevent pest entry (e.g., by using fine mesh)?",
+      "keywords": ["exterior walls", "pest exclusion", "wall integrity", "pipe penetrations", "vent screens", "pest proofing"],
+      "mandatoryStatements": ["Exterior walls must be free of holes and gaps that allow pest entry", "Pipes, vents, and air duct penetrations must be properly sealed", "Fine mesh screens must be installed on vents and openings", "Regular inspection must identify pest entry points", "Structural gaps must be filled and sealed promptly"],
+      "verificationExpectations": "Semi-annual exterior wall and penetration inspection for pest entry points, annual comprehensive pest exclusion assessment",
+      "monitoringExpectations": "Monthly visual inspection of exterior walls and penetrations, immediate sealing of identified gaps"
     },
     {
+      "id": "5.09.11",
       "code": "5.09.11",
-      "question": "Are interior walls and ceilings free of cracks and crevices to prevent pest harborage and allow proper sanitation?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are interior walls and ceilings free of cracks and crevices to prevent pest harborage and allow proper sanitation?",
+      "keywords": ["interior walls", "ceilings", "cracks", "crevices", "pest harborage", "surface integrity"],
+      "mandatoryStatements": ["Interior walls and ceilings must be maintained free of cracks and crevices", "Surfaces must allow effective cleaning and sanitation", "Regular inspection must identify structural deterioration", "Cracks and crevices must be repaired to prevent pest harborage", "Smooth, cleanable surfaces preferred for food production areas"],
+      "verificationExpectations": "Quarterly interior surface inspection for cracks and damage, annual comprehensive structural assessment",
+      "monitoringExpectations": "Monthly visual inspection during cleaning operations, immediate repair of identified cracks"
     },
     {
+      "id": "5.09.12",
       "code": "5.09.12",
-      "question": "Is an 18\" (46 cm) internal wall perimeter being maintained within the facility, with adequate access to these wall perimeters, thereby allowing inspection and cleaning?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is an 18\" (46 cm) internal wall perimeter being maintained within the facility, with adequate access to these wall perimeters, thereby allowing inspection and cleaning?",
+      "keywords": ["wall perimeter", "18 inch clearance", "perimeter access", "inspection access", "cleaning access"],
+      "mandatoryStatements": ["Minimum 18-inch (46 cm) clearance must be maintained along interior wall perimeters", "Perimeter access must allow inspection and cleaning", "Equipment and materials must not block perimeter access", "Regular inspection must verify perimeter clearance is maintained", "Adequate space must exist for pest control device placement along perimeters"],
+      "verificationExpectations": "Quarterly perimeter clearance inspection, annual facility layout assessment for access adequacy",
+      "monitoringExpectations": "Monthly verification that perimeter clearance is maintained, immediate removal of obstructions"
     },
     {
+      "id": "5.09.13",
       "code": "5.09.13",
-      "question": "Is the exterior area immediately outside the facility, including roads, yards and parking areas, free of litter, weeds and standing water?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is the exterior area immediately outside the facility, including roads, yards and parking areas, free of litter, weeds and standing water?",
+      "keywords": ["exterior grounds", "grounds maintenance", "litter control", "weed control", "standing water", "pest prevention"],
+      "mandatoryStatements": ["Exterior areas must be maintained free of litter, excessive vegetation, and standing water", "Regular grounds maintenance must prevent pest harborage conditions", "Vegetation must be controlled near building perimeter", "Standing water must be eliminated through drainage or filling", "Regular grounds inspection and cleanup required"],
+      "verificationExpectations": "Monthly exterior grounds inspection for litter, vegetation, and standing water, quarterly comprehensive grounds maintenance",
+      "monitoringExpectations": "Weekly visual inspection of exterior areas, immediate cleanup and maintenance as needed"
     },
     {
+      "id": "5.09.14",
       "code": "5.09.14",
-      "question": "Are control measures being implemented for the outside storage of equipment, pallets, tires, etc. (i.e., out of the mud, pipe ends capped, stacked to prevent pest harborage, away from the building perimeter)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are control measures being implemented for the outside storage of equipment, pallets, tires, etc. (i.e., out of the mud, pipe ends capped, stacked to prevent pest harborage, away from the building perimeter)?",
+      "keywords": ["outdoor storage", "equipment storage", "pallet storage", "pest harborage prevention", "storage organization"],
+      "mandatoryStatements": ["Outdoor stored items must be elevated off ground or on paved surfaces", "Items must be stacked to prevent pest harborage", "Pipe ends must be capped to prevent pest entry", "Storage must be located away from building perimeter (minimum 20 feet preferred)", "Regular inspection must verify proper storage practices"],
+      "verificationExpectations": "Monthly outdoor storage inspection for pest harborage conditions, quarterly storage organization assessment",
+      "monitoringExpectations": "Weekly verification of proper storage practices, immediate correction of pest harborage conditions"
     },
     {
+      "id": "5.09.15",
       "code": "5.09.15",
-      "question": "Are pallets inspected to separate and replace dirty or broken pallets, and broken or dirty pallets are not in use?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are pallets inspected to separate and replace dirty or broken pallets, and broken or dirty pallets are not in use?",
+      "keywords": ["pallet inspection", "pallet condition", "broken pallets", "dirty pallets", "pallet quality"],
+      "mandatoryStatements": ["Pallets must be inspected before use", "Dirty or broken pallets must be separated and not used", "Damaged pallets must be repaired or discarded", "Clean, intact pallets required for product contact", "Regular pallet quality inspection program required"],
+      "verificationExpectations": "Monthly pallet inventory condition inspection, quarterly pallet quality assessment",
+      "monitoringExpectations": "Daily receiving inspection of incoming pallets, immediate removal of broken or dirty pallets"
     },
     {
+      "id": "5.09.16",
       "code": "5.09.16",
-      "question": "Is the area around the dumpster/cull truck/trash area clean?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Is the area around the dumpster/cull truck/trash area clean?",
+      "keywords": ["dumpster area", "trash area", "waste disposal area", "exterior cleanliness", "pest prevention"],
+      "mandatoryStatements": ["Areas around dumpsters and waste disposal must be maintained clean", "Spills and debris must be cleaned up regularly", "Waste areas must not provide pest attractants", "Regular cleaning schedule for waste areas required", "Pest control measures must be enhanced in waste areas"],
+      "verificationExpectations": "Weekly dumpster area cleanliness inspection, monthly comprehensive waste area sanitation",
+      "monitoringExpectations": "Daily visual check of dumpster area cleanliness, immediate cleanup of spills or debris"
     },
     {
+      "id": "5.09.17",
       "code": "5.09.17",
-      "question": "Are outside garbage receptacles and dumpsters kept covered or closed?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are outside garbage receptacles and dumpsters kept covered or closed?",
+      "keywords": ["dumpster covers", "waste container closure", "pest exclusion", "garbage containers", "waste management"],
+      "mandatoryStatements": ["Outside garbage receptacles and dumpsters must be kept covered or closed", "Lids must be functional and used consistently", "Covers prevent pest access and weather exposure", "Regular inspection must verify proper closure", "Damaged lids must be repaired or replaced"],
+      "verificationExpectations": "Weekly verification of dumpster lid functionality and use, monthly waste container condition assessment",
+      "monitoringExpectations": "Daily verification that dumpsters are closed after use, immediate repair of damaged lids"
     },
     {
+      "id": "5.09.18",
       "code": "5.09.18",
-      "question": "Are all water lines protected against back siphonage?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are all water lines protected against back siphonage?",
+      "keywords": ["backflow prevention", "back siphonage", "water line protection", "cross-connection control", "backflow devices"],
+      "mandatoryStatements": ["Water lines must be protected against back siphonage with backflow prevention devices", "Backflow prevention assemblies must be installed on water supply lines", "Annual testing and certification of backflow devices required", "Test records must be maintained", "Non-potable water lines must be clearly identified and separated"],
+      "verificationExpectations": "Annual backflow prevention device testing and certification, maintenance of current certificates",
+      "monitoringExpectations": "Immediate repair or replacement of failed backflow devices, verification of annual testing compliance"
     },
     {
+      "id": "5.09.19",
       "code": "5.09.19",
-      "question": "Where there is an on-site laboratory, is it completely enclosed and separated from production and storage areas?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Where there is an on-site laboratory, is it completely enclosed and separated from production and storage areas?",
+      "keywords": ["laboratory separation", "lab enclosure", "facility segregation", "contamination prevention", "lab design"],
+      "mandatoryStatements": ["On-site laboratories must be completely enclosed and separated from production areas", "Physical barriers must prevent contamination transfer", "Laboratory access must be controlled and restricted", "Air pressure differentials should prevent air flow from lab to production", "Laboratory procedures must prevent cross-contamination to products"],
+      "verificationExpectations": "Annual laboratory separation and contamination control assessment, quarterly verification of physical barriers",
+      "monitoringExpectations": "Monthly verification of laboratory separation integrity, immediate correction of barrier breaches"
     }
   ],
   "capaInject": [

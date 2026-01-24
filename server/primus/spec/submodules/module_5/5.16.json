@@ -12,76 +12,220 @@
   "description": "Requirements for product and environmental testing programs including microbiological testing, water quality testing, allergen testing, laboratory qualifications, and test result documentation",
   "requirements": [
     {
+      "id": "5.16.01",
       "code": "5.16.01",
+      "text": "Is there a written risk-based, scientifically valid environmental monitoring program?",
       "question": "Is there a written risk-based, scientifically valid environmental monitoring program?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["environmental monitoring", "risk-based", "scientifically valid", "EM program", "pathogen monitoring", "Listeria program"],
+      "mandatoryStatements": [
+        "A written environmental monitoring program must be implemented based on risk assessment and scientific principles",
+        "Program must define target organisms, sampling locations, frequencies, and corrective action procedures",
+        "Program design must address pathogen harborage sites and environmental contamination routes"
+      ],
+      "verificationExpectations": "Auditors will review the written environmental monitoring program to confirm it is risk-based with sampling focused on areas and surfaces that could harbor or transfer pathogens to products. Program should specify target organisms (Listeria, Salmonella, indicators), sampling locations in zones based on proximity to product, sampling frequencies, sample sizes, and analytical methods. Scientific rationale should support the program design.",
+      "monitoringExpectations": "Operations should implement the environmental monitoring program consistently with sampling performed at specified frequencies and locations. Results should be trended to identify problematic areas with program adjustments made when trends indicate emerging issues or when facility changes create new risk areas."
     },
     {
+      "id": "5.16.02",
       "code": "5.16.02",
+      "text": "Are there written risk-based corrective action procedures for when unacceptable environmental monitoring test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
       "question": "Are there written risk-based corrective action procedures for when unacceptable environmental monitoring test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["corrective actions", "positive results", "test response", "remediation procedures", "responsibility assignment", "investigation procedures"],
+      "mandatoryStatements": [
+        "Written corrective action procedures must define response to unacceptable environmental monitoring results",
+        "Procedures must describe steps to be taken including immediate actions, investigations, and verification",
+        "Responsibility must be assigned for executing corrective actions and verifying effectiveness"
+      ],
+      "verificationExpectations": "Auditors will review corrective action procedures for environmental monitoring to confirm they are risk-based with escalating responses depending on organism detected and location found. Procedures should address immediate actions (cleaning, sanitizing, retesting), product holds when necessary, investigation to identify root cause, enhanced cleaning or structural modifications, verification testing, and documentation requirements. Responsibilities should be clearly assigned.",
+      "monitoringExpectations": "Operations should implement corrective action procedures promptly when unacceptable results are received with documentation showing all steps were completed. Verification testing should confirm corrective actions were effective before resuming normal operations. Repeated positives should trigger enhanced investigations and more aggressive corrective measures."
     },
     {
+      "id": "5.16.03",
       "code": "5.16.03",
+      "text": "Are there records of environmental microbiological test results and does testing meet the program requirements?",
       "question": "Are there records of environmental microbiological test results and does testing meet the program requirements?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["test results", "testing records", "program compliance", "environmental samples", "microbiological testing", "sampling documentation"],
+      "mandatoryStatements": [
+        "Complete records must be maintained for all environmental microbiological test results",
+        "Testing must be performed according to program requirements for locations, frequencies, and target organisms",
+        "Records must enable trend analysis and verification that the program is being followed"
+      ],
+      "verificationExpectations": "Auditors will review environmental monitoring records to confirm testing is performed according to program requirements including correct locations, frequencies, and target organisms. Records should document sample identification, location, date, organisms tested, results, and any corrective actions taken. Testing should be current with no unexplained gaps in the sampling schedule.",
+      "monitoringExpectations": "Operations should maintain complete environmental monitoring records that are reviewed regularly to identify trends, verify program compliance, and detect emerging problems. Records should be analyzed to assess program effectiveness with adjustments made when results indicate inadequate sampling frequency, missing locations, or persistent contamination issues."
     },
     {
+      "id": "5.16.04",
       "code": "5.16.04",
+      "text": "Is there a written program describing the operation's requirements for other microbiological or chemical testing not identified in 5.16.01?",
       "question": "Is there a written program describing the operation's requirements for other microbiological or chemical testing not identified in 5.16.01?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["testing program", "product testing", "chemical testing", "microbiological testing", "quality testing", "testing requirements"],
+      "mandatoryStatements": [
+        "A written program must describe all other microbiological and chemical testing requirements beyond environmental monitoring",
+        "Program must specify what is tested, frequencies, methods, acceptance criteria, and corrective action triggers",
+        "Testing program must address product testing, raw material testing, and other relevant quality and safety parameters"
+      ],
+      "verificationExpectations": "Auditors will review the testing program to confirm it describes microbiological and chemical testing requirements not covered by the environmental monitoring program including product testing, raw material testing, allergen testing, pesticide residue testing, heavy metals, or other parameters relevant to the operation. Program should specify sampling plans, analytical methods, acceptance criteria, and data review procedures.",
+      "monitoringExpectations": "Operations should implement the testing program consistently with documentation showing required testing is performed at specified frequencies. Test results should be reviewed to verify acceptance criteria are met with investigations and corrective actions when out-of-specification results are obtained."
     },
     {
+      "id": "5.16.05",
       "code": "5.16.05",
+      "text": "Are there written risk-based corrective action procedures for when unacceptable other microbiological or chemical test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
       "question": "Are there written risk-based corrective action procedures for when unacceptable other microbiological or chemical test results are received, that describe the steps to be taken, and assign responsibility for taking those steps?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["corrective actions", "test failures", "response procedures", "product disposition", "investigation protocol"],
+      "mandatoryStatements": [
+        "Written corrective action procedures must address unacceptable microbiological or chemical test results",
+        "Procedures must be risk-based with steps proportionate to the food safety or quality significance of the failure",
+        "Responsibilities must be assigned for product holds, investigations, corrective actions, and verification"
+      ],
+      "verificationExpectations": "Auditors will review corrective action procedures for product, raw material, and other testing to confirm they describe risk-based responses to unacceptable results. Procedures should address product holds or recalls when necessary, root cause investigation, supplier notification for raw material issues, process adjustments, retesting to verify corrections, and documentation. Responsibility should be clearly assigned for each step.",
+      "monitoringExpectations": "Operations should implement corrective action procedures promptly when unacceptable test results are received with documentation showing immediate product protection, thorough investigation, effective corrective actions, and verification of corrections. Trends in test failures should be analyzed to identify systemic issues requiring preventive actions."
     },
     {
+      "id": "5.16.06",
       "code": "5.16.06",
+      "text": "Are there records of microbiological tests on water used in the facility (sampled from within the facility) and does the testing meet the program requirements?",
       "question": "Are there records of microbiological tests on water used in the facility (sampled from within the facility) and does the testing meet the program requirements?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["water testing", "microbiological testing", "water quality", "coliform testing", "potable water", "facility water"],
+      "mandatoryStatements": [
+        "Microbiological testing records must be maintained for water used in the facility sampled from internal use points",
+        "Testing must meet program requirements for frequencies, locations, and target organisms",
+        "Water testing must verify potable water quality is maintained throughout the facility distribution system"
+      ],
+      "verificationExpectations": "Auditors will review water testing records to confirm microbiological testing is performed on water sampled from within the facility at representative use points. Testing should meet program requirements for frequency (typically monthly or more often), target organisms (total coliforms, E. coli, generic E. coli), and sampling locations. Records should show water meets potable water standards consistently.",
+      "monitoringExpectations": "Operations should sample and test facility water according to the program with increased frequency during warmer months or when system modifications occur. Positive coliform results should trigger immediate retesting, investigation of contamination source, corrective actions including system sanitization, and verification testing before resuming normal water use."
     },
     {
+      "id": "5.16.07",
       "code": "5.16.07",
+      "text": "Are there records of microbiological tests on ice used in the facility (either produced in-house or purchased) and does testing meet the program requirements?",
       "question": "Are there records of microbiological tests on ice used in the facility (either produced in-house or purchased) and does testing meet the program requirements?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["ice testing", "microbiological testing", "ice quality", "ice production", "purchased ice", "product contact ice"],
+      "mandatoryStatements": [
+        "Microbiological testing records must be maintained for all ice used in the facility whether produced in-house or purchased",
+        "Testing must verify ice quality meets potable water standards and is free from pathogenic contamination",
+        "Testing frequency and parameters must align with program requirements based on ice use and risk"
+      ],
+      "verificationExpectations": "Auditors will review ice testing records to confirm microbiological testing is performed on ice used for product cooling, processing, or other food contact purposes. Testing should meet program requirements for frequency (typically monthly for in-house production, periodically for purchased ice), target organisms (total coliforms, E. coli, generic E. coli), and sampling protocols. Records should demonstrate ice meets water quality standards.",
+      "monitoringExpectations": "Operations should test ice according to program requirements with in-house produced ice tested regularly and purchased ice tested to verify supplier quality. Ice makers and storage should be cleaned and sanitized on regular schedules with testing after cleaning to verify effectiveness. Contaminated ice should trigger immediate disposal, equipment cleaning, and investigation."
     },
     {
+      "id": "5.16.08",
       "code": "5.16.08",
+      "text": "Are there records of tests performed on compressed air or other mechanically introduced gases that are used directly on food and food contact surfaces and does testing meet the program requirements?",
       "question": "Are there records of tests performed on compressed air or other mechanically introduced gases that are used directly on food and food contact surfaces and does testing meet the program requirements?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["compressed air", "gas testing", "food contact air", "air quality", "microbial testing", "oil and water testing"],
+      "mandatoryStatements": [
+        "Testing records must be maintained for compressed air and gases used directly on food or food contact surfaces",
+        "Testing must verify air quality is acceptable for food contact use including absence of oil, water, and microbial contamination",
+        "Testing frequency must meet program requirements based on risk and regulatory expectations"
+      ],
+      "verificationExpectations": "Auditors will review testing records for compressed air and gases used in direct food contact to confirm testing meets program requirements. Testing should address microbial contamination, oil content, water content, and particulates as appropriate for the application. Testing frequency should be sufficient to verify air treatment systems are functioning properly (typically annually or more often).",
+      "monitoringExpectations": "Operations should test compressed air and gases according to program requirements with filter maintenance and dryer function verified regularly. Test failures should trigger investigation of air treatment system function with corrective actions to restore proper air quality before food contact use resumes."
     },
     {
+      "id": "5.16.09",
       "code": "5.16.09",
+      "text": "Are there records of other tests (e.g., spent sprout irrigation water, product, raw ingredients, etc.) that are performed for any reason (e.g., customer requirements, best practice, regulatory requirements) and does testing meet program requirements?",
       "question": "Are there records of other tests (e.g., spent sprout irrigation water, product, raw ingredients, etc.) that are performed for any reason (e.g., customer requirements, best practice, regulatory requirements) and does testing meet program requirements?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["product testing", "raw material testing", "customer requirements", "regulatory testing", "irrigation water", "testing compliance"],
+      "mandatoryStatements": [
+        "Records must be maintained for all testing performed whether driven by customer requirements, regulations, or best practices",
+        "Testing must be performed according to applicable program requirements including frequencies and methods",
+        "Documentation must demonstrate compliance with customer, regulatory, and internal testing commitments"
+      ],
+      "verificationExpectations": "Auditors will review records for other testing performed including product testing, raw ingredient testing, irrigation water for sprouts, or any other testing required by customers, regulations, or internal programs. Records should demonstrate testing is performed at required frequencies using appropriate methods with results documented. Testing should meet all applicable requirements from customers, regulations, or company programs.",
+      "monitoringExpectations": "Operations should maintain testing schedules that capture all required testing from various sources (customer specs, regulations, company programs) with tracking to ensure testing is completed on time. Test results should be reviewed and communicated to stakeholders as required with corrective actions when specifications are not met."
     },
     {
+      "id": "5.16.10",
       "code": "5.16.10",
+      "text": "Are there records of corrective actions taken after any unsuitable testing results that describe the steps taken, responsibility for taking those steps, and actions taken to ensure that the cause of contamination has been identified and corrected?",
       "question": "Are there records of corrective actions taken after any unsuitable testing results that describe the steps taken, responsibility for taking those steps, and actions taken to ensure that the cause of contamination has been identified and corrected?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["corrective action records", "root cause", "contamination investigation", "corrective measures", "verification actions"],
+      "mandatoryStatements": [
+        "Corrective action records must document response to all unsuitable testing results",
+        "Records must describe immediate actions taken, root cause investigation, and corrective measures implemented",
+        "Documentation must demonstrate responsibility was assigned and effectiveness of corrections was verified"
+      ],
+      "verificationExpectations": "Auditors will review corrective action records to confirm unsuitable test results trigger documented investigations and corrective actions. Records should describe immediate product protection actions, investigation to identify contamination source or cause, corrective actions implemented to eliminate the cause, responsibility assignments, timeline of actions, and verification testing or other methods to confirm corrections were effective.",
+      "monitoringExpectations": "Operations should investigate all unsuitable test results with documentation showing thorough root cause analysis and effective corrective actions. Verification should confirm the cause was identified and corrected with follow-up monitoring to ensure the problem does not recur. Trends should be analyzed to identify systemic issues requiring preventive actions."
     },
     {
+      "id": "5.16.11",
       "code": "5.16.11",
+      "text": "Is there a documented training program with training records for the sampling personnel, including aseptic sampling collection techniques, sampling protocols and sample handling?",
       "question": "Is there a documented training program with training records for the sampling personnel, including aseptic sampling collection techniques, sampling protocols and sample handling?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["sampling training", "aseptic technique", "sampling protocols", "sample collection", "personnel training", "sampling competency"],
+      "mandatoryStatements": [
+        "A documented training program must exist for personnel who collect samples for testing",
+        "Training must cover aseptic sampling techniques, sampling protocols, and proper sample handling",
+        "Training records must demonstrate sampling personnel are competent to collect representative, uncontaminated samples"
+      ],
+      "verificationExpectations": "Auditors will review the sampling training program and records to confirm personnel who collect samples are trained in aseptic techniques to avoid sample contamination, proper sampling protocols for each sample type, sample identification and labeling, chain of custody, temperature control during transport, and timely delivery to the laboratory. Training should include hands-on practice with competency verification.",
+      "monitoringExpectations": "Operations should provide sampling training to all personnel who collect environmental, product, water, or other samples with documentation showing training completion and competency assessment. Sampling personnel should be monitored periodically to verify proper technique is maintained with retraining when deficiencies are observed or when protocols change."
     },
     {
+      "id": "5.16.12",
       "code": "5.16.12",
+      "text": "Where food safety related testing is being done in-house, is there a laboratory quality assurance manual with protocols and validated testing methods, evidence of training on testing protocols and methods, and relevant supporting documentation?",
       "question": "Where food safety related testing is being done in-house, is there a laboratory quality assurance manual with protocols and validated testing methods, evidence of training on testing protocols and methods, and relevant supporting documentation?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["laboratory QA", "quality assurance manual", "validated methods", "testing protocols", "laboratory training", "method validation"],
+      "mandatoryStatements": [
+        "In-house laboratories must maintain a quality assurance manual with documented protocols and validated testing methods",
+        "Laboratory personnel must be trained on testing protocols and methods with training documented",
+        "Supporting documentation must demonstrate methods are validated and laboratory maintains quality controls"
+      ],
+      "verificationExpectations": "Auditors will review the laboratory quality assurance manual to confirm it includes validated testing methods, quality control procedures, equipment calibration protocols, proficiency testing participation, corrective action procedures, and documentation practices. Training records should show laboratory personnel are qualified and trained on methods they perform. Supporting documentation should include method validations, equipment calibration records, quality control charts, and proficiency testing results.",
+      "monitoringExpectations": "Operations with in-house laboratories should maintain the QA manual as a current document that guides laboratory operations. Quality control samples should be analyzed with each batch, equipment should be calibrated on schedule, and proficiency testing should be performed regularly to verify laboratory competency. Method validations should be documented and reviewed when methods or matrices change."
     }
   ],
   "capaInject": [

@@ -11,64 +11,114 @@
   "description": "Requirements for equipment cleaning and sanitation including documented procedures, cleaning schedules, sanitation verification, water quality for cleaning, and cleaning chemical management",
   "requirements": [
     {
+      "id": "5.07.01",
       "code": "5.07.01",
-      "question": "Are food contact equipment surfaces clean?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are food contact equipment surfaces clean?",
+      "keywords": ["food contact cleanliness", "equipment sanitation", "cleaning effectiveness", "biofilm prevention", "residue removal"],
+      "mandatoryStatements": ["All food contact equipment surfaces must be maintained in clean and sanitary condition", "Surfaces must be free from product residues, soil, biofilm, and visible contamination", "Cleaning procedures must be documented and followed", "Cleaning effectiveness must be verified", "Immediate cleaning required if contamination observed"],
+      "verificationExpectations": "Daily visual inspection of food contact surface cleanliness, weekly ATP testing or environmental swabbing",
+      "monitoringExpectations": "Pre-operational inspections before each production run, continuous monitoring during production"
     },
     {
+      "id": "5.07.02",
       "code": "5.07.02",
-      "question": "Are non-food contact equipment surfaces clean?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are non-food contact equipment surfaces clean?",
+      "keywords": ["non-food contact cleanliness", "equipment hygiene", "pest prevention", "cross-contamination prevention"],
+      "mandatoryStatements": ["Non-food contact equipment surfaces must be kept clean", "Cleaning prevents pest harborage and pathogen reservoirs", "Regular cleaning schedules must include non-food contact surfaces", "Soil accumulation must be prevented", "Cleaning verification must be documented"],
+      "verificationExpectations": "Weekly inspection of non-food contact surface cleanliness, monthly deep cleaning verification",
+      "monitoringExpectations": "Daily visual monitoring, immediate cleaning if excessive soil observed"
     },
     {
+      "id": "5.07.03",
       "code": "5.07.03",
-      "question": "Are items (totes, bins, etc.) that are used to hold or store product clean?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are items (totes, bins, etc.) that are used to hold or store product clean?",
+      "keywords": ["container cleanliness", "totes", "bins", "product holders", "container sanitation"],
+      "mandatoryStatements": ["Totes, bins, and product-holding items must be cleaned and sanitized before use", "Items must be maintained in sanitary condition between uses", "Cleaning and sanitizing procedures must be established", "Pre-use inspection must verify cleanliness", "Dirty containers must be removed from service immediately"],
+      "verificationExpectations": "Daily inspection of container cleanliness before use, weekly cleaning procedure verification",
+      "monitoringExpectations": "Visual inspection of each container before product contact, immediate rejection of unclean containers"
     },
     {
+      "id": "5.07.04",
       "code": "5.07.04",
-      "question": "During cleaning, are food products and packaging materials protected from contamination?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "During cleaning, are food products and packaging materials protected from contamination?",
+      "keywords": ["product protection", "cleaning contamination prevention", "cleaning operations", "chemical protection", "aerosol protection"],
+      "mandatoryStatements": ["Food products and packaging must be protected during cleaning operations", "Products must be covered, removed, or physically separated during cleaning", "Cleaning chemicals and water spray must not contact products", "Cleaning schedule should minimize overlap with production when possible", "Personnel must be trained on product protection requirements during cleaning"],
+      "verificationExpectations": "Weekly observation of cleaning operations for product protection compliance, monthly training verification",
+      "monitoringExpectations": "Supervisory oversight during all cleaning operations, immediate halt if product exposure occurs"
     },
     {
+      "id": "5.07.05",
       "code": "5.07.05",
-      "question": "Are cooling units, including coils in coolers and freezers, clean and free of aged, dirty ice?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are cooling units, including coils in coolers and freezers, clean and free of aged, dirty ice?",
+      "keywords": ["cooling coils", "coil cleaning", "ice quality", "condensate management", "refrigeration maintenance"],
+      "mandatoryStatements": ["Cooling unit coils must be maintained clean and free from dust and buildup", "Ice accumulation must be managed through regular defrosting", "Condensate drip pans must be clean and draining properly", "Preventive maintenance schedule must include coil cleaning", "Dirty ice must be removed and units cleaned"],
+      "verificationExpectations": "Monthly cooling coil inspection and cleaning as needed, quarterly preventive maintenance verification",
+      "monitoringExpectations": "Weekly visual inspection of coil condition, immediate cleaning if excessive buildup observed"
     },
     {
+      "id": "5.07.06",
       "code": "5.07.06",
-      "question": "Where fans or other air circulation equipment are used, are they maintained and operated in a manner that minimizes the potential for contaminating product, equipment, and packaging materials?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Where fans or other air circulation equipment are used, are they maintained and operated in a manner that minimizes the potential for contaminating product, equipment, and packaging materials?",
+      "keywords": ["fan maintenance", "air circulation", "airflow management", "contamination prevention", "fan cleaning"],
+      "mandatoryStatements": ["Fans and air circulation equipment must be cleaned regularly", "Airflow must be directed from clean to less-clean areas", "Fans must not blow across contaminated areas toward product zones", "Filter replacement schedules must be maintained", "Fan positioning must prevent shedding of debris onto products"],
+      "verificationExpectations": "Monthly fan cleaning verification, quarterly airflow pattern assessment",
+      "monitoringExpectations": "Weekly visual inspection of fan cleanliness, immediate cleaning if contamination risk identified"
     },
     {
+      "id": "5.07.07",
       "code": "5.07.07",
-      "question": "Is stored equipment that is not used on a daily basis stored in a clean condition with food-contact surfaces protected and/or are they retained on cleaning schedules in some manner, even though they are not in use?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is stored equipment that is not used on a daily basis stored in a clean condition with food-contact surfaces protected and/or are they retained on cleaning schedules in some manner, even though they are not in use?",
+      "keywords": ["stored equipment", "equipment storage", "long-term storage", "surface protection", "periodic cleaning"],
+      "mandatoryStatements": ["Infrequently used equipment must be cleaned before storage", "Food contact surfaces must be protected from dust and contamination during storage", "Periodic cleaning must occur even during storage periods (monthly minimum)", "Equipment must be cleaned and verified before return to service", "Storage procedures must be documented"],
+      "verificationExpectations": "Quarterly inspection of stored equipment condition, annual review of storage cleaning schedules",
+      "monitoringExpectations": "Monthly cleaning of stored equipment per schedule, pre-use inspection before return to service"
     },
     {
+      "id": "5.07.08",
       "code": "5.07.08",
-      "question": "Are all utensils, hoses, and other items not being used, stored clean and in a manner to prevent contamination?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are all utensils, hoses, and other items not being used, stored clean and in a manner to prevent contamination?",
+      "keywords": ["utensil storage", "hose storage", "tool storage", "storage cleanliness", "contamination prevention"],
+      "mandatoryStatements": ["Utensils, hoses, and tools must be stored clean in designated areas", "Storage must prevent floor contact and contamination exposure", "Hoses must be coiled and elevated off floor", "Utensils may be stored hung or in sanitizer solutions", "Storage orientation must facilitate drainage and drying"],
+      "verificationExpectations": "Weekly inspection of utensil and tool storage areas for proper organization and cleanliness",
+      "monitoringExpectations": "Daily verification of proper storage practices, immediate correction of floor contact or improper storage"
     },
     {
+      "id": "5.07.09",
       "code": "5.07.09",
-      "question": "Are maintenance tools that are used in the production and storage areas of the facility clean, sanitary and corrosion free?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Are maintenance tools that are used in the production and storage areas of the facility clean, sanitary and corrosion free?",
+      "keywords": ["maintenance tools", "tool cleanliness", "tool designation", "corrosion prevention", "food area tools"],
+      "mandatoryStatements": ["Maintenance tools used in production areas must be clean, sanitary, and corrosion-free", "Tools must be designated for food area use only", "Color-coding system should differentiate food area from non-food area tools", "Tool storage must be in designated clean areas", "Inspection procedures must verify tool condition before use"],
+      "verificationExpectations": "Monthly tool condition inspection, quarterly verification of tool designation system",
+      "monitoringExpectations": "Visual inspection before each use, immediate removal of corroded or dirty tools"
     },
     {
+      "id": "5.07.10",
       "code": "5.07.10",
-      "question": "Are excess lubricants and grease removed from the equipment and are lubricant catch pans fitted where needed?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are excess lubricants and grease removed from the equipment and are lubricant catch pans fitted where needed?",
+      "keywords": ["lubricant control", "grease removal", "catch pans", "food-grade lubricants", "contamination prevention"],
+      "mandatoryStatements": ["Excess lubricants and grease must be removed from equipment surfaces", "Catch pans must be installed under lubrication points", "Food-grade lubricants must be used in product zones", "Catch pans must be emptied regularly", "Lubrication procedures must prevent over-application"],
+      "verificationExpectations": "Monthly inspection of lubrication points and catch pans, quarterly review of lubrication procedures",
+      "monitoringExpectations": "Weekly verification that catch pans are in place and emptied, immediate cleanup of excess lubricant"
     }
   ],
   "mandatoryStatements": [

@@ -12,40 +12,160 @@
   "description": "Requirements for Food Safety Plan implementation including preventive control training, monitoring compliance, worker competency, record-keeping, corrective action execution, and verification of control effectiveness",
   "requirements": [
     {
+      "id": "7.03.01",
       "code": "7.03.01",
+      "text": "Is there documented evidence that all plant workers have attended a preventive control training, including specific training for workers directly involved with preventive controls?",
       "question": "Is there documented evidence that all plant workers have attended a preventive control training, including specific training for workers directly involved with preventive controls?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "worker training",
+        "preventive control training",
+        "employee education",
+        "training documentation",
+        "competency development",
+        "food safety awareness",
+        "specialized training"
+      ],
+      "mandatoryStatements": [
+        "All plant workers must receive preventive control awareness training covering food safety principles and their role in the system",
+        "Workers directly involved with preventive control operations must receive specialized training on their specific responsibilities and procedures",
+        "Training documentation must be maintained showing topics, dates, attendees, and training providers with certificates where applicable"
+      ],
+      "verificationExpectations": "Auditors will review training records to verify all plant workers have received preventive control awareness training appropriate to their roles and responsibilities. They will confirm workers directly involved with preventive controls (monitoring, recording, implementing) have received additional specialized training on their specific duties. Training documentation will be examined for completeness including training dates, topics covered, instructor qualifications, and employee signatures. Training materials and agendas may be reviewed to assess content adequacy covering preventive controls concepts, hazard awareness, monitoring procedures, corrective actions, and food safety culture. The auditor may interview workers to verify training was understood and can be applied in their daily work.",
+      "monitoringExpectations": "Human resources and food safety management must maintain comprehensive training records for all plant personnel documenting preventive control awareness training and specialized training for those involved with controls. New employees must complete preventive control awareness training during onboarding before assuming production responsibilities. Workers assigned to preventive control monitoring or implementation must complete specialized training before working independently. Refresher training must be provided annually or when procedures change, new hazards are identified, or performance issues indicate knowledge gaps. Training effectiveness should be assessed through competency demonstrations, testing, or work observations. Management must track training completion rates and ensure no personnel work with preventive controls without current training documentation. Training programs should emphasize the importance of preventive controls to food safety and empower workers to report problems."
     },
     {
+      "id": "7.03.02",
       "code": "7.03.02",
+      "text": "Are the preventive control monitoring activities and frequencies in compliance with the Food Safety Plan, charts, and procedures?",
       "question": "Are the preventive control monitoring activities and frequencies in compliance with the Food Safety Plan, charts, and procedures?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "monitoring compliance",
+        "procedure adherence",
+        "frequency compliance",
+        "plan implementation",
+        "control execution",
+        "documentation accuracy",
+        "system conformance"
+      ],
+      "mandatoryStatements": [
+        "Preventive control monitoring must be conducted exactly as specified in Food Safety Plan documents including methods, parameters, and timing",
+        "Monitoring frequencies documented in procedures must be followed consistently without unauthorized deviations",
+        "Any deviations from planned monitoring activities must be identified, documented, investigated, and corrected immediately"
+      ],
+      "verificationExpectations": "Auditors will observe preventive control monitoring activities during production to verify they are conducted exactly as documented in the Food Safety Plan, process charts, and procedures. They will compare actual monitoring methods, parameters measured, equipment used, and frequencies against documented requirements. Monitoring records will be reviewed to verify frequencies match Food Safety Plan specifications with time stamps confirming monitoring occurs at designated intervals. Any gaps in monitoring, delayed checks, or deviations from documented procedures will be identified as non-conformances. The auditor will verify equipment used for monitoring is properly maintained, calibrated, and suitable for its intended purpose. Observation may include process preventive controls, allergen controls, sanitation verification, and other preventive control monitoring.",
+      "monitoringExpectations": "Supervisors must ensure preventive control monitoring is conducted continuously according to Food Safety Plan specifications without interruption, deviation, or shortcuts. Daily supervision should include observation of monitoring activities to verify compliance with procedures and proper technique. Monitoring records must be reviewed daily to confirm frequencies are met with no gaps or missed checks. When production schedules change, equipment malfunctions, or staffing issues occur, monitoring must continue as required or production must stop until proper monitoring is restored. If monitoring frequency adjustments are determined necessary, the Food Safety Plan must be formally revised with PCQI approval before implementation. Equipment used for monitoring must be maintained in proper working condition with current calibration. Backup equipment and trained personnel must be available to maintain monitoring continuity during equipment failures or absences."
     },
     {
+      "id": "7.03.03",
       "code": "7.03.03",
+      "text": "Do workers directly involved with preventive control operations understand basic preventive control principles and their role in monitoring preventive controls?",
       "question": "Do workers directly involved with preventive control operations understand basic preventive control principles and their role in monitoring preventive controls?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "worker competency",
+        "preventive control understanding",
+        "role comprehension",
+        "knowledge assessment",
+        "food safety awareness",
+        "operational understanding",
+        "responsibility awareness"
+      ],
+      "mandatoryStatements": [
+        "Workers must demonstrate understanding of basic preventive control principles including hazard prevention and control importance",
+        "Workers must understand their specific role in preventive control operations and why their activities are critical to food safety",
+        "Competency must be verified through observation, interviews, testing, or work demonstrations to ensure correct performance"
+      ],
+      "verificationExpectations": "Auditors will interview workers directly involved with preventive controls to assess their understanding of preventive control principles and their specific responsibilities. Questions will probe knowledge of what hazards are being controlled, why preventive controls are important, what they must do and how, what to do when problems occur, and the food safety significance of their work. The auditor will observe workers conducting preventive control activities to verify they perform procedures correctly and understand the purpose behind their actions. Workers should be able to explain what they are monitoring or controlling, why it matters for food safety, and consequences if controls are not properly implemented. Understanding should be appropriate to the worker's role and responsibilities.",
+      "monitoringExpectations": "Supervisors and quality assurance personnel must regularly assess worker competency through direct observation, questioning, and review of work performance. When new workers are trained for preventive control responsibilities, competency must be verified before they work independently through supervised work periods and knowledge assessments. Ongoing competency should be monitored through regular supervision, record review for accuracy and completeness, and periodic retraining. When performance issues or errors are identified, immediate retraining must occur with competency reverified before the worker resumes preventive control duties. Regular team meetings or toolbox talks should reinforce preventive control principles and the critical importance of proper implementation to food safety. Management must create a culture where workers feel empowered to ask questions, report problems, and stop work when preventive controls cannot be properly implemented."
     },
     {
+      "id": "7.03.04",
       "code": "7.03.04",
+      "text": "Are preventive control associated records signed off (or initialed) by the workers who are carrying out and recording the preventive control activities?",
       "question": "Are preventive control associated records signed off (or initialed) by the workers who are carrying out and recording the preventive control activities?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "record signatures",
+        "worker accountability",
+        "documentation authentication",
+        "activity verification",
+        "traceability",
+        "record integrity",
+        "responsibility acknowledgment"
+      ],
+      "mandatoryStatements": [
+        "Workers conducting preventive control activities must sign or initial records at the time activities are performed",
+        "Signatures or initials must be legible and traceable to specific individuals through signature logs or personnel files",
+        "Records must not be pre-signed or signed by individuals who did not actually perform the documented activities"
+      ],
+      "verificationExpectations": "Auditors will examine preventive control records to verify each entry is signed or initialed by the worker who conducted the activity and recorded the data. They will verify signatures are consistent with each entry and made at appropriate times corresponding to monitoring or control frequencies. Signature logs or personnel files will be checked to confirm signatures can be traced to specific individuals. Pre-signed records, records signed by someone other than the person performing activities, or missing signatures will be identified as non-conformances. The auditor may interview workers about signature practices and verify they understand the importance of signing only their own work. Electronic recording systems will be evaluated for user authentication ensuring entries are traceable to specific individuals.",
+      "monitoringExpectations": "Workers must sign or initial each preventive control record immediately after conducting activities and recording data. Supervisors must review records daily to verify all entries are properly signed with no missing signatures or questionable patterns. Signature logs must be maintained showing each worker's full signature and initials for verification and traceability purposes. Workers must be trained that signing records certifies they personally performed the documented activities and recorded accurate information. Pre-signing blank forms or signing records for absent colleagues must be strictly prohibited with clear disciplinary consequences. For electronic recording systems, unique user logins must ensure all data entries are traceable to specific individuals with audit trails showing who entered data and when. When signature deficiencies are found, immediate investigation must determine if activities were actually performed correctly and corrective actions implemented to prevent recurrence."
     },
     {
+      "id": "7.03.05",
       "code": "7.03.05",
+      "text": "Is there a deviation record detailing documented corrective actions when a deviation or deficiency of a preventive control occurs?",
       "question": "Is there a deviation record detailing documented corrective actions when a deviation or deficiency of a preventive control occurs?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "deviation records",
+        "corrective action documentation",
+        "control deficiency",
+        "non-conformance management",
+        "product evaluation",
+        "root cause investigation",
+        "preventive measures"
+      ],
+      "mandatoryStatements": [
+        "Detailed deviation records must be created whenever preventive controls are not properly implemented or specifications are not met",
+        "Records must address identification of affected product, evaluation of food safety, correction of immediate problem, and actions to reduce recurrence",
+        "Deviation documentation must show PCQI or qualified personnel involvement in food safety evaluation and corrective action approval"
+      ],
+      "verificationExpectations": "Auditors will examine deviation records to verify they are created whenever preventive controls deviate from specifications or are not properly implemented. Records must contain comprehensive information including date and time of deviation, preventive control affected, nature of deviation or deficiency, amount of product affected, investigation findings, immediate corrective actions taken, food safety evaluation results, product disposition decision (release, rework, reject), actions to reduce recurrence likelihood, approval signatures from qualified personnel (PCQI or designee), and verification that corrective actions were effective. The auditor will verify deviation records are cross-referenced with preventive control monitoring records. Assessment will be made whether corrective actions were appropriate, timely, and adequate. Recurring deviations should show evidence of root cause analysis and implementation of preventive measures.",
+      "monitoringExpectations": "When preventive control deviations or deficiencies occur, workers must immediately notify supervision and initiate deviation documentation. A formal deviation record or corrective action form must be completed providing full details of the event. Affected product must be identified and segregated pending food safety evaluation and disposition decision. Investigation must determine the cause of deviation including equipment malfunction, operator error, procedure inadequacy, environmental factors, or other causes. Corrective actions must address both immediate problem correction and prevention of recurrence. Food safety evaluation must be conducted by the PCQI or qualified designee based on deviation severity, duration, hazard type, and product characteristics. Product disposition decisions must be documented with scientific justification. Corrective action effectiveness must be verified through follow-up monitoring. Deviation records must be maintained in Food Safety Plan files and periodically reviewed to identify patterns or recurring issues requiring system modifications or preventive measures. Significant or high-frequency deviations should trigger Food Safety Plan reanalysis."
     },
     {
+      "id": "7.03.06",
       "code": "7.03.06",
+      "text": "Are the records associated with preventive controls verified and signed off by a preventive controls qualified individual or trained designate (second signatory)?",
       "question": "Are the records associated with preventive controls verified and signed off by a preventive controls qualified individual or trained designate (second signatory)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "PCQI review",
+        "record verification",
+        "second signatory",
+        "supervisory oversight",
+        "independent review",
+        "quality assurance",
+        "verification signature"
+      ],
+      "mandatoryStatements": [
+        "Preventive control monitoring records must be reviewed and signed by the PCQI or trained designate as verification of data accuracy",
+        "Review must occur within specified timeframes allowing timely identification of deviations, documentation issues, or control problems",
+        "Second signatory review must verify control implementation compliance, data accuracy, completeness, and appropriate corrective actions for deviations"
+      ],
+      "verificationExpectations": "Auditors will examine preventive control records to verify they contain second signatures from the PCQI or trained designate indicating independent review and verification. They will verify review signatures are present for all monitoring periods with no gaps or extended delays. The auditor will check that reviews occur within reasonable timeframes allowing timely identification and correction of control issues. Review signatures should be distinct from worker signatures with reviewers identified through signature logs. Qualifications of reviewers will be verified - PCQI must have current certification, designates must have documented training for review responsibilities. The auditor may interview reviewers to verify they understand their responsibilities, actually examine records for accuracy and compliance before signing, and know what actions to take when issues are identified.",
+      "monitoringExpectations": "The PCQI or trained designates must review all preventive control records at established frequencies, typically daily or per shift. Reviews must verify monitoring or control activities were conducted at required frequencies, all data entries are present and legible, signatures are authentic, specifications were met, and any deviations were properly documented and addressed. Reviewers must sign records with date and time of review documenting that verification occurred. When reviewers identify missing data, questionable values, unsigned records, or deviations without adequate corrective actions, immediate investigation and correction must occur. Review responsibilities must be clearly assigned with backup reviewers designated to ensure continuous oversight. The PCQI must periodically review the overall review process to ensure it is effective in identifying and correcting Food Safety Plan implementation issues. Electronic record systems should include workflow features requiring review completion before records can be closed. Management must ensure reviewers have adequate time, training, and support to conduct thorough reviews."
     }
   ],
   "capaInject": [

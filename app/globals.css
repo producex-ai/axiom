@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "../components/editor/editor-animations.css";
 
 @custom-variant dark (&:is(.dark *));
 

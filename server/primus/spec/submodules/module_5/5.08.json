@@ -12,88 +12,158 @@
   "description": "General facility cleaning requirements including waste management, debris control, cleaning tool management, housekeeping standards, and prevention of cross-contamination during cleaning activities",
   "requirements": [
     {
+      "id": "5.08.01",
       "code": "5.08.01",
-      "question": "Are spills cleaned up immediately?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are spills cleaned up immediately?",
+      "keywords": ["spill response", "immediate cleanup", "spill management", "sanitation", "contamination prevention"],
+      "mandatoryStatements": ["Spills must be cleaned up immediately upon occurrence", "Spill response procedures must be documented", "Spill kits must be available throughout facility", "Personnel must be trained on spill response", "Verification of complete cleanup must be performed"],
+      "verificationExpectations": "Monthly review of spill response records, quarterly training verification for spill procedures",
+      "monitoringExpectations": "Immediate response to all spills, documentation of spill incidents and cleanup actions"
     },
     {
+      "id": "5.08.02",
       "code": "5.08.02",
-      "question": "Are waste and garbage frequently removed from production and storage areas?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are waste and garbage frequently removed from production and storage areas?",
+      "keywords": ["waste removal", "garbage management", "waste frequency", "sanitation", "pest prevention"],
+      "mandatoryStatements": ["Waste and garbage must be removed frequently from production and storage areas", "Removal schedules must prevent waste accumulation", "Waste containers must be adequately sized and distributed", "Waste removal logs must be maintained", "Corrective actions required when waste accumulates beyond acceptable limits"],
+      "verificationExpectations": "Weekly waste removal log review, monthly assessment of waste management adequacy",
+      "monitoringExpectations": "Daily supervision of waste removal compliance, immediate removal if accumulation observed"
     },
     {
+      "id": "5.08.03",
       "code": "5.08.03",
-      "question": "Are floor drains and waste trap systems constructed and located so they can be easily cleaned, do they appear clean, free from odors, in good repair, and flow in a manner that prevents contamination (e.g., from high to low risk areas, from high risk directly to drain system)?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are floor drains and waste trap systems constructed and located so they can be easily cleaned, do they appear clean, free from odors, in good repair, and flow in a manner that prevents contamination (e.g., from high to low risk areas, from high risk directly to drain system)?",
+      "keywords": ["floor drains", "waste traps", "drain cleanliness", "drain flow", "contamination prevention", "drain maintenance"],
+      "mandatoryStatements": ["Floor drains must be constructed to facilitate easy cleaning", "Drains must be maintained clean, odor-free, and in good repair", "Drainage flow must be from high-risk to low-risk areas or directly to drain system", "Regular drain cleaning schedules must be established", "Drain backups or odors must be addressed immediately"],
+      "verificationExpectations": "Monthly drain cleanliness inspection, quarterly drain flow assessment",
+      "monitoringExpectations": "Weekly visual inspection for cleanliness and odors, immediate deep cleaning if issues identified"
     },
     {
+      "id": "5.08.04",
       "code": "5.08.04",
-      "question": "Do high level areas, including overhead pipes, ducts, conduit, etc., appear clean?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Do high level areas, including overhead pipes, ducts, conduit, etc., appear clean?",
+      "keywords": ["overhead cleanliness", "high level cleaning", "dust accumulation", "overhead structures", "preventive maintenance"],
+      "mandatoryStatements": ["Overhead areas including pipes, ducts, and conduit must be maintained clean", "Regular cleaning schedules must address high-level areas", "Dust and debris accumulation must be prevented", "Designated equipment must be available for high-reach cleaning", "Pest evidence in overhead areas must be documented and addressed"],
+      "verificationExpectations": "Monthly overhead area inspection, quarterly deep cleaning of high-level structures",
+      "monitoringExpectations": "Weekly visual inspection of overhead areas, immediate cleaning if excessive dust or debris observed"
     },
     {
+      "id": "5.08.05",
       "code": "5.08.05",
-      "question": "Are plastic strip curtains maintained in good condition, kept clean and mounted so that the tips are not touching the floor?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are plastic strip curtains maintained in good condition, kept clean and mounted so that the tips are not touching the floor?",
+      "keywords": ["strip curtains", "plastic curtains", "curtain maintenance", "door barriers", "pest exclusion"],
+      "mandatoryStatements": ["Plastic strip curtains must be maintained in good condition without tears or damage", "Curtains must be kept clean and free from soil buildup", "Curtain tips must not touch the floor to prevent contamination transfer", "Regular cleaning schedule must be established", "Damaged strips must be replaced promptly"],
+      "verificationExpectations": "Monthly strip curtain condition and cleanliness inspection, replacement of damaged strips",
+      "monitoringExpectations": "Weekly visual inspection, immediate cleaning or repair if deficiencies observed"
     },
     {
+      "id": "5.08.06",
       "code": "5.08.06",
-      "question": "Is personal protection equipment (PPE) for the sanitation crew in good condition and stored to prevent cross contamination to raw products, work in progress, ingredients, finished goods or packaging?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Is personal protection equipment (PPE) for the sanitation crew in good condition and stored to prevent cross contamination to raw products, work in progress, ingredients, finished goods or packaging?",
+      "keywords": ["sanitation PPE", "cleaning crew PPE", "PPE storage", "cross-contamination prevention", "PPE segregation"],
+      "mandatoryStatements": ["Sanitation crew PPE must be maintained in good condition", "PPE must be stored separately from production area PPE", "Storage must prevent cross-contamination to products and materials", "Color-coding or labeling should differentiate sanitation PPE", "Regular inspection and replacement of worn PPE required"],
+      "verificationExpectations": "Monthly PPE condition inspection, quarterly storage area assessment for segregation",
+      "monitoringExpectations": "Weekly verification of proper PPE storage and condition, immediate repair or replacement as needed"
     },
     {
+      "id": "5.08.07",
       "code": "5.08.07",
-      "question": "Is cleaning equipment maintained clean and stored properly?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is cleaning equipment maintained clean and stored properly?",
+      "keywords": ["cleaning equipment", "equipment storage", "cleaning tool maintenance", "mop storage", "broom storage"],
+      "mandatoryStatements": ["Cleaning equipment must be maintained in clean condition", "Equipment must be stored in designated areas preventing contamination", "Storage must allow drainage and drying", "Equipment must be stored elevated off floor", "Regular cleaning of cleaning equipment must be performed"],
+      "verificationExpectations": "Weekly cleaning equipment storage inspection, monthly equipment condition assessment",
+      "monitoringExpectations": "Daily verification that cleaning equipment is properly stored and clean after use"
     },
     {
+      "id": "5.08.08",
       "code": "5.08.08",
-      "question": "Is cleaning equipment identified in order to prevent potential cross-contamination issues (e.g., production, maintenance, outside, restroom equipment)?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is cleaning equipment identified in order to prevent potential cross-contamination issues (e.g., production, maintenance, outside, restroom equipment)?",
+      "keywords": ["equipment identification", "color-coding", "equipment designation", "cross-contamination prevention", "area segregation"],
+      "mandatoryStatements": ["Cleaning equipment must be clearly identified or color-coded by use area", "Separate equipment must be designated for production, restrooms, outside areas", "Cross-use of equipment between incompatible areas is prohibited", "Training must emphasize proper equipment selection", "Regular audits must verify equipment designation compliance"],
+      "verificationExpectations": "Monthly audit of equipment identification and proper use, quarterly training verification",
+      "monitoringExpectations": "Daily supervision of equipment selection and use, immediate correction of cross-contamination risks"
     },
     {
+      "id": "5.08.09",
       "code": "5.08.09",
-      "question": "Are all items used for sanitation appropriate for their designated purpose (e.g., no steel wool, metal bristles, etc.)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are all items used for sanitation appropriate for their designated purpose (e.g., no steel wool, metal bristles, etc.)?",
+      "keywords": ["sanitation tools", "appropriate materials", "steel wool prohibition", "metal bristles", "cleaning tool selection"],
+      "mandatoryStatements": ["Sanitation items must be appropriate for their designated purpose", "Steel wool and metal bristles prohibited on food contact surfaces", "Only approved cleaning tools and materials may be used", "Cleaning tool selection must prevent surface damage and contamination", "Regular inventory must verify only approved items are available"],
+      "verificationExpectations": "Quarterly audit of sanitation supplies and tools, verification no prohibited items present",
+      "monitoringExpectations": "Monthly inspection of cleaning tool inventory, immediate removal of inappropriate items"
     },
     {
+      "id": "5.08.10",
       "code": "5.08.10",
-      "question": "Are toilet facilities and hand washing stations clean?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities and hand washing stations clean?",
+      "keywords": ["restroom cleanliness", "toilet sanitation", "handwashing station cleanliness", "facility hygiene", "sanitary facilities"],
+      "mandatoryStatements": ["Toilet facilities must be maintained in clean and sanitary condition", "Handwashing stations must be kept clean and functional", "Regular cleaning schedules must be established and documented", "Multiple daily cleanings required based on usage", "Immediate cleaning if unsanitary conditions observed"],
+      "verificationExpectations": "Daily cleanliness inspection of all toilet facilities and handwashing stations, weekly deep cleaning verification",
+      "monitoringExpectations": "Multiple daily checks and cleaning as needed, immediate response to sanitation issues"
     },
     {
+      "id": "5.08.11",
       "code": "5.08.11",
-      "question": "Are worker break facilities clean, including microwaves and refrigerators, and no rotting or out of date foodstuffs?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are worker break facilities clean, including microwaves and refrigerators, and no rotting or out of date foodstuffs?",
+      "keywords": ["break room cleanliness", "break area sanitation", "microwave cleaning", "refrigerator cleaning", "food disposal"],
+      "mandatoryStatements": ["Worker break facilities must be maintained clean and sanitary", "Microwaves and refrigerators must be cleaned regularly", "Rotting or expired food must be removed immediately", "Cleaning schedules must include all break area equipment", "Regular inspections must verify cleanliness and food disposal"],
+      "verificationExpectations": "Weekly break facility cleanliness inspection, monthly refrigerator and microwave deep cleaning",
+      "monitoringExpectations": "Daily visual inspection, immediate removal of expired or spoiled food items"
     },
     {
+      "id": "5.08.12",
       "code": "5.08.12",
-      "question": "Is the maintenance shop organized, with equipment and spares stored in a neat and tidy fashion?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is the maintenance shop organized, with equipment and spares stored in a neat and tidy fashion?",
+      "keywords": ["maintenance shop", "shop organization", "tool storage", "spare parts storage", "5S principles"],
+      "mandatoryStatements": ["Maintenance shop must be organized with designated storage locations", "Equipment and spare parts must be stored in neat and orderly fashion", "Inventory management system should be implemented", "Regular shop organization and cleaning must occur", "5S or similar organizational principles should be applied"],
+      "verificationExpectations": "Monthly maintenance shop organization inspection, quarterly inventory and organization assessment",
+      "monitoringExpectations": "Weekly shop cleanliness and organization verification, continuous improvement of organization systems"
     },
     {
+      "id": "5.08.13",
       "code": "5.08.13",
-      "question": "Are internal transport vehicles (e.g., forklifts, bobcats, pallet jacks, carts, floor cleaners, etc.), clean, do not emit toxic fumes and are being used in a sanitary manner?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are internal transport vehicles (e.g., forklifts, bobcats, pallet jacks, carts, floor cleaners, etc.), clean, do not emit toxic fumes and are being used in a sanitary manner?",
+      "keywords": ["transport vehicles", "forklifts", "pallet jacks", "vehicle cleanliness", "exhaust emissions", "sanitary use"],
+      "mandatoryStatements": ["Internal transport vehicles must be maintained clean and in good repair", "Vehicles must not emit toxic fumes that could contaminate products", "Electric or propane vehicles preferred over diesel in food areas", "Vehicles must be operated in sanitary manner preventing product contamination", "Regular vehicle cleaning and maintenance schedules required"],
+      "verificationExpectations": "Monthly vehicle cleanliness and condition inspection, quarterly emissions verification",
+      "monitoringExpectations": "Weekly visual inspection of vehicle cleanliness, immediate cleaning if contamination risk observed"
     },
     {
+      "id": "5.08.14",
       "code": "5.08.14",
-      "question": "Are shipping trucks clean and in good condition?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are shipping trucks clean and in good condition?",
+      "keywords": ["shipping trucks", "truck cleanliness", "trailer sanitation", "vehicle condition", "transport hygiene"],
+      "mandatoryStatements": ["Shipping trucks and trailers must be clean before loading", "Pre-loading inspection must verify truck cleanliness and condition", "Trucks must be free from odors, debris, and contamination", "Temperature control equipment must be functional when required", "Rejection criteria must be established for unacceptable truck conditions"],
+      "verificationExpectations": "Documented pre-loading inspection for every truck, monthly review of truck rejection records",
+      "monitoringExpectations": "100% pre-loading truck inspection, immediate rejection and cleaning or replacement of unsuitable trucks"
     }
   ],
   "capaInject": [

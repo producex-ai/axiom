@@ -12,22 +12,58 @@
   "description": "Comprehensive documentation requirements for pest control programs including program scope, contracts, operator licenses, insurance, monitoring records, and corrective action documentation",
   "requirements": [
     {
+      "id": "5.12.01",
       "code": "5.12.01",
+      "text": "Is the pest control program properly documented, detailing the scope of the program, target pests and frequency of checks, including a copy of the contract with the extermination company (if used), Pest Control Operator license(s)/training (if baits are used), and insurance documents?",
       "question": "Is the pest control program properly documented, detailing the scope of the program, target pests and frequency of checks, including a copy of the contract with the extermination company (if used), Pest Control Operator license(s)/training (if baits are used), and insurance documents?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["pest control program", "program documentation", "target pests", "monitoring frequency", "extermination contract", "PCO license", "operator training", "insurance"],
+      "mandatoryStatements": [
+        "Pest control program must be properly documented detailing scope, target pests, and monitoring frequencies",
+        "Documentation must include copies of extermination contracts when external services are used",
+        "Current Pest Control Operator licenses/training certificates and insurance documents must be maintained"
+      ],
+      "verificationExpectations": "Auditors will review pest control program documentation including the written program describing scope, target pests, and inspection frequencies. When external pest control services are used, contracts should be on file. For operations using pesticide baits, Pest Control Operator licenses or training documentation must be current. Insurance certificates should be current and provide adequate coverage for pest control activities.",
+      "monitoringExpectations": "Operations should maintain complete pest control documentation that is reviewed annually or when the program changes. Contract renewals, license expiration dates, and insurance coverage should be tracked to ensure continuity. Program scope should be reviewed when pest activity trends indicate changes are needed."
     },
     {
+      "id": "5.12.02",
       "code": "5.12.02",
+      "text": "Is there a schematic drawing/plan of the facility showing numbered locations of all pest monitoring devices (e.g., rodent traps, bait stations, insect light traps, etc.) both inside and outside the facility?",
       "question": "Is there a schematic drawing/plan of the facility showing numbered locations of all pest monitoring devices (e.g., rodent traps, bait stations, insect light traps, etc.) both inside and outside the facility?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["facility schematic", "pest monitoring devices", "device locations", "rodent traps", "bait stations", "insect light traps", "numbered devices"],
+      "mandatoryStatements": [
+        "A schematic drawing must show numbered locations of all pest monitoring devices inside and outside the facility",
+        "Device locations must include rodent traps, bait stations, insect light traps, and all other monitoring equipment",
+        "Schematic must be current and updated when device locations change or new devices are added"
+      ],
+      "verificationExpectations": "Auditors will review the facility schematic to confirm it shows all pest monitoring device locations with unique identifying numbers for rodent traps, bait stations, insect light traps, glue boards, and any other pest monitoring equipment. The schematic should cover both interior and exterior areas with sufficient detail to locate each device during inspections.",
+      "monitoringExpectations": "Operations should maintain current facility schematics showing pest monitoring device locations that are used during pest control inspections to ensure all devices are checked. Schematics should be updated when devices are relocated, added, or removed, with changes communicated to all personnel conducting pest control activities."
     },
     {
+      "id": "5.12.03",
       "code": "5.12.03",
+      "text": "Are service reports created for pest control checks detailing inspection records, application records, and corrective actions of issues noted (in-house and/or contract)?",
       "question": "Are service reports created for pest control checks detailing inspection records, application records, and corrective actions of issues noted (in-house and/or contract)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["service reports", "inspection records", "application records", "corrective actions", "pest control checks", "monitoring documentation"],
+      "mandatoryStatements": [
+        "Service reports must be created for all pest control checks whether conducted in-house or by contractors",
+        "Reports must detail inspection findings, any pesticide or control measure applications, and corrective actions taken",
+        "Documentation must be sufficient to demonstrate program effectiveness and response to identified issues"
+      ],
+      "verificationExpectations": "Auditors will review pest control service reports to confirm they document inspection findings for all monitored locations, record any pest activity detected, detail pesticide or control measure applications with products and quantities used, and describe corrective actions taken to address identified issues. Reports should be dated, signed, and maintained for all inspection events.",
+      "monitoringExpectations": "Operations should ensure service reports are completed for every pest control inspection with documentation showing trends in pest activity over time. Reports should be reviewed by management to verify corrective actions are adequate and timely, with escalation procedures when persistent pest activity indicates program deficiencies."
     }
   ],
   "capaInject": [

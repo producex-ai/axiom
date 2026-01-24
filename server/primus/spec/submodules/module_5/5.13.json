@@ -12,52 +12,148 @@
   "description": "Requirements for operational monitoring and record-keeping including process monitoring, temperature logs, water quality testing, sanitation verification, and traceability documentation",
   "requirements": [
     {
+      "id": "5.13.01",
       "code": "5.13.01",
+      "text": "Are there inspection records for incoming goods (e.g., raw materials, ingredients and packing materials)?",
       "question": "Are there inspection records for incoming goods (e.g., raw materials, ingredients and packing materials)?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["inspection records", "incoming goods", "raw materials", "ingredients", "packing materials", "receiving inspection", "supplier verification"],
+      "mandatoryStatements": [
+        "Inspection records must be maintained for all incoming goods including raw materials, ingredients, and packing materials",
+        "Records must document inspection criteria, acceptance decisions, and any deviations or rejections",
+        "Inspections must verify products meet specifications and are free from contamination or damage"
+      ],
+      "verificationExpectations": "Auditors will review inspection records to confirm all incoming goods are inspected upon receipt with documentation of inspection criteria, results, and acceptance or rejection decisions. Records should include lot identification, supplier information, inspection date, condition assessment, and any corrective actions when goods do not meet specifications.",
+      "monitoringExpectations": "Operations should conduct and document inspections of all incoming goods at the time of receipt with records showing consistent application of acceptance criteria. Trends in rejections or quality issues should be analyzed and communicated to suppliers to drive continuous improvement."
     },
     {
+      "id": "5.13.02",
       "code": "5.13.02",
+      "text": "Are there inspection logs on incoming trailers (and other forms of transport) for rodents and insects, cleanliness, holes and temperature control of the trailer (for food requiring temperature control for safety and/or as required per buyer specifications)?",
       "question": "Are there inspection logs on incoming trailers (and other forms of transport) for rodents and insects, cleanliness, holes and temperature control of the trailer (for food requiring temperature control for safety and/or as required per buyer specifications)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["trailer inspection", "transport inspection", "pest evidence", "cleanliness", "structural integrity", "temperature control", "vehicle sanitation"],
+      "mandatoryStatements": [
+        "Inspection logs must document trailer and transport vehicle conditions before accepting incoming goods",
+        "Inspections must check for rodent and insect evidence, cleanliness, structural integrity, and temperature control",
+        "Temperature-sensitive goods must only be accepted from trailers meeting temperature control requirements"
+      ],
+      "verificationExpectations": "Auditors will review trailer inspection logs to confirm incoming transport vehicles are inspected for pest evidence (droppings, nesting, live pests), cleanliness (debris, odors, previous cargo residues), structural integrity (holes, damaged doors, roof leaks), and temperature control adequacy for refrigerated goods. Logs should show rejection criteria are applied when conditions are unacceptable.",
+      "monitoringExpectations": "Operations should inspect all incoming trailers with documentation before unloading begins. Trailers failing inspections should be rejected with documentation provided to carriers. Temperature control verification should include checking refrigeration unit operation and product temperature for temperature-sensitive goods."
     },
     {
+      "id": "5.13.03",
       "code": "5.13.03",
+      "text": "Are there records for the necessary process monitoring activities (e.g., pH, water temperature vs. product temperature, metal detection, X-ray, labeling, heating processes, reduction/kill step processes, postharvest pesticides (e.g., fungicides), control of water activity, drying, etc.), showing, for example, monitoring frequencies, results and where necessary the corrective actions?",
       "question": "Are there records for the necessary process monitoring activities (e.g., pH, water temperature vs. product temperature, metal detection, X-ray, labeling, heating processes, reduction/kill step processes, postharvest pesticides (e.g., fungicides), control of water activity, drying, etc.), showing, for example, monitoring frequencies, results and where necessary the corrective actions?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["process monitoring", "pH monitoring", "temperature monitoring", "metal detection", "heating processes", "kill step", "water activity", "corrective actions"],
+      "mandatoryStatements": [
+        "Records must be maintained for all critical process monitoring activities relevant to the operation",
+        "Monitoring records must show frequencies, results, critical limits, and corrective actions when deviations occur",
+        "Documentation must demonstrate processes are operating within specified parameters to ensure food safety"
+      ],
+      "verificationExpectations": "Auditors will review process monitoring records to confirm all critical activities are monitored at appropriate frequencies including pH, temperatures, metal detection, heating processes, kill steps, water activity, and other parameters relevant to the operation. Records should show target values, actual results, critical limits, and corrective actions taken when out of specification.",
+      "monitoringExpectations": "Operations should implement monitoring procedures for all critical processes with documentation showing consistent monitoring at specified frequencies. Personnel should be trained on monitoring procedures and corrective action protocols, with records demonstrating processes remain in control and corrective actions are effective."
     },
     {
+      "id": "5.13.04",
       "code": "5.13.04",
+      "text": "Are there records (with corrective actions) that show anti-microbial (e.g., free chlorine, peroxyacetic acid) concentration testing of product contact water and ice solutions prior to start up and throughout the production runs?",
       "question": "Are there records (with corrective actions) that show anti-microbial (e.g., free chlorine, peroxyacetic acid) concentration testing of product contact water and ice solutions prior to start up and throughout the production runs?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["antimicrobial testing", "chlorine testing", "peroxyacetic acid", "water treatment", "ice solutions", "concentration monitoring", "startup verification"],
+      "mandatoryStatements": [
+        "Antimicrobial concentration testing records must be maintained for all product contact water and ice solutions",
+        "Testing must be performed prior to startup and throughout production runs at specified frequencies",
+        "Records must include corrective actions taken when antimicrobial concentrations are out of specification"
+      ],
+      "verificationExpectations": "Auditors will review antimicrobial testing records to confirm concentrations of chlorine, peroxyacetic acid, or other antimicrobials are tested before production begins and at regular intervals during production runs. Records should show target concentrations, actual test results, testing frequency, and documented corrective actions when levels are insufficient or excessive.",
+      "monitoringExpectations": "Operations should test antimicrobial concentrations in product contact water and ice solutions according to written procedures with immediate corrective action when out of specification. Testing equipment should be calibrated, personnel trained on testing methods, and adjustment procedures documented to restore proper antimicrobial levels."
     },
     {
+      "id": "5.13.05",
       "code": "5.13.05",
+      "text": "Are there records of monitoring for build-up of organic material (turbidity) and changing of recirculated and batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.)?",
       "question": "Are there records of monitoring for build-up of organic material (turbidity) and changing of recirculated and batch water systems (e.g., dump tanks, flumes, hydro vacuums, hydro coolers, etc.)?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["organic material", "turbidity monitoring", "water change-out", "recirculated water", "batch water", "dump tanks", "flumes", "water quality"],
+      "mandatoryStatements": [
+        "Records must document monitoring for organic material buildup in recirculated and batch water systems",
+        "Water change-out records must show when systems are changed according to established frequencies or turbidity limits",
+        "Monitoring must cover all product contact water systems including dump tanks, flumes, hydro vacuums, and hydro coolers"
+      ],
+      "verificationExpectations": "Auditors will review records showing organic material or turbidity is monitored in recirculated and batch water systems with documentation of when systems are changed out. Records should demonstrate water is changed according to time-based schedules or when turbidity/organic load exceeds acceptable limits, with documentation showing clean water meets quality standards.",
+      "monitoringExpectations": "Operations should monitor turbidity or organic material buildup throughout production shifts with water change-out occurring before antimicrobial efficacy is compromised. Change-out frequencies should be validated to ensure antimicrobial effectiveness is maintained and water quality remains acceptable throughout production runs."
     },
     {
+      "id": "5.13.06",
       "code": "5.13.06",
+      "text": "Are there records (with corrective actions) that show anti-microbial concentration testing of hand/foot/tool dip stations, and are there stock check and replenishment records for gel and spray stations?",
       "question": "Are there records (with corrective actions) that show anti-microbial concentration testing of hand/foot/tool dip stations, and are there stock check and replenishment records for gel and spray stations?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["dip stations", "hand sanitation", "foot dips", "tool dips", "antimicrobial testing", "gel stations", "spray stations", "replenishment"],
+      "mandatoryStatements": [
+        "Records must show antimicrobial concentrations are tested in hand, foot, and tool dip stations with corrective actions when out of spec",
+        "Stock check and replenishment records must be maintained for hand sanitizer gel and spray stations",
+        "Sanitation station monitoring must ensure adequate antimicrobial efficacy is maintained throughout operations"
+      ],
+      "verificationExpectations": "Auditors will review records showing antimicrobial concentrations in hand, foot, and tool dip stations are tested regularly with corrective actions documented when concentrations are inadequate. Stock check records for gel and spray stations should demonstrate adequate supplies are maintained with replenishment occurring before stations become empty or ineffective.",
+      "monitoringExpectations": "Operations should test dip station antimicrobial concentrations at the start of production and periodically throughout shifts, with immediate replenishment or replacement when out of specification. Gel and spray stations should be checked regularly to ensure adequate supply is available with timely replenishment to prevent periods without functional sanitation stations."
     },
     {
+      "id": "5.13.07",
       "code": "5.13.07",
+      "text": "Is there a tool accountability program for knives and similar cutting hand tools used in the production area?",
       "question": "Is there a tool accountability program for knives and similar cutting hand tools used in the production area?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["tool accountability", "knife control", "cutting tools", "tool management", "foreign material prevention", "tool inventory"],
+      "mandatoryStatements": [
+        "A tool accountability program must be implemented for knives and similar cutting hand tools in production areas",
+        "Program must ensure all tools are accounted for through check-in/check-out procedures or regular inventories",
+        "Missing tools must trigger search and investigation procedures to prevent foreign material contamination"
+      ],
+      "verificationExpectations": "Auditors will review the tool accountability program to confirm procedures exist for tracking knives and cutting tools used in production areas. Program should include tool inventory, assignment methods (shadow boards, check-out logs), regular accountability checks, and procedures for investigating and resolving missing tools before production resumes.",
+      "monitoringExpectations": "Operations should conduct tool accountability checks at frequencies appropriate to the risk including shift changes, breaks, and end of production. Missing tools should trigger immediate search procedures with production holds if tools cannot be located, and root cause investigation to prevent recurrence."
     },
     {
+      "id": "5.13.08",
       "code": "5.13.08",
+      "text": "Is there a pre-operation inspection log?",
       "question": "Is there a pre-operation inspection log?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["pre-operation inspection", "startup inspection", "sanitation verification", "equipment inspection", "facility readiness", "pre-op checklist"],
+      "mandatoryStatements": [
+        "A pre-operation inspection log must be completed before production begins each day or shift",
+        "Inspection must verify equipment is clean, sanitized, and in proper operating condition",
+        "Log must document facility conditions including sanitation, pest evidence, and environmental controls"
+      ],
+      "verificationExpectations": "Auditors will review pre-operation inspection logs to confirm inspections are completed before production starts verifying equipment cleanliness and sanitation, facility conditions, absence of pest evidence, proper functioning of critical equipment, and adequate environmental controls. Logs should be dated, signed, and show production does not begin until inspection is satisfactory.",
+      "monitoringExpectations": "Operations should complete pre-operation inspections using structured checklists covering all critical areas before production begins each day or shift. Deficiencies found during inspections must be corrected before production starts with documentation showing corrective actions were completed and verified."
     }
   ],
   "capaInject": [

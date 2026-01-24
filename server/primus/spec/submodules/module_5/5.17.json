@@ -12,40 +12,112 @@
   "description": "Requirements for temperature control documentation including temperature monitoring logs, cold chain management, equipment calibration, alarm systems, and corrective action records for temperature deviations",
   "requirements": [
     {
+      "id": "5.17.01",
       "code": "5.17.01",
+      "text": "Are there records of final product temperature checks for temperature sensitive product?",
       "question": "Are there records of final product temperature checks for temperature sensitive product?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["product temperature", "temperature checks", "temperature sensitive", "final product", "temperature monitoring", "cold chain"],
+      "mandatoryStatements": [
+        "Temperature check records must be maintained for all temperature-sensitive final products",
+        "Checks must verify products are at required temperatures before storage or distribution",
+        "Out-of-specification temperatures must trigger corrective actions to protect product safety and quality"
+      ],
+      "verificationExpectations": "Auditors will review final product temperature records to confirm temperature-sensitive products are checked before storage or loading with documentation showing product temperatures meet required specifications. Records should include product identification, lot numbers, temperature readings, time of check, and corrective actions when temperatures are out of specification.",
+      "monitoringExpectations": "Operations should verify final product temperatures regularly throughout production with immediate corrective action when products are warmer than required. Temperature monitoring equipment should be calibrated and personnel trained on proper temperature measurement techniques and response to temperature deviations."
     },
     {
+      "id": "5.17.02",
       "code": "5.17.02",
+      "text": "Are there temperature logs for the production area (if refrigerated)?",
       "question": "Are there temperature logs for the production area (if refrigerated)?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["production area temperature", "refrigerated production", "temperature logs", "area temperature", "environmental temperature"],
+      "mandatoryStatements": [
+        "Temperature logs must be maintained for refrigerated production areas documenting continuous or periodic monitoring",
+        "Logs must demonstrate production area temperatures remain within specified ranges during operations",
+        "Temperature deviations must be documented with corrective actions to restore proper conditions"
+      ],
+      "verificationExpectations": "Auditors will review temperature logs for refrigerated production areas to confirm temperatures are monitored continuously (via automated systems) or periodically (manual checks) throughout production shifts. Records should show temperature ranges are maintained within specifications with alarm events documented and investigated when automated systems are used.",
+      "monitoringExpectations": "Operations should monitor refrigerated production area temperatures with documentation showing consistent temperature control. Refrigeration equipment should be maintained to ensure adequate capacity and temperature deviations should trigger investigation and corrective action to restore proper conditions before production continues."
     },
     {
+      "id": "5.17.03",
       "code": "5.17.03",
+      "text": "Are there temperature logs for storage rooms?",
       "question": "Are there temperature logs for storage rooms?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["storage temperature", "storage rooms", "temperature logs", "cold storage", "refrigerated storage"],
+      "mandatoryStatements": [
+        "Temperature logs must be maintained for all refrigerated and frozen storage rooms",
+        "Monitoring must demonstrate storage temperatures remain within specified ranges to maintain product safety and quality",
+        "Temperature deviations must trigger corrective actions including product evaluation and equipment repair"
+      ],
+      "verificationExpectations": "Auditors will review storage room temperature logs to confirm refrigerated and frozen storage areas are monitored with documentation showing temperatures remain within specified ranges. Logs should include minimum/maximum temperatures, alarm events, and corrective actions when temperature deviations occur. Monitoring frequency should be adequate to detect excursions before products are adversely affected.",
+      "monitoringExpectations": "Operations should monitor storage room temperatures continuously with automated systems or manually multiple times per shift with documentation showing consistent temperature control. Products affected by temperature deviations should be evaluated for safety and quality with disposition based on time-temperature abuse assessment."
     },
     {
+      "id": "5.17.04",
       "code": "5.17.04",
+      "text": "Is there a documented procedure for checking truck trailer temperature and reviewing sanitary condition of truck trailers prior to loading?",
       "question": "Is there a documented procedure for checking truck trailer temperature and reviewing sanitary condition of truck trailers prior to loading?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["trailer inspection", "truck inspection", "sanitary condition", "trailer temperature", "pre-loading inspection", "vehicle cleanliness"],
+      "mandatoryStatements": [
+        "A documented procedure must define trailer inspection requirements before loading products",
+        "Procedure must address temperature verification, pre-cooling confirmation, and sanitary condition assessment",
+        "Trailers failing inspection criteria must be rejected with documentation provided to carriers"
+      ],
+      "verificationExpectations": "Auditors will review the procedure for trailer inspections to confirm it defines requirements for checking refrigeration unit operation, trailer temperature or pre-cooling verification, and sanitary condition assessment including absence of odors, debris, damage, pest evidence, and previous cargo residues. Procedure should specify rejection criteria and documentation requirements.",
+      "monitoringExpectations": "Operations should implement the trailer inspection procedure for all outbound loads with documentation showing inspections are performed before loading begins. Personnel should be trained on inspection criteria and rejection procedures with communication to carriers when trailers are rejected to drive continuous improvement."
     },
     {
+      "id": "5.17.05",
       "code": "5.17.05",
+      "text": "Are there records of shipping truck trailer (or other transportation systems) temperature checks, indicating the truck trailer temperature settings and that the truck trailer was pre-cooled prior to loading?",
       "question": "Are there records of shipping truck trailer (or other transportation systems) temperature checks, indicating the truck trailer temperature settings and that the truck trailer was pre-cooled prior to loading?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["trailer temperature", "pre-cooling", "temperature settings", "shipping trailers", "temperature verification", "trailer logs"],
+      "mandatoryStatements": [
+        "Records must document trailer temperature checks before loading including verification of pre-cooling and temperature settings",
+        "Trailers must be pre-cooled to required temperatures before products are loaded to maintain cold chain integrity",
+        "Temperature set points must be verified to match product requirements and refrigeration units must be operating properly"
+      ],
+      "verificationExpectations": "Auditors will review trailer temperature records to confirm trailers are inspected before loading with documentation showing trailer was pre-cooled to required temperature, refrigeration unit is set to correct temperature, and unit is operating properly. Records should include trailer identification, temperature readings, set point settings, and inspector identification.",
+      "monitoringExpectations": "Operations should verify trailer pre-cooling and temperature settings before loading with rejection of trailers that are not properly pre-cooled or have malfunctioning refrigeration units. Loading should not begin until trailer temperatures meet requirements to prevent product temperature abuse during loading."
     },
     {
+      "id": "5.17.06",
       "code": "5.17.06",
+      "text": "Are there sanitary condition logs for shipping truck trailers (or other transportation systems)?",
       "question": "Are there sanitary condition logs for shipping truck trailers (or other transportation systems)?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["trailer sanitation", "vehicle cleanliness", "sanitary condition logs", "trailer inspection", "transportation hygiene"],
+      "mandatoryStatements": [
+        "Sanitary condition logs must document inspection of trailers before loading for cleanliness and hygiene",
+        "Inspections must assess absence of debris, odors, pest evidence, damage, and previous cargo residues",
+        "Trailers with unacceptable sanitary conditions must be rejected and documented"
+      ],
+      "verificationExpectations": "Auditors will review sanitary condition logs for shipping trailers to confirm inspections document trailer cleanliness, absence of debris and odors, no pest evidence, structural integrity without holes or damage, and no residues from previous cargoes. Logs should show trailer identification, inspection date, findings, inspector identification, and rejection when conditions are unacceptable.",
+      "monitoringExpectations": "Operations should inspect trailer sanitary conditions before loading with consistent application of acceptance criteria. Rejected trailers should be documented with information provided to carriers to improve fleet cleanliness. Inspection criteria should address facility-specific concerns such as allergen cross-contact or odor absorption risks."
     }
   ],
   "capaInject": [

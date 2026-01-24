@@ -12,40 +12,160 @@
   "description": "Requirements for HACCP plan implementation including worker training, CCP operator competency, monitoring compliance, record-keeping, corrective action execution, and verification of plan effectiveness",
   "requirements": [
     {
+      "id": "6.03.01",
       "code": "6.03.01",
+      "text": "Is there documented evidence that all plant workers have attended a HACCP training, including specific training for CCP operators?",
       "question": "Is there documented evidence that all plant workers have attended a HACCP training, including specific training for CCP operators?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "worker training",
+        "HACCP awareness",
+        "CCP operator training",
+        "training records",
+        "employee education",
+        "competency development",
+        "food safety culture"
+      ],
+      "mandatoryStatements": [
+        "All plant workers must receive basic HACCP awareness training covering food safety principles and their role in the system",
+        "CCP operators must receive specialized training on their specific monitoring responsibilities, procedures, and importance",
+        "Training documentation must be maintained showing topics covered, dates, attendees, and training providers"
+      ],
+      "verificationExpectations": "Auditors will review training records to verify all plant workers have received HACCP awareness training appropriate to their roles. They will confirm CCP operators have received additional specialized training on their specific monitoring responsibilities including procedures, critical limits, equipment use, data recording, and corrective actions. The auditor will examine training documentation for completeness including training dates, topics covered, instructor qualifications, and employee signatures confirming attendance. Training materials and agendas may be reviewed to assess content adequacy. The auditor may interview workers to verify training was understood and retained.",
+      "monitoringExpectations": "Human resources and food safety management must maintain comprehensive training records for all plant personnel documenting HACCP awareness training and CCP-specific training. New employees must complete HACCP training during onboarding before assuming production responsibilities. CCP operators must complete specialized training before being authorized to conduct monitoring activities independently. Refresher training must be provided annually or when procedures change, new hazards are identified, or performance issues indicate training gaps. Training effectiveness should be assessed through testing, observation, or competency demonstrations. Management must track training completion rates and ensure no personnel work in CCP roles without current training documentation."
     },
     {
+      "id": "6.03.02",
       "code": "6.03.02",
+      "text": "Do CCP operators understand basic HACCP principles and their role in monitoring CCPs?",
       "question": "Do CCP operators understand basic HACCP principles and their role in monitoring CCPs?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "operator competency",
+        "HACCP understanding",
+        "monitoring role",
+        "food safety awareness",
+        "knowledge assessment",
+        "job comprehension",
+        "responsibility awareness"
+      ],
+      "mandatoryStatements": [
+        "CCP operators must demonstrate understanding of basic HACCP principles including hazard control and critical limit importance",
+        "Operators must understand their specific role in monitoring CCPs and why their activities are critical to food safety",
+        "Competency must be verified through observation, interviews, or testing to ensure operators can perform monitoring correctly"
+      ],
+      "verificationExpectations": "Auditors will interview CCP operators to assess their understanding of basic HACCP principles and their specific monitoring responsibilities. Questions will probe knowledge of what hazards are being controlled at their CCP, why critical limits are set at specific values, what they must monitor and how, what to do when deviations occur, and the food safety importance of their role. The auditor will observe operators conducting monitoring activities to verify they perform procedures correctly and understand the significance of their actions. Operators should be able to explain what they are doing, why it matters, and what happens if they don't perform monitoring properly.",
+      "monitoringExpectations": "Supervisors and quality assurance personnel must regularly assess CCP operator competency through direct observation, questioning, and review of monitoring records. When new operators are trained for CCP responsibilities, competency must be verified before they work independently through supervised monitoring periods and knowledge assessments. Ongoing competency should be monitored through supervision, record review for accuracy and completeness, and periodic retraining. When monitoring errors are identified, immediate retraining must occur with competency reverified before the operator resumes CCP duties. Regular toolbox talks or team meetings should reinforce HACCP principles and the critical importance of CCP monitoring to food safety. Management must ensure operators feel empowered to stop production or report problems when CCP control is lost."
     },
     {
+      "id": "6.03.03",
       "code": "6.03.03",
+      "text": "Are the CCP monitoring activities and frequencies in conformance with the HACCP Plan and CCP SOPs?",
       "question": "Are the CCP monitoring activities and frequencies in conformance with the HACCP Plan and CCP SOPs?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "monitoring compliance",
+        "procedure adherence",
+        "frequency compliance",
+        "HACCP plan implementation",
+        "SOP conformance",
+        "monitoring consistency",
+        "system execution"
+      ],
+      "mandatoryStatements": [
+        "CCP monitoring must be conducted exactly as specified in the HACCP Plan and SOPs including methods, parameters, and timing",
+        "Monitoring frequencies documented in the HACCP Plan must be followed without deviation or documentation of justification",
+        "Any deviations from planned monitoring activities or frequencies must be identified, investigated, and corrected immediately"
+      ],
+      "verificationExpectations": "Auditors will observe CCP monitoring activities during production to verify they are conducted exactly as documented in the HACCP Plan and SOPs. They will compare actual monitoring methods, parameters measured, equipment used, and frequencies against documented procedures. The auditor will review monitoring records to verify frequencies match those specified in the HACCP Plan. Time stamps on records will be examined to confirm monitoring occurs at designated intervals. Any gaps in monitoring, delayed checks, or deviations from documented procedures will be noted as non-conformances. The auditor will verify equipment used for monitoring is properly maintained and calibrated as required.",
+      "monitoringExpectations": "Supervisors must ensure CCP monitoring is conducted continuously according to HACCP Plan specifications without interruption or deviation. Daily supervision should include observation of monitoring activities to verify compliance with SOPs and proper technique. Monitoring records must be reviewed daily to confirm frequencies are met and no monitoring gaps exist. When production schedules change, equipment malfunctions, or staffing issues occur, monitoring must continue as required or production must be stopped until proper monitoring is restored. If monitoring frequency adjustments are necessary, the HACCP Plan must be formally revised with justification and approval before implementation. Equipment used for monitoring must be maintained in proper working condition with calibration current. Backup equipment and procedures must be available to maintain monitoring continuity during equipment failures."
     },
     {
+      "id": "6.03.04",
       "code": "6.03.04",
+      "text": "Are CCP monitoring records signed off (or initialed) by the operator(s) who are carrying out and recording the CCP check?",
       "question": "Are CCP monitoring records signed off (or initialed) by the operator(s) who are carrying out and recording the CCP check?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "record signatures",
+        "operator accountability",
+        "documentation authentication",
+        "monitoring verification",
+        "traceability",
+        "record integrity",
+        "responsibility acknowledgment"
+      ],
+      "mandatoryStatements": [
+        "Operators conducting CCP monitoring must sign or initial monitoring records at the time checks are performed",
+        "Signatures or initials must be legible and traceable to specific individuals through signature logs or personnel files",
+        "Records must not be pre-signed or signed by individuals who did not perform the actual monitoring activity"
+      ],
+      "verificationExpectations": "Auditors will examine CCP monitoring records to verify each entry is signed or initialed by the operator who conducted the monitoring and recorded the data. They will verify signatures are consistent with each entry and made at appropriate times corresponding to monitoring frequencies. The auditor will check signature logs or personnel files to confirm signatures can be traced to specific individuals. Pre-signed records, records signed by someone other than the monitoring operator, or missing signatures will be identified as non-conformances. The auditor may interview operators about their signature practices and verify they understand the importance of signing only their own work.",
+      "monitoringExpectations": "CCP operators must sign or initial each monitoring record immediately after conducting checks and recording data. Supervisors must review records daily to verify all entries are properly signed with no missing signatures or suspicious patterns. Signature logs must be maintained showing each operator's full signature and initials for verification purposes. Operators must be trained that signing records certifies they personally conducted the monitoring and recorded accurate data. Pre-signing blank forms or signing records for absent colleagues must be strictly prohibited with disciplinary consequences. For electronic recording systems, unique user logins must ensure data entries are traceable to specific individuals. When signature deficiencies are found, immediate investigation must determine if monitoring was actually performed and corrective actions implemented to prevent recurrence."
     },
     {
+      "id": "6.03.05",
       "code": "6.03.05",
+      "text": "Are the CCP records reviewed and signed off by the food safety supervisor and/or management (second signatory)?",
       "question": "Are the CCP records reviewed and signed off by the food safety supervisor and/or management (second signatory)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "supervisory review",
+        "management oversight",
+        "second signatory",
+        "record verification",
+        "independent review",
+        "quality assurance",
+        "oversight accountability"
+      ],
+      "mandatoryStatements": [
+        "CCP monitoring records must be reviewed and signed by food safety supervisors or management as verification of data accuracy",
+        "Supervisory review must occur within specified timeframes allowing timely identification of deviations or documentation issues",
+        "Second signatory review must verify monitoring compliance, data accuracy, and appropriate corrective actions for any deviations"
+      ],
+      "verificationExpectations": "Auditors will examine CCP monitoring records to verify they contain second signatures from food safety supervisors or management indicating independent review. They will verify review signatures are present for all monitoring periods with no gaps. The auditor will check that reviews occur within reasonable timeframes allowing timely identification of control issues. Review signatures should be distinct from operator signatures with reviewers identified through signature logs. The auditor may interview reviewers to verify they understand their responsibilities and actually examine records for accuracy, completeness, and deviations before signing. Evidence that reviews are substantive rather than perfunctory will be assessed.",
+      "monitoringExpectations": "Food safety supervisors or designated management personnel must review all CCP monitoring records at established frequencies, typically daily or per production shift. Reviews must verify monitoring was conducted at required frequencies, all data entries are present and legible, signatures are authentic, critical limits were maintained, and any deviations were properly addressed. Reviewers must sign records with date and time of review to document verification occurred. When reviewers identify missing data, questionable values, unsigned records, or deviations without corrective actions, immediate investigation and correction must occur. Review responsibilities must be clearly assigned with backup reviewers designated. Management must audit the review process periodically to ensure it is effective in identifying and correcting HACCP system issues. Electronic record systems should include workflow features ensuring records cannot be closed until supervisory review is completed."
     },
     {
+      "id": "6.03.06",
       "code": "6.03.06",
+      "text": "Is there a deviation record detailing documented corrective actions when a deviation/loss of control of a CCP occurs (a critical control limit is exceeded)?",
       "question": "Is there a deviation record detailing documented corrective actions when a deviation/loss of control of a CCP occurs (a critical control limit is exceeded)?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "deviation records",
+        "corrective action documentation",
+        "CCP exceedance",
+        "loss of control",
+        "non-conformance management",
+        "product disposition",
+        "root cause analysis"
+      ],
+      "mandatoryStatements": [
+        "Detailed deviation records must be created whenever CCP critical limits are exceeded documenting the deviation and corrective actions taken",
+        "Records must address identification of affected product, investigation of causes, actions to restore control, and product disposition decisions",
+        "Deviation documentation must show approval signatures from qualified personnel authorizing corrective actions and product release or rejection"
+      ],
+      "verificationExpectations": "Auditors will examine deviation records to verify they are created whenever CCP critical limits are exceeded. Records must contain comprehensive information including date and time of deviation, CCP affected, parameter that exceeded limits, extent and duration of deviation, amount of product affected, investigation findings, corrective actions taken to restore process control, product disposition decision (release, rework, or reject), approval signatures, and verification that corrective actions were effective. The auditor will verify deviation records are cross-referenced with CCP monitoring records. They will assess whether corrective actions were appropriate and timely. Recurring deviations should show evidence of root cause analysis and preventive measures.",
+      "monitoringExpectations": "When CCP critical limits are exceeded, operators must immediately notify supervision and initiate deviation documentation. A formal deviation record or corrective action form must be completed providing full details of the event. Affected product must be identified and segregated pending disposition decision by qualified personnel. Investigation must determine the cause of deviation including equipment malfunction, operator error, raw material issues, or other factors. Corrective actions must address both immediate control restoration and prevention of recurrence. Product safety must be evaluated based on deviation severity and duration with disposition decisions documented. Deviation records must be maintained in CCP files and periodically reviewed to identify patterns or recurring issues requiring system improvements. High-severity deviations or frequent deviations at the same CCP should trigger HACCP plan review and possible system modifications."
     }
   ],
   "capaInject": [

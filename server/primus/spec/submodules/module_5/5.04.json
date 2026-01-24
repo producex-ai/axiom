@@ -11,106 +11,191 @@
   "description": "Requirements for operational practices including dropped product protocols, product protection procedures, contamination prevention during operations, and proper handling of damaged or defective products",
   "requirements": [
     {
+      "id": "5.04.01",
       "code": "5.04.01",
-      "question": "Does the process flow, facility layout, worker control, utensil control, internal vehicle use, etc. ensure that finished products are not contaminated by raw products/ingredients?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Does the process flow, facility layout, worker control, utensil control, internal vehicle use, etc. ensure that finished products are not contaminated by raw products/ingredients?",
+      "keywords": ["process flow", "facility layout", "cross-contamination prevention", "worker control", "utensil segregation", "traffic flow"],
+      "mandatoryStatements": ["Process flow must prevent cross-contamination between raw and finished products", "Physical separation or time separation must be implemented", "Worker and equipment movement must be controlled", "Utensils must be segregated for raw vs. finished products", "Traffic patterns must support contamination prevention"],
+      "verificationExpectations": "Quarterly facility flow assessment for cross-contamination risks, annual review of traffic patterns and controls",
+      "monitoringExpectations": "Daily supervision of worker and equipment flow, weekly verification of process flow controls"
     },
     {
+      "id": "5.04.02",
       "code": "5.04.02",
-      "question": "Are all exposed materials (product, packaging, etc.) protected from overhead contamination (e.g., ladders, drive assemblies, condensation, lubricants, walkways, loose panels, degrading insulation, etc.)?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are all exposed materials (product, packaging, etc.) protected from overhead contamination (e.g., ladders, drive assemblies, condensation, lubricants, walkways, loose panels, degrading insulation, etc.)?",
+      "keywords": ["overhead protection", "overhead contamination", "condensation control", "lubricant control", "infrastructure maintenance"],
+      "mandatoryStatements": ["Exposed products and packaging must be protected from overhead contamination sources", "Drip shields or guards must be installed where needed", "Overhead infrastructure must be maintained to prevent degradation", "Condensation must be controlled and directed away from products", "Regular overhead inspections must be conducted"],
+      "verificationExpectations": "Monthly overhead infrastructure inspection, quarterly assessment of product protection measures",
+      "monitoringExpectations": "Daily visual verification of product protection, immediate response to overhead hazards"
     },
     {
+      "id": "5.04.03",
       "code": "5.04.03",
-      "question": "Are production areas clean and well maintained; especially lights, ducts, fans, floor areas by the walls and equipment, and other hard to reach areas?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are production areas clean and well maintained; especially lights, ducts, fans, floor areas by the walls and equipment, and other hard to reach areas?",
+      "keywords": ["production area cleanliness", "sanitation", "hard-to-reach areas", "overhead cleaning", "preventive maintenance"],
+      "mandatoryStatements": ["Production areas must be maintained in clean condition", "Cleaning schedules must include hard-to-reach areas", "Overhead structures, lights, and ducts must be included in cleaning", "Floor-wall junctions and areas around equipment must be cleaned regularly", "Master sanitation schedule must address all areas"],
+      "verificationExpectations": "Weekly inspection of production area cleanliness including hard-to-reach areas, monthly deep cleaning verification",
+      "monitoringExpectations": "Daily pre-operational inspections, immediate cleaning if deficiencies identified"
     },
     {
+      "id": "5.04.04",
       "code": "5.04.04",
-      "question": "Where facilities are not completely enclosed, are there measures in place to mitigate potential hazards?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Where facilities are not completely enclosed, are there measures in place to mitigate potential hazards?",
+      "keywords": ["open facilities", "semi-enclosed facilities", "hazard mitigation", "environmental controls", "pest exclusion"],
+      "mandatoryStatements": ["Open or semi-enclosed facilities must implement specific hazard mitigation measures", "Protection from weather, pests, and dust must be provided", "Environmental risk assessment must be documented", "Additional controls appropriate to exposure level must be implemented", "Regular monitoring must verify control effectiveness"],
+      "verificationExpectations": "Quarterly assessment of environmental hazard controls in open facilities, annual risk assessment review",
+      "monitoringExpectations": "Daily monitoring of environmental conditions and control measures, immediate response to adverse conditions"
     },
     {
+      "id": "5.04.05",
       "code": "5.04.05",
-      "question": "Is all re-work / re-packaging handled correctly?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is all re-work / re-packaging handled correctly?",
+      "keywords": ["rework", "re-packaging", "material handling", "traceability", "food safety assessment"],
+      "mandatoryStatements": ["Rework procedures must be documented and followed", "Rework materials must be properly identified and segregated", "Food safety assessment must be conducted before re-integration", "Traceability must be maintained through rework process", "Approval procedures must be established for rework use"],
+      "verificationExpectations": "Monthly audit of rework handling procedures and records, quarterly food safety assessment review",
+      "monitoringExpectations": "Daily supervision of rework handling, documentation verification for each rework batch"
     },
     {
+      "id": "5.04.06",
       "code": "5.04.06",
-      "question": "Are raw ingredients examined before use?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are raw ingredients examined before use?",
+      "keywords": ["ingredient inspection", "receiving inspection", "quality control", "defect detection", "supplier quality"],
+      "mandatoryStatements": ["Raw ingredients must be inspected before use", "Inspection criteria must be documented", "Defective materials must be rejected and segregated", "Inspection records must be maintained", "Supplier notification procedures must exist for quality issues"],
+      "verificationExpectations": "Quarterly audit of receiving inspection records and procedures, annual supplier quality review",
+      "monitoringExpectations": "100% visual inspection of raw ingredients before use, immediate rejection of defective materials"
     },
     {
+      "id": "5.04.07",
       "code": "5.04.07",
-      "question": "Are products produced on-site coded (carton and unit packaging) for the day of production?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are products produced on-site coded (carton and unit packaging) for the day of production?",
+      "keywords": ["production coding", "lot codes", "date codes", "traceability", "code verification"],
+      "mandatoryStatements": ["All products must be coded with production date on carton and unit packaging", "Coding equipment must be maintained and calibrated", "Code verification procedures must be implemented", "Coding must enable traceability and recall capability", "Missing or illegible codes must halt production until corrected"],
+      "verificationExpectations": "Daily verification of code legibility and accuracy, monthly coding equipment maintenance",
+      "monitoringExpectations": "Continuous verification of coding during production, immediate correction of coding failures"
     },
     {
+      "id": "5.04.08",
       "code": "5.04.08",
-      "question": "Are foreign material control methods (e.g., metal detectors, metal traps, magnets, x-ray machines, visual inspection, etc.) in place and regularly tested (where relevant) to ensure proper operation?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are foreign material control methods (e.g., metal detectors, metal traps, magnets, x-ray machines, visual inspection, etc.) in place and regularly tested (where relevant) to ensure proper operation?",
+      "keywords": ["foreign material control", "metal detectors", "x-ray inspection", "sensitivity testing", "device calibration"],
+      "mandatoryStatements": ["Foreign material control devices must be installed at appropriate points", "Regular sensitivity testing must be conducted and documented", "Test pieces must be maintained for verification", "Device failures must halt production until corrected", "Affected product must be evaluated if device fails testing"],
+      "verificationExpectations": "Monthly verification of test documentation completeness, quarterly calibration of detection equipment",
+      "monitoringExpectations": "Daily or per-shift sensitivity testing of foreign material detection devices, immediate response to failures"
     },
     {
+      "id": "5.04.09",
       "code": "5.04.09",
-      "question": "Does the facility use the appropriate method and equipment for verifying the concentrations of the anti-microbial chemical (product contact water, terminal sanitizers, dip stations, etc.) being used?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Does the facility use the appropriate method and equipment for verifying the concentrations of the anti-microbial chemical (product contact water, terminal sanitizers, dip stations, etc.) being used?",
+      "keywords": ["antimicrobial verification", "sanitizer concentration", "chemical testing", "test equipment", "concentration monitoring"],
+      "mandatoryStatements": ["Appropriate test methods and equipment must be used for chemical concentration verification", "Test equipment must be calibrated and maintained", "Concentration testing frequency must be established and followed", "Out-of-specification results must trigger immediate corrective action", "Testing records must be maintained and reviewed"],
+      "verificationExpectations": "Quarterly calibration of test equipment, monthly review of concentration testing records",
+      "monitoringExpectations": "Hourly or per-batch concentration testing during operations, immediate adjustment for out-of-spec results"
     },
     {
+      "id": "5.04.10",
       "code": "5.04.10",
-      "question": "Are hand washing stations adequate in number and appropriately located for worker access and monitoring usage?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are hand washing stations adequate in number and appropriately located for worker access and monitoring usage?",
+      "keywords": ["handwashing stations", "station adequacy", "station location", "worker access", "hygiene compliance"],
+      "mandatoryStatements": ["Handwashing stations must be adequate in number based on workforce", "Stations must be strategically located for easy worker access", "Stations must be positioned to enable supervisory monitoring", "Stations must be at facility entry points and after restroom use", "Additional stations must be added as workforce increases"],
+      "verificationExpectations": "Quarterly assessment of handwashing station adequacy and locations, annual facility layout review",
+      "monitoringExpectations": "Daily verification that all stations are accessible and functional, continuous observation of handwashing compliance"
     },
     {
+      "id": "5.04.11",
       "code": "5.04.11",
-      "question": "Are hand washing stations in working order, have water of suitable temperature and pressure, adequately stocked (e.g. disposable towels, unscented soap, etc.) and restricted to hand washing purposes only?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are hand washing stations in working order, have water of suitable temperature and pressure, adequately stocked (e.g. disposable towels, unscented soap, etc.) and restricted to hand washing purposes only?",
+      "keywords": ["station functionality", "water temperature", "station supplies", "soap dispensers", "hand drying"],
+      "mandatoryStatements": ["Handwashing stations must be fully functional with tempered running water", "Water temperature must be suitable for handwashing (warm, not scalding)", "Stations must be stocked with liquid soap and single-use towels", "Waste receptacles must be provided and emptied regularly", "Stations must be dedicated to handwashing only, not other uses"],
+      "verificationExpectations": "Daily functionality and stocking verification, monthly water temperature measurements",
+      "monitoringExpectations": "Multiple daily checks of station functionality and supplies, immediate repair and restocking as needed"
     },
     {
+      "id": "5.04.12",
       "code": "5.04.12",
-      "question": "Are toilet facilities adequate in number and location and are they appropriately stocked (e.g., toilet paper.)?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are toilet facilities adequate in number and location and are they appropriately stocked (e.g., toilet paper.)?",
+      "keywords": ["toilet facilities", "restroom adequacy", "facility location", "restroom supplies", "sanitary facilities"],
+      "mandatoryStatements": ["Toilet facilities must be adequate in number per regulatory requirements", "Facilities must be conveniently located to minimize worker travel time", "Facilities must be properly stocked with toilet paper and waste receptacles", "Facilities must be maintained in sanitary condition", "Regular cleaning schedules must be established and followed"],
+      "verificationExpectations": "Daily cleanliness inspection and supply verification, quarterly adequacy assessment based on workforce",
+      "monitoringExpectations": "Multiple daily checks of facility cleanliness and supplies, immediate cleaning and restocking as needed"
     },
     {
+      "id": "5.04.13",
       "code": "5.04.13",
-      "question": "Are secondary hand sanitation stations adequate in number and location, and are the stations maintained properly?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are secondary hand sanitation stations adequate in number and location, and are the stations maintained properly?",
+      "keywords": ["hand sanitizing stations", "alcohol sanitizers", "secondary sanitation", "station maintenance", "supplemental hygiene"],
+      "mandatoryStatements": ["Secondary hand sanitizing stations must supplement handwashing stations", "Stations must be adequate in number and strategically located", "Alcohol-based or approved sanitizers must be provided", "Stations must be maintained with supplies and functionality", "Stations supplement but do not replace handwashing requirements"],
+      "verificationExpectations": "Weekly verification of station functionality and supply levels, monthly adequacy assessment",
+      "monitoringExpectations": "Daily checks of sanitizer levels and dispenser function, immediate refilling as needed"
     },
     {
+      "id": "5.04.14",
       "code": "5.04.14",
-      "question": "Are foot baths, foamers or dry powdered sanitizing stations adequate in number and location, and are the stations maintained properly?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Are foot baths, foamers or dry powdered sanitizing stations adequate in number and location, and are the stations maintained properly?",
+      "keywords": ["foot sanitation", "foot baths", "sanitizing stations", "entry point sanitation", "chemical concentration"],
+      "mandatoryStatements": ["Foot sanitation stations must be located at facility entry points and between zones", "Chemical concentration or mat effectiveness must be maintained", "Regular cleaning and solution replacement must be performed", "Stations must be adequately sized to prevent bypassing", "Monitoring procedures must verify proper maintenance"],
+      "verificationExpectations": "Weekly chemical concentration testing or mat condition assessment, monthly station effectiveness review",
+      "monitoringExpectations": "Daily verification of chemical concentration or mat condition, solution changes per established schedule"
     },
     {
+      "id": "5.04.15",
       "code": "5.04.15",
-      "question": "Are single service containers used for their intended purpose only so that potential cross contamination is prevented?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are single service containers used for their intended purpose only so that potential cross contamination is prevented?",
+      "keywords": ["single-service containers", "disposable containers", "cross-contamination prevention", "container use", "one-time use"],
+      "mandatoryStatements": ["Single-service containers must be used only for their intended purpose", "Containers must be discarded after single use", "Reuse of single-service containers is prohibited", "Clear visual differentiation from reusable containers must exist", "Adequate supplies must be provided to prevent reuse temptation"],
+      "verificationExpectations": "Monthly audit of container use practices, quarterly training verification on proper container handling",
+      "monitoringExpectations": "Daily supervision of container use, immediate correction of any reuse attempts"
     },
     {
+      "id": "5.04.16",
       "code": "5.04.16",
-      "question": "Are re-usable containers cleanable and clearly designated for the specific purpose (trash, raw product, finished product, re-work, ice, etc.) such that cross contamination is prevented?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are re-usable containers cleanable and clearly designated for the specific purpose (trash, raw product, finished product, re-work, ice, etc.) such that cross contamination is prevented?",
+      "keywords": ["reusable containers", "container designation", "color-coding", "container cleaning", "cross-contamination prevention"],
+      "mandatoryStatements": ["Reusable containers must be constructed of cleanable materials", "Containers must be clearly designated and color-coded for specific purposes", "Designation must prevent use for incompatible materials", "Cleaning and sanitizing procedures must be established", "Container use must be monitored and audited regularly"],
+      "verificationExpectations": "Monthly audit of container designation and proper use, quarterly inspection of container condition and cleanability",
+      "monitoringExpectations": "Daily verification of proper container use and designation, immediate correction of misuse"
     },
     {
+      "id": "5.04.17",
       "code": "5.04.17",
-      "question": "Are devices used to measure, regulate or control temperature, pH, acidity, water activity, and other conditions that affect food safety, working properly and adequately maintained?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Are devices used to measure, regulate or control temperature, pH, acidity, water activity, and other conditions that affect food safety, working properly and adequately maintained?",
+      "keywords": ["monitoring devices", "measuring equipment", "calibration", "device maintenance", "critical parameters"],
+      "mandatoryStatements": ["Monitoring and control devices must be properly calibrated and maintained", "Calibration schedules must be established and followed", "Device malfunctions must be addressed immediately", "Backup measurement methods must be available", "Calibration records must be maintained with traceability to standards"],
+      "verificationExpectations": "Quarterly calibration verification against certified standards, annual review of all monitoring devices",
+      "monitoringExpectations": "Daily functionality checks of critical monitoring devices, immediate repair or replacement of malfunctioning equipment"
     }
   ],
   "mandatoryStatements": [

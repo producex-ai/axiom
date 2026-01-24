@@ -11,82 +11,147 @@
   "description": "Worker hygiene and practices requirements including handwashing compliance, prohibited activities in production areas, jewelry restrictions, illness reporting, visitor controls, and personal hygiene standards",
   "requirements": [
     {
+      "id": "5.05.01",
       "code": "5.05.01",
-      "question": "Are workers washing and sanitizing their hands before starting work each day, after using the restroom, after breaks, before putting on gloves and whenever hands may be contaminated?",
-      "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 15,
+      "text": "Are workers washing and sanitizing their hands before starting work each day, after using the restroom, after breaks, before putting on gloves and whenever hands may be contaminated?",
+      "keywords": ["handwashing", "hand hygiene", "worker hygiene", "contamination prevention", "critical handwashing moments"],
+      "mandatoryStatements": ["Workers must wash and sanitize hands before starting work each day", "Handwashing required after using restroom facilities and after breaks", "Hands must be washed before putting on gloves", "Handwashing required whenever hands may become contaminated", "Proper handwashing technique must be followed for minimum 20 seconds"],
+      "verificationExpectations": "Daily observation of handwashing compliance at critical moments, quarterly handwashing effectiveness audits",
+      "monitoringExpectations": "Continuous supervisory observation of handwashing compliance, immediate correction of non-compliance"
     },
     {
+      "id": "5.05.02",
       "code": "5.05.02",
-      "question": "Are workers' fingernails clean, short and free of nail polish?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are workers' fingernails clean, short and free of nail polish?",
+      "keywords": ["fingernails", "nail condition", "nail polish", "personal hygiene", "bacterial harborage"],
+      "mandatoryStatements": ["Fingernails must be kept clean and trimmed short", "Nail polish and artificial nails are prohibited", "Pre-shift inspections must verify fingernail condition", "Nail cleaning brushes must be provided at handwashing stations", "Workers unable to maintain standards must wear gloves"],
+      "verificationExpectations": "Daily pre-shift fingernail inspections documented, weekly spot checks during operations",
+      "monitoringExpectations": "Visual inspection during pre-shift checks, immediate correction required for non-compliance"
     },
     {
+      "id": "5.05.03",
       "code": "5.05.03",
-      "question": "Are workers who are working directly or indirectly with food, without evidence of boils, sores, open wounds and are not exhibiting signs of foodborne illness?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Are workers who are working directly or indirectly with food, without evidence of boils, sores, open wounds and are not exhibiting signs of foodborne illness?",
+      "keywords": ["worker health", "illness exclusion", "open wounds", "health screening", "illness reporting"],
+      "mandatoryStatements": ["Workers with boils, sores, or open wounds must be excluded from food handling", "Workers exhibiting illness symptoms must be excluded", "Illness reporting policy must be established and communicated", "Health screening must be conducted at start of shift", "Medical clearance required before return to work after illness"],
+      "verificationExpectations": "Daily health screening of all workers, monthly review of illness reporting compliance",
+      "monitoringExpectations": "Pre-shift health checks for all workers, immediate exclusion of ill or wounded workers"
     },
     {
+      "id": "5.05.04",
       "code": "5.05.04",
-      "question": "Are workers wearing effective hair restraints that contain all hair?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are workers wearing effective hair restraints that contain all hair?",
+      "keywords": ["hair restraints", "hairnets", "beard nets", "personal protective equipment", "contamination prevention"],
+      "mandatoryStatements": ["All workers in food production areas must wear effective hair restraints", "Hair restraints must fully contain all head and facial hair", "Beard nets required for workers with facial hair", "Pre-shift inspection must verify proper hair restraint use", "Hair restraints must be worn at all times in production areas"],
+      "verificationExpectations": "Daily pre-shift verification of hair restraint compliance, weekly observations during production",
+      "monitoringExpectations": "Continuous visual monitoring of hair restraint compliance, immediate correction of violations"
     },
     {
+      "id": "5.05.05",
       "code": "5.05.05",
-      "question": "Are workers not observed wearing watches, jewelry (plain band permitted), studs, false eyelashes, false fingernails, etc.?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are workers not observed wearing watches, jewelry (plain band permitted), studs, false eyelashes, false fingernails, etc.?",
+      "keywords": ["jewelry prohibition", "watches", "foreign material hazard", "personal items", "plain band exception"],
+      "mandatoryStatements": ["Jewelry, watches, false eyelashes, and false fingernails are prohibited", "Only plain wedding bands are permitted", "Pre-shift inspection must verify no prohibited items", "Lockers must be provided for storage of personal items", "Progressive discipline for repeated violations"],
+      "verificationExpectations": "Daily pre-shift inspection documented, weekly compliance audits during operations",
+      "monitoringExpectations": "Visual verification during pre-shift checks, continuous observation for compliance"
     },
     {
+      "id": "5.05.06",
       "code": "5.05.06",
-      "question": "Are all workers wearing protective outer garments suitable for the operation (e.g., appropriate clean clothes, smocks, aprons, sleeves, non-latex gloves)?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are all workers wearing protective outer garments suitable for the operation (e.g., appropriate clean clothes, smocks, aprons, sleeves, non-latex gloves)?",
+      "keywords": ["protective garments", "PPE", "smocks", "aprons", "gloves", "work clothing"],
+      "mandatoryStatements": ["Workers must wear clean protective outer garments appropriate to their work areas", "Smocks, aprons, sleeves, and gloves must be provided as needed", "Non-latex gloves preferred to prevent allergen concerns", "Garments must be clean at start of shift", "Daily garment inspection and exchange program must be implemented"],
+      "verificationExpectations": "Daily verification of garment cleanliness and suitability, weekly garment condition assessment",
+      "monitoringExpectations": "Pre-shift inspection of protective garments, continuous observation for garment condition"
     },
     {
+      "id": "5.05.07",
       "code": "5.05.07",
-      "question": "Do workers remove protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break, before using the toilets and when going home at the end of their shift?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Do workers remove protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break, before using the toilets and when going home at the end of their shift?",
+      "keywords": ["garment removal", "break procedures", "restroom procedures", "cross-contamination prevention"],
+      "mandatoryStatements": ["Protective garments must be removed before using toilet facilities", "Garments must be removed during breaks", "Garments must be removed at end of shift", "Designated storage areas must be provided for removed garments", "Signage must remind workers to remove garments"],
+      "verificationExpectations": "Weekly observation of garment removal compliance, monthly training reinforcement",
+      "monitoringExpectations": "Supervisory monitoring at break rooms and restroom entries, immediate correction of violations"
     },
     {
+      "id": "5.05.08",
       "code": "5.05.08",
-      "question": "Is there a designated area for workers to leave protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break and before using the toilets?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is there a designated area for workers to leave protective outer garments (e.g., smocks, aprons, sleeves, and gloves) when on break and before using the toilets?",
+      "keywords": ["garment storage", "designated areas", "garment hooks", "contamination prevention"],
+      "mandatoryStatements": ["Designated areas must be provided for garment storage during breaks and restroom use", "Storage areas must prevent garment contact with contamination sources", "Adequate hooks or racks must be provided", "Storage areas must be located adjacent to break rooms and restrooms", "Storage areas must be kept clean and organized"],
+      "verificationExpectations": "Monthly inspection of designated garment storage areas for adequacy and cleanliness",
+      "monitoringExpectations": "Daily verification that designated storage areas are being used properly"
     },
     {
+      "id": "5.05.09",
       "code": "5.05.09",
-      "question": "Are worker personal items being stored in such a way that they are not a potential food safety risk to product, equipment or materials?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are worker personal items being stored in such a way that they are not a potential food safety risk to product, equipment or materials?",
+      "keywords": ["personal belongings", "locker storage", "personal items", "contamination risk", "storage areas"],
+      "mandatoryStatements": ["Personal belongings must be stored in designated areas separate from production zones", "Lockers or storage facilities must be provided outside production areas", "Personal items prohibited in production areas", "Phones, bags, and personal food must be stored in lockers", "Regular inspections must verify no personal items in production areas"],
+      "verificationExpectations": "Monthly audit of locker facilities and compliance, weekly production area inspections for personal items",
+      "monitoringExpectations": "Daily verification that personal items are not in production areas, immediate removal if found"
     },
     {
+      "id": "5.05.10",
       "code": "5.05.10",
-      "question": "Is smoking, eating, chewing and drinking confined to designated areas, and spitting is prohibited in all areas?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Is smoking, eating, chewing and drinking confined to designated areas, and spitting is prohibited in all areas?",
+      "keywords": ["eating restrictions", "smoking policy", "designated break areas", "spitting prohibition", "contamination prevention"],
+      "mandatoryStatements": ["Eating, drinking (except water), smoking, and chewing restricted to designated break areas", "Spitting is strictly prohibited throughout all facility areas", "Designated areas must be clearly marked and separated from production", "Drinking water allowed only from designated clean sources", "Policy must be communicated and enforced"],
+      "verificationExpectations": "Monthly compliance audits, quarterly policy communication verification",
+      "monitoringExpectations": "Continuous supervisory monitoring for violations, immediate enforcement action"
     },
     {
+      "id": "5.05.11",
       "code": "5.05.11",
-      "question": "Is fresh potable drinking water in clean containers readily accessible to workers?",
-      "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 10,
+      "text": "Is fresh potable drinking water in clean containers readily accessible to workers?",
+      "keywords": ["drinking water", "potable water", "worker hydration", "water access", "clean containers"],
+      "mandatoryStatements": ["Fresh potable drinking water must be readily accessible to all workers", "Water must be provided in clean, covered containers or fountains", "Single-use cups must be provided if using communal containers", "Water sources must be maintained in sanitary condition", "Adequate number of water access points for workforce size"],
+      "verificationExpectations": "Daily verification of water availability and container cleanliness, monthly water quality testing",
+      "monitoringExpectations": "Multiple daily checks of water availability and cleanliness, immediate refilling and cleaning as needed"
     },
     {
+      "id": "5.05.12",
       "code": "5.05.12",
-      "question": "Are all items removed from garment (shirt, blouse, etc.) top pockets, and unsecured items are not worn (e.g., pens, glasses on top of the head, Bluetooth devices, etc.)?",
-      "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 3,
+      "text": "Are all items removed from garment (shirt, blouse, etc.) top pockets, and unsecured items are not worn (e.g., pens, glasses on top of the head, Bluetooth devices, etc.)?",
+      "keywords": ["pocket items", "unsecured items", "foreign material hazard", "personal items", "glasses security"],
+      "mandatoryStatements": ["Items must be removed from shirt and apron pockets", "Pens, tools, and thermometers must be securely attached or stored", "Glasses, Bluetooth devices, and unsecured items must not be worn on head", "Pocketless garments or secured pocket flaps preferred", "Pre-shift inspection must verify no unsecured items"],
+      "verificationExpectations": "Daily pre-shift inspection for unsecured items, weekly compliance audits",
+      "monitoringExpectations": "Visual verification during pre-shift checks, continuous observation for loose items"
     },
     {
+      "id": "5.05.13",
       "code": "5.05.13",
-      "question": "Are first aid kits adequately stocked and readily available to workers in the facility, and are blue band aids used?",
-      "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "points": 5,
+      "text": "Are first aid kits adequately stocked and readily available to workers in the facility, and are blue band aids used?",
+      "keywords": ["first aid kits", "blue band-aids", "metal-detectable bandages", "first aid supplies", "kit accessibility"],
+      "mandatoryStatements": ["First aid kits must be adequately stocked and readily accessible", "Blue-colored or metal-detectable bandages must be used", "Kits must include antiseptic, gloves, and related supplies", "Monthly inspections must verify kit completeness", "Kit locations must be posted on facility maps"],
+      "verificationExpectations": "Monthly first aid kit inspection and restocking, quarterly kit location adequacy assessment",
+      "monitoringExpectations": "Weekly verification of kit accessibility and blue bandage availability, immediate restocking as needed"
     }
   ],
   "mandatoryStatements": [

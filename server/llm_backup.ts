@@ -95,24 +95,12 @@ function extractRequirementCode(questionId: string): string | null {
  *
  * @param requirementText - The requirement description or question text
  * @param requirementCode - The requirement code (e.g., "1.01.01")
- * @param moduleNumber - Module number (e.g., "1", "5", "7")
  * @returns Section number (1-15) where this requirement should appear
  */
 function determineTargetSection(
   requirementText: string,
   requirementCode: string,
-  moduleNumber: string,
 ): number {
-  // For Modules 1-6: All Primus requirement implementations go to Section 8 (PROCEDURES)
-  // This matches real-world Primus GFS SOP structure where:
-  // - Sections 1-7 are narrative only
-  // - Section 8 contains all requirement implementations
-  // - Sections 9-12 reference procedures but don't restate requirements
-  if (moduleNumber !== "7") {
-    return 8;
-  }
-
-  // Module 7 (Food Safety Plan) has different placement rules
   const text = requirementText.toLowerCase();
 
   // Deterministic rules based on keywords (sorted by priority)
@@ -344,7 +332,7 @@ function mapAnswersToRequirements(
       requirement?.text || requirement?.required || question.question;
 
     // Determine target section using deterministic rules
-    const sectionNumber = determineTargetSection(requirementText, code, moduleNumber);
+    const sectionNumber = determineTargetSection(requirementText, code);
 
     mappings.push({
       code,
@@ -365,519 +353,6 @@ function mapAnswersToRequirements(
 
   console.log(`[MAPPING] Generated ${mappings.length} requirement mappings`);
   return mappings;
-}
-
-/**
- * Strip generation commentary and internal instructions from LLM output
- * Removes STEP 1, STEP 2, skeleton-first artifacts, and planning commentary
- *
- * @param document - Generated document text
- * @returns Document with all generation commentary removed
- */
-function stripGenerationCommentary(document: string): string {
-  let cleaned = document;
-
-  // Remove section index/outline that appears before actual SOP content
-  // Pattern: "1. TITLE & DOCUMENT CONTROL\n2. PURPOSE\n3. SCOPE..." at the very top
-  // This should appear BEFORE "STANDARD OPERATING PROCEDURE" or before "1. TITLE"
-  const sectionIndexPattern = /^(?:[\s\S]*?)?(?:1\.\s+TITLE[^\n]*\n2\.\s+PURPOSE[^\n]*\n3\.\s+SCOPE[^\n]*\n[\s\S]*?)(?=\n\n+(?:STANDARD OPERATING PROCEDURE|## 1\.|1\.\s+TITLE & DOCUMENT CONTROL))/i;
-  cleaned = cleaned.replace(sectionIndexPattern, "");
-
-  // Remove standalone section lists (numbered 1-15) before main content
-  cleaned = cleaned.replace(
-    /^(?:1\.\s+[A-Z][^\n]*\n){5,15}(?=\n\n)/gim,
-    "",
-  );
-
-  // Remove STEP 1/STEP 2 commentary blocks
-  // Pattern: Lines starting with "STEP X:" or containing skeleton instructions
-  cleaned = cleaned.replace(/^STEP \d+:.*$/gim, "");
-  cleaned = cleaned.replace(/STEP \d+:.*$/gm, "");
-
-  // Remove skeleton-first generation instructions
-  cleaned = cleaned.replace(
-    /━+\s*STEP \d+:.*?━+[\s\S]*?(?=\n\d+\.\s+[A-Z]|$)/gi,
-    "",
-  );
-
-  // Remove common generation planning phrases
-  const planningPhrases = [
-    /You MUST output ALL 15 section headers FIRST.*/gi,
-    /DO NOT add any prose.*in STEP \d+/gi,
-    /ONLY AFTER ALL 15 SECTION HEADERS EXIST.*/gi,
-    /before finishing generation.*/gi,
-    /This guarantees Section \d+ EXISTS.*/gi,
-  ];
-
-  for (const phrase of planningPhrases) {
-    cleaned = cleaned.replace(phrase, "");
-  }
-
-  // Remove instructional block headers (with box drawing characters)
-  cleaned = cleaned.replace(/⚡+.*?⚡+/g, "");
-  cleaned = cleaned.replace(/━{10,}/g, "");
-  cleaned = cleaned.replace(/═{10,}/g, "");
-
-  // Remove verification checklists ("☐ ### X.XX.XX - header present")
-  cleaned = cleaned.replace(/☐.*$/gm, "");
-
-  // Clean up resulting multiple blank lines
-  cleaned = cleaned.replace(/\n{4,}/g, "\n\n\n");
-
-  return cleaned.trim();
-}
-
-/**
- * Move requirement blocks from Section 2 (Purpose) to Section 8 (Procedures)
- * Section 2 should contain only narrative intent, not requirement implementations
- * 
- * @param document - Generated document text
- * @returns Document with requirements moved to proper section
- */
-function moveRequirementsFromPurpose(document: string): string {
-  // Find Section 2 boundaries
-  const section2Start = document.search(/^2\.\s+PURPOSE/im);
-  if (section2Start === -1) {
-    return document; // Section 2 not found
-  }
-
-  // Find Section 3 start (end of Section 2)
-  const section3Start = document.search(/^3\.\s+SCOPE/im);
-  if (section3Start === -1) {
-    return document; // Section 3 not found
-  }
-
-  const beforeSection2 = document.slice(0, section2Start);
-  const section2Content = document.slice(section2Start, section3Start);
-  const afterSection2 = document.slice(section3Start);
-
-  // Find requirement blocks in Section 2 (### X.XX.XX - Title)
-  const requirementPattern = /###\s+(\d+\.\d+\.\d+[a-z]?)\s+-\s+([^\n]+)[\s\S]*?(?=###\s+\d+\.\d+\.\d+|^\d+\.|$)/gim;
-  const requirementBlocks: string[] = [];
-  let cleanedSection2 = section2Content;
-
-  // Extract requirement blocks from Section 2
-  let match;
-  while ((match = requirementPattern.exec(section2Content)) !== null) {
-    requirementBlocks.push(match[0]);
-    cleanedSection2 = cleanedSection2.replace(match[0], "");
-  }
-
-  if (requirementBlocks.length === 0) {
-    return document; // No requirements found in Section 2
-  }
-
-  console.log(
-    `[CLEANUP] Moving ${requirementBlocks.length} requirement block(s) from Section 2 to Section 8`,
-  );
-
-  // Clean up Section 2 (remove extra blank lines)
-  cleanedSection2 = cleanedSection2.replace(/\n{3,}/g, "\n\n");
-
-  // Find Section 8 end (before Section 9)
-  const section8Match = afterSection2.match(/^8\.\s+PROCEDURES[\s\S]*?(?=^9\.\s+MONITORING)/im);
-  if (!section8Match) {
-    console.warn("[CLEANUP] Section 8 not found, cannot move requirements");
-    return document; // Cannot move without Section 8
-  }
-
-  const section8End = section8Match.index! + section8Match[0].length;
-  const beforeSection9 = afterSection2.slice(0, section8End);
-  const afterSection8 = afterSection2.slice(section8End);
-
-  // Insert requirement blocks at end of Section 8
-  const requirementsToInsert = "\n\n" + requirementBlocks.join("\n\n");
-  const updatedSection8 = beforeSection9 + requirementsToInsert;
-
-  return beforeSection2 + cleanedSection2 + updatedSection8 + afterSection8;
-}
-
-/**
- * Normalize requirement titles to ensure they are clear and complete
- * Fixes truncated titles and ensures consistent formatting
- * 
- * @param document - Generated document text
- * @param mappings - Requirement mappings with question text for title generation
- * @returns Document with normalized requirement titles
- */
-function normalizeRequirementTitles(
-  document: string,
-  mappings: RequirementMapping[],
-): string {
-  let normalized = document;
-
-  for (const mapping of mappings) {
-    const { code, question, requirementText } = mapping;
-
-    // Find existing header
-    const escapedCode = code.replace(/\./g, "\\.");
-    const headerPattern = new RegExp(
-      `###\\s+${escapedCode}\\s+-\\s+([^\\n]+)`,
-      "gi",
-    );
-
-    const match = normalized.match(headerPattern);
-    if (!match) continue;
-
-    const currentTitle = match[0].split(" - ")[1]?.trim();
-    if (!currentTitle) continue;
-
-    // Check if title is truncated or incomplete
-    // Detect: very short titles, trailing conjunctions, single letters, or ellipsis
-    const cutOffWords = /\b(and|or|for|of|the|with|f|t|a|in|on|at|to|is|are)$/i;
-    const isTruncated =
-      currentTitle.endsWith("...") ||
-      currentTitle.length < 20 ||
-      cutOffWords.test(currentTitle) ||
-      /\s[a-z]$/i.test(currentTitle); // Ends with space + single letter
-
-    if (isTruncated) {
-      // Generate better title from requirement text or question
-      let betterTitle = requirementText.split(/[.!?]/)[0].trim();
-      if (betterTitle.length > 60) {
-        // Use question as fallback
-        betterTitle = question.split("?")[0].replace(/^(What|How|Is|Are|Does|Do|When|Where|Why)\s+/i, "");
-      }
-
-      // Capitalize first letter
-      betterTitle = betterTitle.charAt(0).toUpperCase() + betterTitle.slice(1);
-
-      // Truncate if still too long (max 60 chars)
-      if (betterTitle.length > 60) {
-        betterTitle = betterTitle.slice(0, 57) + "...";
-      }
-
-      const newHeader = `### ${code} - ${betterTitle}`;
-      normalized = normalized.replace(headerPattern, newHeader);
-
-      console.log(
-        `[CLEANUP] Normalized title for ${code}: "${currentTitle}" → "${betterTitle}"`,
-      );
-    }
-  }
-
-  return normalized;
-}
-
-/**
- * Primus GFS Audit Readiness Check
- * Evaluates document against REAL-WORLD Primus GFS audit expectations
- * 
- * AUDIT-READY CRITERIA (as evaluated by a Primus GFS auditor):
- * 
- * 1. REQUIREMENT COVERAGE
- *    - Every Primus requirement code appears AT LEAST ONCE in the document
- *    - Requirement may appear across multiple sections (Procedures, Monitoring, Verification, Hazard)
- *    - This is NORMAL and EXPECTED in real Primus GFS documentation
- * 
- * 2. REQUIREMENT IMPLEMENTATION
- *    - Each requirement includes:
- *      a) A clear requirement statement (what Primus GFS requires)
- *      b) An implementation description (how the facility meets it)
- *    - Monitoring and verification MAY appear in separate sections (Sections 9, 10)
- *    - This does NOT constitute a "duplicate" - it's proper SOP structure
- * 
- * 3. TRACEABILITY
- *    - A compliance crosswalk exists (typically Section 14)
- *    - Maps each requirement code → implementing section(s) → evidence
- *    - Enables auditor to quickly locate implementation details
- * 
- * 4. CONTRADICTION DETECTION (not yet implemented)
- *    - Would flag if the same requirement has mutually exclusive implementations
- *    - Example: "Temperature maintained at 40°F" AND "Temperature maintained at 50°F"
- *    - Note: Multiple references are NOT contradictions
- * 
- * WHAT THIS CHECK DOES NOT DO:
- * - Does NOT require requirements to appear only once
- * - Does NOT fail if a requirement appears in Monitoring or Verification
- * - Does NOT enforce "Section 8 only" rules (these don't exist in Primus GFS)
- * - Does NOT require proximity of answers to headers
- * 
- * @param document - Generated document text
- * @param mappings - Requirement mappings with answers
- * @param moduleNumber - Module number (e.g., "1", "5", "6")
- * @returns Audit readiness result with coverage, traceability, and quality metrics
- */
-function checkPrimusAuditReadiness(
-  document: string,
-  mappings: RequirementMapping[],
-  moduleNumber: string,
-): {
-  auditReady: boolean;
-  coverage: { total: number; found: number; missing: string[] };
-  traceability: { hasCrosswalk: boolean; crosswalkLocation?: string };
-  multipleReferences: { code: string; count: number }[]; // Renamed from 'duplicates'
-  issues: string[];
-} {
-  const issues: string[] = [];
-  const missing: string[] = [];
-  const multipleReferences: { code: string; count: number }[] = [];
-
-  // ══════════════════════════════════════════════════════════════════════
-  // AUDIT RULE 1: REQUIREMENT COVERAGE
-  // ══════════════════════════════════════════════════════════════════════
-  // Every Primus requirement code must appear at least once in the document.
-  // Auditors check that all applicable requirements are addressed.
-  
-  const requirementCodes = mappings.map((m) => m.code);
-  const foundCodes = new Set<string>();
-
-  for (const code of requirementCodes) {
-    // Search for requirement code anywhere in document
-    // Accept both:
-    // - Header format: "### X.XX.xx - Title"
-    // - Inline references: "X.XX.xx" or "Requirement X.XX.xx"
-    const escapedCode = code.replace(/\./g, "\\.");
-    const codePattern = new RegExp(
-      `(###\\s+|Requirement\\s+)?${escapedCode}(\\s+-|:|\\s|$)`,
-      "i",
-    );
-
-    if (codePattern.test(document)) {
-      foundCodes.add(code);
-    } else {
-      missing.push(code);
-    }
-  }
-
-  if (missing.length > 0) {
-    issues.push(
-      `Missing ${missing.length} requirement(s): ${missing.slice(0, 5).join(", ")}${missing.length > 5 ? "..." : ""}`,
-    );
-  }
-
-  // ══════════════════════════════════════════════════════════════════════
-  // AUDIT RULE 2: MULTIPLE REFERENCES (NOT A FAILURE CONDITION)
-  // ══════════════════════════════════════════════════════════════════════
-  // Track requirements that appear in multiple locations.
-  // 
-  // IMPORTANT: This is NOT an error. In real Primus GFS documentation:
-  // - A requirement may be defined in Section 8 (Procedures)
-  // - Referenced in Section 9 (Monitoring)
-  // - Referenced in Section 10 (Verification)
-  // - Referenced in Section 7 (Hazard Analysis)
-  // 
-  // Auditors EXPECT this cross-referencing for traceability.
-  // We track it for metrics only, NOT as a failure condition.
-  
-  for (const code of requirementCodes) {
-    const escapedCode = code.replace(/\./g, "\\.");
-    const headerPattern = new RegExp(`###\\s+${escapedCode}\\s+-`, "gi");
-    const matches = document.match(headerPattern);
-
-    if (matches && matches.length > 1) {
-      // Log multiple references for observability
-      multipleReferences.push({ code, count: matches.length });
-      // NOTE: We do NOT add this to 'issues' - it's not a problem
-    }
-  }
-
-  // Log multiple references for observability (INFO level, not WARNING)
-  if (multipleReferences.length > 0) {
-    console.log(
-      `[AUDIT] INFO: ${multipleReferences.length} requirement(s) referenced in multiple sections (normal for cross-referencing):`,
-      multipleReferences.slice(0, 3).map((r) => `${r.code} (${r.count}x)`),
-    );
-  }
-
-  // ══════════════════════════════════════════════════════════════════════
-  // AUDIT RULE 3: COMPLIANCE CROSSWALK
-  // ══════════════════════════════════════════════════════════════════════
-  // Document must include a crosswalk table mapping requirements to sections.
-  // This enables auditors to quickly navigate to implementation details.
-  
-  const hasCrosswalk =
-    /14\.\s*COMPLIANCE\s+CROSSWALK/i.test(document) ||
-    /COMPLIANCE\s+CROSSWALK/i.test(document);
-  let crosswalkLocation: string | undefined;
-
-  if (hasCrosswalk) {
-    if (/14\.\s*COMPLIANCE\s+CROSSWALK/i.test(document)) {
-      crosswalkLocation = "Section 14";
-    } else {
-      crosswalkLocation = "Document body";
-    }
-  } else {
-    issues.push("Missing compliance crosswalk (Section 14)");
-  }
-
-  // ══════════════════════════════════════════════════════════════════════
-  // AUDIT RULE 4: DOCUMENT STRUCTURE (SOFT CHECK)
-  // ══════════════════════════════════════════════════════════════════════
-  // Check that key sections exist. This is advisory - Primus GFS expects
-  // these sections but doesn't dictate WHERE requirements appear within them.
-  
-  const expectedSections = [
-    { number: 7, name: "HAZARD", optional: false },
-    { number: 8, name: "PROCEDURES", optional: false },
-    { number: 9, name: "MONITORING", optional: false },
-    { number: 10, name: "VERIFICATION", optional: false },
-    { number: 11, name: "CAPA", optional: false },
-  ];
-
-  for (const section of expectedSections) {
-    const sectionPattern = new RegExp(
-      `${section.number}\\.\\s+[^\\n]*${section.name}`,
-      "i",
-    );
-    if (!sectionPattern.test(document)) {
-      issues.push(`Section ${section.number} (${section.name}) not found`);
-    }
-  }
-
-  // ══════════════════════════════════════════════════════════════════════
-  // AUDIT READINESS DETERMINATION
-  // ══════════════════════════════════════════════════════════════════════
-  // Document is audit-ready if:
-  // 1. All requirements are covered (missing.length === 0)
-  // 2. Crosswalk exists (hasCrosswalk === true)
-  // 3. No structural issues (issues.length === 0)
-  // 
-  // Note: Multiple references do NOT affect audit readiness.
-  
-  const auditReady =
-    missing.length === 0 &&
-    hasCrosswalk &&
-    issues.length === 0;
-
-  console.log(`[AUDIT] Primus GFS Audit Readiness Check:`, {
-    total: requirementCodes.length,
-    found: foundCodes.size,
-    missing: missing.length,
-    multipleReferences: multipleReferences.length,
-    hasCrosswalk,
-    auditReady,
-  });
-
-  return {
-    auditReady,
-    coverage: {
-      total: requirementCodes.length,
-      found: foundCodes.size,
-      missing,
-    },
-    traceability: {
-      hasCrosswalk,
-      crosswalkLocation,
-    },
-    multipleReferences,
-    issues,
-  };
-}
-
-/**
- * Normalize requirement headers in Section 8 for Modules 1-6
- * Inserts missing "### X.XX.xx - Title" headers where content exists
- * but the exact header format was omitted by the LLM
- *
- * @param document - Generated document text
- * @param mappings - Requirement mappings from mapAnswersToRequirements()
- * @param moduleNumber - Module number
- * @returns Document with normalized headers
- */
-function normalizeRequirementHeaders(
-  document: string,
-  mappings: RequirementMapping[],
-  moduleNumber: string,
-): string {
-  // Only apply to Modules 1-6 (Module 7 has different rules)
-  if (moduleNumber === "7") {
-    return document;
-  }
-
-  if (mappings.length === 0) {
-    return document;
-  }
-
-  // Extract Section 8 boundaries
-  //const section8Start = document.search(/^\s*##\s*8\.\s+PROCEDURES/im);
-  const section8Start = document.search(/^\s*##\s*8\.\s+PROCEDURES/im);
-
-  if (section8Start === -1) {
-    console.warn("[NORMALIZE] Section 8 not found, skipping normalization");
-    return document;
-  }
-
-  // Find Section 9 start (or end of document)
-  //const section9Start = document.search(/^(?:##\s*)?9\.\s+MONITORING/im);
-  const section9Start = document.search(/^\s*##\s*9\.\s+MONITORING/im);
-  const section8End = section9Start !== -1 ? section9Start : document.length;
-
-  const beforeSection8 = document.slice(0, section8Start);
-  const section8Content = document.slice(section8Start, section8End);
-  const afterSection8 = document.slice(section8End);
-
-  let normalizedSection8 = section8Content;
-  let insertionsMade = 0;
-
-  // Process each requirement mapping
-  for (const mapping of mappings) {
-    const { code, answer, question, requirementText } = mapping;
-
-    // Check if exact header already exists
-    const escapedCode = code.replace(/\./g, "\\.");
-    const headerPattern = new RegExp(`###\\s+${escapedCode}\\s+-`, "i");
-
-    if (headerPattern.test(normalizedSection8)) {
-      // Header already exists, skip
-      continue;
-    }
-
-    // Header missing - look for semantic content
-    const answerStr = formatAnswerForDisplay(answer).toLowerCase();
-    const questionKeywords = question
-      .toLowerCase()
-      .split(/\s+/)
-      .filter((w) => w.length > 4)
-      .slice(0, 3);
-
-    // Search for content that likely relates to this requirement
-    // Look for paragraphs containing the answer value or question keywords
-    const paragraphs = normalizedSection8.split(/\n\n+/);
-
-    for (let i = 0; i < paragraphs.length; i++) {
-      const para = paragraphs[i];
-      const paraLower = para.toLowerCase();
-
-      // Skip if this paragraph is already a different requirement header
-      if (/^###\s+\d+\.\d+\.\d+/.test(para.trim())) {
-        continue;
-      }
-
-      // Check if this paragraph contains the answer or question keywords
-      const hasAnswer = answerStr.length > 3 && paraLower.includes(answerStr);
-      const hasKeywords =
-        questionKeywords.length > 0 &&
-        questionKeywords.some((kw) => paraLower.includes(kw));
-
-      if (hasAnswer || hasKeywords) {
-        // Found likely content for this requirement
-        // Generate header from requirement text
-        const titleBase =
-          requirementText.split(/[.!?]/)[0].trim() || question.split("?")[0];
-        const title = titleBase.slice(0, 60);
-        const header = `### ${code} - ${title}`;
-
-        // Insert header before this paragraph
-        paragraphs[i] = `${header}\n\n${para}`;
-
-        console.log(`[NORMALIZE] Inserted missing header for ${code}`);
-        insertionsMade++;
-
-        // Reconstruct section
-        normalizedSection8 = paragraphs.join("\n\n");
-        break; // Only insert once per requirement
-      }
-    }
-  }
-
-  if (insertionsMade > 0) {
-    console.log(
-      `[NORMALIZE] ✅ Inserted ${insertionsMade} missing requirement headers`,
-    );
-  }
-
-  return beforeSection8 + normalizedSection8 + afterSection8;
 }
 
 /**
@@ -1691,404 +1166,6 @@ function buildEnhancedSpecDrivenPrompt(
     return basePrompt;
   }
 
-  // STRUCTURAL DETERMINISM CONTRACT (Claude Opus 4.5)
-  // Document-type aware: Module 7 has different rules than Modules 1-6
-  const isModule7 = moduleNumber === "7";
-
-  const structuralContract = isModule7
-    ? `
-⚡⚡⚡ HARD GENERATION CONTRACT – REQUIREMENT STRUCTURE ⚡⚡⚡
-====================================================================
-
-DOCUMENT TYPE: FOOD SAFETY PLAN (Module 7)
-STRUCTURAL RULES (HIGHEST PRIORITY):
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 1: SKELETON-FIRST GENERATION (MANDATORY, NO EXCEPTIONS)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-You MUST output ALL 15 section headers FIRST, IN ORDER,
-with NO CONTENT under any section.
-
-You MUST output exactly:
-
-1. TITLE & DOCUMENT CONTROL
-2. PURPOSE / OBJECTIVE
-3. SCOPE
-4. DEFINITIONS & ABBREVIATIONS
-5. ROLES & RESPONSIBILITIES
-6. PREREQUISITES & REFERENCE DOCUMENTS
-7. HAZARD / RISK ANALYSIS
-8. PROCEDURES
-9. MONITORING PLAN
-10. VERIFICATION & VALIDATION ACTIVITIES
-11. CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL
-12. TRACEABILITY & RECALL ELEMENTS
-13. RECORD RETENTION & DOCUMENT CONTROL
-14. COMPLIANCE CROSSWALK
-15. REVISION HISTORY & APPROVAL SIGNATURES
-
-DO NOT add any prose, bullet points, or paragraphs in STEP 1.
-DO NOT skip any section headers.
-DO NOT combine sections.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 2: FILL CONTENT (ONLY AFTER ALL 15 HEADERS EXIST)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-ONLY AFTER ALL 15 SECTION HEADERS EXIST,
-begin filling content under each section in order.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REQUIREMENT PLACEMENT RULES (MODULE 7 FOOD SAFETY PLAN)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Primus requirement blocks MAY appear ONLY in these sections:
-- Section 8: PROCEDURES (core preventive control design)
-- Section 9: MONITORING PLAN
-- Section 10: VERIFICATION & VALIDATION
-- Section 11: CAPA PROTOCOL
-- Section 12: TRACEABILITY & RECALL (when applicable)
-
-CRITICAL PLACEMENT RULES:
-✅ Each Primus requirement (e.g. 7.02.xx) MUST appear exactly ONCE
-✅ Each requirement MUST appear in the MOST LOGICAL section based on intent
-✅ Requirements MUST NOT be duplicated across sections
-
-⛔ FORBIDDEN:
-- Requirement blocks in Sections 1–7 (except 8 as listed above)
-- Requirement blocks in Sections 13–15
-- Re-stating Primus requirements in narrative sections
-- Sections 2–6 and 13–15 MUST remain narrative-only
-
-CROSSWALK CONSISTENCY:
-- Section references in the compliance crosswalk (Section 14)
-  MUST match where the requirement is actually implemented
-
-A "Primus requirement block" is ANY section of content that:
-- Starts with a Primus code pattern (e.g. 7.02.01, 7.03.05), AND
-- Describes a compliance requirement and its implementation
-
-This includes (but is not limited to):
-- "### 7.02.01 - ..."
-- "7.02.01 - ..."
-- "Primus 7.02.01 ..."
-- Any paragraph whose first line begins with a Primus code
-
-If a requirement appears in a forbidden section or is duplicated,
-the document is INVALID.
-
-ALL ${mappings.length} Primus requirement blocks MUST appear across
-Sections 8, 9, 10, 11, and 12 (no duplicates, no omissions).
-
-====================================================================
-`
-    : `
-⚡⚡⚡ HARD GENERATION CONTRACT – REQUIREMENT STRUCTURE ⚡⚡⚡
-====================================================================
-
-DOCUMENT TYPE: GMP / PROGRAM / FACILITY SOP (Modules 1–6)
-STRUCTURAL RULES (HIGHEST PRIORITY):
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 1: SKELETON-FIRST GENERATION (MANDATORY, NO EXCEPTIONS)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-You MUST output ALL 15 section headers FIRST, IN ORDER,
-with NO CONTENT under any section.
-
-You MUST output exactly:
-
-1. TITLE & DOCUMENT CONTROL
-2. PURPOSE / OBJECTIVE
-3. SCOPE
-4. DEFINITIONS & ABBREVIATIONS
-5. ROLES & RESPONSIBILITIES
-6. PREREQUISITES & REFERENCE DOCUMENTS
-7. HAZARD / RISK ANALYSIS
-8. PROCEDURES
-9. MONITORING PLAN
-10. VERIFICATION & VALIDATION ACTIVITIES
-11. CORRECTIVE & PREVENTIVE ACTION (CAPA) PROTOCOL
-12. TRACEABILITY & RECALL ELEMENTS
-13. RECORD RETENTION & DOCUMENT CONTROL
-14. COMPLIANCE CROSSWALK
-15. REVISION HISTORY & APPROVAL SIGNATURES
-
-DO NOT add any prose, bullet points, or paragraphs in STEP 1.
-DO NOT skip any section headers.
-DO NOT combine sections.
-
-This guarantees Section 8 EXISTS before content generation begins.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 2: FILL CONTENT (ONLY AFTER ALL 15 HEADERS EXIST)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-ONLY AFTER ALL 15 SECTION HEADERS EXIST,
-begin filling content under each section in order.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REQUIREMENT PLACEMENT RULES (MODULES 1–6 GMP/FACILITY SOPs)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🚨 NON-NEGOTIABLE RULES FOR MODULES 1–6:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RULE 1: SECTION 8 IS MANDATORY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-The document MUST ALWAYS include:
-   "8. PROCEDURES"
-
-Section 8 MUST be generated even if other sections are narrative-heavy.
-Section 8 is NOT optional.
-Section 8 CANNOT be omitted.
-Section 8 CANNOT be empty.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RULE 2: POSITIVE GUARANTEE (NO SUPPRESSION)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-ALL ${mappings.length} mapped Primus requirements MUST appear in Section 8.
-
-EVERY requirement mapping MUST produce exactly ONE requirement block
-under Section 8.
-
-NO requirement may be:
-   ❌ Skipped
-   ❌ Omitted
-   ❌ Merged with another requirement
-   ❌ Summarized into narrative text
-   ❌ Deferred to another section
-   ❌ Excluded for any reason
-
-Each requirement MUST be written as a complete, standalone block with:
-   - Primus code header (e.g., "### 5.02.01 - Pest Control Program")
-   - Full "Requirement:" text
-   - Full "Implementation Status:" text
-
-If you have ${mappings.length} requirement mappings, you MUST generate
-${mappings.length} distinct requirement blocks in Section 8.
-
-COUNT GUARANTEE: Section 8 MUST contain ALL ${mappings.length} requirements.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RULE 3: EXACT REQUIREMENT HEADER FORMAT (MANDATORY)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EVERY Primus requirement in Section 8 MUST be introduced with
-the EXACT header format:
-
-   ### X.XX.xx - {Requirement Title}
-
-HEADER FORMAT RULES:
-✅ EXACTLY three hash characters (###)
-✅ Single space after ###
-✅ Exact Primus code (e.g., 5.04.11, 5.04.15, 5.04.16)
-✅ Space, hyphen, space (" - ")
-✅ Human-readable requirement title
-
-EXAMPLES OF CORRECT HEADERS:
-   ### 5.04.11 - Temperature Monitoring Equipment
-   ### 5.04.15 - Calibration Records
-   ### 5.04.16 - Equipment Maintenance Schedule
-
-❌ FORBIDDEN (NARRATIVE-ONLY MENTIONS):
-   - "The requirement 5.04.11 states that..."
-   - "Temperature monitoring (5.04.11) requires..."
-   - "As per 5.04.11, equipment must be calibrated..."
-   - Any text that mentions a requirement without the exact header
-
-🚨 CRITICAL FORMATTING RULES:
-1) Narrative-only text is NOT sufficient.
-   A requirement MUST NOT be introduced only through prose.
-
-2) If a requirement is implemented, it MUST have its own header
-   in the exact format above.
-
-3) EACH of the ${mappings.length} requirements MUST have:
-   - One (and only one) header
-   - Using the exact "### X.XX.xx - Title" format
-   - Appearing under Section 8 (for Modules 1–6)
-
-4) Inline mentions of requirements (without headers) are FORBIDDEN
-   for Modules 1–6.
-
-5) Every requirement code in your mappings MUST appear as a header.
-   If you have requirement 5.04.11, you MUST generate:
-   "### 5.04.11 - {appropriate title}"
-
-VALIDATION CHECKPOINT:
-Before completing Section 8, verify that ALL ${mappings.length}
-requirement codes appear as exact headers in the format:
-"### X.XX.xx - Title"
-
-If ANY requirement is missing its exact header, the document is INVALID.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RULE 4: NEGATIVE CONSTRAINT (NO LEAKAGE)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Primus requirement blocks are FORBIDDEN outside Section 8.
-
-⛔ SECTIONS 1–7 ARE NARRATIVE-ONLY (NO REQUIREMENT BLOCKS):
-
-⛔ SECTIONS 1–7 ARE NARRATIVE-ONLY (NO REQUIREMENT BLOCKS):
-
-Section 1 (TITLE & DOCUMENT CONTROL):
-   - Document metadata ONLY
-   - NO Primus requirement codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-
-Section 2 (PURPOSE / OBJECTIVE):
-   - High-level narrative purpose statement ONLY
-   - ALWAYS narrative-only for Modules 1–6
-   - NO Primus requirement codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-   - General objectives without restating specific requirements
-
-Section 3 (SCOPE):
-   - Scope narrative ONLY
-   - NO Primus requirement codes
-
-Section 4 (DEFINITIONS & ABBREVIATIONS):
-   - Definitions and terms ONLY
-   - NO Primus requirement codes
-
-Section 5 (ROLES & RESPONSIBILITIES):
-   - General role descriptions ONLY
-   - NO Primus requirement codes
-
-Section 6 (PREREQUISITES & REFERENCE DOCUMENTS):
-   - References and prerequisites ONLY
-   - NO Primus requirement codes
-
-Section 7 (HAZARD / RISK ANALYSIS):
-   - Narrative hazard analysis ONLY
-   - Describes hazards OF procedures that will appear in Section 8
-   - May REFER to "procedures in Section 8" but MUST NOT restate them
-   - NO Primus requirement codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-   - NO requirement-level compliance statements
-
-⛔ FORBIDDEN IN SECTIONS 1–7:
-   - Primus requirement code patterns (X.XX.XX)
-   - "### X.XX.XX - ..." headers
-   - "X.XX.XX - ..." plain text requirement blocks
-   - "Requirement:" / "Implementation Status:" formatting
-   - Any requirement-level compliance statements
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RULE 5: SECTION ROLE CLARITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Section 7 describes hazards OF Section 8 procedures
-Section 9 describes monitoring OF Section 8 procedures
-Section 10 describes verification OF Section 8 procedures
-Section 11 describes CAPA FOR failures of Section 8 procedures
-Section 12 describes traceability SUPPORTING Section 8 procedures
-
-These sections provide CONTEXT for Section 8.
-They do NOT restate Section 8 requirements.
-They do NOT introduce new requirements.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SECTION 8 (PROCEDURES) — REQUIREMENT BLOCK LOCATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ Section 8 MUST contain ALL ${mappings.length} Primus requirement blocks
-✅ Each requirement MUST use exact header format: "### X.XX.xx - Title"
-✅ Each requirement gets full procedural details
-✅ This is the ONLY section that contains Primus requirement codes
-✅ This is the ONLY section that contains "Requirement:" / "Implementation Status:" blocks
-✅ NO requirements may be placed in any other section
-
-SECTION 8 COMPLETENESS CHECK:
-Before finishing generation, verify that Section 8 contains
-EXACTLY ${mappings.length} requirement blocks.
-
-If Section 8 contains fewer than ${mappings.length} blocks,
-the document is INVALID.
-
-⛔ SECTIONS 9–12 ARE NARRATIVE-ONLY (ABSOLUTE PROHIBITION):
-
-WHAT "NARRATIVE-ONLY" MEANS:
-These sections may DESCRIBE, ANALYZE, MONITOR, VERIFY, or CORRECT
-the procedures defined in Section 8, BUT they MUST NOT introduce
-or restate Primus requirements.
-
-Section 9 (MONITORING PLAN):
-   - Describe monitoring activities in narrative form
-   - May REFER to "procedures in Section 8" by general description
-   - MUST NOT introduce new requirement codes
-   - MUST NOT restate requirement text from Section 8
-   - NO X.XX.XX codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-   - Example ALLOWED: "Monitoring activities for pest control procedures..."
-   - Example FORBIDDEN: "5.03.01 - Pest monitoring requires..."
-
-Section 10 (VERIFICATION & VALIDATION):
-   - Describe verification activities in narrative form
-   - May REFER to "procedures in Section 8" by general description
-   - MUST NOT introduce new requirement codes
-   - MUST NOT restate requirement text from Section 8
-   - NO X.XX.XX codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-
-Section 11 (CAPA PROTOCOL):
-   - Describe CAPA process in narrative form
-   - May REFER to "procedures in Section 8" by general description
-   - MUST NOT introduce new requirement codes
-   - MUST NOT restate requirement text from Section 8
-   - NO X.XX.XX codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-
-Section 12 (TRACEABILITY & RECALL):
-   - Describe traceability process in narrative form
-   - May REFER to "procedures in Section 8" by general description
-   - MUST NOT introduce new requirement codes
-   - MUST NOT restate requirement text from Section 8
-   - NO X.XX.XX codes
-   - NO "Requirement:" / "Implementation Status:" blocks
-
-⛔ SECTIONS 13–15 (SUPPORTING CONTENT ONLY):
-   - Section 13: Record retention (narrative policy, no requirement codes)
-   - Section 14: Compliance crosswalk (table referencing Section 8)
-   - Section 15: Revision history and signatures
-
-⛔ ABSOLUTE PROHIBITION FOR SECTIONS 7, 9, 10, 11, 12:
-   - Primus requirement code patterns (X.XX.XX)
-   - "### X.XX.XX - ..." headers
-   - "X.XX.XX - ..." plain text requirement blocks
-   - "Requirement:" / "Implementation Status:" formatting
-   - Any text that introduces or restates a Primus requirement
-
-A "Primus requirement block" is ANY section of content that:
-- Starts with a Primus code pattern (e.g. 5.02.01, 5.04.11, 1.01.02), AND
-- Describes a compliance requirement and its implementation
-
-This includes (but is not limited to):
-- "### 5.02.01 - ..."
-- "5.02.01 - ..."
-- "Primus 5.02.01 ..."
-- "5.02.01: ..."
-- Any paragraph whose first line begins with a Primus code
-- Any "Requirement:" / "Implementation Status:" block tied to a code
-- Any text that restates or introduces requirement language
-
-CROSSWALK CONSISTENCY:
-- Section references in the compliance crosswalk (Section 14)
-  MUST show all requirements implemented in Section 8
-
-🚨 CRITICAL VALIDATION RULE:
-If ANY Primus requirement block (X.XX.XX code, "Requirement:", or
-"Implementation Status:") appears in Sections 1-7 or 9-12,
-the document is INVALID and MUST be regenerated.
-
-====================================================================
-`;
-
   // Build answer placement map
   const answerPlacementMap = buildAnswerPlacementMap(answers, mappings);
 
@@ -2133,13 +1210,11 @@ the document is INVALID and MUST be regenerated.
     `[ENHANCED] Found structure marker "${foundMarker}" at position ${markerIndex}`,
   );
   console.log(
-    `[ENHANCED] Injecting structural contract, answer placement map and requirement guidance`,
+    `[ENHANCED] Injecting answer placement map and requirement guidance`,
   );
 
-  // Inject structural contract at VERY TOP, then answer placement map and requirement guidance before structure marker
+  // Inject BOTH answer placement map AND requirement guidance before the structure marker
   const enhancedPrompt =
-    structuralContract +
-    "\\n\\n" +
     basePrompt.slice(0, markerIndex) +
     answerPlacementMap +
     "\\n\\n" +
@@ -2268,6 +1343,7 @@ async function invokeClaude(
     anthropic_version: "bedrock-2023-05-31",
     max_tokens: maxTokens,
     temperature: 0, // deterministic
+    top_p: 1,
     messages: [{ role: "user", content: prompt }],
   };
 
@@ -2426,7 +1502,7 @@ export async function callLLM_fillTemplate(
   twoPass = false,
   documentName?: string,
 ): Promise<string> {
-  const MAX_RETRIES = 1;
+  const MAX_RETRIES = 3;
   const moduleNumber = moduleContext?.moduleNumber || "1";
 
   // SPEC-DRIVEN ONLY: Build questions first (needed for requirement mapping)
@@ -2495,64 +1571,34 @@ export async function callLLM_fillTemplate(
     });
 
     const doc = await invokeClaude(prompt, tokenLimit); // Use dynamic token limit
-    const isModule7 = moduleNumber === "7";
-    // CRITICAL: Immediate Section 8 validation (no retry if missing)
-    if (!isModule7) {
-      if (!doc.includes("8. PROCEDURES") && !doc.includes("8. Procedures")) {
-        throw new Error(
-          `CRITICAL FAILURE: Section 8 (PROCEDURES) missing. ` +
-            `Module: ${moduleNumber}, Document: ${documentName}`,
-        );
-      }
-    }
 
-    // STEP 1: Strip generation commentary (STEP 1/STEP 2 artifacts)
-    let cleaned = stripGenerationCommentary(doc);
-
-    // STEP 2: Check for forbidden patterns
-    const forbiddenCheck = checkForbiddenPatternsOnly(cleaned);
+    // STEP 1: Check for forbidden patterns
+    const forbiddenCheck = checkForbiddenPatternsOnly(doc);
 
     if (!forbiddenCheck.hasForbiddenPatterns) {
       console.log(
         `[LLM] ✅ Output passed forbidden pattern check on attempt ${attempt}`,
       );
 
-      // STEP 3: Apply sanitization
-      let sanitized = sanitizeOutput(cleaned);
+      // STEP 2: Apply sanitization
+      let sanitized = sanitizeOutput(doc);
 
-      // STEP 4: Apply signature cutoff
+      // STEP 3: Apply signature cutoff
       sanitized = cutoffAfterSignatures(sanitized);
 
-      // STEP 5: Apply micro-rule linting (ALWAYS, not just template-based)
+      // STEP 4: Apply micro-rule linting (ALWAYS, not just template-based)
       if (relevantGroups.length > 0) {
         const lintReport = lintCompliance(sanitized, relevantGroups, true);
         sanitized = lintReport.correctedDocument || sanitized;
       }
 
-      // STEP 6: Strip any compliance annotations
+      // STEP 5: Strip any compliance annotations
       let finalDoc = stripComplianceAnnotations(sanitized);
 
-      // STEP 7: Normalize requirement headers (Modules 1-6 only)
-      // Insert missing "### X.XX.xx - Title" headers where content exists
-      const mappings = mapAnswersToRequirements(
-        answers,
-        questions,
-        moduleNumber,
-        documentName,
-        moduleContext?.subModuleName,
-      );
-      finalDoc = normalizeRequirementHeaders(finalDoc, mappings, moduleNumber);
-
-      // STEP 8: Audit-ready document cleanup
-      // Move requirements from Section 2 to Section 8
-      finalDoc = moveRequirementsFromPurpose(finalDoc);
-      // Normalize requirement titles (fix truncations)
-      finalDoc = normalizeRequirementTitles(finalDoc, mappings);
-
-      // STEP 9: Final cutoff pass
+      // STEP 6: Final cutoff pass
       finalDoc = cutoffAfterSignatures(finalDoc);
 
-      // STEP 10: Verify no post-signature content
+      // STEP 7: Verify no post-signature content
       if (hasPostSignatureContent(finalDoc)) {
         console.warn(
           `[LLM] ⚠️ Post-signature content detected. Applying aggressive cutoff.`,
@@ -2560,34 +1606,36 @@ export async function callLLM_fillTemplate(
         finalDoc = cutoffAfterSignatures(finalDoc);
       }
 
-      // STEP 11: Primus GFS Audit Readiness Check
-      const auditCheck = checkPrimusAuditReadiness(
-        finalDoc,
-        mappings,
-        moduleNumber,
-      );
+      // STEP 8: Validate answer presence AND requirement headers
+      // Debug: Log snippet of generated document
+      console.log("[DEBUG] First 1500 chars of generated doc:");
+      console.log(finalDoc.slice(0, 1500));
+      console.log("[DEBUG] ---");
 
-      // STEP 12: Validate answer presence (legacy check)
       const answerValidation = validateAnswersPresent(
         finalDoc,
         answers,
         questions,
       );
 
-      // STEP 13: Validate structure
+      // Debug: Log first 2000 chars to see what was generated
+      console.log("[DEBUG] First 2000 chars of generated doc:");
+      console.log(finalDoc.slice(0, 2000));
+      console.log("[DEBUG] Searching for headers like: ### 1.01.01 -");
+
+      // STEP 9: Validate structure
       const structureValidation = validateLLMOutput(finalDoc);
 
-      // STEP 14: Check procedural quality (soft check for audit readiness)
+      // STEP 10: Check procedural quality (soft check for audit readiness)
       const qualityCheck = validateProceduralQuality(finalDoc);
 
       // Log validation results
-      console.log(`[LLM] Audit Readiness Results:`, {
-        auditReady: auditCheck.auditReady,
-        requirementCoverage: `${auditCheck.coverage.found}/${auditCheck.coverage.total}`,
-        hasCrosswalk: auditCheck.traceability.hasCrosswalk,
-        multipleReferences: auditCheck.multipleReferences.length,
+      console.log(`[LLM] Validation results:`, {
         answersFound: answerValidation.found.length,
         answersMissing: answerValidation.missing,
+        requirementHeadersFound:
+          answerValidation.foundRequirementHeaders.length,
+        requirementHeadersMissing: answerValidation.missingRequirementHeaders,
         forbiddenPatterns: forbiddenCheck.hasForbiddenPatterns,
         structureValid: structureValidation.valid,
         proceduralQualityScore: qualityCheck.score,
@@ -2606,21 +1654,16 @@ export async function callLLM_fillTemplate(
         );
       }
 
-      // Check AUDIT READINESS (not artificial structural constraints)
-      // A document is audit-ready if:
-      // 1. All requirements are covered (appear at least once)
-      // 2. Crosswalk is present
-      // 3. Core answers appear in document
-      // Note: Multiple references are ALLOWED and expected
+      // Check if critical answers or requirement headers are missing
       const hasMissingCore = answerValidation.missing.length > 0;
-      const notAuditReady =
-        !auditCheck.auditReady || hasMissingCore;
+      const hasMissingHeaders =
+        answerValidation.missingRequirementHeaders.length > 0;
 
-      if (notAuditReady) {
-        // Build feedback for retry (audit readiness issues only)
+      if (hasMissingCore || hasMissingHeaders) {
+        // Build feedback for retry
         const feedback: string[] = [
           "",
-          "❌ PRIMUS GFS AUDIT READINESS ISSUES - PLEASE ADDRESS:",
+          "❌ PREVIOUS ATTEMPT FAILED - REGENERATE WITH ALL REQUIREMENTS:",
           "",
         ];
 
@@ -2637,67 +1680,46 @@ export async function callLLM_fillTemplate(
           feedback.push("");
         }
 
-        if (auditCheck.coverage.missing.length > 0) {
-          feedback.push(
-            `MISSING REQUIREMENTS (${auditCheck.coverage.missing.length} total - must appear somewhere in document):`,
-          );
-          for (const code of auditCheck.coverage.missing.slice(0, 10)) {
-            const mapping = mappings.find((m) => m.code === code);
-            feedback.push(
-              `- ${code}: ${mapping?.question || "Unknown requirement"}`,
+        if (hasMissingHeaders) {
+          feedback.push("MISSING REQUIREMENT HEADERS (must use exact format):");
+          for (const code of answerValidation.missingRequirementHeaders) {
+            const question = questions.find(
+              (q) => extractRequirementCode(q.id) === code,
             );
-          }
-          if (auditCheck.coverage.missing.length > 10) {
+            const answer = question
+              ? formatAnswerForDisplay(answers[question.id])
+              : "N/A";
             feedback.push(
-              `  ... and ${auditCheck.coverage.missing.length - 10} more`,
+              `- Missing header "### ${code} - {title}" with answer "${answer}"`,
             );
           }
           feedback.push("");
-        }
-
-        if (!auditCheck.traceability.hasCrosswalk) {
           feedback.push(
-            "MISSING COMPLIANCE CROSSWALK (must include Section 14 with requirement mapping)",
+            'REMEMBER: Header format is "### {code} - {title}" (3 hashes, space, code, space, hyphen, space, title)',
           );
           feedback.push("");
         }
 
-        feedback.push(
-          "NOTE: Requirements can appear in MULTIPLE sections (Procedures, Monitoring,",
-        );
-        feedback.push(
-          "Verification, Hazard Analysis). This is NORMAL and EXPECTED in Primus GFS.",
-        );
-        feedback.push(
-          "Focus on complete coverage and clear traceability via the crosswalk.",
-        );
-
-        lastError = feedback.join("\n");
+        lastError = feedback.join("\\n");
 
         if (attempt < MAX_RETRIES) {
-          console.log(
-            `[LLM] 🔄 Retrying with audit readiness feedback...`,
-          );
-          prompt = prompt + "\n\n" + lastError;
+          console.log(`[LLM] 🔄 Retrying with feedback about missing items...`);
+          prompt = prompt + "\\n\\n" + lastError;
           continue; // Retry with enhanced prompt
         } else {
           // Max retries reached - throw detailed error
           throw new Error(
-            `Document generation failed after ${MAX_RETRIES} attempts.\n` +
-              `Primus GFS Audit Readiness Issues:\n` +
-              `- Missing requirements: ${auditCheck.coverage.missing.length}/${auditCheck.coverage.total}\n` +
-              `- Missing core answers: ${answerValidation.missing.join(", ")}\n` +
-              `- Has crosswalk: ${auditCheck.traceability.hasCrosswalk}\n` +
-              `- Multiple references: ${auditCheck.multipleReferences.length} (INFO only, not a failure)\n` +
-              `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}\n` +
+            `Document generation failed after ${MAX_RETRIES} attempts.\\n` +
+              `Missing core answers: ${answerValidation.missing.join(", ")}\\n` +
+              `Missing requirement headers: ${answerValidation.missingRequirementHeaders.join(", ")}\\n` +
+              `Module: ${moduleNumber}, Submodule: ${moduleContext?.subModuleName || "N/A"}\\n` +
               `Document: ${documentName || "N/A"}`,
           );
         }
       }
 
       // FINAL SAFETY CHECK: Ensure document is complete (all 15 sections present)
-      // const sectionPattern = /^\d{1,2}\.\s+[A-Z]/gm;
-      const sectionPattern = /^(?:##\s*)?\d{1,2}\.\s+[A-Z]/gm;
+      const sectionPattern = /^\d{1,2}\.\s+[A-Z]/gm;
       const sectionMatches = finalDoc.match(sectionPattern);
       const sectionCount = sectionMatches?.length || 0;
 

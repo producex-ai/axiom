@@ -12,70 +12,293 @@
   "description": "Core HACCP plan requirements including documented hazard analysis, Critical Control Point (CCP) determination, critical limits, monitoring procedures, corrective actions, verification activities, and annual review",
   "requirements": [
     {
+      "id": "6.02.01",
       "code": "6.02.01",
+      "text": "Has a documented hazard analysis for the processes been conducted, showing the various types of hazards, their likelihood of occurrence, their associated severity and their control measures? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
       "question": "Has a documented hazard analysis for the processes been conducted, showing the various types of hazards, their likelihood of occurrence, their associated severity and their control measures? A ZERO POINT (NON-CONFORMANCE) DOWN SCORE IN THIS QUESTION RESULTS IN AUTOMATIC FAILURE OF THIS AUDIT.",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": true
+      "required": true,
+      "isAutomaticFailure": true,
+      "keywords": [
+        "hazard analysis",
+        "biological hazards",
+        "chemical hazards",
+        "physical hazards",
+        "likelihood assessment",
+        "severity rating",
+        "control measures",
+        "risk evaluation"
+      ],
+      "mandatoryStatements": [
+        "A comprehensive documented hazard analysis must identify all potential biological, chemical, and physical hazards for each process step",
+        "Each identified hazard must be evaluated for likelihood of occurrence and severity of health consequences",
+        "Control measures must be documented for each significant hazard showing how it will be prevented, eliminated, or reduced to acceptable levels"
+      ],
+      "verificationExpectations": "Auditors will examine the documented hazard analysis to verify it comprehensively addresses all process steps from receiving through distribution. They will confirm biological hazards (pathogens, toxins), chemical hazards (allergens, cleaning chemicals, pesticides), and physical hazards (metal, glass, hard plastic) are identified and evaluated. The auditor will verify that likelihood and severity ratings are logically determined and documented with scientific rationale. Control measures must be clearly linked to each significant hazard with justification for why the measures are adequate. This is a critical requirement where non-conformance results in automatic audit failure.",
+      "monitoringExpectations": "The HACCP team must maintain a current documented hazard analysis that is reviewed whenever processes change, new products are introduced, or new hazards are identified. Each hazard must be systematically evaluated using consistent criteria for likelihood (probability of occurrence) and severity (magnitude of health impact). Control measures for significant hazards must be clearly documented showing whether hazards are controlled at CCPs or through prerequisite programs. The hazard analysis must be updated immediately when new scientific information, regulatory changes, or operational modifications affect hazard identification or control. Annual review of the complete hazard analysis must be conducted to ensure continued accuracy and effectiveness."
     },
     {
+      "id": "6.02.02",
       "code": "6.02.02",
+      "text": "Have CCP decisions been made with logical, documented justification and where CCPs are implemented in a specific processing step, have they been developed to control the identified hazard(s)? This question must be scored. Scoring N/A is not allowed.",
       "question": "Have CCP decisions been made with logical, documented justification and where CCPs are implemented in a specific processing step, have they been developed to control the identified hazard(s)? This question must be scored. Scoring N/A is not allowed.",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "CCP determination",
+        "decision tree",
+        "logical justification",
+        "hazard control",
+        "critical control points",
+        "process steps",
+        "documented rationale",
+        "control effectiveness"
+      ],
+      "mandatoryStatements": [
+        "CCP determination must follow a logical decision-making process using recognized decision trees or equivalent systematic methods",
+        "Documentation must clearly justify why each step is or is not a CCP based on hazard significance and control capability",
+        "Each identified CCP must be specifically designed to prevent, eliminate, or reduce the identified hazard to acceptable levels"
+      ],
+      "verificationExpectations": "Auditors will review CCP determination documentation to verify a systematic decision-making process was used, typically through HACCP decision tree application. They will examine the logic applied at each process step to determine if it should be a CCP, verifying decisions are scientifically sound and properly justified. The auditor will confirm that identified CCPs are positioned at the correct process steps where control can be effectively applied. Documentation must show clear linkage between specific hazards and the CCPs designed to control them. The auditor may challenge CCP decisions to ensure the team properly understands CCP principles and has not missed critical control points or incorrectly designated non-critical steps.",
+      "monitoringExpectations": "The HACCP team must document CCP determination decisions using consistent methodology for all products and processes. When applying decision trees, each question must be answered with clear justification based on process capabilities and hazard characteristics. CCP decisions must be reviewed whenever hazard analysis changes, new control measures are implemented, or process modifications occur. The team must verify that each CCP effectively controls its designated hazards through validation studies demonstrating control adequacy. Documentation must be maintained showing the rationale for CCP decisions, including why certain steps with hazards are not CCPs because control occurs elsewhere or through prerequisite programs."
     },
     {
+      "id": "6.02.03",
       "code": "6.02.03",
+      "text": "Is the HACCP system reviewed when significant changes are made and at least once every 12 months?",
       "question": "Is the HACCP system reviewed when significant changes are made and at least once every 12 months?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "HACCP review",
+        "annual review",
+        "system revalidation",
+        "change management",
+        "continuous improvement",
+        "periodic assessment",
+        "documentation update"
+      ],
+      "mandatoryStatements": [
+        "The complete HACCP system must be reviewed at least annually to ensure continued effectiveness and accuracy",
+        "Reviews must be conducted whenever significant changes occur including new products, process modifications, equipment changes, or new hazard information",
+        "Review findings must be documented with any necessary system modifications approved and implemented promptly"
+      ],
+      "verificationExpectations": "Auditors will examine HACCP review records to verify reviews are conducted at least annually with documentation showing review dates, participants, scope, and findings. They will verify that reviews occurred following significant changes such as new product introductions, process modifications, equipment installations, ingredient changes, or new scientific information about hazards. The auditor will confirm reviews are comprehensive, covering hazard analysis, CCP determinations, critical limits, monitoring procedures, corrective actions, verification activities, and record-keeping. Documentation must show any modifications made to the HACCP system based on review findings with approval signatures and implementation dates.",
+      "monitoringExpectations": "Management must establish a schedule ensuring HACCP reviews occur at minimum annually, with review dates tracked to prevent overdue reviews. The HACCP team leader must maintain a system for identifying significant changes that trigger mandatory reviews including change management procedures. Each review must be documented showing all HACCP elements examined, any deficiencies identified, corrective actions required, and system improvements implemented. When changes are made to the HACCP system following reviews, all affected documentation must be updated, personnel retrained as needed, and changes verified for effectiveness. Review schedules must ensure continuous system oversight with no gaps exceeding 12 months between comprehensive reviews."
     },
     {
+      "id": "6.02.04",
       "code": "6.02.04",
+      "text": "Have critical control point (CCP) processing steps been identified that eliminate or reduce food safety hazards to an acceptable level? Information gathering. If the answer is YES, continue with the next question. If the answer is NO, the rest of \"Module 6 HACCP\" is not applicable. Where the auditor finds error(s) in the logic applied, e.g., a step meets the requirements for a CCP, but it is not identified as such, the issue should be detailed here, and the rest of Module 6 is applicable and should be scored.",
       "question": "Have critical control point (CCP) processing steps been identified that eliminate or reduce food safety hazards to an acceptable level? Information gathering. If the answer is YES, continue with the next question. If the answer is NO, the rest of \"Module 6 HACCP\" is not applicable. Where the auditor finds error(s) in the logic applied, e.g., a step meets the requirements for a CCP, but it is not identified as such, the issue should be detailed here, and the rest of Module 6 is applicable and should be scored.",
+      "points": 0,
       "totalPoints": 0,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "CCP identification",
+        "hazard elimination",
+        "hazard reduction",
+        "acceptable levels",
+        "control effectiveness",
+        "information gathering",
+        "applicability determination"
+      ],
+      "mandatoryStatements": [
+        "CCPs must be identified at process steps where control is essential to prevent, eliminate, or reduce hazards to safe levels",
+        "Each CCP must be capable of eliminating hazards or reducing them to acceptable levels defined by regulatory or scientific criteria",
+        "If no CCPs are identified, the rationale must demonstrate that hazards are adequately controlled through prerequisite programs"
+      ],
+      "verificationExpectations": "Auditors will determine whether the operation has identified CCPs that effectively control food safety hazards to acceptable levels. This is an information-gathering question to establish if the HACCP module applies to the operation. If CCPs exist, the auditor will proceed with evaluating the remaining HACCP requirements. If no CCPs are identified, the auditor will verify the rationale is sound and hazards are adequately controlled through other means. The auditor will check the logic applied in CCP determination - if process steps that should be CCPs are not identified as such, this will be documented as an error in logic, and the remaining HACCP questions will still be scored based on how identified CCPs are managed.",
+      "monitoringExpectations": "The HACCP team must clearly identify all CCPs in the process where food safety hazards must be controlled to acceptable levels. For operations without CCPs, comprehensive documentation must explain how food safety is assured through prerequisite programs and operational controls. The team must regularly reassess whether identified control points truly function as CCPs or if additional CCPs are needed based on process performance and hazard occurrence. When process changes occur, CCP identification must be reviewed to determine if new CCPs are needed or existing CCPs should be modified or eliminated. Clear documentation must distinguish between CCPs and other control points, showing why certain controls are critical for food safety."
     },
     {
+      "id": "6.02.05",
       "code": "6.02.05",
+      "text": "Have CCP critical control limits been established and are they supported by relevant validation documentation?",
       "question": "Have CCP critical control limits been established and are they supported by relevant validation documentation?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "critical limits",
+        "validation",
+        "scientific support",
+        "measurable parameters",
+        "maximum limits",
+        "minimum limits",
+        "regulatory compliance",
+        "control boundaries"
+      ],
+      "mandatoryStatements": [
+        "Critical limits must be established for each CCP defining the boundaries between acceptable and unacceptable control",
+        "Limits must be measurable parameters such as time, temperature, pH, water activity, or observable characteristics",
+        "Scientific validation documentation must support that critical limits are adequate to control identified hazards"
+      ],
+      "verificationExpectations": "Auditors will examine critical limits established for each CCP to verify they are clearly defined, measurable, and based on scientific rationale. They will review validation documentation supporting critical limits including scientific literature, regulatory guidance, challenge studies, expert consultation, or historical process data. The auditor will verify limits are stringent enough to ensure food safety when met, with appropriate safety factors built in. Documentation must demonstrate that achieving the critical limits will prevent, eliminate, or reduce hazards to acceptable levels. The auditor may question whether limits are realistic for the operation to achieve consistently while maintaining the intended safety margin.",
+      "monitoringExpectations": "The HACCP team must establish critical limits for each CCP based on validated scientific data demonstrating control effectiveness. Validation documentation must be maintained including the sources used to establish limits and rationale for values selected. When processes operate at parameters different from critical limits, operational limits or target values should be established to reduce the likelihood of exceeding critical limits. Critical limits must be reviewed whenever process equipment changes, new scientific data becomes available, or CCP monitoring shows frequent deviations. Any changes to critical limits must be validated before implementation to ensure continued hazard control. Documentation must clearly distinguish critical limits from operational targets or action levels used for process control."
     },
     {
+      "id": "6.02.06",
       "code": "6.02.06",
+      "text": "Have monitoring requirements and frequencies been determined and documented for the CCPs?",
       "question": "Have monitoring requirements and frequencies been determined and documented for the CCPs?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "monitoring procedures",
+        "monitoring frequency",
+        "measurement methods",
+        "continuous monitoring",
+        "periodic checks",
+        "real-time control",
+        "documentation requirements"
+      ],
+      "mandatoryStatements": [
+        "Monitoring procedures must specify what will be monitored, how measurements will be taken, and frequency of monitoring for each CCP",
+        "Monitoring frequency must be adequate to detect loss of control at CCPs before unsafe products are produced or distributed",
+        "Monitoring methods must provide timely information enabling corrective action before critical limits are exceeded"
+      ],
+      "verificationExpectations": "Auditors will review monitoring procedures to verify they clearly define what parameters are monitored at each CCP (time, temperature, pH, etc.), how monitoring is conducted (instruments, methods, techniques), when and how often monitoring occurs, and who is responsible for monitoring. They will verify monitoring frequencies are adequate to detect deviations before control is lost, considering the nature of the hazard and process dynamics. The auditor will confirm monitoring methods provide results quickly enough to enable timely corrective action. Documentation must specify the actual monitoring procedures in sufficient detail that operators can execute them correctly and consistently.",
+      "monitoringExpectations": "The HACCP team must document comprehensive monitoring requirements for each CCP including specific parameters measured, measurement methods and equipment used, monitoring frequencies, and responsible personnel. Monitoring frequencies must be established based on process variability, hazard severity, and time required for corrective action. For critical processes, continuous monitoring or very frequent checks may be necessary, while stable processes may permit less frequent verification. Monitoring procedures must be practical for operators to execute consistently during production while providing adequate assurance of CCP control. When monitoring equipment is used, calibration requirements and frequencies must be specified. Monitoring documentation must be reviewed regularly to ensure procedures remain appropriate as processes evolve."
     },
     {
+      "id": "6.02.07",
       "code": "6.02.07",
+      "text": "Have specific responsibilities been assigned for the monitoring, recording and corrective action implementation of each CCP?",
       "question": "Have specific responsibilities been assigned for the monitoring, recording and corrective action implementation of each CCP?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "responsibility assignment",
+        "designated personnel",
+        "accountability",
+        "monitoring responsibility",
+        "recording duties",
+        "corrective action authority",
+        "job descriptions"
+      ],
+      "mandatoryStatements": [
+        "Specific individuals or positions must be assigned responsibility for conducting CCP monitoring activities",
+        "Designated personnel must be assigned responsibility for recording monitoring data and maintaining CCP records",
+        "Authority and responsibility must be assigned for implementing corrective actions when CCP deviations occur"
+      ],
+      "verificationExpectations": "Auditors will verify that HACCP documentation clearly assigns specific responsibilities for each CCP to designated personnel or job positions. They will confirm assignments cover monitoring execution, data recording, and corrective action implementation. The auditor may interview assigned personnel to verify they understand their responsibilities and have authority to take necessary actions. Documentation should show responsible positions by name or title for each CCP with contact information readily available. The auditor will verify that backup personnel are designated to cover CCP responsibilities during absences or shift changes ensuring continuous control.",
+      "monitoringExpectations": "Management must clearly assign and document CCP responsibilities to specific positions or individuals with appropriate training and authority. Job descriptions or work instructions should include CCP monitoring and recording duties for relevant positions. Personnel assigned to CCP monitoring must be trained on procedures, understand the importance of their role, and have authority to stop production or implement corrective actions when deviations occur. Backup personnel must be designated and trained to assume CCP responsibilities during absences. When personnel changes occur, CCP responsibilities must be reassigned promptly with new personnel trained before assuming duties. A current roster of personnel responsible for each CCP must be maintained and readily accessible to supervision and quality assurance."
     },
     {
+      "id": "6.02.08",
       "code": "6.02.08",
+      "text": "Have standard operating procedures (SOPs) been created for the monitoring process(es) of the CCPs, which would include how to carry out the monitoring activities?",
       "question": "Have standard operating procedures (SOPs) been created for the monitoring process(es) of the CCPs, which would include how to carry out the monitoring activities?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "standard operating procedures",
+        "SOPs",
+        "monitoring procedures",
+        "step-by-step instructions",
+        "work instructions",
+        "procedure documentation",
+        "activity guidance"
+      ],
+      "mandatoryStatements": [
+        "Written SOPs must be developed for monitoring activities at each CCP providing step-by-step instructions",
+        "SOPs must detail how to conduct monitoring including equipment use, measurement techniques, and data recording methods",
+        "Procedures must be clear enough that trained personnel can consistently execute monitoring activities correctly"
+      ],
+      "verificationExpectations": "Auditors will review CCP monitoring SOPs to verify they provide detailed, step-by-step instructions for conducting monitoring activities. They will confirm SOPs include equipment setup and use, measurement techniques, sampling methods, data recording procedures, and frequency of monitoring. The auditor will verify SOPs are written in clear language appropriate for the personnel using them, with visual aids or diagrams where helpful. SOPs should be readily accessible to monitoring personnel at or near the CCP location. The auditor may observe monitoring activities to verify they are conducted according to documented procedures and that operators understand and follow the SOPs.",
+      "monitoringExpectations": "The HACCP team must develop comprehensive SOPs for each CCP monitoring activity documenting every step operators must perform. SOPs must be current, version-controlled, and reviewed periodically to ensure accuracy. When monitoring procedures change due to new equipment, improved methods, or process modifications, SOPs must be updated immediately and personnel retrained. Monitoring SOPs should be posted at CCP locations or readily accessible to operators in their work areas. Supervisors must verify monitoring is conducted according to SOPs through direct observation and record review. Any deviations from SOPs discovered during supervision must be addressed through retraining or procedure clarification. SOPs must be written in the primary language of monitoring personnel or with translations provided."
     },
     {
+      "id": "6.02.09",
       "code": "6.02.09",
+      "text": "Have corrective action procedures been established for the CCPs, including a detailed action plan for operators to follow if the critical control limits are not met (loss of control/deviation) and plans to adjust the process back into control?",
       "question": "Have corrective action procedures been established for the CCPs, including a detailed action plan for operators to follow if the critical control limits are not met (loss of control/deviation) and plans to adjust the process back into control?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "corrective actions",
+        "deviation response",
+        "product disposition",
+        "process adjustment",
+        "control restoration",
+        "action plans",
+        "non-conformance management"
+      ],
+      "mandatoryStatements": [
+        "Documented corrective action procedures must be established for each CCP specifying actions when critical limits are not met",
+        "Procedures must address product disposition decisions ensuring potentially unsafe products are identified and prevented from reaching consumers",
+        "Action plans must include steps to restore process control and prevent recurrence of deviations"
+      ],
+      "verificationExpectations": "Auditors will review corrective action procedures for each CCP to verify they provide clear, detailed instructions for operators when critical limits are exceeded. They will confirm procedures address all required elements: identification and control of nonconforming product, determination of product acceptability, correction of the cause of deviation, and maintenance of records. The auditor will verify procedures specify who has authority to implement corrective actions and make product disposition decisions. Documentation must show that corrective action procedures are practical and can be executed promptly when deviations occur. Historical records may be reviewed to verify corrective actions are properly implemented when needed.",
+      "monitoringExpectations": "The HACCP team must develop specific corrective action procedures for each CCP detailing immediate actions operators must take when critical limits are exceeded. Procedures must specify how to identify and segregate affected product, who to notify (supervision, quality assurance, HACCP team), and authority for product disposition decisions. Corrective actions must address both the immediate deviation (product safety assessment) and underlying causes (process adjustment, equipment repair, personnel retraining). Documentation requirements for corrective actions must be clearly specified including what information must be recorded, forms to be completed, and approval signatures required. Supervisors must verify corrective actions were properly executed and effective in restoring control. Root cause analysis should be conducted for recurring deviations to implement preventive measures."
     },
     {
+      "id": "6.02.10",
       "code": "6.02.10",
+      "text": "Have recording forms been developed for monitoring the CCPs?",
       "question": "Have recording forms been developed for monitoring the CCPs?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "recording forms",
+        "monitoring logs",
+        "data collection",
+        "documentation templates",
+        "CCP records",
+        "traceability",
+        "record-keeping"
+      ],
+      "mandatoryStatements": [
+        "Standardized recording forms must be developed for documenting monitoring activities and results at each CCP",
+        "Forms must capture all critical information including monitoring parameters, values observed, time/date, and operator identification",
+        "Recording forms must provide space for documenting deviations and corrective actions taken"
+      ],
+      "verificationExpectations": "Auditors will examine CCP recording forms to verify they capture all necessary information for demonstrating control. Forms must include fields for the CCP being monitored, specific parameter measured, actual values observed, acceptable ranges or critical limits, monitoring frequency, date and time of monitoring, operator signature or initials, and space for recording deviations and corrective actions. The auditor will verify forms are designed to be user-friendly and minimize recording errors. Electronic recording systems will be evaluated for data integrity, security, and backup procedures. Forms should facilitate supervisor review and verification activities with designated signature areas. The auditor will review completed forms to ensure they are filled out completely and correctly.",
+      "monitoringExpectations": "The HACCP team must design CCP monitoring forms that capture all required information while being practical for operators to complete during production. Forms must be version-controlled with current versions distributed to monitoring locations. When processes change or new CCPs are added, forms must be updated to reflect current requirements. Blank forms must be readily available at monitoring locations with adequate supplies maintained. Completed forms must be collected, reviewed, and stored systematically to facilitate retrieval and verification activities. For electronic recording systems, the HACCP team must ensure data integrity through access controls, audit trails, and regular backups. Form design should minimize opportunities for recording errors through clear labeling, appropriate units of measure, and logical layout. Management must establish retention periods for CCP records ensuring they are maintained for required durations."
     },
     {
+      "id": "6.02.11",
       "code": "6.02.11",
+      "text": "Have verification plans and schedules been developed for each CCP?",
       "question": "Have verification plans and schedules been developed for each CCP?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "verification activities",
+        "validation",
+        "CCP verification",
+        "scheduled reviews",
+        "effectiveness assessment",
+        "calibration",
+        "testing programs"
+      ],
+      "mandatoryStatements": [
+        "Verification plans must be established for each CCP defining activities to confirm the CCP is under control and functioning as intended",
+        "Verification schedules must specify frequency of verification activities including calibration, testing, record review, and observation",
+        "Verification activities must be conducted by personnel other than those responsible for CCP monitoring to ensure objectivity"
+      ],
+      "verificationExpectations": "Auditors will review verification plans and schedules to confirm they define specific activities for each CCP including calibration of monitoring equipment, observation of monitoring activities, review of monitoring records, testing of products or processes, and revalidation of critical limits. They will verify schedules establish appropriate frequencies for each verification activity based on CCP importance, process stability, and regulatory requirements. The auditor will confirm verification activities are assigned to qualified personnel independent of monitoring responsibilities. Documentation must show verification activities are actually conducted according to schedules with findings recorded. The auditor will review verification records to assess CCP performance and identify any patterns of deviations or control issues.",
+      "monitoringExpectations": "The HACCP team must develop comprehensive verification plans for each CCP identifying all verification activities required to ensure continued control effectiveness. Schedules must establish frequencies for equipment calibration (thermometers, pH meters, flow meters), record reviews by supervision, observation of monitoring procedures, product testing, and revalidation studies. Verification activities must be tracked on calendars or schedules to ensure they are completed on time. When verification activities identify deficiencies in CCP control, monitoring, or documentation, corrective actions must be implemented promptly. Equipment calibration must be conducted by qualified personnel using certified standards with calibration records maintained. Annual or more frequent verification should include comprehensive assessment of CCP effectiveness through data analysis, trend review, and system audit. Verification findings must be communicated to management and the HACCP team for continuous improvement."
     }
   ],
   "capaInject": [

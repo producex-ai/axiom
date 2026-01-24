@@ -12,76 +12,319 @@
   "description": "Requirements for Food Safety Plan development including hazard analysis, preventive controls identification, critical limits establishment, monitoring procedures, corrective actions, verification activities, and validation documentation",
   "requirements": [
     {
+      "id": "7.02.01",
       "code": "7.02.01",
+      "text": "Has a documented hazard analysis for each product (or product group) been conducted, showing the various types of hazards, their likelihood of occurrence, their associated severity and their preventive controls? This question must be scored. NA is not allowed.",
       "question": "Has a documented hazard analysis for each product (or product group) been conducted, showing the various types of hazards, their likelihood of occurrence, their associated severity and their preventive controls? This question must be scored. NA is not allowed.",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "hazard analysis",
+        "product-specific",
+        "biological hazards",
+        "chemical hazards",
+        "physical hazards",
+        "likelihood assessment",
+        "severity rating",
+        "preventive controls identification"
+      ],
+      "mandatoryStatements": [
+        "Comprehensive hazard analysis must be conducted for each product or product group identifying all potential biological, chemical, and physical hazards",
+        "Each identified hazard must be evaluated for likelihood of occurrence and severity of potential health consequences",
+        "Appropriate preventive controls must be identified for each significant hazard showing how it will be prevented, minimized, or controlled"
+      ],
+      "verificationExpectations": "Auditors will examine documented hazard analysis to verify it addresses each product or product group manufactured at the facility. The analysis must comprehensively identify biological hazards (pathogens, toxins, allergens), chemical hazards (pesticides, cleaning chemicals, environmental contaminants), and physical hazards (metal, glass, stones, hard plastic). Each hazard must be evaluated using consistent criteria for likelihood (probability of occurrence) and severity (magnitude of health impact). The auditor will verify preventive controls are identified for each significant hazard with clear linkage between hazards and controls. Analysis must consider raw materials, ingredients, packaging, processing environment, process steps, distribution, and intended use. This question must be scored and cannot be marked N/A.",
+      "monitoringExpectations": "The Food Safety Plan team must conduct systematic hazard analysis for all products using standardized methodology and documentation formats. Analysis must be updated whenever new products are introduced, formulations change, new ingredients are used, processes are modified, or new hazard information becomes available. Each hazard evaluation must be documented with rationale for likelihood and severity ratings based on scientific data, historical information, and expert knowledge. Preventive controls identified for significant hazards must be appropriate for the specific hazard and operation. The team must ensure hazard analysis is comprehensive by systematically reviewing each process step and all potential hazard sources. PCQI oversight of hazard analysis is essential to ensure scientific soundness and regulatory compliance. Hazard analysis must be reviewed at least every three years during Food Safety Plan reanalysis."
     },
     {
+      "id": "7.02.02",
       "code": "7.02.02",
+      "text": "Where risk-based preventive controls are identified, have reasonably appropriate procedures, practices, and processes been developed to control identified hazard(s) are they appropriate and consistent with current scientific understanding?",
       "question": "Where risk-based preventive controls are identified, have reasonably appropriate procedures, practices, and processes been developed to control identified hazard(s) are they appropriate and consistent with current scientific understanding?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "preventive controls",
+        "risk-based approach",
+        "control procedures",
+        "scientific basis",
+        "hazard prevention",
+        "control effectiveness",
+        "current science",
+        "regulatory compliance"
+      ],
+      "mandatoryStatements": [
+        "Preventive controls must be developed for each identified significant hazard using procedures, practices, and processes appropriate for hazard characteristics",
+        "Controls must be based on current scientific understanding and proven effective for the specific hazards and operational conditions",
+        "Preventive controls may include process controls, allergen controls, sanitation controls, supply chain controls, and other controls as appropriate"
+      ],
+      "verificationExpectations": "Auditors will review preventive controls to verify they are appropriately matched to identified hazards and based on sound scientific principles. Process preventive controls (time, temperature, pressure, formulation factors) will be evaluated for adequacy in controlling biological hazards. Allergen preventive controls will be assessed for effectiveness in preventing cross-contact. Sanitation preventive controls will be reviewed for adequacy in maintaining environmental and food contact surface hygiene. Supply chain preventive controls will be evaluated for ensuring incoming materials meet safety requirements. The auditor will verify controls are consistent with current FDA guidance, industry best practices, and scientific literature. Controls must be reasonably appropriate considering facility capabilities, product characteristics, and hazard severity.",
+      "monitoringExpectations": "The Food Safety Plan team must develop specific preventive control procedures for each significant hazard identified in hazard analysis. Controls must be practical for the operation to implement consistently while providing adequate food safety assurance. Process preventive controls must specify critical parameters (time, temperature, pH, water activity) that will be controlled. Allergen controls must address ingredient receiving, storage, handling, production scheduling, cleaning, and labeling. Sanitation controls must define cleaning schedules, methods, verification testing, and corrective actions. Supply chain controls must specify supplier approval criteria, incoming material verification, and documentation requirements. The PCQI must verify preventive controls are scientifically sound and consistent with current understanding of food safety. Controls must be reviewed and updated when new scientific information becomes available or when effectiveness is questioned."
     },
     {
+      "id": "7.02.03",
       "code": "7.02.03",
+      "text": "Do the process preventive controls have critical limits, supported by relevant validation documentation, and do allergen, sanitation, supply chain or other preventive controls have parameters, values and targets (where relevant)?",
       "question": "Do the process preventive controls have critical limits, supported by relevant validation documentation, and do allergen, sanitation, supply chain or other preventive controls have parameters, values and targets (where relevant)?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "critical limits",
+        "validation",
+        "parameters",
+        "target values",
+        "process controls",
+        "allergen controls",
+        "sanitation controls",
+        "measurable criteria"
+      ],
+      "mandatoryStatements": [
+        "Process preventive controls must have established critical limits defining the boundaries between safe and unsafe conditions, supported by validation",
+        "Non-process preventive controls (allergen, sanitation, supply chain) must have defined parameters, values, or targets where relevant to control effectiveness",
+        "All critical limits and parameters must be based on scientific evidence demonstrating they achieve intended hazard control"
+      ],
+      "verificationExpectations": "Auditors will examine process preventive controls to verify critical limits are clearly defined (temperature, time, pH, water activity, etc.) and supported by validation documentation. Validation may include scientific literature, regulatory guidance, challenge studies, or expert consultation. For allergen controls, parameters may include production sequencing, cleaning verification limits (ATP, protein swabs), or visual inspection criteria. Sanitation controls should have parameters such as sanitizer concentrations, contact times, or microbiological testing limits. Supply chain controls may have specifications for incoming material certificates, testing frequencies, or supplier audit schedules. The auditor will verify parameters are measurable, achievable, and adequate for hazard control. Documentation must link critical limits and parameters to the hazards they control.",
+      "monitoringExpectations": "The Food Safety Plan team must establish and document critical limits for all process preventive controls based on validated scientific data. Validation documentation must be maintained showing the basis for each critical limit. For thermal processes, validation must demonstrate time-temperature combinations achieve required pathogen reductions. For allergen controls, parameters must ensure cross-contact is prevented or detected. Sanitation control parameters must ensure effective cleaning and sanitizing of food contact surfaces and environment. Supply chain control parameters must ensure incoming materials meet safety specifications. When operational experience or new data suggests critical limits or parameters may be inadequate, revalidation must be conducted. The PCQI must review and approve all critical limits and parameters to ensure scientific adequacy. Parameters must be reviewed during triennial reanalysis and whenever processes or hazards change."
     },
     {
+      "id": "7.02.04",
       "code": "7.02.04",
+      "text": "Have monitoring requirements and frequencies been determined and documented for the preventive controls?",
       "question": "Have monitoring requirements and frequencies been determined and documented for the preventive controls?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "monitoring procedures",
+        "monitoring frequency",
+        "measurement methods",
+        "control verification",
+        "documentation requirements",
+        "continuous monitoring",
+        "periodic checks"
+      ],
+      "mandatoryStatements": [
+        "Monitoring procedures must be established specifying what will be monitored, how measurements will be taken, and frequency for each preventive control",
+        "Monitoring frequency must be adequate to provide assurance that preventive controls are consistently performed and effective",
+        "Monitoring methods must provide timely information enabling prompt corrective action when controls are not properly implemented"
+      ],
+      "verificationExpectations": "Auditors will review monitoring procedures for each preventive control to verify they specify what is monitored (parameters, activities, conditions), how monitoring is conducted (instruments, observation, testing), when and how often monitoring occurs, and who is responsible. Process preventive control monitoring may be continuous (automated systems) or periodic (operator checks). Allergen control monitoring may include production sequencing verification, cleaning validation testing, and label verification. Sanitation control monitoring includes cleaning verification, environmental testing, and visual inspections. Supply chain control monitoring includes certificate review, incoming material testing, and supplier performance tracking. The auditor will verify monitoring frequencies are appropriate for control type, process variability, and hazard significance.",
+      "monitoringExpectations": "The Food Safety Plan team must document comprehensive monitoring requirements for each preventive control including specific procedures, frequencies, responsible personnel, and equipment needed. Monitoring frequencies must be established based on process stability, hazard severity, and ability to detect control failures before safety is compromised. For process controls, continuous monitoring may be required for critical parameters while periodic verification is conducted. Allergen controls require monitoring at points where cross-contact may occur. Sanitation controls require both immediate post-cleaning verification and periodic environmental monitoring. Supply chain controls require documented verification of supplier compliance and incoming material specifications. Monitoring procedures must be practical for personnel to execute consistently during operations while providing adequate assurance of control effectiveness. Procedures must specify calibration requirements for monitoring equipment and instruments."
     },
     {
+      "id": "7.02.05",
       "code": "7.02.05",
+      "text": "Are there documents that show validation work for the process preventive controls and was this validation work performed by or overseen by a Preventive Controls Qualified Individual?",
       "question": "Are there documents that show validation work for the process preventive controls and was this validation work performed by or overseen by a Preventive Controls Qualified Individual?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "validation",
+        "PCQI oversight",
+        "process validation",
+        "scientific evidence",
+        "effectiveness demonstration",
+        "documentation",
+        "qualified individual"
+      ],
+      "mandatoryStatements": [
+        "Validation documentation must demonstrate that process preventive controls are capable of effectively controlling identified hazards",
+        "Validation must be performed by or under oversight of a PCQI with documented evidence of their involvement",
+        "Validation may include scientific literature, regulatory guidance, challenge studies, heat distribution studies, or other appropriate methods"
+      ],
+      "verificationExpectations": "Auditors will examine validation documentation for process preventive controls to verify scientific evidence supports their effectiveness. Validation records must show PCQI involvement through signatures, approval documentation, or oversight records. For thermal processes, validation may include heat penetration studies, come-up time studies, and microbial challenge studies. For acidification processes, validation must demonstrate pH is achieved throughout product. For formulation controls, validation must show that factors like water activity or preservative levels effectively control target pathogens. The auditor will verify validation was conducted under conditions representative of actual production. PCQI qualifications will be verified through training certificates. The auditor will confirm validation addresses the specific hazards, products, and processes at the facility.",
+      "monitoringExpectations": "The Food Safety Plan team must ensure all process preventive controls are validated before implementation with PCQI oversight documented. Validation studies must be conducted using appropriate scientific methods and equipment. When validation is based on published scientific literature or regulatory guidance, documentation must show applicability to the specific operation. Challenge studies must be conducted by qualified laboratories using appropriate target organisms and product matrices. The PCQI must review validation protocols, oversee study execution, and approve validation conclusions. Validation documentation must be maintained in the Food Safety Plan including study reports, data analysis, and PCQI approval. Revalidation must be conducted when processes change significantly, new equipment is installed, or process performance suggests controls may be inadequate. The PCQI must be involved in all revalidation activities."
     },
     {
+      "id": "7.02.06",
       "code": "7.02.06",
+      "text": "Do the Food Safety Plan, charts and/or procedures indicate that specific responsibilities have been assigned for the monitoring, recording, verification, and corrective action implementation?",
       "question": "Do the Food Safety Plan, charts and/or procedures indicate that specific responsibilities have been assigned for the monitoring, recording, verification, and corrective action implementation?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "responsibility assignment",
+        "accountability",
+        "designated personnel",
+        "monitoring responsibility",
+        "verification duties",
+        "corrective action authority",
+        "role definition"
+      ],
+      "mandatoryStatements": [
+        "Specific individuals or positions must be assigned responsibility for conducting preventive control monitoring activities",
+        "Designated personnel must be assigned responsibility for verification activities including record review, calibration, and effectiveness checks",
+        "Clear authority and responsibility must be established for implementing corrective actions when preventive controls are not properly implemented"
+      ],
+      "verificationExpectations": "Auditors will review Food Safety Plan documentation, process charts, and procedures to verify specific responsibilities are assigned for each preventive control. Assignments must cover monitoring execution, data recording, verification activities, and corrective action implementation. The auditor will verify assignments identify positions or individuals by name or title. Interviews with assigned personnel will confirm they understand their responsibilities and have appropriate training and authority. The auditor will verify backup personnel are designated to ensure continuous preventive control coverage during absences or shift changes. Responsibility assignments should be incorporated into job descriptions where applicable.",
+      "monitoringExpectations": "Management must clearly assign and document preventive control responsibilities to qualified personnel with appropriate training and authority. The Food Safety Plan or related procedures must specify who is responsible for each aspect of preventive control implementation. Monitoring responsibilities must be assigned to personnel who will actually perform the activities during their shifts. Verification responsibilities must be assigned to qualified personnel independent of monitoring responsibilities, often supervisors or quality assurance staff. Corrective action authority must be clearly established so personnel know who can make decisions about process adjustments and product disposition. When personnel changes occur, responsibilities must be promptly reassigned with new personnel trained before assuming duties. A current roster showing preventive control assignments must be maintained and readily accessible. Management must ensure assigned personnel have adequate time, resources, and support to fulfill their responsibilities."
     },
     {
+      "id": "7.02.07",
       "code": "7.02.07",
+      "text": "Have standard operating procedures (SOPs) been created for the monitoring process(es) of the preventive controls, including those in plan or chart format (e.g., process preventive controls)?",
       "question": "Have standard operating procedures (SOPs) been created for the monitoring process(es) of the preventive controls, including those in plan or chart format (e.g., process preventive controls)?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "standard operating procedures",
+        "SOPs",
+        "monitoring procedures",
+        "work instructions",
+        "step-by-step guidance",
+        "process charts",
+        "documentation"
+      ],
+      "mandatoryStatements": [
+        "Written SOPs must be developed for monitoring activities for each preventive control providing detailed instructions",
+        "SOPs must describe how to conduct monitoring including equipment use, measurement techniques, data recording, and frequency",
+        "Procedures must be clear and detailed enough that trained personnel can consistently execute monitoring activities correctly"
+      ],
+      "verificationExpectations": "Auditors will review SOPs for preventive control monitoring to verify they provide comprehensive, step-by-step instructions. SOPs may be in narrative format, flowchart format, or process charts depending on the control type. For process preventive controls, charts showing critical limits, monitoring methods, frequencies, and corrective actions are common. The auditor will verify SOPs include all necessary information: what to monitor, equipment and methods to use, frequency and timing, how to record data, and what to do when specifications are not met. SOPs should be written in clear language appropriate for users with visual aids where helpful. The auditor may observe monitoring activities to verify they are conducted according to SOPs and that operators understand and follow procedures.",
+      "monitoringExpectations": "The Food Safety Plan team must develop comprehensive SOPs for each preventive control monitoring activity. SOPs must be current, version-controlled, and reviewed periodically to ensure continued accuracy. When monitoring procedures change due to new equipment, improved methods, or process modifications, SOPs must be updated immediately and affected personnel retrained. Monitoring SOPs should be readily accessible to operators at or near work locations. For process preventive controls, process charts or control plans may serve as SOPs if they contain sufficient detail. Supervisors must verify monitoring is conducted according to SOPs through direct observation and record review. When deviations from SOPs are observed, immediate retraining or procedure clarification must occur. SOPs must be in the primary language of monitoring personnel or with appropriate translations provided."
     },
     {
+      "id": "7.02.08",
       "code": "7.02.08",
+      "text": "Have corrective action procedures been established for the preventive controls, including a detailed action plan for operators to follow if out of specification situations are observed (loss of control/deviation) and plans to adjust process back into control?",
       "question": "Have corrective action procedures been established for the preventive controls, including a detailed action plan for operators to follow if out of specification situations are observed (loss of control/deviation) and plans to adjust process back into control?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "corrective actions",
+        "action plans",
+        "deviation response",
+        "control restoration",
+        "product evaluation",
+        "root cause analysis",
+        "preventive measures"
+      ],
+      "mandatoryStatements": [
+        "Documented corrective action procedures must be established for each preventive control specifying actions when controls are not properly implemented",
+        "Procedures must address affected product identification and evaluation, correction of problem causing deviation, and reduction of recurrence likelihood",
+        "Action plans must be detailed enough that operators and supervisors can execute appropriate responses when deviations occur"
+      ],
+      "verificationExpectations": "Auditors will review corrective action procedures for each preventive control to verify they provide clear guidance for responding to deviations. Procedures must address all required elements: identifying and evaluating affected product for safety and quality, correcting the immediate problem, reducing likelihood of recurrence, and maintaining corrective action records. The auditor will verify procedures specify who has authority to implement corrective actions and make product disposition decisions. For process preventive control deviations, procedures must address food safety evaluation of affected products. For allergen control deviations, procedures must address cross-contact assessment and product recall consideration. Historical corrective action records may be reviewed to verify procedures are properly implemented when needed.",
+      "monitoringExpectations": "The Food Safety Plan team must develop specific corrective action procedures for each preventive control providing detailed guidance for operators and supervisors. Procedures must specify immediate actions when deviations occur: stop and segregate affected product, notify supervision, identify cause of problem, and document the situation. Corrective actions must address affected product safety through evaluation based on deviation type, severity, and duration. Food safety evaluations must be conducted by qualified personnel, often the PCQI or designee. Process corrections must restore control before operations resume. Root cause analysis should be conducted for significant or recurring deviations to identify and implement preventive measures. Corrective action documentation must be comprehensive including description of deviation, affected products, investigation findings, actions taken, product disposition, and approval signatures. Management must review corrective action patterns to identify systemic issues requiring Food Safety Plan modifications."
     },
     {
+      "id": "7.02.09",
       "code": "7.02.09",
+      "text": "Have recording forms been developed for monitoring the preventive controls?",
       "question": "Have recording forms been developed for monitoring the preventive controls?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "recording forms",
+        "monitoring logs",
+        "documentation templates",
+        "data collection",
+        "record-keeping",
+        "traceability",
+        "form design"
+      ],
+      "mandatoryStatements": [
+        "Standardized recording forms or templates must be developed for documenting monitoring activities for each preventive control",
+        "Forms must capture all critical information including parameters monitored, values observed, date and time, and operator identification",
+        "Recording systems must provide space for documenting deviations, corrective actions, and verification signatures"
+      ],
+      "verificationExpectations": "Auditors will examine preventive control recording forms to verify they capture all necessary information for demonstrating controls are properly implemented. Forms must include fields for the specific preventive control, parameters or activities monitored, actual values or observations, acceptable ranges or specifications, monitoring frequency, date and time, operator signature or initials, and space for noting deviations and corrective actions. The auditor will verify forms are designed to be user-friendly and minimize recording errors. Electronic recording systems will be evaluated for data integrity, access controls, audit trails, and backup procedures. Forms should facilitate supervisor review and verification with designated areas for second signatures. Completed forms will be reviewed to ensure proper and complete use.",
+      "monitoringExpectations": "The Food Safety Plan team must design recording forms for each preventive control that capture required information while being practical for operators to complete during production. Forms must be version-controlled with current versions readily available at monitoring locations. When preventive controls change or new controls are added, forms must be updated accordingly. Adequate supplies of blank forms must be maintained at work areas. Completed forms must be collected, reviewed, and filed systematically to facilitate retrieval for verification and regulatory inspections. For electronic recording systems, data integrity must be ensured through appropriate security controls, user authentication, and regular backups. Form design should minimize recording errors through clear labeling, appropriate units of measure, logical layout, and sufficient space for entries. Management must establish record retention periods ensuring preventive control records are maintained for required durations, typically at least two years or product shelf life plus six months."
     },
     {
+      "id": "7.02.10",
       "code": "7.02.10",
+      "text": "Have verification procedures and schedules been developed for the preventive controls?",
       "question": "Have verification procedures and schedules been developed for the preventive controls?",
+      "points": 15,
       "totalPoints": 15,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "verification activities",
+        "verification schedules",
+        "control effectiveness",
+        "calibration",
+        "validation",
+        "record review",
+        "testing programs"
+      ],
+      "mandatoryStatements": [
+        "Verification procedures must be established defining activities to confirm preventive controls are consistently implemented and effective",
+        "Verification schedules must specify frequency of activities including calibration, testing, record review, observation, and revalidation",
+        "Verification must be conducted by or under oversight of qualified personnel, often the PCQI or trained designee"
+      ],
+      "verificationExpectations": "Auditors will review verification plans and schedules to confirm specific activities are defined for each preventive control. Verification activities should include calibration of monitoring equipment, review of monitoring records, observation of monitoring activities, testing to verify control effectiveness (environmental monitoring, finished product testing, cleaning validation), and periodic revalidation. The auditor will verify schedules establish appropriate frequencies based on control type, process stability, and hazard significance. Documentation must show verification activities are actually conducted according to schedules with findings recorded. The auditor will verify the PCQI or qualified designee is involved in verification as appropriate. Verification findings should be used to assess preventive control performance and identify improvement needs.",
+      "monitoringExpectations": "The Food Safety Plan team must develop comprehensive verification plans for each preventive control identifying all activities required to ensure continued effectiveness. Verification schedules must be established and tracked to ensure activities are completed on time. Equipment calibration must be conducted by qualified personnel using certified standards with records maintained. Record reviews must be conducted by supervisors or quality assurance staff independent of monitoring responsibilities. Environmental monitoring programs must be established for operations with environmental contamination risks. Finished product testing may be conducted to verify process effectiveness. When verification activities identify deficiencies, corrective actions must be implemented promptly. The PCQI must be involved in reviewing verification results, investigating significant findings, and approving system modifications. Annual or more frequent verification should include comprehensive assessment of Food Safety Plan effectiveness through data analysis, trend evaluation, and internal audit. Verification findings must be documented and communicated to management for continuous improvement."
     },
     {
+      "id": "7.02.11",
       "code": "7.02.11",
+      "text": "If any preventive control has been identified, does the operation have a documented and implemented recall plan?",
       "question": "If any preventive control has been identified, does the operation have a documented and implemented recall plan?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "recall plan",
+        "product recall",
+        "emergency response",
+        "product retrieval",
+        "consumer notification",
+        "traceability",
+        "recall procedures"
+      ],
+      "mandatoryStatements": [
+        "A written recall plan must be documented describing procedures for identifying, retrieving, and disposing of unsafe products",
+        "The recall plan must assign responsibilities, establish notification procedures, and define decision-making authority",
+        "Recall effectiveness must be verifiable through mock recalls or traceability exercises demonstrating product can be located and retrieved"
+      ],
+      "verificationExpectations": "Auditors will review the recall plan to verify it includes all necessary elements: assignment of recall coordinator and team responsibilities, procedures for determining if recall is necessary, classification of recall severity, identification of affected products using lot codes and distribution records, notification procedures for customers and consumers, product retrieval methods, product disposition and destruction procedures, regulatory agency notification requirements, and documentation requirements. The auditor will verify the plan has been tested through mock recalls demonstrating the operation can identify product locations and retrieve products within reasonable timeframes. Mock recall records should show complete traceability from raw materials through production to distribution. The auditor will verify contact information in the plan is current and recall team members understand their roles.",
+      "monitoringExpectations": "Management must develop and maintain a comprehensive recall plan with procedures readily accessible to recall team members. The recall coordinator must be designated with authority to initiate recalls and coordinate response activities. Contact information for regulatory agencies, customers, distributors, and media must be current. Mock recalls must be conducted at least annually to test plan effectiveness and traceability systems. Mock recall exercises should test both forward traceability (following products through distribution) and backward traceability (identifying raw material sources). Results must be documented showing time required to identify affected products, percentage of products located, and any gaps in traceability. When mock recalls identify deficiencies, corrective actions must be implemented to improve recall effectiveness. Recall team members must receive training on their responsibilities and procedures. The recall plan must be reviewed and updated whenever products, processes, or distribution channels change significantly."
     },
     {
+      "id": "7.02.12",
       "code": "7.02.12",
+      "text": "Is there documented evidence that the food safety plan (primary documents in the preventive controls food safety system) has been verified on-site?",
       "question": "Is there documented evidence that the food safety plan (primary documents in the preventive controls food safety system) has been verified on-site?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": [
+        "on-site verification",
+        "plan accuracy",
+        "document validation",
+        "facility walkthrough",
+        "practical confirmation",
+        "implementation verification",
+        "documentation review"
+      ],
+      "mandatoryStatements": [
+        "The Food Safety Plan and primary documents must be verified on-site to confirm they accurately represent actual operations",
+        "On-site verification must be documented with dates, participants, findings, and any discrepancies identified",
+        "Verification must occur during active production to observe actual product flows, personnel activities, and preventive control implementation"
+      ],
+      "verificationExpectations": "Auditors will examine records documenting on-site verification of Food Safety Plan documents including hazard analysis, process flow diagrams, preventive control procedures, and monitoring records. Verification documentation must show when verification occurred, who participated (typically including the PCQI), what was verified, and findings. The auditor will verify that walk-throughs occurred during production operations allowing observation of actual practices. Documentation should show any discrepancies identified between documented procedures and actual operations with corrections made to either documents or practices. The auditor will confirm the PCQI or qualified personnel conducted verification ensuring technical adequacy. On-site verification should have occurred initially before plan implementation and whenever significant changes are made.",
+      "monitoringExpectations": "The Food Safety Plan team, led by the PCQI, must conduct on-site verification of all plan documents during active production operations. Verification walk-throughs must follow products through all processing steps from receiving through shipping, comparing documented procedures to actual practices. Process flow diagrams must be verified to accurately show product movement, cross-contamination potential, and preventive control locations. Preventive control procedures must be verified to reflect actual monitoring methods, frequencies, and responsibilities. When discrepancies are found between documents and actual operations, immediate determination must be made whether documents need updating or operations need correction. On-site verification must be documented comprehensively including date, participants, areas verified, observations, discrepancies found, and resolutions. Verification must be repeated whenever significant changes occur such as new products, process modifications, equipment changes, or facility layout alterations. Annual verification during triennial reanalysis should confirm all plan documents remain accurate and current."
     }
   ],
   "capaInject": [

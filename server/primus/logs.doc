@@ -1,0 +1,76 @@
+[LOADER] Search text: "5.04_operational_practices operational practices"
+[LOADER] ✅ Found exact code match: 5.04
+[SPEC] ✅ Found spec: 5.04 - Operational Practices
+[SPEC] Requirements count: 17
+[SPEC] Adding REQUIRED question: requirement_5_04_01 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_02 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_03 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_04 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_05 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_06 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_07 (date)
+[SPEC] Adding REQUIRED question: requirement_5_04_08 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_09 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_10 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_11 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_12 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_13 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_14 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_15 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_16 (text)
+[SPEC] Adding REQUIRED question: requirement_5_04_17 (text)
+[SPEC] ✅ Generated 23 total questions from specification
+[LLM] ✅ Using SPEC-DRIVEN ONLY generation for module 5 (23 questions)
+[LLM] ⚠️ Large submodule detected (17 requirements). Using two-phase generation.
+[LOADER] findSubmoduleSpecByName called: {
+  moduleNumber: '5',
+  documentName: '5.04_Operational_Practices',
+  subModuleName: 'Operational Practices'
+}
+[LOADER] Search text: "5.04_operational_practices operational practices"
+[LOADER] ✅ Found exact code match: 5.04
+[LLM] 🚀 4-JOB ARCHITECTURE: Generating audit-ready document
+[LLM] Job 1: Sections 1-7 (Framework) - 20K tokens
+[BEDROCK] Token usage: input=901, output=2494
+[LLM] Job 2: Section 8 Part A (9 requirements) - 20K tokens
+[BEDROCK] Token usage: input=676, output=877
+[LLM] Job 3: Section 8 Part B (8 requirements) - 20K tokens
+[BEDROCK] Token usage: input=667, output=864
+[LLM] Job 4: Sections 9-15 (Completion) - 20K tokens
+[BEDROCK] Token usage: input=1929, output=612
+[LLM] Merging 4 parts into final document
+[LINT] ⚠️ Section "8. Procedures" not found. Skipping insertion to prevent post-signature content.
+[LLM] ✅ Two-part document generation complete
+[API] Validating LLM output...
+[API] ⚠️ Validation detected issues:
+================================================================================
+DOCUMENT VALIDATION REPORT
+================================================================================
+
+Status: ❌ INVALID
+Errors: 7
+Warnings: 0
+
+ERRORS:
+--------------------------------------------------------------------------------
+[CRITICAL] Post-signature content detected (compliance summaries, appendices, or notes after final signature)
+  Context: Content found after "Approved By:" signature line
+
+[HIGH] Mandatory section missing: 10. Verification & Validation Activities
+
+[HIGH] Mandatory section missing: 11. Corrective & Preventive Action
+
+[HIGH] Mandatory section missing: 12. Traceability & Recall Elements
+
+[HIGH] Mandatory section missing: 13. Record Retention & Document Control
+
+[HIGH] Mandatory section missing: 14. Compliance Crosswalk
+
+[HIGH] Mandatory section missing: 15. Revision History & Approval Signatures
+
+================================================================================
+[API] ⚠️ Post-signature content detected. Applying cutoff.
+[API] ❌ Post-signature content still present! Applying aggressive cutoff.
+[API] Creating DOCX document...
+[API] Uploading to S3: primus_gfs/5/5.04/v1_1769234066057.docx
+[API] ✅ Document generated successfully!

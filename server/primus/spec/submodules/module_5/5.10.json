@@ -12,34 +12,94 @@
   "description": "Requirements for site planning and documentation including site maps, facility layout, adjacent land use considerations, and environmental factors affecting food safety",
   "requirements": [
     {
+      "id": "5.10.01",
       "code": "5.10.01",
+      "text": "Is there a site plan showing the facility location, adjacent sites, roads, water sources, storm water, wastewater and other relevant features?",
       "question": "Is there a site plan showing the facility location, adjacent sites, roads, water sources, storm water, wastewater and other relevant features?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["site plan", "facility location", "adjacent sites", "water sources", "storm water", "wastewater", "site mapping", "environmental features"],
+      "mandatoryStatements": [
+        "A comprehensive site plan must show facility location and all adjacent sites",
+        "Site plan must document all water sources, storm water drainage, and wastewater systems",
+        "Plan must include roads, access points, and other relevant environmental features"
+      ],
+      "verificationExpectations": "Auditors will review site plans to confirm they accurately show the facility location relative to adjacent sites, all roads and access points, water sources and distribution, storm water management systems, wastewater handling, and any environmental features that could impact food safety. Plans should be current and reflect the actual site conditions.",
+      "monitoringExpectations": "Operations should maintain updated site plans that are reviewed when site changes occur, used for risk assessments, and referenced when planning facility expansions or modifications. Plans should be readily accessible to management and used during emergency response planning."
     },
     {
+      "id": "5.10.02",
       "code": "5.10.02",
+      "text": "Is there a facility floor plan showing the layout of the building, production areas, storage areas, water sources and fixtures, layout of equipment and traffic flow patterns?",
       "question": "Is there a facility floor plan showing the layout of the building, production areas, storage areas, water sources and fixtures, layout of equipment and traffic flow patterns?",
+      "points": 5,
       "totalPoints": 5,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["floor plan", "building layout", "production areas", "storage areas", "water fixtures", "equipment layout", "traffic flow", "facility design"],
+      "mandatoryStatements": [
+        "A detailed facility floor plan must show the complete building layout and all functional areas",
+        "Floor plan must identify production areas, storage areas, and their separation or segregation",
+        "Plan must document water sources, fixtures, equipment placement, and traffic flow patterns"
+      ],
+      "verificationExpectations": "Auditors will examine facility floor plans to verify they show the building layout including all production areas, storage areas, water sources and plumbing fixtures, major equipment placement, and personnel/product traffic flow patterns. Plans should demonstrate proper segregation of raw and processed areas and indicate any food safety zoning.",
+      "monitoringExpectations": "Operations should maintain current floor plans that are used for facility management, employee training, and operational planning. Plans should be updated when equipment changes, area designations are modified, or traffic patterns are revised, and used to support food safety assessments."
     },
     {
+      "id": "5.10.03",
       "code": "5.10.03",
+      "text": "Has a documented risk assessment been performed to ensure that any food safety hazards relevant to facility location and adjacent land use are identified and controlled?",
       "question": "Has a documented risk assessment been performed to ensure that any food safety hazards relevant to facility location and adjacent land use are identified and controlled?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["risk assessment", "facility location", "adjacent land use", "food safety hazards", "environmental hazards", "hazard identification", "risk control"],
+      "mandatoryStatements": [
+        "A documented risk assessment must be performed for facility location and adjacent land use",
+        "Risk assessment must identify all potential food safety hazards from environmental sources",
+        "Identified hazards must have documented control measures to prevent food safety risks"
+      ],
+      "verificationExpectations": "Auditors will review the documented risk assessment to confirm it evaluates food safety hazards related to facility location including proximity to agricultural operations, industrial facilities, waste sites, flooding risks, air quality concerns, and pest pressures from adjacent land use. Assessment should identify specific hazards and document control measures implemented.",
+      "monitoringExpectations": "Operations should maintain the risk assessment as a living document that is reviewed annually or when adjacent land use changes occur. Controls identified should be monitored for effectiveness, with updates made when new hazards are identified or when existing controls prove inadequate."
     },
     {
+      "id": "5.10.04",
       "code": "5.10.04",
+      "text": "Is there a current certificate of inspection (or similar record) for backflow prevention assemblies on water lines into the facility?",
       "question": "Is there a current certificate of inspection (or similar record) for backflow prevention assemblies on water lines into the facility?",
+      "points": 3,
       "totalPoints": 3,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["backflow prevention", "water lines", "inspection certificate", "backflow assembly", "water system protection", "cross-connection control"],
+      "mandatoryStatements": [
+        "Current certificates of inspection must be maintained for all backflow prevention assemblies",
+        "Backflow prevention devices must be tested by certified inspectors according to regulatory requirements",
+        "Inspection records must verify assemblies are functioning properly to protect water supply"
+      ],
+      "verificationExpectations": "Auditors will verify that current inspection certificates or similar records exist for all backflow prevention assemblies on water lines entering the facility. Records should be from certified inspectors, show testing dates, indicate assemblies passed inspection, and be current according to local regulatory requirements or manufacturer recommendations.",
+      "monitoringExpectations": "Operations should maintain a schedule for backflow prevention assembly inspections with tracking to ensure certifications remain current. Failed inspections should trigger immediate repairs or replacements before assemblies are returned to service, with documentation of corrective actions taken."
     },
     {
+      "id": "5.10.05",
       "code": "5.10.05",
+      "text": "Is there a trained on-site person responsible for the operation's food safety program?",
       "question": "Is there a trained on-site person responsible for the operation's food safety program?",
+      "points": 10,
       "totalPoints": 10,
-      "isAutomaticFailure": false
+      "required": true,
+      "isAutomaticFailure": false,
+      "keywords": ["on-site person", "food safety program", "trained personnel", "program responsibility", "food safety management", "qualified individual"],
+      "mandatoryStatements": [
+        "An on-site person must be designated as responsible for the operation's food safety program",
+        "The designated person must have appropriate training in food safety principles and practices",
+        "The responsible person must have authority to implement and oversee the food safety program"
+      ],
+      "verificationExpectations": "Auditors will verify that a trained on-site person is designated as responsible for the food safety program through organizational documents, job descriptions, or letters of responsibility. Training records should demonstrate the person has appropriate food safety education, HACCP training, or relevant certifications and possesses the knowledge to manage the program effectively.",
+      "monitoringExpectations": "Operations should ensure the designated food safety person maintains current training and competency through ongoing education and professional development. The person's responsibilities should be clearly documented and communicated, with authority to make decisions affecting food safety and access to management for resource allocation."
     }
   ],
   "capaInject": [
