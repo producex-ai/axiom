@@ -300,18 +300,40 @@ kbd {
   }
 }
 
-/* Find & Replace Match Highlighting */
-.find-replace-match {
-  background-color: rgba(255, 215, 0, 0.3); /* Yellow highlight */
-  border-radius: 2px;
+/* Selection highlight - Must come before find/replace to ensure proper layering */
+.ProseMirror ::selection {
+  background: rgba(59, 130, 246, 0.3) !important;
+}
+
+.ProseMirror ::-moz-selection {
+  background: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Find & Replace Match Highlighting - Lower specificity, no !important */
+.ProseMirror .find-replace-match {
+  background-color: rgba(255, 215, 0, 0.25);
+  border-bottom: 2px solid rgba(255, 215, 0, 0.6);
   transition: background-color 0.2s ease;
 }
 
-.find-replace-match-active {
-  background-color: rgba(255, 165, 0, 0.5); /* Orange highlight for active match */
-  border-radius: 2px;
-  box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.3);
+.ProseMirror .find-replace-match-active {
+  background-color: rgba(255, 165, 0, 0.35);
+  border-bottom: 2px solid rgba(255, 165, 0, 0.8);
+  box-shadow: 0 0 0 1px rgba(255, 165, 0, 0.3);
   animation: pulseMatch 0.3s ease;
+}
+
+/* When text is selected, find/replace highlights should be less prominent */
+.ProseMirror .find-replace-match::selection,
+.ProseMirror .find-replace-match-active::selection {
+  background: rgba(59, 130, 246, 0.4) !important;
+  border-bottom-color: transparent;
+}
+
+.ProseMirror .find-replace-match::-moz-selection,
+.ProseMirror .find-replace-match-active::-moz-selection {
+  background: rgba(59, 130, 246, 0.4) !important;
+  border-bottom-color: transparent;
 }
 
 @keyframes pulseMatch {
@@ -319,21 +341,31 @@ kbd {
     box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 4px rgba(255, 165, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
   }
   100% {
-    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 165, 0, 0.3);
   }
 }
 
 /* Dark mode adjustments for find/replace */
 @media (prefers-color-scheme: dark) {
-  .find-replace-match {
-    background-color: rgba(255, 215, 0, 0.2);
+  .ProseMirror .find-replace-match {
+    background-color: rgba(255, 215, 0, 0.15);
+    border-bottom-color: rgba(255, 215, 0, 0.5);
   }
   
-  .find-replace-match-active {
-    background-color: rgba(255, 165, 0, 0.4);
-    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.4);
+  .ProseMirror .find-replace-match-active {
+    background-color: rgba(255, 165, 0, 0.25);
+    border-bottom-color: rgba(255, 165, 0, 0.7);
+    box-shadow: 0 0 0 1px rgba(255, 165, 0, 0.4);
+  }
+
+  .ProseMirror ::selection {
+    background: rgba(59, 130, 246, 0.4) !important;
+  }
+
+  .ProseMirror ::-moz-selection {
+    background: rgba(59, 130, 246, 0.4) !important;
   }
 }

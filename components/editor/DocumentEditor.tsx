@@ -14,6 +14,8 @@ import { AIDiffView, AIProcessingIndicator } from "./AIDiffView";
 import { CommandPalette } from "./CommandPalette";
 import { FindReplaceExtension } from "./extensions/FindReplaceExtension";
 import { FindReplaceDialog } from "./FindReplaceDialog";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 
 export function DocumentEditor({
   initialContent = "",
@@ -291,6 +293,25 @@ export function DocumentEditor({
 
   return (
     <div className="flex h-full flex-col border rounded-lg shadow-sm bg-background overflow-hidden">
+      {/* Simple Toolbar for Edit Mode */}
+      {!readOnly && (
+        <div className="flex items-center gap-2 border-b bg-muted/30 px-4 py-2">
+          <div className="flex-1" />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowFindReplace(true)}
+            className="h-8 gap-2"
+          >
+            <Search className="h-4 w-4" />
+            Find & Replace
+            <kbd className="ml-1 px-1.5 py-0.5 text-[10px] border rounded bg-muted text-muted-foreground font-mono">
+              ⌘F
+            </kbd>
+          </Button>
+        </div>
+      )}
+
       {/* Editor Content - Full width */}
       <div className="flex-1 overflow-y-auto">
         {/* TipTap Editor */}
