@@ -164,22 +164,29 @@ Storage (S3)
     ↓
 DOCX file
     ↓
-convertDocxToMarkdown() [mammoth, turndown]
-    ↓
-Markdown (version control friendly)
-    ↓
-convertMarkdownToHtml() [markdown-it]
+convertDocxToHtml() [mammoth]
     ↓
 HTML (editor content)
     ↓
-convertHtmlToMarkdown() [turndown]
+TipTap Editor
     ↓
-Markdown (for saving)
+HTML (from editor)
     ↓
-convertMarkdownToDocx() [docx library]
+convertHtmlToDocx() [docx + htmlparser2]
     ↓
 DOCX file → S3
 ```
+
+**Key Functions**:
+- `convertDocxToHtml()`: Converts DOCX buffer to HTML using mammoth
+- `convertHtmlToDocx()`: Converts HTML to DOCX buffer using docx library with htmlparser2 for parsing
+
+**Benefits of HTML-based flow**:
+- Preserves formatting (headings, bold, italic, lists, tables)
+- No lossy markdown conversion
+- Direct mammoth HTML output to TipTap
+- Better WYSIWYG experience
+- Proper HTML parsing with comprehensive formatting support
 
 ### Styling Architecture
 

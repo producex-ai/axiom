@@ -13,15 +13,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DocumentEditor } from "@/components/editor";
-import { AuditDialog } from "@/components/editor/AuditDialog";
+import { ComplianceAnalysisSidebar } from "@/components/editor/ComplianceAnalysisSidebar";
 import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys } from "@/lib/compliance/queries";
-import {
-  convertHtmlToMarkdown,
-  convertMarkdownToHtml,
-} from "@/lib/document-converters";
+
 import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface DocumentEditorClientProps {
@@ -48,7 +45,7 @@ export default function DocumentEditorClient({
   const [userHasEdited, setUserHasEdited] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [documentMetadata, setDocumentMetadata] = useState<any>(null);
-  const [auditIssuesOpen, setAuditIssuesOpen] = useState(false);
+  const [analysisSidebarOpen, setAnalysisSidebarOpen] = useState(false);
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
   const [simplePublishDialogOpen, setSimplePublishDialogOpen] = useState(false);
@@ -62,17 +59,17 @@ export default function DocumentEditorClient({
   useEffect(() => {
     if (content && originalContent && userHasEdited) {
       // Normalize both sides for comparison
-      const currentMarkdown = convertHtmlToMarkdown(content)
+      const currentNormalized = content
         .trim()
-        .replace(/\n{3,}/g, "\n\n") // Normalize multiple newlines
-        .replace(/\s+$/gm, ""); // Remove trailing whitespace from lines
+        .replace(/\s+/g, " ") // Normalize whitespace
+        .replace(/\s*<\/p>\s*<p>\s*/g, "</p><p>"); // Normalize paragraph spacing
 
-      const originalMarkdownNormalized = originalContent
+      const originalNormalized = originalContent
         .trim()
-        .replace(/\n{3,}/g, "\n\n")
-        .replace(/\s+$/gm, "");
+        .replace(/\s+/g, " ")
+        .replace(/\s*<\/p>\s*<p>\s*/g, "</p><p>");
 
-      setHasChanges(currentMarkdown !== originalMarkdownNormalized);
+      setHasChanges(currentNormalized !== originalNormalized);
     }
   }, [content, originalContent, userHasEdited]);
 
@@ -90,13 +87,12 @@ export default function DocumentEditorClient({
       }
 
       const data = await response.json();
-      const markdown = data.content;
-      const html = convertMarkdownToHtml(markdown);
+      const html = data.content;
       const currentStatus = data.metadata?.status || "draft";
       setDocumentStatus(currentStatus);
 
       setContent(html);
-      setOriginalContent(markdown);
+      setOriginalContent(html);
       setDocumentMetadata(data.metadata);
 
       // Load existing analysis results if available
@@ -130,31 +126,31 @@ export default function DocumentEditorClient({
       setSaving(true);
       setError(null);
 
-      let markdown = convertHtmlToMarkdown(content);
+      let html = content;
 
       // Strip document title if it appears at the beginning (safety check)
       if (documentMetadata?.title) {
         const titlePatterns = [
           new RegExp(
-            `^#{1,6}\\s*${documentMetadata.title.replace(
+            `<h[1-6][^>]*>\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
               "\\$&",
-            )}\\s*\\n+`,
-            "i",
+            )}\\s*</h[1-6]>`,
+            "gi",
           ),
           new RegExp(
-            `^${documentMetadata.title.replace(
+            `<p[^>]*>\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
               "\\$&",
-            )}\\s*\\n+`,
-            "i",
+            )}\\s*</p>`,
+            "gi",
           ),
         ];
 
         for (const pattern of titlePatterns) {
-          markdown = markdown.replace(pattern, "");
+          html = html.replace(pattern, "");
         }
-        markdown = markdown.trim();
+        html = html.trim();
       }
 
       // Save document without version increment or analysis
@@ -163,7 +159,7 @@ export default function DocumentEditorClient({
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: markdown }),
+          body: JSON.stringify({ content: html }),
         },
       );
 
@@ -175,7 +171,7 @@ export default function DocumentEditorClient({
       const result = await response.json();
 
       // Update local state after successful save
-      setOriginalContent(markdown);
+      setOriginalContent(html);
       setHasChanges(false);
       setUserHasEdited(false);
       // Set status to draft since changes haven't been published yet
@@ -209,31 +205,31 @@ export default function DocumentEditorClient({
       setPublishing(true);
       setError(null);
 
-      let markdown = convertHtmlToMarkdown(content);
+      let html = content;
 
       // Strip document title if it appears at the beginning (safety check)
       if (documentMetadata?.title) {
         const titlePatterns = [
           new RegExp(
-            `^#{1,6}\\s*${documentMetadata.title.replace(
+            `<h[1-6][^>]*>\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
               "\\$&",
-            )}\\s*\\n+`,
-            "i",
+            )}\\s*</h[1-6]>`,
+            "gi",
           ),
           new RegExp(
-            `^${documentMetadata.title.replace(
+            `<p[^>]*>\\s*${documentMetadata.title.replace(
               /[.*+?^${}()|[\]\\]/g,
               "\\$&",
-            )}\\s*\\n+`,
-            "i",
+            )}\\s*</p>`,
+            "gi",
           ),
         ];
 
         for (const pattern of titlePatterns) {
-          markdown = markdown.replace(pattern, "");
+          html = html.replace(pattern, "");
         }
-        markdown = markdown.trim();
+        html = html.trim();
       }
 
       // Check if this is a compliance document
@@ -258,7 +254,7 @@ export default function DocumentEditorClient({
           // 3. Conditionally finalize publish
           const result = await executePublishFlow(
             documentId,
-            markdown,
+            html,
             documentMetadata?.title || "Document",
             { skipValidation, comment }, // Pass comment to publish flow
           );
@@ -267,7 +263,7 @@ export default function DocumentEditorClient({
           toast.dismiss(loadingToastId);
 
           // Update local state after successful persistence
-          setOriginalContent(markdown);
+          setOriginalContent(html);
           setHasChanges(false);
           setUserHasEdited(false);
 
@@ -307,10 +303,10 @@ export default function DocumentEditorClient({
               version: result.version,
             }));
 
-            // Show audit issues dialog with full analysis
+            // Show audit issues in sidebar with full analysis
             setAuditIssues(result.fullAnalysis?.risks || []);
             setAuditAnalysis(result.fullAnalysis || null);
-            setAuditIssuesOpen(true);
+            setAnalysisSidebarOpen(true);
 
             // Show warning toast
             toast.error(result.message, {
@@ -330,7 +326,7 @@ export default function DocumentEditorClient({
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              content: markdown,
+              content: html,
               status: "published",
               comment: comment, // Pass comment to backend
             }),
@@ -345,7 +341,7 @@ export default function DocumentEditorClient({
         const result = await response.json();
 
         // Update local state after successful publish
-        setOriginalContent(markdown);
+        setOriginalContent(html);
         setHasChanges(false);
         setUserHasEdited(false);
         setMode("view");
@@ -421,8 +417,7 @@ export default function DocumentEditorClient({
         if (!confirmed) return;
       }
       setMode("view");
-      const html = convertMarkdownToHtml(originalContent);
-      setContent(html);
+      setContent(originalContent);
       setHasChanges(false);
       router.replace(`/compliance/documents/${documentId}/edit?mode=view`, {
         scroll: false,
@@ -508,21 +503,14 @@ export default function DocumentEditorClient({
             <div className="flex items-center gap-2">
               {documentMetadata?.docType !== "company" && auditAnalysis && (
                 <Button
-                  variant="outline"
+                  variant={analysisSidebarOpen ? "default" : "outline"}
                   size="sm"
-                  onClick={() => setAuditIssuesOpen(true)}
+                  onClick={() => setAnalysisSidebarOpen(!analysisSidebarOpen)}
                 >
-                  {auditIssues.length > 0 ? (
-                    <>
-                      <AlertCircle className="mr-2 h-4 w-4 text-orange-600" />
-                      Review Issues ({auditIssues.length})
-                    </>
-                  ) : (
-                    <>
-                      <AlertCircle className="mr-2 h-4 w-4 text-green-600" />
-                      Review Analysis
-                    </>
-                  )}
+                  <>
+                    <AlertCircle className="mr-2 h-4 w-4" />
+                    {analysisSidebarOpen ? "Hide" : "Show"} Analysis
+                  </>
                 </Button>
               )}
               <Button
@@ -600,23 +588,6 @@ export default function DocumentEditorClient({
         </div>
       </header>
 
-      {/* Audit Issues Dialog - Shown when publish is blocked by audit issues (compliance docs only) */}
-      {documentMetadata?.docType !== "company" && (
-        <AuditDialog
-          open={auditIssuesOpen}
-          onClose={() => setAuditIssuesOpen(false)}
-          issues={auditIssues}
-          onFixClick={() => setAuditIssuesOpen(false)}
-          onPublishClick={() => {
-            setAuditIssuesOpen(false);
-            setSkipValidationOnPublish(true);
-            setSimplePublishDialogOpen(true);
-          }}
-          version={documentMetadata?.version}
-          fullAnalysis={auditAnalysis}
-        />
-      )}
-
       {/* Simple Publish Dialog - For all documents */}
       <SimplePublishDialog
         open={simplePublishDialogOpen}
@@ -630,27 +601,46 @@ export default function DocumentEditorClient({
         isPublishing={publishing}
       />
 
-      {/* Editor */}
-      <main className="flex-1 overflow-hidden">
-        <DocumentEditor
-          documentId={documentId}
-          documentTitle={documentMetadata?.title || "Document"}
-          initialContent={content}
-          readOnly={mode === "view"}
-          onChange={(newContent) => {
-            setContent(newContent);
-            // Only mark as edited if editor has stabilized
-            if (editorStabilizedRef.current) {
-              setUserHasEdited(true);
-            }
-          }}
-          onToggleReadOnly={() => {
-            setMode(mode === "view" ? "edit" : "view");
-          }}
-          showToolbar={mode === "edit"}
-          showAI={mode === "edit"}
-          placeholder="Start editing your document..."
-        />
+      {/* Editor and Analysis Sidebar */}
+      <main className="flex flex-1 overflow-hidden">
+        <div
+          className={`flex-1 overflow-hidden transition-all duration-300 ${analysisSidebarOpen && auditAnalysis ? "mr-[500px]" : ""}`}
+        >
+          <DocumentEditor
+            documentId={documentId}
+            documentTitle={documentMetadata?.title || "Document"}
+            initialContent={content}
+            readOnly={mode === "view"}
+            onChange={(newContent) => {
+              setContent(newContent);
+              // Only mark as edited if editor has stabilized
+              if (editorStabilizedRef.current) {
+                setUserHasEdited(true);
+              }
+            }}
+            onToggleReadOnly={() => {
+              setMode(mode === "view" ? "edit" : "view");
+            }}
+            showToolbar={mode === "edit"}
+            showAI={mode === "edit"}
+            placeholder="Start editing your document..."
+          />
+        </div>
+
+        {/* Analysis Sidebar - Only for compliance documents */}
+        {documentMetadata?.docType !== "company" && (
+          <ComplianceAnalysisSidebar
+            open={analysisSidebarOpen}
+            onClose={() => setAnalysisSidebarOpen(false)}
+            auditAnalysis={auditAnalysis}
+            documentVersion={documentMetadata?.version}
+            onPublishClick={() => {
+              setAnalysisSidebarOpen(false);
+              setSkipValidationOnPublish(true);
+              setSimplePublishDialogOpen(true);
+            }}
+          />
+        )}
       </main>
     </div>
   );

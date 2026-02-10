@@ -44,14 +44,14 @@ interface AuditDialogProps {
   fullAnalysis?: any; // Complete detailed analysis from API
 }
 
-export function AuditDialog({
+export const AuditDialogComponent = ({
   open,
   onClose,
   onFixClick,
   onPublishClick,
   version,
   fullAnalysis,
-}: AuditDialogProps) {
+}: AuditDialogProps) => {
   const analysisScores = fullAnalysis
     ? {
         overall: fullAnalysis.overallScore,
@@ -66,14 +66,6 @@ export function AuditDialog({
     analysisScores &&
     analysisScores.audit >= 85 &&
     analysisScores.overall >= 85;
-
-  // Debug logging
-  React.useEffect(() => {
-    console.log("[AuditDialog] Full Analysis:", fullAnalysis);
-    console.log("[AuditDialog] Analysis Scores:", analysisScores);
-    console.log("[AuditDialog] Can Publish:", canPublishWithWarning);
-    console.log("[AuditDialog] Audit Score:", analysisScores?.audit);
-  }, [fullAnalysis, analysisScores, canPublishWithWarning]);
 
   const recommendations = fullAnalysis?.recommendations || [];
 
@@ -276,4 +268,6 @@ export function AuditDialog({
       </DialogContent>
     </Dialog>
   );
-}
+};
+
+export const AuditDialog = React.memo(AuditDialogComponent);

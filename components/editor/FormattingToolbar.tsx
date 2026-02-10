@@ -34,10 +34,10 @@ interface FormattingToolbarProps {
   className?: string;
 }
 
-export function FormattingToolbar({
+const FormattingToolbarComponent = ({
   editor,
   className,
-}: FormattingToolbarProps) {
+}: FormattingToolbarProps) => {
   const { editorState, currentBlockType, setBlockType, canUndo, canRedo } =
     useEditorToolbar(editor);
 
@@ -91,7 +91,11 @@ export function FormattingToolbar({
           value="bold"
           aria-label="Toggle bold"
           size="sm"
-          onClick={() => editor.chain().focus().toggleBold().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleBold().run();
+          }}
           disabled={!editor.can().toggleBold()}
         >
           <Bold className="h-4 w-4" />
@@ -100,7 +104,11 @@ export function FormattingToolbar({
           value="italic"
           aria-label="Toggle italic"
           size="sm"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleItalic().run();
+          }}
           disabled={!editor.can().toggleItalic()}
         >
           <Italic className="h-4 w-4" />
@@ -109,7 +117,11 @@ export function FormattingToolbar({
           value="strike"
           aria-label="Toggle strikethrough"
           size="sm"
-          onClick={() => editor.chain().focus().toggleStrike().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleStrike().run();
+          }}
           disabled={!editor.can().toggleStrike()}
         >
           <Strikethrough className="h-4 w-4" />
@@ -118,7 +130,11 @@ export function FormattingToolbar({
           value="code"
           aria-label="Toggle code"
           size="sm"
-          onClick={() => editor.chain().focus().toggleCode().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleCode().run();
+          }}
           disabled={!editor.can().toggleCode()}
         >
           <Code className="h-4 w-4" />
@@ -133,7 +149,12 @@ export function FormattingToolbar({
           value="bulletList"
           aria-label="Toggle bullet list"
           size="sm"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleBulletList().run();
+          }}
+          data-state={editorState?.isBulletList ? "on" : "off"}
         >
           <List className="h-4 w-4" />
         </ToggleGroupItem>
@@ -141,7 +162,12 @@ export function FormattingToolbar({
           value="orderedList"
           aria-label="Toggle ordered list"
           size="sm"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleOrderedList().run();
+          }}
+          data-state={editorState?.isOrderedList ? "on" : "off"}
         >
           <ListOrdered className="h-4 w-4" />
         </ToggleGroupItem>
@@ -149,7 +175,12 @@ export function FormattingToolbar({
           value="blockquote"
           aria-label="Toggle blockquote"
           size="sm"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            editor.chain().focus().toggleBlockquote().run();
+          }}
+          data-state={editorState?.isBlockquote ? "on" : "off"}
         >
           <Quote className="h-4 w-4" />
         </ToggleGroupItem>
@@ -161,7 +192,11 @@ export function FormattingToolbar({
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          editor.chain().focus().setHorizontalRule().run();
+        }}
         title="Insert horizontal rule"
       >
         <Minus className="h-4 w-4" />
@@ -170,7 +205,11 @@ export function FormattingToolbar({
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          editor.chain().focus().unsetAllMarks().run();
+        }}
         disabled={!editor.can().unsetAllMarks()}
         title="Clear formatting"
       >
@@ -183,7 +222,11 @@ export function FormattingToolbar({
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => editor.chain().focus().undo().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          editor.chain().focus().undo().run();
+        }}
         disabled={!canUndo}
         title="Undo"
       >
@@ -192,7 +235,11 @@ export function FormattingToolbar({
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => editor.chain().focus().redo().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          editor.chain().focus().redo().run();
+        }}
         disabled={!canRedo}
         title="Redo"
       >
@@ -200,4 +247,6 @@ export function FormattingToolbar({
       </Button>
     </div>
   );
-}
+};
+
+export const FormattingToolbar = React.memo(FormattingToolbarComponent);

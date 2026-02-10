@@ -14,6 +14,7 @@ import { AIDiffView, AIProcessingIndicator } from "./AIDiffView";
 import { CommandPalette } from "./CommandPalette";
 import { FindReplaceExtension } from "./extensions/FindReplaceExtension";
 import { FindReplaceDialog } from "./FindReplaceDialog";
+import { FormattingToolbar } from "./FormattingToolbar";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 
@@ -42,6 +43,14 @@ export function DocumentEditor({
       StarterKit.configure({
         heading: {
           levels: [1, 2, 3, 4, 5, 6],
+        },
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: false,
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: false,
         },
       }),
       Link.configure({
@@ -136,6 +145,10 @@ export function DocumentEditor({
           "prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6",
           "prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6",
           "prose-li:my-2 prose-li:leading-relaxed",
+          // Ensure list items display markers
+          "[&_ul]:list-disc [&_ol]:list-decimal",
+          "[&_ul]:pl-6 [&_ol]:pl-6",
+          "[&_li]:ml-0",
           // Code
           "prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none",
           "prose-pre:bg-muted prose-pre:p-4 prose-pre:rounded-lg prose-pre:border",
@@ -153,7 +166,11 @@ export function DocumentEditor({
     },
     content: initialContent,
     onUpdate: ({ editor }) => {
-      onChange?.(editor.getHTML());
+      // Only call onChange if it exists and content actually changed
+      if (onChange) {
+        const html = editor.getHTML();
+        onChange(html);
+      }
     },
   });
 
@@ -293,6 +310,9 @@ export function DocumentEditor({
 
   return (
     <div className="flex h-full flex-col border rounded-lg shadow-sm bg-background overflow-hidden">
+      {/* Formatting Toolbar for Edit Mode */}
+      {!readOnly && <FormattingToolbar editor={editor} />}
+
       {/* Simple Toolbar for Edit Mode */}
       {!readOnly && (
         <div className="flex items-center gap-2 border-b bg-muted/30 px-4 py-2">

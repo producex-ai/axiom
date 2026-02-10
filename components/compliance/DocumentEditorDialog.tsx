@@ -14,10 +14,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  convertHtmlToMarkdown,
-  convertMarkdownToHtml,
-} from "@/lib/document-converters";
 
 interface DocumentEditorDialogProps {
   open: boolean;
@@ -62,8 +58,9 @@ export default function DocumentEditorDialog({
     content: "",
     onUpdate: ({ editor }) => {
       const currentHtml = editor.getHTML();
-      const currentMarkdown = convertHtmlToMarkdown(currentHtml);
-      setHasChanges(currentMarkdown !== originalContent);
+      const currentNormalized = currentHtml.trim().replace(/\s+/g, " ");
+      const originalNormalized = originalContent.trim().replace(/\s+/g, " ");
+      setHasChanges(currentNormalized !== originalNormalized);
     },
   });
 
@@ -95,14 +92,11 @@ export default function DocumentEditorDialog({
       }
 
       const data = await response.json();
-      const markdown = data.content;
-
-      // Convert Markdown to HTML for TipTap
-      const html = convertMarkdownToHtml(markdown);
+      const html = data.content;
 
       // Set content in editor
       editor?.commands.setContent(html);
-      setOriginalContent(markdown);
+      setOriginalContent(html);
       setHasChanges(false);
     } catch (err) {
       console.error("Error loading document:", err);
@@ -119,9 +113,8 @@ export default function DocumentEditorDialog({
       setSaving(true);
       setError(null);
 
-      // Get HTML from editor and convert to Markdown
+      // Get HTML from editor
       const html = editor.getHTML();
-      const markdown = convertHtmlToMarkdown(html);
 
       // Save to API
       const response = await fetch(
@@ -130,7 +123,7 @@ export default function DocumentEditorDialog({
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content: markdown,
+            content: html,
             publish,
           }),
         },
@@ -143,7 +136,7 @@ export default function DocumentEditorDialog({
       const data = await response.json();
 
       // Update original content to reflect saved state
-      setOriginalContent(markdown);
+      setOriginalContent(html);
       setHasChanges(false);
 
       // If published, switch to view mode
@@ -190,8 +183,7 @@ export default function DocumentEditorDialog({
       setMode("view");
       // Reload original content
       if (originalContent && editor) {
-        const html = convertMarkdownToHtml(originalContent);
-        editor.commands.setContent(html);
+        editor.commands.setContent(originalContent);
         setHasChanges(false);
       }
     }

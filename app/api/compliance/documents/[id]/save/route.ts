@@ -8,7 +8,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db/postgres";
-import { convertMarkdownToDocx } from "@/lib/document-converters";
+import { convertHtmlToDocx } from "@/lib/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import {
   createDocumentRevision,
@@ -56,8 +56,8 @@ export async function PATCH(
 
     console.log(`[API] Saving document ${id} without version increment`);
 
-    // Convert Markdown to DOCX
-    const docxBuffer = await convertMarkdownToDocx(content, document.title);
+    // Convert HTML to DOCX
+    const docxBuffer = await convertHtmlToDocx(content, document.title);
 
     // Use current version (no increment)
     const currentVersion = document.current_version;

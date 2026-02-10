@@ -14,8 +14,8 @@ import {
 import { type NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db/postgres";
 import {
-  convertDocxToMarkdown,
-  convertMarkdownToDocx,
+  convertDocxToHtml,
+  convertHtmlToDocx,
 } from "@/lib/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import {
@@ -76,17 +76,17 @@ export async function GET(
     }
     const docxBuffer = Buffer.concat(chunks);
 
-    // Convert DOCX to Markdown, passing title to strip it from content
-    const markdown = await convertDocxToMarkdown(docxBuffer, document.title);
+    // Convert DOCX to HTML, passing title to strip it from content
+    const html = await convertDocxToHtml(docxBuffer, document.title);
 
     console.log(
-      `[API] ✅ Document content converted to Markdown (${markdown.length} chars)`,
+      `[API] ✅ Document content converted to HTML (${html.length} chars)`,
     );
 
     return NextResponse.json({
       success: true,
-      content: markdown,
-      contentType: "text/markdown",
+      content: html,
+      contentType: "text/html",
       metadata: {
         id: document.id,
         title: document.title,
@@ -174,8 +174,8 @@ export async function PUT(
       `[API] ${status === "published" ? "Publishing" : "Saving draft for"} document ${id}`,
     );
 
-    // Convert Markdown to DOCX
-    const docxBuffer = await convertMarkdownToDocx(content, document.title);
+    // Convert HTML to DOCX
+    const docxBuffer = await convertHtmlToDocx(content, document.title);
 
     // Generate new S3 key with incremented version
     const newVersion = document.current_version + 1;

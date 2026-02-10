@@ -11,10 +11,6 @@ import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys } from "@/lib/compliance/queries";
-import {
-  convertHtmlToMarkdown,
-  convertMarkdownToHtml,
-} from "@/lib/document-converters";
 import { executePublishFlow } from "@/lib/editor/publish-flow";
 
 interface EditParams {
@@ -50,17 +46,17 @@ export default function EditDocumentPage({ params }: EditParams) {
 
   useEffect(() => {
     if (content && originalContent && userHasEdited) {
-      const currentMarkdown = convertHtmlToMarkdown(content)
+      const currentNormalized = content
         .trim()
-        .replace(/\n{3,}/g, "\n\n")
-        .replace(/\s+$/gm, "");
+        .replace(/\s+/g, " ")
+        .replace(/\s*<\/p>\s*<p>\s*/g, "</p><p>");
 
-      const originalMarkdownNormalized = originalContent
+      const originalNormalized = originalContent
         .trim()
-        .replace(/\n{3,}/g, "\n\n")
-        .replace(/\s+$/gm, "");
+        .replace(/\s+/g, " ")
+        .replace(/\s*<\/p>\s*<p>\s*/g, "</p><p>");
 
-      setHasChanges(currentMarkdown !== originalMarkdownNormalized);
+      setHasChanges(currentNormalized !== originalNormalized);
     }
   }, [content, originalContent, userHasEdited]);
 
@@ -78,11 +74,10 @@ export default function EditDocumentPage({ params }: EditParams) {
       }
 
       const data = await response.json();
-      const markdown = data.content;
-      const html = convertMarkdownToHtml(markdown);
+      const html = data.content;
 
       setContent(html);
-      setOriginalContent(markdown);
+      setOriginalContent(html);
       setDocumentMetadata(data.metadata);
 
       // Load existing analysis results if available
@@ -120,24 +115,24 @@ export default function EditDocumentPage({ params }: EditParams) {
       setPublishing(true);
       setError(null);
 
-      let markdown = convertHtmlToMarkdown(content);
+      let html = content;
 
       if (documentMetadata?.title) {
         const titlePatterns = [
           new RegExp(
-            `^#{1,6}\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `<h[1-6][^>]*>\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*</h[1-6]>`,
+            "gi",
           ),
           new RegExp(
-            `^${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n+`,
-            "i",
+            `<p[^>]*>\\s*${documentMetadata.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*</p>`,
+            "gi",
           ),
         ];
 
         for (const pattern of titlePatterns) {
-          markdown = markdown.replace(pattern, "");
+          html = html.replace(pattern, "");
         }
-        markdown = markdown.trim();
+        html = html.trim();
       }
 
       // Check if this is a company document (non-compliance)
@@ -151,7 +146,7 @@ export default function EditDocumentPage({ params }: EditParams) {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              content: markdown,
+              content: html,
               status: "published",
               comment: comment, // Pass comment to backend
             }),
@@ -166,7 +161,7 @@ export default function EditDocumentPage({ params }: EditParams) {
         const result = await response.json();
 
         // Update state
-        setOriginalContent(markdown);
+        setOriginalContent(html);
         setHasChanges(false);
         setUserHasEdited(false);
         setDocumentMetadata((prev: any) => ({
@@ -191,7 +186,7 @@ export default function EditDocumentPage({ params }: EditParams) {
         // COMPLIANCE FLOW: Use the built-in publish flow with audit validation
         const result = await executePublishFlow(
           id,
-          markdown,
+          html,
           documentMetadata?.title || "Document",
           { skipValidation, comment }, // Pass comment to publish flow
         );
@@ -210,7 +205,7 @@ export default function EditDocumentPage({ params }: EditParams) {
             queryKey: complianceKeys.overview(),
           });
 
-          setOriginalContent(markdown);
+          setOriginalContent(html);
           setHasChanges(false);
           setUserHasEdited(false);
           setDocumentMetadata((prev: any) => ({
@@ -264,8 +259,7 @@ export default function EditDocumentPage({ params }: EditParams) {
         if (!confirmed) return;
       }
       setMode("view");
-      const html = convertMarkdownToHtml(originalContent);
-      setContent(html);
+      setContent(originalContent);
       setHasChanges(false);
     }
   };

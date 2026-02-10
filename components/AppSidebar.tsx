@@ -1,5 +1,6 @@
 "use client";
 import {
+  Briefcase,
   CalendarDays,
   ClipboardList,
   FileText,
@@ -72,6 +73,19 @@ const logsItems = [
   },
 ] as const;
 
+const jobsItems = [
+  {
+    title: "Job Templates",
+    icon: LayoutTemplate,
+    href: "/compliance/job-templates",
+  },
+  {
+    title: "Jobs",
+    icon: Briefcase,
+    href: "/compliance/jobs",
+  },
+] as const;
+
 const complianceItems = [
   {
     title: "Primus GFS",
@@ -95,7 +109,7 @@ export function AppSidebar({ isOperator = false }: AppSidebarProps) {
   const { data: overview } = useComplianceOverview();
 
   const moduleCount =
-    overview?.modules?.filter((m) => m.enabled).length || null;
+    overview?.modules?.filter((m) => m.enabled).length ?? null;
 
   return (
     <Sidebar collapsible="icon">
@@ -211,6 +225,37 @@ export function AppSidebar({ isOperator = false }: AppSidebarProps) {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="font-semibold text-muted-foreground/70 text-xs uppercase tracking-wider">
+            Jobs
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {jobsItems.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  pathname.startsWith(item.href + "/");
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className="group relative px-3"
+                    >
+                      <Link href={item.href}>
+                        <item.icon className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                        <span className="transition-colors group-hover:text-foreground">
+                          {item.title}
+                        </span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
         {!isOperator && (
           <SidebarGroup>
