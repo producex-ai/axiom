@@ -117,7 +117,7 @@ export function FindReplaceDialog({
   if (!open) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-50 w-[450px] bg-background border rounded-lg shadow-lg">
+    <div className="fixed top-4 right-4 z-[60] w-[450px] bg-background border rounded-lg shadow-lg">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b">
         <h3 className="font-semibold text-sm">Find & Replace</h3>
