@@ -8,6 +8,7 @@ import {
   useState,
   useTransition,
 } from "react";
+
 import {
   type ActionState,
   submitForApprovalAction,
@@ -15,9 +16,11 @@ import {
 } from "@/actions/daily-logs";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
+import type { FieldItem } from "@/db/queries/log-templates";
 
 type AssigneeViewProps = {
   log: DailyLogWithDetails;
@@ -29,7 +32,12 @@ export function AssigneeView({ log }: AssigneeViewProps) {
   const [isPending, startTransition] = useTransition();
   const [isSaving, setIsSaving] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const pendingTasksRef = useRef<Record<string, boolean>>(log.tasks);
+  const pendingTasksRef = useRef<Record<string, boolean | string>>(log.tasks);
+
+  const isFieldInputTemplate = log.template_type === "field_input";
+  const fieldItems = isFieldInputTemplate
+    ? (log.template_items as FieldItem[])
+    : [];
 
   const [updateState, updateAction] = useActionState<ActionState, FormData>(
     updateDailyLogTasksAction.bind(null, log.id),
@@ -49,10 +57,10 @@ export function AssigneeView({ log }: AssigneeViewProps) {
     };
   }, []);
 
-  const saveTasksToServer = (tasksToSave: Record<string, boolean>) => {
+  const saveTasksToServer = (tasksToSave: Record<string, boolean | string>) => {
     const formData = new FormData();
-    Object.entries(tasksToSave).forEach(([task, completed]) => {
-      formData.append(`task_${task}`, completed.toString());
+    Object.entries(tasksToSave).forEach(([task, value]) => {
+      formData.append(`task_${task}`, value.toString());
     });
 
     startTransition(() => {
@@ -61,10 +69,10 @@ export function AssigneeView({ log }: AssigneeViewProps) {
     });
   };
 
-  const handleTaskChange = (taskName: string, checked: boolean) => {
+  const handleTaskChange = (taskName: string, value: boolean | string) => {
     // Optimistically update UI immediately
     setTasks((prev) => {
-      const updated = { ...prev, [taskName]: checked };
+      const updated = { ...prev, [taskName]: value };
       pendingTasksRef.current = updated;
       return updated;
     });
@@ -83,10 +91,26 @@ export function AssigneeView({ log }: AssigneeViewProps) {
     }, 500);
   };
 
-  const currentCompletedTasks = Object.values(tasks).filter(Boolean).length;
-  const currentTotalTasks = Object.keys(tasks).length;
-  const currentAllCompleted =
-    currentTotalTasks > 0 && currentCompletedTasks === currentTotalTasks;
+  // Check if all requirements are met for sign-off
+  const isReadyForSignOff = () => {
+    if (isFieldInputTemplate) {
+      // For field input templates, check that all required fields have values
+      return fieldItems.every((field) => {
+        if (!field.required) return true;
+        const value = tasks[field.name];
+        return value && (typeof value !== "string" || value.trim() !== "");
+      });
+    } else {
+      // For task list templates, check that all tasks are completed
+      const currentCompletedTasks = Object.values(tasks).filter(Boolean).length;
+      const currentTotalTasks = Object.keys(tasks).length;
+      return (
+        currentTotalTasks > 0 && currentCompletedTasks === currentTotalTasks
+      );
+    }
+  };
+
+  const currentAllCompleted = isReadyForSignOff();
 
   return (
     <div className="space-y-4">
@@ -100,38 +124,70 @@ export function AssigneeView({ log }: AssigneeViewProps) {
         </div>
       )}
 
-      {/* Task List */}
+      {/* Task/Field List */}
       <div className="rounded-lg border bg-card p-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-sm">Task List</h3>
+          <h3 className="font-semibold text-sm">
+            {isFieldInputTemplate ? "Field List" : "Task List"}
+          </h3>
           {(isPending || isSaving) && (
             <span className="text-muted-foreground text-xs">Saving...</span>
           )}
         </div>
-        <div className="mt-4 space-y-2">
-          {Object.entries(tasks).map(([task, completed]) => (
-            <div
-              key={task}
-              className="flex items-center gap-3 rounded-md border p-3"
-            >
-              <Checkbox
-                id={`task-${task}`}
-                checked={completed}
-                disabled={false}
-                onCheckedChange={(checked) =>
-                  handleTaskChange(task, checked === true)
-                }
-              />
-              <Label
-                htmlFor={`task-${task}`}
-                className={`flex-1 cursor-pointer ${
-                  completed ? "text-muted-foreground line-through" : ""
-                }`}
-              >
-                {task}
-              </Label>
-            </div>
-          ))}
+        <div className="mt-4 space-y-3">
+          {isFieldInputTemplate
+            ? // Field Input Mode - Text inputs with descriptions
+              fieldItems.map((field) => {
+                const value = tasks[field.name];
+                return (
+                  <div key={field.name} className="space-y-2">
+                    <Label htmlFor={`field-${field.name}`}>
+                      {field.name}
+                      {field.required && (
+                        <span className="ml-1 text-red-500">*</span>
+                      )}
+                    </Label>
+                    {field.description && (
+                      <p className="text-muted-foreground text-xs">
+                        {field.description}
+                      </p>
+                    )}
+                    <Input
+                      id={`field-${field.name}`}
+                      value={(value as string) || ""}
+                      onChange={(e) =>
+                        handleTaskChange(field.name, e.target.value)
+                      }
+                      placeholder={field.description || `Enter ${field.name}`}
+                      required={field.required}
+                    />
+                  </div>
+                );
+              })
+            : // Task List Mode - Checkboxes
+              Object.entries(tasks).map(([task, completed]) => (
+                <div
+                  key={task}
+                  className="flex items-center gap-3 rounded-md border p-3"
+                >
+                  <Checkbox
+                    id={`task-${task}`}
+                    checked={completed as boolean}
+                    disabled={false}
+                    onCheckedChange={(checked) =>
+                      handleTaskChange(task, checked === true)
+                    }
+                  />
+                  <Label
+                    htmlFor={`task-${task}`}
+                    className={`flex-1 cursor-pointer ${
+                      completed ? "text-muted-foreground line-through" : ""
+                    }`}
+                  >
+                    {task}
+                  </Label>
+                </div>
+              ))}
         </div>
 
         {updateState.message && !isPending && (
@@ -153,7 +209,7 @@ export function AssigneeView({ log }: AssigneeViewProps) {
               disabled={isPending}
             >
               <CheckCircle2 className="mr-2 h-4 w-4" />
-              Sign Off Tasks
+              {isFieldInputTemplate ? "Sign Off Fields" : "Sign Off Tasks"}
             </Button>
           </div>
         )}
@@ -162,9 +218,13 @@ export function AssigneeView({ log }: AssigneeViewProps) {
       {/* Sign Off Section */}
       {showSignOff && currentAllCompleted && (
         <form action={submitAction} className="rounded-lg border bg-card p-4">
-          <h3 className="font-semibold text-sm">Task Sign Off</h3>
+          <h3 className="font-semibold text-sm">
+            {isFieldInputTemplate ? "Field Sign Off" : "Task Sign Off"}
+          </h3>
           <p className="mt-1 text-muted-foreground text-sm">
-            All tasks are completed. Please sign off and submit for review.
+            {isFieldInputTemplate
+              ? "All required fields are filled. Please sign off and submit for review."
+              : "All tasks are completed. Please sign off and submit for review."}
           </p>
 
           <div className="mt-4 space-y-4">

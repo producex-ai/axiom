@@ -2,6 +2,7 @@
 
 import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
 import { useActionState } from "react";
+
 import {
   type ActionState,
   approveDailyLogAction,
@@ -12,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
+import type { FieldItem } from "@/db/queries/log-templates";
 
 type ReviewerViewProps = {
   log: DailyLogWithDetails;
@@ -27,67 +29,137 @@ export function ReviewerView({ log }: ReviewerViewProps) {
     {},
   );
 
+  const isFieldInputTemplate = log.template_type === "field_input";
+  const fieldItems = isFieldInputTemplate
+    ? (log.template_items as FieldItem[])
+    : [];
+
   const totalTasks = Object.keys(log.tasks).length;
-  const completedTasks = Object.values(log.tasks).filter(Boolean).length;
+  const completedTasks = isFieldInputTemplate
+    ? Object.values(log.tasks).filter(
+        (value) => typeof value === "string" && value.trim() !== "",
+      ).length
+    : Object.values(log.tasks).filter(Boolean).length;
 
   return (
     <div className="space-y-4">
-      {/* Task List - Read Only */}
+      {/* Task/Field List - Read Only */}
       <div className="rounded-lg border bg-card p-4">
-        <h3 className="font-semibold text-sm">Task List</h3>
-        <div className="mt-4 space-y-2">
+        <h3 className="font-semibold text-sm">
+          {isFieldInputTemplate ? "Field List" : "Task List"}
+        </h3>
+        <div className="mt-4 space-y-3">
           {Object.entries(log.tasks).length > 0 ? (
-            Object.entries(log.tasks).map(([task, completed]) => (
-              <div
-                key={task}
-                className={`flex items-center gap-3 rounded-md border p-3 ${
-                  completed
-                    ? "bg-muted/30"
-                    : "border-orange-100 bg-orange-50/10"
-                }`}
-              >
+            isFieldInputTemplate ? (
+              // Field Input Mode - Show field values
+              fieldItems.map((field) => {
+                const value = log.tasks[field.name] as string;
+                const isCompleted = value && value.trim() !== "";
+                return (
+                  <div
+                    key={field.name}
+                    className={`rounded-md border p-3 ${
+                      isCompleted
+                        ? "bg-muted/30"
+                        : "border-orange-100 bg-orange-50/10"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Label className="font-medium text-sm">
+                            {field.name}
+                            {field.required && (
+                              <span className="ml-1 text-red-500">*</span>
+                            )}
+                          </Label>
+                          {isCompleted ? (
+                            <Badge
+                              variant="outline"
+                              className="h-5 border-green-100 bg-green-50 text-[10px] text-green-700"
+                            >
+                              Filled
+                            </Badge>
+                          ) : (
+                            <Badge
+                              variant="outline"
+                              className="h-5 border-orange-100 bg-orange-50 text-[10px] text-orange-700"
+                            >
+                              Empty
+                            </Badge>
+                          )}
+                        </div>
+                        {field.description && (
+                          <p className="text-muted-foreground text-xs">
+                            {field.description}
+                          </p>
+                        )}
+                        <p
+                          className={`text-sm ${
+                            isCompleted ? "" : "text-muted-foreground italic"
+                          }`}
+                        >
+                          {isCompleted ? value : "No value provided"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              // Task List Mode - Show checkboxes
+              Object.entries(log.tasks).map(([task, completed]) => (
                 <div
-                  className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+                  key={task}
+                  className={`flex items-center gap-3 rounded-md border p-3 ${
                     completed
-                      ? "border-primary bg-primary"
-                      : "border-orange-200 bg-white"
+                      ? "bg-muted/30"
+                      : "border-orange-100 bg-orange-50/10"
                   }`}
                 >
+                  <div
+                    className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+                      completed
+                        ? "border-primary bg-primary"
+                        : "border-orange-200 bg-white"
+                    }`}
+                  >
+                    {completed ? (
+                      <CheckCircle2 className="h-4 w-4 text-white" />
+                    ) : (
+                      <div className="h-1.5 w-1.5 rounded-full bg-orange-200" />
+                    )}
+                  </div>
+                  <span
+                    className={`flex-1 text-sm ${
+                      completed
+                        ? "text-muted-foreground line-through"
+                        : "font-medium"
+                    }`}
+                  >
+                    {task}
+                  </span>
                   {completed ? (
-                    <CheckCircle2 className="h-4 w-4 text-white" />
+                    <Badge
+                      variant="outline"
+                      className="h-5 border-green-100 bg-green-50 text-[10px] text-green-700"
+                    >
+                      Done
+                    </Badge>
                   ) : (
-                    <div className="h-1.5 w-1.5 rounded-full bg-orange-200" />
+                    <Badge
+                      variant="outline"
+                      className="h-5 border-orange-100 bg-orange-50 text-[10px] text-orange-700"
+                    >
+                      Pending
+                    </Badge>
                   )}
                 </div>
-                <span
-                  className={`flex-1 text-sm ${
-                    completed
-                      ? "text-muted-foreground line-through"
-                      : "font-medium"
-                  }`}
-                >
-                  {task}
-                </span>
-                {completed ? (
-                  <Badge
-                    variant="outline"
-                    className="h-5 border-green-100 bg-green-50 text-[10px] text-green-700"
-                  >
-                    Done
-                  </Badge>
-                ) : (
-                  <Badge
-                    variant="outline"
-                    className="h-5 border-orange-100 bg-orange-50 text-[10px] text-orange-700"
-                  >
-                    Pending
-                  </Badge>
-                )}
-              </div>
-            ))
+              ))
+            )
           ) : (
             <p className="py-4 text-center text-muted-foreground text-sm">
-              No tasks found in this log.
+              No {isFieldInputTemplate ? "fields" : "tasks"} found in this log.
             </p>
           )}
         </div>
@@ -97,7 +169,8 @@ export function ReviewerView({ log }: ReviewerViewProps) {
             <div className="space-y-1">
               <h4 className="font-semibold text-sm">Submission Summary</h4>
               <p className="text-muted-foreground text-xs">
-                {completedTasks} of {totalTasks} tasks completed
+                {completedTasks} of {totalTasks}{" "}
+                {isFieldInputTemplate ? "fields filled" : "tasks completed"}
               </p>
             </div>
             {log.tasks_sign_off && (

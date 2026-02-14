@@ -1,13 +1,27 @@
 import { query } from "@/lib/db/postgres";
 
 export type ReviewTimePeriod = "1_month" | "3_months" | "6_months" | "1_year";
+export type TemplateType = "task_list" | "field_input";
+
+// Item types for task list mode (checkbox tasks)
+export type TaskItem = {
+  name: string;
+};
+
+// Item types for field input mode (text input fields)
+export type FieldItem = {
+  name: string;
+  description?: string;
+  required: boolean;
+};
 
 export type LogTemplate = {
   id: string;
   name: string;
   category: string | null;
   sop: string | null;
-  task_list: string[] | null;
+  template_type: TemplateType;
+  items: TaskItem[] | FieldItem[];
   org_id: string | null;
   created_at: Date;
   updated_at: Date;
@@ -20,19 +34,49 @@ export type LogTemplateWithSchedule = LogTemplate & {
   schedule_id: string | null;
 };
 
+// Type guards
+export const isTaskTemplate = (
+  template: LogTemplate,
+): template is LogTemplate & { items: TaskItem[] } => {
+  return template.template_type === "task_list";
+};
+
+export const isFieldTemplate = (
+  template: LogTemplate,
+): template is LogTemplate & { items: FieldItem[] } => {
+  return template.template_type === "field_input";
+};
+
 export const createLogTemplate = async (
   template: Omit<LogTemplate, "id" | "created_at" | "updated_at" | "due_date">,
 ): Promise<LogTemplate | null> => {
-  const { name, category, sop, task_list, org_id, created_by, review_time } =
-    template;
+  const {
+    name,
+    category,
+    sop,
+    template_type,
+    items,
+    org_id,
+    created_by,
+    review_time,
+  } = template;
   try {
     const result = await query<LogTemplate>(
       `
-      INSERT INTO log_templates (name, category, sop, task_list, org_id, created_by, review_time)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO log_templates (name, category, sop, template_type, items, org_id, created_by, review_time)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING *
       `,
-      [name, category, sop, task_list, org_id, created_by, review_time],
+      [
+        name,
+        category,
+        sop,
+        template_type,
+        JSON.stringify(items),
+        org_id,
+        created_by,
+        review_time,
+      ],
     );
     return result.rows[0];
   } catch (error) {
@@ -51,7 +95,7 @@ export const updateLogTemplate = async (
   >,
   orgId: string,
 ): Promise<LogTemplate | null> => {
-  const { name, category, sop, task_list, review_time } = template;
+  const { name, category, sop, template_type, items, review_time } = template;
   try {
     const result = await query<LogTemplate>(
       `
@@ -60,13 +104,23 @@ export const updateLogTemplate = async (
                 name = COALESCE($1, name),
                 category = COALESCE($2, category),
                 sop = COALESCE($3, sop),
-                task_list = COALESCE($4, task_list),
-                review_time = COALESCE($5, review_time),
+                template_type = COALESCE($4, template_type),
+                items = COALESCE($5, items),
+                review_time = COALESCE($6, review_time),
                 updated_at = NOW()
-            WHERE id = $6 AND org_id = $7
+            WHERE id = $7 AND org_id = $8
             RETURNING *
             `,
-      [name, category, sop, task_list, review_time, id, orgId],
+      [
+        name,
+        category,
+        sop,
+        template_type,
+        items ? JSON.stringify(items) : null,
+        review_time,
+        id,
+        orgId,
+      ],
     );
     return result.rows[0];
   } catch (error) {

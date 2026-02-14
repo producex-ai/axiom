@@ -16,23 +16,24 @@ import {
   submitDailyLogForApproval,
   updateDailyLogTasks,
 } from "@/db/queries/daily-logs";
+import type { FieldItem, TaskItem } from "@/db/queries/log-templates";
 
 /**
- * Sort tasks in a log based on the original template task list order
+ * Sort tasks in a log based on the original template items order
  */
 function sortLogTasks(
-  tasks: Record<string, boolean>,
-  templateTasks: string[] | null,
-): Record<string, boolean> {
-  if (!templateTasks || templateTasks.length === 0) return tasks;
+  tasks: Record<string, boolean | string>,
+  templateItems: TaskItem[] | FieldItem[] | null,
+): Record<string, boolean | string> {
+  if (!templateItems || templateItems.length === 0) return tasks;
 
-  const sortedTasks: Record<string, boolean> = {};
+  const sortedTasks: Record<string, boolean | string> = {};
   const taskNames = Object.keys(tasks);
 
   // First add tasks from template in their defined order
-  for (const taskName of templateTasks) {
-    if (taskName in tasks) {
-      sortedTasks[taskName] = tasks[taskName];
+  for (const item of templateItems) {
+    if (item.name in tasks) {
+      sortedTasks[item.name] = tasks[item.name];
     }
   }
 
@@ -85,7 +86,7 @@ async function enrichLogsWithUserNames(
     // Enrich logs with names and sort tasks
     return logs.map((log) => ({
       ...log,
-      tasks: sortLogTasks(log.tasks, log.template_tasks),
+      tasks: sortLogTasks(log.tasks, log.template_items),
       assignee_name: log.assignee_id
         ? userMap.get(log.assignee_id) || null
         : null,
@@ -101,7 +102,7 @@ async function enrichLogsWithUserNames(
 
 // Validation schemas
 const UpdateTasksSchema = z.object({
-  tasks: z.record(z.string(), z.boolean()),
+  tasks: z.record(z.string(), z.union([z.boolean(), z.string()])),
 });
 
 const SubmitForApprovalSchema = z.object({
@@ -190,7 +191,7 @@ export async function getLogsForReviewAction(): Promise<DailyLogWithDetails[]> {
 }
 
 /**
- * Update task completion status
+ * Update task completion status or field values
  */
 export async function updateDailyLogTasksAction(
   id: string,
@@ -203,11 +204,16 @@ export async function updateDailyLogTasksAction(
   }
 
   // Parse tasks from form data
-  const tasks: Record<string, boolean> = {};
+  const tasks: Record<string, boolean | string> = {};
   for (const [key, value] of formData.entries()) {
     if (key.startsWith("task_")) {
       const taskName = key.replace("task_", "");
-      tasks[taskName] = value === "true" || value === "on";
+      // Check if it's a checkbox (boolean) or text input (string)
+      if (value === "true" || value === "false" || value === "on") {
+        tasks[taskName] = value === "true" || value === "on";
+      } else {
+        tasks[taskName] = value.toString();
+      }
     }
   }
 
@@ -271,6 +277,34 @@ export async function submitForApprovalAction(
   }
 
   try {
+    // Fetch the log to check template type and validate required fields
+    const log = await getDailyLogById(id, orgId);
+
+    if (!log) {
+      return { message: "Log not found" };
+    }
+
+    // Validate required fields for field_input templates
+    if (log.template_type === "field_input") {
+      const items = log.template_items as FieldItem[];
+      const missingFields: string[] = [];
+
+      for (const item of items) {
+        if (item.required) {
+          const value = log.tasks[item.name];
+          if (!value || (typeof value === "string" && value.trim() === "")) {
+            missingFields.push(item.name);
+          }
+        }
+      }
+
+      if (missingFields.length > 0) {
+        return {
+          message: `Please fill in all required fields: ${missingFields.join(", ")}`,
+        };
+      }
+    }
+
     const result = await submitDailyLogForApproval(
       id,
       orgId,

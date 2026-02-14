@@ -98,26 +98,31 @@ export default async function TemplateDetailsPage({ params }: PageProps) {
         <section className="space-y-3">
           <div className="flex items-center gap-2 font-medium text-lg">
             <CheckSquare className="h-4 w-4 text-muted-foreground" />
-            <h2>Task List</h2>
+            <h2>
+              {template.template_type === "field_input"
+                ? "Field List"
+                : "Task List"}
+            </h2>
             <Badge
               variant="outline"
               className="ml-2 font-normal text-muted-foreground text-xs"
             >
-              {template.task_list?.length || 0} tasks
+              {template.items?.length || 0}{" "}
+              {template.template_type === "field_input" ? "fields" : "tasks"}
             </Badge>
           </div>
           <div className="pl-6">
-            {template.task_list && template.task_list.length > 0 ? (
+            {template.items && template.items.length > 0 ? (
               <div className="grid gap-2">
-                {template.task_list.map((task, index) => (
+                {template.items.map((item, index) => (
                   <div
-                    key={`${task}-${index}`}
+                    key={`${item.name}-${index}`}
                     className="flex items-start gap-3 border-border/40 border-b py-2 last:border-0"
                   >
                     <span className="mt-1 w-6 shrink-0 font-mono text-muted-foreground text-xs">
                       {(index + 1).toString().padStart(2, "0")}
                     </span>
-                    <span className="text-sm">{task}</span>
+                    <span className="text-sm">{item.name}</span>
                   </div>
                 ))}
               </div>

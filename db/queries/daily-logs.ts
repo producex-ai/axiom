@@ -1,3 +1,4 @@
+import type { FieldItem, TaskItem } from "@/db/queries/log-templates";
 import { query } from "@/lib/db/postgres";
 
 export type DailyLog = {
@@ -7,7 +8,7 @@ export type DailyLog = {
   schedule_id: string;
   assignee_id: string;
   reviewer_id: string | null;
-  tasks: Record<string, boolean>; // Task name -> completion status
+  tasks: Record<string, boolean | string>; // Task name -> boolean (checkbox) or string (text input)
   tasks_sign_off: "ALL_GOOD" | "ACTION_REQUIRED" | null;
   assignee_comment: string | null;
   reviewer_comment: string | null;
@@ -24,7 +25,8 @@ export type DailyLogWithDetails = DailyLog & {
   template_name: string;
   template_category: string | null;
   template_sop: string | null;
-  template_tasks: string[] | null;
+  template_type: "task_list" | "field_input";
+  template_items: TaskItem[] | FieldItem[];
   assignee_name: string | null;
   reviewer_name: string | null;
 };
@@ -35,7 +37,7 @@ export type CreateDailyLogInput = {
   schedule_id: string;
   assignee_id: string;
   reviewer_id: string | null;
-  tasks: Record<string, boolean>;
+  tasks: Record<string, boolean | string>;
   log_date: Date;
   created_by: string;
 };
@@ -86,7 +88,7 @@ export const createDailyLog = async (
 export const updateDailyLogTasks = async (
   id: string,
   orgId: string,
-  tasks: Record<string, boolean>,
+  tasks: Record<string, boolean | string>,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -250,7 +252,8 @@ export const getDailyLogs = async (
         lt.name as template_name,
         lt.category as template_category,
         lt.sop as template_sop,
-        lt.task_list as template_tasks
+        lt.template_type as template_type,
+        lt.items as template_items
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.org_id = $1
@@ -320,7 +323,8 @@ export const getDailyLogById = async (
         lt.name as template_name,
         lt.category as template_category,
         lt.sop as template_sop,
-        lt.task_list as template_tasks
+        lt.template_type as template_type,
+        lt.items as template_items
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.id = $1 AND dl.org_id = $2

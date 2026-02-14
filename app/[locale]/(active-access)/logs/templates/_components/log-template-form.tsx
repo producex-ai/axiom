@@ -12,8 +12,10 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -23,7 +25,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { ReviewTimePeriod } from "@/db/queries/log-templates";
+import { Textarea } from "@/components/ui/textarea";
+import type {
+  FieldItem,
+  ReviewTimePeriod,
+  TaskItem,
+  TemplateType,
+} from "@/db/queries/log-templates";
 import { uploadAndExtractTasks } from "@/lib/ai/extract-tasks";
 import { CATEGORY_OPTIONS, SOP_OPTIONS } from "@/lib/constants/log-templates";
 
@@ -59,10 +67,13 @@ interface LogTemplateFormProps {
     name: string;
     category: string | null;
     sop: string | null;
-    task_list: string[] | null;
+    template_type: TemplateType;
+    items: TaskItem[] | FieldItem[];
     review_time: ReviewTimePeriod | null;
   };
 }
+
+type ItemState = (TaskItem | FieldItem) & { id: number };
 
 export function LogTemplateForm({
   mode = "create",
@@ -79,16 +90,38 @@ export function LogTemplateForm({
 
   const [state, formAction] = useActionState(actionToUse, initialState);
 
-  // Initialize tasks from initialData or default to one empty task
-  const initialTasks =
-    initialData?.task_list && initialData.task_list.length > 0
-      ? initialData.task_list
-      : [""];
+  // Determine initial template type
+  const initialTemplateType: TemplateType =
+    initialData?.template_type || "task_list";
+  const [templateType, setTemplateType] =
+    useState<TemplateType>(initialTemplateType);
 
-  const [tasks, setTasks] = useState<{ id: number; defaultValue: string }[]>(
-    initialTasks.map((t, i) => ({ id: i, defaultValue: t })),
-  );
-  const [nextId, setNextId] = useState(initialTasks.length);
+  // Initialize items from initialData or default to one empty item
+  const getInitialItems = (): ItemState[] => {
+    if (initialData?.items && initialData.items.length > 0) {
+      // Map items based on template type to ensure proper structure
+      if (initialTemplateType === "field_input") {
+        return initialData.items.map((item, i) => ({
+          id: i,
+          name: item.name,
+          description: (item as FieldItem).description || "",
+          required: (item as FieldItem).required ?? false,
+        }));
+      } else {
+        return initialData.items.map((item, i) => ({
+          id: i,
+          name: item.name,
+        }));
+      }
+    }
+    // Default empty item based on template type
+    return templateType === "task_list"
+      ? [{ id: 0, name: "" }]
+      : [{ id: 0, name: "", description: "", required: false }];
+  };
+
+  const [items, setItems] = useState<ItemState[]>(getInitialItems());
+  const [nextId, setNextId] = useState(initialData?.items?.length || 1);
   const [isExtracting, setIsExtracting] = useState(false);
   const [extractError, setExtractError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -98,14 +131,37 @@ export function LogTemplateForm({
     enabledModules.includes(group.module),
   );
 
-  const addTask = () => {
-    setTasks([...tasks, { id: nextId, defaultValue: "" }]);
+  const addItem = () => {
+    const newItem: ItemState =
+      templateType === "task_list"
+        ? { id: nextId, name: "" }
+        : { id: nextId, name: "", description: "", required: false };
+    setItems([...items, newItem]);
     setNextId(nextId + 1);
   };
 
-  const removeTask = (idToRemove: number) => {
-    if (tasks.length <= 1) return;
-    setTasks(tasks.filter((t) => t.id !== idToRemove));
+  const removeItem = (idToRemove: number) => {
+    if (items.length <= 1) return;
+    setItems(items.filter((item) => item.id !== idToRemove));
+  };
+
+  const updateItem = (id: number, field: string, value: string | boolean) => {
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
+    );
+  };
+
+  const handleTemplateTypeChange = (newType: TemplateType) => {
+    setTemplateType(newType);
+    // Reset items when switching types
+    const newItem: ItemState =
+      newType === "task_list"
+        ? { id: 0, name: "" }
+        : { id: 0, name: "", description: "", required: false };
+    setItems([newItem]);
+    setNextId(1);
   };
 
   const handleFileExtract = async (
@@ -122,13 +178,25 @@ export function LogTemplateForm({
       const result = await uploadAndExtractTasks(file);
 
       if (result.success && result.tasks && result.tasks.length > 0) {
-        // Replace current tasks with extracted tasks
-        setTasks(
-          result.tasks.map((task, i) => ({
-            id: nextId + i,
-            defaultValue: task,
-          })),
-        );
+        // Replace current items with extracted tasks
+        if (templateType === "task_list") {
+          setItems(
+            result.tasks.map((task, i) => ({
+              id: nextId + i,
+              name: task,
+            })),
+          );
+        } else {
+          // For field_input, create fields from extracted tasks
+          setItems(
+            result.tasks.map((task, i) => ({
+              id: nextId + i,
+              name: task,
+              description: "",
+              required: false,
+            })),
+          );
+        }
         setNextId(nextId + result.tasks.length);
       } else {
         setExtractError(result.error || "No tasks found in the document");
@@ -257,9 +325,48 @@ export function LogTemplateForm({
             </div>
           </div>
 
+          {/* Template Type Selection */}
+          <div className="space-y-3">
+            <Label>Template Type</Label>
+            <RadioGroup
+              name="template_type"
+              value={templateType}
+              onValueChange={(value: string) =>
+                handleTemplateTypeChange(value as TemplateType)
+              }
+              className="flex gap-4"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="task_list" id="task_list" />
+                <Label
+                  htmlFor="task_list"
+                  className="cursor-pointer font-normal"
+                >
+                  Task List (Checkboxes)
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="field_input" id="field_input" />
+                <Label
+                  htmlFor="field_input"
+                  className="cursor-pointer font-normal"
+                >
+                  Field Input (Text Fields)
+                </Label>
+              </div>
+            </RadioGroup>
+            <p className="text-muted-foreground text-xs">
+              {templateType === "task_list"
+                ? "Assignees will check off completed tasks"
+                : "Assignees will fill in text information for each field"}
+            </p>
+          </div>
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-medium text-lg">Task List</h3>
+              <h3 className="font-medium text-lg">
+                {templateType === "task_list" ? "Task List" : "Field List"}
+              </h3>
               <div className="flex gap-2">
                 <Button
                   type="button"
@@ -276,7 +383,8 @@ export function LogTemplateForm({
                   ) : (
                     <>
                       <FileText className="mr-2 h-4 w-4" />
-                      Extract Tasks
+                      Extract{" "}
+                      {templateType === "task_list" ? "Tasks" : "Fields"}
                     </>
                   )}
                 </Button>
@@ -291,10 +399,10 @@ export function LogTemplateForm({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={addTask}
+                  onClick={addItem}
                 >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Task
+                  Add {templateType === "task_list" ? "Task" : "Field"}
                 </Button>
               </div>
             </div>
@@ -305,36 +413,126 @@ export function LogTemplateForm({
               </Alert>
             )}
 
+            {/* Hidden field to pass items as JSON for field_input type */}
+            {templateType === "field_input" && (
+              <input
+                type="hidden"
+                name="items"
+                value={JSON.stringify(items.map(({ id, ...rest }) => rest))}
+              />
+            )}
+
             <div className="space-y-3">
-              {tasks.map((task, index) => (
-                <div key={task.id} className="flex gap-2">
-                  <div className="flex-1">
-                    <Input
-                      name="tasks"
-                      defaultValue={task.defaultValue}
-                      placeholder={`Task ${index + 1}`}
-                      aria-label={`Task ${index + 1}`}
-                      required // All tasks are required to not be empty
-                    />
-                  </div>
-                  {tasks.length > 1 ? (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => removeTask(task.id)}
-                      aria-label="Remove task"
-                    >
-                      <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                    </Button>
-                  ) : (
-                    <div className="w-10" />
-                  )}
-                </div>
-              ))}
-              {state.errors?.tasks && (
+              {templateType === "task_list"
+                ? // Task List Mode - Simple text inputs
+                  items.map((item, index) => (
+                    <div key={item.id} className="flex gap-2">
+                      <div className="flex-1">
+                        <Input
+                          name="items"
+                          value={(item as TaskItem).name}
+                          onChange={(e) =>
+                            updateItem(item.id, "name", e.target.value)
+                          }
+                          placeholder={`Task ${index + 1}`}
+                          aria-label={`Task ${index + 1}`}
+                          required
+                        />
+                      </div>
+                      {items.length > 1 ? (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeItem(item.id)}
+                          aria-label="Remove task"
+                        >
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </Button>
+                      ) : (
+                        <div className="w-10" />
+                      )}
+                    </div>
+                  ))
+                : // Field Input Mode - Name, Description, Required
+                  items.map((item, index) => {
+                    const fieldItem = item as FieldItem;
+                    return (
+                      <Card key={item.id} className="p-4">
+                        <div className="space-y-3">
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 space-y-3">
+                              <div className="space-y-2">
+                                <Label htmlFor={`field-name-${item.id}`}>
+                                  Field Name
+                                </Label>
+                                <Input
+                                  id={`field-name-${item.id}`}
+                                  value={fieldItem.name}
+                                  onChange={(e) =>
+                                    updateItem(item.id, "name", e.target.value)
+                                  }
+                                  placeholder={`Field ${index + 1}`}
+                                  required
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor={`field-desc-${item.id}`}>
+                                  Description (Optional)
+                                </Label>
+                                <Textarea
+                                  id={`field-desc-${item.id}`}
+                                  value={fieldItem.description || ""}
+                                  onChange={(e) =>
+                                    updateItem(
+                                      item.id,
+                                      "description",
+                                      e.target.value,
+                                    )
+                                  }
+                                  placeholder="Brief description or hint"
+                                  rows={2}
+                                />
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <Checkbox
+                                  id={`field-required-${item.id}`}
+                                  checked={fieldItem.required}
+                                  onCheckedChange={(checked) =>
+                                    updateItem(
+                                      item.id,
+                                      "required",
+                                      checked as boolean,
+                                    )
+                                  }
+                                />
+                                <Label
+                                  htmlFor={`field-required-${item.id}`}
+                                  className="cursor-pointer font-normal"
+                                >
+                                  Required field
+                                </Label>
+                              </div>
+                            </div>
+                            {items.length > 1 && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => removeItem(item.id)}
+                                aria-label="Remove field"
+                              >
+                                <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      </Card>
+                    );
+                  })}
+              {state.errors?.items && (
                 <p className="text-destructive text-sm">
-                  {state.errors.tasks.join(", ")}
+                  {state.errors.items.join(", ")}
                 </p>
               )}
             </div>

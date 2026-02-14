@@ -92,7 +92,10 @@ async function TemplateList() {
                     </span>
                   </div>
                   <div className="text-xs">
-                    {template.task_list?.length || 0} tasks
+                    {template.items?.length || 0}{" "}
+                    {template.template_type === "field_input"
+                      ? "fields"
+                      : "tasks"}
                   </div>
                 </div>
               </div>

@@ -59,7 +59,8 @@ export default async function EditTemplatePage({ params }: PageProps) {
           name: template.name,
           category: template.category,
           sop: template.sop,
-          task_list: template.task_list,
+          template_type: template.template_type,
+          items: template.items,
           review_time: template.review_time,
         }}
       />

@@ -12,6 +12,7 @@ import { AssigneeView } from "@/components/tasks/AssigneeView";
 import { ReviewerView } from "@/components/tasks/ReviewerView";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
+import type { FieldItem } from "@/db/queries/log-templates";
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString("en-US", {
@@ -48,8 +49,15 @@ export default async function TaskDetailPage({
     redirect("/tasks");
   }
 
+  const isFieldInputTemplate = log.template_type === "field_input";
   const totalTasks = Object.keys(log.tasks).length;
-  const completedTasks = Object.values(log.tasks).filter(Boolean).length;
+
+  // Calculate completion differently based on template type
+  const completedTasks = isFieldInputTemplate
+    ? Object.values(log.tasks).filter(
+        (value) => typeof value === "string" && value.trim() !== "",
+      ).length
+    : Object.values(log.tasks).filter(Boolean).length;
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
@@ -164,36 +172,79 @@ export default async function TaskDetailPage({
         (log.status === "REJECTED" && isReviewer) ||
         (log.status === "PENDING" && isReviewer)) && (
         <div className="rounded-lg border bg-card p-4">
-          <h3 className="font-semibold text-sm">Task List</h3>
-          <div className="mt-4 space-y-2">
+          <h3 className="font-semibold text-sm">
+            {isFieldInputTemplate ? "Field List" : "Task List"}
+          </h3>
+          <div className="mt-4 space-y-3">
             {Object.entries(log.tasks).length > 0 ? (
-              Object.entries(log.tasks).map(([task, completed]) => (
-                <div
-                  key={task}
-                  className="flex items-center gap-3 rounded-md border p-3"
-                >
+              isFieldInputTemplate ? (
+                // Field Input Mode - Show field values
+                (log.template_items as FieldItem[]).map((field) => {
+                  const value = log.tasks[field.name];
+                  return (
+                    <div
+                      key={field.name}
+                      className="space-y-1 rounded-md border p-3"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-sm">
+                          {field.name}
+                          {field.required && (
+                            <span className="ml-1 text-red-500">*</span>
+                          )}
+                        </span>
+                      </div>
+                      {field.description && (
+                        <p className="text-muted-foreground text-xs">
+                          {field.description}
+                        </p>
+                      )}
+                      <p className="text-sm">
+                        {value &&
+                        typeof value === "string" &&
+                        value.trim() !== "" ? (
+                          value
+                        ) : (
+                          <span className="text-muted-foreground italic">
+                            Not filled
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  );
+                })
+              ) : (
+                // Task List Mode - Show checkboxes
+                Object.entries(log.tasks).map(([task, completed]) => (
                   <div
-                    className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
-                      completed
-                        ? "border-primary bg-primary"
-                        : "border-muted-foreground/30"
-                    }`}
+                    key={task}
+                    className="flex items-center gap-3 rounded-md border p-3"
                   >
-                    {completed && (
-                      <CheckCircle2 className="h-4 w-4 text-white" />
-                    )}
+                    <div
+                      className={`flex h-5 w-5 items-center justify-center rounded border-2 ${
+                        completed
+                          ? "border-primary bg-primary"
+                          : "border-muted-foreground/30"
+                      }`}
+                    >
+                      {completed && (
+                        <CheckCircle2 className="h-4 w-4 text-white" />
+                      )}
+                    </div>
+                    <span
+                      className={`text-sm ${
+                        completed ? "text-muted-foreground line-through" : ""
+                      }`}
+                    >
+                      {task}
+                    </span>
                   </div>
-                  <span
-                    className={`text-sm ${
-                      completed ? "text-muted-foreground line-through" : ""
-                    }`}
-                  >
-                    {task}
-                  </span>
-                </div>
-              ))
+                ))
+              )
             ) : (
-              <p className="text-muted-foreground text-sm">No tasks defined.</p>
+              <p className="text-muted-foreground text-sm">
+                No {isFieldInputTemplate ? "fields" : "tasks"} defined.
+              </p>
             )}
           </div>
 
@@ -202,7 +253,8 @@ export default async function TaskDetailPage({
               <div className="space-y-1">
                 <h4 className="font-semibold text-sm">Submission Summary</h4>
                 <p className="text-muted-foreground text-xs">
-                  {completedTasks} of {totalTasks} tasks completed
+                  {completedTasks} of {totalTasks}{" "}
+                  {isFieldInputTemplate ? "fields filled" : "tasks completed"}
                 </p>
               </div>
               {log.tasks_sign_off && (
