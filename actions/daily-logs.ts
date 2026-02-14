@@ -11,6 +11,7 @@ import {
   getDailyLogs,
   getLogsForReview,
   getMyPendingLogs,
+  markDailyLogObsolete,
   rejectDailyLog,
   reopenDailyLog,
   submitDailyLogForApproval,
@@ -125,12 +126,18 @@ export type ActionState = {
  * Get daily logs for the current user's organization
  */
 export async function getDailyLogsAction(filters?: {
-  status?: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
+  status?:
+    | "PENDING"
+    | "PENDING_APPROVAL"
+    | "APPROVED"
+    | "REJECTED"
+    | "OBSOLETE";
   assigneeId?: string;
   reviewerId?: string;
   startDate?: string;
   endDate?: string;
   templateId?: string;
+  includeObsolete?: boolean;
 }): Promise<DailyLogWithDetails[]> {
   const { orgId } = await auth();
   if (!orgId) {
@@ -519,5 +526,39 @@ export async function reopenDailyLogAction(id: string): Promise<ActionState> {
   } catch (error) {
     console.error("Failed to reopen log:", error);
     return { message: "Failed to reopen log. Please try again." };
+  }
+}
+
+/**
+ * Mark a daily log as obsolete (soft delete) - reviewer action only
+ * Can mark logs in PENDING, PENDING_APPROVAL, or REJECTED status as obsolete
+ */
+export async function markDailyLogObsoleteAction(
+  id: string,
+): Promise<ActionState> {
+  const { userId, orgId } = await auth();
+  if (!userId || !orgId) {
+    return { message: "Unauthorized" };
+  }
+
+  try {
+    const result = await markDailyLogObsolete(id, orgId, userId);
+
+    if (!result) {
+      return {
+        message:
+          "Failed to mark log as obsolete. Make sure you are the assigned reviewer and the log is not already approved or obsolete.",
+      };
+    }
+
+    revalidatePath("/tasks");
+    revalidatePath(`/tasks/${id}`);
+    revalidatePath("/tasks/history");
+    revalidatePath("/logs/review");
+
+    return { success: true, message: "Task marked as obsolete successfully" };
+  } catch (error) {
+    console.error("Failed to mark log as obsolete:", error);
+    return { message: "Failed to mark as obsolete. Please try again." };
   }
 }

@@ -12,13 +12,15 @@ export type DailyLog = {
   tasks_sign_off: "ALL_GOOD" | "ACTION_REQUIRED" | null;
   assignee_comment: string | null;
   reviewer_comment: string | null;
-  status: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
+  status: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "OBSOLETE";
   log_date: Date;
   submitted_at: Date | null;
   reviewed_at: Date | null;
   created_at: Date;
   updated_at: Date;
   created_by: string | null;
+  deleted_at: Date | null;
+  deleted_by: string | null;
 };
 
 export type DailyLogWithDetails = DailyLog & {
@@ -261,7 +263,39 @@ export const reopenDailyLog = async (
 };
 
 /**
+ * Mark a daily log as obsolete (soft delete) - reviewer action only
+ * Can obsolete logs that are in PENDING, PENDING_APPROVAL, or REJECTED status
+ */
+export const markDailyLogObsolete = async (
+  id: string,
+  orgId: string,
+  reviewerId: string,
+): Promise<DailyLog | null> => {
+  try {
+    const result = await query<DailyLog>(
+      `
+      UPDATE daily_logs
+      SET 
+        status = 'OBSOLETE',
+        deleted_at = NOW(),
+        deleted_by = $1,
+        updated_at = NOW()
+      WHERE id = $2 AND org_id = $3 AND reviewer_id = $1 
+        AND status IN ('PENDING', 'PENDING_APPROVAL', 'REJECTED')
+      RETURNING *
+      `,
+      [reviewerId, id, orgId],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error marking daily log as obsolete:", error);
+    return null;
+  }
+};
+
+/**
  * Get daily logs for an organization with optional filters
+ * By default, excludes OBSOLETE logs unless explicitly requested
  */
 export const getDailyLogs = async (
   orgId: string,
@@ -272,6 +306,7 @@ export const getDailyLogs = async (
     startDate?: Date;
     endDate?: Date;
     templateId?: string;
+    includeObsolete?: boolean; // Set to true to include obsolete logs
   },
 ): Promise<DailyLogWithDetails[]> => {
   try {
@@ -290,6 +325,11 @@ export const getDailyLogs = async (
 
     const params: (string | Date)[] = [orgId];
     let paramIndex = 2;
+
+    // Exclude obsolete logs by default
+    if (!filters?.includeObsolete) {
+      queryText += ` AND dl.status != 'OBSOLETE'`;
+    }
 
     if (filters?.status) {
       queryText += ` AND dl.status = $${paramIndex}`;
@@ -471,7 +511,7 @@ export const getDailyLogStats = async (
         COUNT(*) FILTER (WHERE status = 'APPROVED') as approved,
         COUNT(*) FILTER (WHERE status = 'REJECTED') as rejected
       FROM daily_logs
-      WHERE org_id = $1 AND log_date BETWEEN $2 AND $3
+      WHERE org_id = $1 AND log_date BETWEEN $2 AND $3 AND status != 'OBSOLETE'
       `,
       [orgId, startDate, endDate],
     );

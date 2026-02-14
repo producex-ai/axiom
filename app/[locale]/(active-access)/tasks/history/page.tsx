@@ -38,7 +38,7 @@ function EmptyState() {
       <History className="h-16 w-16 text-muted-foreground/40" />
       <h3 className="mt-4 font-semibold text-lg">No history found</h3>
       <p className="mt-2 text-center text-muted-foreground text-sm">
-        You don't have any completed or past tasks in your history yet.
+        You don't have any approved or obsolete tasks in your history yet.
       </p>
     </div>
   );
@@ -60,13 +60,16 @@ export default async function TaskHistoryPage({
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
 
-  const allLogs = await getDailyLogsAction({
-    status: "APPROVED",
-  });
+  // Get all logs including obsolete ones for history
+  const allLogs = await getDailyLogsAction({ includeObsolete: true });
 
-  // Filter for current user and sort by date descending
+  // Filter for current user and show only APPROVED or OBSOLETE tasks
   const userLogs = allLogs
-    .filter((log) => log.assignee_id === userId || log.reviewer_id === userId)
+    .filter(
+      (log) =>
+        (log.assignee_id === userId || log.reviewer_id === userId) &&
+        (log.status === "APPROVED" || log.status === "OBSOLETE"),
+    )
     .sort(
       (a, b) => new Date(b.log_date).getTime() - new Date(a.log_date).getTime(),
     );
@@ -82,7 +85,7 @@ export default async function TaskHistoryPage({
       <div>
         <h1 className="font-bold text-3xl tracking-tight">My Task History</h1>
         <p className="mt-2 text-muted-foreground">
-          View your approved daily log tasks
+          View your approved and obsolete daily log tasks
         </p>
       </div>
 

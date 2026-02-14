@@ -1,14 +1,26 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
-import { useActionState } from "react";
+import { AlertCircle, CheckCircle2, Trash2, XCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useActionState, useState, useTransition } from "react";
 
 import {
   type ActionState,
   approveDailyLogAction,
+  markDailyLogObsoleteAction,
   rejectDailyLogAction,
 } from "@/actions/daily-logs";
 import { TaskView } from "@/components/tasks/TaskView";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -25,6 +37,11 @@ type ReviewerViewProps = {
 };
 
 export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [showObsoleteDialog, setShowObsoleteDialog] = useState(false);
+  const [obsoleteError, setObsoleteError] = useState<string | null>(null);
+
   const [approveState, approveAction] = useActionState<ActionState, FormData>(
     approveDailyLogAction.bind(null, log.id),
     {},
@@ -37,6 +54,23 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
   const isFieldInputTemplate = log.template_type === "field_input";
   const totalTasks = getTotalTasksCount(log.tasks);
   const completedTasks = getCompletedTasksCount(log.tasks, log.template_type);
+
+  // Can mark as obsolete if status is PENDING and no tasks have been completed
+  const canMarkObsolete = log.status === "PENDING" && completedTasks === 0;
+
+  const handleMarkObsolete = async () => {
+    setObsoleteError(null);
+    startTransition(async () => {
+      const result = await markDailyLogObsoleteAction(log.id);
+      if (result.success) {
+        setShowObsoleteDialog(false);
+        router.push("/tasks");
+        router.refresh();
+      } else {
+        setObsoleteError(result.message || "Failed to mark as obsolete");
+      }
+    });
+  };
 
   return (
     <div className="space-y-4">
@@ -54,10 +88,6 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h4 className="font-semibold text-sm">Submission Summary</h4>
-              <p className="text-muted-foreground text-xs">
-                {completedTasks} of {totalTasks}{" "}
-                {isFieldInputTemplate ? "fields filled" : "tasks completed"}
-              </p>
             </div>
             {log.tasks_sign_off && (
               <Badge
@@ -104,6 +134,32 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
           )}
         </div>
       </div>
+
+      {/* Mark as Obsolete Button - Available when status is PENDING and no tasks completed */}
+      {canMarkObsolete && (
+        <div className="rounded-lg border border-orange-200 bg-orange-50/30 p-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h4 className="font-semibold text-orange-900 text-sm">
+                Incorrect Scheduling?
+              </h4>
+              <p className="text-muted-foreground text-xs">
+                If this task was created by mistake, you can mark it as obsolete
+              </p>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setShowObsoleteDialog(true)}
+              className="border-orange-500 text-orange-600 hover:bg-orange-50"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Mark as Obsolete
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Review Actions - only in edit mode */}
       {mode === "edit" && (
@@ -207,6 +263,36 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
           </div>
         </div>
       )}
+
+      {/* Obsolete Confirmation Dialog */}
+      <AlertDialog
+        open={showObsoleteDialog}
+        onOpenChange={setShowObsoleteDialog}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Mark Task as Obsolete?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This task was created due to incorrect scheduling. Marking it as
+              obsolete will remove it from active tasks but keep it in the
+              history for audit purposes. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          {obsoleteError && (
+            <p className="text-red-600 text-sm">{obsoleteError}</p>
+          )}
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleMarkObsolete}
+              disabled={isPending}
+              className="bg-orange-600 hover:bg-orange-700"
+            >
+              {isPending ? "Marking..." : "Mark as Obsolete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
