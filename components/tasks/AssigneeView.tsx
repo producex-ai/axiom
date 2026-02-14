@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertCircle, CheckCircle2 } from "lucide-react";
 import {
   useActionState,
   useEffect,
@@ -14,8 +13,9 @@ import {
   submitForApprovalAction,
   updateDailyLogTasksAction,
 } from "@/actions/daily-logs";
+import { ReviewSummary } from "@/components/tasks/ReviewSummary";
+import { SubmissionSummary } from "@/components/tasks/SubmissionSummary";
 import { TaskView } from "@/components/tasks/TaskView";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,7 +33,6 @@ type AssigneeViewProps = {
 
 export function AssigneeView({ log, mode = "edit" }: AssigneeViewProps) {
   const [tasks, setTasks] = useState(log.tasks);
-  const [showSignOff, setShowSignOff] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [isSaving, setIsSaving] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -43,8 +42,6 @@ export function AssigneeView({ log, mode = "edit" }: AssigneeViewProps) {
   const fieldItems = isFieldInputTemplate
     ? (log.template_items as FieldItem[])
     : [];
-  const totalTasks = getTotalTasksCount(log.tasks);
-  const completedTasks = getCompletedTasksCount(log.tasks, log.template_type);
 
   const [updateState, updateAction] = useActionState<ActionState, FormData>(
     updateDailyLogTasksAction.bind(null, log.id),
@@ -128,78 +125,16 @@ export function AssigneeView({ log, mode = "edit" }: AssigneeViewProps) {
           templateItems={log.template_items}
         />
 
-        <div className="rounded-lg border bg-card p-4">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h4 className="font-semibold text-sm">Submission Summary</h4>
-                <p className="text-muted-foreground text-xs">
-                  {completedTasks} of {totalTasks}{" "}
-                  {isFieldInputTemplate ? "fields filled" : "tasks completed"}
-                </p>
-              </div>
-              {log.tasks_sign_off && (
-                <Badge
-                  variant={
-                    log.tasks_sign_off === "ALL_GOOD"
-                      ? "success"
-                      : "destructive"
-                  }
-                  className="px-2"
-                >
-                  {log.tasks_sign_off === "ALL_GOOD" ? (
-                    <>
-                      <CheckCircle2 className="mr-1 h-3 w-3" />
-                      All Good
-                    </>
-                  ) : (
-                    <>
-                      <AlertCircle className="mr-1 h-3 w-3" />
-                      Action Required
-                    </>
-                  )}
-                </Badge>
-              )}
-            </div>
-
-            {log.assignee_comment && (
-              <div className="rounded-md border bg-muted/30 p-3">
-                <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
-                  Assignee Comment
-                </p>
-                <p className="text-foreground text-sm italic leading-relaxed">
-                  "{log.assignee_comment}"
-                </p>
-              </div>
-            )}
-
-            {log.reviewer_comment && (
-              <div className="rounded-md border bg-muted/30 p-3">
-                <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
-                  Reviewer Comment
-                </p>
-                <p className="text-foreground text-sm italic leading-relaxed">
-                  "{log.reviewer_comment}"
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
+        <SubmissionSummary log={log} />
+        <ReviewSummary log={log} />
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      {/* Rejected state message */}
-      {log.status === "REJECTED" && log.reviewer_comment && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-          <h3 className="font-semibold text-red-900 text-sm">
-            Rejected by Reviewer
-          </h3>
-          <p className="mt-1 text-red-700 text-sm">{log.reviewer_comment}</p>
-        </div>
-      )}
+      {/* Review Summary for Approved/Rejected statuses */}
+      <ReviewSummary log={log} />
 
       {/* Task/Field List */}
       <TaskView

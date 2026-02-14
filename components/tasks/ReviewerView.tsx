@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, Trash2, XCircle } from "lucide-react";
+import { CheckCircle2, Trash2, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useActionState, useState, useTransition } from "react";
 
@@ -10,6 +10,8 @@ import {
   markDailyLogObsoleteAction,
   rejectDailyLogAction,
 } from "@/actions/daily-logs";
+import { ReviewSummary } from "@/components/tasks/ReviewSummary";
+import { SubmissionSummary } from "@/components/tasks/SubmissionSummary";
 import { TaskView } from "@/components/tasks/TaskView";
 import {
   AlertDialog,
@@ -21,15 +23,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
-import {
-  getCompletedTasksCount,
-  getTotalTasksCount,
-} from "@/lib/utils/task-utils";
+import { getCompletedTasksCount } from "@/lib/utils/task-utils";
 
 type ReviewerViewProps = {
   log: DailyLogWithDetails;
@@ -51,8 +48,6 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
     {},
   );
 
-  const isFieldInputTemplate = log.template_type === "field_input";
-  const totalTasks = getTotalTasksCount(log.tasks);
   const completedTasks = getCompletedTasksCount(log.tasks, log.template_type);
 
   // Can mark as obsolete if status is PENDING and no tasks have been completed
@@ -83,59 +78,12 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
       />
 
       {/* Summary and Comments Section */}
-      <div className="rounded-lg border bg-card p-4">
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <h4 className="font-semibold text-sm">Submission Summary</h4>
-            </div>
-            {log.tasks_sign_off && (
-              <Badge
-                variant={
-                  log.tasks_sign_off === "ALL_GOOD" ? "success" : "destructive"
-                }
-                className="px-2"
-              >
-                {log.tasks_sign_off === "ALL_GOOD" ? (
-                  <>
-                    <CheckCircle2 className="mr-1 h-3 w-3" />
-                    All Good
-                  </>
-                ) : (
-                  <>
-                    <AlertCircle className="mr-1 h-3 w-3" />
-                    Action Required
-                  </>
-                )}
-              </Badge>
-            )}
-          </div>
+      <SubmissionSummary log={log} />
 
-          {log.assignee_comment && (
-            <div className="rounded-md border bg-muted/30 p-3">
-              <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
-                Assignee Comment
-              </p>
-              <p className="text-foreground text-sm italic leading-relaxed">
-                "{log.assignee_comment}"
-              </p>
-            </div>
-          )}
+      {/* Review Summary */}
+      <ReviewSummary log={log} />
 
-          {log.reviewer_comment && (
-            <div className="rounded-md border bg-muted/30 p-3">
-              <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
-                Reviewer Comment
-              </p>
-              <p className="text-foreground text-sm italic leading-relaxed">
-                "{log.reviewer_comment}"
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Mark as Obsolete Button - Available when status is PENDING and no tasks completed */}
+      {/* Mark as Obsolete - Available when status is PENDING */}
       {canMarkObsolete && (
         <div className="rounded-lg border border-orange-200 bg-orange-50/30 p-4">
           <div className="flex items-center justify-between">
@@ -167,7 +115,6 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
           <h3 className="font-semibold text-sm">Review</h3>
           <div className="mt-4 space-y-4">
             <div>
-              <Label htmlFor="reviewer_comment">Comment</Label>
               <Textarea
                 id="reviewer_comment"
                 name="reviewer_comment"
@@ -180,17 +127,18 @@ export function ReviewerView({ log, mode = "edit" }: ReviewerViewProps) {
               </p>
             </div>
 
-            {(approveState.message || rejectState.message) && (
-              <p
-                className={`text-sm ${
-                  approveState.success || rejectState.success
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {approveState.message || rejectState.message}
-              </p>
-            )}
+            {(approveState.message || rejectState.message) &&
+              !rejectState.errors?.reviewer_comment && (
+                <p
+                  className={`text-sm ${
+                    approveState.success || rejectState.success
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {approveState.message || rejectState.message}
+                </p>
+              )}
             {rejectState.errors?.reviewer_comment && (
               <p className="text-red-600 text-sm">
                 {rejectState.errors.reviewer_comment[0]}
