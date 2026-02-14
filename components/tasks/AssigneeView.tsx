@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2 } from "lucide-react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import {
   useActionState,
   useEffect,
@@ -14,19 +14,24 @@ import {
   submitForApprovalAction,
   updateDailyLogTasksAction,
 } from "@/actions/daily-logs";
+import { TaskView } from "@/components/tasks/TaskView";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
 import type { FieldItem } from "@/db/queries/log-templates";
+import {
+  getCompletedTasksCount,
+  getTotalTasksCount,
+} from "@/lib/utils/task-utils";
 
 type AssigneeViewProps = {
   log: DailyLogWithDetails;
+  mode?: "edit" | "view";
 };
 
-export function AssigneeView({ log }: AssigneeViewProps) {
+export function AssigneeView({ log, mode = "edit" }: AssigneeViewProps) {
   const [tasks, setTasks] = useState(log.tasks);
   const [showSignOff, setShowSignOff] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -38,6 +43,8 @@ export function AssigneeView({ log }: AssigneeViewProps) {
   const fieldItems = isFieldInputTemplate
     ? (log.template_items as FieldItem[])
     : [];
+  const totalTasks = getTotalTasksCount(log.tasks);
+  const completedTasks = getCompletedTasksCount(log.tasks, log.template_type);
 
   const [updateState, updateAction] = useActionState<ActionState, FormData>(
     updateDailyLogTasksAction.bind(null, log.id),
@@ -102,15 +109,85 @@ export function AssigneeView({ log }: AssigneeViewProps) {
       });
     } else {
       // For task list templates, check that all tasks are completed
-      const currentCompletedTasks = Object.values(tasks).filter(Boolean).length;
-      const currentTotalTasks = Object.keys(tasks).length;
-      return (
-        currentTotalTasks > 0 && currentCompletedTasks === currentTotalTasks
-      );
+      const completedTasks = getCompletedTasksCount(tasks, log.template_type);
+      const totalTasks = getTotalTasksCount(tasks);
+      return totalTasks > 0 && completedTasks === totalTasks;
     }
   };
 
   const currentAllCompleted = isReadyForSignOff();
+
+  // View mode: Show read-only view with submission summary
+  if (mode === "view") {
+    return (
+      <div className="space-y-4">
+        <TaskView
+          mode="view"
+          templateType={log.template_type}
+          tasks={log.tasks}
+          templateItems={log.template_items}
+        />
+
+        <div className="rounded-lg border bg-card p-4">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <h4 className="font-semibold text-sm">Submission Summary</h4>
+                <p className="text-muted-foreground text-xs">
+                  {completedTasks} of {totalTasks}{" "}
+                  {isFieldInputTemplate ? "fields filled" : "tasks completed"}
+                </p>
+              </div>
+              {log.tasks_sign_off && (
+                <Badge
+                  variant={
+                    log.tasks_sign_off === "ALL_GOOD"
+                      ? "success"
+                      : "destructive"
+                  }
+                  className="px-2"
+                >
+                  {log.tasks_sign_off === "ALL_GOOD" ? (
+                    <>
+                      <CheckCircle2 className="mr-1 h-3 w-3" />
+                      All Good
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="mr-1 h-3 w-3" />
+                      Action Required
+                    </>
+                  )}
+                </Badge>
+              )}
+            </div>
+
+            {log.assignee_comment && (
+              <div className="rounded-md border bg-muted/30 p-3">
+                <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                  Assignee Comment
+                </p>
+                <p className="text-foreground text-sm italic leading-relaxed">
+                  "{log.assignee_comment}"
+                </p>
+              </div>
+            )}
+
+            {log.reviewer_comment && (
+              <div className="rounded-md border bg-muted/30 p-3">
+                <p className="mb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                  Reviewer Comment
+                </p>
+                <p className="text-foreground text-sm italic leading-relaxed">
+                  "{log.reviewer_comment}"
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -125,95 +202,41 @@ export function AssigneeView({ log }: AssigneeViewProps) {
       )}
 
       {/* Task/Field List */}
-      <div className="rounded-lg border bg-card p-4">
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-sm">
-            {isFieldInputTemplate ? "Field List" : "Task List"}
-          </h3>
-          {(isPending || isSaving) && (
-            <span className="text-muted-foreground text-xs">Saving...</span>
-          )}
-        </div>
-        <div className="mt-4 space-y-3">
-          {isFieldInputTemplate
-            ? // Field Input Mode - Text inputs with descriptions
-              fieldItems.map((field) => {
-                const value = tasks[field.name];
-                return (
-                  <div key={field.name} className="space-y-2">
-                    <Label htmlFor={`field-${field.name}`}>
-                      {field.name}
-                      {field.required && (
-                        <span className="ml-1 text-red-500">*</span>
-                      )}
-                    </Label>
-                    {field.description && (
-                      <p className="text-muted-foreground text-xs">
-                        {field.description}
-                      </p>
-                    )}
-                    <Input
-                      id={`field-${field.name}`}
-                      value={(value as string) || ""}
-                      onChange={(e) =>
-                        handleTaskChange(field.name, e.target.value)
-                      }
-                      placeholder={field.description || `Enter ${field.name}`}
-                      required={field.required}
-                    />
-                  </div>
-                );
-              })
-            : // Task List Mode - Checkboxes
-              Object.entries(tasks).map(([task, completed]) => (
-                <div
-                  key={task}
-                  className="flex items-center gap-3 rounded-md border p-3"
-                >
-                  <Checkbox
-                    id={`task-${task}`}
-                    checked={completed as boolean}
-                    disabled={false}
-                    onCheckedChange={(checked) =>
-                      handleTaskChange(task, checked === true)
-                    }
-                  />
-                  <Label
-                    htmlFor={`task-${task}`}
-                    className={`flex-1 cursor-pointer ${
-                      completed ? "text-muted-foreground line-through" : ""
-                    }`}
-                  >
-                    {task}
-                  </Label>
-                </div>
-              ))}
-        </div>
+      <TaskView
+        mode="edit"
+        templateType={log.template_type}
+        tasks={tasks}
+        templateItems={log.template_items}
+        onChange={handleTaskChange}
+        isPending={isPending}
+        isSaving={isSaving}
+      />
 
-        {updateState.message && !isPending && (
+      {updateState.message && !isPending && (
+        <div className="rounded-lg border bg-card p-4">
           <p
-            className={`mt-2 text-sm ${
+            className={`text-sm ${
               updateState.success ? "text-green-600" : "text-red-600"
             }`}
           >
             {updateState.message}
           </p>
-        )}
+        </div>
+      )}
 
-        {currentAllCompleted && !showSignOff && (
-          <div className="mt-4">
-            <Button
-              onClick={() => setShowSignOff(true)}
-              variant="default"
-              size="sm"
-              disabled={isPending}
-            >
-              <CheckCircle2 className="mr-2 h-4 w-4" />
-              {isFieldInputTemplate ? "Sign Off Fields" : "Sign Off Tasks"}
-            </Button>
-          </div>
-        )}
-      </div>
+      {currentAllCompleted && !showSignOff && (
+        <div className="rounded-lg border bg-card p-4">
+          <Button
+            onClick={() => setShowSignOff(true)}
+            variant="default"
+            size="sm"
+            disabled={isPending}
+          >
+            <CheckCircle2 className="mr-2 h-4 w-4" />
+            {isFieldInputTemplate ? "Sign Off Fields" : "Sign Off Tasks"}
+          </Button>
+        </div>
+      )}
 
       {/* Sign Off Section */}
       {showSignOff && currentAllCompleted && (

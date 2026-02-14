@@ -21,6 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  getCompletedTasksCount,
+  getTotalTasksCount,
+} from "@/lib/utils/task-utils";
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString("en-US", {
@@ -142,10 +146,11 @@ export default async function TasksPage() {
               <TableBody>
                 {myTasks.map((task) => {
                   const isAssignee = task.assignee_id === userId;
-                  const totalTasks = Object.keys(task.tasks).length;
-                  const completedTasks = Object.values(task.tasks).filter(
-                    Boolean,
-                  ).length;
+                  const totalTasks = getTotalTasksCount(task.tasks);
+                  const completedTasks = getCompletedTasksCount(
+                    task.tasks,
+                    task.template_type,
+                  );
 
                   return (
                     <TableRow key={task.id} className="cursor-pointer">

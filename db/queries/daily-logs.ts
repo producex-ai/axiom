@@ -110,6 +110,35 @@ export const updateDailyLogTasks = async (
 };
 
 /**
+ * Update assignee and reviewer for a daily log (only if status is PENDING and no tasks are completed)
+ */
+export const updateDailyLogAssignment = async (
+  id: string,
+  orgId: string,
+  assigneeId: string,
+  reviewerId: string | null,
+): Promise<DailyLog | null> => {
+  try {
+    const result = await query<DailyLog>(
+      `
+      UPDATE daily_logs
+      SET 
+        assignee_id = $1,
+        reviewer_id = $2,
+        updated_at = NOW()
+      WHERE id = $3 AND org_id = $4 AND status = 'PENDING'
+      RETURNING *
+      `,
+      [assigneeId, reviewerId, id, orgId],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error updating daily log assignment:", error);
+    return null;
+  }
+};
+
+/**
  * Submit log for approval (assignee completes and sends for review)
  */
 export const submitDailyLogForApproval = async (

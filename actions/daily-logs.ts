@@ -14,6 +14,7 @@ import {
   rejectDailyLog,
   reopenDailyLog,
   submitDailyLogForApproval,
+  updateDailyLogAssignment,
   updateDailyLogTasks,
 } from "@/db/queries/daily-logs";
 import type { FieldItem, TaskItem } from "@/db/queries/log-templates";
@@ -244,6 +245,78 @@ export async function updateDailyLogTasksAction(
   } catch (error) {
     console.error("Failed to update tasks:", error);
     return { message: "Failed to update tasks. Please try again." };
+  }
+}
+
+/**
+ * Update assignee and reviewer for a daily log
+ * Only allowed when status is PENDING and no tasks are completed
+ */
+export async function updateDailyLogAssignmentAction(
+  id: string,
+  assigneeId: string,
+  reviewerId: string | null,
+): Promise<{ success?: boolean; message?: string }> {
+  const { userId, orgId } = await auth();
+
+  if (!userId || !orgId) {
+    return { message: "Unauthorized" };
+  }
+
+  // Validate input
+  if (!assigneeId) {
+    return { message: "Assignee is required" };
+  }
+
+  try {
+    // First, get the log to check permissions and status
+    const log = await getDailyLogById(id, orgId);
+
+    if (!log) {
+      return { message: "Daily log not found" };
+    }
+
+    // Only reviewer can update assignments
+    if (log.reviewer_id !== userId) {
+      return { message: "Only the reviewer can update assignments" };
+    }
+
+    // Only allow when status is PENDING
+    if (log.status !== "PENDING") {
+      return { message: "Can only update assignments when status is PENDING" };
+    }
+
+    // Check if any tasks are completed
+    const hasCompletedTasks = Object.values(log.tasks).some((value) => {
+      if (typeof value === "boolean") return value;
+      if (typeof value === "string") return value.trim() !== "";
+      return false;
+    });
+
+    if (hasCompletedTasks) {
+      return {
+        message: "Cannot update assignments when tasks have been started",
+      };
+    }
+
+    const result = await updateDailyLogAssignment(
+      id,
+      orgId,
+      assigneeId,
+      reviewerId,
+    );
+
+    if (!result) {
+      return { message: "Failed to update assignments" };
+    }
+
+    revalidatePath(`/tasks/${id}`);
+    revalidatePath("/tasks");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update assignments:", error);
+    return { message: "Failed to update assignments. Please try again." };
   }
 }
 
