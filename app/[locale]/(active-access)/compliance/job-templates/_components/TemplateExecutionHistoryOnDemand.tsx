@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { ClipboardList, Calendar, User, Eye, Loader2 } from "lucide-react";
 import { getJobsByTemplateId } from "@/lib/actions/jobActions";
-import { JobExecutionDetailsDialog } from "./JobExecutionDetailsDialog";
+import { JobExecutionDetailsDialog } from "../../jobs/_components/JobExecutionDetailsDialog";
 
 interface ActionField {
   field_key: string;

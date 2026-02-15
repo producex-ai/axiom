@@ -15,9 +15,9 @@ import {
 import { getJobTemplateById } from "@/lib/actions/jobTemplateActions";
 import { getJobsByTemplateId } from "@/lib/actions/jobActions";
 import { ArrowLeft, Calendar } from "lucide-react";
-import { DeactivateTemplateButton } from "@/components/jobs/DeactivateTemplateButton";
-import { TemplateJobsTable } from "@/components/jobs/TemplateJobsTable";
-import { TemplateExecutionHistoryOnDemand } from "@/components/jobs/TemplateExecutionHistoryOnDemand";
+import { DeactivateTemplateButton } from "../_components/DeactivateTemplateButton";
+import { TemplateJobsTable } from "../_components/TemplateJobsTable";
+import { TemplateExecutionHistoryOnDemand } from "../_components/TemplateExecutionHistoryOnDemand";
 
 async function TemplateDetail({ id, locale }: { id: string; locale: string }) {
   const { userId } = await auth();

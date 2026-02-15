@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
-import { JobDetailContent } from "@/components/jobs/JobDetailContent";
+import { JobDetailContent } from "../_components/JobDetailContent";
 
 async function JobDetailWrapper({ id }: { id: string }) {
   const { userId } = await auth();

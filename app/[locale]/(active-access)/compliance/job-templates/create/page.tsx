@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { TemplateBuilderForm } from "@/components/jobs/TemplateBuilderForm";
+import { TemplateBuilderForm } from "../_components/TemplateBuilderForm";
 import { getEnabledModules } from "@/lib/primus/db-helper";
 
 export default async function CreateJobTemplatePage() {

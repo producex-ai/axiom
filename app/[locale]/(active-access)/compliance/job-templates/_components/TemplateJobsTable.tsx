@@ -15,7 +15,7 @@ import {
 import type { JobWithTemplate } from "@/lib/services/jobService";
 import type { JobStatus } from "@/lib/validators/jobValidators";
 import { Calendar, Clock, User } from "lucide-react";
-import { JobActionsDropdown } from "./JobActionsDropdown";
+import { JobActionsDropdown } from "../../jobs/_components/JobActionsDropdown";
 import { FREQUENCY_LABELS } from "@/lib/cron/cron-utils";
 
 interface TemplateJobsTableProps {

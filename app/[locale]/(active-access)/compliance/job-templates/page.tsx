@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Skeleton } from "@/components/ui/skeleton";
 import { getJobTemplates } from "@/lib/actions/jobTemplateActions";
 import { PlusCircle, FileText, Calendar } from "lucide-react";
-import { TemplatesGrid } from "@/components/jobs/TemplatesGrid";
+import { TemplatesGrid } from "./_components/TemplatesGrid";
 
 async function TemplatesList() {
   const result = await getJobTemplates();

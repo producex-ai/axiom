@@ -6,8 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getJobsWithStatus } from "@/lib/actions/jobActions";
-import { JobsList } from "@/components/jobs/JobsList";
-import { JobsByTemplateGroup } from "@/components/jobs/JobsByTemplateGroup";
+import { JobsList } from "./_components/JobsList";
+import { JobsByTemplateGroup } from "./_components/JobsByTemplateGroup";
 import { PlusCircle } from "lucide-react";
 
 async function JobsContent() {

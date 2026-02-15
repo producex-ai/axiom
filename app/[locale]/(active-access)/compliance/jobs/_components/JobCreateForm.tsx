@@ -32,7 +32,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { DynamicFieldRenderer } from "./DynamicFieldRenderer";
+import { DynamicFieldRenderer } from "../../_components/DynamicFieldRenderer";
 import { JobFormFields } from "./JobFormFields";
 
 interface JobCreateFormProps {

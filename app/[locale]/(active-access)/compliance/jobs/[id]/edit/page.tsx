@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import { getOrgMembersAction } from "@/actions/clerk";
 import { getJobById } from "@/lib/actions/jobActions";
-import { JobEditForm } from "@/components/jobs/JobEditForm";
+import { JobEditForm } from "../../_components/JobEditForm";
 
 async function EditJobWrapper({ id }: { id: string }) {
   const { userId } = await auth();

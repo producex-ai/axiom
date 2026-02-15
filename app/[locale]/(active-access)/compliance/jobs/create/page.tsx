@@ -1,5 +1,5 @@
 import { getOrgMembersAction } from "@/actions/clerk";
-import { JobCreateForm } from "@/components/jobs/JobCreateForm";
+import { JobCreateForm } from "../_components/JobCreateForm";
 
 interface CreateJobPageProps {
   searchParams: Promise<{ template?: string }>;

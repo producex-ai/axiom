@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { DynamicFieldRenderer } from "./DynamicFieldRenderer";
+import { DynamicFieldRenderer } from "../../_components/DynamicFieldRenderer";
 
 interface ActionExecutionModalProps {
   isOpen: boolean;

@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { DynamicFieldRenderer } from "./DynamicFieldRenderer";
+import { DynamicFieldRenderer } from "../../_components/DynamicFieldRenderer";
 import { executeJobActionSchema, type ExecuteJobActionInput } from "@/lib/validators/jobValidators";
 import { executeJobAction } from "@/lib/actions/jobActions";
 import type { JobDetail } from "@/lib/services/jobService";
