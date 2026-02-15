@@ -54,7 +54,9 @@ export default async function TaskDetailPage({
       {/* Header */}
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-3xl tracking-tight">Daily Log</h1>
+          <h1 className="font-bold text-3xl tracking-tight">
+            {log.template_name}
+          </h1>
           <StatusBadge status={log.status} />
         </div>
         <p className="mt-2 text-muted-foreground">
@@ -66,6 +68,7 @@ export default async function TaskDetailPage({
       <TemplateDetailsView
         logId={log.id}
         templateName={log.template_name}
+        templateDescription={log.template_description}
         templateCategory={log.template_category}
         templateSop={log.template_sop}
         assigneeId={log.assignee_id}

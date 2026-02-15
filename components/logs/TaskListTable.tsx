@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/table";
 import type { DailyLogWithDetails } from "@/db/queries/daily-logs";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 type ViewMode = "personal" | "organization";
 

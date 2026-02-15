@@ -18,6 +18,7 @@ export type FieldItem = {
 export type LogTemplate = {
   id: string;
   name: string;
+  description: string | null;
   category: string | null;
   sop: string | null;
   template_type: TemplateType;
@@ -52,6 +53,7 @@ export const createLogTemplate = async (
 ): Promise<LogTemplate | null> => {
   const {
     name,
+    description,
     category,
     sop,
     template_type,
@@ -63,12 +65,13 @@ export const createLogTemplate = async (
   try {
     const result = await query<LogTemplate>(
       `
-      INSERT INTO log_templates (name, category, sop, template_type, items, org_id, created_by, review_time)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO log_templates (name, description, category, sop, template_type, items, org_id, created_by, review_time)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING *
       `,
       [
         name,
+        description,
         category,
         sop,
         template_type,
@@ -95,24 +98,34 @@ export const updateLogTemplate = async (
   >,
   orgId: string,
 ): Promise<LogTemplate | null> => {
-  const { name, category, sop, template_type, items, review_time } = template;
+  const {
+    name,
+    description,
+    category,
+    sop,
+    template_type,
+    items,
+    review_time,
+  } = template;
   try {
     const result = await query<LogTemplate>(
       `
             UPDATE log_templates
             SET 
                 name = COALESCE($1, name),
-                category = COALESCE($2, category),
-                sop = COALESCE($3, sop),
-                template_type = COALESCE($4, template_type),
-                items = COALESCE($5, items),
-                review_time = COALESCE($6, review_time),
+                description = COALESCE($2, description),
+                category = COALESCE($3, category),
+                sop = COALESCE($4, sop),
+                template_type = COALESCE($5, template_type),
+                items = COALESCE($6, items),
+                review_time = COALESCE($7, review_time),
                 updated_at = NOW()
-            WHERE id = $7 AND org_id = $8
+            WHERE id = $8 AND org_id = $9
             RETURNING *
             `,
       [
         name,
+        description,
         category,
         sop,
         template_type,

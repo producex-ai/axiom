@@ -57,6 +57,7 @@ export default async function EditTemplatePage({ params }: PageProps) {
         initialData={{
           id: template.id,
           name: template.name,
+          description: template.description,
           category: template.category,
           sop: template.sop,
           template_type: template.template_type,

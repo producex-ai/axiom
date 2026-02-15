@@ -25,6 +25,7 @@ export type DailyLog = {
 
 export type DailyLogWithDetails = DailyLog & {
   template_name: string;
+  template_description: string | null;
   template_category: string | null;
   template_sop: string | null;
   template_type: "task_list" | "field_input";
@@ -314,6 +315,7 @@ export const getDailyLogs = async (
       SELECT 
         dl.*,
         lt.name as template_name,
+        lt.description as template_description,
         lt.category as template_category,
         lt.sop as template_sop,
         lt.template_type as template_type,
@@ -390,6 +392,7 @@ export const getDailyLogById = async (
       SELECT 
         dl.*,
         lt.name as template_name,
+        lt.description as template_description,
         lt.category as template_category,
         lt.sop as template_sop,
         lt.template_type as template_type,

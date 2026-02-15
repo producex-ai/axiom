@@ -65,6 +65,7 @@ interface LogTemplateFormProps {
   initialData?: {
     id: string;
     name: string;
+    description: string | null;
     category: string | null;
     sop: string | null;
     template_type: TemplateType;
@@ -266,7 +267,30 @@ export function LogTemplateForm({
                 </p>
               )}
             </div>
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="description">Description (Optional)</Label>
+            <Textarea
+              id="description"
+              name="description"
+              defaultValue={initialData?.description || ""}
+              placeholder="Additional context or instructions for this template..."
+              rows={3}
+              aria-describedby="description-error"
+            />
+            {state.errors?.description && (
+              <p id="description-error" className="text-destructive text-sm">
+                {state.errors.description.join(", ")}
+              </p>
+            )}
+            <p className="text-muted-foreground text-xs">
+              Provide any additional information to help users understand this
+              template
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="sop">Standard Operating Procedure (SOP)</Label>
               <Select

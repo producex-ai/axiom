@@ -29,6 +29,7 @@ const FieldItemSchema = z.object({
 // Separate validation schemas for each template type
 const TaskListTemplateSchema = z.object({
   name: z.string().min(1, "Name is required"),
+  description: z.string().optional(),
   category: z.string().min(1, "Category is required"),
   sop: z.string().min(1, "SOP is required"),
   template_type: z.literal("task_list"),
@@ -38,6 +39,7 @@ const TaskListTemplateSchema = z.object({
 
 const FieldInputTemplateSchema = z.object({
   name: z.string().min(1, "Name is required"),
+  description: z.string().optional(),
   category: z.string().min(1, "Category is required"),
   sop: z.string().min(1, "SOP is required"),
   template_type: z.literal("field_input"),
@@ -55,6 +57,7 @@ export type CreateTemplateState = {
   message?: string;
   errors?: {
     name?: string[];
+    description?: string[];
     category?: string[];
     sop?: string[];
     template_type?: string[];
@@ -67,6 +70,7 @@ export type CreateTemplateState = {
 // Common validation and extraction logic
 const processFormData = (formData: FormData) => {
   const name = formData.get("name") as string;
+  const description = (formData.get("description") as string) || null;
   const category = formData.get("category") as string;
   const sop = formData.get("sop") as string;
   const review_time = formData.get("review_time") as string | null;
@@ -96,6 +100,7 @@ const processFormData = (formData: FormData) => {
   // Validate
   const validatedFields = CreateTemplateSchema.safeParse({
     name,
+    description,
     category,
     sop,
     template_type,
@@ -127,6 +132,7 @@ export async function createLogTemplateAction(
   try {
     await createLogTemplate({
       name: validatedFields.data.name,
+      description: validatedFields.data.description || null,
       category: validatedFields.data.category,
       sop: validatedFields.data.sop,
       template_type: validatedFields.data.template_type,
@@ -169,6 +175,7 @@ export async function updateLogTemplateAction(
       id,
       {
         name: validatedFields.data.name,
+        description: validatedFields.data.description || null,
         category: validatedFields.data.category,
         sop: validatedFields.data.sop,
         template_type: validatedFields.data.template_type,

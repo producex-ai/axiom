@@ -18,7 +18,7 @@ export function LogsTableLoadingSkeleton() {
       </div>
 
       {/* Stats cards skeleton */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="rounded-md border bg-card p-4">
             <Skeleton className="h-4 w-20" />

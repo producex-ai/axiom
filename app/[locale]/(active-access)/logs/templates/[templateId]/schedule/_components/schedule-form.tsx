@@ -187,8 +187,15 @@ export function ScheduleForm({
   const [generateToday, setGenerateToday] = useState<boolean>(true);
   const isPaused = initialData?.status === "PAUSED";
 
-  // Get today's date in YYYY-MM-DD format for min date validation
-  const today = new Date().toISOString().split("T")[0];
+  // Get today's date in YYYY-MM-DD format for min date validation (using local timezone)
+  const getLocalDateString = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+  const today = getLocalDateString();
 
   const handleDayToggle = (dayValue: number) => {
     setSelectedDays((prev) =>

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  AlertCircle,
-  Calendar,
-  CheckCircle2,
-  FileText,
-  Pencil,
-  User,
-} from "lucide-react";
+import { Calendar, CheckCircle2, Pencil, User } from "lucide-react";
 import { useState } from "react";
 import type { OrgMember } from "@/actions/clerk";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +10,7 @@ import { EditAssignmentDialog } from "./EditAssignmentDialog";
 interface TemplateDetailsViewProps {
   logId: string;
   templateName: string;
+  templateDescription?: string | null;
   templateCategory?: string | null;
   templateSop?: string | null;
   assigneeId: string;
@@ -41,7 +35,7 @@ function formatDate(date: Date): string {
 
 export function TemplateDetailsView({
   logId,
-  templateName,
+  templateDescription,
   templateCategory,
   templateSop,
   assigneeId,
@@ -58,30 +52,31 @@ export function TemplateDetailsView({
 
   return (
     <div className="space-y-4">
-      {/* Template and SOP */}
+      {/* Template Name and Description */}
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-lg border bg-card p-4">
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <FileText className="h-4 w-4" />
-            <span className="font-medium">Template</span>
-          </div>
-          <p className="mt-1 font-semibold">{templateName}</p>
-          {templateCategory && (
-            <Badge variant="outline" className="mt-2">
-              {templateCategory}
-            </Badge>
-          )}
+          <p className="font-medium text-muted-foreground text-sm">
+            Description
+          </p>
+
+          <p className="mt-2 text-sm">
+            {templateDescription ? templateDescription : "N/A"}
+          </p>
         </div>
 
         {templateSop && (
           <div className="rounded-lg border bg-card p-4">
             <h3 className="flex items-center gap-2 font-semibold text-sm">
-              <AlertCircle className="h-4 w-4 text-blue-500" />
               Standard Operating Procedure
+              <p className="whitespace-pre-wrap text-muted-foreground text-sm">
+                {templateSop}
+              </p>
             </h3>
-            <p className="mt-2 whitespace-pre-wrap text-muted-foreground text-sm">
-              {templateSop}
-            </p>
+            {templateCategory && (
+              <Badge variant="outline" className="mt-2">
+                {templateCategory}
+              </Badge>
+            )}
           </div>
         )}
       </div>
