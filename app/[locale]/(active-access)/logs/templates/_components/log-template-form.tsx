@@ -175,36 +175,63 @@ export function LogTemplateForm({
     setExtractError(null);
 
     try {
-      // Upload file to S3 and extract tasks using server action
-      const result = await uploadAndExtractTasks(file);
+      // Upload file to S3 and extract tasks/fields using server action
+      const result = await uploadAndExtractTasks(file, templateType);
 
-      if (result.success && result.tasks && result.tasks.length > 0) {
-        // Replace current items with extracted tasks
-        if (templateType === "task_list") {
+      if (result.success) {
+        // Handle extracted description if present
+        if (result.description) {
+          // Update the description field in the form
+          const descriptionField = document.getElementById(
+            "description",
+          ) as HTMLTextAreaElement;
+          if (descriptionField && !descriptionField.value) {
+            // Only set if description is empty
+            descriptionField.value = result.description;
+          }
+        }
+
+        // Handle tasks or fields based on template type
+        if (
+          templateType === "task_list" &&
+          result.tasks &&
+          result.tasks.length > 0
+        ) {
+          // Replace current items with extracted tasks
           setItems(
             result.tasks.map((task, i) => ({
               id: nextId + i,
               name: task,
             })),
           );
-        } else {
-          // For field_input, create fields from extracted tasks
+          setNextId(nextId + result.tasks.length);
+        } else if (
+          templateType === "field_input" &&
+          result.fields &&
+          result.fields.length > 0
+        ) {
+          // Replace current items with extracted fields
           setItems(
-            result.tasks.map((task, i) => ({
+            result.fields.map((field, i) => ({
               id: nextId + i,
-              name: task,
-              description: "",
-              required: false,
+              name: field.name,
+              description: field.description || "",
+              required: field.required,
             })),
+          );
+          setNextId(nextId + result.fields.length);
+        } else {
+          setExtractError(
+            result.error ||
+              `No ${templateType === "task_list" ? "tasks" : "fields"} found in the document`,
           );
         }
-        setNextId(nextId + result.tasks.length);
       } else {
-        setExtractError(result.error || "No tasks found in the document");
+        setExtractError(result.error || "Extraction failed");
       }
     } catch (error) {
       console.error("Extract error:", error);
-      setExtractError("Failed to extract tasks. Please try again.");
+      setExtractError("Failed to extract. Please try again.");
     } finally {
       setIsExtracting(false);
       // Reset file input
