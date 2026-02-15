@@ -1,5 +1,6 @@
 import {
   AlertCircle,
+  Archive,
   CheckCircle2,
   Clock,
   type LucideIcon,
@@ -42,6 +43,11 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
       variant: "destructive",
       icon: XCircle,
       label: "Rejected",
+    },
+    OBSOLETE: {
+      variant: "secondary",
+      icon: Archive,
+      label: "Obsolete",
     },
     PUBLISHED: {
       variant: "success",

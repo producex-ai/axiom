@@ -3,7 +3,10 @@ import {
   getActiveLogSchedules,
   getAllActiveLogSchedules,
 } from "@/db/queries/log-schedules";
-import { getLogTemplateById } from "@/db/queries/log-templates";
+import {
+  getLogTemplateById,
+  type LogTemplate,
+} from "@/db/queries/log-templates";
 import type { ScheduleFrequency } from "@/lib/cron/cron-utils";
 
 /**
@@ -73,13 +76,33 @@ function shouldCreateLogToday(
 }
 
 /**
- * Convert task list array to tasks object with all tasks set to false
+ * Initialize tasks/fields based on template type
+ * For task_list: creates object with boolean values (checkboxes)
+ * For field_input: creates object with empty string values (text inputs)
  */
-function initializeTasks(taskList: string[]): Record<string, boolean> {
-  const tasks: Record<string, boolean> = {};
-  for (const task of taskList) {
-    tasks[task] = false;
+function initializeTasks(
+  template: LogTemplate,
+): Record<string, boolean | string> {
+  const tasks: Record<string, boolean | string> = {};
+
+  if (template.template_type === "task_list") {
+    // Task list mode: initialize with false (unchecked)
+    const items = template.items as Array<{ name: string }>;
+    for (const item of items) {
+      tasks[item.name] = false;
+    }
+  } else {
+    // Field input mode: initialize with empty string
+    const items = template.items as Array<{
+      name: string;
+      description?: string;
+      required: boolean;
+    }>;
+    for (const item of items) {
+      tasks[item.name] = "";
+    }
   }
+
   return tasks;
 }
 
@@ -180,8 +203,8 @@ export async function generateLogsForSchedule(
       return { success: 0, failed: 1, skipped: 0, error };
     }
 
-    if (!template.task_list || template.task_list.length === 0) {
-      const error = `Template ${template.id} has no tasks defined`;
+    if (!template.items || template.items.length === 0) {
+      const error = `Template ${template.id} has no items defined`;
       console.error(error);
       return { success: 0, failed: 1, skipped: 0, error };
     }
@@ -201,7 +224,7 @@ export async function generateLogsForSchedule(
         schedule_id: schedule.id,
         assignee_id: schedule.assignee_id,
         reviewer_id: schedule.reviewer_id,
-        tasks: initializeTasks(template.task_list),
+        tasks: initializeTasks(template),
         log_date: targetDate,
         created_by: "SYSTEM", // System-generated
       });

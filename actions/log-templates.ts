@@ -7,32 +7,61 @@ import { z } from "zod";
 
 import {
   createLogTemplate,
+  type FieldItem,
   getLogTemplateById,
   getLogTemplates,
+  type TaskItem,
+  type TemplateType,
   updateLogTemplate,
 } from "@/db/queries/log-templates";
 
-// Define validation schema
-const CreateTemplateSchema = z.object({
+// Define validation schemas for different item types
+const TaskItemSchema = z.object({
+  name: z.string().min(1, "Task name is required"),
+});
+
+const FieldItemSchema = z.object({
+  name: z.string().min(1, "Field name is required"),
+  description: z.string().default(""),
+  required: z.boolean().default(false),
+});
+
+// Separate validation schemas for each template type
+const TaskListTemplateSchema = z.object({
   name: z.string().min(1, "Name is required"),
+  description: z.string().optional(),
   category: z.string().min(1, "Category is required"),
   sop: z.string().min(1, "SOP is required"),
-  tasks: z
-    .array(z.string())
-    .min(1, "At least one task is required")
-    .refine((tasks) => tasks.every((t) => t.trim().length > 0), {
-      message: "Tasks cannot be empty",
-    }),
+  template_type: z.literal("task_list"),
+  items: z.array(TaskItemSchema).min(1, "At least one item is required"),
   review_time: z.enum(["1_month", "3_months", "6_months", "1_year"]).optional(),
 });
+
+const FieldInputTemplateSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  description: z.string().optional(),
+  category: z.string().min(1, "Category is required"),
+  sop: z.string().min(1, "SOP is required"),
+  template_type: z.literal("field_input"),
+  items: z.array(FieldItemSchema).min(1, "At least one item is required"),
+  review_time: z.enum(["1_month", "3_months", "6_months", "1_year"]).optional(),
+});
+
+// Union of the two template schemas
+const CreateTemplateSchema = z.discriminatedUnion("template_type", [
+  TaskListTemplateSchema,
+  FieldInputTemplateSchema,
+]);
 
 export type CreateTemplateState = {
   message?: string;
   errors?: {
     name?: string[];
+    description?: string[];
     category?: string[];
     sop?: string[];
-    tasks?: string[];
+    template_type?: string[];
+    items?: string[];
     review_time?: string[];
   };
   success?: boolean;
@@ -41,22 +70,41 @@ export type CreateTemplateState = {
 // Common validation and extraction logic
 const processFormData = (formData: FormData) => {
   const name = formData.get("name") as string;
+  const description = (formData.get("description") as string) || null;
   const category = formData.get("category") as string;
   const sop = formData.get("sop") as string;
   const review_time = formData.get("review_time") as string | null;
+  const template_type = formData.get("template_type") as TemplateType;
 
-  // Extract tasks - handling getAll properly
-  const tasks = formData
-    .getAll("tasks")
-    .map((task) => task.toString())
-    .filter((task) => task.trim() !== "");
+  // Parse items based on template type
+  let items: TaskItem[] | FieldItem[];
+
+  if (template_type === "task_list") {
+    // Extract task items - simple array of names
+    items = formData
+      .getAll("items")
+      .map((item) => item.toString())
+      .filter((item) => item.trim() !== "")
+      .map((name) => ({ name }));
+  } else {
+    // Extract field items - parse JSON array from form
+    const itemsJson = formData.get("items") as string;
+    try {
+      items = JSON.parse(itemsJson);
+    } catch (error) {
+      console.error("Failed to parse items JSON:", error);
+      items = [];
+    }
+  }
 
   // Validate
   const validatedFields = CreateTemplateSchema.safeParse({
     name,
+    description,
     category,
     sop,
-    tasks,
+    template_type,
+    items,
     review_time: review_time || undefined,
   });
 
@@ -84,9 +132,11 @@ export async function createLogTemplateAction(
   try {
     await createLogTemplate({
       name: validatedFields.data.name,
+      description: validatedFields.data.description || null,
       category: validatedFields.data.category,
       sop: validatedFields.data.sop,
-      task_list: validatedFields.data.tasks,
+      template_type: validatedFields.data.template_type,
+      items: validatedFields.data.items,
       org_id: orgId,
       created_by: userId,
       review_time: validatedFields.data.review_time || null,
@@ -125,9 +175,11 @@ export async function updateLogTemplateAction(
       id,
       {
         name: validatedFields.data.name,
+        description: validatedFields.data.description || null,
         category: validatedFields.data.category,
         sop: validatedFields.data.sop,
-        task_list: validatedFields.data.tasks,
+        template_type: validatedFields.data.template_type,
+        items: validatedFields.data.items,
         review_time: validatedFields.data.review_time || null,
       },
       orgId,

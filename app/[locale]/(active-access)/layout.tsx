@@ -30,9 +30,9 @@ export default async function AuthCheckLayout({
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
         <AppSidebar isOperator={isOperator} />
-        <div className="flex flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 flex-col">
           <AppHeader />
-          <main className="flex-1 overflow-auto bg-muted/30">
+          <main className="min-w-0 flex-1 overflow-auto bg-muted/30">
             <DashboardContent>{children}</DashboardContent>
           </main>
         </div>

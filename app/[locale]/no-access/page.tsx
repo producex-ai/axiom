@@ -20,7 +20,7 @@ export default function NoAccessPage() {
               Access Denied
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed">
-              It looks like your organization does not have access to Visio.
+              It looks like your organization does not have access to Axiom.
               Please contact your administrator or support for more information.
             </p>
           </div>

@@ -11,28 +11,31 @@ import {
   getDailyLogs,
   getLogsForReview,
   getMyPendingLogs,
+  markDailyLogObsolete,
   rejectDailyLog,
   reopenDailyLog,
   submitDailyLogForApproval,
+  updateDailyLogAssignment,
   updateDailyLogTasks,
 } from "@/db/queries/daily-logs";
+import type { FieldItem, TaskItem } from "@/db/queries/log-templates";
 
 /**
- * Sort tasks in a log based on the original template task list order
+ * Sort tasks in a log based on the original template items order
  */
 function sortLogTasks(
-  tasks: Record<string, boolean>,
-  templateTasks: string[] | null,
-): Record<string, boolean> {
-  if (!templateTasks || templateTasks.length === 0) return tasks;
+  tasks: Record<string, boolean | string>,
+  templateItems: TaskItem[] | FieldItem[] | null,
+): Record<string, boolean | string> {
+  if (!templateItems || templateItems.length === 0) return tasks;
 
-  const sortedTasks: Record<string, boolean> = {};
+  const sortedTasks: Record<string, boolean | string> = {};
   const taskNames = Object.keys(tasks);
 
   // First add tasks from template in their defined order
-  for (const taskName of templateTasks) {
-    if (taskName in tasks) {
-      sortedTasks[taskName] = tasks[taskName];
+  for (const item of templateItems) {
+    if (item.name in tasks) {
+      sortedTasks[item.name] = tasks[item.name];
     }
   }
 
@@ -85,7 +88,7 @@ async function enrichLogsWithUserNames(
     // Enrich logs with names and sort tasks
     return logs.map((log) => ({
       ...log,
-      tasks: sortLogTasks(log.tasks, log.template_tasks),
+      tasks: sortLogTasks(log.tasks, log.template_items),
       assignee_name: log.assignee_id
         ? userMap.get(log.assignee_id) || null
         : null,
@@ -101,7 +104,7 @@ async function enrichLogsWithUserNames(
 
 // Validation schemas
 const UpdateTasksSchema = z.object({
-  tasks: z.record(z.string(), z.boolean()),
+  tasks: z.record(z.string(), z.union([z.boolean(), z.string()])),
 });
 
 const SubmitForApprovalSchema = z.object({
@@ -123,12 +126,18 @@ export type ActionState = {
  * Get daily logs for the current user's organization
  */
 export async function getDailyLogsAction(filters?: {
-  status?: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
+  status?:
+    | "PENDING"
+    | "PENDING_APPROVAL"
+    | "APPROVED"
+    | "REJECTED"
+    | "OBSOLETE";
   assigneeId?: string;
   reviewerId?: string;
   startDate?: string;
   endDate?: string;
   templateId?: string;
+  includeObsolete?: boolean;
 }): Promise<DailyLogWithDetails[]> {
   const { orgId } = await auth();
   if (!orgId) {
@@ -190,7 +199,7 @@ export async function getLogsForReviewAction(): Promise<DailyLogWithDetails[]> {
 }
 
 /**
- * Update task completion status
+ * Update task completion status or field values
  */
 export async function updateDailyLogTasksAction(
   id: string,
@@ -203,11 +212,16 @@ export async function updateDailyLogTasksAction(
   }
 
   // Parse tasks from form data
-  const tasks: Record<string, boolean> = {};
+  const tasks: Record<string, boolean | string> = {};
   for (const [key, value] of formData.entries()) {
     if (key.startsWith("task_")) {
       const taskName = key.replace("task_", "");
-      tasks[taskName] = value === "true" || value === "on";
+      // Check if it's a checkbox (boolean) or text input (string)
+      if (value === "true" || value === "false" || value === "on") {
+        tasks[taskName] = value === "true" || value === "on";
+      } else {
+        tasks[taskName] = value.toString();
+      }
     }
   }
 
@@ -242,6 +256,78 @@ export async function updateDailyLogTasksAction(
 }
 
 /**
+ * Update assignee and reviewer for a daily log
+ * Only allowed when status is PENDING and no tasks are completed
+ */
+export async function updateDailyLogAssignmentAction(
+  id: string,
+  assigneeId: string,
+  reviewerId: string | null,
+): Promise<{ success?: boolean; message?: string }> {
+  const { userId, orgId } = await auth();
+
+  if (!userId || !orgId) {
+    return { message: "Unauthorized" };
+  }
+
+  // Validate input
+  if (!assigneeId) {
+    return { message: "Assignee is required" };
+  }
+
+  try {
+    // First, get the log to check permissions and status
+    const log = await getDailyLogById(id, orgId);
+
+    if (!log) {
+      return { message: "Daily log not found" };
+    }
+
+    // Only reviewer can update assignments
+    if (log.reviewer_id !== userId) {
+      return { message: "Only the reviewer can update assignments" };
+    }
+
+    // Only allow when status is PENDING
+    if (log.status !== "PENDING") {
+      return { message: "Can only update assignments when status is PENDING" };
+    }
+
+    // Check if any tasks are completed
+    const hasCompletedTasks = Object.values(log.tasks).some((value) => {
+      if (typeof value === "boolean") return value;
+      if (typeof value === "string") return value.trim() !== "";
+      return false;
+    });
+
+    if (hasCompletedTasks) {
+      return {
+        message: "Cannot update assignments when tasks have been started",
+      };
+    }
+
+    const result = await updateDailyLogAssignment(
+      id,
+      orgId,
+      assigneeId,
+      reviewerId,
+    );
+
+    if (!result) {
+      return { message: "Failed to update assignments" };
+    }
+
+    revalidatePath(`/tasks/${id}`);
+    revalidatePath("/tasks");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update assignments:", error);
+    return { message: "Failed to update assignments. Please try again." };
+  }
+}
+
+/**
  * Submit log for approval
  */
 export async function submitForApprovalAction(
@@ -271,6 +357,34 @@ export async function submitForApprovalAction(
   }
 
   try {
+    // Fetch the log to check template type and validate required fields
+    const log = await getDailyLogById(id, orgId);
+
+    if (!log) {
+      return { message: "Log not found" };
+    }
+
+    // Validate required fields for field_input templates
+    if (log.template_type === "field_input") {
+      const items = log.template_items as FieldItem[];
+      const missingFields: string[] = [];
+
+      for (const item of items) {
+        if (item.required) {
+          const value = log.tasks[item.name];
+          if (!value || (typeof value === "string" && value.trim() === "")) {
+            missingFields.push(item.name);
+          }
+        }
+      }
+
+      if (missingFields.length > 0) {
+        return {
+          message: `Please fill in all required fields: ${missingFields.join(", ")}`,
+        };
+      }
+    }
+
     const result = await submitDailyLogForApproval(
       id,
       orgId,
@@ -412,5 +526,39 @@ export async function reopenDailyLogAction(id: string): Promise<ActionState> {
   } catch (error) {
     console.error("Failed to reopen log:", error);
     return { message: "Failed to reopen log. Please try again." };
+  }
+}
+
+/**
+ * Mark a daily log as obsolete (soft delete) - reviewer action only
+ * Can mark logs in PENDING, PENDING_APPROVAL, or REJECTED status as obsolete
+ */
+export async function markDailyLogObsoleteAction(
+  id: string,
+): Promise<ActionState> {
+  const { userId, orgId } = await auth();
+  if (!userId || !orgId) {
+    return { message: "Unauthorized" };
+  }
+
+  try {
+    const result = await markDailyLogObsolete(id, orgId, userId);
+
+    if (!result) {
+      return {
+        message:
+          "Failed to mark log as obsolete. Make sure you are the assigned reviewer and the log is not already approved or obsolete.",
+      };
+    }
+
+    revalidatePath("/tasks");
+    revalidatePath(`/tasks/${id}`);
+    revalidatePath("/tasks/history");
+    revalidatePath("/logs/review");
+
+    return { success: true, message: "Task marked as obsolete successfully" };
+  } catch (error) {
+    console.error("Failed to mark log as obsolete:", error);
+    return { message: "Failed to mark as obsolete. Please try again." };
   }
 }

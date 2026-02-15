@@ -13,7 +13,9 @@ export default function DashboardContent({
   const isCollapsed = state === "collapsed";
 
   return (
-    <div className={isCollapsed ? "w-full" : "container mx-auto max-w-7xl"}>
+    <div
+      className={`overflow-x-hidden ${isCollapsed ? "w-full" : "container mx-auto max-w-7xl"}`}
+    >
       <div className="p-6">{children}</div>
     </div>
   );

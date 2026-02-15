@@ -1,3 +1,4 @@
+import type { FieldItem, TaskItem } from "@/db/queries/log-templates";
 import { query } from "@/lib/db/postgres";
 
 export type DailyLog = {
@@ -7,24 +8,28 @@ export type DailyLog = {
   schedule_id: string;
   assignee_id: string;
   reviewer_id: string | null;
-  tasks: Record<string, boolean>; // Task name -> completion status
+  tasks: Record<string, boolean | string>; // Task name -> boolean (checkbox) or string (text input)
   tasks_sign_off: "ALL_GOOD" | "ACTION_REQUIRED" | null;
   assignee_comment: string | null;
   reviewer_comment: string | null;
-  status: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED";
+  status: "PENDING" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "OBSOLETE";
   log_date: Date;
   submitted_at: Date | null;
   reviewed_at: Date | null;
   created_at: Date;
   updated_at: Date;
   created_by: string | null;
+  deleted_at: Date | null;
+  deleted_by: string | null;
 };
 
 export type DailyLogWithDetails = DailyLog & {
   template_name: string;
+  template_description: string | null;
   template_category: string | null;
   template_sop: string | null;
-  template_tasks: string[] | null;
+  template_type: "task_list" | "field_input";
+  template_items: TaskItem[] | FieldItem[];
   assignee_name: string | null;
   reviewer_name: string | null;
 };
@@ -35,7 +40,7 @@ export type CreateDailyLogInput = {
   schedule_id: string;
   assignee_id: string;
   reviewer_id: string | null;
-  tasks: Record<string, boolean>;
+  tasks: Record<string, boolean | string>;
   log_date: Date;
   created_by: string;
 };
@@ -86,7 +91,7 @@ export const createDailyLog = async (
 export const updateDailyLogTasks = async (
   id: string,
   orgId: string,
-  tasks: Record<string, boolean>,
+  tasks: Record<string, boolean | string>,
 ): Promise<DailyLog | null> => {
   try {
     const result = await query<DailyLog>(
@@ -103,6 +108,35 @@ export const updateDailyLogTasks = async (
     return result.rows[0] || null;
   } catch (error) {
     console.error("Error updating daily log tasks:", error);
+    return null;
+  }
+};
+
+/**
+ * Update assignee and reviewer for a daily log (only if status is PENDING and no tasks are completed)
+ */
+export const updateDailyLogAssignment = async (
+  id: string,
+  orgId: string,
+  assigneeId: string,
+  reviewerId: string | null,
+): Promise<DailyLog | null> => {
+  try {
+    const result = await query<DailyLog>(
+      `
+      UPDATE daily_logs
+      SET 
+        assignee_id = $1,
+        reviewer_id = $2,
+        updated_at = NOW()
+      WHERE id = $3 AND org_id = $4 AND status = 'PENDING'
+      RETURNING *
+      `,
+      [assigneeId, reviewerId, id, orgId],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error updating daily log assignment:", error);
     return null;
   }
 };
@@ -230,7 +264,39 @@ export const reopenDailyLog = async (
 };
 
 /**
+ * Mark a daily log as obsolete (soft delete) - reviewer action only
+ * Can obsolete logs that are in PENDING, PENDING_APPROVAL, or REJECTED status
+ */
+export const markDailyLogObsolete = async (
+  id: string,
+  orgId: string,
+  reviewerId: string,
+): Promise<DailyLog | null> => {
+  try {
+    const result = await query<DailyLog>(
+      `
+      UPDATE daily_logs
+      SET 
+        status = 'OBSOLETE',
+        deleted_at = NOW(),
+        deleted_by = $1,
+        updated_at = NOW()
+      WHERE id = $2 AND org_id = $3 AND reviewer_id = $1 
+        AND status IN ('PENDING', 'PENDING_APPROVAL', 'REJECTED')
+      RETURNING *
+      `,
+      [reviewerId, id, orgId],
+    );
+    return result.rows[0] || null;
+  } catch (error) {
+    console.error("Error marking daily log as obsolete:", error);
+    return null;
+  }
+};
+
+/**
  * Get daily logs for an organization with optional filters
+ * By default, excludes OBSOLETE logs unless explicitly requested
  */
 export const getDailyLogs = async (
   orgId: string,
@@ -241,6 +307,7 @@ export const getDailyLogs = async (
     startDate?: Date;
     endDate?: Date;
     templateId?: string;
+    includeObsolete?: boolean; // Set to true to include obsolete logs
   },
 ): Promise<DailyLogWithDetails[]> => {
   try {
@@ -248,9 +315,11 @@ export const getDailyLogs = async (
       SELECT 
         dl.*,
         lt.name as template_name,
+        lt.description as template_description,
         lt.category as template_category,
         lt.sop as template_sop,
-        lt.task_list as template_tasks
+        lt.template_type as template_type,
+        lt.items as template_items
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.org_id = $1
@@ -258,6 +327,11 @@ export const getDailyLogs = async (
 
     const params: (string | Date)[] = [orgId];
     let paramIndex = 2;
+
+    // Exclude obsolete logs by default
+    if (!filters?.includeObsolete) {
+      queryText += ` AND dl.status != 'OBSOLETE'`;
+    }
 
     if (filters?.status) {
       queryText += ` AND dl.status = $${paramIndex}`;
@@ -318,9 +392,11 @@ export const getDailyLogById = async (
       SELECT 
         dl.*,
         lt.name as template_name,
+        lt.description as template_description,
         lt.category as template_category,
         lt.sop as template_sop,
-        lt.task_list as template_tasks
+        lt.template_type as template_type,
+        lt.items as template_items
       FROM daily_logs dl
       JOIN log_templates lt ON dl.template_id = lt.id
       WHERE dl.id = $1 AND dl.org_id = $2
@@ -438,7 +514,7 @@ export const getDailyLogStats = async (
         COUNT(*) FILTER (WHERE status = 'APPROVED') as approved,
         COUNT(*) FILTER (WHERE status = 'REJECTED') as rejected
       FROM daily_logs
-      WHERE org_id = $1 AND log_date BETWEEN $2 AND $3
+      WHERE org_id = $1 AND log_date BETWEEN $2 AND $3 AND status != 'OBSOLETE'
       `,
       [orgId, startDate, endDate],
     );
