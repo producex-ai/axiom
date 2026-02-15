@@ -18,8 +18,8 @@ import * as jobTemplateService from "@/lib/services/jobTemplateService";
  */
 export async function createJob(input: CreateJobInput) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -29,7 +29,7 @@ export async function createJob(input: CreateJobInput) {
     // Validate creation fields against template
     const template = await jobTemplateService.getTemplateById(
       validatedInput.template_id,
-      userId
+      orgId
     );
 
     if (!template) {
@@ -54,7 +54,7 @@ export async function createJob(input: CreateJobInput) {
     }
 
     // Create job
-    const job = await jobService.createJob(validatedInput, userId);
+    const job = await jobService.createJob(validatedInput, userId, orgId);
 
     return { success: true, data: job };
   } catch (error) {
@@ -74,12 +74,12 @@ export async function getJobs(filters?: {
   template_id?: string;
 }) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const jobs = await jobService.getJobs(userId, filters);
+    const jobs = await jobService.getJobs(orgId, filters);
 
     return { success: true, data: jobs };
   } catch (error) {
@@ -96,12 +96,12 @@ export async function getJobs(filters?: {
  */
 export async function getJobsWithStatus(statusFilter?: JobStatus) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const jobs = await jobService.getJobsWithStatus(userId, statusFilter);
+    const jobs = await jobService.getJobsWithStatus(orgId, statusFilter);
 
     return { success: true, data: jobs };
   } catch (error) {
@@ -118,12 +118,12 @@ export async function getJobsWithStatus(statusFilter?: JobStatus) {
  */
 export async function getJobById(jobId: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const job = await jobService.getJobById(jobId, userId);
+    const job = await jobService.getJobById(jobId, orgId);
 
     if (!job) {
       return { success: false, error: "Job not found" };
@@ -144,8 +144,8 @@ export async function getJobById(jobId: string) {
  */
 export async function updateJob(input: UpdateJobInput) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -153,7 +153,7 @@ export async function updateJob(input: UpdateJobInput) {
     const validatedInput = updateJobSchema.parse(input);
 
     // Update job
-    const job = await jobService.updateJob(validatedInput, userId);
+    const job = await jobService.updateJob(validatedInput, orgId);
 
     return { success: true, data: job };
   } catch (error) {
@@ -170,12 +170,12 @@ export async function updateJob(input: UpdateJobInput) {
  */
 export async function deleteJob(jobId: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    await jobService.deleteJob(jobId, userId);
+    await jobService.deleteJob(jobId, orgId);
 
     return { success: true };
   } catch (error) {
@@ -192,8 +192,8 @@ export async function deleteJob(jobId: string) {
  */
 export async function executeJobAction(input: ExecuteJobActionInput) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -201,7 +201,7 @@ export async function executeJobAction(input: ExecuteJobActionInput) {
     const validatedInput = executeJobActionSchema.parse(input);
 
     // Execute action
-    const action = await jobService.executeJobAction(validatedInput, userId);
+    const action = await jobService.executeJobAction(validatedInput, userId, orgId);
 
     return { success: true, data: action };
   } catch (error) {
@@ -218,12 +218,12 @@ export async function executeJobAction(input: ExecuteJobActionInput) {
  */
 export async function getJobsByTemplateId(templateId: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const data = await jobService.getJobsByTemplateId(templateId, userId);
+    const data = await jobService.getJobsByTemplateId(templateId, orgId);
 
     return { success: true, data };
   } catch (error) {

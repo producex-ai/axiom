@@ -14,8 +14,8 @@ import * as jobTemplateService from "@/lib/services/jobTemplateService";
  */
 export async function createJobTemplate(input: CreateJobTemplateInput) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -25,7 +25,8 @@ export async function createJobTemplate(input: CreateJobTemplateInput) {
     // Create template
     const template = await jobTemplateService.createTemplate(
       validatedInput,
-      userId
+      userId,
+      orgId
     );
 
     return { success: true, data: template };
@@ -43,12 +44,12 @@ export async function createJobTemplate(input: CreateJobTemplateInput) {
  */
 export async function getJobTemplates() {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    const templates = await jobTemplateService.getTemplates(userId);
+    const templates = await jobTemplateService.getTemplates(orgId);
 
     return { success: true, data: templates };
   } catch (error) {
@@ -65,14 +66,14 @@ export async function getJobTemplates() {
  */
 export async function getJobTemplateById(templateId: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
     const template = await jobTemplateService.getTemplateById(
       templateId,
-      userId
+      orgId
     );
 
     if (!template) {
@@ -94,8 +95,8 @@ export async function getJobTemplateById(templateId: string) {
  */
 export async function updateJobTemplate(input: UpdateJobTemplateInput) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
@@ -105,7 +106,7 @@ export async function updateJobTemplate(input: UpdateJobTemplateInput) {
     // Update template
     const template = await jobTemplateService.updateTemplate(
       validatedInput,
-      userId
+      orgId
     );
 
     return { success: true, data: template };
@@ -123,12 +124,12 @@ export async function updateJobTemplate(input: UpdateJobTemplateInput) {
  */
 export async function deleteJobTemplate(templateId: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
-    await jobTemplateService.deleteTemplate(templateId, userId);
+    await jobTemplateService.deleteTemplate(templateId, orgId);
 
     return { success: true };
   } catch (error) {
@@ -145,14 +146,14 @@ export async function deleteJobTemplate(templateId: string) {
  */
 export async function getJobTemplatesByCategory(category: string) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return { success: false, error: "Unauthorized" };
     }
 
     const templates = await jobTemplateService.getTemplatesByCategory(
       category,
-      userId
+      orgId
     );
 
     return { success: true, data: templates };

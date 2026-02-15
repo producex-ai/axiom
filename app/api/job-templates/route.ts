@@ -8,8 +8,8 @@ import * as jobTemplateService from "@/lib/services/jobTemplateService";
  */
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -20,10 +20,10 @@ export async function GET(request: NextRequest) {
     if (category) {
       templates = await jobTemplateService.getTemplatesByCategory(
         category,
-        userId
+        orgId
       );
     } else {
-      templates = await jobTemplateService.getTemplates(userId);
+      templates = await jobTemplateService.getTemplates(orgId);
     }
 
     return NextResponse.json({ templates });

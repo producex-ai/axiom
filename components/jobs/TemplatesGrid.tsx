@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -19,6 +20,8 @@ interface TemplatesGridProps {
 }
 
 export function TemplatesGrid({ templates }: TemplatesGridProps) {
+  const params = useParams();
+  const locale = params.locale as string;
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   // Extract unique categories
@@ -93,13 +96,13 @@ export function TemplatesGrid({ templates }: TemplatesGridProps) {
               </div>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" asChild className="flex-1">
-                  <Link href={`/compliance/jobs/create?template=${template.id}`}>
+                  <Link href={`/${locale}/compliance/jobs/create?template=${template.id}`}>
                     <Calendar className="h-3 w-3 mr-1" />
                     Create Job
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild className="flex-1">
-                  <Link href={`/compliance/job-templates/${template.id}`}>
+                  <Link href={`/${locale}/compliance/job-templates/${template.id}`}>
                     View
                   </Link>
                 </Button>

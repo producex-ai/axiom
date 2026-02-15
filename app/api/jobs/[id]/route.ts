@@ -11,14 +11,14 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { id } = await params;
 
-    const jobDetail = await jobService.getJobById(id, userId);
+    const jobDetail = await jobService.getJobById(id, orgId);
 
     if (!jobDetail) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 });

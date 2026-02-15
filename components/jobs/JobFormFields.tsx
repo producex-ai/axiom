@@ -90,55 +90,39 @@ export function JobFormFields({
         </div>
       )}
 
-      {/* Job Title (75%) and Assignee (25%) - 2 columns with custom widths */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-[3fr_1fr]">
-        <FormField
-          control={control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Job Title</FormLabel>
+      {/* Assignee - full width */}
+      <FormField
+        control={control}
+        name="assigned_to"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Assignee</FormLabel>
+            <Select
+              onValueChange={field.onChange}
+              value={field.value}
+            >
               <FormControl>
-                <Input placeholder="January 2026 Security Review" className="w-full" {...field} />
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select assignee" />
+                </SelectTrigger>
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="assigned_to"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Assignee</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                value={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select assignee" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {members.map((member) => {
-                    const displayName = [member.firstName, member.lastName]
-                      .filter(Boolean)
-                      .join(" ") || member.email;
-                    return (
-                      <SelectItem key={member.id} value={member.id}>
-                        {displayName}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
+              <SelectContent>
+                {members.map((member) => {
+                  const displayName = [member.firstName, member.lastName]
+                    .filter(Boolean)
+                    .join(" ") || member.email;
+                  return (
+                    <SelectItem key={member.id} value={member.id}>
+                      {displayName}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </>
   );
 }

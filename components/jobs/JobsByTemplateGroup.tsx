@@ -183,7 +183,6 @@ export function JobsByTemplateGroup({ jobs, currentUserId }: JobsByTemplateGroup
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Job Title</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>Next Execution</TableHead>
                           <TableHead>Frequency</TableHead>
@@ -198,9 +197,6 @@ export function JobsByTemplateGroup({ jobs, currentUserId }: JobsByTemplateGroup
 
                           return (
                             <TableRow key={job.id}>
-                              <TableCell className="font-medium">
-                                {job.title}
-                              </TableCell>
                               <TableCell>
                                 <Badge variant={statusInfo.variant}>
                                   {statusInfo.label}
@@ -233,7 +229,7 @@ export function JobsByTemplateGroup({ jobs, currentUserId }: JobsByTemplateGroup
                               <TableCell className="text-right">
                                 <JobActionsDropdown
                                   jobId={job.id}
-                                  jobTitle={job.title}
+                                  jobTitle={template.template_name}
                                   assignedTo={job.assigned_to}
                                   currentUserId={currentUserId}
                                   actionFields={[]}

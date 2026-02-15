@@ -31,7 +31,6 @@ export function JobEditForm({ job, members }: JobEditFormProps) {
     resolver: zodResolver(updateJobSchema),
     defaultValues: {
       id: job.id,
-      title: job.title,
       assigned_to: job.assigned_to,
       frequency: job.frequency,
       next_execution_date: new Date(job.next_execution_date).toISOString().split("T")[0],

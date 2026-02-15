@@ -62,7 +62,6 @@ export type UpdateJobTemplateInput = z.infer<typeof updateJobTemplateSchema>;
 // Create Job Schema
 export const createJobSchema = z.object({
   template_id: z.string().uuid(),
-  title: z.string().min(1).max(255),
   assigned_to: z.string().min(1),
   frequency: frequencySchema,
   next_execution_date: z.string().or(z.date()),
@@ -74,7 +73,6 @@ export type CreateJobInput = z.infer<typeof createJobSchema>;
 // Update Job Schema
 export const updateJobSchema = z.object({
   id: z.string().uuid(),
-  title: z.string().min(1).max(255).optional(),
   assigned_to: z.string().min(1).optional(),
   frequency: frequencySchema.optional(),
   next_execution_date: z.string().or(z.date()).optional(),

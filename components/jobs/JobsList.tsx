@@ -75,17 +75,19 @@ export function JobsList({ jobs, currentUserId }: JobsListProps) {
               <div className="flex items-start justify-between">
                 <div className="space-y-1 flex-1">
                   <CardTitle className="text-lg line-clamp-1">
-                    {job.title}
+                    {job.template_name}
                   </CardTitle>
                   <CardDescription className="flex items-center gap-4 text-xs">
                     <span className="flex items-center gap-1">
                       <Badge variant="outline" className="text-xs">
-                        {job.template_name}
+                        {job.template_category}
                       </Badge>
                     </span>
-                    <span className="text-muted-foreground">
-                      {job.template_category}
-                    </span>
+                    {job.template_description && (
+                      <span className="text-muted-foreground truncate">
+                        {job.template_description}
+                      </span>
+                    )}
                   </CardDescription>
                 </div>
                 <Badge variant={statusInfo.variant}>
@@ -117,7 +119,7 @@ export function JobsList({ jobs, currentUserId }: JobsListProps) {
                 </div>
                 <JobActionsDropdown
                   jobId={job.id}
-                  jobTitle={job.title}
+                  jobTitle={job.template_name}
                   assignedTo={job.assigned_to}
                   currentUserId={currentUserId}
                   actionFields={[]}

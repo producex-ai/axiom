@@ -19,7 +19,6 @@ interface ActionField {
 }
 
 interface JobExecutionDetails {
-  job_title: string;
   job_id: string;
   performed_by_name: string;
   performed_at: Date | string;
@@ -81,44 +80,33 @@ export function JobExecutionDetailsDialog({
         </DialogHeader>
 
         <div className="space-y-6 py-4">
-          {/* Job Title */}
+          {/* Execution Info */}
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <FileText className="h-4 w-4" />
-                Job Title
+                <User className="h-4 w-4" />
+                Performed By
               </div>
-              <p className="text-base font-semibold">{execution.job_title}</p>
+              <p className="text-sm">{execution.performed_by_name}</p>
             </div>
 
-            <Separator />
-
-            {/* Execution Info */}
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                  <User className="h-4 w-4" />
-                  Performed By
-                </div>
-                <p className="text-sm">{execution.performed_by_name}</p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Calendar className="h-4 w-4" />
+                Executed On
               </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  Executed On
-                </div>
-                <p className="text-sm">
-                  {performedDate.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}{" "}
-                  at{" "}
-                  {performedDate.toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
+              <p className="text-sm">
+                {performedDate.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}{" "}
+                at{" "}
+                {performedDate.toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </p>
               </div>
             </div>
 

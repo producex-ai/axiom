@@ -39,7 +39,8 @@ export interface JobTemplateWithFields extends JobTemplate {
  */
 export async function createTemplate(
   input: CreateJobTemplateInput,
-  userId: string
+  userId: string,
+  orgId: string
 ): Promise<JobTemplateWithFields> {
   const pool = getPool();
   const client = await pool.connect();
@@ -49,10 +50,10 @@ export async function createTemplate(
 
     // Insert template
     const templateResult = await client.query<JobTemplate>(
-      `INSERT INTO job_templates (name, category, doc_num, sop, description, created_by)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO job_templates (name, category, doc_num, sop, description, created_by, org_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
-      [input.name, input.category, input.doc_num || null, input.sop || null, input.description || null, userId]
+      [input.name, input.category, input.doc_num || null, input.sop || null, input.description || null, userId, orgId]
     );
 
     const template = templateResult.rows[0];
@@ -96,7 +97,7 @@ export async function createTemplate(
 /**
  * Get all job templates
  */
-export async function getTemplates(userId: string): Promise<JobTemplateWithFields[]> {
+export async function getTemplates(orgId: string): Promise<JobTemplateWithFields[]> {
   const pool = getPool();
 
   const result = await pool.query<JobTemplateWithFields>(
@@ -120,10 +121,10 @@ export async function getTemplates(userId: string): Promise<JobTemplateWithField
        ) as fields
      FROM job_templates t
      LEFT JOIN job_template_fields f ON f.template_id = t.id
-     WHERE t.created_by = $1 AND t.active = TRUE
+     WHERE t.org_id = $1 AND t.active = TRUE
      GROUP BY t.id
      ORDER BY t.created_at DESC`,
-    [userId]
+    [orgId]
   );
 
   return result.rows.map((row) => ({
@@ -137,7 +138,7 @@ export async function getTemplates(userId: string): Promise<JobTemplateWithField
  */
 export async function getTemplateById(
   templateId: string,
-  userId: string
+  orgId: string
 ): Promise<JobTemplateWithFields | null> {
   const pool = getPool();
 
@@ -162,9 +163,9 @@ export async function getTemplateById(
        ) as fields
      FROM job_templates t
      LEFT JOIN job_template_fields f ON f.template_id = t.id
-     WHERE t.id = $1 AND t.created_by = $2 AND t.active = TRUE
+     WHERE t.id = $1 AND t.org_id = $2 AND t.active = TRUE
      GROUP BY t.id`,
-    [templateId, userId]
+    [templateId, orgId]
   );
 
   if (result.rows.length === 0) {
@@ -183,7 +184,7 @@ export async function getTemplateById(
  */
 export async function updateTemplate(
   input: UpdateJobTemplateInput,
-  userId: string
+  orgId: string
 ): Promise<JobTemplateWithFields> {
   const pool = getPool();
   const client = await pool.connect();
@@ -220,12 +221,12 @@ export async function updateTemplate(
     // Increment version
     updateFields.push(`version = version + 1`);
 
-    updateValues.push(input.id, userId);
+    updateValues.push(input.id, orgId);
 
     const templateResult = await client.query<JobTemplate>(
       `UPDATE job_templates 
        SET ${updateFields.join(", ")}
-       WHERE id = $${paramIndex++} AND created_by = $${paramIndex++}
+       WHERE id = $${paramIndex++} AND org_id = $${paramIndex++}
        RETURNING *`,
       updateValues
     );
@@ -293,15 +294,15 @@ export async function updateTemplate(
  */
 export async function deleteTemplate(
   templateId: string,
-  userId: string
+  orgId: string
 ): Promise<void> {
   const pool = getPool();
 
   const result = await pool.query(
     `UPDATE job_templates SET active = FALSE, updated_at = CURRENT_TIMESTAMP 
-     WHERE id = $1 AND created_by = $2 AND active = TRUE 
+     WHERE id = $1 AND org_id = $2 AND active = TRUE 
      RETURNING id`,
-    [templateId, userId]
+    [templateId, orgId]
   );
 
   if (result.rows.length === 0) {
@@ -314,7 +315,7 @@ export async function deleteTemplate(
  */
 export async function getTemplatesByCategory(
   category: string,
-  userId: string
+  orgId: string
 ): Promise<JobTemplateWithFields[]> {
   const pool = getPool();
 
@@ -339,10 +340,10 @@ export async function getTemplatesByCategory(
        ) as fields
      FROM job_templates t
      LEFT JOIN job_template_fields f ON f.template_id = t.id
-     WHERE t.category = $1 AND t.created_by = $2 AND t.active = TRUE
+     WHERE t.category = $1 AND t.org_id = $2 AND t.active = TRUE
      GROUP BY t.id
      ORDER BY t.created_at DESC`,
-    [category, userId]
+    [category, orgId]
   );
 
   return result.rows.map((row) => ({

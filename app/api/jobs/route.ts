@@ -9,8 +9,8 @@ import { JobStatus } from "@/lib/validators/jobValidators";
  */
 export async function GET(request: NextRequest) {
   try {
-    const { userId } = await auth();
-    if (!userId) {
+    const { userId, orgId } = await auth();
+    if (!userId || !orgId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     // Get jobs with status
     let jobs = await jobService.getJobsWithStatus(
-      userId,
+      orgId,
       status || undefined
     );
 

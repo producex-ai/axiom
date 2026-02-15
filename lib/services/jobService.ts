@@ -13,7 +13,6 @@ export interface Job {
   id: string;
   template_id: string;
   template_version: number;
-  title: string;
   assigned_to: string;
   frequency: ScheduleFrequency;
   next_execution_date: string;
@@ -114,7 +113,8 @@ export function deriveStatus(job: Job): JobStatus {
  */
 export async function createJob(
   input: CreateJobInput,
-  userId: string
+  userId: string,
+  orgId: string
 ): Promise<Job> {
   const pool = getPool();
   const client = await pool.connect();
@@ -143,17 +143,17 @@ export async function createJob(
     // Insert job
     const jobResult = await client.query<Job>(
       `INSERT INTO jobs 
-       (template_id, template_version, title, assigned_to, frequency, next_execution_date, created_by)
+       (template_id, template_version, assigned_to, frequency, next_execution_date, created_by, org_id)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
       [
         input.template_id,
         templateVersion,
-        input.title,
         input.assigned_to,
         input.frequency,
         nextExecutionDate,
         userId,
+        orgId,
       ]
     );
 
@@ -185,7 +185,7 @@ export async function createJob(
  * Get all jobs with template info
  */
 export async function getJobs(
-  userId: string,
+  orgId: string,
   filters?: {
     assigned_to?: string;
     template_id?: string;
@@ -201,10 +201,10 @@ export async function getJobs(
       t.description as template_description
     FROM jobs j
     INNER JOIN job_templates t ON j.template_id = t.id
-    WHERE j.created_by = $1
+    WHERE j.org_id = $1
   `;
 
-  const params: any[] = [userId];
+  const params: any[] = [orgId];
   let paramIndex = 2;
 
   if (filters?.assigned_to) {
@@ -229,7 +229,7 @@ export async function getJobs(
  */
 export async function getJobById(
   jobId: string,
-  userId: string
+  orgId: string
 ): Promise<JobDetail | null> {
   const pool = getPool();
 
@@ -242,8 +242,8 @@ export async function getJobById(
        t.description as template_description
      FROM jobs j
      INNER JOIN job_templates t ON j.template_id = t.id
-     WHERE j.id = $1 AND j.created_by = $2`,
-    [jobId, userId]
+     WHERE j.id = $1 AND j.org_id = $2`,
+    [jobId, orgId]
   );
 
   if (jobResult.rows.length === 0) {
@@ -356,7 +356,8 @@ export async function getJobById(
  */
 export async function executeJobAction(
   input: ExecuteJobActionInput,
-  userId: string
+  userId: string,
+  orgId: string
 ): Promise<JobAction> {
   const pool = getPool();
   const client = await pool.connect();
@@ -366,8 +367,8 @@ export async function executeJobAction(
 
     // Verify job exists and user has access
     const jobCheck = await client.query(
-      `SELECT id FROM jobs WHERE id = $1 AND created_by = $2`,
-      [input.job_id, userId]
+      `SELECT id FROM jobs WHERE id = $1 AND org_id = $2`,
+      [input.job_id, orgId]
     );
 
     if (jobCheck.rows.length === 0) {
@@ -482,7 +483,7 @@ export async function executeJobAction(
  */
 export async function updateJob(
   input: UpdateJobInput,
-  userId: string
+  orgId: string
 ): Promise<Job> {
   const pool = getPool();
 
@@ -490,10 +491,6 @@ export async function updateJob(
   const updateValues: any[] = [];
   let paramIndex = 1;
 
-  if (input.title !== undefined) {
-    updateFields.push(`title = $${paramIndex++}`);
-    updateValues.push(input.title);
-  }
   if (input.assigned_to !== undefined) {
     updateFields.push(`assigned_to = $${paramIndex++}`);
     updateValues.push(input.assigned_to);
@@ -515,12 +512,12 @@ export async function updateJob(
     throw new Error("No fields to update");
   }
 
-  updateValues.push(input.id, userId);
+  updateValues.push(input.id, orgId);
 
   const result = await pool.query<Job>(
     `UPDATE jobs 
      SET ${updateFields.join(", ")}
-     WHERE id = $${paramIndex++} AND created_by = $${paramIndex++}
+     WHERE id = $${paramIndex++} AND org_id = $${paramIndex++}
      RETURNING *`,
     updateValues
   );
@@ -535,12 +532,12 @@ export async function updateJob(
 /**
  * Delete job
  */
-export async function deleteJob(jobId: string, userId: string): Promise<void> {
+export async function deleteJob(jobId: string, orgId: string): Promise<void> {
   const pool = getPool();
 
   const result = await pool.query(
-    `DELETE FROM jobs WHERE id = $1 AND created_by = $2 RETURNING id`,
-    [jobId, userId]
+    `DELETE FROM jobs WHERE id = $1 AND org_id = $2 RETURNING id`,
+    [jobId, orgId]
   );
 
   if (result.rows.length === 0) {
@@ -552,10 +549,10 @@ export async function deleteJob(jobId: string, userId: string): Promise<void> {
  * Get jobs with derived status
  */
 export async function getJobsWithStatus(
-  userId: string,
+  orgId: string,
   statusFilter?: JobStatus
 ): Promise<Array<JobWithTemplate & { derived_status: JobStatus; assigned_to_name: string }>> {
-  const jobs = await getJobs(userId);
+  const jobs = await getJobs(orgId);
 
   if (jobs.length === 0) {
     return [];
@@ -588,11 +585,10 @@ export async function getJobsWithStatus(
  */
 export async function getJobsByTemplateId(
   templateId: string,
-  userId: string
+  orgId: string
 ): Promise<{
   scheduled_jobs: Array<JobWithTemplate & { derived_status: JobStatus; assigned_to_name: string }>;
   execution_history: Array<{
-    job_title: string;
     job_id: string;
     performed_by: string;
     performed_by_name: string;
@@ -609,7 +605,7 @@ export async function getJobsByTemplateId(
   const pool = getPool();
 
   // Get scheduled jobs for this template
-  const jobs = await getJobs(userId, { template_id: templateId });
+  const jobs = await getJobs(orgId, { template_id: templateId });
 
   // Get last action for each job
   const jobIds = jobs.map((j) => j.id);
@@ -634,7 +630,6 @@ export async function getJobsByTemplateId(
 
   // Get execution history for all jobs of this template with action values
   const historyResult = await pool.query<{
-    job_title: string;
     job_id: string;
     performed_by: string;
     performed_at: Date;
@@ -642,7 +637,6 @@ export async function getJobsByTemplateId(
     action_values: any;
   }>(
     `SELECT 
-       j.title as job_title,
        j.id as job_id,
        a.performed_by,
        a.performed_at,
@@ -661,11 +655,11 @@ export async function getJobsByTemplateId(
      FROM job_actions a
      INNER JOIN jobs j ON j.id = a.job_id
      LEFT JOIN job_action_values av ON av.action_id = a.id
-     WHERE j.template_id = $1 AND j.created_by = $2
-     GROUP BY j.title, j.id, a.performed_by, a.performed_at, a.notes, a.id
+     WHERE j.template_id = $1 AND j.org_id = $2
+     GROUP BY j.id, a.performed_by, a.performed_at, a.notes, a.id
      ORDER BY a.performed_at DESC
      LIMIT 100`,
-    [templateId, userId]
+    [templateId, orgId]
   );
 
   // Enrich execution history with user names

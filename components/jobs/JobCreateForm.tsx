@@ -52,8 +52,7 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
   const form = useForm<CreateJobInput>({
     resolver: zodResolver(createJobSchema),
     defaultValues: {
-      template_id: preselectedTemplateId || "",
-      title: "",
+      template_id: "",
       assigned_to: "",
       frequency: "monthly",
       next_execution_date: "",
@@ -66,14 +65,19 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
   }, []);
 
   useEffect(() => {
-    if (preselectedTemplateId && templates.length > 0) {
+    if (preselectedTemplateId && templates.length > 0 && !selectedTemplate) {
       const template = templates.find((t) => t.id === preselectedTemplateId);
       if (template) {
         setSelectedTemplate(template);
         form.setValue("template_id", template.id);
+        // Trigger a re-render by resetting the form with the new value
+        form.reset({
+          ...form.getValues(),
+          template_id: template.id,
+        });
       }
     }
-  }, [preselectedTemplateId, templates, form]);
+  }, [preselectedTemplateId, templates]);
 
   const loadTemplates = async () => {
     setIsLoading(true);

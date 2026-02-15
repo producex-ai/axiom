@@ -23,7 +23,6 @@ interface ActionField {
 }
 
 interface ExecutionHistoryItem {
-  job_title: string;
   job_id: string;
   performed_by: string;
   performed_by_name: string;
@@ -138,7 +137,6 @@ export function TemplateExecutionHistoryOnDemand({ templateId }: TemplateExecuti
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Job Title</TableHead>
                   <TableHead>Executed On</TableHead>
                   <TableHead>Performed By</TableHead>
                   <TableHead>Notes</TableHead>
@@ -151,9 +149,6 @@ export function TemplateExecutionHistoryOnDemand({ templateId }: TemplateExecuti
 
                   return (
                     <TableRow key={`${item.job_id}-${index}`}>
-                      <TableCell className="font-medium">
-                        {item.job_title}
-                      </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1.5 text-sm">
                           <Calendar className="h-4 w-4 text-muted-foreground" />

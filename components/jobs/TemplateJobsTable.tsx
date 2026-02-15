@@ -83,7 +83,6 @@ export function TemplateJobsTable({ jobs, currentUserId }: TemplateJobsTableProp
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Job Title</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Next Execution</TableHead>
                 <TableHead>Frequency</TableHead>
@@ -98,9 +97,6 @@ export function TemplateJobsTable({ jobs, currentUserId }: TemplateJobsTableProp
 
                 return (
                   <TableRow key={job.id}>
-                    <TableCell className="font-medium">
-                      {job.title}
-                    </TableCell>
                     <TableCell>
                       <Badge variant={statusInfo.variant}>
                         {statusInfo.label}
@@ -133,7 +129,7 @@ export function TemplateJobsTable({ jobs, currentUserId }: TemplateJobsTableProp
                     <TableCell className="text-right">
                       <JobActionsDropdown
                         jobId={job.id}
-                        jobTitle={job.title}
+                        jobTitle={job.template_name}
                         assignedTo={job.assigned_to}
                         currentUserId={currentUserId}
                         actionFields={[]}

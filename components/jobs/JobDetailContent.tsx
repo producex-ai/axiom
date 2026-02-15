@@ -165,12 +165,14 @@ export function JobDetailContent({ jobId, currentUserId }: JobDetailContentProps
         <CardHeader>
           <div className="flex items-start justify-between">
             <div>
-              <CardTitle className="text-2xl">{job.title}</CardTitle>
+              <CardTitle className="text-2xl">{template.name}</CardTitle>
               <CardDescription className="mt-2 flex items-center gap-2">
-                <Badge variant="outline">{template.name}</Badge>
-                <span className="text-muted-foreground">
-                  {template.category}
-                </span>
+                <Badge variant="outline">{template.category}</Badge>
+                {template.description && (
+                  <span className="text-muted-foreground">
+                    {template.description}
+                  </span>
+                )}
               </CardDescription>
             </div>
             <Badge variant={statusInfo.variant} className="text-sm">

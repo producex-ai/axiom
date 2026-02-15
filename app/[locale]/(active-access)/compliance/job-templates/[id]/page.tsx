@@ -19,7 +19,7 @@ import { DeactivateTemplateButton } from "@/components/jobs/DeactivateTemplateBu
 import { TemplateJobsTable } from "@/components/jobs/TemplateJobsTable";
 import { TemplateExecutionHistoryOnDemand } from "@/components/jobs/TemplateExecutionHistoryOnDemand";
 
-async function TemplateDetail({ id }: { id: string }) {
+async function TemplateDetail({ id, locale }: { id: string; locale: string }) {
   const { userId } = await auth();
   const result = await getJobTemplateById(id);
 
@@ -65,7 +65,7 @@ async function TemplateDetail({ id }: { id: string }) {
         <CardContent>
           <div className="flex gap-2">
             <Button asChild>
-              <Link href={`/compliance/jobs/create?template=${template.id}`}>
+              <Link href={`/${locale}/compliance/jobs/create?template=${template.id}`}>
                 <Calendar className="h-4 w-4 mr-2" />
                 Create Job
               </Link>
@@ -213,15 +213,15 @@ function TemplateDetailSkeleton() {
 export default async function TemplateDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
-  const { id } = await params;
+  const { id, locale } = await params;
 
   return (
     <div className="container max-w-6xl">
       <div className="mb-8">
         <Button variant="ghost" size="sm" asChild className="mb-4">
-          <Link href="/compliance/job-templates">
+          <Link href={`/${locale}/compliance/job-templates`}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Templates
           </Link>
@@ -230,7 +230,7 @@ export default async function TemplateDetailPage({
       </div>
 
       <Suspense fallback={<TemplateDetailSkeleton />}>
-        <TemplateDetail id={id} />
+        <TemplateDetail id={id} locale={locale} />
       </Suspense>
     </div>
   );
