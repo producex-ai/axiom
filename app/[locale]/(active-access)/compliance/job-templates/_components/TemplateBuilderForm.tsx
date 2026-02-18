@@ -1,14 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  createJobTemplateSchema,
-  type CreateJobTemplateInput,
-} from "@/lib/validators/jobValidators";
-import { createJobTemplate } from "@/lib/actions/jobTemplateActions";
+import { Loader2, Plus, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -27,7 +24,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -37,10 +33,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { SOP_OPTIONS } from "@/lib/constants/log-templates";
+import { createJobTemplate } from "@/lib/actions/jobTemplateActions";
+import { CATEGORY_OPTIONS, SOP_OPTIONS } from "@/lib/constants/log-templates";
+import {
+  type CreateJobTemplateInput,
+  createJobTemplateSchema,
+} from "@/lib/validators/jobValidators";
 
 interface TemplateBuilderFormProps {
   enabledModules?: string[];
@@ -82,24 +82,27 @@ export function TemplateBuilderForm({
 
   // Helper function to generate unique field_key
   // TODO(Gaurav): Update this and handle gracefully
-  const generateUniqueFieldKey = (label: string, existingKeys: string[]): string => {
+  const generateUniqueFieldKey = (
+    label: string,
+    existingKeys: string[],
+  ): string => {
     // Convert label to snake_case
-    const baseKey = label
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "_")
-      .replace(/[^a-z0-9_]/g, "")
-      || "field";
-    
+    const baseKey =
+      label
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_]/g, "") || "field";
+
     // Check if key already exists, append number if needed
     let uniqueKey = baseKey;
     let counter = 1;
-    
+
     while (existingKeys.includes(uniqueKey)) {
       uniqueKey = `${baseKey}_${counter}`;
       counter++;
     }
-    
+
     return uniqueKey;
   };
 
@@ -112,28 +115,35 @@ export function TemplateBuilderForm({
         ...data,
         fields: data.fields.map((field) => {
           let uniqueKey: string;
-          
+
           // For creation fields: generate from label
           // For action fields: generate from field_key (which holds description)
           if (field.field_category === "creation") {
             // If field already has a valid key, keep it (backward compatibility)
-            if (field.field_key && field.field_key.trim() && !existingKeys.includes(field.field_key)) {
+            if (
+              field.field_key &&
+              field.field_key.trim() &&
+              !existingKeys.includes(field.field_key)
+            ) {
               uniqueKey = field.field_key;
             } else {
               // Generate from label
-              uniqueKey = generateUniqueFieldKey(field.field_label, existingKeys);
+              uniqueKey = generateUniqueFieldKey(
+                field.field_label,
+                existingKeys,
+              );
             }
           } else {
             // Action field: generate from field_key (description)
             if (field.field_key && field.field_key.trim()) {
               // Generate slug from description
-              const baseKey = field.field_key
-                .toLowerCase()
-                .trim()
-                .replace(/\s+/g, "_")
-                .replace(/[^a-z0-9_]/g, "")
-                || "action_field";
-              
+              const baseKey =
+                field.field_key
+                  .toLowerCase()
+                  .trim()
+                  .replace(/\s+/g, "_")
+                  .replace(/[^a-z0-9_]/g, "") || "action_field";
+
               // Ensure uniqueness
               uniqueKey = baseKey;
               let counter = 1;
@@ -143,10 +153,13 @@ export function TemplateBuilderForm({
               }
             } else {
               // Fallback: generate from label if description is empty
-              uniqueKey = generateUniqueFieldKey(field.field_label, existingKeys);
+              uniqueKey = generateUniqueFieldKey(
+                field.field_label,
+                existingKeys,
+              );
             }
           }
-          
+
           existingKeys.push(uniqueKey);
           return { ...field, field_key: uniqueKey };
         }),
@@ -204,7 +217,7 @@ export function TemplateBuilderForm({
   return (
     <div className="w-full max-w-full">
       <Form {...form}>
-        <form 
+        <form
           onSubmit={form.handleSubmit(onSubmit, (errors) => {
             console.error("Form validation failed:", errors);
             toast({
@@ -212,7 +225,7 @@ export function TemplateBuilderForm({
               description: "Please check all required fields and try again.",
               variant: "destructive",
             });
-          })} 
+          })}
           className="space-y-8"
         >
           <Card>
@@ -248,12 +261,23 @@ export function TemplateBuilderForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Category</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Security, Compliance, Operations"
-                          {...field}
-                        />
-                      </FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {CATEGORY_OPTIONS.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -291,7 +315,11 @@ export function TemplateBuilderForm({
                             <SelectValue placeholder="Select an SOP module" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent side="bottom" align="start" className="w-full">
+                        <SelectContent
+                          side="bottom"
+                          align="start"
+                          className="w-full"
+                        >
                           {filteredSopOptions.map((group) => (
                             <SelectGroup key={group.label}>
                               <SelectLabel>{group.label}</SelectLabel>
@@ -349,7 +377,7 @@ export function TemplateBuilderForm({
                   size="sm"
                   onClick={() => addField("creation")}
                 >
-                  <Plus className="h-4 w-4 mr-2" />
+                  <Plus className="mr-2 h-4 w-4" />
                   Add Field
                 </Button>
               </div>
@@ -363,9 +391,9 @@ export function TemplateBuilderForm({
                     return null;
 
                   return (
-                    <div key={field.id} className="border rounded-lg p-4">
+                    <div key={field.id} className="rounded-lg border p-4">
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                        <div className="flex-1 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center">
+                        <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center">
                           <FormField
                             control={form.control}
                             name={`fields.${index}.field_label`}
@@ -375,19 +403,26 @@ export function TemplateBuilderForm({
                                   Label
                                 </FormLabel>
                                 <FormControl>
-                                  <Input 
-                                    placeholder="Location / Description / Qty ..." 
+                                  <Input
+                                    placeholder="Location / Description / Qty ..."
                                     {...field}
                                     onChange={(e) => {
                                       field.onChange(e);
                                       // Auto-generate unique field_key from label for creation fields
-                                      const currentFields = form.getValues("fields");
+                                      const currentFields =
+                                        form.getValues("fields");
                                       const existingKeys = currentFields
                                         .filter((_, idx) => idx !== index)
-                                        .map(f => f.field_key)
+                                        .map((f) => f.field_key)
                                         .filter(Boolean);
-                                      const uniqueKey = generateUniqueFieldKey(e.target.value, existingKeys);
-                                      form.setValue(`fields.${index}.field_key`, uniqueKey);
+                                      const uniqueKey = generateUniqueFieldKey(
+                                        e.target.value,
+                                        existingKeys,
+                                      );
+                                      form.setValue(
+                                        `fields.${index}.field_key`,
+                                        uniqueKey,
+                                      );
                                     }}
                                   />
                                 </FormControl>
@@ -397,9 +432,9 @@ export function TemplateBuilderForm({
                           />
 
                           {/* Hidden field_key field for creation fields */}
-                          <input 
-                            type="hidden" 
-                            {...form.register(`fields.${index}.field_key`)} 
+                          <input
+                            type="hidden"
+                            {...form.register(`fields.${index}.field_key`)}
                           />
 
                           <FormField
@@ -453,7 +488,7 @@ export function TemplateBuilderForm({
                   size="sm"
                   onClick={() => addField("action")}
                 >
-                  <Plus className="h-4 w-4 mr-2" />
+                  <Plus className="mr-2 h-4 w-4" />
                   Add Field
                 </Button>
               </div>
@@ -465,9 +500,9 @@ export function TemplateBuilderForm({
                     return null;
 
                   return (
-                    <div key={field.id} className="border rounded-lg p-4">
+                    <div key={field.id} className="rounded-lg border p-4">
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                        <div className="flex-1 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-center">
+                        <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3 sm:items-center">
                           <FormField
                             control={form.control}
                             name={`fields.${index}.field_label`}
@@ -477,8 +512,8 @@ export function TemplateBuilderForm({
                                   Label
                                 </FormLabel>
                                 <FormControl>
-                                  <Input 
-                                    placeholder="Glass Brittle / Condition ..." 
+                                  <Input
+                                    placeholder="Glass Brittle / Condition ..."
                                     {...field}
                                   />
                                 </FormControl>
