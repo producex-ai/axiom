@@ -25,8 +25,8 @@ export const frequencySchema = z.enum([
 export const jobTemplateFieldSchema = z.object({
   id: z.string().uuid().optional(),
   template_id: z.string().uuid().optional(),
-  field_key: z.string().transform(val => val || "field"),
-  field_label: z.string().min(1).max(255),
+  field_key: z.string().default(""), // Will be auto-generated if empty
+  field_label: z.string().min(1, "Field label is required").max(255),
   field_type: fieldTypeSchema,
   field_category: fieldCategorySchema,
   is_required: z.boolean(),
@@ -42,6 +42,17 @@ export const createJobTemplateSchema = z.object({
   sop: z.string().optional(),
   description: z.string().optional(),
   fields: z.array(jobTemplateFieldSchema).min(1),
+}).superRefine((data, ctx) => {
+  // Validate that action fields have non-empty field_key (description)
+  data.fields.forEach((field, index) => {
+    if (field.field_category === "action" && (!field.field_key || field.field_key.trim() === "")) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Description is required",
+        path: ["fields", index, "field_key"],
+      });
+    }
+  });
 });
 
 export type CreateJobTemplateInput = z.infer<typeof createJobTemplateSchema>;

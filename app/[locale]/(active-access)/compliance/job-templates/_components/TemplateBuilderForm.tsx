@@ -54,7 +54,7 @@ export function TemplateBuilderForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<CreateJobTemplateInput>({
-    resolver: zodResolver(createJobTemplateSchema),
+    resolver: zodResolver(createJobTemplateSchema) as any, // Type assertion needed due to zod default() and react-hook-form type inference
     defaultValues: {
       name: "",
       category: "",
@@ -80,28 +80,78 @@ export function TemplateBuilderForm({
     name: "fields",
   });
 
+  // Helper function to generate unique field_key
+  // TODO(Gaurav): Update this and handle gracefully
+  const generateUniqueFieldKey = (label: string, existingKeys: string[]): string => {
+    // Convert label to snake_case
+    const baseKey = label
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^a-z0-9_]/g, "")
+      || "field";
+    
+    // Check if key already exists, append number if needed
+    let uniqueKey = baseKey;
+    let counter = 1;
+    
+    while (existingKeys.includes(uniqueKey)) {
+      uniqueKey = `${baseKey}_${counter}`;
+      counter++;
+    }
+    
+    return uniqueKey;
+  };
+
   const onSubmit = async (data: CreateJobTemplateInput) => {
     setIsSubmitting(true);
     try {
-      // Auto-generate field_key from field_label for creation fields
+      // Auto-generate unique field_keys
+      const existingKeys: string[] = [];
       const processedData = {
         ...data,
         fields: data.fields.map((field) => {
-          if (field.field_category === "creation" && !field.field_key) {
-            // Generate field_key from field_label (convert to snake_case)
-            const generatedKey = field.field_label
-              .toLowerCase()
-              .replace(/\s+/g, "_")
-              .replace(/[^a-z0-9_]/g, "");
-            return { ...field, field_key: generatedKey };
+          let uniqueKey: string;
+          
+          // For creation fields: generate from label
+          // For action fields: generate from field_key (which holds description)
+          if (field.field_category === "creation") {
+            // If field already has a valid key, keep it (backward compatibility)
+            if (field.field_key && field.field_key.trim() && !existingKeys.includes(field.field_key)) {
+              uniqueKey = field.field_key;
+            } else {
+              // Generate from label
+              uniqueKey = generateUniqueFieldKey(field.field_label, existingKeys);
+            }
+          } else {
+            // Action field: generate from field_key (description)
+            if (field.field_key && field.field_key.trim()) {
+              // Generate slug from description
+              const baseKey = field.field_key
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, "_")
+                .replace(/[^a-z0-9_]/g, "")
+                || "action_field";
+              
+              // Ensure uniqueness
+              uniqueKey = baseKey;
+              let counter = 1;
+              while (existingKeys.includes(uniqueKey)) {
+                uniqueKey = `${baseKey}_${counter}`;
+                counter++;
+              }
+            } else {
+              // Fallback: generate from label if description is empty
+              uniqueKey = generateUniqueFieldKey(field.field_label, existingKeys);
+            }
           }
-          return field;
+          
+          existingKeys.push(uniqueKey);
+          return { ...field, field_key: uniqueKey };
         }),
       };
-
-      console.log("Submitting template data:", processedData);
       const result = await createJobTemplate(processedData);
-      console.log("Template creation result:", result);
       if (result.success) {
         toast({
           title: "Template created",
@@ -135,7 +185,7 @@ export function TemplateBuilderForm({
 
   const addField = (category: "creation" | "action") => {
     append({
-      field_key: category === "creation" ? "field" : "",
+      field_key: "", // Will be auto-generated from field_label
       field_label: "",
       field_type: "text" as const,
       field_category: category,
@@ -150,13 +200,6 @@ export function TemplateBuilderForm({
     enabledModules.length > 0
       ? SOP_OPTIONS.filter((group) => enabledModules.includes(group.module))
       : SOP_OPTIONS;
-
-  const creationFields = fields.filter(
-    (_, idx) => form.watch(`fields.${idx}.field_category`) === "creation",
-  );
-  const actionFields = fields.filter(
-    (_, idx) => form.watch(`fields.${idx}.field_category`) === "action",
-  );
 
   return (
     <div className="w-full max-w-full">
@@ -337,12 +380,14 @@ export function TemplateBuilderForm({
                                     {...field}
                                     onChange={(e) => {
                                       field.onChange(e);
-                                      // Auto-generate field_key from label for creation fields
-                                      const generatedKey = e.target.value
-                                        .toLowerCase()
-                                        .replace(/\s+/g, "_")
-                                        .replace(/[^a-z0-9_]/g, "");
-                                      form.setValue(`fields.${index}.field_key`, generatedKey || "field");
+                                      // Auto-generate unique field_key from label for creation fields
+                                      const currentFields = form.getValues("fields");
+                                      const existingKeys = currentFields
+                                        .filter((_, idx) => idx !== index)
+                                        .map(f => f.field_key)
+                                        .filter(Boolean);
+                                      const uniqueKey = generateUniqueFieldKey(e.target.value, existingKeys);
+                                      form.setValue(`fields.${index}.field_key`, uniqueKey);
                                     }}
                                   />
                                 </FormControl>
@@ -432,7 +477,10 @@ export function TemplateBuilderForm({
                                   Label
                                 </FormLabel>
                                 <FormControl>
-                                  <Input placeholder="Glass Brittle / Condition / Breakage reoport ..." {...field} />
+                                  <Input 
+                                    placeholder="Glass Brittle / Condition ..." 
+                                    {...field}
+                                  />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -445,7 +493,7 @@ export function TemplateBuilderForm({
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="sm:sr-only">
-                                  Action Description
+                                  Description (Required)
                                 </FormLabel>
                                 <FormControl>
                                   <Input
