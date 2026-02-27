@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 
-import { getOrgMembersAction } from "@/actions/clerk";
-import { getDailyLogByIdAction } from "@/actions/daily-logs";
+import { getOrgMembersAction } from "@/actions/auth/clerk";
+import { getDailyLogByIdAction } from "@/actions/logs/daily-logs";
 import { AssigneeView } from "@/components/tasks/AssigneeView";
 import { ReviewerView } from "@/components/tasks/ReviewerView";
 import { TemplateDetailsView } from "@/components/tasks/TemplateDetailsView";

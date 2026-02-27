@@ -8,7 +8,7 @@ import {
   type CreateTemplateState,
   createLogTemplateAction,
   updateLogTemplateAction,
-} from "@/actions/log-templates";
+} from "@/actions/logs/log-templates";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

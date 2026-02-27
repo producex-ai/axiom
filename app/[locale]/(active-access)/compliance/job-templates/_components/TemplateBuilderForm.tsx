@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { createJobTemplate } from "@/lib/actions/jobTemplateActions";
+import { createJobTemplate } from "@/actions/jobs/job-template-actions";
 import { CATEGORY_OPTIONS, SOP_OPTIONS } from "@/lib/constants/log-templates";
 import {
   type CreateJobTemplateInput,

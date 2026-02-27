@@ -182,6 +182,56 @@ export async function createJob(
 }
 
 /**
+ * Result of bulk job creation
+ */
+export interface BulkJobCreationResult {
+  totalAttempted: number;
+  totalCreated: number;
+  created: Job[];
+  failed: Array<{
+    index: number;
+    input: CreateJobInput;
+    error: string;
+  }>;
+}
+
+/**
+ * Create multiple jobs from template (bulk operation)
+ * Uses best-effort strategy: continues on individual failures
+ */
+export async function createBulkJobs(
+  inputs: CreateJobInput[],
+  userId: string,
+  orgId: string
+): Promise<BulkJobCreationResult> {
+  const result: BulkJobCreationResult = {
+    totalAttempted: inputs.length,
+    totalCreated: 0,
+    created: [],
+    failed: [],
+  };
+
+  // Process each job individually to allow partial success
+  for (let i = 0; i < inputs.length; i++) {
+    const input = inputs[i];
+    try {
+      const job = await createJob(input, userId, orgId);
+      result.created.push(job);
+      result.totalCreated++;
+    } catch (error) {
+      console.error(`Failed to create job at index ${i}:`, error);
+      result.failed.push({
+        index: i,
+        input,
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
+  }
+
+  return result;
+}
+
+/**
  * Get all jobs with template info
  */
 export async function getJobs(

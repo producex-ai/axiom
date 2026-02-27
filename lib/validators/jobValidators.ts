@@ -189,3 +189,44 @@ export const jobDetailSchema = z.object({
 });
 
 export type JobDetail = z.infer<typeof jobDetailSchema>;
+
+// Bulk Job Creation Schemas
+
+// Field mapping for bulk import
+export const fieldMappingSchema = z.object({
+  documentColumn: z.string(),
+  templateFieldKey: z.string(),
+  templateFieldLabel: z.string(),
+  fieldCategory: z.enum(["creation", "action"]),
+  confidence: z.enum(["high", "medium", "low"]),
+});
+
+export type FieldMapping = z.infer<typeof fieldMappingSchema>;
+
+// Extracted job row from document
+export const extractedJobRowSchema = z.object({
+  index: z.number().int().min(0),
+  fields: z.record(z.string(), z.any()),
+});
+
+export type ExtractedJobRow = z.infer<typeof extractedJobRowSchema>;
+
+// Bulk job creation input
+export const bulkJobCreationSchema = z.object({
+  templateId: z.string().uuid(),
+  fieldMappings: z.array(fieldMappingSchema),
+  jobs: z.array(createJobSchema),
+});
+
+export type BulkJobCreationInput = z.infer<typeof bulkJobCreationSchema>;
+
+// Job extraction result
+export const jobExtractionResultSchema = z.object({
+  success: z.boolean(),
+  description: z.string().optional(),
+  columns: z.array(z.string()).optional(),
+  rows: z.array(z.record(z.string(), z.any())).optional(),
+  error: z.string().optional(),
+});
+
+export type JobExtractionResult = z.infer<typeof jobExtractionResultSchema>;

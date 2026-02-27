@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ClipboardList, Calendar, User, Eye, Loader2 } from "lucide-react";
-import { getJobsByTemplateId } from "@/lib/actions/jobActions";
+import { getJobsByTemplateId } from "@/actions/jobs/job-actions";
 import { JobExecutionDetailsDialog } from "../../jobs/_components/JobExecutionDetailsDialog";
 
 interface ActionField {

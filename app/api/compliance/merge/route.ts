@@ -26,8 +26,8 @@ import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { query } from "@/lib/db/postgres";
-import { getFromS3, uploadToS3 } from "@/lib/s3-utils";
-import { mergeDocuments } from "@/lib/llm-merge";
+import { getFromS3, uploadToS3 } from "@/lib/utils/s3";
+import { mergeDocuments } from "@/lib/ai/llm-merge";
 import { createDocxBufferFromText } from "@/server/docgen";
 import { createDocumentRevision } from "@/lib/primus/db-helper";
 

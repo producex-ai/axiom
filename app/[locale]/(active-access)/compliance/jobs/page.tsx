@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getJobsWithStatus } from "@/lib/actions/jobActions";
+import { getJobsWithStatus } from "@/actions/jobs/job-actions";
 import { JobsList } from "./_components/JobsList";
 import { JobsByTemplateGroup } from "./_components/JobsByTemplateGroup";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Upload } from "lucide-react";
 
 async function JobsContent() {
   const { userId } = await auth();
@@ -100,12 +100,20 @@ export default function JobsPage() {
             Track and execute recurring jobs. Jobs move through statuses: Upcoming → Open → Completed (or Overdue if missed).
           </p>
         </div>
-        <Button asChild>
-          <Link href="/compliance/jobs/create">
-            <PlusCircle className="h-4 w-4 mr-2" />
-            Create Job
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" asChild>
+            <Link href="/compliance/jobs/bulk-create">
+              <Upload className="h-4 w-4 mr-2" />
+              Bulk Import
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/compliance/jobs/create">
+              <PlusCircle className="h-4 w-4 mr-2" />
+              Create Job
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <Suspense fallback={<JobsContentSkeleton />}>

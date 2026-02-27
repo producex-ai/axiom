@@ -25,7 +25,7 @@ import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { query } from "@/lib/db/postgres";
-import { uploadToS3, extractTextFromDOCX } from "@/lib/s3-utils";
+import { uploadToS3, extractTextFromDOCX } from "@/lib/utils/s3";
 
 export const runtime = "nodejs";
 export const maxDuration = 300; // 5 minutes for upload and processing

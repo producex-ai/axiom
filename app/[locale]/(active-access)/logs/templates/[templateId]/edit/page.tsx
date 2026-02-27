@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLogTemplateByIdAction } from "@/actions/log-templates";
+import { getLogTemplateByIdAction } from "@/actions/logs/log-templates";
 import { Button } from "@/components/ui/button";
 import { getEnabledModules } from "@/lib/primus/db-helper";
 import { LogTemplateForm } from "../../_components/log-template-form";

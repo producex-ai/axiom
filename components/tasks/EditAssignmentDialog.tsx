@@ -2,8 +2,8 @@
 
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
-import type { OrgMember } from "@/actions/clerk";
-import { updateDailyLogAssignmentAction } from "@/actions/daily-logs";
+import type { OrgMember } from "@/actions/auth/clerk";
+import { updateDailyLogAssignmentAction } from "@/actions/logs/daily-logs";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

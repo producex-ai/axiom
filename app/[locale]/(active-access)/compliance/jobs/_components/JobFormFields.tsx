@@ -2,7 +2,7 @@
 
 import { Control, FieldErrors } from "react-hook-form";
 import type { CreateJobInput, UpdateJobInput } from "@/lib/validators/jobValidators";
-import type { OrgMember } from "@/actions/clerk";
+import type { OrgMember } from "@/actions/auth/clerk";
 import { FREQUENCY_LABELS, type ScheduleFrequency } from "@/lib/cron/cron-utils";
 import {
   FormControl,

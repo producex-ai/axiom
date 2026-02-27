@@ -25,7 +25,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { DynamicFieldRenderer } from "../../_components/DynamicFieldRenderer";
 import { executeJobActionSchema, type ExecuteJobActionInput } from "@/lib/validators/jobValidators";
-import { executeJobAction } from "@/lib/actions/jobActions";
+import { executeJobAction } from "@/actions/jobs/job-actions";
 import type { JobDetail } from "@/lib/services/jobService";
 import { Calendar, User, Clock, Loader2 } from "lucide-react";
 import type { JobStatus } from "@/lib/validators/jobValidators";

@@ -12,8 +12,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getJobTemplateById } from "@/lib/actions/jobTemplateActions";
-import { getJobsByTemplateId } from "@/lib/actions/jobActions";
+import { getJobTemplateById } from "@/actions/jobs/job-template-actions";
+import { getJobsByTemplateId } from "@/actions/jobs/job-actions";
 import { ArrowLeft, Calendar } from "lucide-react";
 import { DeactivateTemplateButton } from "../_components/DeactivateTemplateButton";
 import { TemplateJobsTable } from "../_components/TemplateJobsTable";

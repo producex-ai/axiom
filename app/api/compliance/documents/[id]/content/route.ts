@@ -16,7 +16,7 @@ import { query } from "@/lib/db/postgres";
 import {
   convertDocxToHtml,
   convertHtmlToDocx,
-} from "@/lib/document-converters";
+} from "@/lib/utils/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import {
   createDocumentRevision,

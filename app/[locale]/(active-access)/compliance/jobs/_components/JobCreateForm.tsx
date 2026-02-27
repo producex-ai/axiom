@@ -5,10 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createJobSchema, type CreateJobInput } from "@/lib/validators/jobValidators";
-import { createJob } from "@/lib/actions/jobActions";
-import { getJobTemplates } from "@/lib/actions/jobTemplateActions";
+import { createJob } from "@/actions/jobs/job-actions";
+import { getJobTemplates } from "@/actions/jobs/job-template-actions";
 import type { JobTemplateWithFields } from "@/lib/services/jobTemplateService";
-import type { OrgMember } from "@/actions/clerk";
+import type { OrgMember } from "@/actions/auth/clerk";
 import { FREQUENCY_LABELS, type ScheduleFrequency } from "@/lib/cron/cron-utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -42,12 +42,16 @@ interface JobCreateFormProps {
 
 export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [templates, setTemplates] = useState<JobTemplateWithFields[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<JobTemplateWithFields | null>(null);
+
+  // Get template ID from either prop (server) or searchParams (client)
+  const templateIdFromUrl = searchParams.get("template") || preselectedTemplateId;
 
   const form = useForm<CreateJobInput>({
     resolver: zodResolver(createJobSchema),
@@ -65,8 +69,8 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
   }, []);
 
   useEffect(() => {
-    if (preselectedTemplateId && templates.length > 0 && !selectedTemplate) {
-      const template = templates.find((t) => t.id === preselectedTemplateId);
+    if (templateIdFromUrl && templates.length > 0 && !selectedTemplate) {
+      const template = templates.find((t) => t.id === templateIdFromUrl);
       if (template) {
         setSelectedTemplate(template);
         form.setValue("template_id", template.id);
@@ -77,7 +81,7 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
         });
       }
     }
-  }, [preselectedTemplateId, templates]);
+  }, [templateIdFromUrl, templates, selectedTemplate, form]);
 
   const loadTemplates = async () => {
     setIsLoading(true);

@@ -21,7 +21,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { getDocumentById } from "@/lib/primus/db-helper";
-import { analyzeCompliance } from "@/lib/llm-analysis";
+import { analyzeCompliance } from "@/lib/ai/llm-analysis";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";

@@ -14,7 +14,7 @@ import {
 } from "@/db/queries/log-schedules";
 import { getLogTemplateById } from "@/db/queries/log-templates";
 import { generateLogsForSchedule } from "@/lib/cron/generate-daily-logs";
-import { getOrgMembersAction } from "./clerk";
+import { getOrgMembersAction } from "../auth/clerk";
 
 // Define validation schema with date validation
 const CreateScheduleSchema = z

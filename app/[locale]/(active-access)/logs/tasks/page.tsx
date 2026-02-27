@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { ClipboardList } from "lucide-react";
 import { redirect } from "next/navigation";
 
-import { getDailyLogsAction } from "@/actions/daily-logs";
+import { getDailyLogsAction } from "@/actions/logs/daily-logs";
 import { TaskListTable } from "@/components/logs/TaskListTable";
 
 export default async function OrgTasksPage() {

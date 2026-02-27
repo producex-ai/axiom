@@ -1,8 +1,8 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getOrgMembersAction } from "@/actions/clerk";
-import { getLogTemplateByIdAction } from "@/actions/log-templates";
+import { getOrgMembersAction } from "@/actions/auth/clerk";
+import { getLogTemplateByIdAction } from "@/actions/logs/log-templates";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "./_components/schedule-form";
 

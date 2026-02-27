@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateJobSchema, type UpdateJobInput } from "@/lib/validators/jobValidators";
-import { updateJob } from "@/lib/actions/jobActions";
+import { updateJob } from "@/actions/jobs/job-actions";
 import type { Job } from "@/lib/services/jobService";
-import type { OrgMember } from "@/actions/clerk";
+import type { OrgMember } from "@/actions/auth/clerk";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {

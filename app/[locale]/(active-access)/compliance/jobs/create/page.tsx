@@ -1,5 +1,8 @@
-import { getOrgMembersAction } from "@/actions/clerk";
+import { getOrgMembersAction } from "@/actions/auth/clerk";
 import { JobCreateForm } from "../_components/JobCreateForm";
+
+// Force dynamic rendering since we use searchParams
+export const dynamic = "force-dynamic";
 
 interface CreateJobPageProps {
   searchParams: Promise<{ template?: string }>;

@@ -2,7 +2,7 @@ import { Calendar, Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { getLogTemplatesAction } from "@/actions/log-templates";
+import { getLogTemplatesAction } from "@/actions/logs/log-templates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {

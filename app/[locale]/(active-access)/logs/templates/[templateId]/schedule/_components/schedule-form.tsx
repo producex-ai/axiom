@@ -4,13 +4,13 @@ import { Loader2 } from "lucide-react";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import type { OrgMember } from "@/actions/clerk";
+import type { OrgMember } from "@/actions/auth/clerk";
 import {
   type CreateScheduleState,
   createLogScheduleAction,
   toggleScheduleStatusAction,
   updateLogScheduleAction,
-} from "@/actions/log-schedules";
+} from "@/actions/logs/log-schedules";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

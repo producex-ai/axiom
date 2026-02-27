@@ -8,7 +8,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db/postgres";
-import { convertHtmlToDocx } from "@/lib/document-converters";
+import { convertHtmlToDocx } from "@/lib/utils/document-converters";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import {
   createDocumentRevision,

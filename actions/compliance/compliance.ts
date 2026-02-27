@@ -25,7 +25,7 @@ import {
   ServerError,
   createErrorResponse,
   createSuccessResponse,
-} from "./utils";
+} from "../utils";
 
 const MAX_FILES = 3;
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB

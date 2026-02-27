@@ -12,7 +12,7 @@ import {
   type ActionState,
   submitForApprovalAction,
   updateDailyLogTasksAction,
-} from "@/actions/daily-logs";
+} from "@/actions/logs/daily-logs";
 import { ReviewSummary } from "@/components/tasks/ReviewSummary";
 import { SubmissionSummary } from "@/components/tasks/SubmissionSummary";
 import { TaskView } from "@/components/tasks/TaskView";

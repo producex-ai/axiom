@@ -234,4 +234,3 @@ export async function getJobsByTemplateId(templateId: string) {
     return { success: false, error: "Failed to fetch jobs for template" };
   }
 }
-

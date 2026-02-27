@@ -23,7 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Eye, Play, Trash2, Pencil } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { deleteJob } from "@/lib/actions/jobActions";
+import { deleteJob } from "@/actions/jobs/job-actions";
 import { ActionExecutionModal } from "./ActionExecutionModal";
 
 interface JobActionsDropdownProps {

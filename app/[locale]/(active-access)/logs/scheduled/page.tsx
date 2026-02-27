@@ -2,7 +2,7 @@ import { Calendar, CheckCircle2, User } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { getActiveSchedulesWithDetailsAction } from "@/actions/log-schedules";
+import { getActiveSchedulesWithDetailsAction } from "@/actions/logs/log-schedules";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";

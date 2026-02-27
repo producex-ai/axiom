@@ -21,7 +21,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { query } from "@/lib/db/postgres";
-import { deleteFromS3 } from "@/lib/s3-utils";
+import { deleteFromS3 } from "@/lib/utils/s3";
 
 export async function DELETE(
   request: NextRequest,

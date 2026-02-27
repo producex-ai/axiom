@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { deleteJobTemplate } from "@/lib/actions/jobTemplateActions";
+import { deleteJobTemplate } from "@/actions/jobs/job-template-actions";
 import { useToast } from "@/hooks/use-toast";
 
 interface DeactivateTemplateButtonProps {

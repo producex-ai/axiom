@@ -5,8 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
-import { getOrgMembersAction } from "@/actions/clerk";
-import { getJobById } from "@/lib/actions/jobActions";
+import { getOrgMembersAction } from "@/actions/auth/clerk";
+import { getJobById } from "@/actions/jobs/job-actions";
 import { JobEditForm } from "../../_components/JobEditForm";
 
 async function EditJobWrapper({ id }: { id: string }) {

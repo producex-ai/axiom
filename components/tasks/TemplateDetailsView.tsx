@@ -2,7 +2,7 @@
 
 import { Calendar, CheckCircle2, Pencil, User } from "lucide-react";
 import { useState } from "react";
-import type { OrgMember } from "@/actions/clerk";
+import type { OrgMember } from "@/actions/auth/clerk";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EditAssignmentDialog } from "./EditAssignmentDialog";

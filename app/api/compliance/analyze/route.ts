@@ -21,8 +21,8 @@ import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthContext } from "@/lib/primus/auth-helper";
 import { query } from "@/lib/db/postgres";
-import { getFromS3 } from "@/lib/s3-utils";
-import { analyzeCompliance } from "@/lib/llm-analysis";
+import { getFromS3 } from "@/lib/utils/s3";
+import { analyzeCompliance } from "@/lib/ai/llm-analysis";
 import { loadSubmoduleSpec } from "@/server/primus/loader";
 
 export const runtime = "nodejs";

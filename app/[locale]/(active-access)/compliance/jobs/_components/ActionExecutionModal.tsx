@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { executeJobActionSchema, type ExecuteJobActionInput } from "@/lib/validators/jobValidators";
-import { executeJobAction } from "@/lib/actions/jobActions";
+import { executeJobAction } from "@/actions/jobs/job-actions";
 import {
   Dialog,
   DialogContent,

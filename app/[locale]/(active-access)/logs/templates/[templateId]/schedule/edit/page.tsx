@@ -1,9 +1,9 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getOrgMembersAction } from "@/actions/clerk";
-import { getLogScheduleByIdAction } from "@/actions/log-schedules";
-import { getLogTemplateByIdAction } from "@/actions/log-templates";
+import { getOrgMembersAction } from "@/actions/auth/clerk";
+import { getLogScheduleByIdAction } from "@/actions/logs/log-schedules";
+import { getLogTemplateByIdAction } from "@/actions/logs/log-templates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "../_components/schedule-form";

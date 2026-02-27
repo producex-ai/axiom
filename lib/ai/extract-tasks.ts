@@ -7,7 +7,7 @@ import {
 import { z } from "zod";
 
 import type { TemplateType } from "@/db/queries/log-templates";
-import { getFromS3, uploadToS3 } from "@/lib/s3-utils";
+import { getFromS3, uploadToS3 } from "@/lib/utils/s3";
 
 // Schema for task list extraction
 const TaskListSchema = z.object({

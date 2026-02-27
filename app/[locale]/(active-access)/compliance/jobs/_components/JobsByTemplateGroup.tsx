@@ -147,9 +147,9 @@ export function JobsByTemplateGroup({ jobs, currentUserId }: JobsByTemplateGroup
                           {statusCounts.OVERDUE} Overdue
                         </Badge>
                       )}
-                      {statusCounts.DUE > 0 && (
+                      {statusCounts.OPEN > 0 && (
                         <Badge variant="default" className="text-xs">
-                          {statusCounts.DUE} Due
+                          {statusCounts.OPEN} Open
                         </Badge>
                       )}
                       {statusCounts.COMPLETED > 0 && (

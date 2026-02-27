@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLogTemplateByIdAction } from "@/actions/log-templates";
+import { getLogTemplateByIdAction } from "@/actions/logs/log-templates";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
