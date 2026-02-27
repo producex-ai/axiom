@@ -24,9 +24,9 @@ const statusConfig: Record<
     label: "Overdue",
     color: "text-red-600",
   },
-  DUE: {
+  OPEN: {
     variant: "default",
-    label: "Due",
+    label: "Open",
     color: "text-blue-600",
   },
   COMPLETED: {

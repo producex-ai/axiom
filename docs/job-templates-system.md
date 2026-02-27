@@ -39,10 +39,10 @@ Template → Job → ActionExecution → ExecutionHistory
    - Updates derived status
 
 4. **Derived Status**: Runtime-calculated status
-   - **UPCOMING**: Before execution window
-   - **DUE**: Within execution window
-   - **COMPLETED**: Action exists in current window
-   - **OVERDUE**: Past execution window without action
+   - **UPCOMING**: Before execution window opens (today < cycleStart)
+   - **OPEN**: Execution window is open, ready to execute (cycleStart <= today < cycleEnd, not executed)
+   - **COMPLETED**: Executed within current cycle window
+   - **OVERDUE**: Past execution deadline without being executed (today >= cycleEnd, not executed)
 
 ## Database Schema
 
@@ -143,7 +143,7 @@ function deriveStatus(job: Job, lastAction: JobAction | null): JobStatus {
 
   // No action in window
   if (today >= windowEnd) return "OVERDUE";
-  if (today >= nextExecution) return "DUE";
+  if (today >= nextExecution) return "OPEN";
   return "UPCOMING";
 }
 ```

@@ -101,9 +101,13 @@ export const executeJobActionSchema = z.object({
 export type ExecuteJobActionInput = z.infer<typeof executeJobActionSchema>;
 
 // Job Status Type
+// UPCOMING: Execution window hasn't started yet (today < cycleStart)
+// OPEN: Execution window is open, ready to execute (cycleStart <= today < cycleEnd, not executed)
+// COMPLETED: Executed within current cycle window
+// OVERDUE: Past execution deadline without being executed (today >= cycleEnd, not executed)
 export const jobStatusSchema = z.enum([
   "UPCOMING",
-  "DUE",
+  "OPEN",
   "COMPLETED",
   "OVERDUE",
 ]);

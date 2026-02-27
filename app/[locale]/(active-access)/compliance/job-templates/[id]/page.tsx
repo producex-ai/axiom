@@ -109,9 +109,6 @@ async function TemplateDetail({ id, locale }: { id: string; locale: string }) {
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-medium text-sm">{field.field_label}</span>
-                          <Badge variant="outline" className="text-xs">
-                            {field.field_type}
-                          </Badge>
                         </div>
                         <div className="text-xs text-muted-foreground">
                           Key: {field.field_key}
@@ -147,9 +144,6 @@ async function TemplateDetail({ id, locale }: { id: string; locale: string }) {
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-medium text-sm">{field.field_label}</span>
-                          <Badge variant="outline" className="text-xs">
-                            {field.field_type}
-                          </Badge>
                         </div>
                         <div className="text-xs text-muted-foreground">
                           Key: {field.field_key}

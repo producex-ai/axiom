@@ -594,6 +594,12 @@ export async function getJobsByTemplateId(
     performed_by_name: string;
     performed_at: Date;
     notes: string | null;
+    creation_values: Array<{
+      field_key: string;
+      field_label: string;
+      field_type: string;
+      value: any;
+    }>;
     action_values: Array<{
       field_key: string;
       field_label: string;
@@ -628,12 +634,13 @@ export async function getJobsByTemplateId(
     }
   }
 
-  // Get execution history for all jobs of this template with action values
+  // Get execution history for all jobs of this template with action values and creation values
   const historyResult = await pool.query<{
     job_id: string;
     performed_by: string;
     performed_at: Date;
     notes: string | null;
+    creation_values: any;
     action_values: any;
   }>(
     `SELECT 
@@ -643,18 +650,31 @@ export async function getJobsByTemplateId(
        a.notes,
        COALESCE(
          json_agg(
-           json_build_object(
+           DISTINCT jsonb_build_object(
+             'field_key', cv.field_key,
+             'field_label', cf.field_label,
+             'field_type', cf.field_type,
+             'value', cv.value_json
+           )
+         ) FILTER (WHERE cv.id IS NOT NULL),
+         '[]'
+       ) as creation_values,
+       COALESCE(
+         json_agg(
+           DISTINCT jsonb_build_object(
              'field_key', av.field_key,
              'field_label', av.field_label,
              'field_type', av.field_type,
              'value', av.value_json
-           ) ORDER BY av.field_key
+           )
          ) FILTER (WHERE av.id IS NOT NULL),
          '[]'
        ) as action_values
      FROM job_actions a
      INNER JOIN jobs j ON j.id = a.job_id
      LEFT JOIN job_action_values av ON av.action_id = a.id
+     LEFT JOIN job_creation_values cv ON cv.job_id = j.id
+     LEFT JOIN job_template_fields cf ON cf.field_key = cv.field_key AND cf.template_id = j.template_id AND cf.field_category = 'creation'
      WHERE j.template_id = $1 AND j.org_id = $2
      GROUP BY j.id, a.performed_by, a.performed_at, a.notes, a.id
      ORDER BY a.performed_at DESC
@@ -671,6 +691,7 @@ export async function getJobsByTemplateId(
     execution_history: historyResult.rows.map((row) => ({
       ...row,
       performed_by_name: historyUserNamesMap.get(row.performed_by) || "Unknown User",
+      creation_values: Array.isArray(row.creation_values) ? row.creation_values : [],
       action_values: Array.isArray(row.action_values) ? row.action_values : [],
     })),
   };

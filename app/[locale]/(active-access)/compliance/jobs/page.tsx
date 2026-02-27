@@ -30,6 +30,7 @@ async function JobsContent() {
   const jobs = result.data;
 
   const overdueJobs = jobs.filter((j) => j.derived_status === "OVERDUE");
+  const openJobs = jobs.filter((j) => j.derived_status === "OPEN");
   const completedJobs = jobs.filter((j) => j.derived_status === "COMPLETED");
   const upcomingJobs = jobs.filter((j) => j.derived_status === "UPCOMING");
 
@@ -41,6 +42,9 @@ async function JobsContent() {
         </TabsTrigger>
         <TabsTrigger value="overdue" className="text-red-600">
           Overdue ({overdueJobs.length})
+        </TabsTrigger>
+        <TabsTrigger value="open" className="text-blue-600">
+          Open ({openJobs.length})
         </TabsTrigger>
         <TabsTrigger value="completed">
           Completed ({completedJobs.length})
@@ -56,6 +60,10 @@ async function JobsContent() {
 
       <TabsContent value="overdue">
         <JobsList jobs={overdueJobs} currentUserId={userId || ""} />
+      </TabsContent>
+
+      <TabsContent value="open">
+        <JobsList jobs={openJobs} currentUserId={userId || ""} />
       </TabsContent>
 
       <TabsContent value="completed">
@@ -89,7 +97,7 @@ export default function JobsPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Jobs</h1>
           <p className="text-muted-foreground mt-1">
-            Track and execute recurring jobs
+            Track and execute recurring jobs. Jobs move through statuses: Upcoming → Open → Completed (or Overdue if missed).
           </p>
         </div>
         <Button asChild>

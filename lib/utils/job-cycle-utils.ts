@@ -7,6 +7,20 @@
  * - Fixed anchor date scheduling (no drift)
  * - Early execution support
  * - Missed cycle catch-up
+ * 
+ * STATUS DEFINITIONS:
+ * - UPCOMING: Execution window hasn't opened yet (today < cycleStart)
+ *             User cannot execute the job yet. Shows in "Upcoming" tab.
+ * 
+ * - OPEN:     Execution window is open (cycleStart <= today < cycleEnd, not executed)
+ *             User can execute the job now. Shows in "Open" tab.
+ *             This is the actionable state - job is ready to be worked on.
+ * 
+ * - OVERDUE:  Past the deadline (today >= cycleEnd, not executed)
+ *             User missed the deadline. Shows in "Overdue" tab.
+ * 
+ * - COMPLETED: Executed within current cycle window
+ *              Job is done for this cycle. Shows in "Completed" tab.
  */
 
 import type { ScheduleFrequency } from "@/lib/cron/cron-utils";
@@ -220,7 +234,7 @@ export function catchUpMissedCycles(
  * Status determination:
  * - COMPLETED: Executed within current cycle window
  * - OVERDUE: Current cycle has passed (today >= cycleEnd) and not executed
- * - DUE: Within execution window (today >= cycleStart) and not executed
+ * - OPEN: Execution window is open (today >= cycleStart) and not executed
  * - UPCOMING: Before execution window (today < cycleStart)
  * 
  * @param lastExecutionDate - The timestamp of the last execution, or null
@@ -234,7 +248,7 @@ export function deriveJobStatus(
   nextExecutionDate: Date,
   frequency: ScheduleFrequency,
   now: Date = new Date()
-): "UPCOMING" | "DUE" | "COMPLETED" | "OVERDUE" {
+): "UPCOMING" | "OPEN" | "COMPLETED" | "OVERDUE" {
   const { cycleStart, cycleEnd } = getCycleWindow(nextExecutionDate, frequency);
   
   // Normalize dates to start of day for comparison (UTC)
@@ -256,7 +270,7 @@ export function deriveJobStatus(
   if (today >= cycleEndDay) {
     return "OVERDUE";
   } else if (today >= cycleStartDay) {
-    return "DUE";
+    return "OPEN";
   } else {
     return "UPCOMING";
   }

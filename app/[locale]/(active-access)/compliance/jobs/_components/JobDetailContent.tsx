@@ -38,7 +38,7 @@ const statusConfig: Record<
   { variant: "default" | "secondary" | "destructive" | "outline"; label: string }
 > = {
   OVERDUE: { variant: "destructive", label: "Overdue" },
-  DUE: { variant: "default", label: "Due" },
+  OPEN: { variant: "default", label: "Open" },
   COMPLETED: { variant: "secondary", label: "Completed" },
   UPCOMING: { variant: "outline", label: "Upcoming" },
 };

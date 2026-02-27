@@ -28,6 +28,7 @@ interface ExecutionHistoryItem {
   performed_by_name: string;
   performed_at: Date;
   notes: string | null;
+  creation_values: ActionField[];
   action_values: ActionField[];
 }
 
