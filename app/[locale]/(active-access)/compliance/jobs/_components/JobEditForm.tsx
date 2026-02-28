@@ -8,6 +8,7 @@ import { updateJobSchema, type UpdateJobInput } from "@/lib/validators/jobValida
 import { updateJob } from "@/actions/jobs/job-actions";
 import type { Job } from "@/lib/services/jobService";
 import type { OrgMember } from "@/actions/auth/clerk";
+import { toDateInputValue } from "@/lib/utils/date-utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -33,7 +34,7 @@ export function JobEditForm({ job, members }: JobEditFormProps) {
       id: job.id,
       assigned_to: job.assigned_to,
       frequency: job.frequency,
-      next_execution_date: new Date(job.next_execution_date).toISOString().split("T")[0],
+      next_execution_date: toDateInputValue(job.next_execution_date),
     },
   });
 

@@ -23,15 +23,15 @@
  *              Job is done for this cycle. Shows in "Completed" tab.
  */
 
-import type { ScheduleFrequency } from "@/lib/cron/cron-utils";
+import type { JobFrequency } from "@/lib/validators/jobValidators";
 
 export interface CycleWindow {
   cycleStart: Date;
   cycleEnd: Date;
 }
 
-export interface JobFrequency {
-  frequency: ScheduleFrequency;
+export interface JobFrequencyInfo {
+  frequency: JobFrequency;
 }
 
 /**
@@ -52,7 +52,7 @@ export interface JobFrequency {
  */
 export function getCycleWindow(
   nextExecutionDate: Date,
-  frequency: ScheduleFrequency
+  frequency: JobFrequency
 ): CycleWindow {
   const cycleEnd = new Date(nextExecutionDate);
   const cycleStart = new Date(nextExecutionDate);
@@ -72,6 +72,12 @@ export function getCycleWindow(
       break;
     case "yearly":
       cycleStart.setFullYear(cycleStart.getFullYear() - 1);
+      break;
+    case "two_yearly":
+      cycleStart.setFullYear(cycleStart.getFullYear() - 2);
+      break;
+    case "five_yearly":
+      cycleStart.setFullYear(cycleStart.getFullYear() - 5);
       break;
   }
 
@@ -135,7 +141,7 @@ export function hasExecutedThisCycle(
 export function canExecuteJob(
   lastExecutionDate: Date | null,
   nextExecutionDate: Date,
-  frequency: ScheduleFrequency,
+  frequency: JobFrequency,
   now: Date = new Date()
 ): boolean {
   const { cycleStart, cycleEnd } = getCycleWindow(nextExecutionDate, frequency);
@@ -172,7 +178,7 @@ export function canExecuteJob(
  */
 export function advanceNextExecutionDate(
   currentNextExecutionDate: Date,
-  frequency: ScheduleFrequency
+  frequency: JobFrequency
 ): Date {
   const newDate = new Date(currentNextExecutionDate);
 
@@ -191,6 +197,12 @@ export function advanceNextExecutionDate(
       break;
     case "yearly":
       newDate.setFullYear(newDate.getFullYear() + 1);
+      break;
+    case "two_yearly":
+      newDate.setFullYear(newDate.getFullYear() + 2);
+      break;
+    case "five_yearly":
+      newDate.setFullYear(newDate.getFullYear() + 5);
       break;
   }
 
@@ -215,7 +227,7 @@ export function advanceNextExecutionDate(
  */
 export function catchUpMissedCycles(
   currentNextExecutionDate: Date,
-  frequency: ScheduleFrequency,
+  frequency: JobFrequency,
   now: Date = new Date()
 ): Date {
   let nextDate = new Date(currentNextExecutionDate);
@@ -246,7 +258,7 @@ export function catchUpMissedCycles(
 export function deriveJobStatus(
   lastExecutionDate: Date | null,
   nextExecutionDate: Date,
-  frequency: ScheduleFrequency,
+  frequency: JobFrequency,
   now: Date = new Date()
 ): "UPCOMING" | "OPEN" | "COMPLETED" | "OVERDUE" {
   const { cycleStart, cycleEnd } = getCycleWindow(nextExecutionDate, frequency);

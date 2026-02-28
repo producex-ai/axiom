@@ -27,19 +27,20 @@ import { DynamicFieldRenderer } from "../../_components/DynamicFieldRenderer";
 import { executeJobActionSchema, type ExecuteJobActionInput } from "@/lib/validators/jobValidators";
 import { executeJobAction } from "@/actions/jobs/job-actions";
 import type { JobDetail } from "@/lib/services/jobService";
-import { Calendar, User, Clock, Loader2 } from "lucide-react";
+import { Calendar, User, Clock, Loader2, CalendarClock } from "lucide-react";
 import type { JobStatus } from "@/lib/validators/jobValidators";
-import { FREQUENCY_LABELS } from "@/lib/cron/cron-utils";
+import { JOB_FREQUENCY_LABELS } from "@/lib/validators/jobValidators";
 import { useToast } from "@/hooks/use-toast";
-import { canExecuteJob } from "@/lib/utils/job-cycle-utils";
+import { canExecuteJob, getCycleWindow } from "@/lib/utils/job-cycle-utils";
+import { parseLocalDate, formatLocalDate } from "@/lib/utils/date-utils";
 
 const statusConfig: Record<
   JobStatus,
-  { variant: "default" | "secondary" | "destructive" | "outline"; label: string }
+  { variant: "default" | "secondary" | "destructive" | "outline"; label: string; className?: string }
 > = {
   OVERDUE: { variant: "destructive", label: "Overdue" },
   OPEN: { variant: "default", label: "Open" },
-  COMPLETED: { variant: "secondary", label: "Completed" },
+  COMPLETED: { variant: "outline", label: "Completed", className: "bg-green-50 text-green-700 border-green-200 hover:bg-green-100" },
   UPCOMING: { variant: "outline", label: "Upcoming" },
 };
 
@@ -142,7 +143,14 @@ export function JobDetailContent({ jobId, currentUserId }: JobDetailContentProps
   const { job, template, creation_fields, action_fields, derived_status } = jobDetail;
 
   const statusInfo = statusConfig[derived_status];
-  const nextExecution = new Date(job.next_execution_date);
+  const nextExecution = parseLocalDate(job.next_execution_date);
+  
+  // Calculate cycle start date for UPCOMING jobs
+  let cycleStartDate: Date | null = null;
+  if (derived_status === "UPCOMING") {
+    const { cycleStart } = getCycleWindow(nextExecution, job.frequency);
+    cycleStartDate = cycleStart;
+  }
   
   // Check if job can be executed using cycle-window logic
   // User must be assigned AND job must not have been executed in current cycle
@@ -175,28 +183,40 @@ export function JobDetailContent({ jobId, currentUserId }: JobDetailContentProps
                 )}
               </CardDescription>
             </div>
-            <Badge variant={statusInfo.variant} className="text-sm">
+            <Badge variant={statusInfo.variant} className={`text-sm ${statusInfo.className || ''}`}>
               {statusInfo.label}
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="flex items-center gap-2 text-sm">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <div>
-                <div className="font-medium">Next Execution</div>
-                <div className="text-muted-foreground">
-                  {nextExecution.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            {derived_status === "UPCOMING" && cycleStartDate ? (
+              <div className="flex items-center gap-2 text-sm">
+                <CalendarClock className="h-4 w-4 text-blue-600" />
+                <div>
+                  <div className="font-medium text-blue-600">Execution Opens</div>
+                  <div className="text-muted-foreground">
+                    {cycleStartDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex items-center gap-2 text-sm">
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <div className="font-medium">Next Execution</div>
+                  <div className="text-muted-foreground">
+                    {nextExecution.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="flex items-center gap-2 text-sm">
               <Clock className="h-4 w-4 text-muted-foreground" />
               <div>
                 <div className="font-medium">Frequency</div>
                 <div className="text-muted-foreground">
-                  {FREQUENCY_LABELS[job.frequency]}
+                  {JOB_FREQUENCY_LABELS[job.frequency]}
                 </div>
               </div>
             </div>

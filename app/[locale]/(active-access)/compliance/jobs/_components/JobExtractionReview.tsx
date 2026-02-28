@@ -27,8 +27,8 @@ import { useToast } from "@/hooks/use-toast";
 import { createBulkJobsAction } from "@/actions/jobs/job-bulk-actions";
 import type { OrgMember } from "@/actions/auth/clerk";
 import type { FieldMapping } from "@/lib/validators/jobValidators";
-import type { ScheduleFrequency } from "@/lib/cron/cron-utils";
-import { FREQUENCY_LABELS } from "@/lib/cron/cron-utils";
+import type { JobFrequency } from "@/lib/validators/jobValidators";
+import { JOB_FREQUENCY_LABELS } from "@/lib/validators/jobValidators";
 
 interface JobExtractionReviewProps {
   extractionData: {
@@ -63,7 +63,7 @@ interface EditableJob {
   index: number;
   fields: Record<string, any>;
   assigned_to: string;
-  frequency: ScheduleFrequency;
+  frequency: JobFrequency;
   next_execution_date: string;
   isEditing: boolean;
   errors: string[];
@@ -86,7 +86,7 @@ export function JobExtractionReview({
       index,
       fields: row,
       assigned_to: "",
-      frequency: "monthly" as ScheduleFrequency,
+      frequency: "monthly" as JobFrequency,
       next_execution_date: "",
       isEditing: false,
       errors: [],
@@ -94,7 +94,7 @@ export function JobExtractionReview({
   );
   const [isCreating, setIsCreating] = useState(false);
   const [globalAssignedTo, setGlobalAssignedTo] = useState("");
-  const [globalFrequency, setGlobalFrequency] = useState<ScheduleFrequency>("monthly");
+  const [globalFrequency, setGlobalFrequency] = useState<JobFrequency>("monthly");
   const [globalNextDate, setGlobalNextDate] = useState("");
 
   // Get unmapped columns
@@ -260,36 +260,94 @@ export function JobExtractionReview({
         };
       });
 
-      const result = await createBulkJobsAction({
-        templateId: extractionData.template.id,
-        fieldMappings,
-        jobs: jobInputs,
-      });
+      // Batch processing: Split into batches of 50 for parallel processing
+      // Jobs are now created in parallel, so 50 jobs = ~3-5 seconds
+      const BATCH_SIZE = 50;
+      const batches = [];
+      for (let i = 0; i < jobInputs.length; i += BATCH_SIZE) {
+        batches.push(jobInputs.slice(i, i + BATCH_SIZE));
+      }
 
-      if (!result.success) {
+      console.log(`📦 Processing ${jobInputs.length} jobs in ${batches.length} batch(es) of max ${BATCH_SIZE}...`);
+
+      let totalCreated = 0;
+      let totalFailed = 0;
+      const allCreated: any[] = [];
+      const allFailed: any[] = [];
+
+      // Process batches sequentially to avoid overwhelming the server
+      for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+        const batch = batches[batchIndex];
+        console.log(`📦 Processing batch ${batchIndex + 1}/${batches.length} (${batch.length} jobs)...`);
+
+        toast({
+          title: `Processing batch ${batchIndex + 1}/${batches.length}`,
+          description: `Creating ${batch.length} jobs...`,
+        });
+
+        try {
+          const result = await createBulkJobsAction({
+            templateId: extractionData.template.id,
+            fieldMappings,
+            jobs: batch,
+          });
+
+          console.log(`✅ Batch ${batchIndex + 1} result:`, result);
+
+          if (!result.success) {
+            console.error(`❌ Batch ${batchIndex + 1} failed:`, result.error);
+            // Continue with next batch even if this one fails
+            totalFailed += batch.length;
+            
+            toast({
+              title: `Batch ${batchIndex + 1} failed`,
+              description: result.error || "Unknown error",
+              variant: "destructive",
+            });
+          } else if (result.data) {
+            totalCreated += result.data.totalCreated;
+            totalFailed += result.data.failed.length;
+            allCreated.push(...result.data.created);
+            allFailed.push(...result.data.failed);
+            
+            console.log(`✅ Batch ${batchIndex + 1} complete: ${result.data.totalCreated}/${batch.length} created`);
+          }
+        } catch (batchError) {
+          console.error(`❌ Batch ${batchIndex + 1} exception:`, batchError);
+          totalFailed += batch.length;
+          
+          toast({
+            title: `Batch ${batchIndex + 1} error`,
+            description: batchError instanceof Error ? batchError.message : "Unknown error",
+            variant: "destructive",
+          });
+        }
+      }
+
+      // Show final summary
+      if (totalCreated > 0 && totalFailed === 0) {
+        toast({
+          title: "Success!",
+          description: `Created ${totalCreated} jobs successfully.`,
+        });
+      } else if (totalCreated > 0 && totalFailed > 0) {
+        toast({
+          title: "Partial success",
+          description: `Created ${totalCreated}/${jobInputs.length} jobs. ${totalFailed} failed.`,
+          variant: "default",
+        });
+      } else {
         toast({
           title: "Failed to create jobs",
-          description: result.error || "An error occurred",
+          description: `All ${totalFailed} jobs failed to create.`,
           variant: "destructive",
         });
         return;
       }
 
-      // Show success message
-      if (result.data) {
-        toast({
-          title: "Jobs created successfully",
-          description: `Created ${result.data.totalCreated} out of ${result.data.totalAttempted} jobs.`,
-        });
-
-        // Show failures if any
-        if (result.data.failed.length > 0) {
-          toast({
-            title: "Some jobs failed",
-            description: `${result.data.failed.length} job(s) could not be created.`,
-            variant: "destructive",
-          });
-        }
+      // Log details
+      if (allFailed.length > 0) {
+        console.error("Failed jobs:", allFailed);
       }
 
       onSuccess();
@@ -487,13 +545,13 @@ export function JobExtractionReview({
               <label className="text-sm font-medium">Frequency</label>
               <Select
                 value={globalFrequency}
-                onValueChange={(value) => setGlobalFrequency(value as ScheduleFrequency)}
+                onValueChange={(value) => setGlobalFrequency(value as JobFrequency)}
               >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.entries(FREQUENCY_LABELS).map(([value, label]) => (
+                  {Object.entries(JOB_FREQUENCY_LABELS).map(([value, label]) => (
                     <SelectItem key={value} value={value}>
                       {label}
                     </SelectItem>
@@ -605,7 +663,7 @@ export function JobExtractionReview({
                           value={job.frequency}
                           onValueChange={(value) =>
                             handleUpdateJob(job.index, {
-                              frequency: value as ScheduleFrequency,
+                              frequency: value as JobFrequency,
                             })
                           }
                         >
@@ -613,7 +671,7 @@ export function JobExtractionReview({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {Object.entries(FREQUENCY_LABELS).map(([value, label]) => (
+                            {Object.entries(JOB_FREQUENCY_LABELS).map(([value, label]) => (
                               <SelectItem key={value} value={value}>
                                 {label}
                               </SelectItem>

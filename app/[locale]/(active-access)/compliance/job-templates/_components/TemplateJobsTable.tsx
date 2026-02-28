@@ -16,7 +16,8 @@ import type { JobWithTemplate } from "@/lib/services/jobService";
 import type { JobStatus } from "@/lib/validators/jobValidators";
 import { Calendar, Clock, User } from "lucide-react";
 import { JobActionsDropdown } from "../../jobs/_components/JobActionsDropdown";
-import { FREQUENCY_LABELS } from "@/lib/cron/cron-utils";
+import { JOB_FREQUENCY_LABELS } from "@/lib/validators/jobValidators";
+import { parseLocalDate } from "@/lib/utils/date-utils";
 
 interface TemplateJobsTableProps {
   jobs: Array<JobWithTemplate & { derived_status: JobStatus; assigned_to_name: string }>;
@@ -25,7 +26,7 @@ interface TemplateJobsTableProps {
 
 const statusConfig: Record<
   JobStatus,
-  { variant: "default" | "secondary" | "destructive" | "outline"; label: string }
+  { variant: "default" | "secondary" | "destructive" | "outline"; label: string; className?: string }
 > = {
   OVERDUE: {
     variant: "destructive",
@@ -36,8 +37,9 @@ const statusConfig: Record<
     label: "Open",
   },
   COMPLETED: {
-    variant: "secondary",
+    variant: "outline",
     label: "Completed",
+    className: "bg-green-50 text-green-700 border-green-200 hover:bg-green-100",
   },
   UPCOMING: {
     variant: "outline",
@@ -93,12 +95,12 @@ export function TemplateJobsTable({ jobs, currentUserId }: TemplateJobsTableProp
             <TableBody>
               {jobs.map((job) => {
                 const statusInfo = statusConfig[job.derived_status];
-                const nextExecution = new Date(job.next_execution_date);
+                const nextExecution = parseLocalDate(job.next_execution_date);
 
                 return (
                   <TableRow key={job.id}>
                     <TableCell>
-                      <Badge variant={statusInfo.variant}>
+                      <Badge variant={statusInfo.variant} className={statusInfo.className}>
                         {statusInfo.label}
                       </Badge>
                     </TableCell>
@@ -115,7 +117,7 @@ export function TemplateJobsTable({ jobs, currentUserId }: TemplateJobsTableProp
                     <TableCell>
                       <div className="flex items-center gap-1.5 text-sm">
                         <Clock className="h-4 w-4 text-muted-foreground" />
-                        {FREQUENCY_LABELS[job.frequency]}
+                        {JOB_FREQUENCY_LABELS[job.frequency]}
                       </div>
                     </TableCell>
                     <TableCell>

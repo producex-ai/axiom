@@ -3,7 +3,7 @@
 import { Control, FieldErrors } from "react-hook-form";
 import type { CreateJobInput, UpdateJobInput } from "@/lib/validators/jobValidators";
 import type { OrgMember } from "@/actions/auth/clerk";
-import { FREQUENCY_LABELS, type ScheduleFrequency } from "@/lib/cron/cron-utils";
+import { JOB_FREQUENCY_LABELS, type JobFrequency } from "@/lib/validators/jobValidators";
 import {
   FormControl,
   FormField,
@@ -53,8 +53,8 @@ export function JobFormFields({
                   </FormControl>
                   <SelectContent>
                     {(
-                      Object.entries(FREQUENCY_LABELS) as [
-                        ScheduleFrequency,
+                      Object.entries(JOB_FREQUENCY_LABELS) as [
+                        JobFrequency,
                         string,
                       ][]
                     ).map(([key, label]) => (
@@ -80,7 +80,7 @@ export function JobFormFields({
                     type="date"
                     className="w-full"
                     {...field}
-                    value={typeof field.value === 'string' ? field.value : field.value?.toISOString().split('T')[0] || ''}
+                    value={typeof field.value === 'string' ? field.value.split('T')[0] : ''}
                   />
                 </FormControl>
                 <FormMessage />

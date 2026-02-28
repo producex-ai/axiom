@@ -40,13 +40,13 @@ async function JobsContent() {
         <TabsTrigger value="grouped">
           By Template
         </TabsTrigger>
-        <TabsTrigger value="overdue" className="text-red-600">
+        <TabsTrigger value="overdue" className="data-[state=active]:text-red-600">
           Overdue ({overdueJobs.length})
         </TabsTrigger>
-        <TabsTrigger value="open" className="text-blue-600">
+        <TabsTrigger value="open" className="data-[state=active]:text-blue-600">
           Open ({openJobs.length})
         </TabsTrigger>
-        <TabsTrigger value="completed">
+        <TabsTrigger value="completed" className="data-[state=active]:text-green-700">
           Completed ({completedJobs.length})
         </TabsTrigger>
         <TabsTrigger value="upcoming">

@@ -1,11 +1,11 @@
 import { getPool } from "@/lib/db/postgres";
 import { getUserDisplayNames } from "@/lib/services/userService";
-import type { ScheduleFrequency } from "@/lib/cron/cron-utils";
 import type {
   CreateJobInput,
   UpdateJobInput,
   ExecuteJobActionInput,
   JobStatus,
+  JobFrequency,
 } from "@/lib/validators/jobValidators";
 import type { JobTemplateField } from "./jobTemplateService";
 
@@ -14,7 +14,7 @@ export interface Job {
   template_id: string;
   template_version: number;
   assigned_to: string;
-  frequency: ScheduleFrequency;
+  frequency: JobFrequency;
   next_execution_date: string;
   last_execution_date: Date | null;
   created_by: string;
@@ -196,8 +196,29 @@ export interface BulkJobCreationResult {
 }
 
 /**
+ * Helper function to process promises with concurrency limit
+ */
+async function processBatchWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  processor: (item: T, index: number) => Promise<R>
+): Promise<R[]> {
+  const results: R[] = [];
+  
+  for (let i = 0; i < items.length; i += concurrency) {
+    const batch = items.slice(i, i + concurrency);
+    const batchResults = await Promise.all(
+      batch.map((item, batchIndex) => processor(item, i + batchIndex))
+    );
+    results.push(...batchResults);
+  }
+  
+  return results;
+}
+
+/**
  * Create multiple jobs from template (bulk operation)
- * Uses best-effort strategy: continues on individual failures
+ * Uses controlled parallel processing to avoid connection pool exhaustion
  */
 export async function createBulkJobs(
   inputs: CreateJobInput[],
@@ -211,23 +232,44 @@ export async function createBulkJobs(
     failed: [],
   };
 
-  // Process each job individually to allow partial success
-  for (let i = 0; i < inputs.length; i++) {
-    const input = inputs[i];
-    try {
-      const job = await createJob(input, userId, orgId);
-      result.created.push(job);
+  // Process jobs in batches of 10 to avoid exhausting connection pool (max 20)
+  const CONCURRENCY = 10;
+  console.log(`📦 Processing ${inputs.length} jobs with concurrency: ${CONCURRENCY}`);
+
+  const results = await processBatchWithConcurrency(
+    inputs,
+    CONCURRENCY,
+    async (input, index) => {
+      try {
+        const job = await createJob(input, userId, orgId);
+        return { success: true, job, index };
+      } catch (error) {
+        console.error(`Failed to create job at index ${index}:`, error);
+        return {
+          success: false,
+          index,
+          input,
+          error: error instanceof Error ? error.message : "Unknown error",
+        };
+      }
+    }
+  );
+
+  // Separate successful and failed jobs
+  for (const res of results) {
+    if (res.success && 'job' in res && res.job) {
+      result.created.push(res.job);
       result.totalCreated++;
-    } catch (error) {
-      console.error(`Failed to create job at index ${i}:`, error);
+    } else if (!res.success && 'input' in res && res.input) {
       result.failed.push({
-        index: i,
-        input,
-        error: error instanceof Error ? error.message : "Unknown error",
+        index: res.index,
+        input: res.input,
+        error: res.error,
       });
     }
   }
 
+  console.log(`✅ Bulk creation complete: ${result.totalCreated}/${result.totalAttempted} successful`);
   return result;
 }
 
@@ -500,6 +542,12 @@ export async function executeJobAction(
         break;
       case 'yearly':
         newNextExecution.setFullYear(newNextExecution.getFullYear() + 1);
+        break;
+      case 'two_yearly':
+        newNextExecution.setFullYear(newNextExecution.getFullYear() + 2);
+        break;
+      case 'five_yearly':
+        newNextExecution.setFullYear(newNextExecution.getFullYear() + 5);
         break;
     }
 

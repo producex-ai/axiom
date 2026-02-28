@@ -6,9 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { JobWithTemplate } from "@/lib/services/jobService";
 import type { JobStatus } from "@/lib/validators/jobValidators";
-import { Calendar, User, Clock } from "lucide-react";
+import { Calendar, User, Clock, CalendarClock } from "lucide-react";
 import { JobActionsDropdown } from "./JobActionsDropdown";
-import { FREQUENCY_LABELS } from "@/lib/cron/cron-utils";
+import { JOB_FREQUENCY_LABELS } from "@/lib/validators/jobValidators";
+import { getCycleWindow } from "@/lib/utils/job-cycle-utils";
+import { parseLocalDate } from "@/lib/utils/date-utils";
 
 interface JobsListProps {
   jobs: Array<JobWithTemplate & { derived_status: JobStatus; assigned_to_name: string }>;
@@ -17,7 +19,7 @@ interface JobsListProps {
 
 const statusConfig: Record<
   JobStatus,
-  { variant: "default" | "secondary" | "destructive" | "outline"; label: string; color: string }
+  { variant: "default" | "secondary" | "destructive" | "outline"; label: string; color: string; className?: string }
 > = {
   OVERDUE: {
     variant: "destructive",
@@ -30,9 +32,10 @@ const statusConfig: Record<
     color: "text-blue-600",
   },
   COMPLETED: {
-    variant: "secondary",
+    variant: "outline",
     label: "Completed",
     color: "text-green-600",
+    className: "bg-green-50 text-green-700 border-green-200 hover:bg-green-100",
   },
   UPCOMING: {
     variant: "outline",
@@ -67,7 +70,14 @@ export function JobsList({ jobs, currentUserId }: JobsListProps) {
     <div className="space-y-3">
       {jobs.map((job) => {
         const statusInfo = statusConfig[job.derived_status];
-        const nextExecution = new Date(job.next_execution_date);
+        const nextExecution = parseLocalDate(job.next_execution_date);
+        
+        // Calculate cycle start date for UPCOMING jobs
+        let cycleStartDate: Date | null = null;
+        if (job.derived_status === "UPCOMING") {
+          const { cycleStart } = getCycleWindow(nextExecution, job.frequency);
+          cycleStartDate = cycleStart;
+        }
 
         return (
           <Card key={job.id} className="hover:shadow-md transition-shadow">
@@ -90,7 +100,7 @@ export function JobsList({ jobs, currentUserId }: JobsListProps) {
                     )}
                   </CardDescription>
                 </div>
-                <Badge variant={statusInfo.variant}>
+                <Badge variant={statusInfo.variant} className={statusInfo.className}>
                   {statusInfo.label}
                 </Badge>
               </div>
@@ -98,16 +108,25 @@ export function JobsList({ jobs, currentUserId }: JobsListProps) {
             <CardContent className="pt-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="h-4 w-4" />
-                    <span>
-                      {nextExecution.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </span>
-                  </div>
+                  {job.derived_status === "UPCOMING" && cycleStartDate ? (
+                    <div className="flex items-center gap-1.5 text-blue-600">
+                      <CalendarClock className="h-4 w-4" />
+                      <span className="font-medium">
+                        Opens {cycleStartDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4" />
+                      <span>
+                        {nextExecution.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
                     <span>
-                      {FREQUENCY_LABELS[job.frequency]}
+                      {JOB_FREQUENCY_LABELS[job.frequency]}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">

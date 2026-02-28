@@ -19,7 +19,21 @@ export const frequencySchema = z.enum([
   "quarterly",
   "half_yearly",
   "yearly",
+  "two_yearly",
+  "five_yearly",
 ]);
+
+export type JobFrequency = z.infer<typeof frequencySchema>;
+
+export const JOB_FREQUENCY_LABELS: Record<JobFrequency, string> = {
+  weekly: "Weekly",
+  monthly: "Monthly",
+  quarterly: "Quarterly",
+  half_yearly: "Half Yearly",
+  yearly: "Yearly",
+  two_yearly: "Every 2 Years",
+  five_yearly: "Every 5 Years",
+};
 
 // Job Template Field Schema
 export const jobTemplateFieldSchema = z.object({
@@ -215,7 +229,7 @@ export type ExtractedJobRow = z.infer<typeof extractedJobRowSchema>;
 export const bulkJobCreationSchema = z.object({
   templateId: z.string().uuid(),
   fieldMappings: z.array(fieldMappingSchema),
-  jobs: z.array(createJobSchema),
+  jobs: z.array(createJobSchema).max(50, "Maximum 50 jobs per batch for optimal performance."),
 });
 
 export type BulkJobCreationInput = z.infer<typeof bulkJobCreationSchema>;

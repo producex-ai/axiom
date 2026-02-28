@@ -9,7 +9,7 @@ import { createJob } from "@/actions/jobs/job-actions";
 import { getJobTemplates } from "@/actions/jobs/job-template-actions";
 import type { JobTemplateWithFields } from "@/lib/services/jobTemplateService";
 import type { OrgMember } from "@/actions/auth/clerk";
-import { FREQUENCY_LABELS, type ScheduleFrequency } from "@/lib/cron/cron-utils";
+import { JOB_FREQUENCY_LABELS, type JobFrequency } from "@/lib/validators/jobValidators";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -200,8 +200,8 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
                       </FormControl>
                       <SelectContent>
                         {(
-                          Object.entries(FREQUENCY_LABELS) as [
-                            ScheduleFrequency,
+                          Object.entries(JOB_FREQUENCY_LABELS) as [
+                            JobFrequency,
                             string,
                           ][]
                         ).map(([key, label]) => (
@@ -227,7 +227,7 @@ export function JobCreateForm({ members, preselectedTemplateId }: JobCreateFormP
                         type="date"
                         className="w-full"
                         {...field}
-                        value={typeof field.value === 'string' ? field.value : field.value?.toISOString().split('T')[0] || ''}
+                        value={typeof field.value === 'string' ? field.value.split('T')[0] : ''}
                       />
                     </FormControl>
                     <FormMessage />
