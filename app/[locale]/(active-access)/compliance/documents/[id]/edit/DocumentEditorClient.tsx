@@ -7,13 +7,16 @@ import {
   Edit,
   Eye,
   Globe,
+  Link2,
   Loader2,
+  X,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DocumentEditor } from "@/components/editor";
 import { ComplianceAnalysisSidebar } from "@/components/editor/ComplianceAnalysisSidebar";
+import { ComplianceArtifactsPanel } from "@/components/compliance/ComplianceArtifactsPanel";
 import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -46,6 +49,7 @@ export default function DocumentEditorClient({
   const [error, setError] = useState<string | null>(null);
   const [documentMetadata, setDocumentMetadata] = useState<any>(null);
   const [analysisSidebarOpen, setAnalysisSidebarOpen] = useState(false);
+  const [artifactsSidebarOpen, setArtifactsSidebarOpen] = useState(false);
   const [auditIssues, setAuditIssues] = useState<any[]>([]);
   const [auditAnalysis, setAuditAnalysis] = useState<any>(null);
   const [simplePublishDialogOpen, setSimplePublishDialogOpen] = useState(false);
@@ -501,17 +505,31 @@ export default function DocumentEditorClient({
             </div>
 
             <div className="flex items-center gap-2">
-              {documentMetadata?.docType !== "company" && auditAnalysis && (
-                <Button
-                  variant={analysisSidebarOpen ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setAnalysisSidebarOpen(!analysisSidebarOpen)}
-                >
-                  <>
-                    <AlertCircle className="mr-2 h-4 w-4" />
-                    {analysisSidebarOpen ? "Hide" : "Show"} Analysis
-                  </>
-                </Button>
+              {documentMetadata?.docType !== "company" && (
+                <>
+                  {auditAnalysis && (
+                    <Button
+                      variant={analysisSidebarOpen ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setAnalysisSidebarOpen(!analysisSidebarOpen)}
+                    >
+                      <>
+                        <AlertCircle className="mr-2 h-4 w-4" />
+                        {analysisSidebarOpen ? "Hide" : "Show"} Analysis
+                      </>
+                    </Button>
+                  )}
+                  <Button
+                    variant={artifactsSidebarOpen ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setArtifactsSidebarOpen(!artifactsSidebarOpen)}
+                  >
+                    <>
+                      <Link2 className="mr-2 h-4 w-4" />
+                      {artifactsSidebarOpen ? "Hide" : "Show"} Artifacts
+                    </>
+                  </Button>
+                </>
               )}
               <Button
                 variant="outline"
@@ -601,10 +619,18 @@ export default function DocumentEditorClient({
         isPublishing={publishing}
       />
 
-      {/* Editor and Analysis Sidebar */}
+      {/* Editor and Sidebars */}
       <main className="flex flex-1 overflow-hidden">
         <div
-          className={`flex-1 overflow-hidden transition-all duration-300 ${analysisSidebarOpen && auditAnalysis ? "mr-[500px]" : ""}`}
+          className={`flex-1 overflow-hidden transition-all duration-300 ${
+            analysisSidebarOpen && auditAnalysis && artifactsSidebarOpen
+              ? "mr-[1000px]"
+              : analysisSidebarOpen && auditAnalysis
+                ? "mr-[500px]"
+                : artifactsSidebarOpen
+                  ? "mr-[500px]"
+                  : ""
+          }`}
         >
           <DocumentEditor
             documentId={documentId}
@@ -640,6 +666,36 @@ export default function DocumentEditorClient({
               setSimplePublishDialogOpen(true);
             }}
           />
+        )}
+
+        {/* Artifacts Sidebar - Only for compliance documents */}
+        {documentMetadata?.docType !== "company" && (
+          <div
+            className={`fixed right-0 top-0 h-full w-[500px] transform border-l bg-background transition-transform duration-300 ${
+              artifactsSidebarOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+            style={{
+              right: analysisSidebarOpen && auditAnalysis ? "500px" : "0",
+            }}
+          >
+            <div className="flex h-full flex-col overflow-hidden pt-[73px]">
+              {/* Header with close button */}
+              <div className="flex items-center justify-between border-b px-6 py-4">
+                <h2 className="font-semibold text-lg">Linked Artifacts</h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setArtifactsSidebarOpen(false)}
+                  className="h-8 w-8"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-6">
+                <ComplianceArtifactsPanel documentId={documentId} />
+              </div>
+            </div>
+          </div>
         )}
       </main>
     </div>

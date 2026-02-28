@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { DocumentEditor } from "@/components/editor";
 import { AuditDialog } from "@/components/editor/AuditDialog";
 import { SimplePublishDialog } from "@/components/editor/SimplePublishDialog";
+import { ComplianceArtifactsPanel } from "@/components/compliance/ComplianceArtifactsPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { complianceKeys } from "@/lib/compliance/queries";
@@ -415,21 +416,33 @@ export default function EditDocumentPage({ params }: EditParams) {
       {/* Editor */}
       <main className="flex-1 overflow-hidden">
         <div className="container mx-auto h-full px-4 py-6">
-          <DocumentEditor
-            documentId={id || ""}
-            documentTitle={documentMetadata?.title || "Document"}
-            initialContent={content}
-            readOnly={mode === "view"}
-            onChange={(newContent) => {
-              setContent(newContent);
-              if (editorStabilizedRef.current) {
-                setUserHasEdited(true);
-              }
-            }}
-            showToolbar={mode === "edit"}
-            showAI={mode === "edit"}
-            placeholder="Start editing your document..."
-          />
+          <div className="grid h-full gap-6 lg:grid-cols-[1fr_320px]">
+            {/* Editor Column */}
+            <div className="h-full overflow-hidden">
+              <DocumentEditor
+                documentId={id || ""}
+                documentTitle={documentMetadata?.title || "Document"}
+                initialContent={content}
+                readOnly={mode === "view"}
+                onChange={(newContent) => {
+                  setContent(newContent);
+                  if (editorStabilizedRef.current) {
+                    setUserHasEdited(true);
+                  }
+                }}
+                showToolbar={mode === "edit"}
+                showAI={mode === "edit"}
+                placeholder="Start editing your document..."
+              />
+            </div>
+
+            {/* Artifacts Panel Column - Only for compliance documents */}
+            {documentMetadata?.docType !== "company" && id && (
+              <div className="h-full overflow-y-auto">
+                <ComplianceArtifactsPanel documentId={id} />
+              </div>
+            )}
+          </div>
         </div>
       </main>
 

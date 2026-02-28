@@ -52,17 +52,21 @@ export function getPool(): Pool {
       ssl: {
         rejectUnauthorized: false, // For development; in production, use proper CA certificate
       },
-      max: 20, // Maximum number of clients in the pool
-      idleTimeoutMillis: 30000, // 30 seconds - keep idle connections for reuse
-      connectionTimeoutMillis: 20000, // Increased to 20 seconds for intermittent network issues
-      query_timeout: 30000, // Increased to 30 seconds for complex queries
+      max: 10, // Reduced max connections
+      min: 2, // Keep minimum 2 connections alive
+      idleTimeoutMillis: 10000, // 10 seconds - recycle idle connections faster
+      connectionTimeoutMillis: 5000, // 5 seconds - fail fast if can't get connection
+      query_timeout: 60000, // 60 seconds for complex queries
       // Connection keep-alive settings for better stability
       keepAlive: true,
-      keepAliveInitialDelayMillis: 10000,
+      keepAliveInitialDelayMillis: 5000,
+      // Important: allow pool to remove broken connections
+      allowExitOnIdle: false,
     });
 
     pool.on("error", (err: Error) => {
       console.error("Unexpected error on idle PostgreSQL client", err);
+      // Don't crash the app, pool will recover
     });
 
     pool.on("connect", () => {
@@ -104,7 +108,7 @@ export function getPool(): Pool {
 }
 
 /**
- * Execute a SQL query
+ * Execute a SQL query with automatic retry on connection errors
  *
  * @param text SQL query text
  * @param params Query parameters
@@ -114,47 +118,82 @@ export async function query<T extends QueryResultRow = any>(
   text: string,
   params?: any[],
 ): Promise<QueryResult<T>> {
-  const startTime = Date.now();
-  try {
-    const pool = getPool();
-    const poolStats = {
-      total: pool.totalCount,
-      idle: pool.idleCount,
-      waiting: pool.waitingCount,
-    };
+  const maxRetries = 2;
+  let lastError: Error | null = null;
 
-    console.log(
-      "Executing query:",
-      text.substring(0, 100),
-      "with params:",
-      params,
-      "Pool stats:",
-      poolStats,
-    );
-
-    const result = await pool.query<T>(text, params);
-    const duration = Date.now() - startTime;
-    console.log(
-      `Query completed successfully in ${duration}ms, rows:`,
-      result.rowCount,
-    );
-    return result;
-  } catch (error) {
-    const duration = Date.now() - startTime;
-    const pool = getPool();
-    console.error("Query failed:", {
-      query: text.substring(0, 100),
-      params,
-      duration: `${duration}ms`,
-      poolStats: {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const startTime = Date.now();
+    try {
+      const pool = getPool();
+      const poolStats = {
         total: pool.totalCount,
         idle: pool.idleCount,
         waiting: pool.waitingCount,
-      },
-      error: error instanceof Error ? error.message : String(error),
-    });
-    throw error;
+      };
+
+      if (attempt > 1) {
+        console.log(`[Query] Retry attempt ${attempt}/${maxRetries}`);
+      }
+
+      console.log(
+        "Executing query:",
+        text.substring(0, 100),
+        "with params:",
+        params,
+        "Pool stats:",
+        poolStats,
+      );
+
+      const result = await pool.query<T>(text, params);
+      const duration = Date.now() - startTime;
+      console.log(
+        `Query completed successfully in ${duration}ms, rows:`,
+        result.rowCount,
+      );
+      return result;
+    } catch (error) {
+      const duration = Date.now() - startTime;
+      const pool = getPool();
+      lastError = error instanceof Error ? error : new Error(String(error));
+
+      console.error("Query failed:", {
+        query: text.substring(0, 100),
+        params,
+        duration: `${duration}ms`,
+        attempt: `${attempt}/${maxRetries}`,
+        poolStats: {
+          total: pool.totalCount,
+          idle: pool.idleCount,
+          waiting: pool.waitingCount,
+        },
+        error: lastError.message,
+      });
+
+      // Check if error is retryable (connection issues)
+      const isRetryable =
+        lastError.message.includes("Connection terminated") ||
+        lastError.message.includes("Connection timeout") ||
+        lastError.message.includes("ECONNRESET") ||
+        lastError.message.includes("ETIMEDOUT");
+
+      if (isRetryable && attempt < maxRetries) {
+        console.log(
+          `[Query] Connection error detected, will retry after brief delay...`,
+        );
+        // Force reset the pool on connection errors
+        await resetPool();
+        // Brief delay before retry
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        continue;
+      }
+
+      // Non-retryable error or max retries reached
+      throw lastError;
+    }
   }
+
+  // Should never reach here, but TypeScript needs it
+  throw lastError || new Error("Query failed after retries");
 }
 
 /**
@@ -174,4 +213,23 @@ export async function closePool(): Promise<void> {
     await pool.end();
     pool = null;
   }
+}
+
+/**
+ * Force reset the pool (for handling connection issues)
+ * Use this when connections are timing out or in bad state
+ */
+export async function resetPool(): Promise<void> {
+  console.log("[Pool] Force resetting connection pool...");
+  if (pool) {
+    try {
+      await pool.end();
+      console.log("[Pool] Old pool closed successfully");
+    } catch (error) {
+      console.error("[Pool] Error closing old pool:", error);
+    }
+    pool = null;
+  }
+  // Next call to getPool() will create a fresh pool
+  console.log("[Pool] Pool reset complete. Next query will create new pool.");
 }

@@ -13,6 +13,7 @@ export interface JobTemplate {
   description: string | null;
   version: number;
   active: boolean;
+  org_id: string;
   created_by: string;
   created_at: Date;
   updated_at: Date;

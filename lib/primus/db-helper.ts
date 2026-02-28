@@ -378,6 +378,35 @@ export async function getDocumentsBySubModule(
 }
 
 /**
+ * Get ONLY company documents for a specific sub-module
+ * Used for artifact linking - excludes compliance documents
+ */
+export async function getCompanyDocumentsBySubModule(
+  orgId: string,
+  frameworkId: string,
+  moduleId: string,
+  subModuleId: string,
+): Promise<Document[]> {
+  try {
+    const result = await query<Document>(
+      `SELECT * FROM document 
+       WHERE org_id = $1 AND framework_id = $2 
+       AND module_id = $3 AND sub_module_id = $4
+       AND doc_type = 'company'
+       AND deleted_at IS NULL
+       ORDER BY created_at DESC`,
+      [orgId, frameworkId, moduleId, subModuleId],
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching company documents by sub-module:", error);
+    throw new Error(
+      `Failed to fetch company documents: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+}
+
+/**
  * Create a document revision record
  * Called whenever a document is created, edited, or published
  */
