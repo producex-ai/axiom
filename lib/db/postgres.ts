@@ -52,10 +52,10 @@ export function getPool(): Pool {
       ssl: {
         rejectUnauthorized: false, // For development; in production, use proper CA certificate
       },
-      max: 10, // Reduced max connections
-      min: 2, // Keep minimum 2 connections alive
-      idleTimeoutMillis: 10000, // 10 seconds - recycle idle connections faster
-      connectionTimeoutMillis: 5000, // 5 seconds - fail fast if can't get connection
+      max: 20, // Max connections for handling bulk operations and concurrent requests
+      min: 5, // Keep 5 connections warm to match bulk job concurrency
+      idleTimeoutMillis: 30000, // 30 seconds - keep connections available longer
+      connectionTimeoutMillis: 30000, // 30 seconds - allow time for pool to scale up
       query_timeout: 60000, // 60 seconds for complex queries
       // Connection keep-alive settings for better stability
       keepAlive: true,

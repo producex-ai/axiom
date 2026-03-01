@@ -7,6 +7,9 @@ import { getOrgMembersAction } from "@/actions/auth/clerk";
 import type { OrgMember } from "@/actions/auth/clerk";
 import { JobExtractionReview } from "@/app/[locale]/(active-access)/compliance/jobs/_components/JobExtractionReview";
 
+// Configure timeout for bulk operations (Vercel Pro: max 300s, Hobby: max 10s)
+export const maxDuration = 60; // 60 seconds for bulk job creation
+
 export default function ReviewBulkJobsPage() {
   const router = useRouter();
   const [extractionData, setExtractionData] = useState<any>(null);

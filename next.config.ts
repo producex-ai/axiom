@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "5mb",
     },
   },
+  // Note: Route-level maxDuration is set per page (e.g., 60s for bulk operations)
+  // Default is 10s on Vercel Hobby plan, 300s max on Pro plan
 };
 
 export default withNextIntl(nextConfig);

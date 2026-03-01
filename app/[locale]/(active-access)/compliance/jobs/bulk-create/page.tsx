@@ -2,6 +2,9 @@ import { getOrgMembersAction } from "@/actions/auth/clerk";
 import { getJobTemplates } from "@/actions/jobs/job-template-actions";
 import { JobBulkUploadForm } from "../_components/JobBulkUploadForm";
 
+// Configure timeout for bulk job extraction (Vercel Pro: max 300s, Hobby: max 10s)
+export const maxDuration = 60; // 60 seconds for document extraction
+
 export default async function BulkCreateJobPage() {
   const [members, templatesResult] = await Promise.all([
     getOrgMembersAction(),

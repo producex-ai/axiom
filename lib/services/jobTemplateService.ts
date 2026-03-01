@@ -88,7 +88,12 @@ export async function createTemplate(
       fields,
     };
   } catch (error) {
-    await client.query("ROLLBACK");
+    try {
+      await client.query("ROLLBACK");
+    } catch (rollbackError) {
+      console.error("Error during rollback:", rollbackError);
+      // Continue to throw original error
+    }
     throw error;
   } finally {
     client.release();
@@ -283,7 +288,12 @@ export async function updateTemplate(
       fields,
     };
   } catch (error) {
-    await client.query("ROLLBACK");
+    try {
+      await client.query("ROLLBACK");
+    } catch (rollbackError) {
+      console.error("Error during rollback:", rollbackError);
+      // Continue to throw original error
+    }
     throw error;
   } finally {
     client.release();

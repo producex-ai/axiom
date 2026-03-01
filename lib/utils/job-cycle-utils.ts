@@ -24,6 +24,7 @@
  */
 
 import type { JobFrequency } from "@/lib/validators/jobValidators";
+import { parseLocalDate } from "@/lib/utils/date-utils";
 
 export interface CycleWindow {
   cycleStart: Date;
@@ -51,11 +52,11 @@ export interface JobFrequencyInfo {
  * // Returns: { cycleStart: Jan 20, 2026, cycleEnd: Feb 20, 2026 }
  */
 export function getCycleWindow(
-  nextExecutionDate: Date,
+  nextExecutionDate: Date | string,
   frequency: JobFrequency
 ): CycleWindow {
-  const cycleEnd = new Date(nextExecutionDate);
-  const cycleStart = new Date(nextExecutionDate);
+  const cycleEnd = nextExecutionDate instanceof Date ? new Date(nextExecutionDate) : parseLocalDate(nextExecutionDate);
+  const cycleStart = nextExecutionDate instanceof Date ? new Date(nextExecutionDate) : parseLocalDate(nextExecutionDate);
 
   switch (frequency) {
     case "weekly":
@@ -140,7 +141,7 @@ export function hasExecutedThisCycle(
  */
 export function canExecuteJob(
   lastExecutionDate: Date | null,
-  nextExecutionDate: Date,
+  nextExecutionDate: Date | string,
   frequency: JobFrequency,
   now: Date = new Date()
 ): boolean {
@@ -177,10 +178,10 @@ export function canExecuteJob(
  * // Returns: Mar 20, 2026 (NOT based on execution time)
  */
 export function advanceNextExecutionDate(
-  currentNextExecutionDate: Date,
+  currentNextExecutionDate: Date | string,
   frequency: JobFrequency
 ): Date {
-  const newDate = new Date(currentNextExecutionDate);
+  const newDate = currentNextExecutionDate instanceof Date ? new Date(currentNextExecutionDate) : parseLocalDate(currentNextExecutionDate);
 
   switch (frequency) {
     case "weekly":
@@ -226,11 +227,11 @@ export function advanceNextExecutionDate(
  * // Returns: Mar 20, 2026 (first future date after catch-up)
  */
 export function catchUpMissedCycles(
-  currentNextExecutionDate: Date,
+  currentNextExecutionDate: Date | string,
   frequency: JobFrequency,
   now: Date = new Date()
 ): Date {
-  let nextDate = new Date(currentNextExecutionDate);
+  let nextDate = currentNextExecutionDate instanceof Date ? new Date(currentNextExecutionDate) : parseLocalDate(currentNextExecutionDate);
 
   // Advance until the schedule is in the future
   while (nextDate <= now) {
@@ -257,7 +258,7 @@ export function catchUpMissedCycles(
  */
 export function deriveJobStatus(
   lastExecutionDate: Date | null,
-  nextExecutionDate: Date,
+  nextExecutionDate: Date | string,
   frequency: JobFrequency,
   now: Date = new Date()
 ): "UPCOMING" | "OPEN" | "COMPLETED" | "OVERDUE" {

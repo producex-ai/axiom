@@ -1,5 +1,6 @@
 import { getPool } from "@/lib/db/postgres";
 import { getUserDisplayNames } from "@/lib/services/userService";
+import { parseLocalDate } from "@/lib/utils/date-utils";
 import type {
   CreateJobInput,
   UpdateJobInput,
@@ -99,7 +100,7 @@ export interface JobDetail {
  * The cycle window is derived from next_execution_date (the cycle boundary).
  */
 export function deriveStatus(job: Job): JobStatus {
-  const nextExecutionDate = new Date(job.next_execution_date);
+  const nextExecutionDate = parseLocalDate(job.next_execution_date);
   const lastExecutionDate = job.last_execution_date ? new Date(job.last_execution_date) : null;
   
   // Import the utility function inline to avoid circular dependencies
@@ -123,7 +124,7 @@ export async function createJob(
     await client.query("BEGIN");
 
     // Get template version
-    const templateResult = await pool.query(
+    const templateResult = await client.query(
       `SELECT version FROM job_templates WHERE id = $1`,
       [input.template_id]
     );
@@ -174,7 +175,12 @@ export async function createJob(
 
     return job;
   } catch (error) {
-    await client.query("ROLLBACK");
+    try {
+      await client.query("ROLLBACK");
+    } catch (rollbackError) {
+      console.error("Error during rollback:", rollbackError);
+      // Continue to throw original error
+    }
     throw error;
   } finally {
     client.release();
@@ -219,6 +225,13 @@ async function processBatchWithConcurrency<T, R>(
 /**
  * Create multiple jobs from template (bulk operation)
  * Uses controlled parallel processing to avoid connection pool exhaustion
+ * 
+ * Performance expectations:
+ * - ~0.5s per job with concurrency of 5
+ * - 50 jobs: ~5 seconds
+ * - 100 jobs: ~10 seconds
+ * - 200 jobs: ~20 seconds
+ * - 500 jobs: ~50 seconds
  */
 export async function createBulkJobs(
   inputs: CreateJobInput[],
@@ -232,8 +245,9 @@ export async function createBulkJobs(
     failed: [],
   };
 
-  // Process jobs in batches of 10 to avoid exhausting connection pool (max 20)
-  const CONCURRENCY = 10;
+  // Process jobs in batches of 5 to avoid exhausting connection pool (max 20)
+  // Leaves 15 connections available for other API requests during bulk operations
+  const CONCURRENCY = 5;
   console.log(`📦 Processing ${inputs.length} jobs with concurrency: ${CONCURRENCY}`);
 
   const results = await processBatchWithConcurrency(
@@ -524,7 +538,7 @@ export async function executeJobAction(
     const { frequency, next_execution_date } = jobData.rows[0];
     
     // Advance next_execution_date by one frequency period from current anchor
-    const nextExecDate = new Date(next_execution_date);
+    const nextExecDate = parseLocalDate(next_execution_date);
     let newNextExecution = new Date(nextExecDate);
     
     switch (frequency) {
@@ -569,7 +583,12 @@ export async function executeJobAction(
 
     return action;
   } catch (error) {
-    await client.query("ROLLBACK");
+    try {
+      await client.query("ROLLBACK");
+    } catch (rollbackError) {
+      console.error("Error during rollback:", rollbackError);
+      // Continue to throw original error
+    }
     throw error;
   } finally {
     client.release();
